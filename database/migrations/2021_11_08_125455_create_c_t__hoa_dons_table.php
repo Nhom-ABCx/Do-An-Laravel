@@ -13,7 +13,7 @@ class CreateCTHoaDonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('c_t__hoa_dons', function (Blueprint $table) {
+        Schema::create('ct_hoa_dons', function (Blueprint $table) {
             $table->foreignId('HoaDonId');
             $table->foreignId('SanPhamId');
             $table->integer('SoLuong');
@@ -31,6 +31,6 @@ class CreateCTHoaDonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('c_t__hoa_dons');
+        Schema::dropIfExists('ct_hoa_dons');
     }
 }

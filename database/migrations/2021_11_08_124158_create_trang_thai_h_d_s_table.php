@@ -13,7 +13,7 @@ class CreateTrangThaiHDSTable extends Migration
      */
     public function up()
     {
-        Schema::create('trang_thai_h_d_s', function (Blueprint $table) {
+        Schema::create('trang_thai_hd_s', function (Blueprint $table) {
             $table->Id();
             $table->string('TenTrangThai');
             $table->string('MoTa');
@@ -28,6 +28,6 @@ class CreateTrangThaiHDSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trang_thai_h_d_s');
+        Schema::dropIfExists('trang_thai_hd_s');
     }
 }

@@ -25,7 +25,7 @@ class CreateHoaDonsTable extends Migration
             $table->timestamps();
             $table->foreign('NhanVienId')->references('Id')->on('nhan_viens');
             $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
-            $table->foreign('TrangThaiHDId')->references('Id')->on('trang_thai_h_d_s');
+            $table->foreign('TrangThaiHDId')->references('Id')->on('trang_thai_hd_s');
         });
     }
 

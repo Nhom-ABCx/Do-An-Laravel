@@ -13,7 +13,7 @@ class CreateLoaiTaiKhoanQuyensTable extends Migration
      */
     public function up()
     {
-        Schema::create('loai_tai_khoan__quyens', function (Blueprint $table) {
+        Schema::create('loai_tai_khoan_quyens', function (Blueprint $table) {
             $table->foreignId('LoaiTaiKhoanId');
             $table->foreignId('QuyenId');
             $table->string('MoTa');
@@ -30,6 +30,6 @@ class CreateLoaiTaiKhoanQuyensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('loai_tai_khoan__quyens');
+        Schema::dropIfExists('loai_tai_khoan_quyens');
     }
 }
