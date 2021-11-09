@@ -17,7 +17,7 @@ class CreateHoaDonsTable extends Migration
             $table->Id();
             $table->foreignId('NhanVienId');
             $table->foreignId('KhachHangId');
-            $table->string('DiaChiGiao');
+            $table->string('DiaChiGiao')->nullable();
             $table->foreignId('TrangThaiHDId');
             $table->dateTime('NgayGiao');
             $table->double('GiamGia');

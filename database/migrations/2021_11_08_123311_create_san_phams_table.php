@@ -16,10 +16,10 @@ class CreateSanPhamsTable extends Migration
         Schema::create('san_phams', function (Blueprint $table) {
             $table->Id();
             $table->string('TenSanPham');
-            $table->string('MoTa');
+            $table->string('MoTa')->nullable();
             $table->integer('SoLuongTon');
             $table->double('DonGia');
-            $table->string('HinhAnh');
+            $table->string('HinhAnh')->nullable();
             $table->integer('LuotMua');
             $table->foreignId('NhaCungCapId');
             $table->foreignId('LoaiSanPhamId');

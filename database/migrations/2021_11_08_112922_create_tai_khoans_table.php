@@ -17,7 +17,7 @@ class CreateTaiKhoansTable extends Migration
             $table->Id();
             $table->string('Username');
             $table->string('Email');
-            $table->string('Phone');
+            $table->string('Phone')->nullable();
             $table->string('MatKhau');
             $table->foreignId('LoaiTaiKhoanId');
             $table->timestamps();

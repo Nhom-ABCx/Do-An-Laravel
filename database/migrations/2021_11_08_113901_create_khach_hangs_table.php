@@ -18,8 +18,8 @@ class CreateKhachHangsTable extends Migration
             $table->string('HoTen');
             $table->dateTime('NgaySinh');
             $table->boolean('GioiTinh'); //1 nam 0 nu~
-            $table->string('DiaChi');
-            $table->string('HinhAnh');
+            $table->string('DiaChi')->nullable();
+            $table->string('HinhAnh')->nullable();
             $table->foreignId('TaiKhoanId');
             $table->timestamps();
             $table->foreign('TaiKhoanId')->references('Id')->on('tai_khoans');

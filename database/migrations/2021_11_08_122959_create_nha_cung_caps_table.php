@@ -16,9 +16,9 @@ class CreateNhaCungCapsTable extends Migration
         Schema::create('nha_cung_caps', function (Blueprint $table) {
             $table->Id();
             $table->string('TenNhaCungCap');
-            $table->string('DiaChi');
+            $table->string('DiaChi')->nullable();
             $table->string('Email');
-            $table->string('Phone');
+            $table->string('Phone')->nullable();
             $table->timestamps();
         });
     }

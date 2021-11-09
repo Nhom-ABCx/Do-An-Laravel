@@ -16,7 +16,7 @@ class CreateTrangThaiHDSTable extends Migration
         Schema::create('trang_thai_hd_s', function (Blueprint $table) {
             $table->Id();
             $table->string('TenTrangThai');
-            $table->string('MoTa');
+            $table->string('MoTa')->nullable();
             $table->timestamps();
         });
     }

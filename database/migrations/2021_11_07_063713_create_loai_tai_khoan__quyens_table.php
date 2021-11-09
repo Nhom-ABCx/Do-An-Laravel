@@ -16,7 +16,7 @@ class CreateLoaiTaiKhoanQuyensTable extends Migration
         Schema::create('loai_tai_khoan_quyens', function (Blueprint $table) {
             $table->foreignId('LoaiTaiKhoanId');
             $table->foreignId('QuyenId');
-            $table->string('MoTa');
+            $table->string('MoTa')->nullable();
             $table->timestamps();
             $table->foreign('LoaiTaiKhoanId')->references('Id')->on('loai_tai_khoans');
             $table->foreign('QuyenId')->references('Id')->on('quyens');
