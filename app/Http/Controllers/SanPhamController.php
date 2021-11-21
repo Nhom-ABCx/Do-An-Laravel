@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\SanPham;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Cache\Store;
+use Illuminate\Support\Facades\Storage; //thu vien luu tru~ de tao lien ket den public
+use Illuminate\Support\Facades\Redirect;
 
 class SanPhamController extends Controller
 {
@@ -81,5 +84,14 @@ class SanPhamController extends Controller
     public function destroy(SanPham $sanPham)
     {
         //
+    }
+    //phương thức hỗ trợ load hình ảnh và thay thế bằng hình mạc định nếu ko tìm thấy file
+    public function fixImage(SanPham $sanPham)
+    {
+        //chạy lệnh sau: php artisan storage:link     de tu tao 1 lien ket den' folder public
+        if  (Storage::disk('public/assets/images/product-image/')->exists($sanPham->HinhAnh))
+            $sanPham->HinhAnh=Storage::url($sanPham->HinhAnh);
+        else
+            $sanPham->HinhAnh='/assets/images/404/Img_error.png';
     }
 }
