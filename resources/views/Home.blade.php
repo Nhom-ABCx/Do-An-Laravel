@@ -3,9 +3,10 @@
 
 @section('title', 'Page Title')
 
-@section('header')
+{{-- cung ko can` goi thang section nay de ma in ra, vi trong layout co @show o phia cuoi' section r --}}
+{{-- @section('header')
     @parent
-@endsection
+@endsection --}}
 
 @section('body')
     <!-- Hero/Intro Slider Start -->
@@ -123,10 +124,10 @@
                 <div class="tab-slider d-md-flex justify-content-md-between align-items-md-center">
                     <ul class="product-tab-nav nav justify-content-start align-items-center">
                         <li class="nav-item">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#newarrivals">New Arrivals</button>
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#newarrivals">New Arrivals</button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#toprated">Top Rated</button>
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#toprated">Top Rated</button>
                         </li>
                         <li class="nav-item">
                             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#featured">Featured</button>
@@ -155,7 +156,7 @@
                                     <div class="thumb">
                                         <a href="single-product.html" class="image">
                                             <img src="assets/images/product-image/{{$item->HinhAnh}}" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/{{$item->HinhAnh}}" alt="Product" />
+                                            <img class="hover-image" src="/assets/images/product-image/{{$item->HinhAnh}}" alt="Product" />
                                         </a>
                                     </div>
                                     <div class="content">
@@ -1091,9 +1092,9 @@
 @endsection
 
 
-@section('footer')
+{{-- @section('footer')
     @parent
 @endsection
 @section('modal')
     @parent
-@endsection
+@endsection --}}

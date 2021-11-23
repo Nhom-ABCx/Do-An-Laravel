@@ -27,7 +27,7 @@
 </head>
     <body>
         @section('header')
-        {{-- phan nay la Header --}}
+    {{-- phan nay la Header --}}
         <header>
             <!-- Header top area start -->
             <div class="header-top">
@@ -283,10 +283,10 @@
                 </div>
             </div>
         </header>
-        <!-- offcanvas overlay start -->
+    <!-- offcanvas overlay start -->
         <div class="offcanvas-overlay"></div>
-        <!-- offcanvas overlay end -->
-        <!-- OffCanvas Wishlist Start -->
+    <!-- offcanvas overlay end -->
+    <!-- OffCanvas Wishlist Start -->
         <div id="offcanvas-wishlist" class="offcanvas offcanvas-wishlist">
             <div class="inner">
                 <div class="head">
@@ -328,8 +328,8 @@
                 </div>
             </div>
         </div>
-        <!-- OffCanvas Wishlist End -->
-        <!-- OffCanvas Cart Start -->
+    <!-- OffCanvas Wishlist End -->
+    <!-- OffCanvas Cart Start -->
         <div id="offcanvas-cart" class="offcanvas offcanvas-cart">
             <div class="inner">
                 <div class="head">
@@ -372,8 +372,8 @@
                 </div>
             </div>
         </div>
-        <!-- OffCanvas Cart End -->
-        <!-- OffCanvas Menu Start -->
+    <!-- OffCanvas Cart End -->
+    <!-- OffCanvas Menu Start -->
         <div id="offcanvas-mobile-menu" class="offcanvas offcanvas-mobile-menu">
             <button class="offcanvas-close"></button>
             <div class="user-panel">
@@ -522,17 +522,17 @@
                 </div>
             </div>
         </div>
-        <!-- OffCanvas Menu End -->
+    <!-- OffCanvas Menu End -->
         @show
 
         <div class="main-wrapper">
-            {{-- phan nay la BODY --}}
+    {{-- phan nay la BODY --}}
             @yield('body')
         </div>
 
         @section('footer')
-            {{-- phan nay la FOOTER --}}
-             <!-- Footer Area Start -->
+    {{-- phan nay la FOOTER --}}
+    <!-- Footer Area Start -->
 <div class="footer-area">
     <div class="footer-container">
         <div class="footer-top">
@@ -648,11 +648,11 @@
         </div>
     </div>
 </div>
-<!-- Footer Area End -->
+    <!-- Footer Area End -->
         @show
         @section('modal')
-            {{-- phan nay la modal va Script --}}
-        <!-- Modal -->
+    {{-- phan nay la modal va Script --}}
+    <!-- Modal -->
     <div class="modal modal-2 fade" id="exampleModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
