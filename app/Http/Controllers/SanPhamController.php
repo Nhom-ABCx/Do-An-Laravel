@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SanPham;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage; //thu vien luu tru~ de tao lien ket den public
@@ -93,5 +94,12 @@ class SanPhamController extends Controller
             $sanPham->HinhAnh=Storage::url($sanPham->HinhAnh);
         else
             $sanPham->HinhAnh='/assets/images/404/Img_error.png';
+    }
+    //API
+    public function API_SanPham()
+    {
+        $data=SanPham::all();
+        //return json_encode($data);
+        return response()->json($data, 200);
     }
 }
