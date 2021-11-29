@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SanPham;
+use Facade\FlareClient\View;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Store;
@@ -18,7 +19,7 @@ class SanPhamController extends Controller
      */
     public function index()
     {
-        //
+        return view('SanPham',[]);
     }
 
     /**

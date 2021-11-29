@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+//controller
+use App\Http\Controllers\SanPhamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,5 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class,"Index"]);
+Route::resource('SanPham', SanPhamController::class);
 
