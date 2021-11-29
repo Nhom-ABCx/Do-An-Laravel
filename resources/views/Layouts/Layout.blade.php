@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Tables - Ace Admin</title>
+		<title>@yield('title') - Ace Admin</title>
 
 		<meta name="description" content="Static &amp; Dynamic Tables" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,6 +17,10 @@
 		<![endif]-->
 
 		<!-- page specific plugin styles -->
+
+        <link rel="stylesheet" href="assets/css/jquery-ui-1.10.3.full.min.css" />
+		<link rel="stylesheet" href="assets/css/datepicker.css" />
+		<link rel="stylesheet" href="assets/css/ui.jqgrid.css" />
 
 		<!-- fonts -->
 
@@ -55,7 +59,7 @@
 
         <div class="navbar-container" id="navbar-container">
             <div class="navbar-header pull-left">
-                <a href="#" class="navbar-brand">
+                <a href="{{url('/')}}" class="navbar-brand">
                     <small>
                         <i class="icon-leaf"></i>
                         Ace Admin
@@ -378,96 +382,14 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a href="#" class="dropdown-toggle">
+                        <li class="{{ request()->is('SanPham') ? 'active' : '' }}">
+                            <a href="{{route('SanPham.index')}}">
                                 <i class="icon-desktop"></i>
-                                <span class="menu-text"> UI Elements </span>
-
-                                <b class="arrow icon-angle-down"></b>
+                                <span class="menu-text"> Quản lý sản phẩm </span>
                             </a>
-
-                            <ul class="submenu">
-                                <li>
-                                    <a href="elements.html">
-                                        <i class="icon-double-angle-right"></i>
-                                        Elements
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="buttons.html">
-                                        <i class="icon-double-angle-right"></i>
-                                        Buttons &amp; Icons
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="treeview.html">
-                                        <i class="icon-double-angle-right"></i>
-                                        Treeview
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="jquery-ui.html">
-                                        <i class="icon-double-angle-right"></i>
-                                        jQuery UI
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="nestable-list.html">
-                                        <i class="icon-double-angle-right"></i>
-                                        Nestable Lists
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" class="dropdown-toggle">
-                                        <i class="icon-double-angle-right"></i>
-
-                                        Three Level Menu
-                                        <b class="arrow icon-angle-down"></b>
-                                    </a>
-
-                                    <ul class="submenu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="icon-leaf"></i>
-                                                Item #1
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#" class="dropdown-toggle">
-                                                <i class="icon-pencil"></i>
-
-                                                4th level
-                                                <b class="arrow icon-angle-down"></b>
-                                            </a>
-
-                                            <ul class="submenu">
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="icon-plus"></i>
-                                                        Add Product
-                                                    </a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="icon-eye-open"></i>
-                                                        View Products
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
                         </li>
 
-                        <li class="active open">
+                        <li class="{{ request()->is('/') ? 'active open' : '' }}">
                             <a href="#" class="dropdown-toggle">
                                 <i class="icon-list"></i>
                                 <span class="menu-text"> Tables </span>
@@ -765,6 +687,9 @@
 
 		<script src="assets/js/jquery.dataTables.min.js"></script>
 		<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
+        <script src="assets/js/date-time/bootstrap-datepicker.min.js"></script>
+		<script src="assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+		<script src="assets/js/jqGrid/i18n/grid.locale-en.js"></script>
 
 		<!-- ace scripts -->
 

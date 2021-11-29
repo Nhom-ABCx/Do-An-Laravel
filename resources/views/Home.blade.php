@@ -1,7 +1,7 @@
 {{--  cai nay la duong dan den' file Layouts/Layout.blade.php --}}
 @extends('layouts.Layout')
 
-@section('title', 'Page Title')
+@section('title', 'Home')
 
 {{-- cung ko can` goi thang section nay de ma in ra, vi trong layout co @show o phia cuoi' section r --}}
 {{-- @section('header')
