@@ -19,7 +19,8 @@ class SanPhamController extends Controller
      */
     public function index()
     {
-        return view('SanPham',[]);
+        $data=SanPham::all();
+        return view('SanPham',["sanPham"=>$data]);
     }
 
     /**
@@ -63,6 +64,8 @@ class SanPhamController extends Controller
     public function edit(SanPham $sanPham)
     {
         //
+        echo "asdasdasdasd";
+        dd($sanPham);
     }
 
     /**
