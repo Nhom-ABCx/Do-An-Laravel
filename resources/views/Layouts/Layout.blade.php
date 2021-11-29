@@ -1,863 +1,814 @@
 <!DOCTYPE html>
-<html lang="zxx" dir="ltr">
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Tables - Ace Admin</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Name - @yield('title')</title>
-    <meta name="robots" content="index, follow" />
-    <meta name="description" content="Hmart-Smart Product eCommerce html Template">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico" />
-    <!-- CSS
-    ============================================ -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/font.awesome.css" />
-    <link rel="stylesheet" href="assets/css/pe-icon-7-stroke.css" />
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="assets/css/venobox.css">
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
-    <!-- Style CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Minify Version -->
-    <!-- <link rel="stylesheet" href="assets/css/plugins.min.css">
-    <link rel="stylesheet" href="assets/css/style.min.css"> -->
-</head>
+		<meta name="description" content="Static &amp; Dynamic Tables" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- basic styles -->
+
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+
+		<!-- page specific plugin styles -->
+
+		<!-- fonts -->
+
+		<link rel="stylesheet" href="assets/css/ace-fonts.css" />
+
+		<!-- ace styles -->
+
+		<link rel="stylesheet" href="assets/css/ace.min.css" />
+		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+
+		<!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+
+		<script src="assets/js/ace-extra.min.js"></script>
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+		<!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
     <body>
         @section('header')
     {{-- phan nay la Header --}}
-        <header>
-            <!-- Header top area start -->
-            <div class="header-top">
-                <div class="container">
-                    <div class="row justify-content-between align-items-center">
-                        <div class="col">
-                            <div class="welcome-text">
-                                <p>World Wide Completely Free Returns and Shipping</p>
-                            </div>
-                        </div>
-                        <div class="col d-none d-lg-block">
-                            <div class="top-nav">
-                                <ul>
-                                    <li><a href="tel:0123456789"><i class="fa fa-phone"></i> +012 3456 789</a></li>
-                                    <li><a href="mailto:demo@example.com"><i class="fa fa-envelope-o"></i> demo@example.com</a></li>
-                                    <li><a href="my-account.html"><i class="fa fa-user"></i> Account</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Header top area end -->
-            <!-- Header action area start -->
-            <div class="header-bottom  d-none d-lg-block">
-                <div class="container">
-                    <div class="row justify-content-between align-items-center">
-                        <div class="col-lg-3 col">
-                            <div class="header-logo">
-                                <a href="index.html"><img src="assets/images/logo/logo.png" alt="Site Logo" /></a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 d-none d-lg-block">
-                            <div class="search-element">
-                                <form action="#">
-                                    <input type="text" placeholder="Search" />
-                                    <button><i class="pe-7s-search"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col">
-                            <div class="header-actions">
-                                <!-- Single Wedge Start -->
-                                <a href="#offcanvas-wishlist" class="header-action-btn offcanvas-toggle">
-                                    <i class="pe-7s-like"></i>
+    <div class="navbar navbar-default" id="navbar">
+        <script type="text/javascript">
+            try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+        </script>
+
+        <div class="navbar-container" id="navbar-container">
+            <div class="navbar-header pull-left">
+                <a href="#" class="navbar-brand">
+                    <small>
+                        <i class="icon-leaf"></i>
+                        Ace Admin
+                    </small>
+                </a><!-- /.brand -->
+            </div><!-- /.navbar-header -->
+
+            <div class="navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+                    <li class="grey">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-tasks"></i>
+                            <span class="badge badge-grey">4</span>
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="icon-ok"></i>
+                                4 Tasks to complete
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="clearfix">
+                                        <span class="pull-left">Software Update</span>
+                                        <span class="pull-right">65%</span>
+                                    </div>
+
+                                    <div class="progress progress-mini ">
+                                        <div style="width:65%" class="progress-bar "></div>
+                                    </div>
                                 </a>
-                                <!-- Single Wedge End -->
-                                <a href="#offcanvas-cart" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
-                                    <i class="pe-7s-shopbag"></i>
-                                    <span class="header-action-num">01</span>
-                                    <!-- <span class="cart-amount">€30.00</span> -->
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="clearfix">
+                                        <span class="pull-left">Hardware Upgrade</span>
+                                        <span class="pull-right">35%</span>
+                                    </div>
+
+                                    <div class="progress progress-mini ">
+                                        <div style="width:35%" class="progress-bar progress-bar-danger"></div>
+                                    </div>
                                 </a>
-                                <a href="#offcanvas-mobile-menu" class="header-action-btn header-action-btn-menu offcanvas-toggle d-lg-none">
-                                    <i class="pe-7s-menu"></i>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="clearfix">
+                                        <span class="pull-left">Unit Testing</span>
+                                        <span class="pull-right">15%</span>
+                                    </div>
+
+                                    <div class="progress progress-mini ">
+                                        <div style="width:15%" class="progress-bar progress-bar-warning"></div>
+                                    </div>
                                 </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Header action area end -->
-            <!-- Header action area start -->
-            <div class="header-bottom d-lg-none sticky-nav style-1">
-                <div class="container">
-                    <div class="row justify-content-between align-items-center">
-                        <div class="col-lg-3 col">
-                            <div class="header-logo">
-                                <a href="assets/Home"><img src="assets/images/logo/logo.png" alt="Site Logo" /></a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 d-none d-lg-block">
-                            <div class="search-element">
-                                <form action="#">
-                                    <input type="text" placeholder="Search" />
-                                    <button><i class="pe-7s-search"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col">
-                            <div class="header-actions">
-                                <!-- Single Wedge Start -->
-                                <a href="#offcanvas-wishlist" class="header-action-btn offcanvas-toggle">
-                                    <i class="pe-7s-like"></i>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="clearfix">
+                                        <span class="pull-left">Bug Fixes</span>
+                                        <span class="pull-right">90%</span>
+                                    </div>
+
+                                    <div class="progress progress-mini progress-striped active">
+                                        <div style="width:90%" class="progress-bar progress-bar-success"></div>
+                                    </div>
                                 </a>
-                                <!-- Single Wedge End -->
-                                <a href="#offcanvas-cart" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
-                                    <i class="pe-7s-shopbag"></i>
-                                    <span class="header-action-num">01</span>
-                                     <span class="cart-amount">€30.00</span>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    See tasks with details
+                                    <i class="icon-arrow-right"></i>
                                 </a>
-                                <a href="#offcanvas-mobile-menu" class="header-action-btn header-action-btn-menu offcanvas-toggle d-lg-none">
-                                    <i class="pe-7s-menu"></i>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="purple">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-bell-alt icon-animated-bell"></i>
+                            <span class="badge badge-important">8</span>
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="icon-warning-sign"></i>
+                                8 Notifications
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="clearfix">
+                                        <span class="pull-left">
+                                            <i class="btn btn-xs no-hover btn-pink icon-comment"></i>
+                                            New Comments
+                                        </span>
+                                        <span class="pull-right badge badge-info">+12</span>
+                                    </div>
                                 </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Header action area end -->
-            <!-- header navigation area start -->
-            <div class="header-nav-area d-none d-lg-block sticky-nav">
-                <div class="container">
-                    <div class="header-nav">
-                        <div class="main-menu position-relative">
-                            <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a asp-action="Index" asp-controller="Abouts">About</a></li>
-                                <li class="dropdown position-static">
-                                    <a href="#">Pages <i class="fa fa-angle-down"></i></a>
-                                    <ul class="mega-menu d-block">
-                                        <li class="d-flex">
-                                            <ul class="d-block">
-                                                <li class="title"><a href="#">Inner Pages</a></li>
-                                                <li><a asp-action="Page404" asp-controller="Pages">404 Page</a></li>
-                                                <li><a asp-action="OderTracking" asp-controller="Pages">Order Tracking</a></li>
-                                                <li><a asp-action="FaqPage" asp-controller="Pages">Faq Page</a></li>
-                                                <li><a asp-action="ComingSoon" asp-controller="Pages">Coming Soon Page</a></li>
-                                            </ul>
-                                            <ul class="d-block">
-                                                <li class="title"><a href="#">Other Shop Pages</a></li>
-                                                <li><a href="assets/Cart/">Cart Page</a></li>
-                                                <li><a href="assets/checkout.cshtml">Checkout Page</a></li>
-                                                <li><a href="assets/compare.cshtml">Compare Page</a></li>
-                                                <li><a asp-action="Wishlist" asp-controller="Carts"></a></li>
-                                            </ul>
-                                            <ul class="d-block">
-                                                <li class="title"><a href="#">Related Shop Pages</a></li>
-                                                <li><a href="assets/my-account.cshtml">Account Page</a></li>
-                                                <li><a href="assets/login.cshtml">Login & Register Page</a></li>
-                                                <li><a href="assets/empty-/Cart/index.cshtml">Empty Cart Page</a></li>
-                                                <li><a href="assets/Cart/Thank_you_page">Thank You Page</a></li>
-                                            </ul>
-                                            <ul class="d-flex align-items-center p-0 border-0 flex-column justify-content-center">
-                                                <li>
-                                                    <a class="p-0" href="shop-left-sidebar.cshtml"><img class="img-responsive w-100" src="assets/images/banner/menu-banner.png" alt=""></a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown position-static">
-                                    <a href="#">
-                                        Shop <i class="fa fa-angle-down"></i>
-                                    </a>
-                                    <ul class="mega-menu d-block">
-                                        <li class="d-flex">
-                                            <ul class="d-block">
-                                                <li class="title"><a href="#">Shop Page</a></li>
-                                                <li><a href="assets/shop-3-column.cshtml">Shop 3 Column</a></li>
-                                                <li><a href="assets/shop-4-column.cshtml">Shop 4 Column</a></li>
-                                                <li><a href="assets/shop-left-sidebar.cshtml">Shop Left Sidebar</a></li>
-                                                <li><a href="assets/shop-right-sidebar.cshtml">Shop Right Sidebar</a></li>
-                                                <li>
-                                                    <a href="assets/shop-list-left-sidebar.cshtml">Shop List Left Sidebar</a>
-                                                </li>
-                                                <li>
-                                                    <a href="assets/shop-list-right-sidebar.cshtml">Shop List Right Sidebar</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="d-block">
-                                                <li class="title"><a href="#">product Details Page</a></li>
-                                                <li><a href="assets/single-product.cshtml">Product Single</a></li>
-                                                <li><a href="assets/single-product-variable.cshtml">Product Variable</a></li>
-                                                <li><a href="assets/single-product-affiliate.cshtml">Product Affiliate</a></li>
-                                                <li><a href="assets/single-product-group.cshtml">Product Group</a></li>
-                                                <li><a href="assets/single-product-tabstyle-2.cshtml">Product Tab 2</a></li>
-                                                <li><a href="assets/single-product-tabstyle-3.cshtml">Product Tab 3</a></li>
-                                            </ul>
-                                            <ul class="d-block">
-                                                <li class="title"><a href="#">Single Product Page</a></li>
-                                                <li><a href="assets/single-product-slider.cshtml">Product Slider</a></li>
-                                                <li><a href="assets/single-product-gallery-left.cshtml">Product Gallery Left</a>
-                                                <li><a href="assets/single-product-gallery-right.cshtml">Product Gallery Right</a> </li>
-                                                <li>
-                                                    <a href="assets/single-product-sticky-left.cshtml">Product Sticky Left</a>
-                                                </li>
-                                                <li>
-                                                    <a href="assets/single-product-sticky-right.cshtml">Product Sticky Right</a>
-                                                </li>
-                                                <li><a href="assets/Cart/">Cart Page</a></li>
-                                            </ul>
-                                            <ul class="d-block p-0 border-0">
-                                                <li class="title"><a href="#">Single Product Page</a></li>
-                                                <li><a href="assets/checkout.cshtml">Checkout Page</a></li>
-                                                <li><a href="assets/compare.cshtml">Compare Page</a></li>
-                                                <li><a asp-action="Wishlist" asp-controller="Carts">Wishlist Page</a></li>
-                                                <li><a href="assets/my-account.cshtml">Account Page</a></li>
-                                                <li><a href="assets/login.cshtml">Login & Register Page</a></li>
-                                                <li><a href="assets/empty-/Cart/index.cshtml">Empty Cart Page</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown ">
-                                    <a href="#">Blog <i class="fa fa-angle-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li class="dropdown position-static">
-                                            <a href="blog-grid-left-sidebar.cshtml">
-                                                Blog Grid
-                                                <i class="fa fa-angle-right"></i>
-                                            </a>
-                                            <ul class="sub-menu sub-menu-2">
-                                                <li><a href="assets/blog-grid.cshtml">Blog Grid</a></li>
-                                                <li><a href="assets/blog-grid-left-sidebar.cshtml">Blog Grid Left Sidebar</a></li>
-                                                <li><a href="assets/blog-grid-right-sidebar.cshtml">Blog Grid Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown position-static">
-                                            <a href="assets/blog-list-left-sidebar.cshtml">
-                                                Blog List
-                                                <i class="fa fa-angle-right"></i>
-                                            </a>
-                                            <ul class="sub-menu sub-menu-2">
-                                                <li><a href="assets/blog-list.cshtml">Blog List</a></li>
-                                                <li><a href="assets/blog-list-left-sidebar.cshtml">Blog List Left Sidebar</a></li>
-                                                <li><a href="assets/blog-list-right-sidebar.cshtml">Blog List Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown position-static">
-                                            <a href="assets/blog-single-left-sidebar.cshtml">
-                                                Single
-                                                Blog <i class="fa fa-angle-right"></i>
-                                            </a>
-                                            <ul class="sub-menu sub-menu-2">
-                                                <li><a href="assets/blog-single.cshtml">Single Blog</a>
-                                                <li>
-                                                    <a href="assets/blog-single-left-sidebar.cshtml">Single Blog Left Sidebar</a>
-                                                </li>
-                                                <li>
-                                                    <a href="assets/blog-single-right-sidebar.cshtml">Single Blog Right Sidebar</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="assets/contact.cshtml">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- header navigation area end -->
-            <div class="mobile-search-box d-lg-none">
-                <div class="container">
-                    <!-- mobile search start -->
-                    <div class="search-element max-width-100">
-                        <form action="#">
-                            <input type="text" placeholder="Search" />
-                            <button><i class="pe-7s-search"></i></button>
-                        </form>
-                    </div>
-                    <!-- mobile search start -->
-                </div>
-            </div>
-        </header>
-    <!-- offcanvas overlay start -->
-        <div class="offcanvas-overlay"></div>
-    <!-- offcanvas overlay end -->
-    <!-- OffCanvas Wishlist Start -->
-        <div id="offcanvas-wishlist" class="offcanvas offcanvas-wishlist">
-            <div class="inner">
-                <div class="head">
-                    <span class="title">Wishlist</span>
-                    <button class="offcanvas-close">×</button>
-                </div>
-                <div class="body customScroll">
-                    <ul class="minicart-product-list">
-                        <li>
-                            <a href="assets/single-product.cshtml" class="image"><img src="assets/images/product-image/1.webp" alt="Cart product Image"></a>
-                            <div class="content">
-                                <a href="assets/single-product.cshtml" class="title">Modern Smart Phone</a>
-                                <span class="quantity-price">1 x <span class="amount">$21.86</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="assets/single-product.cshtml" class="image"><img src="assets/images/product-image/2.webp" alt="Cart product Image"></a>
-                            <div class="content">
-                                <a href="assets/single-product.cshtml" class="title">Bluetooth Headphone</a>
-                                <span class="quantity-price">1 x <span class="amount">$13.28</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="assets/single-product.cshtml" class="image"><img src="assets/images/product-image/3.webp" alt="Cart product Image"></a>
-                            <div class="content">
-                                <a href="assets/single-product.cshtml" class="title">Smart Music Box</a>
-                                <span class="quantity-price">1 x <span class="amount">$17.34</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="foot">
-                    <div class="buttons">
-                        <a asp-action="Wishlist" asp-controller="Carts" class="btn btn-dark btn-hover-primary mt-30px">view wishlist</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <!-- OffCanvas Wishlist End -->
-    <!-- OffCanvas Cart Start -->
-        <div id="offcanvas-cart" class="offcanvas offcanvas-cart">
-            <div class="inner">
-                <div class="head">
-                    <span class="title">Cart</span>
-                    <button class="offcanvas-close">×</button>
-                </div>
-                <div class="body customScroll">
-                    <ul class="minicart-product-list">
-                        <li>
-                            <a href="assets/single-product.cshtml" class="image"><img src="assets/images/product-image/1.webp" alt="Cart product Image"></a>
-                            <div class="content">
-                                <a href="assets/single-product.cshtml" class="title">Modern Smart Phone</a>
-                                <span class="quantity-price">1 x <span class="amount">$18.86</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="assets/single-product.cshtml" class="image"><img src="assets/images/product-image/2.webp" alt="Cart product Image"></a>
-                            <div class="content">
-                                <a href="assets/single-product.cshtml" class="title">Bluetooth Headphone</a>
-                                <span class="quantity-price">1 x <span class="amount">$43.28</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="assets/single-product.cshtml" class="image"><img src="assets/images/product-image/3.webp" alt="Cart product Image"></a>
-                            <div class="content">
-                                <a href="assets/single-product.cshtml" class="title">Smart Music Box</a>
-                                <span class="quantity-price">1 x <span class="amount">$37.34</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="foot">
-                    <div class="buttons mt-30px">
-                        <a asp-action="Index" asp-controller="Carts" class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
-                        <a href="checkout.html" class="btn btn-outline-dark current-btn">checkout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <!-- OffCanvas Cart End -->
-    <!-- OffCanvas Menu Start -->
-        <div id="offcanvas-mobile-menu" class="offcanvas offcanvas-mobile-menu">
-            <button class="offcanvas-close"></button>
-            <div class="user-panel">
-                <ul>
-                    <li><a href="tel:0123456789"><i class="fa fa-phone"></i> +012 3456 789</a></li>
-                    <li><a href="mailto:demo@example.com"><i class="fa fa-envelope-o"></i> demo@example.com</a></li>
-                    <li><a href="assets/my-account.cshtml"><i class="fa fa-user"></i> Account</a></li>
-                </ul>
-            </div>
-            <div class="inner customScroll">
-                <div class="offcanvas-menu mb-4">
-                    <ul>
-                        <li>
-                            <a href="#"><span class="menu-text">Home</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="assets/index.cshtml"><span class="menu-text">Home 1</span></a></li>
-                                <li><a href="assets/index-2.cshtml"><span class="menu-text">Home 2</span></a></li>
-                            </ul>
-                        </li>
-                        <li><a href="assets/about.cshtml">About</a></li>
-                        <li>
-                            <a href="#"><span class="menu-text">Pages</span></a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="#"><span class="menu-text">Inner Pages</span></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="assets/404.cshtml">404 Page</a></li>
-                                        <li><a href="assets/order-tracking.cshtml">Order Tracking</a></li>
-                                        <li><a href="assets/faq.cshtml">Faq Page</a></li>
-                                        <li><a href="assets/coming-soon.cshtml">Coming Soon Page</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><span class="menu-text"> Other Shop Pages</span></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="assets/cart.cshtml">Cart Page</a></li>
-                                        <li><a href="assets/checkout.cshtml">Checkout Page</a></li>
-                                        <li><a href="assets/compare.cshtml">Compare Page</a></li>
-                                        <li><a asp-action="Wishlist" asp-controller="Carts">Wishlist Page</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><span class="menu-text">Related Shop Page</span></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="assets/my-account.cshtml">Account Page</a></li>
-                                        <li><a href="assets/login.cshtml">Login & Register Page</a></li>
-                                        <li><a href="assets/empty-cart.cshtml">Empty Cart Page</a></li>
-                                        <li><a href="assets/thank-you-page.cshtml">Thank You Page</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><span class="menu-text">Shop</span></a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="#"><span class="menu-text">Shop Page</span></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="assets/shop-3-column.cshtml">Shop 3 Column</a></li>
-                                        <li><a href="assets/shop-4-column.cshtml">Shop 4 Column</a></li>
-                                        <li><a href="assets/shop-left-sidebar.cshtml">Shop Left Sidebar</a></li>
-                                        <li><a href="assets/shop-right-sidebar.cshtml">Shop Right Sidebar</a></li>
-                                        <li>
-                                            <a href="assets/shop-list-left-sidebar.cshtml">Shop List Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="assets/shop-list-right-sidebar.cshtml">Shop List Right Sidebar</a>
-                                        </li>
-                                        <li><a href="assets/cart.cshtml">Cart Page</a></li>
-                                        <li><a href="assets/checkout.cshtml">Checkout Page</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><span class="menu-text">product Details Page</span></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="assets/single-product.cshtml">Product Single</a></li>
-                                        <li><a href="assets/single-product-variable.cshtml">Product Variable</a></li>
-                                        <li><a href="assets/single-product-affiliate.cshtml">Product Affiliate</a></li>
-                                        <li><a href="assets/single-product-group.cshtml">Product Group</a></li>
-                                        <li><a href="assets/single-product-tabstyle-2.cshtml">Product Tab 2</a></li>
-                                        <li><a href="assets/single-product-tabstyle-3.cshtml">Product Tab 3</a></li>
-                                        <li><a href="assets/single-product-slider.cshtml">Product Slider</a></li>
-                                        <li><a href="assets/single-product-gallery-left.cshtml">Product Gallery Left</a>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><span class="menu-text">Single Product Page</span></a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="assets/single-product-gallery-right.cshtml">
-                                                Product Gallery
-                                                Right
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="assets/single-product-sticky-left.cshtml">Product Sticky Left</a>
-                                        </li>
-                                        <li>
-                                            <a href="assets/single-product-sticky-right.cshtml">Product Sticky Right</a>
-                                        </li>
-                                        <li><a href="assets/compare.cshtml">Compare Page</a></li>
-                                        <li><a asp-action="Wishlist" asp-controller="Carts">Wishlist Page</a></li>
-                                        <li><a href="assets/my-account.cshtml">Account Page</a></li>
-                                        <li><a href="assets/login.cshtml">Login & Register Page</a></li>
-                                        <li><a href="assets/empty-cart.cshtml">Empty Cart Page</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><span class="menu-text">Blog</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="assets/blog-grid.cshtml">Blog Grid Page</a></li>
-                                <li><a href="assets/blog-grid-left-sidebar.cshtml">Grid Left Sidebar</a></li>
-                                <li><a href="assets/blog-grid-right-sidebar.cshtml">Grid Right Sidebar</a></li>
-                                <li><a href="assets/blog-list.cshtml">Blog List Page</a></li>
-                                <li><a href="assets/blog-list-left-sidebar.cshtml">List Left Sidebar</a></li>
-                                <li><a href="assets/blog-list-right-sidebar.cshtml">List Right Sidebar</a></li>
-                                <li><a href="assets/blog-single.cshtml">Blog Single Page</a></li>
-                                <li><a href="assets/blog-single-left-sidebar.cshtml">Single Left Sidebar</a></li>
-                                <li><a href="assets/blog-single-right-sidebar.cshtml">Single Right Sidbar</a>
-                            </ul>
-                        </li>
-                        <li><a href="assets/contact.cshtml">Contact Us</a></li>
-                    </ul>
-                </div>
-                <!-- OffCanvas Menu End -->
-                <div class="offcanvas-social mt-auto">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-google"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-youtube"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    <!-- OffCanvas Menu End -->
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="btn btn-xs btn-primary icon-user"></i>
+                                    Bob just signed up as an editor ...
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="clearfix">
+                                        <span class="pull-left">
+                                            <i class="btn btn-xs no-hover btn-success icon-shopping-cart"></i>
+                                            New Orders
+                                        </span>
+                                        <span class="pull-right badge badge-success">+8</span>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="clearfix">
+                                        <span class="pull-left">
+                                            <i class="btn btn-xs no-hover btn-info icon-twitter"></i>
+                                            Followers
+                                        </span>
+                                        <span class="pull-right badge badge-info">+11</span>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    See all notifications
+                                    <i class="icon-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="green">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-envelope icon-animated-vertical"></i>
+                            <span class="badge badge-success">5</span>
+                        </a>
+
+                        <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="icon-envelope-alt"></i>
+                                5 Messages
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <img src="assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                                    <span class="msg-body">
+                                        <span class="msg-title">
+                                            <span class="blue">Alex:</span>
+                                            Ciao sociis natoque penatibus et auctor ...
+                                        </span>
+
+                                        <span class="msg-time">
+                                            <i class="icon-time"></i>
+                                            <span>a moment ago</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <img src="assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+                                    <span class="msg-body">
+                                        <span class="msg-title">
+                                            <span class="blue">Susan:</span>
+                                            Vestibulum id ligula porta felis euismod ...
+                                        </span>
+
+                                        <span class="msg-time">
+                                            <i class="icon-time"></i>
+                                            <span>20 minutes ago</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <img src="assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+                                    <span class="msg-body">
+                                        <span class="msg-title">
+                                            <span class="blue">Bob:</span>
+                                            Nullam quis risus eget urna mollis ornare ...
+                                        </span>
+
+                                        <span class="msg-time">
+                                            <i class="icon-time"></i>
+                                            <span>3:15 pm</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="inbox.html">
+                                    See all messages
+                                    <i class="icon-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="light-blue">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
+                            <span class="user-info">
+                                <small>Welcome,</small>
+                                Jason
+                            </span>
+
+                            <i class="icon-caret-down"></i>
+                        </a>
+
+                        <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li>
+                                <a href="#">
+                                    <i class="icon-cog"></i>
+                                    Settings
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="icon-user"></i>
+                                    Profile
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="icon-off"></i>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul><!-- /.ace-nav -->
+            </div><!-- /.navbar-header -->
+        </div><!-- /.container -->
+    </div>
         @show
 
-        <div class="main-wrapper">
-    {{-- phan nay la BODY --}}
+    {{-- BODY START --}}
+    <div class="main-container" id="main-container">
+    {{-- MENU Start --}}
+            <script type="text/javascript">
+                try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+            </script>
+
+            <div class="main-container-inner">
+                <a class="menu-toggler" id="menu-toggler" href="#">
+                    <span class="menu-text"></span>
+                </a>
+
+                <div class="sidebar" id="sidebar">
+                    <script type="text/javascript">
+                        try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+                    </script>
+
+                    <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                            <button class="btn btn-success">
+                                <i class="icon-signal"></i>
+                            </button>
+
+                            <button class="btn btn-info">
+                                <i class="icon-pencil"></i>
+                            </button>
+
+                            <button class="btn btn-warning">
+                                <i class="icon-group"></i>
+                            </button>
+
+                            <button class="btn btn-danger">
+                                <i class="icon-cogs"></i>
+                            </button>
+                        </div>
+
+                        <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                            <span class="btn btn-success"></span>
+
+                            <span class="btn btn-info"></span>
+
+                            <span class="btn btn-warning"></span>
+
+                            <span class="btn btn-danger"></span>
+                        </div>
+                    </div><!-- #sidebar-shortcuts -->
+
+                    <ul class="nav nav-list">
+                        <li>
+                            <a href="index.html">
+                                <i class="icon-dashboard"></i>
+                                <span class="menu-text"> Dashboard </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="typography.html">
+                                <i class="icon-text-width"></i>
+                                <span class="menu-text"> Typography </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-desktop"></i>
+                                <span class="menu-text"> UI Elements </span>
+
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li>
+                                    <a href="elements.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Elements
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="buttons.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Buttons &amp; Icons
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="treeview.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Treeview
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="jquery-ui.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        jQuery UI
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="nestable-list.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Nestable Lists
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="dropdown-toggle">
+                                        <i class="icon-double-angle-right"></i>
+
+                                        Three Level Menu
+                                        <b class="arrow icon-angle-down"></b>
+                                    </a>
+
+                                    <ul class="submenu">
+                                        <li>
+                                            <a href="#">
+                                                <i class="icon-leaf"></i>
+                                                Item #1
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="dropdown-toggle">
+                                                <i class="icon-pencil"></i>
+
+                                                4th level
+                                                <b class="arrow icon-angle-down"></b>
+                                            </a>
+
+                                            <ul class="submenu">
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="icon-plus"></i>
+                                                        Add Product
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="icon-eye-open"></i>
+                                                        View Products
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="active open">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-list"></i>
+                                <span class="menu-text"> Tables </span>
+
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li class="active">
+                                    <a href="tables.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Simple &amp; Dynamic
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="jqgrid.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        jqGrid plugin
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-edit"></i>
+                                <span class="menu-text"> Forms </span>
+
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li>
+                                    <a href="form-elements.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Form Elements
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="form-wizard.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Wizard &amp; Validation
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="wysiwyg.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Wysiwyg &amp; Markdown
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="dropzone.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Dropzone File Upload
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="widgets.html">
+                                <i class="icon-list-alt"></i>
+                                <span class="menu-text"> Widgets </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="calendar.html">
+                                <i class="icon-calendar"></i>
+
+                                <span class="menu-text">
+                                    Calendar
+                                    <span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
+                                        <i class="icon-warning-sign red bigger-130"></i>
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="gallery.html">
+                                <i class="icon-picture"></i>
+                                <span class="menu-text"> Gallery </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-tag"></i>
+                                <span class="menu-text"> More Pages </span>
+
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li>
+                                    <a href="profile.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        User Profile
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="inbox.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Inbox
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="pricing.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Pricing Tables
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="invoice.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Invoice
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="timeline.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Timeline
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="login.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Login &amp; Register
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-file-alt"></i>
+
+                                <span class="menu-text">
+                                    Other Pages
+                                    <span class="badge badge-primary ">5</span>
+                                </span>
+
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li>
+                                    <a href="faq.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        FAQ
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="error-404.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Error 404
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="error-500.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Error 500
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="grid.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Grid
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="blank.html">
+                                        <i class="icon-double-angle-right"></i>
+                                        Blank Page
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul><!-- /.nav-list -->
+
+                    <div class="sidebar-collapse" id="sidebar-collapse">
+                        <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+                    </div>
+
+                    <script type="text/javascript">
+                        try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+                    </script>
+                </div>
+                {{-- MENU END --}}
+    {{-- phan nay la main-content, BODY --}}
             @yield('body')
-        </div>
+
+            @section('settingicon')
+        <div class="ace-settings-container" id="ace-settings-container">
+            <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+                <i class="icon-cog bigger-150"></i>
+            </div>
+
+            <div class="ace-settings-box" id="ace-settings-box">
+                <div>
+                    <div class="pull-left">
+                        <select id="skin-colorpicker" class="hide">
+                            <option data-skin="default" value="#438EB9">#438EB9</option>
+                            <option data-skin="skin-1" value="#222A2D">#222A2D</option>
+                            <option data-skin="skin-2" value="#C6487E">#C6487E</option>
+                            <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+                        </select>
+                    </div>
+                    <span>&nbsp; Choose Skin</span>
+                </div>
+
+                <div>
+                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
+                    <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
+                    <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
+                    <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
+                    <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
+                    <label class="lbl" for="ace-settings-add-container">
+                        Inside
+                        <b>.container</b>
+                    </label>
+                </div>
+            </div>
+        </div><!-- /#ace-settings-container -->
+        @show
+            </div><!-- /.main-container-inner -->
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="icon-double-angle-up icon-only bigger-110"></i>
+        </a>
+
+    </div><!-- /.main-container -->
+    {{-- BODY END --}}
 
         @section('footer')
     {{-- phan nay la FOOTER --}}
     <!-- Footer Area Start -->
-<div class="footer-area">
-    <div class="footer-container">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <!-- Start single blog -->
-                    <div class="col-md-6 col-lg-3 mb-md-30px mb-lm-30px">
-                        <div class="single-wedge">
-                            <div class="footer-logo">
-                                <a href="index.html"><img src="assets/images/logo/footer-logo.png" alt=""></a>
-                            </div>
-                            <p class="about-text">
-                                Lorem ipsum dolor sit amet consl adipisi elit, sed do eiusmod templ incididunt ut labore
-                            </p>
-                            <ul class="link-follow">
-                                <li>
-                                    <a class="m-0" title="Twitter" target="_blank" rel="noopener noreferrer" href="#">
-                                        <i class="fa fa-facebook"
-                                           aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Tumblr" target="_blank" rel="noopener noreferrer" href="#">
-                                        <i class="fa fa-tumblr" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Facebook" target="_blank" rel="noopener noreferrer" href="#">
-                                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Instagram" target="_blank" rel="noopener noreferrer" href="#">
-                                        <i class="fa fa-instagram" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End single blog -->
-                    <!-- Start single blog -->
-                    <div class="col-md-6 col-lg-3 col-sm-6 mb-lm-30px pl-lg-60px">
-                        <div class="single-wedge">
-                            <h4 class="footer-herading">Services</h4>
-                            <div class="footer-links">
-                                <div class="footer-row">
-                                    <ul class="align-items-center">
-                                        <li class="li"><a class="single-link" href="my-account.html">My Account</a></li>
-                                        <li class="li"><a class="single-link" href="contact.html">Contact</a></li>
-                                        <li class="li"><a class="single-link" href="cart.html">Shopping cart</a></li>
-                                        <li class="li"><a class="single-link" href="shop-left-sidebar.html">Shop</a></li>
-                                        <li class="li"><a class="single-link" href="login.html">Services Login</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End single blog -->
-                    <!-- Start single blog -->
-                    <div class="col-md-6 col-lg-3 col-sm-6 mb-lm-30px pl-lg-40px">
-                        <div class="single-wedge">
-                            <h4 class="footer-herading">My Account</h4>
-                            <div class="footer-links">
-                                <div class="footer-row">
-                                    <ul class="align-items-center">
-                                        <li class="li"><a class="single-link" href="my-account.html">My Account</a></li>
-                                        <li class="li"><a class="single-link" href="contact.html">Contact</a></li>
-                                        <li class="li"><a class="single-link" href="cart.html">Shopping cart</a></li>
-                                        <li class="li"><a class="single-link" href="shop-left-sidebar.html">Shop</a></li>
-                                        <li class="li"><a class="single-link" href="login.html">Services Login</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End single blog -->
-                    <!-- Start single blog -->
-                    <div class="col-md-6 col-lg-3 col-sm-12">
-                        <div class="single-wedge">
-                            <h4 class="footer-herading">Contact Info</h4>
-                            <div class="footer-links">
-                                <!-- News letter area -->
-                                <p class="address">Address: Your Address Goes Here.</p>
-                                <p class="phone">Phone/Fax:<a href="tel:0123456789"> 0123456789</a></p>
-                                <p class="mail">Email:<a href="mailto:demo@example.com"> demo@example.com</a></p>
-                                <p class="mail"><a href="https://demo@example.com"> demo@example.com</a></p>
-                                <!-- News letter area  End -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End single blog -->
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="line-shape-top line-height-1">
-                    <div class="row flex-md-row-reverse align-items-center">
-                        <div class="col-md-6 text-center text-md-end">
-                            <div class="payment-mth"><a href="#"><img class="img img-fluid" src="assets/images/icons/payment.png" alt="payment-image"></a></div>
-                        </div>
-                        <div class="col-md-6 text-center text-md-start">
-                            <p class="copy-text">
-                                © 2021 <strong>Hmart</strong> Made With <i class="fa fa-heart"
-                                                                           aria-hidden="true"></i> By <a class="company-name" href="https://themeforest.net/user/codecarnival/portfolio">
-                                    <strong> Codecarnival </strong>
-                                </a>.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
     <!-- Footer Area End -->
         @show
-        @section('modal')
-    {{-- phan nay la modal va Script --}}
-    <!-- Modal -->
-    <div class="modal modal-2 fade" id="exampleModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> <i class="pe-7s-close"></i></button>
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-12 col-xs-12 mb-lm-30px mb-md-30px mb-sm-30px">
-                            <!-- Swiper -->
-                            <div class="swiper-container gallery-top">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/1.webp" alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/2.webp" alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/3.webp" alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/4.webp" alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/5.webp" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-container gallery-thumbs mt-20px slider-nav-style-1 small-nav">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/small-image/1.webp" alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/small-image/2.webp" alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/small-image/3.webp" alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/small-image/4.webp" alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/small-image/5.webp" alt="">
-                                    </div>
-                                </div>
-                                <!-- Add Arrows -->
-                                <div class="swiper-buttons">
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
-                            <div class="product-details-content quickview-content">
-                                <h2>Modern Smart Phone</h2>
-                                <div class="pricing-meta">
-                                    <ul class="d-flex">
-                                        <li class="new-price">$20.90</li>
-                                    </ul>
-                                </div>
-                                <div class="pro-details-rating-wrap">
-                                    <div class="rating-product">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <span class="read-review"><a class="reviews" href="#">( 2 Review )</a></span>
-                                </div>
-                                <p class="mt-30px">Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmll tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mill veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exet commodo consequat. Duis aute irure dolor</p>
-                                <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
-                                    <span>SKU:</span>
-                                    <ul class="d-flex">
-                                        <li>
-                                            <a href="#">Ch-256xl</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
-                                    <span>Categories: </span>
-                                    <ul class="d-flex">
-                                        <li>
-                                            <a href="#">Smart Device, </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">ETC</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
-                                    <span>Tags: </span>
-                                    <ul class="d-flex">
-                                        <li>
-                                            <a href="#">Smart Device, </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Phone</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="pro-details-quality">
-                                    <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                                    </div>
-                                    <div class="pro-details-cart">
-                                        <button class="add-cart">
-                                            Add To
-                                            Cart
-                                        </button>
-                                    </div>
-                                    <div class="pro-details-compare-wishlist pro-details-wishlist ">
-                                        <a href="wishlist.html"><i class="pe-7s-like"></i></a>
-                                    </div>
-                                </div>
-                                <div class="payment-img">
-                                    <a href="#"><img src="assets/images/icons/payment.png" alt=""></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal end -->
-    <!-- Modal Cart -->
-    <div class="modal customize-class fade" id="exampleModal-Cart" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="pe-7s-close"></i></button>
-                    <div class="tt-modal-messages">
-                        <i class="pe-7s-check"></i> Added to cart successfully!
-                    </div>
-                    <div class="tt-modal-product">
-                        <div class="tt-img">
-                            <img src="assets/images/product-image/1.webp" alt="Modern Smart Phone">
-                        </div>
-                        <h2 class="tt-title"><a href="#">Modern Smart Phone</a></h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal wishlist -->
-    <div class="modal customize-class fade" id="exampleModal-Wishlist" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="pe-7s-close"></i></button>
-                    <div class="tt-modal-messages">
-                        <i class="pe-7s-check"></i> Added to Wishlist successfully!
-                    </div>
-                    <div class="tt-modal-product">
-                        <div class="tt-img">
-                            <img src="assets/images/product-image/1.webp" alt="Modern Smart Phone">
-                        </div>
-                        <h2 class="tt-title"><a href="#">Modern Smart Phone</a></h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal compare -->
-    <div class="modal customize-class fade" id="exampleModal-Compare" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="pe-7s-close"></i></button>
-                    <div class="tt-modal-messages">
-                        <i class="pe-7s-check"></i> Added to compare successfully!
-                    </div>
-                    <div class="tt-modal-product">
-                        <div class="tt-img">
-                            <img src="assets/images/product-image/1.webp" alt="Modern Smart Phone">
-                        </div>
-                        <h2 class="tt-title"><a href="#">Modern Smart Phone</a></h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        @section('script')
+    {{-- phan nay la Script --}}
+    <!-- basic scripts -->
+
+		<!--[if !IE]> -->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+		<script type="text/javascript">
+			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/typeahead-bs2.min.js"></script>
+
+		<!-- page specific plugin scripts -->
+
+		<script src="assets/js/jquery.dataTables.min.js"></script>
+		<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
+
+		<!-- ace scripts -->
+
+		<script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+
+		<script type="text/javascript">
+			jQuery(function($) {
+				var oTable1 = $('#sample-table-2').dataTable( {
+				"aoColumns": [
+			      { "bSortable": false },
+			      null, null,null, null, null,
+				  { "bSortable": false }
+				] } );
 
 
-    <!-- Global Vendor, plugins JS -->
-    <!-- JS Files
-    ============================================ -->
-    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
-    <script src="assets/js/vendor/modernizr-3.11.2.min.js"></script>
-    <script src="assets/js/plugins/jquery.countdown.min.js"></script>
-    <script src="assets/js/plugins/swiper-bundle.min.js"></script>
-    <script src="assets/js/plugins/scrollUp.js"></script>
-    <script src="assets/js/plugins/venobox.min.js"></script>
-    <script src="assets/js/plugins/jquery-ui.min.js"></script>
-    <script src="assets/js/plugins/mailchimp-ajax.js"></script>
+				$('table th input:checkbox').on('click' , function(){
+					var that = this;
+					$(this).closest('table').find('tr > td:first-child input:checkbox')
+					.each(function(){
+						this.checked = that.checked;
+						$(this).closest('tr').toggleClass('selected');
+					});
 
-    <!-- Minify Version -->
-    <!-- <script src="assets/js/vendor.min.js"></script>
-    <script src="assets/js/plugins.min.js"></script>
-    <script src="assets/js/main.min.js"></script> -->
-    <!--Main JS (Common Activation Codes)-->
-    <script src="assets/js/main.js"></script>
+				});
+
+
+				$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+				function tooltip_placement(context, source) {
+					var $source = $(source);
+					var $parent = $source.closest('table')
+					var off1 = $parent.offset();
+					var w1 = $parent.width();
+
+					var off2 = $source.offset();
+					var w2 = $source.width();
+
+					if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+					return 'left';
+				}
+			})
+		</script>
         @show
     </body>
 </html>
