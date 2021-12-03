@@ -48,6 +48,7 @@
 		<script src="assets/js/html5shiv.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
+        @yield('headThisPage')
 	</head>
     <body>
         @section('header')
@@ -700,3 +701,4 @@
         @yield('scriptThisPage')
     </body>
 </html>
+		<script src="assets/js/jquery.dataTables.min.js"></script>

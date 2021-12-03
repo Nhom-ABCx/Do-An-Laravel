@@ -61,11 +61,12 @@ class SanPhamController extends Controller
      * @param  \App\Models\SanPham  $sanPham
      * @return \Illuminate\Http\Response
      */
-    public function edit(SanPham $sanPham)
+    public function edit($sanPham)
     {
-        //
-        echo "asdasdasdasd";
-        dd($sanPham);
+        $sp=SanPham::find($sanPham);
+
+        //$this->fixImage($sp);
+        return view('SanPham-edit',['sanPham'=>$sp]);
     }
 
     /**
