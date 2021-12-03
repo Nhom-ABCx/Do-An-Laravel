@@ -77,7 +77,7 @@
                                 <td>{{$item->SoLuongTon}}</td>
                                 <td>{{$item->DonGia}}</td>
                                 <td>
-                                    <img src='assets/images/product-image/{{$item->HinhAnh}}' alt="{{$item->HinhAnh}}" width='100' height='100'>
+                                    <img src='/assets/images/product-image/{{$item->HinhAnh}}' alt="{{$item->HinhAnh}}" width='100' height='100'>
                                 </td>
                                 <td>{{$item->LuotMua}}</td>
                                 <td>{{$item->NhaCungCapId}}</td>
