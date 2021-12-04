@@ -17,5 +17,8 @@ use App\Http\Controllers\SanPhamController;
 */
 
 Route::get('/', [HomeController::class,"Index"]);
-Route::resource('SanPham', SanPhamController::class);
-
+Route::resource('SanPham', SanPhamController::class, [
+    'parameters' => [
+        'SanPham' => 'sanPham'
+    ]
+]);

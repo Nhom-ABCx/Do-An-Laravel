@@ -20,7 +20,10 @@ class SanPhamController extends Controller
     public function index()
     {
         $data=SanPham::all();
-        return view('SanPham',["sanPham"=>$data]);
+        foreach ($data as $sp)
+            $this->fixImage($sp);
+        //gọi fixImage cho từng sp
+        return view('SanPham.SanPham-index',["sanPham"=>$data]);
     }
 
     /**
@@ -61,12 +64,10 @@ class SanPhamController extends Controller
      * @param  \App\Models\SanPham  $sanPham
      * @return \Illuminate\Http\Response
      */
-    public function edit($sanPham)
+    public function edit(SanPham $sanPham)
     {
-        $sp=SanPham::find($sanPham);
-
-        //$this->fixImage($sp);
-        return view('SanPham-edit',['sanPham'=>$sp]);
+        $this->fixImage($sanPham);
+        return view('SanPham.SanPham-edit',['sanPham'=>$sanPham]);
     }
 
     /**
@@ -95,10 +96,11 @@ class SanPhamController extends Controller
     public function fixImage(SanPham $sanPham)
     {
         //chạy lệnh sau: php artisan storage:link     de tu tao 1 lien ket den' folder public
-        if  (Storage::disk('public/assets/images/product-image/')->exists($sanPham->HinhAnh))
-            $sanPham->HinhAnh=Storage::url($sanPham->HinhAnh);
+        // nếu trong đường dẫn "storage/app/public" + "assets/images/product-image/..." tồn tại hình ảnh
+        if  (Storage::disk('public')->exists("assets/images/product-image/".$sanPham->HinhAnh))
+            $sanPham->HinhAnh=Storage::url("assets/images/product-image/".$sanPham->HinhAnh);
         else
-            $sanPham->HinhAnh='/assets/images/404/Img_error.png';
+            $sanPham->HinhAnh=Storage::url("assets/images/404/Img_error.png");
     }
     //API
     public function API_SanPham()

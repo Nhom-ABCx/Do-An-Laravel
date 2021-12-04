@@ -9,6 +9,10 @@
 
 @section('body')
     Trang nay la trang BODY
+    <br>
+    <a href="{{route('SanPham.index')}}">quay về nè</a>
+    <img src='{{$sanPham->HinhAnh}}' alt="{{$sanPham->HinhAnh}}" width='100' height='100'>
+    {{dd($sanPham)}}
 @endsection
 
 @section("scriptThisPage")
