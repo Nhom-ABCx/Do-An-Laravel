@@ -80,8 +80,8 @@
                                     <img src='{{$item->HinhAnh}}' alt="{{$item->HinhAnh}}" width='100' height='100'>
                                 </td>
                                 <td>{{$item->LuotMua}}</td>
-                                <td>{{$item->NhaCungCapId}}</td>
-                                <td>{{$item->LoaiSanPhamId}}</td>
+                                <td>{{$item->NhaCungCap->TenNhaCungCap}}</td>
+                                <td>{{$item->LoaiSanPham->TenLoai}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
 

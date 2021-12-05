@@ -84,7 +84,27 @@ class SanPhamController extends Controller
      */
     public function update(Request $request, SanPham $sanPham)
     {
-        //
+        //Hình ảnh phải lưu trong public và phải có bước tạo link thì người dùng mới thấy dc
+        //store() tự đặt hình bằng chuỗi random, nên tạo thư mục theo mã/tên sp để dễ quản lý
+        if($request->hasFile('HinhAnh'))
+        {
+            $sanPham->HinhAnh=$request->file('HinhAnh')->store('assets/images/product-image/'.$sanPham->id,'public');
+            //cat chuoi ra, chi luu cai ten thoi
+            $catChuoi = explode("/", $sanPham->HinhAnh);
+            $sanPham->HinhAnh=$catChuoi[4];
+        }
+        $sanPham->fill([
+            'TenSanPham'=>$request->input('TenSanPham'),
+            'MoTa'=>$request->input('MoTa'),
+            'SoLuongTon'=>$request->input('SoLuongTon'),
+            'DonGia'=>$request->input('DonGia'),
+            'NhaCungCapId'=>$request->input('NhaCungCapId'),
+            'LoaiSanPhamId'=>$request->input('LoaiSanPhamId'),
+        ]);
+        //fill chi sua doi tuong trong bo nho', muon luu trong CSDL thi phai save()
+        $sanPham->save();
+        //dd($sanPham);
+        return Redirect::route('SanPham.index',$sanPham);
     }
 
     /**
@@ -102,7 +122,12 @@ class SanPhamController extends Controller
     {
         //chạy lệnh sau: php artisan storage:link     de tu tao 1 lien ket den' folder public
         // nếu trong đường dẫn "storage/app/public" + "assets/images/product-image/..." tồn tại hình ảnh
-        if  (Storage::disk('public')->exists("assets/images/product-image/".$sanPham->HinhAnh))
+
+        if (Storage::disk('public')->exists("assets/images/product-image/".$sanPham->id."/".$sanPham->HinhAnh))
+        {
+            $sanPham->HinhAnh=Storage::url("assets/images/product-image/".$sanPham->id."/".$sanPham->HinhAnh);
+        }
+        elseif  (Storage::disk('public')->exists("assets/images/product-image/".$sanPham->HinhAnh))
             $sanPham->HinhAnh=Storage::url("assets/images/product-image/".$sanPham->HinhAnh);
         else
             $sanPham->HinhAnh=Storage::url("assets/images/404/Img_error.png");

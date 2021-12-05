@@ -67,7 +67,7 @@
                                     <i class="icon-coffee"></i>
                                 </span>
 
-                                <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" value="{{$sanPham->TenSanPham}}"/>
+                                <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" value="{{$sanPham->TenSanPham}}" name="TenSanPham"/>
                             </div>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                                     <i class="icon-edit"></i>
                                 </span>
 
-                                <textarea id="form-field-11" class="autosize-transition form-control">{{$sanPham->MoTa}}</textarea>
+                                <textarea id="form-field-11" class="autosize-transition form-control" name="MoTa">{{$sanPham->MoTa}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
 
                         <div class="col-sm-3">
                             {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner3" --}}
-                            <input type="text" class="input-mini" id="spinner3" value="{{$sanPham->SoLuongTon}}"/>
+                            <input type="text" class="input-mini" id="spinner3" value="{{$sanPham->SoLuongTon}}" name="SoLuongTon"/>
                         </div>
                     </div>
 
@@ -111,7 +111,7 @@
                                 </span>
 
                             {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner2" --}}
-                            <input type="text" class="input-mini" id="spinner2" value="{{$sanPham->DonGia}}"/>
+                            <input type="text" class="input-mini" id="spinner2" value="{{$sanPham->DonGia}}" name="DonGia"/>
                             </div>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
                         <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Hình ảnh </label>
 
                         <div class="col-sm-2">
-                            <input type="file" accept="image/*" id="id-input-file-3" name="hinhanh">
+                            <input type="file" accept="image/*" id="id-input-file-3" name="HinhAnh">
                         </div>
                         <img style="width:150px;max-height:150px;object-fit:contain" src="{{$sanPham->HinhAnh}}" alt="">
                     </div>
@@ -154,7 +154,7 @@
                                     <i class="icon-sort-by-attributes"></i>
                                 </span>
 
-                                <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="">
+                                <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="NhaCungCapId">
                                     <option value="">&nbsp;</option>
                                     @foreach ($lstNhaCungCap as $item)
                                     <option value="{{$item->id}}" @if ($item->id==$sanPham->NhaCungCapId) selected @endif>
@@ -177,7 +177,7 @@
                                     <i class="icon-sort-by-attributes"></i>
                                 </span>
 
-                                <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="">
+                                <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="LoaiSanPhamId">
                                     <option value="">&nbsp;</option>
                                     @foreach ($lstLoaiSanPham as $item)
                                     <option value="{{$item->id}}" @if ($item->id==$sanPham->LoaiSanPhamId) selected @endif>
@@ -225,7 +225,7 @@
 
                     <div class="clearfix form-actions">
                         <div class="col-md-9">
-                            <button class="btn btn-info" type="button">
+                            <button class="btn btn-info" type="submit">
                                 <i class="icon-ok bigger-110"></i>
                                 Submit
                             </button>
