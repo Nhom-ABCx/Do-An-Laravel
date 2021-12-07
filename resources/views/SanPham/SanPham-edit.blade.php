@@ -154,11 +154,11 @@
                                     <i class="icon-sort-by-attributes"></i>
                                 </span>
 
-                                <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="NhaCungCapId">
+                                <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="HangSanXuatId">
                                     <option value="">&nbsp;</option>
-                                    @foreach ($lstNhaCungCap as $item)
-                                    <option value="{{$item->id}}" @if ($item->id==$sanPham->NhaCungCapId) selected @endif>
-                                        {{$item->TenNhaCungCap}}
+                                    @foreach ($lstHangSanXuat as $item)
+                                    <option value="{{$item->id}}" @if ($item->id==$sanPham->HangSanXuatId) selected @endif>
+                                        {{$item->Ten}}
                                     </option>
                                     @endforeach
                                 </select>

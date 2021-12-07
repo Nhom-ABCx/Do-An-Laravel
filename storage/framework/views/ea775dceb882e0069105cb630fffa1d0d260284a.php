@@ -50,8 +50,8 @@
                                 <th>DonGia</th>
                                 <th>HinhAnh</th>
                                 <th>LuotMua</th>
-                                <th>NhaCungCapId</th>
                                 <th>LoaiSanPhamId</th>
+                                <th>HangSanXuatId</th>
                                 <th>
                                     <i class="icon-time bigger-110 hidden-480"></i>
                                     Create_at
@@ -77,8 +77,8 @@
                                     <img src='<?php echo e($item->HinhAnh); ?>' alt="<?php echo e($item->HinhAnh); ?>" width='100' height='100'>
                                 </td>
                                 <td><?php echo e($item->LuotMua); ?></td>
-                                <td><?php echo e($item->NhaCungCap->TenNhaCungCap); ?></td>
                                 <td><?php echo e($item->LoaiSanPham->TenLoai); ?></td>
+                                <td><?php echo e($item->HangSanXuat->Ten); ?></td>
                                 <td><?php echo e($item->created_at); ?></td>
                                 <td><?php echo e($item->updated_at); ?></td>
 

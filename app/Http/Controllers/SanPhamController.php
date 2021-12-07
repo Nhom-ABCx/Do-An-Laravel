@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SanPham;
 use App\Models\LoaiSanPham;
-use App\Models\NhaCungCap;
+use App\Models\HangSanXuat;
 use Facade\FlareClient\View;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
@@ -70,9 +70,9 @@ class SanPhamController extends Controller
     {
         $this->fixImage($sanPham);
         $lstLoaiSanPham=LoaiSanPham::all();
-        $lstNhaCungCap=NhaCungCap::all();
+        $lstHangSanXuat=HangSanXuat::all();
         //truyền them danh sách loại sản phẩm để tạo thẻ <options
-        return view('SanPham.SanPham-edit',['sanPham'=>$sanPham,'lstLoaiSanPham'=>$lstLoaiSanPham,'lstNhaCungCap'=>$lstNhaCungCap]);
+        return view('SanPham.SanPham-edit',['sanPham'=>$sanPham,'lstLoaiSanPham'=>$lstLoaiSanPham,'lstHangSanXuat'=>$lstHangSanXuat]);
     }
 
     /**
@@ -98,7 +98,7 @@ class SanPhamController extends Controller
             'MoTa'=>$request->input('MoTa'),
             'SoLuongTon'=>$request->input('SoLuongTon'),
             'DonGia'=>$request->input('DonGia'),
-            'NhaCungCapId'=>$request->input('NhaCungCapId'),
+            'HangSanXuatId'=>$request->input('HangSanXuatId'),
             'LoaiSanPhamId'=>$request->input('LoaiSanPhamId'),
         ]);
         //fill chi sua doi tuong trong bo nho', muon luu trong CSDL thi phai save()

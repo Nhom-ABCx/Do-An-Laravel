@@ -19,12 +19,12 @@ class SanPham extends Model
           'DonGia',
           'HinhAnh',
           'LuotMua',
-          'NhaCungCapId',
+          'HangSanXuatId',
           'LoaiSanPhamId',
     ];
-    public function NhaCungCap()
+    public function HangSanXuat()
     {
-        return $this->belongsTo(NhaCungCap::class,'NhaCungCapId');
+        return $this->belongsTo(HangSanXuat::class,'HangSanXuatId');
     }
     public function LoaiSanPham()
     {

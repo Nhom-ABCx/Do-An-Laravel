@@ -151,11 +151,11 @@
                                     <i class="icon-sort-by-attributes"></i>
                                 </span>
 
-                                <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="NhaCungCapId">
+                                <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="HangSanXuatId">
                                     <option value="">&nbsp;</option>
-                                    <?php $__currentLoopData = $lstNhaCungCap; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($item->id); ?>" <?php if($item->id==$sanPham->NhaCungCapId): ?> selected <?php endif; ?>>
-                                        <?php echo e($item->TenNhaCungCap); ?>
+                                    <?php $__currentLoopData = $lstHangSanXuat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($item->id); ?>" <?php if($item->id==$sanPham->HangSanXuatId): ?> selected <?php endif; ?>>
+                                        <?php echo e($item->Ten); ?>
 
                                     </option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

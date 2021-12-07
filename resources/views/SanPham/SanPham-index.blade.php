@@ -53,8 +53,8 @@
                                 <th>DonGia</th>
                                 <th>HinhAnh</th>
                                 <th>LuotMua</th>
-                                <th>NhaCungCapId</th>
                                 <th>LoaiSanPhamId</th>
+                                <th>HangSanXuatId</th>
                                 <th>
                                     <i class="icon-time bigger-110 hidden-480"></i>
                                     Create_at
@@ -80,8 +80,8 @@
                                     <img src='{{$item->HinhAnh}}' alt="{{$item->HinhAnh}}" width='100' height='100'>
                                 </td>
                                 <td>{{$item->LuotMua}}</td>
-                                <td>{{$item->NhaCungCap->TenNhaCungCap}}</td>
                                 <td>{{$item->LoaiSanPham->TenLoai}}</td>
+                                <td>{{$item->HangSanXuat->Ten}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
 
