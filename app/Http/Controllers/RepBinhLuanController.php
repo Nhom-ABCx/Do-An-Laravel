@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TaiKhoan;
+use App\Models\RepBinhLuan;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class TaiKhoanController extends Controller
+class RepBinhLuanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class TaiKhoanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TaiKhoan  $taiKhoan
+     * @param  \App\Models\RepBinhLuan  $repBinhLuan
      * @return \Illuminate\Http\Response
      */
-    public function show(TaiKhoan $taiKhoan)
+    public function show(RepBinhLuan $repBinhLuan)
     {
         //
     }
@@ -52,10 +53,10 @@ class TaiKhoanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TaiKhoan  $taiKhoan
+     * @param  \App\Models\RepBinhLuan  $repBinhLuan
      * @return \Illuminate\Http\Response
      */
-    public function edit(TaiKhoan $taiKhoan)
+    public function edit(RepBinhLuan $repBinhLuan)
     {
         //
     }
@@ -64,10 +65,10 @@ class TaiKhoanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TaiKhoan  $taiKhoan
+     * @param  \App\Models\RepBinhLuan  $repBinhLuan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TaiKhoan $taiKhoan)
+    public function update(Request $request, RepBinhLuan $repBinhLuan)
     {
         //
     }
@@ -75,10 +76,10 @@ class TaiKhoanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TaiKhoan  $taiKhoan
+     * @param  \App\Models\RepBinhLuan  $repBinhLuan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaiKhoan $taiKhoan)
+    public function destroy(RepBinhLuan $repBinhLuan)
     {
         //
     }

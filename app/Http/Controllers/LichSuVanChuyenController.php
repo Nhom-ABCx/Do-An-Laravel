@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LoaiTaiKhoan_Quyen;
+use App\Models\LichSuVanChuyen;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class LoaiTaiKhoanQuyenController extends Controller
+class LichSuVanChuyenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class LoaiTaiKhoanQuyenController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\LoaiTaiKhoan_Quyen  $loaiTaiKhoan_Quyen
+     * @param  \App\Models\LichSuVanChuyen  $lichSuVanChuyen
      * @return \Illuminate\Http\Response
      */
-    public function show(LoaiTaiKhoan_Quyen $loaiTaiKhoan_Quyen)
+    public function show(LichSuVanChuyen $lichSuVanChuyen)
     {
         //
     }
@@ -52,10 +53,10 @@ class LoaiTaiKhoanQuyenController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\LoaiTaiKhoan_Quyen  $loaiTaiKhoan_Quyen
+     * @param  \App\Models\LichSuVanChuyen  $lichSuVanChuyen
      * @return \Illuminate\Http\Response
      */
-    public function edit(LoaiTaiKhoan_Quyen $loaiTaiKhoan_Quyen)
+    public function edit(LichSuVanChuyen $lichSuVanChuyen)
     {
         //
     }
@@ -64,10 +65,10 @@ class LoaiTaiKhoanQuyenController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\LoaiTaiKhoan_Quyen  $loaiTaiKhoan_Quyen
+     * @param  \App\Models\LichSuVanChuyen  $lichSuVanChuyen
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LoaiTaiKhoan_Quyen $loaiTaiKhoan_Quyen)
+    public function update(Request $request, LichSuVanChuyen $lichSuVanChuyen)
     {
         //
     }
@@ -75,10 +76,10 @@ class LoaiTaiKhoanQuyenController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\LoaiTaiKhoan_Quyen  $loaiTaiKhoan_Quyen
+     * @param  \App\Models\LichSuVanChuyen  $lichSuVanChuyen
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LoaiTaiKhoan_Quyen $loaiTaiKhoan_Quyen)
+    public function destroy(LichSuVanChuyen $lichSuVanChuyen)
     {
         //
     }

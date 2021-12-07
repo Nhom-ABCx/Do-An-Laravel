@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Quyen;
-use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\YeuThich;
+use App\Models\User;
 
-class QuyenPolicy
+class YeuThichPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class QuyenPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Quyen  $quyen
+     * @param  \App\Models\YeuThich  $yeuThich
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Quyen $quyen)
+    public function view(User $user, YeuThich $yeuThich)
     {
         //
     }
@@ -48,10 +48,10 @@ class QuyenPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Quyen  $quyen
+     * @param  \App\Models\YeuThich  $yeuThich
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Quyen $quyen)
+    public function update(User $user, YeuThich $yeuThich)
     {
         //
     }
@@ -60,10 +60,10 @@ class QuyenPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Quyen  $quyen
+     * @param  \App\Models\YeuThich  $yeuThich
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Quyen $quyen)
+    public function delete(User $user, YeuThich $yeuThich)
     {
         //
     }
@@ -72,10 +72,10 @@ class QuyenPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Quyen  $quyen
+     * @param  \App\Models\YeuThich  $yeuThich
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Quyen $quyen)
+    public function restore(User $user, YeuThich $yeuThich)
     {
         //
     }
@@ -84,10 +84,10 @@ class QuyenPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Quyen  $quyen
+     * @param  \App\Models\YeuThich  $yeuThich
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Quyen $quyen)
+    public function forceDelete(User $user, YeuThich $yeuThich)
     {
         //
     }

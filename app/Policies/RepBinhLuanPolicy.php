@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\TaiKhoan;
-use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\RepBinhLuan;
+use App\Models\User;
 
-class TaiKhoanPolicy
+class RepBinhLuanPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class TaiKhoanPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TaiKhoan  $taiKhoan
+     * @param  \App\Models\RepBinhLuan  $repBinhLuan
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, TaiKhoan $taiKhoan)
+    public function view(User $user, RepBinhLuan $repBinhLuan)
     {
         //
     }
@@ -48,10 +48,10 @@ class TaiKhoanPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TaiKhoan  $taiKhoan
+     * @param  \App\Models\RepBinhLuan  $repBinhLuan
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, TaiKhoan $taiKhoan)
+    public function update(User $user, RepBinhLuan $repBinhLuan)
     {
         //
     }
@@ -60,10 +60,10 @@ class TaiKhoanPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TaiKhoan  $taiKhoan
+     * @param  \App\Models\RepBinhLuan  $repBinhLuan
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, TaiKhoan $taiKhoan)
+    public function delete(User $user, RepBinhLuan $repBinhLuan)
     {
         //
     }
@@ -72,10 +72,10 @@ class TaiKhoanPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TaiKhoan  $taiKhoan
+     * @param  \App\Models\RepBinhLuan  $repBinhLuan
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, TaiKhoan $taiKhoan)
+    public function restore(User $user, RepBinhLuan $repBinhLuan)
     {
         //
     }
@@ -84,10 +84,10 @@ class TaiKhoanPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TaiKhoan  $taiKhoan
+     * @param  \App\Models\RepBinhLuan  $repBinhLuan
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, TaiKhoan $taiKhoan)
+    public function forceDelete(User $user, RepBinhLuan $repBinhLuan)
     {
         //
     }

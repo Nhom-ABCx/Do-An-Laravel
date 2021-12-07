@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NhaCungCap;
+use App\Models\YeuThich;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class NhaCungCapController extends Controller
+class YeuThichController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class NhaCungCapController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\NhaCungCap  $nhaCungCap
+     * @param  \App\Models\YeuThich  $yeuThich
      * @return \Illuminate\Http\Response
      */
-    public function show(NhaCungCap $nhaCungCap)
+    public function show(YeuThich $yeuThich)
     {
         //
     }
@@ -52,10 +53,10 @@ class NhaCungCapController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\NhaCungCap  $nhaCungCap
+     * @param  \App\Models\YeuThich  $yeuThich
      * @return \Illuminate\Http\Response
      */
-    public function edit(NhaCungCap $nhaCungCap)
+    public function edit(YeuThich $yeuThich)
     {
         //
     }
@@ -64,10 +65,10 @@ class NhaCungCapController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\NhaCungCap  $nhaCungCap
+     * @param  \App\Models\YeuThich  $yeuThich
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NhaCungCap $nhaCungCap)
+    public function update(Request $request, YeuThich $yeuThich)
     {
         //
     }
@@ -75,10 +76,10 @@ class NhaCungCapController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\NhaCungCap  $nhaCungCap
+     * @param  \App\Models\YeuThich  $yeuThich
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NhaCungCap $nhaCungCap)
+    public function destroy(YeuThich $yeuThich)
     {
         //
     }

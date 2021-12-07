@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Quyen;
+use App\Models\HangSanXuat;
 use Illuminate\Http\Request;
 
-class QuyenController extends Controller
+class HangSanXuatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class QuyenController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Quyen  $quyen
+     * @param  \App\Models\HangSanXuat  $HangSanXuat
      * @return \Illuminate\Http\Response
      */
-    public function show(Quyen $quyen)
+    public function show(HangSanXuat $HangSanXuat)
     {
         //
     }
@@ -52,10 +52,10 @@ class QuyenController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Quyen  $quyen
+     * @param  \App\Models\HangSanXuat  $HangSanXuat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Quyen $quyen)
+    public function edit(HangSanXuat $HangSanXuat)
     {
         //
     }
@@ -64,10 +64,10 @@ class QuyenController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Quyen  $quyen
+     * @param  \App\Models\HangSanXuat  $HangSanXuat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Quyen $quyen)
+    public function update(Request $request, HangSanXuat $HangSanXuat)
     {
         //
     }
@@ -75,10 +75,10 @@ class QuyenController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Quyen  $quyen
+     * @param  \App\Models\HangSanXuat  $HangSanXuat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Quyen $quyen)
+    public function destroy(HangSanXuat $HangSanXuat)
     {
         //
     }
