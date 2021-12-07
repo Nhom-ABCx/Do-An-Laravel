@@ -103,9 +103,11 @@
                                             <i class="icon-pencil bigger-130"></i>
                                         </a>
 
-                                        <a class="red" href="#">
-                                            <i class="icon-trash bigger-130"></i>
-                                        </a>
+                                        <form action="<?php echo e(route('SanPham.destroy',$item)); ?>" method="post">
+                                            <?php echo csrf_field(); ?>
+                                            <?php echo method_field('DELETE'); ?>
+                                            <button type="submit" class="btn-link red"><i class="icon-trash bigger-130"></i></button>
+                                        </form>
                                     </div>
 
                                     <div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -114,7 +116,7 @@
                                                 <i class="icon-caret-down icon-only bigger-120"></i>
                                             </button>
 
-                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close d-flex justify-content-center">
                                                 <li>
                                                     <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
                                                         <span class="blue">
@@ -132,11 +134,11 @@
                                                 </li>
 
                                                 <li>
-                                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                        <span class="red">
-                                                            <i class="icon-trash bigger-120"></i>
-                                                        </span>
-                                                    </a>
+                                                    <form action="<?php echo e(route('SanPham.destroy',$item)); ?>" method="post">
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('DELETE'); ?>
+                                                        <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Delete"><i class="icon-trash bigger-120"></i></button>
+                                                    </form>
                                                 </li>
                                             </ul>
                                         </div>

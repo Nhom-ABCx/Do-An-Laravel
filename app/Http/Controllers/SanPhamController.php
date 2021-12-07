@@ -83,7 +83,7 @@ class SanPhamController extends Controller
      */
     public function show(SanPham $sanPham)
     {
-        //
+        dd($sanPham);
     }
 
     /**
@@ -141,7 +141,8 @@ class SanPhamController extends Controller
      */
     public function destroy(SanPham $sanPham)
     {
-        //
+        $sanPham->delete();
+        return Redirect::route('SanPham.index');
     }
     //phương thức hỗ trợ load hình ảnh và thay thế bằng hình mạc định nếu ko tìm thấy file
     public function fixImage(SanPham $sanPham)

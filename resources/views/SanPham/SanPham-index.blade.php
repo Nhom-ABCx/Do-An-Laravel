@@ -106,9 +106,11 @@
                                             <i class="icon-pencil bigger-130"></i>
                                         </a>
 
-                                        <a class="red" href="#">
-                                            <i class="icon-trash bigger-130"></i>
-                                        </a>
+                                        <form action="{{route('SanPham.destroy',$item)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn-link red"><i class="icon-trash bigger-130"></i></button>
+                                        </form>
                                     </div>
 
                                     <div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -135,11 +137,11 @@
                                                 </li>
 
                                                 <li>
-                                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                        <span class="red">
-                                                            <i class="icon-trash bigger-120"></i>
-                                                        </span>
-                                                    </a>
+                                                    <form action="{{route('SanPham.destroy',$item)}}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Delete"><i class="icon-trash bigger-120"></i></button>
+                                                    </form>
                                                 </li>
                                             </ul>
                                         </div>
