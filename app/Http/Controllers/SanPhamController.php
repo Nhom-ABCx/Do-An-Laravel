@@ -97,7 +97,7 @@ class SanPhamController extends Controller
             'TenSanPham'=>$request->input('TenSanPham'),
             'MoTa'=>$request->input('MoTa'),
             'SoLuongTon'=>$request->input('SoLuongTon'),
-            'DonGia'=>$request->input('DonGia'),
+            'GiaBan'=>$request->input('GiaBan'),
             'HangSanXuatId'=>$request->input('HangSanXuatId'),
             'LoaiSanPhamId'=>$request->input('LoaiSanPhamId'),
         ]);

@@ -13,10 +13,12 @@ class SanPham extends Model
 
     protected $table = 'san_phams';
     protected $fillable = [
+          'Id',
           'TenSanPham',
           'MoTa',
           'SoLuongTon',
-          'DonGia',
+          'GiaNhap',
+          'GiaBan',
           'HinhAnh',
           'LuotMua',
           'HangSanXuatId',

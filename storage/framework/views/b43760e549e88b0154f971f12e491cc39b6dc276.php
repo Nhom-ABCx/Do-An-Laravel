@@ -108,7 +108,7 @@
                                 </span>
 
                             
-                            <input type="text" class="input-mini" id="spinner2" value="<?php echo e($sanPham->DonGia); ?>" name="DonGia"/>
+                            <input type="text" class="input-mini" id="spinner2" value="<?php echo e($sanPham->GiaBan); ?>" name="GiaBan"/>
                             </div>
                         </div>
                     </div>
@@ -461,7 +461,7 @@
 
 
         _valueSL=<?php echo e($sanPham->SoLuongTon); ?>;
-        _valueDG=<?php echo e($sanPham->DonGia); ?>;
+        _valueDG=<?php echo e($sanPham->GiaBan); ?>;
         $('#spinner1').ace_spinner({value:_valueSL,min:0,max:200,step:10, btn_up_class:'btn-info' , btn_down_class:'btn-info'})
         .on('change', function(){
             //alert(this.value)

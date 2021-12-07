@@ -111,7 +111,7 @@
                                 </span>
 
                             {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner2" --}}
-                            <input type="text" class="input-mini" id="spinner2" value="{{$sanPham->DonGia}}" name="DonGia"/>
+                            <input type="text" class="input-mini" id="spinner2" value="{{$sanPham->GiaBan}}" name="GiaBan"/>
                             </div>
                         </div>
                     </div>
@@ -462,7 +462,7 @@
 
 
         _valueSL={{$sanPham->SoLuongTon}};
-        _valueDG={{$sanPham->DonGia}};
+        _valueDG={{$sanPham->GiaBan}};
         $('#spinner1').ace_spinner({value:_valueSL,min:0,max:200,step:10, btn_up_class:'btn-info' , btn_down_class:'btn-info'})
         .on('change', function(){
             //alert(this.value)
