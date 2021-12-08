@@ -39,8 +39,7 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
                         <i class="icon-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -63,8 +62,7 @@
                     <!-- PAGE CONTENT BEGINS -->
                     {{-- web để search Icon trong template https://fontawesome.com/v3.2/icons/ --}}
 
-                    <form class="form-horizontal" role="form" action="{{ route('SanPham.update', $sanPham) }}" method="post"
-                        enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" action="{{ route('SanPham.update', $sanPham) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
                         <div class="form-group">
@@ -76,8 +74,7 @@
                                         <i class="icon-coffee"></i>
                                     </span>
 
-                                    <input class="form-control" type="text" placeholder="Nhập tên sản phẩm"
-                                        value="{{ $sanPham->TenSanPham }}" name="TenSanPham" />
+                                    <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" value="{{ $sanPham->TenSanPham }}" name="TenSanPham" />
                                 </div>
                             </div>
                         </div>
@@ -93,8 +90,7 @@
                                         <i class="icon-edit"></i>
                                     </span>
 
-                                    <textarea id="form-field-11" class="autosize-transition form-control"
-                                        name="MoTa">{{ $sanPham->MoTa }}</textarea>
+                                    <textarea id="form-field-11" class="autosize-transition form-control" name="MoTa">{{ $sanPham->MoTa }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -106,8 +102,7 @@
 
                             <div class="col-sm-3">
                                 {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner3" --}}
-                                <input type="text" class="input-mini" id="spinner3" value="{{ $sanPham->SoLuongTon }}"
-                                    name="SoLuongTon" />
+                                <input type="text" class="input-mini" id="spinner3" value="{{ $sanPham->SoLuongTon }}" name="SoLuongTon" />
                             </div>
                         </div>
 
@@ -123,8 +118,7 @@
                                     </span>
 
                                     {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner1" --}}
-                                    <input type="text" class="input-mini" id="spinner1" value="{{ $sanPham->GiaNhap }}"
-                                        name="GiaNhap" />
+                                    <input type="text" class="input-mini" id="spinner1" value="{{ $sanPham->GiaNhap }}" name="GiaNhap" />
                                 </div>
                             </div>
                         </div>
@@ -141,8 +135,7 @@
                                     </span>
 
                                     {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner2" --}}
-                                    <input type="text" class="input-mini" id="spinner2" value="{{ $sanPham->GiaBan }}"
-                                        name="GiaBan" />
+                                    <input type="text" class="input-mini" id="spinner2" value="{{ $sanPham->GiaBan }}" name="GiaBan" />
                                 </div>
                             </div>
                         </div>
@@ -155,8 +148,7 @@
                             <div class="col-sm-2">
                                 <input type="file" accept="image/*" id="id-input-file-3" name="HinhAnh">
                             </div>
-                            <img style="width:150px;max-height:150px;object-fit:contain" src="{{ $sanPham->HinhAnh }}"
-                                alt="">
+                            <img style="width:150px;max-height:150px;object-fit:contain" src="{{ $sanPham->HinhAnh }}" alt="">
                         </div>
 
                         <div class="space-4"></div>
@@ -170,8 +162,7 @@
                                         <i class="icon-bar-chart"></i>
                                     </span>
 
-                                    <input class="form-control" readonly type="text" id="form-input-readonly"
-                                        value="{{ $sanPham->LuotMua }}">
+                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="{{ $sanPham->LuotMua }}">
                                 </div>
                             </div>
                         </div>
@@ -188,8 +179,7 @@
                                         <i class="icon-sort-by-attributes"></i>
                                     </span>
 
-                                    <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder=""
-                                        name="HangSanXuatId">
+                                    <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="HangSanXuatId">
                                         <option value="">&nbsp;</option>
                                         @foreach ($lstHangSanXuat as $item)
                                             <option value="{{ $item->id }}" @if ($item->id == $sanPham->HangSanXuatId) selected @endif>
@@ -213,8 +203,7 @@
                                         <i class="icon-sort-by-attributes"></i>
                                     </span>
 
-                                    <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder=""
-                                        name="LoaiSanPhamId">
+                                    <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="LoaiSanPhamId">
                                         <option value="">&nbsp;</option>
                                         @foreach ($lstLoaiSanPham as $item)
                                             <option value="{{ $item->id }}" @if ($item->id == $sanPham->LoaiSanPhamId) selected @endif>
@@ -237,8 +226,7 @@
                                         <i class="icon-calendar"></i>
                                     </span>
 
-                                    <input class="form-control" readonly type="text" id="form-input-readonly"
-                                        value="{{ $sanPham->created_at }}">
+                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="{{ $sanPham->created_at }}">
                                 </div>
                             </div>
                         </div>
@@ -255,8 +243,7 @@
                                         <i class="icon-calendar"></i>
                                     </span>
 
-                                    <input class="form-control" readonly type="text" id="form-input-readonly"
-                                        value="{{ $sanPham->updated_at }}">
+                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="{{ $sanPham->updated_at }}">
                                 </div>
                             </div>
                         </div>
@@ -272,8 +259,7 @@
                                         <i class="icon-calendar"></i>
                                     </span>
 
-                                    <input class="form-control" readonly type="text" id="form-input-readonly"
-                                        value="{{ $sanPham->deleted_at }}">
+                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="{{ $sanPham->deleted_at }}">
                                 </div>
                             </div>
                         </div>
@@ -303,8 +289,8 @@
 
 @section('scriptThisPage')
     <!--[if lte IE 8]>
-      <script src="/storage/assets/js/excanvas.min.js"></script>
-      <![endif]-->
+                  <script src="/storage/assets/js/excanvas.min.js"></script>
+                  <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -416,7 +402,7 @@
                     if (!ui.handle.firstChild) {
                         $(ui.handle).append(
                             "<div class='tooltip right in' style='display:none;left:16px;top:-6px;'><div class='tooltip-arrow'></div><div class='tooltip-inner'></div></div>"
-                            );
+                        );
                     }
                     $(ui.handle.firstChild).show().children().eq(1).text(val);
                 }

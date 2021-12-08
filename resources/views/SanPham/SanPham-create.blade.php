@@ -35,8 +35,7 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
                         <i class="icon-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -59,8 +58,7 @@
                     <!-- PAGE CONTENT BEGINS -->
                     {{-- web để search Icon trong template https://fontawesome.com/v3.2/icons/ --}}
 
-                    <form class="form-horizontal" role="form" action="{{ route('SanPham.store') }}" method="post"
-                        enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" action="{{ route('SanPham.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         {{-- @method('PATCH') --}}
                         <div class="form-group">
@@ -72,8 +70,7 @@
                                         <i class="icon-coffee"></i>
                                     </span>
 
-                                    <input class="form-control" type="text" placeholder="Nhập tên sản phẩm"
-                                        value="{{ old('TenSanPham') }}" name="TenSanPham" />
+                                    <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" value="{{ old('TenSanPham') }}" name="TenSanPham" />
                                 </div>
                             </div>
                             @if ($errors->has('TenSanPham'))
@@ -92,8 +89,7 @@
                                         <i class="icon-edit"></i>
                                     </span>
 
-                                    <textarea id="form-field-11" class="autosize-transition form-control"
-                                        placeholder="Nhập mô tả" name="MoTa">{{ old('MoTa') }}</textarea>
+                                    <textarea id="form-field-11" class="autosize-transition form-control" placeholder="Nhập mô tả" name="MoTa">{{ old('MoTa') }}</textarea>
                                 </div>
                             </div>
                             @if ($errors->has('MoTa'))
@@ -108,8 +104,7 @@
 
                             <div class="col-sm-3">
                                 {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner3" --}}
-                                <input type="text" class="input-mini" id="spinner3" value="{{ old('SoLuongTon') }}"
-                                    name="SoLuongTon" />
+                                <input type="text" class="input-mini" id="spinner3" value="{{ old('SoLuongTon') }}" name="SoLuongTon" />
                             </div>
                             @if ($errors->has('SoLuongTon'))
                                 <i class="icon-remove bigger-110 red"> {{ $errors->first('SoLuongTon') }}</i>
@@ -128,8 +123,7 @@
                                     </span>
 
                                     {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner1" --}}
-                                    <input type="text" class="input-mini" id="spinner1" value="{{ old('GiaNhap') }}"
-                                        name="GiaNhap" />
+                                    <input type="text" class="input-mini" id="spinner1" value="{{ old('GiaNhap') }}" name="GiaNhap" />
                                 </div>
                             </div>
                             @if ($errors->has('GiaNhap'))
@@ -149,8 +143,7 @@
                                     </span>
 
                                     {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner2" --}}
-                                    <input type="text" class="input-mini" id="spinner2" value="{{ old('GiaBan') }}"
-                                        name="GiaBan" />
+                                    <input type="text" class="input-mini" id="spinner2" value="{{ old('GiaBan') }}" name="GiaBan" />
                                 </div>
                             </div>
                             @if ($errors->has('GiaBan'))
@@ -164,8 +157,7 @@
                             <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Hình ảnh </label>
 
                             <div class="col-sm-2">
-                                <input type="file" accept="image/*" id="id-input-file-3" onchange="showImage()"
-                                    name="HinhAnh">
+                                <input type="file" accept="image/*" id="id-input-file-3" onchange="showImage()" name="HinhAnh">
                             </div>
                             @if ($errors->has('HinhAnh'))
                                 <i class="icon-remove bigger-110 red"> {{ $errors->first('HinhAnh') }}</i>
@@ -185,8 +177,7 @@
                                         <i class="icon-sort-by-attributes"></i>
                                     </span>
 
-                                    <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder=""
-                                        name="HangSanXuatId">
+                                    <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="HangSanXuatId">
                                         <option value="">&nbsp;</option>
                                         @foreach ($lstHangSanXuat as $item)
                                             <option value="{{ $item->id }}" @if ($item->id == old('LoaiSanPhamId')) selected @endif>
@@ -213,8 +204,7 @@
                                         <i class="icon-sort-by-attributes"></i>
                                     </span>
 
-                                    <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder=""
-                                        name="LoaiSanPhamId">
+                                    <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="LoaiSanPhamId">
                                         <option value="">&nbsp;</option>
                                         @foreach ($lstLoaiSanPham as $item)
                                             <option value="{{ $item->id }}" @if ($item->id == old('LoaiSanPhamId')) selected @endif>
@@ -254,8 +244,8 @@
 
 @section('scriptThisPage')
     <!--[if lte IE 8]>
-      <script src="/storage/assets/js/excanvas.min.js"></script>
-      <![endif]-->
+              <script src="/storage/assets/js/excanvas.min.js"></script>
+              <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -367,7 +357,7 @@
                     if (!ui.handle.firstChild) {
                         $(ui.handle).append(
                             "<div class='tooltip right in' style='display:none;left:16px;top:-6px;'><div class='tooltip-arrow'></div><div class='tooltip-inner'></div></div>"
-                            );
+                        );
                     }
                     $(ui.handle.firstChild).show().children().eq(1).text(val);
                 }

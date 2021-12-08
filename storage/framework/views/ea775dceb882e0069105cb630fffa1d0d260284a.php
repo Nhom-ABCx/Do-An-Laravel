@@ -21,8 +21,7 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
                         <i class="icon-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -87,8 +86,7 @@
                                         <td><?php echo e($item->GiaNhap); ?></td>
                                         <td><?php echo e($item->GiaBan); ?></td>
                                         <td>
-                                            <img src='<?php echo e($item->HinhAnh); ?>' alt="<?php echo e($item->HinhAnh); ?>" width='100'
-                                                height='100'>
+                                            <img src='<?php echo e($item->HinhAnh); ?>' alt="<?php echo e($item->HinhAnh); ?>" width='100' height='100'>
                                         </td>
                                         <td><?php echo e($item->LuotMua); ?></td>
                                         <td><?php echo e($item->HangSanXuat->Ten); ?></td>
@@ -110,23 +108,19 @@
                                                 <form action="<?php echo e(route('SanPham.destroy', $item)); ?>" method="post">
                                                     <?php echo csrf_field(); ?>
                                                     <?php echo method_field('DELETE'); ?>
-                                                    <button type="submit" class="btn-link red"><i
-                                                            class="icon-trash bigger-130"></i></button>
+                                                    <button type="submit" class="btn-link red"><i class="icon-trash bigger-130"></i></button>
                                                 </form>
                                             </div>
 
                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                 <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle"
-                                                        data-toggle="dropdown">
+                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
                                                         <i class="icon-caret-down icon-only bigger-120"></i>
                                                     </button>
 
-                                                    <ul
-                                                        class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                         <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip"
-                                                                title="View">
+                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
                                                                 <span class="blue">
                                                                     <i class="icon-zoom-in bigger-120"></i>
                                                                 </span>
@@ -134,8 +128,7 @@
                                                         </li>
 
                                                         <li>
-                                                            <a href="<?php echo e(route('SanPham.edit', $item)); ?>"
-                                                                class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                            <a href="<?php echo e(route('SanPham.edit', $item)); ?>" class="tooltip-success" data-rel="tooltip" title="Edit">
                                                                 <span class="green">
                                                                     <i class="icon-edit bigger-120"></i>
                                                                 </span>
@@ -143,13 +136,10 @@
                                                         </li>
 
                                                         <li>
-                                                            <form action="<?php echo e(route('SanPham.destroy', $item)); ?>"
-                                                                method="post">
+                                                            <form action="<?php echo e(route('SanPham.destroy', $item)); ?>" method="post">
                                                                 <?php echo csrf_field(); ?>
                                                                 <?php echo method_field('DELETE'); ?>
-                                                                <button type="submit" class="tooltip-error btn-link red"
-                                                                    data-rel="tooltip" title="Delete"><i
-                                                                        class="icon-trash bigger-120"></i></button>
+                                                                <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Delete"><i class="icon-trash bigger-120"></i></button>
                                                             </form>
                                                         </li>
                                                     </ul>

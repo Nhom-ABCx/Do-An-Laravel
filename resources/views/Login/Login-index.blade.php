@@ -70,21 +70,27 @@
 
                                         <div class="space-6"></div>
 
+                                        @if ($errors->has('Username'))
+                                            <i class="icon-remove bigger-110 red">{{ $errors->first('Username') }}</i>
+                                        @endif
+
                                         <form action="{{ route('Login.store') }}" method="post">
                                             @csrf
                                             <fieldset>
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" class="form-control" placeholder="Username"
-                                                            name="Username" />
+                                                        <input type="text" class="form-control" placeholder="Username" name="Username" value="Admin"/>
                                                         <i class="icon-user"></i>
                                                     </span>
                                                 </label>
 
+                                                @if ($errors->has('MatKhau'))
+                                                    <i class="icon-remove bigger-110 red">{{ $errors->first('MatKhau') }}</i>
+                                                @endif
+
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="password" class="form-control"
-                                                            placeholder="Password" name="MatKhau" />
+                                                        <input type="password" class="form-control" placeholder="Password" name="MatKhau" value="Admin"/>
                                                         <i class="icon-lock"></i>
                                                     </span>
                                                 </label>
@@ -122,16 +128,14 @@
 
                                     <div class="toolbar clearfix">
                                         <div>
-                                            <a href="#" onclick="show_box('forgot-box'); return false;"
-                                                class="forgot-password-link">
+                                            <a href="#" onclick="show_box('forgot-box'); return false;" class="forgot-password-link">
                                                 <i class="icon-arrow-left"></i>
                                                 I forgot my password
                                             </a>
                                         </div>
 
                                         <div>
-                                            <a href="#" onclick="show_box('signup-box'); return false;"
-                                                class="user-signup-link">
+                                            <a href="#" onclick="show_box('signup-box'); return false;" class="user-signup-link">
                                                 I want to register
                                                 <i class="icon-arrow-right"></i>
                                             </a>
@@ -157,15 +161,13 @@
                                             <fieldset>
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="email" class="form-control"
-                                                            placeholder="Email" />
+                                                        <input type="email" class="form-control" placeholder="Email" />
                                                         <i class="icon-envelope"></i>
                                                     </span>
                                                 </label>
 
                                                 <div class="clearfix">
-                                                    <button type="button"
-                                                        class="width-35 pull-right btn btn-sm btn-danger">
+                                                    <button type="button" class="width-35 pull-right btn btn-sm btn-danger">
                                                         <i class="icon-lightbulb"></i>
                                                         Send Me!
                                                     </button>
@@ -175,8 +177,7 @@
                                     </div><!-- /widget-main -->
 
                                     <div class="toolbar center">
-                                        <a href="#" onclick="show_box('login-box'); return false;"
-                                            class="back-to-login-link">
+                                        <a href="#" onclick="show_box('login-box'); return false;" class="back-to-login-link">
                                             Back to login
                                             <i class="icon-arrow-right"></i>
                                         </a>
@@ -199,32 +200,28 @@
                                             <fieldset>
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="email" class="form-control"
-                                                            placeholder="Email" />
+                                                        <input type="email" class="form-control" placeholder="Email" />
                                                         <i class="icon-envelope"></i>
                                                     </span>
                                                 </label>
 
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Username" />
+                                                        <input type="text" class="form-control" placeholder="Username" />
                                                         <i class="icon-user"></i>
                                                     </span>
                                                 </label>
 
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="password" class="form-control"
-                                                            placeholder="Password" />
+                                                        <input type="password" class="form-control" placeholder="Password" />
                                                         <i class="icon-lock"></i>
                                                     </span>
                                                 </label>
 
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="password" class="form-control"
-                                                            placeholder="Repeat password" />
+                                                        <input type="password" class="form-control" placeholder="Repeat password" />
                                                         <i class="icon-retweet"></i>
                                                     </span>
                                                 </label>
@@ -245,8 +242,7 @@
                                                         Reset
                                                     </button>
 
-                                                    <button type="button"
-                                                        class="width-65 pull-right btn btn-sm btn-success">
+                                                    <button type="button" class="width-65 pull-right btn btn-sm btn-success">
                                                         Register
                                                         <i class="icon-arrow-right icon-on-right"></i>
                                                     </button>
@@ -256,8 +252,7 @@
                                     </div>
 
                                     <div class="toolbar center">
-                                        <a href="#" onclick="show_box('login-box'); return false;"
-                                            class="back-to-login-link">
+                                        <a href="#" onclick="show_box('login-box'); return false;" class="back-to-login-link">
                                             <i class="icon-arrow-left"></i>
                                             Back to login
                                         </a>

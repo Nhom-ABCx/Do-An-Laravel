@@ -230,8 +230,7 @@
 
                                 <li>
                                     <a href="#">
-                                        <img src="/storage/assets/avatars/avatar.png" class="msg-photo"
-                                            alt="Alex's Avatar" />
+                                        <img src="/storage/assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
                                         <span class="msg-body">
                                             <span class="msg-title">
                                                 <span class="blue">Alex:</span>
@@ -248,8 +247,7 @@
 
                                 <li>
                                     <a href="#">
-                                        <img src="/storage/assets/avatars/avatar3.png" class="msg-photo"
-                                            alt="Susan's Avatar" />
+                                        <img src="/storage/assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
                                         <span class="msg-body">
                                             <span class="msg-title">
                                                 <span class="blue">Susan:</span>
@@ -266,8 +264,7 @@
 
                                 <li>
                                     <a href="#">
-                                        <img src="/storage/assets/avatars/avatar4.png" class="msg-photo"
-                                            alt="Bob's Avatar" />
+                                        <img src="/storage/assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
                                         <span class="msg-body">
                                             <span class="msg-title">
                                                 <span class="blue">Bob:</span>
@@ -296,7 +293,14 @@
                                 <img class="nav-user-photo" src="/storage/assets/avatars/user.jpg" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
-                                    Jason
+                                    <?php if(auth()->guard()->check()): ?>
+                                    <?php echo e(dd(Auth::user())); ?>
+
+                                    <?php endif; ?>
+
+                                    <?php if(auth()->guard()->guest()): ?>
+                                    Chưa đăng nhập
+                                    <?php endif; ?>
                                 </span>
 
                                 <i class="icon-caret-down"></i>
@@ -320,7 +324,7 @@
                                 <li class="divider"></li>
 
                                 <li>
-                                    <a href="#">
+                                    <a href="<?php echo e(route('Login.destroy')); ?>">
                                         <i class="icon-off"></i>
                                         Logout
                                     </a>
@@ -483,8 +487,7 @@
 
                             <span class="menu-text">
                                 Calendar
-                                <span class="badge badge-transparent tooltip-error"
-                                    title="2&nbsp;Important&nbsp;Events">
+                                <span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
                                     <i class="icon-warning-sign red bigger-130"></i>
                                 </span>
                             </span>
@@ -603,8 +606,7 @@
                 </ul><!-- /.nav-list -->
 
                 <div class="sidebar-collapse" id="sidebar-collapse">
-                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
-                        data-icon2="icon-double-angle-right"></i>
+                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
                 </div>
 
                 <script type="text/javascript">
@@ -693,10 +695,10 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-    <script type="text/javascript">
-        window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-    </script>
-    <![endif]-->
+        <script type="text/javascript">
+            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+        </script>
+        <![endif]-->
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +

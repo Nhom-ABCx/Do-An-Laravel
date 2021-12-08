@@ -28,8 +28,7 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
                         <i class="icon-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -41,8 +40,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="pull">
-                        <a type="button" class="btn btn-success " href="{{ route('KhuyenMai.create') }}"><i
-                                class="fa fa-plus"></i> Thêm chương trình khuyến mãi</a>
+                        <a type="button" class="btn btn-success " href="{{ route('KhuyenMai.create') }}"><i class="fa fa-plus"></i> Thêm chương trình khuyến mãi</a>
                     </div>
                     <h3 class="header smaller lighter blue">Chương trình khuyến mãi</h3>
                     <div class="table-header">
@@ -114,16 +112,13 @@
 
                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                 <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle"
-                                                        data-toggle="dropdown">
+                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
                                                         <i class="icon-caret-down icon-only bigger-120"></i>
                                                     </button>
 
-                                                    <ul
-                                                        class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                         <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip"
-                                                                title="View">
+                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
                                                                 <span class="blue">
                                                                     <i class="icon-zoom-in bigger-120"></i>
                                                                 </span>
@@ -131,8 +126,7 @@
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" class="tooltip-success" data-rel="tooltip"
-                                                                title="Edit">
+                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
                                                                 <span class="green">
                                                                     <i class="icon-edit bigger-120"></i>
                                                                 </span>
@@ -140,8 +134,7 @@
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" class="tooltip-error" data-rel="tooltip"
-                                                                title="Delete">
+                                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
                                                                 <span class="red">
                                                                     <i class="icon-trash bigger-120"></i>
                                                                 </span>

@@ -34,8 +34,7 @@
         <div class="nav-search" id="nav-search">
             <form class="form-search">
                 <span class="input-icon">
-                    <input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input"
-                        autocomplete="off" />
+                    <input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input" autocomplete="off" />
                     <i class="icon-search nav-search-icon"></i>
                 </span>
             </form>
@@ -61,8 +60,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>Tên Chương Trình KM</strong>
-                                    <input type="text" name="TenChuongTrinh" value="{{ $ctkm->TenChuongTrinh }}"
-                                        class="form-control">
+                                    <input type="text" name="TenChuongTrinh" value="{{ $ctkm->TenChuongTrinh }}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">

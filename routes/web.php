@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 //controller
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\ChuongTrinhKhuyenMaiController;
 
@@ -29,4 +29,6 @@ Route::resource('KhuyenMai', ChuongTrinhKhuyenMaiController::class, [
         'KhuyenMai' => 'chuongTrinhKhuyenMai'
     ]
 ]);
-Route::resource('Login', LoginController::class);
+Route::get('Login', [AuthController::class,'index'])->name('Login.index');
+Route::post('Login', [AuthController::class,'store'])->name('Login.store');
+Route::delete('Login', [AuthController::class,'destroy'])->name('Login.destroy');
