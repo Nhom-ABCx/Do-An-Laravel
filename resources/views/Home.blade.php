@@ -1,4 +1,4 @@
-{{--  cai nay la duong dan den' file Layouts/Layout.blade.php --}}
+{{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
 @extends('layouts.Layout')
 
 @section('title', 'Home')
@@ -13,7 +13,9 @@
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
-                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                try {
+                    ace.settings.check('breadcrumbs', 'fixed')
+                } catch (e) {}
             </script>
 
             <ul class="breadcrumb">
@@ -31,7 +33,8 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
+                            autocomplete="off" />
                         <i class="icon-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -120,13 +123,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-primary dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-cog icon-only bigger-110"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -134,7 +140,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -142,7 +149,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -194,13 +202,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-primary dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-cog icon-only bigger-110"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -208,7 +219,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -216,7 +228,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -268,13 +281,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-primary dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-cog icon-only bigger-110"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -282,7 +298,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -290,7 +307,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -342,13 +360,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-primary dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-cog icon-only bigger-110"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -356,7 +377,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -364,7 +386,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -416,13 +439,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-primary dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-cog icon-only bigger-110"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -430,7 +456,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -438,7 +465,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -459,7 +487,8 @@
 
                     <h4 class="pink">
                         <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
-                        <a href="#modal-table" role="button" class="green" data-toggle="modal"> Table Inside a Modal Box </a>
+                        <a href="#modal-table" role="button" class="green" data-toggle="modal"> Table Inside a
+                            Modal Box </a>
                     </h4>
 
                     <div class="hr hr-18 dotted hr-double"></div>
@@ -532,13 +561,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -546,7 +578,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -554,7 +587,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -602,13 +636,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -616,7 +653,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -624,7 +662,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -672,13 +711,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -686,7 +728,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -694,7 +737,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -742,13 +786,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -756,7 +803,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -764,7 +812,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -812,13 +861,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -826,7 +878,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -834,7 +887,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -882,13 +936,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -896,7 +953,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -904,7 +962,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -952,13 +1011,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -966,7 +1028,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -974,7 +1037,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -1022,13 +1086,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -1036,7 +1103,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -1044,7 +1112,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -1092,13 +1161,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -1106,7 +1178,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -1114,7 +1187,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -1162,13 +1236,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -1176,7 +1253,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -1184,7 +1262,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -1232,13 +1311,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -1246,7 +1328,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -1254,7 +1337,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -1302,13 +1386,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -1316,7 +1403,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -1324,7 +1412,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -1372,13 +1461,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -1386,7 +1478,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -1394,7 +1487,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -1442,13 +1536,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -1456,7 +1553,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -1464,7 +1562,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -1512,13 +1611,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -1526,7 +1628,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -1534,7 +1637,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -1582,13 +1686,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -1596,7 +1703,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -1604,7 +1712,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -1652,13 +1761,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -1666,7 +1778,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -1674,7 +1787,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -1722,13 +1836,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -1736,7 +1853,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -1744,7 +1862,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -1792,13 +1911,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -1806,7 +1928,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -1814,7 +1937,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -1862,13 +1986,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -1876,7 +2003,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -1884,7 +2012,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -1932,13 +2061,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -1946,7 +2078,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -1954,7 +2087,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -2002,13 +2136,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -2016,7 +2153,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -2024,7 +2162,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -2072,13 +2211,16 @@
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
                                                             <i class="icon-caret-down icon-only bigger-120"></i>
                                                         </button>
 
-                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -2086,7 +2228,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -2094,7 +2237,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
                                                                     <span class="red">
                                                                         <i class="icon-trash bigger-120"></i>
                                                                     </span>
@@ -2116,7 +2260,8 @@
                             <div class="modal-content">
                                 <div class="modal-header no-padding">
                                     <div class="table-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-hidden="true">
                                             <span class="white">&times;</span>
                                         </button>
                                         Results for "Latest Registered Domains
@@ -2124,7 +2269,8 @@
                                 </div>
 
                                 <div class="modal-body no-padding">
-                                    <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                                    <table
+                                        class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
                                         <thead>
                                             <tr>
                                                 <th>Domain</th>
@@ -2229,46 +2375,53 @@
 
 @endsection
 
-@section("scriptThisPage")
-{{-- Phần này là script thu gọn, phân trang lại của cái table --}}
-<!-- inline scripts related to this page -->
+@section('scriptThisPage')
+    {{-- Phần này là script thu gọn, phân trang lại của cái table --}}
+    <!-- inline scripts related to this page -->
 
-<script type="text/javascript">
-    jQuery(function($) {
-        var oTable1 = $('#sample-table-2').dataTable( {
-        "aoColumns": [
-          { "bSortable": false },
-          null, null,null, null, null,
-          { "bSortable": false }
-        ] } );
-
-
-        $('table th input:checkbox').on('click' , function(){
-            var that = this;
-            $(this).closest('table').find('tr > td:first-child input:checkbox')
-            .each(function(){
-                this.checked = that.checked;
-                $(this).closest('tr').toggleClass('selected');
+    <script type="text/javascript">
+        jQuery(function($) {
+            var oTable1 = $('#sample-table-2').dataTable({
+                "aoColumns": [{
+                        "bSortable": false
+                    },
+                    null, null, null, null, null,
+                    {
+                        "bSortable": false
+                    }
+                ]
             });
 
-        });
+
+            $('table th input:checkbox').on('click', function() {
+                var that = this;
+                $(this).closest('table').find('tr > td:first-child input:checkbox')
+                    .each(function() {
+                        this.checked = that.checked;
+                        $(this).closest('tr').toggleClass('selected');
+                    });
+
+            });
 
 
-        $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-        function tooltip_placement(context, source) {
-            var $source = $(source);
-            var $parent = $source.closest('table')
-            var off1 = $parent.offset();
-            var w1 = $parent.width();
+            $('[data-rel="tooltip"]').tooltip({
+                placement: tooltip_placement
+            });
 
-            var off2 = $source.offset();
-            var w2 = $source.width();
+            function tooltip_placement(context, source) {
+                var $source = $(source);
+                var $parent = $source.closest('table')
+                var off1 = $parent.offset();
+                var w1 = $parent.width();
 
-            if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-            return 'left';
-        }
-    })
-</script>
+                var off2 = $source.offset();
+                var w2 = $source.width();
+
+                if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
+                return 'left';
+            }
+        })
+    </script>
 @endsection
 
 {{-- @section('footer')
