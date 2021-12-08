@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Page Title'); ?>
+<?php $__env->startSection('title', 'Edit-Sản Phẩm'); ?>
 
 <?php $__env->startSection("headThisPage"); ?>
 <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
@@ -112,7 +112,8 @@
                                     <i class="icon-credit-card"></i>
                                 </span>
 
-                            <input class="form-control" type="text" value="<?php echo e($sanPham->GiaNhap); ?>" name="GiaNhap">
+                                
+                            <input type="text" class="input-mini" id="spinner1" value="<?php echo e($sanPham->GiaNhap); ?>" name="GiaNhap"/>
                             </div>
                         </div>
                     </div>
@@ -498,12 +499,14 @@
 
 
         _valueSL=<?php echo e($sanPham->SoLuongTon); ?>;
-        _valueDG=<?php echo e($sanPham->GiaBan); ?>;
-        $('#spinner1').ace_spinner({value:_valueSL,min:0,max:200,step:10, btn_up_class:'btn-info' , btn_down_class:'btn-info'})
+        _valueGN=<?php echo e($sanPham->GiaNhap); ?>;
+        _valueGB=<?php echo e($sanPham->GiaBan); ?>;
+        $('#spinner0').ace_spinner({value:_valueSL,min:0,max:200,step:10, btn_up_class:'btn-info' , btn_down_class:'btn-info'})
         .on('change', function(){
             //alert(this.value)
         });
-        $('#spinner2').ace_spinner({value:_valueDG,min:0,max:1000000000,step:10000, touch_spinner: true, icon_up:'icon-caret-up', icon_down:'icon-caret-down'});
+        $('#spinner1').ace_spinner({value:_valueGN,min:0,max:1000000000,step:10000, touch_spinner: true, icon_up:'icon-caret-up', icon_down:'icon-caret-down'});
+        $('#spinner2').ace_spinner({value:_valueGB,min:0,max:1000000000,step:10000, touch_spinner: true, icon_up:'icon-caret-up', icon_down:'icon-caret-down'});
         $('#spinner3').ace_spinner({value:_valueSL,min:0,max:10000,step:5, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
 
 

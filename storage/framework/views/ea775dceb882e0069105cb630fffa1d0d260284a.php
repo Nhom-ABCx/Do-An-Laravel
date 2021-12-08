@@ -116,7 +116,7 @@
                                                 <i class="icon-caret-down icon-only bigger-120"></i>
                                             </button>
 
-                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close d-flex justify-content-center">
+                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                 <li>
                                                     <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
                                                         <span class="blue">

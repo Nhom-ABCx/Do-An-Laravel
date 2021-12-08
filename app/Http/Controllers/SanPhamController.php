@@ -49,13 +49,27 @@ class SanPhamController extends Controller
      */
     public function store(Request $request)
     {
+        //xác thực đầu vào
+        $request->validate(
+            [
+            'TenSanPham'=>['required','unique:san_phams,TenSanPham','max:255'],
+            'MoTa'=>['max:255'],
+            'SoLuongTon'=>['required','numeric','integer','min:0'],
+            'GiaNhap'=>['required','numeric','integer','min:0'],
+            'GiaBan'=>['numeric','integer','min:0'],
+            'HinhAnh'=>['required','image'],
+            'HangSanXuatId'=>['required','numeric','integer','exists:loai_san_phams,id'],
+            'LoaiSanPhamId'=>['required','numeric','integer','exists:hang_san_xuats,id'],
+            ]
+            );
+
         $sanPham=new SanPham();
         $sanPham->fill([
             'TenSanPham'=>$request->input('TenSanPham'),
-            'MoTa'=>$request->input('MoTa'),
+            'MoTa'=>$request->input('MoTa')??'',
             'SoLuongTon'=>$request->input('SoLuongTon'),
             'GiaNhap'=>$request->input('GiaNhap'),
-            'GiaBan'=>$request->input('GiaBan'),
+            'GiaBan'=>$request->input('GiaBan')??0,
             'HinhAnh'=>'', //cap nhat sau
             'LuotMua'=>0,
             'HangSanXuatId'=>$request->input('HangSanXuatId'),
@@ -121,9 +135,10 @@ class SanPhamController extends Controller
         }
         $sanPham->fill([
             'TenSanPham'=>$request->input('TenSanPham'),
-            'MoTa'=>$request->input('MoTa'),
+            'MoTa'=>$request->input('MoTa')??'',
             'SoLuongTon'=>$request->input('SoLuongTon'),
-            'GiaBan'=>$request->input('GiaBan'),
+            'GiaNhap'=>$request->input('GiaNhap'),
+            'GiaBan'=>$request->input('GiaBan')??0,
             'HangSanXuatId'=>$request->input('HangSanXuatId'),
             'LoaiSanPhamId'=>$request->input('LoaiSanPhamId'),
         ]);
@@ -159,6 +174,7 @@ class SanPhamController extends Controller
         else
             $sanPham->HinhAnh=Storage::url("assets/images/404/Img_error.png");
     }
+
     //API
     public function API_SanPham()
     {

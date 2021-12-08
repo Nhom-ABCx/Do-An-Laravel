@@ -68,9 +68,12 @@
                                     <i class="icon-coffee"></i>
                                 </span>
 
-                                <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" value="" name="TenSanPham"/>
+                                <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" value="{{old('TenSanPham')}}" name="TenSanPham"/>
                             </div>
                         </div>
+                        @if ($errors->has('TenSanPham'))
+                        <i class="icon-remove bigger-110 red"> {{$errors->first('TenSanPham')}}</i>
+                        @endif
                     </div>
 
                     <div class="space-4"></div>
@@ -84,9 +87,12 @@
                                     <i class="icon-edit"></i>
                                 </span>
 
-                                <textarea id="form-field-11" class="autosize-transition form-control" placeholder="Nhập mô tả" name="MoTa"></textarea>
+                                <textarea id="form-field-11" class="autosize-transition form-control" placeholder="Nhập mô tả" name="MoTa">{{old('MoTa')}}</textarea>
                             </div>
                         </div>
+                        @if ($errors->has('MoTa'))
+                        <i class="icon-remove bigger-110 red"> {{$errors->first('MoTa')}}</i>
+                        @endif
                     </div>
 
                     <div class="space-4"></div>
@@ -96,8 +102,11 @@
 
                         <div class="col-sm-3">
                             {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner3" --}}
-                            <input type="text" class="input-mini" id="spinner3" value="" name="SoLuongTon"/>
+                            <input type="text" class="input-mini" id="spinner3" value="{{old('SoLuongTon')}}" name="SoLuongTon"/>
                         </div>
+                        @if ($errors->has('SoLuongTon'))
+                        <i class="icon-remove bigger-110 red"> {{$errors->first('SoLuongTon')}}</i>
+                        @endif
                     </div>
 
                     <div class="space-4"></div>
@@ -111,10 +120,13 @@
                                     <i class="icon-credit-card"></i>
                                 </span>
 
-                                {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner2" --}}
-                            <input type="text" class="input-mini" id="spinner1" value="" name="GiaNhap"/>
+                                {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner1" --}}
+                            <input type="text" class="input-mini" id="spinner1" value="{{old('GiaNhap')}}" name="GiaNhap"/>
                             </div>
                         </div>
+                        @if ($errors->has('GiaNhap'))
+                        <i class="icon-remove bigger-110 red"> {{$errors->first('GiaNhap')}}</i>
+                        @endif
                     </div>
 
                     <div class="space-4"></div>
@@ -129,9 +141,12 @@
                                 </span>
 
                             {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner2" --}}
-                            <input type="text" class="input-mini" id="spinner2" value="" name="GiaBan"/>
+                            <input type="text" class="input-mini" id="spinner2" value="{{old('GiaBan')}}" name="GiaBan"/>
                             </div>
                         </div>
+                        @if ($errors->has('GiaBan'))
+                        <i class="icon-remove bigger-110 red"> {{$errors->first('GiaBan')}}</i>
+                        @endif
                     </div>
 
                     <div class="space-4"></div>
@@ -142,23 +157,10 @@
                         <div class="col-sm-2">
                             <input type="file" accept="image/*" id="id-input-file-3" onchange="showImage()" name="HinhAnh">
                         </div>
+                        @if ($errors->has('HinhAnh'))
+                        <i class="icon-remove bigger-110 red"> {{$errors->first('HinhAnh')}}</i>
+                        @endif
                         <div id="displayImage"></div>
-                    </div>
-
-                    <div class="space-4"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Lượt mua </label>
-
-                        <div class="col-sm-3">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="icon-bar-chart"></i>
-                                </span>
-
-                                <input class="form-control" readonly type="text" id="form-input-readonly" value="0">
-                            </div>
-                        </div>
                     </div>
 
                     <div class="space-4"></div>
@@ -173,15 +175,18 @@
                                 </span>
 
                                 <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="HangSanXuatId">
-                                    <option value="" selected>&nbsp;</option>
+                                    <option value="">&nbsp;</option>
                                     @foreach ($lstHangSanXuat as $item)
-                                    <option value="{{$item->id}}">
+                                    <option value="{{$item->id}}" @if ($item->id==old('LoaiSanPhamId')) selected @endif>
                                         {{$item->Ten}}
                                     </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+                        @if ($errors->has('HangSanXuatId'))
+                        <i class="icon-remove bigger-110 red"> {{$errors->first('HangSanXuatId')}}</i>
+                        @endif
                     </div>
 
                     <div class="space-4"></div>
@@ -196,15 +201,18 @@
                                 </span>
 
                                 <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="LoaiSanPhamId">
-                                    <option value="" selected>&nbsp;</option>
+                                    <option value="">&nbsp;</option>
                                     @foreach ($lstLoaiSanPham as $item)
-                                    <option value="{{$item->id}}">
+                                    <option value="{{$item->id}}" @if ($item->id==old('LoaiSanPhamId')) selected @endif>
                                         {{$item->TenLoai}}
                                     </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+                        @if ($errors->has('LoaiSanPhamId'))
+                        <i class="icon-remove bigger-110 red"> {{$errors->first('LoaiSanPhamId')}}</i>
+                        @endif
                     </div>
 
                     <div class="space-4"></div>
@@ -446,14 +454,16 @@
         // });
 
 
-
+        _valueSL={{old('SoLuongTon')??0}};
+        _valueGN={{old('GiaNhap')??0}};
+        _valueGB={{old('GiaBan')??0}};
         $('#spinner0').ace_spinner({value:0,min:0,max:200,step:10, btn_up_class:'btn-info' , btn_down_class:'btn-info'})
         .on('change', function(){
             //alert(this.value)
         });
-        $('#spinner1').ace_spinner({value:0,min:0,max:1000000000,step:10000, touch_spinner: true, icon_up:'icon-caret-up', icon_down:'icon-caret-down'});
-        $('#spinner2').ace_spinner({value:0,min:0,max:1000000000,step:10000, touch_spinner: true, icon_up:'icon-caret-up', icon_down:'icon-caret-down'});
-        $('#spinner3').ace_spinner({value:0,min:0,max:10000,step:5, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+        $('#spinner1').ace_spinner({value:_valueGN,min:0,max:1000000000,step:10000, touch_spinner: true, icon_up:'icon-caret-up', icon_down:'icon-caret-down'});
+        $('#spinner2').ace_spinner({value:_valueGB,min:0,max:1000000000,step:10000, touch_spinner: true, icon_up:'icon-caret-up', icon_down:'icon-caret-down'});
+        $('#spinner3').ace_spinner({value:_valueSL,min:0,max:10000,step:5, on_sides: true, icon_up:'icon-plus smaller-75', icon_down:'icon-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
 
 
 
