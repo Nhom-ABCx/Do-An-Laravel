@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ChuongTrinhKhuyenMai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ChuongTrinhKhuyenMaiController extends Controller
 {
@@ -14,7 +15,8 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function index()
     {
-        //
+        $data=ChuongTrinhKhuyenMai::all();
+        return view('KhuyenMai.KhuyenMai-index',['ctkm'=>$data]);
     }
 
     /**
@@ -24,7 +26,7 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function create()
     {
-        //
+        return view('KhuyenMai.KhuyenMai-create');
     }
 
     /**
@@ -35,7 +37,16 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $CTkm= new ChuongTrinhKhuyenMai();
+        
+        $CTkm->fill([
+            "TenChuongTrinh"=>$request->input("TenChuongTrinh"),
+            "MoTa"=>$request->input("MoTa"),
+            "FromDate"=>$request->input("FromDate"),
+            "ToDate"=>$request->input("ToDate")
+        ]);
+        $CTkm->save();
+         return Redirect::route('KhuyenMai.index');
     }
 
     /**
@@ -57,7 +68,8 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function edit(ChuongTrinhKhuyenMai $chuongTrinhKhuyenMai)
     {
-        //
+        //dd($chuongTrinhKhuyenMai);
+        return view('KhuyenMai.KhuyenMai-edit',['ctkm'=>$chuongTrinhKhuyenMai]);
     }
 
     /**
@@ -69,9 +81,20 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function update(Request $request, ChuongTrinhKhuyenMai $chuongTrinhKhuyenMai)
     {
-        //
-    }
+        //dd($chuongTrinhKhuyenMai);
+        
+        $chuongTrinhKhuyenMai->fill([
+            'TenChuongTrinh'=>$request->input('TenChuongTrinh'),
+            'MoTa'=>$request->input('MoTa'),
+            'FromDate'=>$request->input('FromDate'),
+            'ToDate'=>$request->input('ToDate'),
+        
+        ]);
+   
+        $chuongTrinhKhuyenMai->save();
 
+         return Redirect::route('KhuyenMai.index');
+    }
     /**
      * Remove the specified resource from storage.
      *

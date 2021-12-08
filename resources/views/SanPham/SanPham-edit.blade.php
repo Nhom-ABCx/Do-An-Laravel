@@ -1,7 +1,7 @@
 {{--  cai nay la duong dan den' file Layouts/Layout.blade.php --}}
 @extends('layouts.Layout')
 
-@section('title', 'Page Title')
+@section('title', 'Edit-Sản Phẩm')
 
 @section("headThisPage")
 <link rel="stylesheet" href="/storage/assets/css/chosen.css" />

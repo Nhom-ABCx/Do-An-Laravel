@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 //controller
 use App\Http\Controllers\SanPhamController;
+use App\Http\Controllers\ChuongTrinhKhuyenMaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,10 @@ Route::get('/', [HomeController::class,"Index"]);
 Route::resource('SanPham', SanPhamController::class, [
     'parameters' => [
         'SanPham' => 'sanPham'
+    ]
+]);
+Route::resource('KhuyenMai',ChuongTrinhKhuyenMaiController::class,[
+    'parameters' => [
+        'KhuyenMai' => 'chuongTrinhKhuyenMai'
     ]
 ]);

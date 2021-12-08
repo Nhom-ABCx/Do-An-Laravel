@@ -14,7 +14,7 @@ class CTChuongTrinhKMController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
