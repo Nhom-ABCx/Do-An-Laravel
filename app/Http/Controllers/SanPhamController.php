@@ -35,7 +35,10 @@ class SanPhamController extends Controller
      */
     public function create()
     {
-        //
+        $lstLoaiSanPham=LoaiSanPham::all();
+        $lstHangSanXuat=HangSanXuat::all();
+        //truyền thêm danh sách loại sản phẩm để tạo thẻ <options>
+        return view('SanPham.SanPham-create',['lstLoaiSanPham'=>$lstLoaiSanPham,'lstHangSanXuat'=>$lstHangSanXuat]);
     }
 
     /**
@@ -46,7 +49,30 @@ class SanPhamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sanPham=new SanPham();
+        $sanPham->fill([
+            'TenSanPham'=>$request->input('TenSanPham'),
+            'MoTa'=>$request->input('MoTa'),
+            'SoLuongTon'=>$request->input('SoLuongTon'),
+            'GiaNhap'=>$request->input('GiaNhap'),
+            'GiaBan'=>$request->input('GiaBan'),
+            'HinhAnh'=>'', //cap nhat sau
+            'LuotMua'=>0,
+            'HangSanXuatId'=>$request->input('HangSanXuatId'),
+            'LoaiSanPhamId'=>$request->input('LoaiSanPhamId'),
+        ]);
+        $sanPham->save(); //luu xong moi có mã sản phẩm
+
+        if($request->hasFile('HinhAnh'))
+        {
+            $sanPham->HinhAnh=$request->file('HinhAnh')->store('assets/images/product-image/'.$sanPham->id,'public');
+            //cat chuoi ra, chi luu cai ten thoi
+            $catChuoi = explode("/", $sanPham->HinhAnh);
+            $sanPham->HinhAnh=$catChuoi[4];
+        }
+
+        $sanPham->save(); //luu lại đường dẫn hình
+        return Redirect::route('SanPham.index');
     }
 
     /**
@@ -57,7 +83,7 @@ class SanPhamController extends Controller
      */
     public function show(SanPham $sanPham)
     {
-        //
+        dd($sanPham);
     }
 
     /**
@@ -104,7 +130,7 @@ class SanPhamController extends Controller
         //fill chi sua doi tuong trong bo nho', muon luu trong CSDL thi phai save()
         $sanPham->save();
         //dd($sanPham);
-        return Redirect::route('SanPham.index',$sanPham);
+        return Redirect::route('SanPham.index');
     }
 
     /**
@@ -115,7 +141,8 @@ class SanPhamController extends Controller
      */
     public function destroy(SanPham $sanPham)
     {
-        //
+        $sanPham->delete();
+        return Redirect::route('SanPham.index');
     }
     //phương thức hỗ trợ load hình ảnh và thay thế bằng hình mạc định nếu ko tìm thấy file
     public function fixImage(SanPham $sanPham)

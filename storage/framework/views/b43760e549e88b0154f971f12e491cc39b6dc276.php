@@ -17,13 +17,18 @@
         <ul class="breadcrumb">
             <li>
                 <i class="icon-home home-icon"></i>
-                <a href="#">Home</a>
+                <a href="<?php echo e(url('/')); ?>">Home</a>
             </li>
 
             <li>
-                <a href="#">Forms</a>
+                <a href="<?php echo e(route('SanPham.index')); ?>">Sản phẩm</a>
             </li>
-            <li class="active">Form Elements</li>
+
+            <li>
+                <a href="<?php echo e(route('SanPham.show',["sanPham"=>$sanPham])); ?>"><?php echo e($sanPham->id); ?></a>
+            </li>
+
+            <li class="active">Chỉnh sửa</li>
         </ul><!-- .breadcrumb -->
 
         <div class="nav-search" id="nav-search">
@@ -39,10 +44,10 @@
     <div class="page-content">
         <div class="page-header">
             <h1>
-                Form Elements
+                Sản phẩm
                 <small>
                     <i class="icon-double-angle-right"></i>
-                    Common form elements and layouts
+                    Nhập thông tin để chỉnh sửa
                 </small>
             </h1>
         </div><!-- /.page-header -->
@@ -99,7 +104,23 @@
                     <div class="space-4"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Đơn giá </label>
+                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Giá Nhập </label>
+
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-credit-card"></i>
+                                </span>
+
+                            <input class="form-control" type="text" value="<?php echo e($sanPham->GiaNhap); ?>" name="GiaNhap">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Giá bán </label>
 
                         <div class="col-sm-3">
                             <div class="input-group">
@@ -143,7 +164,7 @@
                     <div class="space-4"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Nhà cung cấp </label>
+                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Hãng sản xuất </label>
 
                         <div class="col-sm-3">
                             <div class="input-group">
@@ -216,6 +237,22 @@
                                 </span>
 
                                 <input class="form-control" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->updated_at); ?>">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Ngày xóa </label>
+
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-calendar"></i>
+                                </span>
+
+                                <input class="form-control" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->deleted_at); ?>">
                             </div>
                         </div>
                     </div>

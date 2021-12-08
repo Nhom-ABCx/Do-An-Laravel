@@ -14,13 +14,9 @@
         <ul class="breadcrumb">
             <li>
                 <i class="icon-home home-icon"></i>
-                <a href="#">Home</a>
+                <a href="{{url('/')}}">Home</a>
             </li>
-
-            <li>
-                <a href="#">Tables</a>
-            </li>
-            <li class="active">jqGrid plugin</li>
+            <li class="active">Quản lý sản phẩm</li>
         </ul><!-- .breadcrumb -->
 
         <div class="nav-search" id="nav-search">
@@ -38,6 +34,14 @@
         <div class="row">
             <div class="col-xs-12">
                 <h3 class="header smaller lighter blue">Quản lý sản phẩm</h3>
+
+                <a href="{{route('SanPham.create')}}" class="btn btn-success">
+                    <i class="icon-plus"></i>
+                    Thêm sản phẩm
+                </a>
+
+                <div class="hr hr-24"></div>
+
                 <div class="table-header">
                     Bảng sản phẩm
                 </div>
@@ -50,11 +54,12 @@
                                 <th>TenSanPham</th>
                                 <th>MoTa</th>
                                 <th>SoLuongTon</th>
-                                <th>DonGia</th>
+                                <th>GiaNhap</th>
+                                <th>GiaBan</th>
                                 <th>HinhAnh</th>
                                 <th>LuotMua</th>
-                                <th>LoaiSanPhamId</th>
                                 <th>HangSanXuatId</th>
+                                <th>LoaiSanPhamId</th>
                                 <th>
                                     <i class="icon-time bigger-110 hidden-480"></i>
                                     Create_at
@@ -62,6 +67,10 @@
                                 <th>
                                     <i class="icon-time bigger-110 hidden-480"></i>
                                     Update_at
+                                </th>
+                                <th>
+                                    <i class="icon-time bigger-110 hidden-480"></i>
+                                    Deleted_at
                                 </th>
                                 <th></th>
                             </tr>
@@ -75,15 +84,17 @@
                                 <td>{{$item->TenSanPham}}</td>
                                 <td>{{$item->MoTa}}</td>
                                 <td>{{$item->SoLuongTon}}</td>
-                                <td>{{$item->DonGia}}</td>
+                                <td>{{$item->GiaNhap}}</td>
+                                <td>{{$item->GiaBan}}</td>
                                 <td>
                                     <img src='{{$item->HinhAnh}}' alt="{{$item->HinhAnh}}" width='100' height='100'>
                                 </td>
                                 <td>{{$item->LuotMua}}</td>
-                                <td>{{$item->LoaiSanPham->TenLoai}}</td>
                                 <td>{{$item->HangSanXuat->Ten}}</td>
+                                <td>{{$item->LoaiSanPham->TenLoai}}</td>
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
+                                <td>{{$item->deleted_at}}</td>
 
                                 <td>
                                     <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
@@ -95,9 +106,11 @@
                                             <i class="icon-pencil bigger-130"></i>
                                         </a>
 
-                                        <a class="red" href="#">
-                                            <i class="icon-trash bigger-130"></i>
-                                        </a>
+                                        <form action="{{route('SanPham.destroy',$item)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn-link red"><i class="icon-trash bigger-130"></i></button>
+                                        </form>
                                     </div>
 
                                     <div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -116,7 +129,7 @@
                                                 </li>
 
                                                 <li>
-                                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                    <a href="{{route('SanPham.edit',$item)}}" class="tooltip-success" data-rel="tooltip" title="Edit">
                                                         <span class="green">
                                                             <i class="icon-edit bigger-120"></i>
                                                         </span>
@@ -124,11 +137,11 @@
                                                 </li>
 
                                                 <li>
-                                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                        <span class="red">
-                                                            <i class="icon-trash bigger-120"></i>
-                                                        </span>
-                                                    </a>
+                                                    <form action="{{route('SanPham.destroy',$item)}}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Delete"><i class="icon-trash bigger-120"></i></button>
+                                                    </form>
                                                 </li>
                                             </ul>
                                         </div>
@@ -157,12 +170,23 @@
         var oTable1 = $('#sample-table-2').dataTable( {
         "aoColumns": [
           null,null,
-          { "bSortable": false },
-          null, null,
-          { "bSortable": false },
-          null, null,null,null,null,
+          { "bSortable": false }, //mota
+          null, null,null,
+          { "bSortable": false }, //hinh anh
+          null, null,null,null,null,null,
           { "bSortable": false }
         ] } );
+
+
+        $('table th input:checkbox').on('click' , function(){
+					var that = this;
+					$(this).closest('table').find('tr > td:first-child input:checkbox')
+					.each(function(){
+						this.checked = that.checked;
+						$(this).closest('tr').toggleClass('selected');
+					});
+
+		});
 
 
         $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
