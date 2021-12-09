@@ -474,18 +474,11 @@
                     </li>
 
                     <li>
-<<<<<<< HEAD
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Khuyến mãi </span>
-
                             <b class="arrow icon-angle-down"></b>
-=======
-                        <a href="{{ route('KhuyenMai.index') }}">
-                            <i class="icon-list-alt"></i>
-                            <span class="menu-text"> CT Khuyến Mãi </span>
->>>>>>> 84e15b2f1dec31940231adf050f0a009a7c8c659
-                        </a>
+                       
                         <ul class="submenu">
                             <li>
                                 <a href="{{route('KhuyenMai.index')}}">
