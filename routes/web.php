@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 //controller
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\ChuongTrinhKhuyenMaiController;
+use App\Http\Controllers\CTChuongTrinhKMController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +27,10 @@ Route::resource('SanPham', SanPhamController::class, [
 Route::resource('KhuyenMai',ChuongTrinhKhuyenMaiController::class,[
     'parameters' => [
         'KhuyenMai' => 'chuongTrinhKhuyenMai'
+    ]
+]);
+Route::resource('CTKhuyenMai',CTChuongTrinhKMController::class,[
+    'parameters' => [
+        'CTKhuyenMai/{Id}/{Id}' => 'cTChuongTrinhKM'
     ]
 ]);

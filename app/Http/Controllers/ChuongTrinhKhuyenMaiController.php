@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ChuongTrinhKhuyenMai;
+use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -26,7 +27,8 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function create()
     {
-        return view('KhuyenMai.KhuyenMai-create');
+        $sanPhamId=SanPham::all();
+        return view('KhuyenMai.KhuyenMai-create',['sanPhamId'=>$sanPhamId]);
     }
 
     /**
@@ -68,6 +70,7 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function edit(ChuongTrinhKhuyenMai $chuongTrinhKhuyenMai)
     {
+       
         //dd($chuongTrinhKhuyenMai);
         return view('KhuyenMai.KhuyenMai-edit',['ctkm'=>$chuongTrinhKhuyenMai]);
     }
@@ -103,6 +106,8 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function destroy(ChuongTrinhKhuyenMai $chuongTrinhKhuyenMai)
     {
-        //
+        $chuongTrinhKhuyenMai->delete();
+        return Redirect::route('KhuyenMai.index');
+
     }
 }

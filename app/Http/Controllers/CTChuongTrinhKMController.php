@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChuongTrinhKhuyenMai;
 use App\Models\CTChuongTrinhKM;
+use App\Models\SanPham;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\Console\Input\Input;
 
 class CTChuongTrinhKMController extends Controller
 {
@@ -14,7 +18,8 @@ class CTChuongTrinhKMController extends Controller
      */
     public function index()
     {
-        
+        $data=CTChuongTrinhKM::all();
+        return view('CTKhuyenMai.CTKhuyenMai-index',['ctctkm'=>$data]);
     }
 
     /**
@@ -24,7 +29,9 @@ class CTChuongTrinhKMController extends Controller
      */
     public function create()
     {
-        //
+        $ctKhuyenMai=ChuongTrinhKhuyenMai::all();
+        $sanPham=SanPham::all();
+        return view('CTKhuyenMai.CTKhuyenMai-create',['ctkm'=>$ctKhuyenMai,'sanPham'=>$sanPham]);
     }
 
     /**
@@ -35,7 +42,15 @@ class CTChuongTrinhKMController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cTChuongTrinhKM= new CTChuongTrinhKM();
+        $cTChuongTrinhKM->fill([
+            'ChuongTrinhKhuyenMaiId'=>$request->input('ChuongTrinhKhuyenMaiId'),
+            'SanPhamId'=>$request->input('SanPhamId'),
+            'GiamGia'=>$request->input('GiamGia'),
+            'SoLuong'=>$request->input('SoLuong')
+        ]);
+        $cTChuongTrinhKM->save();
+        return Redirect::route('CTKhuyenMai.index');
     }
 
     /**
@@ -57,7 +72,9 @@ class CTChuongTrinhKMController extends Controller
      */
     public function edit(CTChuongTrinhKM $cTChuongTrinhKM)
     {
-        //
+        
+        dd($cTChuongTrinhKM);
+       // return view('CTKhuyenMai.CTKhuyenMai-edit');
     }
 
     /**

@@ -1,7 +1,7 @@
 {{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
 @extends('layouts.Layout')
 
-@section('title', 'CT Khuyến Mãi')
+@section('title', 'ChuongTrinh-Khuyến Mãi')
 
 @section('body')
 
@@ -22,7 +22,7 @@
             <li>
                 <a href="#">Tables</a>
             </li>
-            <li class="active">CT_Khuyến mãi</li>
+            <li class="active">Chương Trình_Khuyến mãi</li>
         </ul><!-- .breadcrumb -->
 
         <div class="nav-search" id="nav-search">
@@ -39,12 +39,14 @@
 
         <div class="row">
             <div class="col-xs-12">
+
+                <h3 class="header smaller lighter blue">Chương trình khuyến mãi</h3>
                 <div class="pull">
                     <a type="button" class="btn btn-success " href="{{ route('KhuyenMai.create') }}"><i class="fa fa-plus"></i> Thêm chương trình khuyến mãi</a>
                 </div>
-                <h3 class="header smaller lighter blue">Chương trình khuyến mãi</h3>
+                </br>
                 <div class="table-header">
-                    Bảng CT Khuyến mãi
+                    Bảng Chương Trình Khuyến mãi
                 </div>
 
                 <div class="table-responsive">
@@ -80,7 +82,7 @@
                                     <i class="fa fa-trash"></i>
                                     deleted_at
                                 </th>
-                                <th>cong cu</th>
+                                <th></th>
                             </tr>
                         </thead>
 
@@ -100,14 +102,15 @@
                                         <a class="blue" href="#">
                                             <i class="fa fa-plus"></i>
                                         </a>
-                                        
+
                                         <a class="green" href="{{route('KhuyenMai.edit',$item)}}">
                                             <i class="icon-pencil bigger-130"></i>
                                         </a>
-
-                                        <a class="red" href="#">
-                                            <i class="icon-trash bigger-130"></i>
-                                        </a>
+                                        <form action="{{route('KhuyenMai.destroy',$item)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn-link red"><i class="icon-trash bigger-130"></i></button>
+                                        </form>
                                     </div>
 
                                     <div class="visible-xs visible-sm hidden-md hidden-lg">
