@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\ChuongTrinhKhuyenMaiController;
+use App\Http\Controllers\HangSanXuatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,11 @@ Route::resource('SanPham', SanPhamController::class, [
 Route::resource('KhuyenMai', ChuongTrinhKhuyenMaiController::class, [
     'parameters' => [
         'KhuyenMai' => 'chuongTrinhKhuyenMai'
+    ]
+]);
+Route::resource('HangSanXuat', HangSanXuatController::class, [
+    'parameters' => [
+        'HangSanXuat' => 'hangSanXuat'
     ]
 ]);
 Route::get('Login', [AuthController::class,'index'])->name('Login.index');

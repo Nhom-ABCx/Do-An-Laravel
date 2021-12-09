@@ -479,6 +479,12 @@
                             <span class="menu-text"> CT Khuyến Mãi </span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{  route('HangSanXuat.index')  }}">
+                            <i class="icon-list-alt"></i>
+                            <span class="menu-text"> Hãng Sản Xuất </span>
+                        </a>
+                    </li>
 
                     <li>
                         <a href="calendar.html">

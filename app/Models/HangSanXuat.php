@@ -10,7 +10,14 @@ class HangSanXuat extends Model
 {
     use HasFactory;
     use SoftDeletes; //su dung chuc nang softdelete
-
+    protected $table ="hang_san_xuats";
+    protected $fillable=[
+        'Id',
+        'Ten',
+        'DiaChi',
+        'Email',
+        'Phone'
+    ];
     public function SanPham()
     {
         return $this->hasMany(SanPham::class,'HangSanXuatId');
