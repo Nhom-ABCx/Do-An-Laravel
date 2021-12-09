@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HangSanXuat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class HangSanXuatController extends Controller
 {
@@ -14,7 +15,8 @@ class HangSanXuatController extends Controller
      */
     public function index()
     {
-        //
+        $data=HangSanXuat::all();
+        return view('HangSanXuat.HangSanXuat-index',['hsx'=>$data]);
     }
 
     /**
@@ -24,7 +26,7 @@ class HangSanXuatController extends Controller
      */
     public function create()
     {
-        //
+        return view('HangSanXuat.HangSanXuat-create');
     }
 
     /**
@@ -35,7 +37,16 @@ class HangSanXuatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Hsx= new HangSanXuat();
+
+        $Hsx->fill([
+            "Ten"=>$request->input("Ten"),
+            "DiaChi"=>$request->input("DiaChi"),
+            "Email"=>$request->input("Email"),
+            "Phone"=>$request->input("Phone")
+        ]);
+        $Hsx->save();
+         return Redirect::route('HangSanXuat.index');
     }
 
     /**
@@ -57,7 +68,7 @@ class HangSanXuatController extends Controller
      */
     public function edit(HangSanXuat $hangSanXuat)
     {
-        //
+        return view('HangSanXuat.HangSanXuat-edit',['hsx'=>$hangSanXuat]);
     }
 
     /**
@@ -69,7 +80,17 @@ class HangSanXuatController extends Controller
      */
     public function update(Request $request, HangSanXuat $hangSanXuat)
     {
-        //
+        $hangSanXuat->fill([
+            'Ten'=>$request->input('Ten'),
+            'DiaChi'=>$request->input('DiaChi'),
+            'Email'=>$request->input('Email'),
+            'Phone'=>$request->input('Phone'),
+        ]);
+
+        $hangSanXuat->save();
+
+         return Redirect::route('HangSanXuat.index');
+        //dd("adsd");
     }
 
     /**

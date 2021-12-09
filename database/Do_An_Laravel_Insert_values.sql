@@ -146,9 +146,9 @@ insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien) values(23,
 insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien) values(18,4,12,0,0);
 
 insert into Lich_Su_Van_Chuyens(HoaDonId,NguoiVanChuyenId,TrangThai,created_at)
-SELECT a.Id,b.Id,0,a.created_at FROM Hoa_Dons as a,Nguoi_Van_Chuyens as b ORDER BY RAND() LIMIT 50
+SELECT a.Id,b.Id,0,a.created_at FROM Hoa_Dons as a,Nguoi_Van_Chuyens as b ORDER BY RAND() LIMIT 50;
 
 update CT_Hoa_Dons
-set GiaBan=(select GiaBan from San_Phams where Id=SanPhamId)
+set GiaBan=(select GiaBan from San_Phams where Id=SanPhamId);
 update CT_Hoa_Dons
-set ThanhTien=(SoLuong*GiaBan)-GiaGiam
+set ThanhTien=(SoLuong*GiaBan)-GiaGiam;
