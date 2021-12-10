@@ -54,6 +54,11 @@
   <script src="/storage/assets/js/html5shiv.js"></script>
   <script src="/storage/assets/js/respond.min.js"></script>
   <![endif]-->
+    <style>
+        tfoot input {
+            width: 100%;
+        }
+    </style>
     <?php echo $__env->yieldContent('headThisPage'); ?>
 </head>
 
@@ -294,12 +299,12 @@
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     <?php if(auth()->guard()->check()): ?>
-                                    <?php echo e(dd(Auth::user())); ?>
+                                        <?php echo e(dd(Auth::user())); ?>
 
                                     <?php endif; ?>
 
                                     <?php if(auth()->guard()->guest()): ?>
-                                    Chưa đăng nhập
+                                        Chưa đăng nhập
                                     <?php endif; ?>
                                 </span>
 
@@ -480,21 +485,21 @@
                             <span class="menu-text"> Khuyến mãi </span>
                             <b class="arrow icon-angle-down"></b>
 
-                        <ul class="submenu">
-                            <li class="<?php echo e(request()->is('KhuyenMai') ? 'active' : ''); ?>">
-                                <a href="<?php echo e(route('KhuyenMai.index')); ?>">
-                                    <i class="icon-double-angle-right"></i>
-                                    Chương Trình Khuyến Mãi
-                                </a>
-                            </li>
-                            <li class="<?php echo e(request()->is('CTKhuyenMai') ? 'active' : ''); ?>">
-                                <a href="<?php echo e(route('CTKhuyenMai.index')); ?>">
-                                    <i class="icon-list-alt"></i>
-                                    <span class="menu-text"> Chi tiết CT-Khuyến mãi </span>
-                                </a>
-                            </li>
+                            <ul class="submenu">
+                                <li class="<?php echo e(request()->is('KhuyenMai') ? 'active' : ''); ?>">
+                                    <a href="<?php echo e(route('KhuyenMai.index')); ?>">
+                                        <i class="icon-double-angle-right"></i>
+                                        Chương Trình Khuyến Mãi
+                                    </a>
+                                </li>
+                                <li class="<?php echo e(request()->is('CTKhuyenMai') ? 'active' : ''); ?>">
+                                    <a href="<?php echo e(route('CTKhuyenMai.index')); ?>">
+                                        <i class="icon-list-alt"></i>
+                                        <span class="menu-text"> Chi tiết CT-Khuyến mãi </span>
+                                    </a>
+                                </li>
 
-                        </ul>
+                            </ul>
                     </li>
                     <li class="<?php echo e(request()->is('HangSanXuat') ? 'active' : ''); ?>">
                         <a href="<?php echo e(route('HangSanXuat.index')); ?>">
@@ -717,10 +722,10 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-        <script type="text/javascript">
-            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-        </script>
-        <![endif]-->
+            <script type="text/javascript">
+                window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+            </script>
+            <![endif]-->
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +

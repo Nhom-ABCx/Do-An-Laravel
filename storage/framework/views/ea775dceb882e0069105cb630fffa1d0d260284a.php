@@ -1,6 +1,3 @@
-
-
-
 <?php $__env->startSection('title', 'QL Sản phẩm'); ?>
 
 <?php $__env->startSection('body'); ?>
@@ -185,7 +182,6 @@
                     }
                 ]
             });
-
 
             $('table th input:checkbox').on('click', function() {
                 var that = this;
