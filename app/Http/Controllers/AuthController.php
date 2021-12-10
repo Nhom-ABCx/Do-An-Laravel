@@ -28,7 +28,7 @@ class AuthController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -37,8 +37,19 @@ class AuthController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    //đăng nhập nè
     public function store(Request $request)
+    {
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    //dang nhap ne`
+    public function show(Request $request)
     {
         $request->validate([
             'Username' => ['required'],
@@ -53,17 +64,6 @@ class AuthController extends Controller
         return back()->withErrors([
             'Username' => 'Có lỗi xãy ra',
         ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

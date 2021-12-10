@@ -9,6 +9,7 @@ use App\Http\Controllers\ChuongTrinhKhuyenMaiController;
 use App\Http\Controllers\CTChuongTrinhKMController;
 use App\Http\Controllers\HangSanXuatController;
 
+//composer dump-autoload
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +49,9 @@ Route::resource('HangSanXuat', HangSanXuatController::class, [
         'HangSanXuat' => 'hangSanXuat'
     ]
 ]);
-Route::get('Login', [AuthController::class,'index'])->name('Login.index');
-Route::post('Login', [AuthController::class,'store'])->name('Login.store');
-Route::delete('Login', [AuthController::class,'destroy'])->name('Login.destroy');
+Route::get('Login', [AuthController::class,'index'])->name('Login.index'); //show trang login
+Route::post('Login', [AuthController::class,'show'])->name('Login.show'); //xu ly dang nhap -> tra ve home
+Route::delete('Login', [AuthController::class,'destroy'])->name('Login.destroy'); //dang xuat
+//Route::put('Login', [AuthController::class,'create'])->name('Login.create'); //dang ky
+//Route::post('Login', [AuthController::class,'store'])->name('Login.store');
 

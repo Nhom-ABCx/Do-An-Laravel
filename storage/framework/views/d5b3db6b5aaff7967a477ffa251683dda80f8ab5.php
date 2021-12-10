@@ -419,7 +419,7 @@
                         </a>
 
                         <ul class="submenu">
-                            <li class="active">
+                            <li class="<?php echo e(request()->is('/') ? 'active' : ''); ?>">
                                 <a href="tables.html">
                                     <i class="icon-double-angle-right"></i>
                                     Simple &amp; Dynamic
@@ -474,10 +474,32 @@
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="<?php echo e(route('KhuyenMai.index')); ?>">
+                    <li class="<?php echo e(request()->is('KhuyenMai') ? 'active open' : ''); ?>">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="icon-certificate"></i>
+                            <span class="menu-text"> Khuyến mãi </span>
+                            <b class="arrow icon-angle-down"></b>
+
+                        <ul class="submenu">
+                            <li class="<?php echo e(request()->is('KhuyenMai') ? 'active' : ''); ?>">
+                                <a href="<?php echo e(route('KhuyenMai.index')); ?>">
+                                    <i class="icon-double-angle-right"></i>
+                                    Chương Trình Khuyến Mãi
+                                </a>
+                            </li>
+                            <li class="<?php echo e(request()->is('CTKhuyenMai') ? 'active' : ''); ?>">
+                                <a href="<?php echo e(route('CTKhuyenMai.index')); ?>">
+                                    <i class="icon-list-alt"></i>
+                                    <span class="menu-text"> Chi tiết CT-Khuyến mãi </span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="<?php echo e(request()->is('HangSanXuat') ? 'active' : ''); ?>">
+                        <a href="<?php echo e(route('HangSanXuat.index')); ?>">
                             <i class="icon-list-alt"></i>
-                            <span class="menu-text"> CT Khuyến Mãi </span>
+                            <span class="menu-text"> Hãng Sản Xuất </span>
                         </a>
                     </li>
 
