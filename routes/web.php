@@ -9,6 +9,7 @@ use App\Http\Controllers\ChuongTrinhKhuyenMaiController;
 use App\Http\Controllers\CTChuongTrinhKMController;
 use App\Http\Controllers\HangSanXuatController;
 
+//composer dump-autoload
 
 /*
 |--------------------------------------------------------------------------

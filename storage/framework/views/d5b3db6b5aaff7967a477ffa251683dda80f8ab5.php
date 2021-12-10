@@ -475,9 +475,31 @@
                     </li>
 
                     <li>
-                        <a href="<?php echo e(route('KhuyenMai.index')); ?>">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="icon-certificate"></i>
+                            <span class="menu-text"> Khuyến mãi </span>
+                            <b class="arrow icon-angle-down"></b>
+                       
+                        <ul class="submenu">
+                            <li>
+                                <a href="<?php echo e(route('KhuyenMai.index')); ?>">
+                                    <i class="icon-double-angle-right"></i>
+                                    Chương Trình Khuyến Mãi
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo e(route('CTKhuyenMai.index')); ?>">
+                                    <i class="icon-list-alt"></i>
+                                    <span class="menu-text"> Chi tiết CT-Khuyến mãi </span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="<?php echo e(route('HangSanXuat.index')); ?>">
                             <i class="icon-list-alt"></i>
-                            <span class="menu-text"> CT Khuyến Mãi </span>
+                            <span class="menu-text"> Hãng Sản Xuất </span>
                         </a>
                     </li>
 

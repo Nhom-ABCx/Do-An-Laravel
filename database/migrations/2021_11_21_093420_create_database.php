@@ -15,8 +15,8 @@ class CreateDatabase extends Migration
     {
         Schema::create('nhan_viens', function (Blueprint $table) {
             $table->Id();
-            $table->string('Username');
-            $table->string('Email');
+            $table->string('Username')->unique();
+            $table->string('Email')->unique();
             $table->string('Phone')->nullable();
             $table->string('MatKhau');
             $table->string('HoTen');
@@ -30,8 +30,8 @@ class CreateDatabase extends Migration
         });
         Schema::create('khach_hangs', function (Blueprint $table) {
             $table->Id();
-            $table->string('Username');
-            $table->string('Email');
+            $table->string('Username')->unique();
+            $table->string('Email')->unique();
             $table->string('Phone')->nullable();
             $table->string('MatKhau');
             $table->string('HoTen');
@@ -44,7 +44,7 @@ class CreateDatabase extends Migration
         });
         Schema::create('hang_san_xuats', function (Blueprint $table) {
             $table->Id();
-            $table->string('Ten');
+            $table->string('Ten')->unique();
             $table->string('DiaChi')->nullable();
             $table->string('Email');
             $table->string('Phone')->nullable();
@@ -53,14 +53,14 @@ class CreateDatabase extends Migration
         });
         Schema::create('loai_san_phams', function (Blueprint $table) {
             $table->Id();
-            $table->string('TenLoai');
+            $table->string('TenLoai')->unique();
             $table->string('MoTa')->nullable();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
         });
         Schema::create('san_phams', function (Blueprint $table) {
             $table->Id();
-            $table->string('TenSanPham');
+            $table->string('TenSanPham')->unique();
             $table->string('MoTa')->nullable();
             $table->integer('SoLuongTon');
             $table->double('GiaNhap');
@@ -86,7 +86,7 @@ class CreateDatabase extends Migration
         });
         Schema::create('chuong_trinh_khuyen_mais', function (Blueprint $table) {
             $table->Id();
-            $table->string('TenChuongTrinh');
+            $table->string('TenChuongTrinh')->unique();
             $table->string('MoTa')->nullable();
             $table->dateTime('FromDate');
             $table->dateTime('ToDate');
@@ -105,7 +105,7 @@ class CreateDatabase extends Migration
         });
         Schema::create('don_vi_van_chuyens', function (Blueprint $table) {
             $table->Id();
-            $table->string('TenDonViVanChuyen');
+            $table->string('TenDonViVanChuyen')->unique();
             $table->string('Website')->nullable();
             $table->string('Email')->nullable();
             $table->string('Phone')->nullable();
