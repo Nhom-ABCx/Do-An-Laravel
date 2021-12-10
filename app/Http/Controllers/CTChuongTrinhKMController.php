@@ -92,19 +92,8 @@ class CTChuongTrinhKMController extends Controller
      */
     public function update(Request $request, $ctId,$spId)
     {
-        
         DB::update("update ct_chuong_trinh_kms set GiamGia=?, SoLuong=? where ChuongTrinhKhuyenMaiId=? and SanPhamId=? ",
         [$request->input('GiamGia'),$request->input('SoLuong'),$ctId,$spId]);
-    //     //     $ctctkm[0]->fill([
-    //     //     'GiamGia'=>$request->input('GiamGia'),
-    //     //     'SoLuong'=>$request->input('SoLuong')    
-    //     // ]);
-    //      $ctctkm[0]->GiamGia=$request->input('GiamGia');
-
-    //      $ctctkm[0]->SoLuong=$request->input('SoLuong');
-    //    dd($ctctkm);
-    //  $ctctkm[0]->save();
- 
         return Redirect::route('CTKhuyenMai.index');
     }
 
@@ -114,8 +103,9 @@ class CTChuongTrinhKMController extends Controller
      * @param  \App\Models\CTChuongTrinhKM  $cTChuongTrinhKM
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CTChuongTrinhKM $cTChuongTrinhKM)
-    {
-        //
+    public function destroy($ctId,$spId)
+    {   
+        CTChuongTrinhKM::where('ChuongTrinhKhuyenMaiId',$ctId)->where('SanPhamId',$spId)->delete();
+        return Redirect::route('CTKhuyenMai.index');
     }
 }

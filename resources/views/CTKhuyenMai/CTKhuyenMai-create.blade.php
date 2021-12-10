@@ -57,6 +57,9 @@
 
         <div class="row">
             <div class="col-xs-12">
+                <div class="pull">
+                    <a type="button" class="btn btn-info " href="{{ route('CTKhuyenMai.index') }}"><i class="fa fa-angle-double-left"></i> Back</a>
+                </div>
                 <!-- PAGE CONTENT BEGINS -->
                 {{--web để search Icon trong template https://fontawesome.com/v3.2/icons/ --}}
 

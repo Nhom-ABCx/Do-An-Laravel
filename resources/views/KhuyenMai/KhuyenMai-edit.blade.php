@@ -75,22 +75,22 @@
                             <hr />
 
                             <div class="row-fluid">
-                                <label for="id-date-range-picker-1">Ngày bắt đầu</label>
+                                <label >Ngày bắt đầu</label>
                             </div>
 
                             <div class="control-group">
                                 <div class="row-fluid input-prepend">
-                                    <input class="span10" type="date" value="{{$ctkm->FromDate}}" name="FromDate" id="id-date-range-picker-1" />
+                                    <input  type="date" value="{{$ctkm->FromDate}}" name="FromDate"  />
                                 </div>
                             </div>
                             <hr />
                             <div class="row-fluid">
-                                <label for="id-date-range-picker-1">Ngày kết thúc</label>
+                                <label >Ngày kết thúc</label>
                             </div>
 
                             <div class="control-group">
                                 <div class="row-fluid input-prepend">
-                                    <input class="span10" type="date" value="{{$ctkm->ToDate}}" name="ToDate" id="id-date-range-picker-1" />
+                                    <input  type="date" value="{{$ctkm->ToDate}}" name="ToDate"  />
                                 </div>
                             </div>
                             <hr />

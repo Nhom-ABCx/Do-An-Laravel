@@ -109,11 +109,11 @@
                                         <a class="green" href="{{route('CTKhuyenMai.edit',[$item->ChuongTrinhKhuyenMaiId,$item->SanPhamId])}}">
                                             <i class="icon-pencil bigger-130"></i>
                                         </a>
-                                        <!-- <form action="" method="post">
+                                        <form action="{{route('CTKhuyenMai.destroy',[$item->ChuongTrinhKhuyenMaiId,$item->SanPhamId])}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn-link red"><i class="icon-trash bigger-130"></i></button>
-                                        </form> -->
+                                        </form>
                                     </div>
 
                                     <div class="visible-xs visible-sm hidden-md hidden-lg">

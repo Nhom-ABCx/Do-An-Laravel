@@ -154,6 +154,7 @@ class SanPhamController extends Controller
      */
     public function destroy(SanPham $sanPham)
     {
+        dd($sanPham);
         $sanPham->delete();
         return Redirect::route('SanPham.index');
     }
