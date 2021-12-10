@@ -74,7 +74,7 @@
                                             <i class="icon-remove bigger-110 red">{{ $errors->first('Username') }}</i>
                                         @endif
 
-                                        <form action="{{ route('Login.store') }}" method="post">
+                                        <form action="{{ route('Login.show') }}" method="post">
                                             @csrf
                                             <fieldset>
                                                 <label class="block clearfix">
@@ -196,32 +196,33 @@
                                         <div class="space-6"></div>
                                         <p> Enter your details to begin: </p>
 
-                                        <form>
+                                        <form action="#" method="post">
+                                            @csrf
                                             <fieldset>
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="email" class="form-control" placeholder="Email" />
+                                                        <input type="email" class="form-control" placeholder="Email" name="Email"/>
                                                         <i class="icon-envelope"></i>
                                                     </span>
                                                 </label>
 
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" class="form-control" placeholder="Username" />
+                                                        <input type="text" class="form-control" placeholder="Username" name="Username"/>
                                                         <i class="icon-user"></i>
                                                     </span>
                                                 </label>
 
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="password" class="form-control" placeholder="Password" />
+                                                        <input type="password" class="form-control" placeholder="Password" name="MatKhau"/>
                                                         <i class="icon-lock"></i>
                                                     </span>
                                                 </label>
 
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="password" class="form-control" placeholder="Repeat password" />
+                                                        <input type="password" class="form-control" placeholder="Repeat password" name="XacNhan_MatKhau"/>
                                                         <i class="icon-retweet"></i>
                                                     </span>
                                                 </label>
