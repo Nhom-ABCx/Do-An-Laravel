@@ -54,6 +54,11 @@
   <script src="/storage/assets/js/html5shiv.js"></script>
   <script src="/storage/assets/js/respond.min.js"></script>
   <![endif]-->
+    <style>
+        tfoot input {
+            width: 100%;
+        }
+    </style>
     @yield('headThisPage')
 </head>
 
@@ -294,11 +299,11 @@
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     @auth
-                                    {{dd(Auth::user())}}
+                                        {{ dd(Auth::user()) }}
                                     @endauth
 
                                     @guest
-                                    Chưa đăng nhập
+                                        Chưa đăng nhập
                                     @endguest
                                 </span>
 
@@ -323,7 +328,7 @@
                                 <li class="divider"></li>
 
                                 <li>
-                                    <a href="{{route('Login.destroy')}}">
+                                    <a href="{{ route('Login.destroy') }}">
                                         <i class="icon-off"></i>
                                         Logout
                                     </a>
@@ -479,24 +484,24 @@
                             <span class="menu-text"> Khuyến mãi </span>
                             <b class="arrow icon-angle-down"></b>
 
-                        <ul class="submenu">
-                            <li class="{{ request()->is('KhuyenMai') ? 'active' : '' }}">
-                                <a href="{{route('KhuyenMai.index')}}">
-                                    <i class="icon-double-angle-right"></i>
-                                    Chương Trình Khuyến Mãi
-                                </a>
-                            </li>
-                            <li class="{{ request()->is('CTKhuyenMai') ? 'active' : '' }}">
-                                <a href="{{route('CTKhuyenMai.index')}}">
-                                    <i class="icon-list-alt"></i>
-                                    <span class="menu-text"> Chi tiết CT-Khuyến mãi </span>
-                                </a>
-                            </li>
+                            <ul class="submenu">
+                                <li class="{{ request()->is('KhuyenMai') ? 'active' : '' }}">
+                                    <a href="{{ route('KhuyenMai.index') }}">
+                                        <i class="icon-double-angle-right"></i>
+                                        Chương Trình Khuyến Mãi
+                                    </a>
+                                </li>
+                                <li class="{{ request()->is('CTKhuyenMai') ? 'active' : '' }}">
+                                    <a href="{{ route('CTKhuyenMai.index') }}">
+                                        <i class="icon-list-alt"></i>
+                                        <span class="menu-text"> Chi tiết CT-Khuyến mãi </span>
+                                    </a>
+                                </li>
 
-                        </ul>
+                            </ul>
                     </li>
                     <li class="{{ request()->is('HangSanXuat') ? 'active' : '' }}">
-                        <a href="{{  route('HangSanXuat.index')  }}">
+                        <a href="{{ route('HangSanXuat.index') }}">
                             <i class="icon-list-alt"></i>
                             <span class="menu-text"> Hãng Sản Xuất </span>
                         </a>
@@ -716,10 +721,10 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-        <script type="text/javascript">
-            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-        </script>
-        <![endif]-->
+            <script type="text/javascript">
+                window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+            </script>
+            <![endif]-->
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +

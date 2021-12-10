@@ -3,6 +3,10 @@
 
 @section('title', 'QL Sản phẩm')
 
+@section('headThisPage')
+    <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
+@endsection
+
 @section('body')
 
     <div class="main-content">
@@ -21,26 +25,60 @@
                 <li class="active">Quản lý sản phẩm</li>
             </ul><!-- .breadcrumb -->
 
-            <div class="nav-search" id="nav-search">
+            {{-- <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
                         <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
                         <i class="icon-search nav-search-icon"></i>
                     </span>
                 </form>
-            </div><!-- #nav-search -->
+            </div><!-- #nav-search --> --}}
         </div>
 
         <div class="page-content">
-
             <div class="row">
                 <div class="col-xs-12">
-                    <h3 class="header smaller lighter blue">Quản lý sản phẩm</h3>
+                    <div class="widget-box">
+                        <div class="widget-header">
+                            <h3 class="header smaller lighter blue">Quản lý sản phẩm</h3>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <form class="form-inline" action="{{ route('SanPham.index') }}" method="get">
+                                    <a href="{{ route('SanPham.create') }}" class="btn btn-success">
+                                        <i class="icon-plus"></i>
+                                        Thêm sản phẩm
+                                    </a>
 
-                    <a href="{{ route('SanPham.create') }}" class="btn btn-success">
-                        <i class="icon-plus"></i>
-                        Thêm sản phẩm
-                    </a>
+                                    <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="{{$request['TenSanPham']}}" name="TenSanPham" />
+                                    <label for=""> Hãng sãn xuất: </label>
+                                    <select class="width-10 chosen-select" id="form-field-select-4" name="HangSanXuatId">
+                                        <option value="">All</option>
+                                        @foreach ($lstHangSanXuat as $item)
+                                            <option value="{{ $item->id }}" @if ($item->id == $request['HangSanXuatId']) selected @endif>
+                                                {{ $item->Ten }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    <label for=""> Loại sản phẩm: </label>
+                                    <select class="width-10 chosen-select" id="form-field-select-4" name="LoaiSanPhamId">
+                                        <option value="">All</option>
+                                        @foreach ($lstLoaiSanPham as $item)
+                                            <option value="{{ $item->id }}" @if ($item->id == $request['LoaiSanPhamId']) selected @endif>
+                                                {{ $item->TenLoai }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    <button type="submit" class="btn btn-purple btn-sm">
+                                        Search
+                                        <i class="icon-search icon-on-right bigger-110"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="hr hr-24"></div>
 
@@ -164,9 +202,8 @@
 @endsection
 
 @section('scriptThisPage')
-    {{-- Phần này là script thu gọn, phân trang lại của cái table --}}
+    <script src="/storage/assets/js/chosen.jquery.min.js"></script>
     <!-- inline scripts related to this page -->
-
     <script type="text/javascript">
         jQuery(function($) {
             var oTable1 = $('#sample-table-2').dataTable({
@@ -185,7 +222,6 @@
                     }
                 ]
             });
-
 
             $('table th input:checkbox').on('click', function() {
                 var that = this;
@@ -215,6 +251,16 @@
                 return 'left';
             }
         })
+        $('[data-rel=tooltip]').tooltip({
+            container: 'body'
+        });
+        $(".chosen-select").chosen();
+        $('#chosen-multiple-style').on('click', function(e) {
+            var target = $(e.target).find('input[type=radio]');
+            var which = parseInt(target.val());
+            if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
+            else $('#form-field-select-4').removeClass('tag-input-style');
+        });
     </script>
 
 @endsection

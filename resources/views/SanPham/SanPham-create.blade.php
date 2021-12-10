@@ -180,7 +180,7 @@
                                     <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="HangSanXuatId">
                                         <option value="">&nbsp;</option>
                                         @foreach ($lstHangSanXuat as $item)
-                                            <option value="{{ $item->id }}" @if ($item->id == old('LoaiSanPhamId')) selected @endif>
+                                            <option value="{{ $item->id }}" @if ($item->id == old('HangSanXuatId')) selected @endif>
                                                 {{ $item->Ten }}
                                             </option>
                                         @endforeach
