@@ -106,7 +106,7 @@
                                         <a class="blue" href="#">
                                             <i class="fa fa-plus"></i>
                                         </a>
-                                        <a class="green" href="{{route('CTKhuyenMai.edit',[$item])}}">
+                                        <a class="green" href="{{route('CTKhuyenMai.edit',[$item->ChuongTrinhKhuyenMaiId,$item->SanPhamId])}}">
                                             <i class="icon-pencil bigger-130"></i>
                                         </a>
                                         <!-- <form action="" method="post">
@@ -163,8 +163,7 @@
 @endsection
 
 @section("scriptThisPage")
-    <!-- inline scripts related to this page -->
-
+<!-- inline scripts related to this page -->
 <script type="text/javascript">
     jQuery(function($) {
         var oTable1 = $('#sample-table-2').dataTable({

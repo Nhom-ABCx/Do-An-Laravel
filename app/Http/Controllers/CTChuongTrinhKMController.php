@@ -8,6 +8,7 @@ use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\Console\Input\Input;
+use Illuminate\Support\Facades\DB;
 
 class CTChuongTrinhKMController extends Controller
 {
@@ -18,8 +19,9 @@ class CTChuongTrinhKMController extends Controller
      */
     public function index()
     {
-        $data=CTChuongTrinhKM::all();
-        return view('CTKhuyenMai.CTKhuyenMai-index',['ctctkm'=>$data]);
+        $data = CTChuongTrinhKM::all();
+        $ctctkm = new CTChuongTrinhKM();
+        return view('CTKhuyenMai.CTKhuyenMai-index', ['ctctkm' => $data, $ctctkm]);
     }
 
     /**
@@ -29,9 +31,9 @@ class CTChuongTrinhKMController extends Controller
      */
     public function create()
     {
-        $ctKhuyenMai=ChuongTrinhKhuyenMai::all();
-        $sanPham=SanPham::all();
-        return view('CTKhuyenMai.CTKhuyenMai-create',['ctkm'=>$ctKhuyenMai,'sanPham'=>$sanPham]);
+        $ctKhuyenMai = ChuongTrinhKhuyenMai::all();
+        $sanPham = SanPham::all();
+        return view('CTKhuyenMai.CTKhuyenMai-create', ['ctkm' => $ctKhuyenMai, 'sanPham' => $sanPham]);
     }
 
     /**
@@ -42,12 +44,12 @@ class CTChuongTrinhKMController extends Controller
      */
     public function store(Request $request)
     {
-        $cTChuongTrinhKM= new CTChuongTrinhKM();
+        $cTChuongTrinhKM = new CTChuongTrinhKM();
         $cTChuongTrinhKM->fill([
-            'ChuongTrinhKhuyenMaiId'=>$request->input('ChuongTrinhKhuyenMaiId'),
-            'SanPhamId'=>$request->input('SanPhamId'),
-            'GiamGia'=>$request->input('GiamGia'),
-            'SoLuong'=>$request->input('SoLuong')
+            'ChuongTrinhKhuyenMaiId' => $request->input('ChuongTrinhKhuyenMaiId'),
+            'SanPhamId' => $request->input('SanPhamId'),
+            'GiamGia' => $request->input('GiamGia'),
+            'SoLuong' => $request->input('SoLuong')
         ]);
         $cTChuongTrinhKM->save();
         return Redirect::route('CTKhuyenMai.index');
@@ -70,11 +72,15 @@ class CTChuongTrinhKMController extends Controller
      * @param  \App\Models\CTChuongTrinhKM  $cTChuongTrinhKM
      * @return \Illuminate\Http\Response
      */
-    public function edit(CTChuongTrinhKM $cTChuongTrinhKM)
+    public function edit($ctId, $spId)
     {
+
+        $query = CTChuongTrinhKM::where('ChuongTrinhKhuyenMaiId', $ctId)->where('SanPhamId', $spId)->get();
         
-        dd($cTChuongTrinhKM);
-       // return view('CTKhuyenMai.CTKhuyenMai-edit');
+        $ctkm = ChuongTrinhKhuyenMai::find($ctId);
+        $sanPham = SanPham::find($spId);
+        //dd($ctctkm);
+        return view('CTKhuyenMai.CTKhuyenMai-edit', ['ctctkm' => $query, 'ctkm' => $ctkm, 'sanPham' => $sanPham]);
     }
 
     /**
@@ -84,9 +90,22 @@ class CTChuongTrinhKMController extends Controller
      * @param  \App\Models\CTChuongTrinhKM  $cTChuongTrinhKM
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CTChuongTrinhKM $cTChuongTrinhKM)
+    public function update(Request $request, $ctId,$spId)
     {
-        //
+        
+        DB::update("update ct_chuong_trinh_kms set GiamGia=?, SoLuong=? where ChuongTrinhKhuyenMaiId=? and SanPhamId=? ",
+        [$request->input('GiamGia'),$request->input('SoLuong'),$ctId,$spId]);
+    //     //     $ctctkm[0]->fill([
+    //     //     'GiamGia'=>$request->input('GiamGia'),
+    //     //     'SoLuong'=>$request->input('SoLuong')    
+    //     // ]);
+    //      $ctctkm[0]->GiamGia=$request->input('GiamGia');
+
+    //      $ctctkm[0]->SoLuong=$request->input('SoLuong');
+    //    dd($ctctkm);
+    //  $ctctkm[0]->save();
+ 
+        return Redirect::route('CTKhuyenMai.index');
     }
 
     /**

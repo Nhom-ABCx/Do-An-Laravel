@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage; //thu vien luu tru~ de tao lien ket den public
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class SanPhamController extends Controller
 {
@@ -19,13 +21,23 @@ class SanPhamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $data = SanPham::all();
+        if (!empty($request->input('TenSanPham')))
+            $data=$data->where('TenSanPham', 'LIKE', '%' . Str::of($request->input('TenSanPham'))->trim() . '%');
+        if (!empty($request->input('HangSanXuatId')))
+            $data=$data->where('HangSanXuatId', $request->input('HangSanXuatId'));
+        if (!empty($request->input('LoaiSanPhamId')))
+            $data=$data->where('LoaiSanPhamId', $request->input('LoaiSanPhamId'));
+
         foreach ($data as $sp)
             $this->fixImage($sp);
         //gọi fixImage cho từng sp
-        return view('SanPham.SanPham-index', ["sanPham" => $data]);
+        $lstLoaiSanPham = LoaiSanPham::all();
+        $lstHangSanXuat = HangSanXuat::all();
+        //tra lai resquet ve cho view de hien thi lai tim` kiem' cu?
+        return view('SanPham.SanPham-index', ["sanPham" => $data, 'lstLoaiSanPham' => $lstLoaiSanPham, 'lstHangSanXuat' => $lstHangSanXuat, 'request' => $request]);
     }
 
     /**
