@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DonViVanChuyen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class DonViVanChuyenController extends Controller
 {
@@ -14,7 +15,8 @@ class DonViVanChuyenController extends Controller
      */
     public function index()
     {
-        //
+        $data=DonViVanChuyen::all();
+        return view('DonViVanChuyen.DonViVanChuyen-index',['dvvc'=>$data]);
     }
 
     /**
@@ -24,7 +26,7 @@ class DonViVanChuyenController extends Controller
      */
     public function create()
     {
-        //
+        return view('DonViVanChuyen.DonViVanChuyen-create');
     }
 
     /**
@@ -35,7 +37,21 @@ class DonViVanChuyenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'TenDonViVanChuyen'=>'required',
+            'Website'=>'required',
+            'Email'=>'required',
+            'Phone'=>'required'
+        ]);
+        $dvvc= new DonViVanChuyen();
+        $dvvc->fill([
+            'TenDonViVanChuyen'=>$request->input('TenDonViVanChuyen'),
+            'Website'=>$request->input('Website'),
+            'Email'=>$request->input('Email'),
+            'Phone'=>$request->input('Phone')
+        ]);
+        $dvvc->save();
+        return Redirect::route('DonViVanChuyen.index');
     }
 
     /**
@@ -57,7 +73,7 @@ class DonViVanChuyenController extends Controller
      */
     public function edit(DonViVanChuyen $donViVanChuyen)
     {
-        //
+        return view('DonViVanChuyen.DonViVanChuyen-edit',['dvvc'=>$donViVanChuyen]);
     }
 
     /**
@@ -69,7 +85,20 @@ class DonViVanChuyenController extends Controller
      */
     public function update(Request $request, DonViVanChuyen $donViVanChuyen)
     {
-        //
+        $request->validate([
+            'TenDonViVanChuyen'=>'required',
+            'Website'=>'required',
+            'Email'=>'required',
+            'Phone'=>'required'
+        ]);
+        $donViVanChuyen->fill([
+            'TenDonViVanChuyen'=>$request->input('TenDonViVanChuyen'),
+            'Website'=>$request->input('Website'),
+            'Email'=>$request->input('Email'),
+            'Phone'=>$request->input('Phone')
+        ]);
+        $donViVanChuyen->save();
+        return Redirect::route('DonViVanChuyen.index');
     }
 
     /**
@@ -80,6 +109,7 @@ class DonViVanChuyenController extends Controller
      */
     public function destroy(DonViVanChuyen $donViVanChuyen)
     {
-        //
+        $donViVanChuyen->delete();
+        return Redirect::route('DonViVanChuyen.index');
     }
 }

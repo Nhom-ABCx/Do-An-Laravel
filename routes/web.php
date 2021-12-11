@@ -8,6 +8,7 @@ use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\ChuongTrinhKhuyenMaiController;
 use App\Http\Controllers\CTChuongTrinhKMController;
 use App\Http\Controllers\HangSanXuatController;
+use App\Http\Controllers\DonViVanChuyenController;
 
 //composer dump-autoload
 
@@ -33,12 +34,6 @@ Route::resource('KhuyenMai', ChuongTrinhKhuyenMaiController::class, [
         'KhuyenMai' => 'chuongTrinhKhuyenMai'
     ]
 ]);
-
-// Route::resource('CTKhuyenMai',CTChuongTrinhKMController::class,[
-//     'parameters' => [
-//         'CTKhuyenMai/{Id}/{Id}' => 'cTChuongTrinhKM'
-//     ]
-// ]);
 Route::get('/CTKhuyenMai',[CTChuongTrinhKMController::class,'index'])->name('CTKhuyenMai.index');//Chi tiết CTKM index
 Route::get('/CTKhuyenMai/create',[CTChuongTrinhKMController::class,'create'])->name('CTKhuyenMai.create');//Chi tiết CTKM create
 Route::post('/CTKhuyenMai.store',[CTChuongTrinhKMController::class,'store'])->name('CTKhuyenMai.store');//Chi tiết CTKM store
@@ -56,3 +51,8 @@ Route::delete('Login', [AuthController::class,'destroy'])->name('Login.destroy')
 //Route::put('Login', [AuthController::class,'create'])->name('Login.create'); //dang ky
 //Route::post('Login', [AuthController::class,'store'])->name('Login.store');
 
+Route::resource('DonViVanChuyen',DonViVanChuyenController::class, [
+    'parameters' => [
+        'DonViVanChuyen' => 'donViVanChuyen'
+    ]
+]);
