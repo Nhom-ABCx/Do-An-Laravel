@@ -18,4 +18,8 @@ class ChuongTrinhKhuyenMai extends Model
         'FromDate',
         'ToDate'
     ];
+    public function CTChuongTrinhKM()
+    {
+        return $this->hasMany(CTChuongTrinhKM::class,'ChuongTrinhKhuyenMaiId');
+    }
 }

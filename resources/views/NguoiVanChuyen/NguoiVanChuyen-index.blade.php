@@ -8,7 +8,6 @@
 @endsection
 
 @section('body')
-
 <div class="main-content">
     <div class="breadcrumbs" id="breadcrumbs">
         <script type="text/javascript">
@@ -22,7 +21,7 @@
                 <i class="icon-home home-icon"></i>
                 <a href="{{ url('/') }}">Home</a>
             </li>
-            <li class="active">Đơn vị vận chuyển</li>
+            <li class="active">Người vận chuyển</li>
         </ul><!-- .breadcrumb -->
 
         {{-- <div class="nav-search" id="nav-search">
@@ -40,14 +39,14 @@
             <div class="col-xs-12">
                 <div class="widget-box">
                     <div class="widget-header">
-                        <h3 class="header smaller lighter blue">Đơn vị vận chuyển</h3>
+                        <h3 class="header smaller lighter blue">Người vận chuyển</h3>
                     </div>
                     <div class="widget-body">
                         <div class="widget-main">
-                            <form class="form-inline"  method="get">
-                                <a href="{{route('DonViVanChuyen.create')}}" class="btn btn-success">
+                            <form class="form-inline" method="get">
+                                <a href="{{route('NguoiVanChuyen.create')}}" class="btn btn-success">
                                     <i class="icon-plus"></i>
-                                    Thêm đơn vị vận chuyển
+                                    Thêm người vận chuyển
                                 </a>
                             </form>
                         </div>
@@ -57,18 +56,21 @@
                 <div class="hr hr-24"></div>
 
                 <div class="table-header">
-                    Bảng đơn vị vận chuyển
+                    Bảng người vận chuyển
                 </div>
 
                 <div class="table-responsive">
                     <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th class="center">Id</th>
-                                <th>TenDonViVanChuyen</th>
-                                <th>Website</th>
-                                <th>Email</th>
+                                <th class="center">##</th>
+                                <th>HoTen</th>
+                                <th>NgaySinh</th>
+                                <th>GioiTinh</th>
+                                <th>DiaChi</th>
+                                <th>HinhAnh</th>
                                 <th>Phone</th>
+                                <th>DonViVanChuyenId</th>
                                 <th>
                                     <i class="icon-time bigger-110 hidden-480"></i>
                                     Create_at
@@ -86,14 +88,26 @@
                         </thead>
 
                         <tbody>
-                            @foreach ($dvvc as $item)
+                            @foreach ($nvc as $item)
 
                             <tr>
                                 <td class="center">{{ $item->id }}</td>
-                                <td>{{ $item->TenDonViVanChuyen }}</td>
-                                <td>{{ $item->Website }}</td>
-                                <td>{{ $item->Email }}</td>
+                                <td>{{ $item->HoTen }}</td>
+                                <td>{{ $item->NgaySinh }}</td>
+                                @if ($item->GioiTinh == '0')
+                                <td>Nữ</td>
+                                @elseif($item->GioiTinh == '1')
+                                <td>Nam</td>
+                                @else($item->Gioitinh!=0||$item->gioitinh!=1)
+                                <td>Không xác định</td>
+                                @endif
+                                </td>
+                                <td>{{ $item->DiaChi}}</td>
+                                <td>
+                                    <img src='{{ $item->HinhAnh }}' alt="{{ $item->HinhAnh }}" width='100' height='100'>
+                                </td>
                                 <td>{{ $item->Phone }}</td>
+                                <td>{{ $item->DonViVanChuyen->TenDonViVanChuyen }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>{{ $item->updated_at }}</td>
                                 <td>{{ $item->deleted_at }}</td>
@@ -104,11 +118,11 @@
                                             <i class="icon-zoom-in bigger-130"></i>
                                         </a>
 
-                                        <a class="green" href="{{ route('DonViVanChuyen.edit', $item) }}">
+                                        <a class="green" href="{{ route('NguoiVanChuyen.edit', $item) }}">
                                             <i class="icon-pencil bigger-130"></i>
                                         </a>
 
-                                        <form action="{{ route('DonViVanChuyen.destroy', $item) }}" method="post">
+                                        <form action="{{ route('NguoiVanChuyen.destroy', $item) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn-link red"><i class="icon-trash bigger-130"></i></button>
@@ -130,7 +144,7 @@
                                                     </a>
                                                 </li>
 
-                                                <li>
+                                                <!-- <li>
                                                     <a href="{{ route('SanPham.edit', $item) }}" class="tooltip-success" data-rel="tooltip" title="Edit">
                                                         <span class="green">
                                                             <i class="icon-edit bigger-120"></i>
@@ -144,7 +158,7 @@
                                                         @method('DELETE')
                                                         <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Delete"><i class="icon-trash bigger-120"></i></button>
                                                     </form>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
                                     </div>
@@ -169,16 +183,18 @@
         var oTable1 = $('#sample-table-2').dataTable({
             "aoColumns": [
                 null, null,
+                null, //NgaySinh
+                null, //GioiTinh
                 {
                     "bSortable": false
-                }, //website
+                }, //HinhAnh
                 {
-                    "bSortable": false
-                }, //email
+                    'bSortable': false
+                },
                 {
-                    "bSortable": false
-                }, //phone
-                null, null, null,
+                    'bSortable': false
+                },
+                null, null, null, null,
                 {
                     "bSortable": false
                 }, // edit,delete....

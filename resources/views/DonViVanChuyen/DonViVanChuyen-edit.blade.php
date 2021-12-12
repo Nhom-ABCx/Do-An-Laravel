@@ -155,6 +155,6 @@
 @endsection
 
 @section('scriptThisPage')
-    Đoạn script chỉ xài cho trang
+    <!-- Đoạn script chỉ xài cho trang -->
 @endsection
 

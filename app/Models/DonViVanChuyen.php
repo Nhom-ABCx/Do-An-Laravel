@@ -20,4 +20,8 @@ class DonViVanChuyen extends Model
           'Email',
           'Phone',
     ];
+    public function NguoiVanChuyen()
+    {
+        return $this->hasMany(NguoiVanChuyen::class,'DonViVanChuyenId');
+    }
 }

@@ -32,4 +32,8 @@ class SanPham extends Model
     {
         return $this->belongsTo(LoaiSanPham::class,'LoaiSanPhamId');
     }
+    public function CTChuongTrinhKM()
+    {
+        return $this->hasMany(CTChuongTrinhKM::class,'SanPhamId');
+    }
 }

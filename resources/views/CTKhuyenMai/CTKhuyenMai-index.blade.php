@@ -93,8 +93,8 @@
                         <tbody>
                             @foreach ($ctctkm as $item)
                             <tr>
-                                <td>{{$item->ChuongTrinhKhuyenMaiId}}</td>
-                                <td>{{$item->SanPhamId}}</td>
+                                <td>{{$item->ChuongTrinhKhuyenMai->TenChuongTrinh}}</td>
+                                <td>{{$item->SanPham->TenSanPham}}</td>
                                 <td>{{$item->GiamGia}}</td>
                                 <td>{{$item->SoLuong}}</td>
                                 <td>{{$item->created_at}}</td>

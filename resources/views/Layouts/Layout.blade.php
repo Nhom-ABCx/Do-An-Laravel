@@ -506,12 +506,30 @@
                             <span class="menu-text"> Hãng Sản Xuất </span>
                         </a>
                     </li>
-                    <li class="{{ request()->is('DonViVanChuyen') ? 'active' : '' }}">
-                        <a href="{{ route('DonViVanChuyen.index') }}">
-                            <i class="icon-group"></i>
-                            <span class="menu-text">Đơn vị vận chuyên</span>
+
+                    <li >
+                        <a href="#" class="dropdown-toggle">
+                            <i class="icon-certificate"></i>
+                            <span class="menu-text"> Vận chuyển </span>
+                            <b class="arrow icon-angle-down"></b>
+
+                            <ul class="submenu">
+                                <li class="{{ request()->is('DonViVanChuyen') ? 'active' : '' }}">
+                                    <a href="{{ route('DonViVanChuyen.index') }}">
+                                        <i class="icon-double-angle-right"></i>
+                                        Đơn vị vận chuyển
+                                    </a>
+                                </li>
+                                <li class="{{ request()->is('NguoiVanChuyen') ? 'active' : '' }}">
+                                    <a href="{{route('NguoiVanChuyen.index')}}">
+                                        <i class="icon-check"></i>
+                                         Người vận chuyển
+                                    </a>
+                                </li>
+                            </ul>
                         </a>
                     </li>
+                    
                     <li>
                         <a href="calendar.html">
                             <i class="icon-calendar"></i>
