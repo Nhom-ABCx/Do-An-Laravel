@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\NhanVien;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
 {
@@ -28,7 +31,7 @@ class AuthController extends Controller
      */
     public function create()
     {
-
+        return view('Login.Login-create');
     }
 
     /**
@@ -39,7 +42,28 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'Username' => ['required','unique:nhan_viens,Username'],
+            'Email'=>['required','unique:nhan_viens,Email'],
+            'Phone'=>['required'],
+            'MatKhau' => ['required'],
+            'XacNhan_MatKhau'=>['required','same:MatKhau'],
+        ]);
 
+        $user = NhanVien::create([
+            'Username'       => strip_tags($request->input('Username')),
+            'Email'       => strip_tags($request->input('Email')),
+            'Phone'       => strip_tags($request->input('Phone')),
+            'MatKhau'         => Hash::make($request->input('password')),
+            'HoTen'=>'', //cap nhat sau
+            'NgaySinh'=>date('Y-m-d H:i:s'),
+            'GioiTinh'=>0,
+            'DiaChi'=>'',
+            'HinhAnh'=>'',
+        ]);
+        event(new Registered($user)); //luu vo database
+        Auth::login($user); //thuc hien dang nhap voi tai khoan do'
+        return Redirect::route('Home.index');
     }
 
     /**
@@ -55,15 +79,12 @@ class AuthController extends Controller
             'Username' => ['required'],
             'MatKhau' => ['required'],
         ]);
-        $select = NhanVien::where('Username', $request->input("Username"))->where('MatKhau', $request->input("MatKhau"))->count();
-        if ($select) {
-            $request->session()->regenerate();
+        $select = NhanVien::where('Username', $request->input("Username"))->where('MatKhau', $request->input("MatKhau"))->first();
+        if (!empty($select)) { //neu' ko rong~
+            Auth::login($select);
+            //$request->session()->regenerate();
             return redirect()->intended('/');
         }
-
-        return back()->withErrors([
-            'Username' => 'Có lỗi xãy ra',
-        ]);
     }
 
     /**
@@ -95,11 +116,11 @@ class AuthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return Redirect::route('Login.index');
     }
 }

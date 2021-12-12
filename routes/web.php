@@ -23,7 +23,7 @@ use App\Http\Controllers\DonViVanChuyenController;
 |
 */
 
-Route::get('/', [HomeController::class, "Index"]);
+Route::get('/', [HomeController::class, "Index"])->name('Home.index');
 Route::resource('SanPham', SanPhamController::class, [
     'parameters' => [
         'SanPham' => 'sanPham'
@@ -47,9 +47,9 @@ Route::resource('HangSanXuat', HangSanXuatController::class, [
 ]);
 Route::get('Login', [AuthController::class,'index'])->name('Login.index'); //show trang login
 Route::post('Login', [AuthController::class,'show'])->name('Login.show'); //xu ly dang nhap -> tra ve home
-Route::delete('Login', [AuthController::class,'destroy'])->name('Login.destroy'); //dang xuat
-//Route::put('Login', [AuthController::class,'create'])->name('Login.create'); //dang ky
-//Route::post('Login', [AuthController::class,'store'])->name('Login.store');
+Route::get('Login/logout', [AuthController::class,'logout'])->name('Login.logout'); //dang xuat
+Route::get('Login/create', [AuthController::class,'create'])->name('Login.create'); //dang ky
+Route::post('Login/create', [AuthController::class,'store'])->name('Login.store');
 
 Route::resource('DonViVanChuyen',DonViVanChuyenController::class, [
     'parameters' => [
