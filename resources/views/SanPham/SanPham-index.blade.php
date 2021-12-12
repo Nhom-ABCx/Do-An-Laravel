@@ -75,6 +75,10 @@
                                         Search
                                         <i class="icon-search icon-on-right bigger-110"></i>
                                     </button>
+                                    <button type="reset" class="btn btn-sm">
+                                        <i class="icon-refresh"></i>
+                                        Reset
+                                    </button>
                                 </form>
                             </div>
                         </div>

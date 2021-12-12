@@ -58,6 +58,7 @@
         tfoot input {
             width: 100%;
         }
+
     </style>
     <?php echo $__env->yieldContent('headThisPage'); ?>
 </head>
@@ -299,7 +300,7 @@
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     <?php if(auth()->guard()->check()): ?>
-                                        <?php echo e(dd(Auth::user())); ?>
+                                        <?php echo e(Auth::user()->Username); ?>
 
                                     <?php endif; ?>
 
@@ -329,7 +330,7 @@
                                 <li class="divider"></li>
 
                                 <li>
-                                    <a href="<?php echo e(route('Login.destroy')); ?>">
+                                    <a href="<?php echo e(route('Login.logout')); ?>">
                                         <i class="icon-off"></i>
                                         Logout
                                     </a>
@@ -479,7 +480,7 @@
                         </ul>
                     </li>
 
-                    <li class="<?php echo e(request()->is('KhuyenMai') ? 'active open' : ''); ?>">
+                    <li class="<?php echo e(request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : ''); ?>">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Khuyến mãi </span>
@@ -494,12 +495,12 @@
                                 </li>
                                 <li class="<?php echo e(request()->is('CTKhuyenMai') ? 'active' : ''); ?>">
                                     <a href="<?php echo e(route('CTKhuyenMai.index')); ?>">
-                                        <i class="icon-list-alt"></i>
-                                        <span class="menu-text"> Chi tiết CT-Khuyến mãi </span>
+                                        <i class="icon-check"></i>
+                                        Chi tiết CT-Khuyến mãi
                                     </a>
                                 </li>
-
                             </ul>
+                        </a>
                     </li>
                     <li class="<?php echo e(request()->is('HangSanXuat') ? 'active' : ''); ?>">
                         <a href="<?php echo e(route('HangSanXuat.index')); ?>">
@@ -507,7 +508,12 @@
                             <span class="menu-text"> Hãng Sản Xuất </span>
                         </a>
                     </li>
-
+                    <li class="<?php echo e(request()->is('DonViVanChuyen') ? 'active' : ''); ?>">
+                        <a href="<?php echo e(route('DonViVanChuyen.index')); ?>">
+                            <i class="icon-group"></i>
+                            <span class="menu-text">Đơn vị vận chuyên</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="calendar.html">
                             <i class="icon-calendar"></i>
@@ -722,10 +728,10 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-            <script type="text/javascript">
-                window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-            </script>
-            <![endif]-->
+                <script type="text/javascript">
+                    window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                </script>
+                <![endif]-->
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +

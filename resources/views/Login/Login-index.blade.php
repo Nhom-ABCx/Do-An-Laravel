@@ -128,14 +128,14 @@
 
                                     <div class="toolbar clearfix">
                                         <div>
-                                            <a href="#" onclick="show_box('forgot-box'); return false;" class="forgot-password-link">
+                                            <a href="#" class="forgot-password-link">
                                                 <i class="icon-arrow-left"></i>
                                                 I forgot my password
                                             </a>
                                         </div>
 
                                         <div>
-                                            <a href="#" onclick="show_box('signup-box'); return false;" class="user-signup-link">
+                                            <a href="{{ route('Login.create') }}" class="user-signup-link">
                                                 I want to register
                                                 <i class="icon-arrow-right"></i>
                                             </a>
@@ -184,82 +184,6 @@
                                     </div>
                                 </div><!-- /widget-body -->
                             </div><!-- /forgot-box -->
-
-                            <div id="signup-box" class="signup-box widget-box no-border">
-                                <div class="widget-body">
-                                    <div class="widget-main">
-                                        <h4 class="header green lighter bigger">
-                                            <i class="icon-group blue"></i>
-                                            New User Registration
-                                        </h4>
-
-                                        <div class="space-6"></div>
-                                        <p> Enter your details to begin: </p>
-
-                                        <form action="#" method="post">
-                                            @csrf
-                                            <fieldset>
-                                                <label class="block clearfix">
-                                                    <span class="block input-icon input-icon-right">
-                                                        <input type="email" class="form-control" placeholder="Email" name="Email"/>
-                                                        <i class="icon-envelope"></i>
-                                                    </span>
-                                                </label>
-
-                                                <label class="block clearfix">
-                                                    <span class="block input-icon input-icon-right">
-                                                        <input type="text" class="form-control" placeholder="Username" name="Username"/>
-                                                        <i class="icon-user"></i>
-                                                    </span>
-                                                </label>
-
-                                                <label class="block clearfix">
-                                                    <span class="block input-icon input-icon-right">
-                                                        <input type="password" class="form-control" placeholder="Password" name="MatKhau"/>
-                                                        <i class="icon-lock"></i>
-                                                    </span>
-                                                </label>
-
-                                                <label class="block clearfix">
-                                                    <span class="block input-icon input-icon-right">
-                                                        <input type="password" class="form-control" placeholder="Repeat password" name="XacNhan_MatKhau"/>
-                                                        <i class="icon-retweet"></i>
-                                                    </span>
-                                                </label>
-
-                                                <label class="block">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl">
-                                                        I accept the
-                                                        <a href="#">User Agreement</a>
-                                                    </span>
-                                                </label>
-
-                                                <div class="space-24"></div>
-
-                                                <div class="clearfix">
-                                                    <button type="reset" class="width-30 pull-left btn btn-sm">
-                                                        <i class="icon-refresh"></i>
-                                                        Reset
-                                                    </button>
-
-                                                    <button type="button" class="width-65 pull-right btn btn-sm btn-success">
-                                                        Register
-                                                        <i class="icon-arrow-right icon-on-right"></i>
-                                                    </button>
-                                                </div>
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
-                                    <div class="toolbar center">
-                                        <a href="#" onclick="show_box('login-box'); return false;" class="back-to-login-link">
-                                            <i class="icon-arrow-left"></i>
-                                            Back to login
-                                        </a>
-                                    </div>
-                                </div><!-- /widget-body -->
-                            </div><!-- /signup-box -->
                         </div><!-- /position-relative -->
                     </div>
                 </div><!-- /.col -->
@@ -282,19 +206,9 @@
     window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
 </script>
 <![endif]-->
-
     <script type="text/javascript">
         if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
             "/script>");
-    </script>
-
-    <!-- inline scripts related to this page -->
-
-    <script type="text/javascript">
-        function show_box(id) {
-            jQuery('.widget-box.visible').removeClass('visible');
-            jQuery('#' + id).addClass('visible');
-        }
     </script>
 </body>
 
