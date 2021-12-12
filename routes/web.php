@@ -9,6 +9,7 @@ use App\Http\Controllers\ChuongTrinhKhuyenMaiController;
 use App\Http\Controllers\CTChuongTrinhKMController;
 use App\Http\Controllers\HangSanXuatController;
 use App\Http\Controllers\DonViVanChuyenController;
+use App\Http\Controllers\SendEmailController;
 
 //composer dump-autoload
 
@@ -22,37 +23,41 @@ use App\Http\Controllers\DonViVanChuyenController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//bat buoc dang nhap
+Route::middleware('auth')->group(function () {
+    //viet route vao day de bat buoc dang nhap
+    Route::get('/', [HomeController::class, "Index"])->name('Home.index');
+    Route::resource('SanPham', SanPhamController::class, [
+        'parameters' => [
+            'SanPham' => 'sanPham'
+        ]
+    ]);
+    Route::resource('KhuyenMai', ChuongTrinhKhuyenMaiController::class, [
+        'parameters' => [
+            'KhuyenMai' => 'chuongTrinhKhuyenMai'
+        ]
+    ]);
+    Route::get('/CTKhuyenMai', [CTChuongTrinhKMController::class, 'index'])->name('CTKhuyenMai.index'); //Chi tiết CTKM index
+    Route::get('/CTKhuyenMai/create', [CTChuongTrinhKMController::class, 'create'])->name('CTKhuyenMai.create'); //Chi tiết CTKM create
+    Route::post('/CTKhuyenMai.store', [CTChuongTrinhKMController::class, 'store'])->name('CTKhuyenMai.store'); //Chi tiết CTKM store
+    Route::get('/CTKhuyenMai/{ctid}/{spid}/edit', [CTChuongTrinhKMController::class, 'edit'])->name('CTKhuyenMai.edit'); //Chi tiết CTKM edit
+    Route::put('/CTKhuyenMai/{ctid}/{spid}', [CTChuongTrinhKMController::class, 'update'])->name('CTKhuyenMai.update'); //Chi tiết CTKM update
+    Route::delete('/CTKhuyenMai/{ctid}/{spid}', [CTChuongTrinhKMController::class, 'destroy'])->name('CTKhuyenMai.destroy'); //Chi tiết CTKM delete
+    Route::resource('HangSanXuat', HangSanXuatController::class, [
+        'parameters' => [
+            'HangSanXuat' => 'hangSanXuat'
+        ]
+    ]);
+    Route::get('Logout', [AuthController::class, 'logout'])->name('Login.logout'); //dang xuat
+    Route::resource('DonViVanChuyen', DonViVanChuyenController::class, [
+        'parameters' => [
+            'DonViVanChuyen' => 'donViVanChuyen'
+        ]
+    ]);
+});
+Route::get('Login', [AuthController::class, 'index'])->name('Login.index'); //show trang login
+Route::post('Login', [AuthController::class, 'show'])->name('Login.show'); //xu ly dang nhap -> tra ve home
+Route::get('Login/create', [AuthController::class, 'create'])->name('Login.create'); //dang ky
+Route::post('Login/create', [AuthController::class, 'store'])->name('Login.store');
 
-Route::get('/', [HomeController::class, "Index"])->name('Home.index');
-Route::resource('SanPham', SanPhamController::class, [
-    'parameters' => [
-        'SanPham' => 'sanPham'
-    ]
-]);
-Route::resource('KhuyenMai', ChuongTrinhKhuyenMaiController::class, [
-    'parameters' => [
-        'KhuyenMai' => 'chuongTrinhKhuyenMai'
-    ]
-]);
-Route::get('/CTKhuyenMai',[CTChuongTrinhKMController::class,'index'])->name('CTKhuyenMai.index');//Chi tiết CTKM index
-Route::get('/CTKhuyenMai/create',[CTChuongTrinhKMController::class,'create'])->name('CTKhuyenMai.create');//Chi tiết CTKM create
-Route::post('/CTKhuyenMai.store',[CTChuongTrinhKMController::class,'store'])->name('CTKhuyenMai.store');//Chi tiết CTKM store
-Route::get('/CTKhuyenMai/{ctid}/{spid}/edit',[CTChuongTrinhKMController::class,'edit'])->name('CTKhuyenMai.edit');//Chi tiết CTKM edit
-Route::put('/CTKhuyenMai/{ctid}/{spid}',[CTChuongTrinhKMController::class,'update'])->name('CTKhuyenMai.update');//Chi tiết CTKM update
-Route::delete('/CTKhuyenMai/{ctid}/{spid}',[CTChuongTrinhKMController::class,'destroy'])->name('CTKhuyenMai.destroy');//Chi tiết CTKM delete
-Route::resource('HangSanXuat', HangSanXuatController::class, [
-    'parameters' => [
-        'HangSanXuat' => 'hangSanXuat'
-    ]
-]);
-Route::get('Login', [AuthController::class,'index'])->name('Login.index'); //show trang login
-Route::post('Login', [AuthController::class,'show'])->name('Login.show'); //xu ly dang nhap -> tra ve home
-Route::get('Login/logout', [AuthController::class,'logout'])->name('Login.logout'); //dang xuat
-Route::get('Login/create', [AuthController::class,'create'])->name('Login.create'); //dang ky
-Route::post('Login/create', [AuthController::class,'store'])->name('Login.store');
-
-Route::resource('DonViVanChuyen',DonViVanChuyenController::class, [
-    'parameters' => [
-        'DonViVanChuyen' => 'donViVanChuyen'
-    ]
-]);
+Route::get('sendEmail',[SendEmailController::class,'send'])->name('send');

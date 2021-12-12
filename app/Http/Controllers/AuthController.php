@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -60,6 +61,7 @@ class AuthController extends Controller
             'GioiTinh'=>0,
             'DiaChi'=>'',
             'HinhAnh'=>'',
+            'remember_token'=> Str::random(32),
         ]);
         event(new Registered($user)); //luu vo database
         Auth::login($user); //thuc hien dang nhap voi tai khoan do'
@@ -85,6 +87,7 @@ class AuthController extends Controller
             //$request->session()->regenerate();
             return redirect()->intended('/');
         }
+        return back()->withErrors(['Username'=>'Sai Username hoac mat khau']);
     }
 
     /**
@@ -119,8 +122,8 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        //$request->session()->invalidate();
+        //$request->session()->regenerateToken();
         return Redirect::route('Login.index');
     }
 }
