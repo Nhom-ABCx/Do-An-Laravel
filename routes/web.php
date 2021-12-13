@@ -9,11 +9,9 @@ use App\Http\Controllers\ChuongTrinhKhuyenMaiController;
 use App\Http\Controllers\CTChuongTrinhKMController;
 use App\Http\Controllers\HangSanXuatController;
 use App\Http\Controllers\DonViVanChuyenController;
-<<<<<<< HEAD
 use App\Http\Controllers\NguoiVanChuyenController;
-=======
 use App\Http\Controllers\SendEmailController;
->>>>>>> 616f662fadb81a2c403603401585361f82e0e5ed
+
 
 //composer dump-autoload
 
@@ -64,7 +62,6 @@ Route::post('Login', [AuthController::class, 'show'])->name('Login.show'); //xu 
 Route::get('Login/create', [AuthController::class, 'create'])->name('Login.create'); //dang ky
 Route::post('Login/create', [AuthController::class, 'store'])->name('Login.store');
 
-<<<<<<< HEAD
 Route::get('/', [HomeController::class, "Index"]);
 
 Route::resource('SanPham', SanPhamController::class, [
@@ -109,6 +106,6 @@ Route::resource('NguoiVanChuyen',NguoiVanChuyenController::class,[
         'NguoiVanChuyen'=>'nguoiVanChuyen'
     ]
 ]);
-=======
+
 Route::get('sendEmail',[SendEmailController::class,'send'])->name('send');
->>>>>>> 616f662fadb81a2c403603401585361f82e0e5ed
+
