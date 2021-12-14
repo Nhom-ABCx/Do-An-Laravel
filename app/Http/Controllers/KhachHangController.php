@@ -82,4 +82,14 @@ class KhachHangController extends Controller
     {
         //
     }
+    //API
+    public function API_DangNhap(Request $request)
+    {
+        $data = KhachHang::where('Email', $request['Email'])->where('MatKhau', $request['MatKhau'])->first();
+        //neu du lieu ko co rong~ thi tra ve voi status la 200
+        if (!empty($data))
+            return response()->json($data, 200);
+        //nguoc lai du lieu rong~ thi tra ve status 404
+        return response()->json($data, 404);
+    }
 }
