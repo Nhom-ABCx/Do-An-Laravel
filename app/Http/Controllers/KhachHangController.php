@@ -85,7 +85,15 @@ class KhachHangController extends Controller
     //API
     public function API_DangNhap(Request $request)
     {
-        $data = KhachHang::where('Email', $request['Email'])->where('MatKhau', $request['MatKhau'])->first();
+        //select * from KhachHang where MatKhau=$MatKhau and (Email=$Email or Username=$Username or Phone=$Phone)
+        $data = KhachHang::
+        where('MatKhau', $request['MatKhau'])
+        ->Where(function($query) use($request) {
+            $query->orwhere('Email', $request['Email'])
+            ->orwhere('Username', $request['Username'])
+            ->orwhere('Phone', $request['Phone']);
+        })
+        ->first();
         //neu du lieu ko co rong~ thi tra ve voi status la 200
         if (!empty($data))
             return response()->json($data, 200);
