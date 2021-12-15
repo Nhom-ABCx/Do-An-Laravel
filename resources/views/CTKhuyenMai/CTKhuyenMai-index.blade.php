@@ -1,7 +1,7 @@
 {{--  cai nay la duong dan den' file Layouts/Layout.blade.php --}}
 @extends('layouts.Layout')
 
-@section('title', 'Page Title')
+@section('title', 'CT-CT_khuyenMai-index')
 
 @section("headThisPage")
     
@@ -24,7 +24,7 @@
             </li>
 
             <li>
-                <a href="#">Tables</a>
+                <a href="#">KM</a>
             </li>
             <li class="active">CT_Khuyến mãi</li>
         </ul><!-- .breadcrumb -->

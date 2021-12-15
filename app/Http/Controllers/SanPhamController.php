@@ -191,4 +191,18 @@ class SanPhamController extends Controller
         //return json_encode($data);
         return response()->json($data, 200);
     }
+    # danh sách sản phẩm điện thoại
+    public function API_SanPham_DT(){
+        $data=SanPham::where('LoaiSanPhamId',2)->get();
+        return response()->json($data,200);
+    }
+    #chi tiết sản phẩm 
+    public function API_SanPham_DT_ChiTiet($id){
+        $data=SanPham::find($id);
+        if ($data==null) {
+            return response()->json($data,404);
+        }
+        return response()->json($data,200);
+    
+    }
 }
