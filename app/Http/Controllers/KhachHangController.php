@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\KhachHang;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-
+//use Illuminate\Support\Facades\Hash;
 class KhachHangController extends Controller
 {
     /**
@@ -99,5 +101,34 @@ class KhachHangController extends Controller
             return response()->json($data, 200);
         //nguoc lai du lieu rong~ thi tra ve status 404
         return response()->json($data, 404);
+    }
+    public function API_DangKy(Request $request)
+    {
+        //kiem tra du lieu
+        $validate=Validator::make($request->all(),[
+            'Username' => ['required','unique:khach_hangs,Username'],
+            'Email'=>['required','unique:khach_hangs,Email'],
+            'MatKhau' => ['required'],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if($validate->fails())
+        return response()->json($validate->errors(),400);
+
+        $khachHang = KhachHang::create([
+            'Username'       => strip_tags($request['Username']),
+            'Email'       => strip_tags($request['Email']),
+            //'MatKhau'         => Hash::make($request['MatKhau']),
+            'MatKhau'         => strip_tags($request['MatKhau']),
+            'HoTen'=>'', //cap nhat sau
+            'NgaySinh'=>date('Y-m-d H:i:s'),
+            'GioiTinh'=>0,
+            'DiaChi'=>'',
+            'HinhAnh'=>'',
+        ]);
+
+        $data = $khachHang;
+        //neu du lieu ko co rong~ thi tra ve voi status la 200
+        if (!empty($data))
+            return response()->json($data, 200);
     }
 }
