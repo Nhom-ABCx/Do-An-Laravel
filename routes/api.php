@@ -28,5 +28,9 @@ Route::get('dien-thoai',[SanPhamController::class,"API_SanPham_DT"]);
 
 # api chi tiết sản phẩm điện thoại
 Route::get('san-pham/{id}',[SanPhamController::class,"API_SanPham_DT_ChiTiet"]);
+
+#api loại sản phẩm laptop
+Route::get("get-all-latop",[SanPhamController::class,"API_SanPham_LapTop"]);
+
 Route::post('DangNhap', [KhachHangController::class,"API_DangNhap"]);
 Route::post('DangKy', [KhachHangController::class,"API_DangKy"]);
