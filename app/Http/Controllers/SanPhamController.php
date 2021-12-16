@@ -205,4 +205,9 @@ class SanPhamController extends Controller
         return response()->json($data,200);
     
     }
+    #loại sản phẩm laptop
+    public function API_SanPham_LapTop(){
+        $data=SanPham::where("LoaiSanPhamId",3)->get();
+        return response()->json($data,200);
+    }
 }
