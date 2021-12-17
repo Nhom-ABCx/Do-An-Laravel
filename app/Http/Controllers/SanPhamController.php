@@ -23,9 +23,7 @@ class SanPhamController extends Controller
      */
     public function index(Request $request)
     {
-        $data = SanPham::all();
-        if (!empty($request->input('TenSanPham')))
-            $data=$data->where('TenSanPham', 'LIKE', '%' . Str::of($request->input('TenSanPham'))->trim() . '%');
+            $data=SanPham::where('TenSanPham', 'LIKE', '%' . Str::of($request->input('TenSanPham'))->trim() . '%')->get();
         if (!empty($request->input('HangSanXuatId')))
             $data=$data->where('HangSanXuatId', $request->input('HangSanXuatId'));
         if (!empty($request->input('LoaiSanPhamId')))
@@ -196,14 +194,14 @@ class SanPhamController extends Controller
         $data=SanPham::where('LoaiSanPhamId',2)->get();
         return response()->json($data,200);
     }
-    #chi tiết sản phẩm 
+    #chi tiết sản phẩm
     public function API_SanPham_DT_ChiTiet($id){
         $data=SanPham::find($id);
         if ($data==null) {
             return response()->json($data,404);
         }
         return response()->json($data,200);
-    
+
     }
     #loại sản phẩm laptop
     public function API_SanPham_LapTop(){
