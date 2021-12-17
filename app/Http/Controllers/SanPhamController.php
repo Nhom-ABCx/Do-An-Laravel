@@ -210,4 +210,22 @@ class SanPhamController extends Controller
         $data=SanPham::where("LoaiSanPhamId",3)->get();
         return response()->json($data,200);
     }
+    # tìm kiếm sản phẩm
+    public function API_SanPham_TimKiem(Request $request){
+        $data=DB::table('san_phams')->where("TenSanPham","rlike","%".$request."%");
+        # không có dữ liệu trả về
+         if ($data==null) {
+            return response()->json($data,404);
+        }
+        
+        #có dữ liệu
+        return response()->json($data,200); 
+    }
+    
+
+    #top sản phẩm bán chạy
+    public function API_SanPham_Top(){
+        $data=SanPham::where('LuotMua','>',10)->get();
+        return response()->json($data,200);
+    }
 }

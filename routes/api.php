@@ -30,7 +30,13 @@ Route::get('dien-thoai',[SanPhamController::class,"API_SanPham_DT"]);
 Route::get('san-pham/{id}',[SanPhamController::class,"API_SanPham_DT_ChiTiet"]);
 
 #api loại sản phẩm laptop
-Route::get("get-all-latop",[SanPhamController::class,"API_SanPham_LapTop"]);
+Route::get('get-all-latop',[SanPhamController::class,"API_SanPham_LapTop"]);
+
+#api tìm kiếm sản phẩm
+Route::post('/search-product',[SanPhamController::class,"API_SanPham_TimKiem"]);
+
+# sản phẩm bán chạy
+Route::get('san-pham-top',[SanPhamController::class,'API_SanPham_Top']);
 
 Route::post('DangNhap', [KhachHangController::class,"API_DangNhap"]);
 Route::post('DangKy', [KhachHangController::class,"API_DangKy"]);
