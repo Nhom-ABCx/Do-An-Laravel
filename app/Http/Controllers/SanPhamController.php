@@ -23,9 +23,7 @@ class SanPhamController extends Controller
      */
     public function index(Request $request)
     {
-        $data = SanPham::all();
-        if (!empty($request->input('TenSanPham')))
-            $data=$data->where('TenSanPham', 'LIKE', '%' . Str::of($request->input('TenSanPham'))->trim() . '%');
+            $data=SanPham::where('TenSanPham', 'LIKE', '%' . Str::of($request->input('TenSanPham'))->trim() . '%')->get();
         if (!empty($request->input('HangSanXuatId')))
             $data=$data->where('HangSanXuatId', $request->input('HangSanXuatId'));
         if (!empty($request->input('LoaiSanPhamId')))
@@ -211,16 +209,17 @@ class SanPhamController extends Controller
         return response()->json($data,200);
     }
 
+    #loại sản phẩm camera
+    public function API_SanPham_Camera(){
+        $data=SanPham::where("LoaiSanPhamId",4)->get();
+        return response()->json($data,200);
+    }
+
     #tìm kiếm sản phẩm
     public function API_SanPham_TimKiem(
         Request $request
     ){
-        // $data=SanPham::all();
-        // $data=$data->whereLike('TenSanPham', "asdasd");
-        //$data=$data->where('TenSanPham', 'LIKE', '%' . $request['TenSanPham'] . '%');
-        //dd($request['TenSanPham']);
-        $data=DB::table("san_phams")->where("TenSanPham","like",$request);
-        dd($data);
+        $data=SanPham::where('TenSanPham', 'LIKE', '%' . Str::of($request['TenSanPham'])->trim() . '%')->get();
         return response()->json($data,200);
     }
 }
