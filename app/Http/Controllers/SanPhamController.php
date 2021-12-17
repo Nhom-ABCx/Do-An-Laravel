@@ -196,18 +196,31 @@ class SanPhamController extends Controller
         $data=SanPham::where('LoaiSanPhamId',2)->get();
         return response()->json($data,200);
     }
-    #chi tiết sản phẩm 
+    #chi tiết sản phẩm
     public function API_SanPham_DT_ChiTiet($id){
         $data=SanPham::find($id);
         if ($data==null) {
             return response()->json($data,404);
         }
         return response()->json($data,200);
-    
+
     }
     #loại sản phẩm laptop
     public function API_SanPham_LapTop(){
         $data=SanPham::where("LoaiSanPhamId",3)->get();
+        return response()->json($data,200);
+    }
+
+    #tìm kiếm sản phẩm
+    public function API_SanPham_TimKiem(
+        Request $request
+    ){
+        // $data=SanPham::all();
+        // $data=$data->whereLike('TenSanPham', "asdasd");
+        //$data=$data->where('TenSanPham', 'LIKE', '%' . $request['TenSanPham'] . '%');
+        //dd($request['TenSanPham']);
+        $data=DB::table("san_phams")->where("TenSanPham","like",$request);
+        dd($data);
         return response()->json($data,200);
     }
 }

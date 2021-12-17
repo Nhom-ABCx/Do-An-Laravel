@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('SanPham', [SanPhamController::class,"API_SanPham"]);
 
-# api loại sản phẩm điện thoại 
+# api loại sản phẩm điện thoại
 Route::get('dien-thoai',[SanPhamController::class,"API_SanPham_DT"]);
 
 # api chi tiết sản phẩm điện thoại
@@ -34,3 +34,5 @@ Route::get("get-all-latop",[SanPhamController::class,"API_SanPham_LapTop"]);
 
 Route::post('DangNhap', [KhachHangController::class,"API_DangNhap"]);
 Route::post('DangKy', [KhachHangController::class,"API_DangKy"]);
+
+Route::post('TimKiem',[SanPhamController::class,"API_SanPham_TimKiem"]);
