@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CTChuongTrinhKM;
 use App\Models\SanPham;
 use App\Models\LoaiSanPham;
 use App\Models\HangSanXuat;
@@ -25,11 +26,11 @@ class SanPhamController extends Controller
     {
         $data = SanPham::all();
         if (!empty($request->input('TenSanPham')))
-            $data=$data->where('TenSanPham', 'LIKE', '%' . Str::of($request->input('TenSanPham'))->trim() . '%');
+            $data = $data->where('TenSanPham', 'LIKE', '%' . Str::of($request->input('TenSanPham'))->trim() . '%');
         if (!empty($request->input('HangSanXuatId')))
-            $data=$data->where('HangSanXuatId', $request->input('HangSanXuatId'));
+            $data = $data->where('HangSanXuatId', $request->input('HangSanXuatId'));
         if (!empty($request->input('LoaiSanPhamId')))
-            $data=$data->where('LoaiSanPhamId', $request->input('LoaiSanPhamId'));
+            $data = $data->where('LoaiSanPhamId', $request->input('LoaiSanPhamId'));
 
         foreach ($data as $sp)
             $this->fixImage($sp);
@@ -183,7 +184,6 @@ class SanPhamController extends Controller
         else
             $sanPham->HinhAnh = Storage::url("assets/images/404/Img_error.png");
     }
-
     //API
     public function API_SanPham()
     {
@@ -192,40 +192,58 @@ class SanPhamController extends Controller
         return response()->json($data, 200);
     }
     # danh sách sản phẩm điện thoại
-    public function API_SanPham_DT(){
-        $data=SanPham::where('LoaiSanPhamId',2)->get();
-        return response()->json($data,200);
+    public function API_SanPham_DT()
+    {
+        $data = SanPham::where('LoaiSanPhamId', 2)->get();
+        return response()->json($data, 200);
     }
     #chi tiết sản phẩm 
-    public function API_SanPham_DT_ChiTiet($id){
-        $data=SanPham::find($id);
-        if ($data==null) {
-            return response()->json($data,404);
+    public function API_SanPham_DT_ChiTiet($id)
+    {
+        $data = SanPham::find($id);
+        if ($data == null) {
+            return response()->json($data, 404);
         }
-        return response()->json($data,200);
-    
+        return response()->json($data, 200);
     }
-    #loại sản phẩm laptop
-    public function API_SanPham_LapTop(){
-        $data=SanPham::where("LoaiSanPhamId",3)->get();
-        return response()->json($data,200);
+    #loại sản phẩm laptop 
+    public function API_SanPham_LapTop()
+    {
+        $data = SanPham::where("LoaiSanPhamId", 3)->get();
+        return response()->json($data, 200);
     }
     # tìm kiếm sản phẩm
-    public function API_SanPham_TimKiem(Request $request){
-        $data=DB::table('san_phams')->where("TenSanPham","rlike","%".$request."%");
+    public function API_SanPham_TimKiem(Request $request)
+    {
+        $data = SanPham::where('TenSanPham', 'LIKE', '%' . Str::of($request['TenSanPham'])->trim() . '%')->get();
         # không có dữ liệu trả về
-         if ($data==null) {
-            return response()->json($data,404);
+        if ($data == null) {
+            return response()->json($data, 404);
         }
-        
+
         #có dữ liệu
-        return response()->json($data,200); 
+        return response()->json($data, 200);
     }
-    
+
 
     #top sản phẩm bán chạy
-    public function API_SanPham_Top(){
-        $data=SanPham::where('LuotMua','>',10)->get();
-        return response()->json($data,200);
+    public function API_SanPham_Top()
+    {
+        $data = SanPham::where('LuotMua', '>', 10)->get();
+        return response()->json($data, 200);
+    }
+
+    #loại sản phẩm camera
+    public function API_SanPham_Camera()
+    {
+        $data = SanPham::where("LoaiSanPhamId", 4)->get();
+        return response()->json($data, 200);
+    }
+    # sản phẩm đang giảm giá
+    public function API_SanPham_GiamGia()
+    {
+        $sanphamctkmid = CTChuongTrinhKM::find();
+        
+        
     }
 }

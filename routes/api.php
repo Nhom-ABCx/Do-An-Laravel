@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('SanPham', [SanPhamController::class,"API_SanPham"]);
 
-# api loại sản phẩm điện thoại 
+# api loại sản phẩm điện thoại
 Route::get('dien-thoai',[SanPhamController::class,"API_SanPham_DT"]);
 
 # api chi tiết sản phẩm điện thoại
@@ -38,5 +38,13 @@ Route::post('/search-product',[SanPhamController::class,"API_SanPham_TimKiem"]);
 # sản phẩm bán chạy
 Route::get('san-pham-top',[SanPhamController::class,'API_SanPham_Top']);
 
+#api loại sản phẩm Camera
+Route::get("get-all-camera",[SanPhamController::class,"API_SanPham_Camera"]);
+
 Route::post('DangNhap', [KhachHangController::class,"API_DangNhap"]);
 Route::post('DangKy', [KhachHangController::class,"API_DangKy"]);
+
+Route::post('TimKiem',[SanPhamController::class,"API_SanPham_TimKiem"]);#
+
+# sản phẩm khuyên mãi 
+Route::get('get-all-product-sale',[SanPhamController::class,"API_SanPham_GiamGia"]);
