@@ -37,5 +37,6 @@ Route::get("get-all-camera",[SanPhamController::class,"API_SanPham_Camera"]);
 
 Route::post('DangNhap', [KhachHangController::class,"API_DangNhap"]);
 Route::post('DangKy', [KhachHangController::class,"API_DangKy"]);
+Route::put('KhachHang/{khachHang}', [KhachHangController::class,"API_Update_KhachHang"]);
 
 Route::post('TimKiem',[SanPhamController::class,"API_SanPham_TimKiem"]);
