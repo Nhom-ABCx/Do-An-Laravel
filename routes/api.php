@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SanPhamController;
 use App\Models\SanPham;
 use App\Http\Controllers\KhachHangController;
-
+use App\Http\Controllers\SendEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,5 +47,8 @@ Route::put('KhachHang/{khachHang}', [KhachHangController::class,"API_Update_Khac
 
 Route::post('TimKiem',[SanPhamController::class,"API_SanPham_TimKiem"]);#
 
-# sản phẩm khuyên mãi 
+# sản phẩm khuyên mãi
 Route::get('get-all-product-sale',[SanPhamController::class,"API_SanPham_GiamGia"]);
+
+//gui mail reset password
+Route::post('sendEmail-User-Reset',[SendEmailController::class,'userReset']);

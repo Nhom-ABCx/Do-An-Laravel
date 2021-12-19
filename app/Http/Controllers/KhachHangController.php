@@ -6,6 +6,7 @@ use App\Models\KhachHang;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 //use Illuminate\Support\Facades\Hash;
 class KhachHangController extends Controller
 {
@@ -84,6 +85,24 @@ class KhachHangController extends Controller
     {
         //
     }
+
+    public function showResetPassword_KhachHang(KhachHang $khachHang)
+    {
+        return view('Login.ResetPassword',['khachHang'=>$khachHang]);
+    }
+    public function actionResetPassword_KhachHang(Request $request,KhachHang $khachHang)
+    {
+        $request->validate([
+            'MatKhau' => ['required'],
+            'XacNhan_MatKhau'=>['required','same:MatKhau'],
+        ]);
+
+        $khachHang->fill(['MatKhau'=>$request['MatKhau'],]);
+        $khachHang->save();
+
+        return Redirect::route('Home.Susscess');
+    }
+
     //API
     public function API_DangNhap(Request $request)
     {
