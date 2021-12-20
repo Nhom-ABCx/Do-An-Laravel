@@ -242,8 +242,30 @@ class SanPhamController extends Controller
     # sản phẩm đang giảm giá
     public function API_SanPham_GiamGia()
     {
-        $sanphamctkmid = CTChuongTrinhKM::find();
-        
+        $data = DB::select('SELECT b.* FROM ct_chuong_trinh_kms as a,san_phams as b where a.SanPhamId=b.id and b.deleted_at is null and a.deleted_at is null');
+        return response()->json($data,200);
         
     }
+    #sản phẩm giá  1-3tr
+    public function API_SanPham_Gia1_3Tr(){
+        $data=DB::table('san_phams')->whereBetween('GiaBan',[1000000,3000000])->where('LoaiSanPhamId',2)->get();
+        //dd($data);
+        return response()->json($data,200);
+    }
+
+    #sản phẩm giá 3 tr - 7 tr
+    public function API_SanPham_Gia3_7Tr()
+    {
+        $data = DB::table('san_phams')->whereBetween('GiaBan', [3000000, 7000000])->where('LoaiSanPhamId', 2)->get();
+        //dd($data);
+        return response()->json($data, 200);
+    }
+    #sản phẩm giá tre 7tr
+    public function API_SanPham_Gia7Tr()
+    {
+        $data = DB::table('san_phams')->where('GiaBan','>', 7000000)->where('LoaiSanPhamId', 2)->get();
+        //dd($data);
+        return response()->json($data, 200);
+    }
+    
 }

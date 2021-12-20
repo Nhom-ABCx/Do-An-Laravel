@@ -49,3 +49,11 @@ Route::post('TimKiem',[SanPhamController::class,"API_SanPham_TimKiem"]);#
 
 # sản phẩm khuyên mãi 
 Route::get('get-all-product-sale',[SanPhamController::class,"API_SanPham_GiamGia"]);
+
+# sản phẩm giá 1-3tr
+Route::get('get-product-price-1/',[SanPhamController::class,"API_SanPham_Gia1_3tr"]);
+
+# sản phẩm giá 3-7tr
+Route::get('get-product-price-2/', [SanPhamController::class, "API_SanPham_Gia3_7tr"]);
+# sản phẩm giá 3-7tr
+Route::get('get-product-price-3/', [SanPhamController::class, "API_SanPham_Gia7tr"]);
