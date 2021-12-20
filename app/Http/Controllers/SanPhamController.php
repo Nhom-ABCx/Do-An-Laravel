@@ -243,7 +243,6 @@ class SanPhamController extends Controller
     # sản phẩm đang giảm giá
     public function API_SanPham_GiamGia()
     {
-<<<<<<< HEAD
         $data = DB::select('SELECT b.* FROM ct_chuong_trinh_kms as a,san_phams as b where a.SanPhamId=b.id and b.deleted_at is null and a.deleted_at is null');
         return response()->json($data,200);
         
@@ -271,8 +270,3 @@ class SanPhamController extends Controller
     }
     
 }
-=======
-
-    }
-}
->>>>>>> 8a789781e9106c7322a3b52a7505bdf429929e71
