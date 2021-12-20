@@ -31,7 +31,8 @@ class SendMail extends Mailable
         //trả về 1 email với cái
         //subject('Tiêu đề)
         //view('')  //có thể gửi web view đến cho ngta
-        return $this->subject('Tiêu đề nèeee')
-        ->view('sendMail');
+
+        return $this->subject($this->data['TieuDe'])->from('noreply@domain.com', $this->data["NguoiGui"])
+        ->view($this->data['View'],["Data"=>$this->data['Data']]);
     }
 }

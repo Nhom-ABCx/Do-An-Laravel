@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChuongTrinhKhuyenMai;
 use App\Models\CTChuongTrinhKM;
 use App\Models\SanPham;
 use App\Models\LoaiSanPham;
@@ -197,7 +198,7 @@ class SanPhamController extends Controller
         $data = SanPham::where('LoaiSanPhamId', 2)->get();
         return response()->json($data, 200);
     }
-    #chi tiết sản phẩm 
+    #chi tiết sản phẩm
     public function API_SanPham_DT_ChiTiet($id)
     {
         $data = SanPham::find($id);
@@ -206,7 +207,7 @@ class SanPhamController extends Controller
         }
         return response()->json($data, 200);
     }
-    #loại sản phẩm laptop 
+    #loại sản phẩm laptop
     public function API_SanPham_LapTop()
     {
         $data = SanPham::where("LoaiSanPhamId", 3)->get();
@@ -242,6 +243,7 @@ class SanPhamController extends Controller
     # sản phẩm đang giảm giá
     public function API_SanPham_GiamGia()
     {
+<<<<<<< HEAD
         $data = DB::select('SELECT b.* FROM ct_chuong_trinh_kms as a,san_phams as b where a.SanPhamId=b.id and b.deleted_at is null and a.deleted_at is null');
         return response()->json($data,200);
         
@@ -269,3 +271,8 @@ class SanPhamController extends Controller
     }
     
 }
+=======
+
+    }
+}
+>>>>>>> 8a789781e9106c7322a3b52a7505bdf429929e71

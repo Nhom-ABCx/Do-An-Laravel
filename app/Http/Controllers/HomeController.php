@@ -14,4 +14,8 @@ class HomeController extends Controller
         //truyen cai' bien' do' ra view
         return view('Home',['dsSanPham'=>$dsSanPham]);
     }
+    public function Susscess()
+    {
+        return view('Login.ResetPassword-Susscess',[]);
+    }
 }

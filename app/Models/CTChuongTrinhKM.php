@@ -22,7 +22,7 @@ class CTChuongTrinhKM extends Model
         'GiamGia',
         'SoLuong'
     ];
-   
+
     public function ChuongTrinhKhuyenMai()
     {
         return $this->belongsTo(ChuongTrinhKhuyenMai::class, 'ChuongTrinhKhuyenMaiId');
