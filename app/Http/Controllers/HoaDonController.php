@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CT_HoaDon;
 use App\Models\HoaDon;
 use Illuminate\Http\Request;
 
@@ -81,5 +82,31 @@ class HoaDonController extends Controller
     public function destroy(HoaDon $hoaDon)
     {
         //
+    }
+
+    //API
+
+    public function addCart(Request $request)
+    {
+        // $hoaDon = HoaDon::create([
+        //     'Username'       => strip_tags($request['Username']),
+        //     'Email'       => strip_tags($request['Email']),
+        //     //'MatKhau'         => Hash::make($request['MatKhau']),
+        //     'MatKhau'         => strip_tags($request['MatKhau']),
+        //     'HoTen' => '', //cap nhat sau
+        //     'NgaySinh' => date('Y-m-d H:i:s'),
+        //     'GioiTinh' => 0,
+        //     'DiaChi' => '',
+        //     'HinhAnh' => '',
+        // ]);
+
+        // $data = $hoaDon;
+        // //neu du lieu ko co rong~ thi tra ve voi status la 200
+        // if (!empty($data))
+        //     return response()->json($data, 200);
+        // $cart = HoaDon::find(8);
+        // dd($cart->CT_HoaDon);
+        // $aa = $cart->CT_HoaDon;
+        // dd($aa->SanPham);
     }
 }
