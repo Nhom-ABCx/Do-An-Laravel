@@ -6,6 +6,7 @@ use App\Models\KhachHang;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 //use Illuminate\Support\Facades\Hash;
 class KhachHangController extends Controller
 {
@@ -84,6 +85,24 @@ class KhachHangController extends Controller
     {
         //
     }
+
+    public function showResetPassword_KhachHang(KhachHang $khachHang)
+    {
+        return view('Login.ResetPassword',['khachHang'=>$khachHang]);
+    }
+    public function actionResetPassword_KhachHang(Request $request,KhachHang $khachHang)
+    {
+        $request->validate([
+            'MatKhau' => ['required'],
+            'XacNhan_MatKhau'=>['required','same:MatKhau'],
+        ]);
+
+        $khachHang->fill(['MatKhau'=>$request['MatKhau'],]);
+        $khachHang->save();
+
+        return Redirect::route('Home.Susscess');
+    }
+
     //API
     public function API_DangNhap(Request $request)
     {
@@ -106,7 +125,7 @@ class KhachHangController extends Controller
     {
         //kiem tra du lieu
         $validate=Validator::make($request->all(),[
-            'Username' => ['required','unique:khach_hangs,Username'],
+            'Username' => ['required','unique:khach_hangs'],
             'Email'=>['required','unique:khach_hangs,Email'],
             'MatKhau' => ['required'],
         ]);
@@ -130,5 +149,44 @@ class KhachHangController extends Controller
         //neu du lieu ko co rong~ thi tra ve voi status la 200
         if (!empty($data))
             return response()->json($data, 200);
+    }
+
+    public function API_Update_KhachHang(Request $request, KhachHang $khachHang)
+    {
+        //kiem tra du lieu
+        $validate=Validator::make($request->all(),[
+        'Username' => ["required"],
+        'Email'=>["required","Email"],
+        //'Phone'=>['numeric', 'integer', 'min:0'],
+        'Phone'=>[],
+        'MatKhau'=>["required"],
+        'HoTen'=>[],
+        'NgaySinh'=>["date"],
+        'GioiTinh'=>["boolean"],
+        'DiaChi'=>[],
+        'HinhAnh'=>[],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if($validate->fails())
+        return response()->json($validate->errors(),400);
+
+        $khachHang->fill([
+        'Username'=>$request['Username'],
+        'Email'=>$request['Email'],
+        'Phone'=>$request['Phone'],
+        'MatKhau'=>$request['MatKhau'],
+        'HoTen'=>$request['HoTen'],
+        'NgaySinh'=>$request['NgaySinh'],
+        'GioiTinh'=>$request['GioiTinh'],
+        'DiaChi'=>$request['DiaChi'],
+        'HinhAnh'=>$request['HinhAnh'],
+        ]);
+        $khachHang->save();
+
+        $data = $khachHang;
+        //neu du lieu ko co rong~ thi tra ve voi status la 200
+        // if (!empty($data))
+        //     return response()->json($data, 200);
+             return response()->json($data, 200);
     }
 }

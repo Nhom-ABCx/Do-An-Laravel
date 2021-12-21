@@ -11,6 +11,7 @@ use App\Http\Controllers\HangSanXuatController;
 use App\Http\Controllers\DonViVanChuyenController;
 use App\Http\Controllers\NguoiVanChuyenController;
 use App\Http\Controllers\SendEmailController;
+use App\Http\Controllers\KhachHangController;
 
 
 //composer dump-autoload
@@ -41,7 +42,7 @@ Route::middleware('auth')->group(function () {
     ]);
     Route::get('/CTKhuyenMai', [CTChuongTrinhKMController::class, 'index'])->name('CTKhuyenMai.index'); //Chi tiết CTKM index
     Route::get('/CTKhuyenMai/create', [CTChuongTrinhKMController::class, 'create'])->name('CTKhuyenMai.create'); //Chi tiết CTKM create
-    Route::post('/CTKhuyenMai.store', [CTChuongTrinhKMController::class, 'store'])->name('CTKhuyenMai.store'); //Chi tiết CTKM store
+    Route::post('/CTKhuyenMai/store', [CTChuongTrinhKMController::class, 'store'])->name('CTKhuyenMai.store'); //Chi tiết CTKM store
     Route::get('/CTKhuyenMai/{ctid}/{spid}/edit', [CTChuongTrinhKMController::class, 'edit'])->name('CTKhuyenMai.edit'); //Chi tiết CTKM edit
     Route::put('/CTKhuyenMai/{ctid}/{spid}', [CTChuongTrinhKMController::class, 'update'])->name('CTKhuyenMai.update'); //Chi tiết CTKM update
     Route::delete('/CTKhuyenMai/{ctid}/{spid}', [CTChuongTrinhKMController::class, 'destroy'])->name('CTKhuyenMai.destroy'); //Chi tiết CTKM delete
@@ -107,5 +108,12 @@ Route::resource('NguoiVanChuyen',NguoiVanChuyenController::class,[
     ]
 ]);
 
+<<<<<<< HEAD
 Route::get('sendEmail',[SendEmailController::class,'send'])->name('send');
+=======
+Route::get('sendEmail',[SendEmailController::class,'send'])->name('send');
+Route::get('KhachHang/{khachHang}/showResetPass',[KhachHangController::class,'showResetPassword_KhachHang'])->name('KhachHang.showReset');
+Route::put('KhachHang/{khachHang}/actionResetPass',[KhachHangController::class,'actionResetPassword_KhachHang'])->name('KhachHang.actionReset');
+Route::get('ResetPassword-Susscess',[HomeController::class,'Susscess'])->name('Home.Susscess');
 
+>>>>>>> 8a789781e9106c7322a3b52a7505bdf429929e71

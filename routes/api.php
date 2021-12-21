@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SanPhamController;
 use App\Models\SanPham;
 use App\Http\Controllers\KhachHangController;
-
+use App\Http\Controllers\SendEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,12 +30,33 @@ Route::get('dien-thoai',[SanPhamController::class,"API_SanPham_DT"]);
 Route::get('san-pham/{id}',[SanPhamController::class,"API_SanPham_DT_ChiTiet"]);
 
 #api loại sản phẩm laptop
-Route::get("get-all-latop",[SanPhamController::class,"API_SanPham_LapTop"]);
+Route::get('get-all-latop',[SanPhamController::class,"API_SanPham_LapTop"]);
+
+#api tìm kiếm sản phẩm
+Route::post('/search-product',[SanPhamController::class,"API_SanPham_TimKiem"]);
+
+# sản phẩm bán chạy
+Route::get('san-pham-top',[SanPhamController::class,'API_SanPham_Top']);
 
 #api loại sản phẩm Camera
 Route::get("get-all-camera",[SanPhamController::class,"API_SanPham_Camera"]);
 
 Route::post('DangNhap', [KhachHangController::class,"API_DangNhap"]);
 Route::post('DangKy', [KhachHangController::class,"API_DangKy"]);
+Route::put('KhachHang/{khachHang}', [KhachHangController::class,"API_Update_KhachHang"]);
 
-Route::post('TimKiem',[SanPhamController::class,"API_SanPham_TimKiem"]);
+Route::post('TimKiem',[SanPhamController::class,"API_SanPham_TimKiem"]);#
+
+# sản phẩm khuyên mãi 
+Route::get('get-all-product-sale',[SanPhamController::class,"API_SanPham_GiamGia"]);
+
+# sản phẩm giá 1-3tr
+Route::get('get-product-price-1/',[SanPhamController::class,"API_SanPham_Gia1_3tr"]);
+
+# sản phẩm giá 3-7tr
+Route::get('get-product-price-2/', [SanPhamController::class, "API_SanPham_Gia3_7tr"]);
+# sản phẩm giá 3-7tr
+Route::get('get-product-price-3/', [SanPhamController::class, "API_SanPham_Gia7tr"]);
+
+//gui mail reset password
+Route::post('sendEmail-User-Reset',[SendEmailController::class,'userReset']);
