@@ -245,7 +245,7 @@ class SanPhamController extends Controller
     {
         $data = DB::select('SELECT b.* FROM ct_chuong_trinh_kms as a,san_phams as b where a.SanPhamId=b.id and b.deleted_at is null and a.deleted_at is null');
         return response()->json($data,200);
-        
+
     }
     #sản phẩm giá  1-3tr
     public function API_SanPham_Gia1_3Tr(){
@@ -268,5 +268,5 @@ class SanPhamController extends Controller
         //dd($data);
         return response()->json($data, 200);
     }
-    
+
 }
