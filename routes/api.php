@@ -64,4 +64,4 @@ Route::post('sendEmail-User-Reset', [SendEmailController::class, 'userReset']);
 
 
 //them vao gio hang
-Route::get('add-Cart', [HoaDonController::class, 'addCart']);
+Route::post('add-Cart', [HoaDonController::class, 'addCart']);

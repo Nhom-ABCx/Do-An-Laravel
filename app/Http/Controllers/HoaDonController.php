@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CT_HoaDon;
 use App\Models\HoaDon;
+use App\Models\SanPham;
 use Illuminate\Http\Request;
 
 class HoaDonController extends Controller
@@ -88,25 +89,30 @@ class HoaDonController extends Controller
 
     public function addCart(Request $request)
     {
-        // $hoaDon = HoaDon::create([
-        //     'Username'       => strip_tags($request['Username']),
-        //     'Email'       => strip_tags($request['Email']),
-        //     //'MatKhau'         => Hash::make($request['MatKhau']),
-        //     'MatKhau'         => strip_tags($request['MatKhau']),
-        //     'HoTen' => '', //cap nhat sau
-        //     'NgaySinh' => date('Y-m-d H:i:s'),
-        //     'GioiTinh' => 0,
-        //     'DiaChi' => '',
-        //     'HinhAnh' => '',
-        // ]);
+        $hoaDon = HoaDon::create([
+            'NhanVienId'       => 1,
+            'KhachHangId'       => $request['KhachHangId'],
+            'DiaChiGiao'         => '',
+            'TrangThai' => 0, //them vao gio hang
+            'TongTien' => 0,
 
-        // $data = $hoaDon;
-        // //neu du lieu ko co rong~ thi tra ve voi status la 200
-        // if (!empty($data))
-        //     return response()->json($data, 200);
-        // $cart = HoaDon::find(8);
-        // dd($cart->CT_HoaDon);
-        // $aa = $cart->CT_HoaDon;
-        // dd($aa->SanPham);
+        ]);
+        $sanPhamId = $request['SanPhamId'];
+        $sanPhamaa = SanPham::find($sanPhamId);
+        $thanhTien = $request['SoLuong'] * $sanPhamaa->GiaBan;
+        $CThoaDon = CT_HoaDon::create([
+            'HoaDonId'       => $hoaDon->id,
+            'SanPhamId'       => $request['SanPhamId'],
+            'SoLuong'         => $request['SoLuong'],
+            'GiaBan' => $sanPhamaa->GiaBan,
+            'ThanhTien' => $thanhTien,
+            'Star' => 0,
+
+        ]);
+
+        $data = [$hoaDon, $CThoaDon];
+        //neu du lieu ko co rong~ thi tra ve voi status la 200
+        if (!empty($data))
+            return response()->json($data, 200);
     }
 }
