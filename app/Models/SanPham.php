@@ -13,27 +13,31 @@ class SanPham extends Model
 
     protected $table = 'san_phams';
     protected $fillable = [
-          'Id',
-          'TenSanPham',
-          'MoTa',
-          'SoLuongTon',
-          'GiaNhap',
-          'GiaBan',
-          'HinhAnh',
-          'LuotMua',
-          'HangSanXuatId',
-          'LoaiSanPhamId',
+        'Id',
+        'TenSanPham',
+        'MoTa',
+        'SoLuongTon',
+        'GiaNhap',
+        'GiaBan',
+        'HinhAnh',
+        'LuotMua',
+        'HangSanXuatId',
+        'LoaiSanPhamId',
     ];
     public function HangSanXuat()
     {
-        return $this->belongsTo(HangSanXuat::class,'HangSanXuatId');
+        return $this->belongsTo(HangSanXuat::class, 'HangSanXuatId');
     }
     public function LoaiSanPham()
     {
-        return $this->belongsTo(LoaiSanPham::class,'LoaiSanPhamId');
+        return $this->belongsTo(LoaiSanPham::class, 'LoaiSanPhamId');
     }
     public function CTChuongTrinhKM()
     {
-        return $this->hasMany(CTChuongTrinhKM::class,'SanPhamId');
+        return $this->hasMany(CTChuongTrinhKM::class, 'SanPhamId');
+    }
+    public function CT_HoaDon()
+    {
+        return $this->hasMany(CT_HoaDon::class, 'SanPhamId');
     }
 }

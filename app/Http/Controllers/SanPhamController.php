@@ -71,7 +71,7 @@ class SanPhamController extends Controller
                 'SoLuongTon' => ['required', 'numeric', 'integer', 'min:0'],
                 'GiaNhap' => ['required', 'numeric', 'integer', 'min:0'],
                 'GiaBan' => ['numeric', 'integer', 'min:0'],
-                'HinhAnh' => ['required', 'image'],
+                'HinhAnh' => ['required', 'image',"max:102400"], //max:100 Mb
                 'HangSanXuatId' => ['required', 'numeric', 'integer', 'exists:loai_san_phams,id'],
                 'LoaiSanPhamId' => ['required', 'numeric', 'integer', 'exists:hang_san_xuats,id'],
             ]

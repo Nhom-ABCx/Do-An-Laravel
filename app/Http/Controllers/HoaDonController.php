@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CT_HoaDon;
 use App\Models\HoaDon;
+use App\Models\SanPham;
 use Illuminate\Http\Request;
 
 class HoaDonController extends Controller
@@ -81,5 +83,36 @@ class HoaDonController extends Controller
     public function destroy(HoaDon $hoaDon)
     {
         //
+    }
+
+    //API
+
+    public function addCart(Request $request)
+    {
+        $hoaDon = HoaDon::create([
+            'NhanVienId'       => 1,
+            'KhachHangId'       => $request['KhachHangId'],
+            'DiaChiGiao'         => '',
+            'TrangThai' => 0, //them vao gio hang
+            'TongTien' => 0,
+
+        ]);
+        $sanPhamId = $request['SanPhamId'];
+        $sanPhamaa = SanPham::find($sanPhamId);
+        $thanhTien = $request['SoLuong'] * $sanPhamaa->GiaBan;
+        $CThoaDon = CT_HoaDon::create([
+            'HoaDonId'       => $hoaDon->id,
+            'SanPhamId'       => $request['SanPhamId'],
+            'SoLuong'         => $request['SoLuong'],
+            'GiaBan' => $sanPhamaa->GiaBan,
+            'ThanhTien' => $thanhTien,
+            'Star' => 0,
+
+        ]);
+
+        $data = [$hoaDon, $CThoaDon];
+        //neu du lieu ko co rong~ thi tra ve voi status la 200
+        if (!empty($data))
+            return response()->json($data, 200);
     }
 }

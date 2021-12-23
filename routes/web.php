@@ -77,12 +77,12 @@ Route::resource('KhuyenMai', ChuongTrinhKhuyenMaiController::class, [
     ]
 ]);
 
-Route::get('/CTKhuyenMai',[CTChuongTrinhKMController::class,'index'])->name('CTKhuyenMai.index');//Chi tiết CTKM index
-Route::get('/CTKhuyenMai/create',[CTChuongTrinhKMController::class,'create'])->name('CTKhuyenMai.create');//Chi tiết CTKM create
-Route::post('/CTKhuyenMai.store',[CTChuongTrinhKMController::class,'store'])->name('CTKhuyenMai.store');//Chi tiết CTKM store
-Route::get('/CTKhuyenMai/{ctid}/{spid}/edit',[CTChuongTrinhKMController::class,'edit'])->name('CTKhuyenMai.edit');//Chi tiết CTKM edit
-Route::put('/CTKhuyenMai/{ctid}/{spid}',[CTChuongTrinhKMController::class,'update'])->name('CTKhuyenMai.update');//Chi tiết CTKM update
-Route::delete('/CTKhuyenMai/{ctid}/{spid}',[CTChuongTrinhKMController::class,'destroy'])->name('CTKhuyenMai.destroy');//Chi tiết CTKM delete
+Route::get('/CTKhuyenMai', [CTChuongTrinhKMController::class, 'index'])->name('CTKhuyenMai.index'); //Chi tiết CTKM index
+Route::get('/CTKhuyenMai/create', [CTChuongTrinhKMController::class, 'create'])->name('CTKhuyenMai.create'); //Chi tiết CTKM create
+Route::post('/CTKhuyenMai.store', [CTChuongTrinhKMController::class, 'store'])->name('CTKhuyenMai.store'); //Chi tiết CTKM store
+Route::get('/CTKhuyenMai/{ctid}/{spid}/edit', [CTChuongTrinhKMController::class, 'edit'])->name('CTKhuyenMai.edit'); //Chi tiết CTKM edit
+Route::put('/CTKhuyenMai/{ctid}/{spid}', [CTChuongTrinhKMController::class, 'update'])->name('CTKhuyenMai.update'); //Chi tiết CTKM update
+Route::delete('/CTKhuyenMai/{ctid}/{spid}', [CTChuongTrinhKMController::class, 'destroy'])->name('CTKhuyenMai.destroy'); //Chi tiết CTKM delete
 
 Route::resource('HangSanXuat', HangSanXuatController::class, [
     'parameters' => [
@@ -90,27 +90,26 @@ Route::resource('HangSanXuat', HangSanXuatController::class, [
     ]
 ]);
 
-Route::get('Login', [AuthController::class,'index'])->name('Login.index'); //show trang login
-Route::post('Login', [AuthController::class,'show'])->name('Login.show'); //xu ly dang nhap -> tra ve home
-Route::delete('Login', [AuthController::class,'destroy'])->name('Login.destroy'); //dang xuat
+Route::get('Login', [AuthController::class, 'index'])->name('Login.index'); //show trang login
+Route::post('Login', [AuthController::class, 'show'])->name('Login.show'); //xu ly dang nhap -> tra ve home
+Route::delete('Login', [AuthController::class, 'destroy'])->name('Login.destroy'); //dang xuat
 //Route::put('Login', [AuthController::class,'create'])->name('Login.create'); //dang ky
 //Route::post('Login', [AuthController::class,'store'])->name('Login.store');
 
-Route::resource('DonViVanChuyen',DonViVanChuyenController::class, [
+Route::resource('DonViVanChuyen', DonViVanChuyenController::class, [
     'parameters' => [
         'DonViVanChuyen' => 'donViVanChuyen'
     ]
 ]);
 
-Route::resource('NguoiVanChuyen',NguoiVanChuyenController::class,[
-    'parameters'=>[
-        'NguoiVanChuyen'=>'nguoiVanChuyen'
+Route::resource('NguoiVanChuyen', NguoiVanChuyenController::class, [
+    'parameters' => [
+        'NguoiVanChuyen' => 'nguoiVanChuyen'
     ]
 ]);
 
-Route::get('sendEmail',[SendEmailController::class,'send'])->name('send');
-Route::get('sendEmail',[SendEmailController::class,'send'])->name('send');
-Route::get('KhachHang/{khachHang}/showResetPass',[KhachHangController::class,'showResetPassword_KhachHang'])->name('KhachHang.showReset');
-Route::put('KhachHang/{khachHang}/actionResetPass',[KhachHangController::class,'actionResetPassword_KhachHang'])->name('KhachHang.actionReset');
-Route::get('ResetPassword-Susscess',[HomeController::class,'Susscess'])->name('Home.Susscess');
-
+Route::get('sendEmail', [SendEmailController::class, 'send'])->name('send');
+Route::get('sendEmail', [SendEmailController::class, 'send'])->name('send');
+Route::get('KhachHang/{khachHang}/showResetPass', [KhachHangController::class, 'showResetPassword_KhachHang'])->name('KhachHang.showReset');
+Route::put('KhachHang/{khachHang}/actionResetPass', [KhachHangController::class, 'actionResetPassword_KhachHang'])->name('KhachHang.actionReset');
+Route::get('ResetPassword-Susscess', [HomeController::class, 'Susscess'])->name('Home.Susscess');

@@ -33,6 +33,11 @@ class NhanVien extends Authenticatable
 
     public function getAuthPassword()
     {
-      return $this->MatKhau;
+        return $this->MatKhau;
+    }
+
+    public function HoaDon()
+    {
+        return $this->hasMany(HoaDon::class, 'NhanVienId');
     }
 }

@@ -22,4 +22,8 @@ class KhachHang extends Model
         'DiaChi',
         'HinhAnh',
     ];
+    public function HoaDon()
+    {
+        return $this->hasMany(HoaDon::class, 'KhachHangId');
+    }
 }
