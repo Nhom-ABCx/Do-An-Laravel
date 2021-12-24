@@ -199,10 +199,10 @@ class KhachHangController extends Controller
 
         //kiem tra upload hinh anh
         if ($request->hasFile('HinhAnh')) {
-            $khachHang->HinhAnh = $request->file('HinhAnh')->store('assets/images/avatar/' . $khachHang->id, 'public');
+            $khachHang->HinhAnh = $request->file('HinhAnh')->store('assets/images/avatar/User/' . $khachHang->id, 'public');
             //cat chuoi ra, chi luu cai ten thoi
             $catChuoi = explode("/", $khachHang->HinhAnh);
-            $khachHang->HinhAnh = $catChuoi[4];
+            $khachHang->HinhAnh = $catChuoi[5];
             $khachHang->save();
         }
         else
