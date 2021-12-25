@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
-
+use Laravel\Socialite\Facades\Socialite;
 class AuthController extends Controller
 {
     //composer require laravel/ui --dev
@@ -85,7 +85,8 @@ class AuthController extends Controller
         if (!empty($select)) { //neu' ko rong~
             Auth::login($select);
             //$request->session()->regenerate();
-            return redirect()->intended('/');
+            //return redirect()->intended('/');
+            return Redirect::route('SanPham.index');
         }
         return back()->withErrors(['Username'=>'Sai Username hoac mat khau']);
     }
@@ -125,5 +126,55 @@ class AuthController extends Controller
         //$request->session()->invalidate();
         //$request->session()->regenerateToken();
         return Redirect::route('Login.index');
+    }
+    public function github()
+    {
+        //gui request len github
+        return Socialite::driver('github')->redirect();
+    }
+
+    public function github_callback()
+    {
+        //nhan du lieu tu github tra ve
+        $user = Socialite::driver('github')->user();
+        //dd($user);
+        $user=NhanVien::firstOrCreate([
+            'Email'=>$user->email
+        ],[
+            'Username'=>$user->nickname,
+            'HoTen'=>$user->name,
+            "NgaySinh"=>date('Y-m-d H:i:s'),
+            "GioiTinh"=>0,
+            "MatKhau"=>$user->nickname,
+            "HinhAnh"=>$user->avatar,
+        ]);
+        Auth::login($user); //thuc hien dang nhap voi tai khoan do'
+        return Redirect::route('SanPham.index');
+    }
+    public function google()
+    {
+        //gui request len google
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function google_callback()
+    {
+        //nhan du lieu tu google tra ve
+        $user = Socialite::driver('google')->user();
+        //dd($user);
+        $username = substr($user->email, 0, strpos($user->email, '@'));
+        //do google nickname no' rong~ nen de? tam nhu v
+        $user=NhanVien::firstOrCreate([
+            'Email'=>$user->email
+        ],[
+            'Username'=>$user->nickname??$username,
+            'HoTen'=>$user->name,
+            "NgaySinh"=>date('Y-m-d H:i:s'),
+            "GioiTinh"=>0,
+            "MatKhau"=>$username,
+            "HinhAnh"=>$user->avatar,
+        ]);
+        Auth::login($user); //thuc hien dang nhap voi tai khoan do'
+        return Redirect::route('SanPham.index');
     }
 }

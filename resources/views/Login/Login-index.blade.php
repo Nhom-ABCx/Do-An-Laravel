@@ -120,8 +120,11 @@
                                                 <i class="icon-twitter"></i>
                                             </a>
 
-                                            <a class="btn btn-danger">
+                                            <a class="btn btn-danger" href="{{route('Login.google')}}">
                                                 <i class="icon-google-plus"></i>
+                                            </a>
+                                            <a class="btn btn-dark" href="{{route('Login.github')}}">
+                                                <i class="icon-github-sign"></i>
                                             </a>
                                         </div>
                                     </div><!-- /widget-main -->
