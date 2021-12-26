@@ -7,6 +7,7 @@ use App\Models\SanPham;
 use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\HoaDonController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------

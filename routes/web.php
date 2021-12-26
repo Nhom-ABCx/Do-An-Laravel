@@ -95,13 +95,9 @@ Route::post('Login', [AuthController::class, 'show'])->name('Login.show'); //xu 
 Route::delete('Login', [AuthController::class, 'destroy'])->name('Login.destroy'); //dang xuat
 //Route::put('Login', [AuthController::class,'create'])->name('Login.create'); //dang ky
 //Route::post('Login', [AuthController::class,'store'])->name('Login.store');
-Route::get('Login/Github', [AuthController::class, 'github'])->name('Login.github');
-Route::get('Login/Github/Callback', [AuthController::class, 'github_callback'])->name('Login.github_callback');
-Route::get('Login/Google', [AuthController::class, 'google'])->name('Login.google');
-Route::get('Login/Google/Callback', [AuthController::class, 'google_callback'])->name('Login.google_callback');
-Route::get('Login/Facebook', [AuthController::class, 'facebook'])->name('Login.facebook');
-Route::get('Login/Facebook/Callback', [AuthController::class, 'facebook_callback'])->name('Login.facebook_callback');
-
+// //dang nhap social
+Route::get('Login/{social}', [AuthController::class, 'social'])->name('Login.social');
+Route::get('Login/{social}/Callback', [AuthController::class, 'social_callback'])->name('Login.social_callback');
 
 Route::resource('DonViVanChuyen', DonViVanChuyenController::class, [
     'parameters' => [

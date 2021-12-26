@@ -127,40 +127,17 @@ class AuthController extends Controller
         //$request->session()->regenerateToken();
         return Redirect::route('Login.index');
     }
-    public function github()
+
+    public function social($social)
     {
-        //gui request len github
-        return Socialite::driver('github')->redirect();
+        //gui request len social
+        return Socialite::driver($social)->redirect();
     }
 
-    public function github_callback()
+    public function social_callback($social)
     {
-        //nhan du lieu tu github tra ve
-        $user = Socialite::driver('github')->user();
-        //dd($user);
-        $user=NhanVien::firstOrCreate([
-            'Email'=>$user->email
-        ],[
-            'Username'=>$user->nickname,
-            'HoTen'=>$user->name,
-            "NgaySinh"=>date('Y-m-d H:i:s'),
-            "GioiTinh"=>0,
-            "MatKhau"=>$user->nickname,
-            "HinhAnh"=>$user->avatar,
-        ]);
-        Auth::login($user); //thuc hien dang nhap voi tai khoan do'
-        return Redirect::route('SanPham.index');
-    }
-    public function google()
-    {
-        //gui request len google
-        return Socialite::driver('google')->redirect();
-    }
-
-    public function google_callback()
-    {
-        //nhan du lieu tu google tra ve
-        $user = Socialite::driver('google')->user();
+        //nhan du lieu tu social tra ve
+        $user = Socialite::driver($social)->user();
         //dd($user);
         $username = substr($user->email, 0, strpos($user->email, '@'));
         //do google nickname no' rong~ nen de? tam nhu v
