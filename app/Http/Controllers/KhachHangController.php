@@ -204,12 +204,35 @@ class KhachHangController extends Controller
             $catChuoi = explode("/", $khachHang->HinhAnh);
             $khachHang->HinhAnh = $catChuoi[5];
             $khachHang->save();
-        }
-        else
-        return response()->json(["NoImage"=>"No image request"], 400);
+        } else
+            return response()->json(["NoImage" => "No image request"], 400);
 
         $data = $khachHang;
         //neu du lieu ko co rong~ thi tra ve voi status la 200
+        if (!empty($data))
+            return response()->json($data, 200);
+    }
+
+    public function API_Update_KhachHang_MatKhau(Request $request, KhachHang $khachHang)
+    {
+        //kiem tra du lieu
+        $validate = Validator::make($request->all(), [
+            'oldMatKhau' => ['required'],
+            'MatKhau' => ['required'],
+            'XacNhan_MatKhau' => ['required', 'same:MatKhau'],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+        if ($khachHang->MatKhau != $request['oldMatKhau'])
+            return response()->json(['oldMatKhau' => "wrong password"], 400);
+        else if ($khachHang->MatKhau == $request['MatKhau'])
+            return response()->json(['MatKhau' => "New password matches your old password"], 400);
+
+        $khachHang->fill(['MatKhau' => $request['MatKhau'],]);
+        $khachHang->save();
+
+        $data = $khachHang;
         if (!empty($data))
             return response()->json($data, 200);
     }
