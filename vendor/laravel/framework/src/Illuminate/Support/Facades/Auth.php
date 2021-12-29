@@ -14,6 +14,7 @@ use RuntimeException;
  * @method static \Illuminate\Contracts\Auth\UserProvider|null createUserProvider(string $provider = null)
  * @method static \Symfony\Component\HttpFoundation\Response|null onceBasic(string $field = 'email',array $extraConditions = [])
  * @method static bool attempt(array $credentials = [], bool $remember = false)
+ * @method static bool hasUser()
  * @method static bool check()
  * @method static bool guest()
  * @method static bool once(array $credentials = [])
@@ -55,7 +56,7 @@ class Auth extends Facade
      */
     public static function routes(array $options = [])
     {
-        if (!static::$app->providerIsLoaded(UiServiceProvider::class)) {
+        if (! static::$app->providerIsLoaded(UiServiceProvider::class)) {
             throw new RuntimeException('In order to use the Auth::routes() method, please install the laravel/ui package.');
         }
 
