@@ -145,6 +145,36 @@ insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien) values(28,
 insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien) values(23,14,11,0,0);
 insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien) values(18,4,12,0,0);
 
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(1,30,10);
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(1,29,10);
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(1,28,10);
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(2,27,10);
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(2,26,10);
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(2,25,10);
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(3,24,10);
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(3,23,10);
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(3,22,10);
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(4,21,10);
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(4,20,10);
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(4,19,10);
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(5,18,10);
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(5,17,10);
+
+insert into Yeu_Thichs(KhachHangId,SanPhamId) values(1,30);
+insert into Yeu_Thichs(KhachHangId,SanPhamId) values(1,29);
+insert into Yeu_Thichs(KhachHangId,SanPhamId) values(1,28);
+insert into Yeu_Thichs(KhachHangId,SanPhamId) values(2,27);
+insert into Yeu_Thichs(KhachHangId,SanPhamId) values(2,26);
+insert into Yeu_Thichs(KhachHangId,SanPhamId) values(2,25);
+insert into Yeu_Thichs(KhachHangId,SanPhamId) values(3,24);
+insert into Yeu_Thichs(KhachHangId,SanPhamId) values(3,23);
+insert into Yeu_Thichs(KhachHangId,SanPhamId) values(3,22);
+insert into Yeu_Thichs(KhachHangId,SanPhamId) values(4,21);
+insert into Yeu_Thichs(KhachHangId,SanPhamId) values(4,20);
+insert into Yeu_Thichs(KhachHangId,SanPhamId) values(4,19);
+insert into Yeu_Thichs(KhachHangId,SanPhamId) values(5,18);
+insert into Yeu_Thichs(KhachHangId,SanPhamId) values(5,17);
+
 insert into Lich_Su_Van_Chuyens(HoaDonId,NguoiVanChuyenId,TrangThai,created_at)
 SELECT a.Id,b.Id,0,a.created_at FROM Hoa_Dons as a,Nguoi_Van_Chuyens as b ORDER BY RAND() LIMIT 50;
 

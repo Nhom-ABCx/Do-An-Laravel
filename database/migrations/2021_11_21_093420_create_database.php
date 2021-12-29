@@ -180,6 +180,15 @@ class CreateDatabase extends Migration
             $table->foreign('HoaDonId')->references('Id')->on('hoa_dons');
             $table->foreign('NguoiVanChuyenId')->references('Id')->on('nguoi_van_chuyens');
         });
+        Schema::create('gio_hangs', function (Blueprint $table) {
+            $table->Id();
+            $table->foreignId('KhachHangId');
+            $table->foreignId('SanPhamId');
+            $table->integer('SoLuong');
+            $table->timestamps();
+            $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
+            $table->foreign('SanPhamId')->references('Id')->on('san_phams');
+        });
     }
 
     /**
@@ -204,5 +213,6 @@ class CreateDatabase extends Migration
         Schema::dropIfExists('yeu_thichs');
         Schema::dropIfExists('rep_binh_luans');
         Schema::dropIfExists('lich_su_van_chuyens');
+        Schema::dropIfExists('gio_hangs');
     }
 }
