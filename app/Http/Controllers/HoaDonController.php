@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\CT_HoaDon;
 use App\Models\HoaDon;
 use App\Models\SanPham;
+use App\Models\KhachHang;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class HoaDonController extends Controller
@@ -87,32 +90,48 @@ class HoaDonController extends Controller
 
     //API
 
-    public function addCart(Request $request)
+    public function API_LapHoaDon(Request $request)
     {
+        //kiem tra du lieu
+        $validate = Validator::make($request->all(), [
+            'KhachHangId' => ['required', 'numeric', 'integer', 'exists:khach_hangs,id'],
+            "Data.*.SanPhamId" => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
+            "Data.*.SoLuong" => ['required', 'numeric', 'integer', 'min:0'],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+
         $hoaDon = HoaDon::create([
             'NhanVienId'       => 1,
             'KhachHangId'       => $request['KhachHangId'],
             'DiaChiGiao'         => '',
-            'TrangThai' => 0, //them vao gio hang
+            'TrangThai' => 0, //vua lap
             'TongTien' => 0,
-
-        ]);
-        $sanPhamId = $request['SanPhamId'];
-        $sanPhamaa = SanPham::find($sanPhamId);
-        $thanhTien = $request['SoLuong'] * $sanPhamaa->GiaBan;
-        $CThoaDon = CT_HoaDon::create([
-            'HoaDonId'       => $hoaDon->id,
-            'SanPhamId'       => $request['SanPhamId'],
-            'SoLuong'         => $request['SoLuong'],
-            'GiaBan' => $sanPhamaa->GiaBan,
-            'ThanhTien' => $thanhTien,
-            'Star' => 0,
-
         ]);
 
-        $data = [$hoaDon, $CThoaDon];
-        //neu du lieu ko co rong~ thi tra ve voi status la 200
-        if (!empty($data))
-            return response()->json($data, 200);
+        //dd($request["Data"][0]["SanPhamId"]);
+        $arrayRaw = json_decode($request->getContent(), true); //chuyen json thanh array de truy van
+        //dd($arrayRaw["Data"][0]);
+        foreach ($arrayRaw["Data"] as $item) {
+            //echo $item["SanPhamId"] . "\n";
+            $sp = SanPham::find($item["SanPhamId"]);
+
+            $thanhTien=$item["SoLuong"] * $sp->GiaBan;
+
+            CT_HoaDon::create([
+                'HoaDonId'       => $hoaDon->id,
+                'SanPhamId'       => $item["SanPhamId"],
+                'SoLuong'         => $item["SoLuong"],
+                'GiaBan' => $sp->GiaBan,
+                'GiaGiam' => 0,
+                'ThanhTien' => $thanhTien,
+                'Star' => 0,
+            ]);
+        }
+        $hoaDon->TongTien=CT_HoaDon::where('HoaDonId',$hoaDon->id)->sum('ThanhTien');
+        $hoaDon->save();
+
+        return response()->json(["Sucssess" => True], 200);
     }
 }

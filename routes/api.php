@@ -66,6 +66,4 @@ Route::get('get-product-price-3/', [SanPhamController::class, "API_SanPham_Gia7t
 //gui mail reset password
 Route::post('sendEmail-User-Reset', [SendEmailController::class, 'userReset']);
 
-
-//them vao gio hang
-Route::post('add-Cart', [HoaDonController::class, 'addCart']);
+Route::post('HoaDon/LapHoaDon', [HoaDonController::class, 'API_LapHoaDon']);
