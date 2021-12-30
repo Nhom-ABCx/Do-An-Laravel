@@ -40,4 +40,8 @@ class SanPham extends Model
     {
         return $this->hasMany(CT_HoaDon::class, 'SanPhamId');
     }
+    public function YeuThich()
+    {
+        return $this->hasMany(YeuThich::class, 'SanPhamId');
+    }
 }

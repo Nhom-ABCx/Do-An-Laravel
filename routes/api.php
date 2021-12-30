@@ -8,6 +8,8 @@ use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\HoaDonController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\YeuThichController;
+use App\Models\YeuThich;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,3 +70,6 @@ Route::get('get-product-price-3/', [SanPhamController::class, "API_SanPham_Gia7t
 Route::post('sendEmail-User-Reset', [SendEmailController::class, 'userReset']);
 
 Route::post('HoaDon/LapHoaDon', [HoaDonController::class, 'API_LapHoaDon']);
+
+Route::get('YeuThich/{khachHang}', [YeuThichController::class, "API_Get_YeuThich"]);
+Route::get('SanPham/YeuThich/{khachHang}', [YeuThichController::class, "API_Get_SanPham_YeuThich"]);
