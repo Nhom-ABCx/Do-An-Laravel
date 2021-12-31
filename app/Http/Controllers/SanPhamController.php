@@ -195,11 +195,16 @@ class SanPhamController extends Controller
         //return json_encode($data);
         return response()->json($data, 200);
     }
-    # danh sách sản phẩm điện thoại
-    public function API_SanPham_DT()
+
+    public function API_SanPham_LoaiSanPham(LoaiSanPham $loaiSanPham)
     {
-        $data = SanPham::where('LoaiSanPhamId', 2)->get();
-        return response()->json($data, 200);
+        $data = SanPham::where('LoaiSanPhamId', $loaiSanPham->id)->get();
+
+        //kt neu du lieu ko rong~ thi tra ve`
+        if (!empty($data))
+            return response()->json($data, 200);
+        //nguoc lai tra ve mang? rong~
+        return response()->json([], 404);
     }
     #chi tiết sản phẩm
     public function API_SanPham_DT_ChiTiet($id)
@@ -208,12 +213,6 @@ class SanPhamController extends Controller
         if ($data == null) {
             return response()->json($data, 404);
         }
-        return response()->json($data, 200);
-    }
-    #loại sản phẩm laptop
-    public function API_SanPham_LapTop()
-    {
-        $data = SanPham::where("LoaiSanPhamId", 3)->get();
         return response()->json($data, 200);
     }
     # tìm kiếm sản phẩm
@@ -237,17 +236,9 @@ class SanPhamController extends Controller
         return response()->json($data, 200);
     }
 
-    #loại sản phẩm camera
-    public function API_SanPham_Camera()
-    {
-        $data = SanPham::where("LoaiSanPhamId", 4)->get();
-        return response()->json($data, 200);
-    }
     # sản phẩm đang giảm giá
     public function API_SanPham_GiamGia()
     {
-        
-
         $ctkm = ChuongTrinhKhuyenMai::where('deleted_at', null)->get();
         $chiTietCtkm = CTChuongTrinhKM::where('ChuongtrinhKhuyenMaiId', $ctkm[0]->id)->get();
         $dsSanPham = [];
@@ -259,7 +250,7 @@ class SanPhamController extends Controller
             $i++;
         }
         //dd($dsSanPham);
-        return response()->json($dsSanPham,200);
+        return response()->json($dsSanPham, 200);
     }
     #sản phẩm giá  1-3tr
     public function API_SanPham_Gia1_3Tr()
