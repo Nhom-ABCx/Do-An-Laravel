@@ -252,26 +252,29 @@ class SanPhamController extends Controller
         //dd($dsSanPham);
         return response()->json($dsSanPham, 200);
     }
-    #sản phẩm giá  1-3tr
-    public function API_SanPham_Gia1_3Tr()
-    {
-        $data = DB::table('san_phams')->whereBetween('GiaBan', [1000000, 3000000])->where('LoaiSanPhamId', 2)->get();
-        //dd($data);
-        return response()->json($data, 200);
-    }
 
-    #sản phẩm giá 3 tr - 7 tr
-    public function API_SanPham_Gia3_7Tr()
+    public function API_SanPham_GiaBan(Request $request)
     {
-        $data = DB::table('san_phams')->whereBetween('GiaBan', [3000000, 7000000])->where('LoaiSanPhamId', 2)->get();
-        //dd($data);
-        return response()->json($data, 200);
-    }
-    #sản phẩm giá tre 7tr
-    public function API_SanPham_Gia7Tr()
-    {
-        $data = DB::table('san_phams')->where('GiaBan', '>', 7000000)->where('LoaiSanPhamId', 2)->get();
-        //dd($data);
-        return response()->json($data, 200);
+        //$data = SanPham::whereBetween('GiaBan', [$request["from"], $request["to"]])->where('LoaiSanPhamId',$request["id"])->get();
+        $data = SanPham::where('LoaiSanPhamId', $request["id"])->get();
+
+        $PriceFrom = $request["PriceFrom"];
+        $PriceTo = $request["PriceTo"];
+
+        if ((empty($PriceFrom) || $PriceFrom == 0) && !empty($PriceTo)) //null vs notnull
+            $data = $data->where("GiaBan", ">=", 0)->where("GiaBan", "<=", $PriceTo);
+        else if (!empty($PriceFrom && (empty($PriceTo)) || $PriceTo == 0)) //notnull vs null
+            $data = $data->where("GiaBan", ">=", $PriceFrom);
+        else if (!empty($PriceFrom) && !empty($PriceTo)) //notnull vs notnull
+            $data = $data->where("GiaBan", ">=", $PriceFrom)->where("GiaBan", "<=", $PriceTo);
+
+        $dsSanPham = [];
+        $i=0;
+        foreach ($data as $item) {
+            $ds=Arr::add($dsSanPham,$i,$item);
+            $dsSanPham=$ds;
+            $i++;
+        }
+        return response()->json($dsSanPham, 200);
     }
 }
