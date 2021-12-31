@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Storage; //thu vien luu tru~ de tao lien ket den 
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+// Array
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class SanPhamController extends Controller
 {
@@ -236,8 +239,18 @@ class SanPhamController extends Controller
     # sản phẩm đang giảm giá
     public function API_SanPham_GiamGia()
     {
-        $data = DB::select('SELECT b.* FROM ct_chuong_trinh_kms as a,san_phams as b where a.SanPhamId=b.id and b.deleted_at is null and a.deleted_at is null');
-        return response()->json($data, 200);
+        $ctkm = ChuongTrinhKhuyenMai::where('deleted_at', null)->get();
+        $chiTietCtkm = CTChuongTrinhKM::where('ChuongtrinhKhuyenMaiId', $ctkm[0]->id)->get();
+        $dsSanPham = [];
+        $i = 0;
+        foreach ($chiTietCtkm as $item) {
+            $sp = SanPham::find($item->SanPhamId);
+            $data = Arr::add($dsSanPham, "$i", $sp);
+            $dsSanPham = $data;
+            $i++;
+        }
+        //dd($dsSanPham);
+        return response()->json($dsSanPham, 200);
     }
     #sản phẩm giá  1-3tr
     public function API_SanPham_Gia1_3Tr()

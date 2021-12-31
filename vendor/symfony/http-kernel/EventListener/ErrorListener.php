@@ -102,6 +102,13 @@ class ErrorListener implements EventSubscriberInterface
             throw $e;
         }
 
+        foreach ($this->exceptionsMapping as $exception => $config) {
+            if ($throwable instanceof $exception && $config['status_code']) {
+                $response->setStatusCode($config['status_code']);
+                break;
+            }
+        }
+
         $event->setResponse($response);
 
         if ($this->debug) {

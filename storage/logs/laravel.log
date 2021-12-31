@@ -1,0 +1,478 @@
+[2021-12-31 07:42:46] local.ERROR: Uncaught ReflectionException: Class "App\Policies\ModelPolicy" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\Policies\\Mo...')
+#1 [internal function]: {closure}('App\\Policies\\Mo...', 'App\\Models\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught ReflectionException: Class \"App\\Policies\\ModelPolicy\" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\\\Policies\\\\Mo...')
+#1 [internal function]: {closure}('App\\\\Policies\\\\Mo...', 'App\\\\Models\\\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown at Command line code:1)
+[stacktrace]
+#0 {main}
+"} 
+[2021-12-31 07:43:40] local.ERROR: syntax error, unexpected token "<<", expecting "function" or "const" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"function\" or \"const\" at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractString.php:428)
+[stacktrace]
+#0 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#1 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractUnicodeString.php(29): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#3 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#4 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\UnicodeString.php(33): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#5 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#6 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#7 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\Helper.php(65): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#8 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(327): Symfony\\Component\\Console\\Helper\\Helper::width('h')
+#9 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(97): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->calculateTotalWidthForOptions(Array)
+#10 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(195): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeInputDefinition(Object(Symfony\\Component\\Console\\Input\\InputDefinition), Array)
+#11 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\Descriptor.php(55): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeApplication(Object(Illuminate\\Console\\Application), Array)
+#12 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\DescriptorHelper.php(65): Symfony\\Component\\Console\\Descriptor\\Descriptor->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#13 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\ListCommand.php(75): Symfony\\Component\\Console\\Helper\\DescriptorHelper->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#14 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\Command.php(298): Symfony\\Component\\Console\\Command\\ListCommand->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(1005): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2021-12-31 07:43:40] local.ERROR: syntax error, unexpected token "<<", expecting "function" or "const" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"function\" or \"const\" at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractString.php:428)
+[stacktrace]
+#0 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#1 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractUnicodeString.php(29): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#3 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#4 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\UnicodeString.php(33): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#5 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#6 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#7 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\Helper.php(65): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#8 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(327): Symfony\\Component\\Console\\Helper\\Helper::width('h')
+#9 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(97): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->calculateTotalWidthForOptions(Array)
+#10 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(195): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeInputDefinition(Object(Symfony\\Component\\Console\\Input\\InputDefinition), Array)
+#11 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\Descriptor.php(55): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeApplication(Object(Illuminate\\Console\\Application), Array)
+#12 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\DescriptorHelper.php(65): Symfony\\Component\\Console\\Descriptor\\Descriptor->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#13 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\ListCommand.php(75): Symfony\\Component\\Console\\Helper\\DescriptorHelper->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#14 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\Command.php(298): Symfony\\Component\\Console\\Command\\ListCommand->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(1005): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2021-12-31 07:43:40] local.ERROR: syntax error, unexpected token "<<", expecting "function" or "const" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"function\" or \"const\" at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractString.php:428)
+[stacktrace]
+#0 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#1 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractUnicodeString.php(29): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#3 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#4 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\UnicodeString.php(33): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#5 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#6 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#7 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\Helper.php(65): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#8 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(327): Symfony\\Component\\Console\\Helper\\Helper::width('h')
+#9 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(97): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->calculateTotalWidthForOptions(Array)
+#10 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(195): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeInputDefinition(Object(Symfony\\Component\\Console\\Input\\InputDefinition), Array)
+#11 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\Descriptor.php(55): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeApplication(Object(Illuminate\\Console\\Application), Array)
+#12 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\DescriptorHelper.php(65): Symfony\\Component\\Console\\Descriptor\\Descriptor->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#13 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\ListCommand.php(75): Symfony\\Component\\Console\\Helper\\DescriptorHelper->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#14 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\Command.php(298): Symfony\\Component\\Console\\Command\\ListCommand->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(1005): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2021-12-31 07:43:40] local.ERROR: syntax error, unexpected token "<<", expecting "function" or "const" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"function\" or \"const\" at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractString.php:428)
+[stacktrace]
+#0 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#1 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractUnicodeString.php(29): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#3 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#4 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\UnicodeString.php(33): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#5 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#6 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#7 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\Helper.php(65): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#8 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(327): Symfony\\Component\\Console\\Helper\\Helper::width('h')
+#9 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(97): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->calculateTotalWidthForOptions(Array)
+#10 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(195): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeInputDefinition(Object(Symfony\\Component\\Console\\Input\\InputDefinition), Array)
+#11 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\Descriptor.php(55): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeApplication(Object(Illuminate\\Console\\Application), Array)
+#12 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\DescriptorHelper.php(65): Symfony\\Component\\Console\\Descriptor\\Descriptor->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#13 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\ListCommand.php(75): Symfony\\Component\\Console\\Helper\\DescriptorHelper->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#14 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\Command.php(298): Symfony\\Component\\Console\\Command\\ListCommand->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(1005): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2021-12-31 07:43:46] local.ERROR: syntax error, unexpected token "<<", expecting "function" or "const" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"function\" or \"const\" at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractString.php:428)
+[stacktrace]
+#0 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#1 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractUnicodeString.php(29): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#3 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#4 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\UnicodeString.php(33): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#5 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#6 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#7 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\Helper.php(65): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#8 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(327): Symfony\\Component\\Console\\Helper\\Helper::width('h')
+#9 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(97): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->calculateTotalWidthForOptions(Array)
+#10 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(195): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeInputDefinition(Object(Symfony\\Component\\Console\\Input\\InputDefinition), Array)
+#11 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\Descriptor.php(55): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeApplication(Object(Illuminate\\Console\\Application), Array)
+#12 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\DescriptorHelper.php(65): Symfony\\Component\\Console\\Descriptor\\Descriptor->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#13 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\ListCommand.php(75): Symfony\\Component\\Console\\Helper\\DescriptorHelper->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#14 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\Command.php(298): Symfony\\Component\\Console\\Command\\ListCommand->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(1005): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2021-12-31 07:43:46] local.ERROR: syntax error, unexpected token "<<", expecting "function" or "const" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"function\" or \"const\" at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractString.php:428)
+[stacktrace]
+#0 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#1 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractUnicodeString.php(29): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#3 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#4 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\UnicodeString.php(33): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#5 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#6 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#7 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\Helper.php(65): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#8 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(327): Symfony\\Component\\Console\\Helper\\Helper::width('h')
+#9 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(97): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->calculateTotalWidthForOptions(Array)
+#10 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(195): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeInputDefinition(Object(Symfony\\Component\\Console\\Input\\InputDefinition), Array)
+#11 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\Descriptor.php(55): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeApplication(Object(Illuminate\\Console\\Application), Array)
+#12 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\DescriptorHelper.php(65): Symfony\\Component\\Console\\Descriptor\\Descriptor->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#13 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\ListCommand.php(75): Symfony\\Component\\Console\\Helper\\DescriptorHelper->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#14 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\Command.php(298): Symfony\\Component\\Console\\Command\\ListCommand->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(1005): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2021-12-31 07:43:47] local.ERROR: Uncaught ReflectionException: Class "App\Policies\ModelPolicy" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\Policies\\Mo...')
+#1 [internal function]: {closure}('App\\Policies\\Mo...', 'App\\Models\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught ReflectionException: Class \"App\\Policies\\ModelPolicy\" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\\\Policies\\\\Mo...')
+#1 [internal function]: {closure}('App\\\\Policies\\\\Mo...', 'App\\\\Models\\\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown at Command line code:1)
+[stacktrace]
+#0 {main}
+"} 
+[2021-12-31 07:44:13] local.ERROR: syntax error, unexpected token "<<", expecting "function" or "const" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"function\" or \"const\" at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractString.php:428)
+[stacktrace]
+#0 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#1 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractUnicodeString.php(29): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#3 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#4 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\UnicodeString.php(33): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#5 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#6 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#7 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\Helper.php(65): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#8 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(327): Symfony\\Component\\Console\\Helper\\Helper::width('h')
+#9 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(97): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->calculateTotalWidthForOptions(Array)
+#10 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(195): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeInputDefinition(Object(Symfony\\Component\\Console\\Input\\InputDefinition), Array)
+#11 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\Descriptor.php(55): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeApplication(Object(Illuminate\\Console\\Application), Array)
+#12 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\DescriptorHelper.php(65): Symfony\\Component\\Console\\Descriptor\\Descriptor->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#13 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\ListCommand.php(75): Symfony\\Component\\Console\\Helper\\DescriptorHelper->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#14 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\Command.php(298): Symfony\\Component\\Console\\Command\\ListCommand->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(1005): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2021-12-31 07:44:46] local.ERROR: syntax error, unexpected token "<<", expecting "function" or "const" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"function\" or \"const\" at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractString.php:428)
+[stacktrace]
+#0 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#1 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractUnicodeString.php(29): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#3 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#4 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\UnicodeString.php(33): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#5 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#6 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#7 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\Helper.php(65): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#8 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(327): Symfony\\Component\\Console\\Helper\\Helper::width('h')
+#9 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(97): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->calculateTotalWidthForOptions(Array)
+#10 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(195): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeInputDefinition(Object(Symfony\\Component\\Console\\Input\\InputDefinition), Array)
+#11 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\Descriptor.php(55): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeApplication(Object(Illuminate\\Console\\Application), Array)
+#12 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\DescriptorHelper.php(65): Symfony\\Component\\Console\\Descriptor\\Descriptor->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#13 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\ListCommand.php(75): Symfony\\Component\\Console\\Helper\\DescriptorHelper->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#14 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\Command.php(298): Symfony\\Component\\Console\\Command\\ListCommand->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(1005): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2021-12-31 07:44:47] local.ERROR: syntax error, unexpected token "<<", expecting "function" or "const" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"function\" or \"const\" at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractString.php:428)
+[stacktrace]
+#0 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#1 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractUnicodeString.php(29): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#3 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#4 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\UnicodeString.php(33): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#5 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#6 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#7 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\Helper.php(65): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#8 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(327): Symfony\\Component\\Console\\Helper\\Helper::width('h')
+#9 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(97): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->calculateTotalWidthForOptions(Array)
+#10 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(195): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeInputDefinition(Object(Symfony\\Component\\Console\\Input\\InputDefinition), Array)
+#11 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\Descriptor.php(55): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeApplication(Object(Illuminate\\Console\\Application), Array)
+#12 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\DescriptorHelper.php(65): Symfony\\Component\\Console\\Descriptor\\Descriptor->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#13 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\ListCommand.php(75): Symfony\\Component\\Console\\Helper\\DescriptorHelper->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#14 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\Command.php(298): Symfony\\Component\\Console\\Command\\ListCommand->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(1005): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2021-12-31 07:44:47] local.ERROR: Uncaught ReflectionException: Class "App\Policies\ModelPolicy" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\Policies\\Mo...')
+#1 [internal function]: {closure}('App\\Policies\\Mo...', 'App\\Models\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught ReflectionException: Class \"App\\Policies\\ModelPolicy\" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\\\Policies\\\\Mo...')
+#1 [internal function]: {closure}('App\\\\Policies\\\\Mo...', 'App\\\\Models\\\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown at Command line code:1)
+[stacktrace]
+#0 {main}
+"} 
+[2021-12-31 07:45:12] local.ERROR: syntax error, unexpected token "<<", expecting "function" or "const" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"function\" or \"const\" at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractString.php:428)
+[stacktrace]
+#0 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#1 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractUnicodeString.php(29): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#3 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#4 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\UnicodeString.php(33): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#5 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#6 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#7 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\Helper.php(65): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#8 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(327): Symfony\\Component\\Console\\Helper\\Helper::width('h')
+#9 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(97): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->calculateTotalWidthForOptions(Array)
+#10 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(195): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeInputDefinition(Object(Symfony\\Component\\Console\\Input\\InputDefinition), Array)
+#11 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\Descriptor.php(55): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeApplication(Object(Illuminate\\Console\\Application), Array)
+#12 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\DescriptorHelper.php(65): Symfony\\Component\\Console\\Descriptor\\Descriptor->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#13 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\ListCommand.php(75): Symfony\\Component\\Console\\Helper\\DescriptorHelper->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#14 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\Command.php(298): Symfony\\Component\\Console\\Command\\ListCommand->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(1005): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2021-12-31 07:45:40] local.ERROR: syntax error, unexpected token "<<", expecting "function" or "const" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"function\" or \"const\" at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractString.php:428)
+[stacktrace]
+#0 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#1 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractUnicodeString.php(29): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#3 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#4 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\UnicodeString.php(33): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#5 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#6 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#7 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\Helper.php(65): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#8 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(327): Symfony\\Component\\Console\\Helper\\Helper::width('h')
+#9 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(97): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->calculateTotalWidthForOptions(Array)
+#10 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(195): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeInputDefinition(Object(Symfony\\Component\\Console\\Input\\InputDefinition), Array)
+#11 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\Descriptor.php(55): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeApplication(Object(Illuminate\\Console\\Application), Array)
+#12 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\DescriptorHelper.php(65): Symfony\\Component\\Console\\Descriptor\\Descriptor->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#13 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\ListCommand.php(75): Symfony\\Component\\Console\\Helper\\DescriptorHelper->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#14 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\Command.php(298): Symfony\\Component\\Console\\Command\\ListCommand->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(1005): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2021-12-31 07:45:40] local.ERROR: syntax error, unexpected token "<<", expecting "function" or "const" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"function\" or \"const\" at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractString.php:428)
+[stacktrace]
+#0 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#1 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractUnicodeString.php(29): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#3 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#4 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\UnicodeString.php(33): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#5 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#6 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#7 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\Helper.php(65): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#8 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(327): Symfony\\Component\\Console\\Helper\\Helper::width('h')
+#9 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(97): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->calculateTotalWidthForOptions(Array)
+#10 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(195): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeInputDefinition(Object(Symfony\\Component\\Console\\Input\\InputDefinition), Array)
+#11 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\Descriptor.php(55): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeApplication(Object(Illuminate\\Console\\Application), Array)
+#12 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\DescriptorHelper.php(65): Symfony\\Component\\Console\\Descriptor\\Descriptor->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#13 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\ListCommand.php(75): Symfony\\Component\\Console\\Helper\\DescriptorHelper->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#14 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\Command.php(298): Symfony\\Component\\Console\\Command\\ListCommand->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(1005): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2021-12-31 07:45:41] local.ERROR: syntax error, unexpected token "<<", expecting "function" or "const" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"function\" or \"const\" at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractString.php:428)
+[stacktrace]
+#0 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#1 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractUnicodeString.php(29): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#3 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#4 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\UnicodeString.php(33): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#5 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#6 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#7 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\Helper.php(65): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#8 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(327): Symfony\\Component\\Console\\Helper\\Helper::width('h')
+#9 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(97): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->calculateTotalWidthForOptions(Array)
+#10 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(195): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeInputDefinition(Object(Symfony\\Component\\Console\\Input\\InputDefinition), Array)
+#11 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\Descriptor.php(55): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeApplication(Object(Illuminate\\Console\\Application), Array)
+#12 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\DescriptorHelper.php(65): Symfony\\Component\\Console\\Descriptor\\Descriptor->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#13 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\ListCommand.php(75): Symfony\\Component\\Console\\Helper\\DescriptorHelper->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#14 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\Command.php(298): Symfony\\Component\\Console\\Command\\ListCommand->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(1005): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2021-12-31 07:45:46] local.ERROR: syntax error, unexpected token "<<", expecting "function" or "const" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"function\" or \"const\" at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractString.php:428)
+[stacktrace]
+#0 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#1 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\AbstractUnicodeString.php(29): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#3 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#4 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\string\\UnicodeString.php(33): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#5 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(571): include('D:\\\\Program File...')
+#6 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Program File...')
+#7 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\Helper.php(65): Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#8 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(327): Symfony\\Component\\Console\\Helper\\Helper::width('h')
+#9 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(97): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->calculateTotalWidthForOptions(Array)
+#10 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\TextDescriptor.php(195): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeInputDefinition(Object(Symfony\\Component\\Console\\Input\\InputDefinition), Array)
+#11 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Descriptor\\Descriptor.php(55): Symfony\\Component\\Console\\Descriptor\\TextDescriptor->describeApplication(Object(Illuminate\\Console\\Application), Array)
+#12 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Helper\\DescriptorHelper.php(65): Symfony\\Component\\Console\\Descriptor\\Descriptor->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#13 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\ListCommand.php(75): Symfony\\Component\\Console\\Helper\\DescriptorHelper->describe(Object(Symfony\\Component\\Console\\Output\\ConsoleOutput), Object(Illuminate\\Console\\Application), Array)
+#14 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Command\\Command.php(298): Symfony\\Component\\Console\\Command\\ListCommand->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(1005): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand(Object(Symfony\\Component\\Console\\Command\\ListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(94): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2021-12-31 07:45:47] local.ERROR: Uncaught ReflectionException: Class "App\Policies\ModelPolicy" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\Policies\\Mo...')
+#1 [internal function]: {closure}('App\\Policies\\Mo...', 'App\\Models\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught ReflectionException: Class \"App\\Policies\\ModelPolicy\" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\\\Policies\\\\Mo...')
+#1 [internal function]: {closure}('App\\\\Policies\\\\Mo...', 'App\\\\Models\\\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown at Command line code:1)
+[stacktrace]
+#0 {main}
+"} 
+[2021-12-31 07:46:47] local.ERROR: Uncaught ReflectionException: Class "App\Policies\ModelPolicy" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\Policies\\Mo...')
+#1 [internal function]: {closure}('App\\Policies\\Mo...', 'App\\Models\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught ReflectionException: Class \"App\\Policies\\ModelPolicy\" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\\\Policies\\\\Mo...')
+#1 [internal function]: {closure}('App\\\\Policies\\\\Mo...', 'App\\\\Models\\\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown at Command line code:1)
+[stacktrace]
+#0 {main}
+"} 
+[2021-12-31 07:47:47] local.ERROR: Uncaught ReflectionException: Class "App\Policies\ModelPolicy" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\Policies\\Mo...')
+#1 [internal function]: {closure}('App\\Policies\\Mo...', 'App\\Models\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught ReflectionException: Class \"App\\Policies\\ModelPolicy\" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\\\Policies\\\\Mo...')
+#1 [internal function]: {closure}('App\\\\Policies\\\\Mo...', 'App\\\\Models\\\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown at Command line code:1)
+[stacktrace]
+#0 {main}
+"} 
+[2021-12-31 07:48:47] local.ERROR: Uncaught ReflectionException: Class "App\Policies\ModelPolicy" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\Policies\\Mo...')
+#1 [internal function]: {closure}('App\\Policies\\Mo...', 'App\\Models\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught ReflectionException: Class \"App\\Policies\\ModelPolicy\" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\\\Policies\\\\Mo...')
+#1 [internal function]: {closure}('App\\\\Policies\\\\Mo...', 'App\\\\Models\\\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown at Command line code:1)
+[stacktrace]
+#0 {main}
+"} 
+[2021-12-31 07:49:47] local.ERROR: Uncaught ReflectionException: Class "App\Policies\ModelPolicy" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\Policies\\Mo...')
+#1 [internal function]: {closure}('App\\Policies\\Mo...', 'App\\Models\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught ReflectionException: Class \"App\\Policies\\ModelPolicy\" does not exist in Command line code:1
+Stack trace:
+#0 Command line code(1): ReflectionClass->__construct('App\\\\Policies\\\\Mo...')
+#1 [internal function]: {closure}('App\\\\Policies\\\\Mo...', 'App\\\\Models\\\\Mode...')
+#2 Command line code(1): array_map(Object(Closure), Array, Array)
+#3 {main}
+  thrown at Command line code:1)
+[stacktrace]
+#0 {main}
+"} 
