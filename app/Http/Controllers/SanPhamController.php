@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Storage; //thu vien luu tru~ de tao lien ket den 
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+// Array
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class SanPhamController extends Controller
 {
@@ -71,7 +74,7 @@ class SanPhamController extends Controller
                 'SoLuongTon' => ['required', 'numeric', 'integer', 'min:0'],
                 'GiaNhap' => ['required', 'numeric', 'integer', 'min:0'],
                 'GiaBan' => ['numeric', 'integer', 'min:0'],
-                'HinhAnh' => ['required', 'image',"max:102400"], //max:100 Mb
+                'HinhAnh' => ['required', 'image', "max:102400"], //max:100 Mb
                 'HangSanXuatId' => ['required', 'numeric', 'integer', 'exists:loai_san_phams,id'],
                 'LoaiSanPhamId' => ['required', 'numeric', 'integer', 'exists:hang_san_xuats,id'],
             ]
@@ -243,15 +246,27 @@ class SanPhamController extends Controller
     # sản phẩm đang giảm giá
     public function API_SanPham_GiamGia()
     {
-        $data = DB::select('SELECT b.* FROM ct_chuong_trinh_kms as a,san_phams as b where a.SanPhamId=b.id and b.deleted_at is null and a.deleted_at is null');
-        return response()->json($data,200);
+        
 
+        $ctkm = ChuongTrinhKhuyenMai::where('deleted_at', null)->get();
+        $chiTietCtkm = CTChuongTrinhKM::where('ChuongtrinhKhuyenMaiId', $ctkm[0]->id)->get();
+        $dsSanPham = [];
+        $i = 0;
+        foreach ($chiTietCtkm as $item) {
+            $sp = SanPham::find($item->SanPhamId);
+            $data = Arr::add($dsSanPham, "$i", $sp);
+            $dsSanPham = $data;
+            $i++;
+        }
+        //dd($dsSanPham);
+        return response()->json($dsSanPham,200);
     }
     #sản phẩm giá  1-3tr
-    public function API_SanPham_Gia1_3Tr(){
-        $data=DB::table('san_phams')->whereBetween('GiaBan',[1000000,3000000])->where('LoaiSanPhamId',2)->get();
+    public function API_SanPham_Gia1_3Tr()
+    {
+        $data = DB::table('san_phams')->whereBetween('GiaBan', [1000000, 3000000])->where('LoaiSanPhamId', 2)->get();
         //dd($data);
-        return response()->json($data,200);
+        return response()->json($data, 200);
     }
 
     #sản phẩm giá 3 tr - 7 tr
@@ -264,9 +279,8 @@ class SanPhamController extends Controller
     #sản phẩm giá tre 7tr
     public function API_SanPham_Gia7Tr()
     {
-        $data = DB::table('san_phams')->where('GiaBan','>', 7000000)->where('LoaiSanPhamId', 2)->get();
+        $data = DB::table('san_phams')->where('GiaBan', '>', 7000000)->where('LoaiSanPhamId', 2)->get();
         //dd($data);
         return response()->json($data, 200);
     }
-
 }

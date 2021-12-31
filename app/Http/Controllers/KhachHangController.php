@@ -135,6 +135,7 @@ class KhachHangController extends Controller
         $khachHang = KhachHang::create([
             'Username'       => strip_tags($request['Username']),
             'Email'       => strip_tags($request['Email']),
+            'Phone'=>0,
             //'MatKhau'         => Hash::make($request['MatKhau']),
             'MatKhau'         => strip_tags($request['MatKhau']),
             'HoTen' => '', //cap nhat sau
@@ -235,5 +236,12 @@ class KhachHangController extends Controller
         $data = $khachHang;
         if (!empty($data))
             return response()->json($data, 200);
+    }
+
+    public function API_Get_KhachHang(KhachHang $khachHang)
+    {
+        if (!empty($khachHang))
+            return response()->json($khachHang, 200);
+        return response()->json(["Error"=>"Item Not found"],404);
     }
 }
