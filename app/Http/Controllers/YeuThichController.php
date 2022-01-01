@@ -124,4 +124,44 @@ class YeuThichController extends Controller
             return response()->json($yeuThich, 200);
         return response()->json($yeuThich,404);
     }
+
+    public function API_Insert_KhachHang_YeuThich_SanPham(Request $request)
+    {
+        //kiem tra du lieu
+        $validate = Validator::make($request->all(), [
+            'KhachHangId' => ['required', 'numeric', 'integer', 'exists:khach_hangs,id'],
+            "SanPhamId" => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+
+        $yeuThich = YeuThich::firstOrCreate([
+            'KhachHangId'       => $request['KhachHangId'],
+            'SanPhamId'       => $request["SanPhamId"],
+        ]);
+
+        $data = $yeuThich;
+        //neu du lieu ko co rong~ thi tra ve voi status la 200
+        if (!empty($data))
+            return response()->json($data, 200);
+        return response()->json($data, 404);
+    }
+    public function API_Delete_KhachHang_YeuThich_SanPham(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'KhachHangId' => ['required', 'numeric', 'integer', 'exists:khach_hangs,id'],
+            "SanPhamId" => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+
+        $yeuThich = YeuThich::where("KhachHangId", $request["KhachHangId"])->where("SanPhamId", $request["SanPhamId"])->first();
+
+        if (!empty($yeuThich))
+            {$data=$yeuThich->delete();
+             return response()->json($data, 200);}
+        return response()->json($ye, 404);
+    }
 }
