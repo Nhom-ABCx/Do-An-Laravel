@@ -128,6 +128,11 @@ class HoaDonController extends Controller
                 'ThanhTien' => $thanhTien,
                 'Star' => 0,
             ]);
+            // $soLuong=SanPham::select('SoLuongTon')->get();
+            // $cnSoLuong=$soLuong-$item["SoLuong"];
+            // $sp=SanPham::find($item["SanPhamId"]);
+            // $sp->SoLuongTon=$cnSoLuong;
+            // $sp->update();
         }
         $hoaDon->TongTien=CT_HoaDon::where('HoaDonId',$hoaDon->id)->sum('ThanhTien');
         $hoaDon->save();
