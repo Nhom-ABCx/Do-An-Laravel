@@ -58,8 +58,10 @@ Route::post('sendEmail-User-Reset', [SendEmailController::class, 'userReset']);
 
 Route::post('HoaDon/LapHoaDon', [HoaDonController::class, 'API_LapHoaDon']);
 
+Route::post('YeuThich/add', [YeuThichController::class, "API_Insert_KhachHang_YeuThich_SanPham"]);
+Route::delete('YeuThich/delete', [YeuThichController::class, "API_Delete_KhachHang_YeuThich_SanPham"]);
 Route::get('YeuThich/{khachHang}', [YeuThichController::class, "API_Get_YeuThich"]);
 Route::get('SanPham/YeuThich/{khachHang}', [YeuThichController::class, "API_Get_SanPham_YeuThich"]);
 Route::get('YeuThich', [YeuThichController::class, "API_Get_KhachHang_YeuThich_SanPham"]);
 #Star
-Route::get('danh-gia',[SanPhamController::class,'API_SanPham_Star']);
+Route::get('danh-gia/{SanPhamId}',[SanPhamController::class,'API_SanPham_Star']);

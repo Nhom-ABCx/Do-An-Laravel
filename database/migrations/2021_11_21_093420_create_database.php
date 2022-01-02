@@ -155,7 +155,6 @@ class CreateDatabase extends Migration
             $table->foreignId('KhachHangId');
             $table->foreignId('SanPhamId');
             $table->timestamps();
-            $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
             $table->foreign('SanPhamId')->references('Id')->on('san_phams');
         });

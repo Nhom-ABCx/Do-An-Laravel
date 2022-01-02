@@ -135,7 +135,7 @@ class KhachHangController extends Controller
         $khachHang = KhachHang::create([
             'Username'       => strip_tags($request['Username']),
             'Email'       => strip_tags($request['Email']),
-            'Phone'=>0,
+            'Phone'=>"0",
             //'MatKhau'         => Hash::make($request['MatKhau']),
             'MatKhau'         => strip_tags($request['MatKhau']),
             'HoTen' => '', //cap nhat sau

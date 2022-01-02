@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class YeuThich extends Model
 {
     use HasFactory;
-    use SoftDeletes; //su dung chuc nang softdelete
 
     protected $table = 'yeu_thichs';
     //protected $primaryKey = null;
