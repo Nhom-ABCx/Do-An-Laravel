@@ -60,3 +60,6 @@ Route::post('HoaDon/LapHoaDon', [HoaDonController::class, 'API_LapHoaDon']);
 
 Route::get('YeuThich/{khachHang}', [YeuThichController::class, "API_Get_YeuThich"]);
 Route::get('SanPham/YeuThich/{khachHang}', [YeuThichController::class, "API_Get_SanPham_YeuThich"]);
+Route::get('YeuThich', [YeuThichController::class, "API_Get_KhachHang_YeuThich_SanPham"]);
+#Star
+Route::get('danh-gia',[SanPhamController::class,'API_SanPham_Star']);

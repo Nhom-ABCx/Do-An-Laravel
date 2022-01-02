@@ -117,4 +117,11 @@ class YeuThichController extends Controller
 
         return response()->json($dsSanPham, 200);
     }
+    public function API_Get_KhachHang_YeuThich_SanPham(Request $request)
+    {
+        $yeuThich=YeuThich::where("KhachHangId",$request["KhachHangId"])->where("SanPhamId",$request["SanPhamId"])->first();
+        if(!empty($yeuThich))
+            return response()->json($yeuThich, 200);
+        return response()->json($yeuThich,404);
+    }
 }

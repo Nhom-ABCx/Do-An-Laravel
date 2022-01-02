@@ -281,4 +281,9 @@ class SanPhamController extends Controller
         }
         return response()->json($dsSanPham, 200);
     }
+    #api danh gia san pham
+    public function API_SanPham_Star(){
+        $star=CT_HoaDon::all();
+        dd($star);
+    }
 }
