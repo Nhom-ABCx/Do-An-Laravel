@@ -194,8 +194,6 @@ class SanPhamController extends Controller
     {
         
         $data = SanPham::all();
-        $cthd = CT_HoaDon::all();
-        dd($cthd);
         //return json_encode($data);
         return response()->json($data, 200);
     }

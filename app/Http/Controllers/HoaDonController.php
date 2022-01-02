@@ -127,22 +127,6 @@ class HoaDonController extends Controller
 
                 $thanhTien = $item["SoLuong"] * $sp->GiaBan;
 
-<<<<<<< HEAD
-            CT_HoaDon::create([
-                'HoaDonId'       => $hoaDon->id,
-                'SanPhamId'       => $item["SanPhamId"],
-                'SoLuong'         => $item["SoLuong"],
-                'GiaBan' => $sp->GiaBan,
-                'GiaGiam' => 0,
-                'ThanhTien' => $thanhTien,
-                'Star' => 0,
-            ]);
-            // $soLuong=SanPham::select('SoLuongTon')->get();
-            // $cnSoLuong=$soLuong-$item["SoLuong"];
-            // $sp=SanPham::find($item["SanPhamId"]);
-            // $sp->SoLuongTon=$cnSoLuong;
-            // $sp->update();
-=======
                 CT_HoaDon::create([
                     'HoaDonId'       => $hoaDon->id,
                     'SanPhamId'       => $item["SanPhamId"],
@@ -153,7 +137,6 @@ class HoaDonController extends Controller
                     'Star' => 0,
                 ]);
             }
->>>>>>> b07495b780836c710692f7031850980409cce982
         }
         //neu ko co chi tiet hoa don nao duoc lap
         if(empty(CT_HoaDon::where('HoaDonId',$hoaDon->id)->first()))
