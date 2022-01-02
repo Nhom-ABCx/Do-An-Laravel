@@ -162,6 +162,6 @@ class YeuThichController extends Controller
         if (!empty($yeuThich))
             {$data=$yeuThich->delete();
              return response()->json($data, 200);}
-        return response()->json($ye, 404);
+        return response()->json($yeuThich, 404);
     }
 }

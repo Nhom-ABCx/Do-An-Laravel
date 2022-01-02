@@ -49,7 +49,7 @@ Route::patch('KhachHang/{id}', [KhachHangController::class, "API_Update_KhachHan
 Route::post('TimKiem', [SanPhamController::class, "API_SanPham_TimKiem"]); #
 
 # sản phẩm khuyên mãi
-Route::get('get-all-product-sale', [SanPhamController::class, "API_SanPham_GiamGia"]);
+Route::get('SanPham/GiamGia', [SanPhamController::class, "API_SanPham_GiamGia"]);
 
 Route::get('SanPham/GiaBan', [SanPhamController::class, "API_SanPham_GiaBan"]);
 

@@ -116,22 +116,37 @@ class HoaDonController extends Controller
         foreach ($arrayRaw["Data"] as $item) {
             //echo $item["SanPhamId"] . "\n";
             $sp = SanPham::find($item["SanPhamId"]);
+            //tru di so luong ton`, neu san pham do' co' so luong <=0
+            if ($sp->SoLuongTon < $item["SoLuong"])
+                continue; //thoat ra khoi vong lap
+            else { //nguoc lai thi lap hoa don
+                $sp->fill([
+                    'SoLuongTon' => $sp->SoLuongTon - $item["SoLuong"],
+                ]);
+                $sp->save();
 
-            $thanhTien=$item["SoLuong"] * $sp->GiaBan;
+                $thanhTien = $item["SoLuong"] * $sp->GiaBan;
 
-            CT_HoaDon::create([
-                'HoaDonId'       => $hoaDon->id,
-                'SanPhamId'       => $item["SanPhamId"],
-                'SoLuong'         => $item["SoLuong"],
-                'GiaBan' => $sp->GiaBan,
-                'GiaGiam' => 0,
-                'ThanhTien' => $thanhTien,
-                'Star' => 0,
-            ]);
+                CT_HoaDon::create([
+                    'HoaDonId'       => $hoaDon->id,
+                    'SanPhamId'       => $item["SanPhamId"],
+                    'SoLuong'         => $item["SoLuong"],
+                    'GiaBan' => $sp->GiaBan,
+                    'GiaGiam' => 0,
+                    'ThanhTien' => $thanhTien,
+                    'Star' => 0,
+                ]);
+            }
         }
-        $hoaDon->TongTien=CT_HoaDon::where('HoaDonId',$hoaDon->id)->sum('ThanhTien');
+        //neu ko co chi tiet hoa don nao duoc lap
+        if(empty(CT_HoaDon::where('HoaDonId',$hoaDon->id)->first()))
+        {
+            $hoaDon->delete();
+            return response()->json(["Sucssess" => false], 400);
+        }
+        //nguoc lai thi tinh' thanh` tien` cho hoa' don va` tra? ket qua ve 200
+        $hoaDon->TongTien = CT_HoaDon::where('HoaDonId', $hoaDon->id)->sum('ThanhTien');
         $hoaDon->save();
-
         return response()->json(["Sucssess" => True], 200);
     }
 }
