@@ -188,6 +188,19 @@ class CreateDatabase extends Migration
             $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
             $table->foreign('SanPhamId')->references('Id')->on('san_phams');
         });
+        Schema::create('dia_chis', function (Blueprint $table) {
+            $table->Id();
+            $table->foreignId('KhachHangId');
+            $table->string('TenNguoiNhan');
+            $table->string('Phone');
+            $table->string('TinhThanhPho')->nullable();
+            $table->string('QuanHuyen')->nullable();
+            $table->string('PhuongXa')->nullable();
+            $table->string('DiaChiChiTiet');
+            $table->timestamps();
+            $table->softDeletes(); //nay la trang thai xoa
+            $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
+        });
     }
 
     /**
@@ -213,5 +226,7 @@ class CreateDatabase extends Migration
         Schema::dropIfExists('rep_binh_luans');
         Schema::dropIfExists('lich_su_van_chuyens');
         Schema::dropIfExists('gio_hangs');
+        Schema::dropIfExists('dia_chis');
+
     }
 }
