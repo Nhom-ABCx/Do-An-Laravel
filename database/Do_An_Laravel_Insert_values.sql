@@ -175,6 +175,10 @@ insert into Yeu_Thichs(KhachHangId,SanPhamId) values(4,19);
 insert into Yeu_Thichs(KhachHangId,SanPhamId) values(5,18);
 insert into Yeu_Thichs(KhachHangId,SanPhamId) values(5,17);
 
+insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'Sản phẩm rất tốt triệu like',1,30);
+insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'Sản phẩm tốt',1,28);
+insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'giao hang nhanh, sản phẩm tốt',2,29);
+insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'hoàn hảo',1,32);
 insert into Lich_Su_Van_Chuyens(HoaDonId,NguoiVanChuyenId,TrangThai,created_at)
 SELECT a.Id,b.Id,0,a.created_at FROM Hoa_Dons as a,Nguoi_Van_Chuyens as b ORDER BY RAND() LIMIT 50;
 

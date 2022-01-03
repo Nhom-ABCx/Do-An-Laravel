@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BinhLuan;
 use App\Models\ChuongTrinhKhuyenMai;
 use App\Models\CT_HoaDon;
 use App\Models\CTChuongTrinhKM;
@@ -241,7 +242,7 @@ class SanPhamController extends Controller
     public function API_SanPham_GiamGia()
     {
         $ctkm = ChuongTrinhKhuyenMai::where('deleted_at', null)->get();
-        $chiTietCtkm = CTChuongTrinhKM::where('ChuongtrinhKhuyenMaiId', $ctkm[0]->id)->get();
+        $chiTietCtkm = CTChuongTrinhKM::where('ChuongTrinhKhuyenMaiId', $ctkm[0]->id)->get();
         $dsSanPham = [];
         $i = 0;
         foreach ($chiTietCtkm as $item) {
@@ -270,19 +271,38 @@ class SanPhamController extends Controller
             $data = $data->where("GiaBan", ">=", $PriceFrom)->where("GiaBan", "<=", $PriceTo);
 
         $dsSanPham = [];
-        $i=0;
+        $i = 0;
         foreach ($data as $item) {
-            $ds=Arr::add($dsSanPham,$i,$item);
-            $dsSanPham=$ds;
+            $ds = Arr::add($dsSanPham, $i, $item);
+            $dsSanPham = $ds;
             $i++;
         }
         return response()->json($dsSanPham, 200);
     }
     #api danh gia san pham
-    public function API_SanPham_Star(Request $request){
+    public function API_SanPham_Star(Request $request)
+    {
         //dd($request["SanPhamId"]);
-        $spId=$request["SanPhamId"];
-        $star=CT_HoaDon::where("SanPhamId",$spId)->get();
-        return response()->json($star,200);
+        $spId = $request["SanPhamId"];
+        $star = CT_HoaDon::where("SanPhamId", $spId)->get();
+        return response()->json($star, 200);
+    }
+    #api binh luan
+    public function API_Get_BinhLuan_SanPham(Request $request)
+    {
+
+        $data = BinhLuan::where("SanPhamId", $request["SanPhamId"])->get();
+        //dd($data);
+        return response()->json($data, 200);
+    }
+    # api gia khuyen mai
+    //chua xong!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public function API_Gia_Khuyen_Mai(Request $request)
+    {
+        //$ctkm = ChuongTrinhKhuyenMai::where('deleted_at', null)->get();
+        $chiTietCtkm = CTChuongTrinhKM::where('SanPhamId', $request["SanPhamId"])->first();
+        if (!empty($chiTietCtkm))
+            return response()->json($chiTietCtkm, 200);
+        return response()->json($chiTietCtkm, 404);
     }
 }
