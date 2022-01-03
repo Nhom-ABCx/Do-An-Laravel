@@ -192,7 +192,6 @@ class SanPhamController extends Controller
     //API
     public function API_SanPham()
     {
-        
         $data = SanPham::all();
         //return json_encode($data);
         return response()->json($data, 200);
