@@ -10,6 +10,7 @@ use App\Http\Controllers\HoaDonController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\YeuThichController;
 use App\Models\YeuThich;
+use App\Policies\SanPhamPolicy;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,3 +66,7 @@ Route::get('SanPham/YeuThich/{khachHang}', [YeuThichController::class, "API_Get_
 Route::get('YeuThich', [YeuThichController::class, "API_Get_KhachHang_YeuThich_SanPham"]);
 #Star
 Route::get('danh-gia/{SanPhamId}',[SanPhamController::class,'API_SanPham_Star']);
+#get binh luan
+Route::get('binh-luan/{SanPhamId}',[SanPhamController::class,'API_Get_BinhLuan_SanPham']);
+# gia sale
+Route::get('khuyen-mai/{SanPhamId}',[SanPhamController::class,"API_Gia_Khuyen_Mai"]);

@@ -37,4 +37,8 @@ class KhachHang extends Model
     {
         return $this->hasMany(YeuThich::class, 'KhachHangId');
     }
+    public function BinhLuan()
+    {
+        return $this->hasMany(BinhLuan::class, 'KhachHangId');
+    }
 }
