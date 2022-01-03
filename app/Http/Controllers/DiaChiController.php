@@ -5,6 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\DiaChi;
 use App\Http\Requests\StoreDiaChiRequest;
 use App\Http\Requests\UpdateDiaChiRequest;
+use App\Models\KhachHang;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\Translation\Provider\Dsn;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class DiaChiController extends Controller
 {
@@ -84,11 +93,75 @@ class DiaChiController extends Controller
         //
     }
     //API
-    public function API_GetAll_DiaChi()
+    public function API_GetAll_DiaChi(KhachHang $khachHang)
     {
-        $data = DiaChi::all();
+        $data = $khachHang->DiaChiGiao;
         //return json_encode($data);
         return response()->json($data, 200);
     }
+    public function API_Insert_DiaChi(Request $request)
+    {
+        //kiem tra du lieu
+        $validate = Validator::make($request->all(), [
+            'KhachHangId' => ['required', 'numeric', 'integer', 'exists:khach_hangs,id'],
+            'TenNguoiNhan' => ['required', 'max:255'],
+            'Phone' => ['required'],
+            'TinhThanhPho' => [],
+            'QuanHuyen' => [],
+            'PhuongXa' => [],
+            'DiaChiChiTiet' => ['required'],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
 
+        $diaChi = DiaChi::firstOrCreate([
+            'KhachHangId' => $request['KhachHangId'],
+            'TenNguoiNhan' => $request["TenNguoiNhan"],
+            'Phone' => $request["Phone"],
+            'TinhThanhPho' => $request["TinhThanhPho"],
+            'QuanHuyen' => $request["QuanHuyen"],
+            'PhuongXa' => $request["PhuongXa"],
+            'DiaChiChiTiet' => $request["DiaChiChiTiet"],
+        ]);
+
+        $data = $diaChi;
+        //neu du lieu ko co rong~ thi tra ve voi status la 200
+        if (!empty($data))
+            return response()->json($data, 200);
+        return response()->json($data, 404);
+    }
+    public function API_Update_DiaChi(Request $request,DiaChi $diaChi)
+    {
+        //kiem tra du lieu
+        $validate = Validator::make($request->all(), [
+            'KhachHangId' => ['required', 'numeric', 'integer', 'exists:khach_hangs,id'],
+            'TenNguoiNhan' => ['required', 'max:255'],
+            'Phone' => ['required'],
+            'TinhThanhPho' => [],
+            'QuanHuyen' => [],
+            'PhuongXa' => [],
+            'DiaChiChiTiet' => ['required'],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+
+        $diaChi->fill([
+            'KhachHangId' => $request['KhachHangId'],
+            'TenNguoiNhan' => $request["TenNguoiNhan"],
+            'Phone' => $request["Phone"],
+            'TinhThanhPho' => $request["TinhThanhPho"],
+            'QuanHuyen' => $request["QuanHuyen"],
+            'PhuongXa' => $request["PhuongXa"],
+            'DiaChiChiTiet' => $request["DiaChiChiTiet"],
+        ]);
+        $diaChi->save();
+
+        $data = $diaChi;
+        //neu du lieu ko co rong~ thi tra ve voi status la 200
+        if (!empty($data))
+            return response()->json($data, 200);
+        return response()->json($data, 404);
+    }
 }

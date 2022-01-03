@@ -37,7 +37,7 @@ class KhachHang extends Model
     {
         return $this->hasMany(YeuThich::class, 'KhachHangId');
     }
-    public function DiaChi()
+    public function DiaChiGiao()
     {
         return $this->hasMany(DiaChi::class, 'KhachHangId');
     }
