@@ -290,9 +290,8 @@ class SanPhamController extends Controller
     #api binh luan
     public function API_Get_BinhLuan_SanPham(Request $request)
     {
-
         $data = BinhLuan::where("SanPhamId", $request["SanPhamId"])->get();
-        //dd($data);
+        dd($data);
         return response()->json($data, 200);
     }
     # api gia khuyen mai
