@@ -110,6 +110,9 @@ class DiaChiController extends Controller
             'QuanHuyen' => [],
             'PhuongXa' => [],
             'DiaChiChiTiet' => ['required'],
+            'CodeTinhThanhPho' => [],
+            'CodeQuanHuyen' => [],
+            'CodePhuongXa' => [],
         ]);
         //neu du lieu no' sai thi`tra? ve` loi~
         if ($validate->fails())
@@ -123,6 +126,9 @@ class DiaChiController extends Controller
             'QuanHuyen' => $request["QuanHuyen"],
             'PhuongXa' => $request["PhuongXa"],
             'DiaChiChiTiet' => $request["DiaChiChiTiet"],
+            'CodeTinhThanhPho' => $request["CodeTinhThanhPho"],
+            'CodeQuanHuyen' => $request["CodeQuanHuyen"],
+            'CodePhuongXa' => $request["CodePhuongXa"],
         ]);
 
         $data = $diaChi;
@@ -131,7 +137,7 @@ class DiaChiController extends Controller
             return response()->json($data, 200);
         return response()->json($data, 404);
     }
-    public function API_Update_DiaChi(Request $request,DiaChi $diaChi)
+    public function API_Update_DiaChi(Request $request, DiaChi $diaChi)
     {
         //kiem tra du lieu
         $validate = Validator::make($request->all(), [
@@ -142,6 +148,9 @@ class DiaChiController extends Controller
             'QuanHuyen' => [],
             'PhuongXa' => [],
             'DiaChiChiTiet' => ['required'],
+            'CodeTinhThanhPho' => [],
+            'CodeQuanHuyen' => [],
+            'CodePhuongXa' => [],
         ]);
         //neu du lieu no' sai thi`tra? ve` loi~
         if ($validate->fails())
@@ -155,6 +164,9 @@ class DiaChiController extends Controller
             'QuanHuyen' => $request["QuanHuyen"],
             'PhuongXa' => $request["PhuongXa"],
             'DiaChiChiTiet' => $request["DiaChiChiTiet"],
+            'CodeTinhThanhPho' => $request["CodeTinhThanhPho"],
+            'CodeQuanHuyen' => $request["CodeQuanHuyen"],
+            'CodePhuongXa' => $request["CodePhuongXa"],
         ]);
         $diaChi->save();
 
@@ -163,5 +175,14 @@ class DiaChiController extends Controller
         if (!empty($data))
             return response()->json($data, 200);
         return response()->json($data, 404);
+    }
+
+    public function API_Delete_DiaChi(DiaChi $diaChi)
+    {
+        if (!empty($diaChi)) {
+            $data = $diaChi->delete();
+            return response()->json($data, 200);
+        }
+        return response()->json($diaChi, 404);
     }
 }
