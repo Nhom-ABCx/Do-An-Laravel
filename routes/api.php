@@ -3,14 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SanPhamController;
-use App\Models\SanPham;
 use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\HoaDonController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\YeuThichController;
-use App\Models\YeuThich;
-use App\Policies\SanPhamPolicy;
+use App\Http\Controllers\DiaChiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +65,16 @@ Route::get('SanPham/YeuThich/{khachHang}', [YeuThichController::class, "API_Get_
 Route::get('YeuThich', [YeuThichController::class, "API_Get_KhachHang_YeuThich_SanPham"]);
 #Star
 Route::get('danh-gia/{SanPhamId}',[SanPhamController::class,'API_SanPham_Star']);
-#get binh luan
-Route::get('binh-luan/{SanPhamId}',[SanPhamController::class,'API_Get_BinhLuan_SanPham']);
+
+//dia chi
+Route::get('DiaChi/{khachHang}', [DiaChiController::class, "API_GetAll_DiaChi"]);
+Route::post('DiaChi/add', [DiaChiController::class, "API_Insert_DiaChi"]);
+Route::put('DiaChi/update/{diaChi}', [DiaChiController::class, "API_Update_DiaChi"]);
 # gia sale
 Route::get('khuyen-mai/{SanPhamId}',[SanPhamController::class,"API_Gia_Khuyen_Mai"]);
+#get binh luan
+Route::get('binh-luan/{sanPham}', [BinhLuanController::class, 'API_Get_BinhLuan_SanPham']);
+
+#add binh luan
+
+Route::post('binh-luan/add',[BinhLuanController::class, "API_Add_BinhLuan_SanPham"]);

@@ -287,14 +287,7 @@ class SanPhamController extends Controller
         $star = CT_HoaDon::where("SanPhamId", $spId)->get();
         return response()->json($star, 200);
     }
-    #api binh luan
-    public function API_Get_BinhLuan_SanPham(Request $request)
-    {
-
-        $data = BinhLuan::where("SanPhamId", $request["SanPhamId"])->get();
-        //dd($data);
-        return response()->json($data, 200);
-    }
+   
     # api gia khuyen mai
     //chua xong!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public function API_Gia_Khuyen_Mai(Request $request)
