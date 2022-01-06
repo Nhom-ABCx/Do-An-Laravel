@@ -158,7 +158,7 @@ class KhachHangController extends Controller
             'Username' => ["required"],
             'Email' => ["required", "Email"],
             //'Phone'=>['numeric', 'integer', 'min:0'],
-            'Phone' => [],
+            'Phone' => ['required','numeric', 'integer'],
             //'MatKhau'=>["required"],
             'HoTen' => [],
             'NgaySinh' => ["date"],

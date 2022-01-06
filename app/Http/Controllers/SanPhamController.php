@@ -287,9 +287,7 @@ class SanPhamController extends Controller
         $star = CT_HoaDon::where("SanPhamId", $spId)->get();
         return response()->json($star, 200);
     }
-<<<<<<< HEAD
-   
-=======
+
     #api binh luan
     public function API_Get_BinhLuan_SanPham(Request $request)
     {
@@ -297,7 +295,6 @@ class SanPhamController extends Controller
         dd($data);
         return response()->json($data, 200);
     }
->>>>>>> 4fa5ef5aa2ffe20bfec0b3fdc668e2976a1ea7bb
     # api gia khuyen mai
     //chua xong!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public function API_Gia_Khuyen_Mai(Request $request)
