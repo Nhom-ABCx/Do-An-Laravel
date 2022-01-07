@@ -193,17 +193,34 @@ class SanPhamController extends Controller
         else
             $sanPham->HinhAnh = Storage::url("assets/images/404/Img_error.png");
     }
+    //ham ho tro API
+    public static function Them_Star_Vao_ListSanPham($ListSanPham)
+    {
+        //tung phan tu cua ListsanPham, tinh trung binh so' Sao dua theo chi tiet hoa' don
+        //API tra ve` trung binh` so' Sao
+        foreach ($ListSanPham as $item) {
+            //lay ra danh sach' san pham duoc mua
+            $dsCtHoaDon = CT_HoaDon::where("SanPhamId",$item->id)->get();
+            //$dsCtHoaDon = $item->CT_HoaDon;   //ko biet tai sao no' co' chi tiet hoa' don vao json
+            //dd($dsCtHoaDon);
+            $Star = $dsCtHoaDon->avg('Star'); //lay ra so' sao trung binh`
+            if (!empty($Star))
+                Arr::add($item, "Star", $Star);
+            else
+                Arr::add($item, "Star", 0);
+        }
+    }
     //API
     public function API_SanPham(Request $request)
     {
         //lay het san pham
-        $sanPham = SanPham::where('SoLuongTon', '>', 0) //so luonhg ton >0
+        $dsSanPham = SanPham::where('SoLuongTon', '>', 0) //so luonhg ton >0
             ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
 
-        YeuThichController::Them_isFavorite_Vao_ListSanPham($sanPham, $request);
+        YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
+        SanPhamController::Them_Star_Vao_ListSanPham($dsSanPham);
 
-        return json_encode($sanPham);
-        return response()->json($sanPham, 200);
+        return response()->json($dsSanPham, 200);
     }
 
     public function API_SanPham_LoaiSanPham(LoaiSanPham $loaiSanPham, Request $request)
@@ -212,6 +229,7 @@ class SanPhamController extends Controller
             ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
 
         YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
+        $this->Them_Star_Vao_ListSanPham($data);
 
 
         //kt neu du lieu ko rong~ thi tra ve`
@@ -233,9 +251,10 @@ class SanPhamController extends Controller
     public function API_SanPham_TimKiem(Request $request)
     {
         $data = SanPham::where('TenSanPham', 'LIKE', '%' . Str::of($request['TenSanPham'])->trim() . '%')->where('SoLuongTon', '>', 0) //so luonhg ton >0
-        ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
+            ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
 
-    YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
+        YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
+        $this->Them_Star_Vao_ListSanPham($data);
         # không có dữ liệu trả về
         if ($data == null) {
             return response()->json($data, 404);
@@ -253,6 +272,7 @@ class SanPhamController extends Controller
             ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
 
         YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
+        $this->Them_Star_Vao_ListSanPham($data);
         return response()->json($data, 200);
     }
 
@@ -274,6 +294,7 @@ class SanPhamController extends Controller
         }
         //dd($dsSanPham);
         YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
+        $this->Them_Star_Vao_ListSanPham($dsSanPham);
         return response()->json($dsSanPham, 200);
     }
 
@@ -282,8 +303,6 @@ class SanPhamController extends Controller
         //$data = SanPham::whereBetween('GiaBan', [$request["from"], $request["to"]])->where('LoaiSanPhamId',$request["id"])->get();
         $data = SanPham::where('LoaiSanPhamId', $request["id"])->where('SoLuongTon', '>', 0) //so luonhg ton >0
             ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
-
-        YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
 
         $PriceFrom = $request["PriceFrom"];
         $PriceTo = $request["PriceTo"];
@@ -302,15 +321,10 @@ class SanPhamController extends Controller
             $dsSanPham = $ds;
             $i++;
         }
+
+        YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
+        $this->Them_Star_Vao_ListSanPham($dsSanPham);
         return response()->json($dsSanPham, 200);
-    }
-    #api danh gia san pham
-    public function API_SanPham_Star(Request $request)
-    {
-        //dd($request["SanPhamId"]);
-        $spId = $request["SanPhamId"];
-        $star = CT_HoaDon::where("SanPhamId", $spId)->get();
-        return response()->json($star, 200);
     }
 
     #api binh luan

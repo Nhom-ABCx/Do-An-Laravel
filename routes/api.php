@@ -62,8 +62,6 @@ Route::post('YeuThich/add', [YeuThichController::class, "API_Insert_KhachHang_Ye
 Route::delete('YeuThich/delete', [YeuThichController::class, "API_Delete_KhachHang_YeuThich_SanPham"]);
 Route::get('YeuThich/{khachHang}', [YeuThichController::class, "API_Get_YeuThich"]);
 Route::get('SanPham/YeuThich', [YeuThichController::class, "API_Get_SanPham_YeuThich"]);
-#Star
-Route::get('danh-gia/{SanPhamId}',[SanPhamController::class,'API_SanPham_Star']);
 
 //dia chi
 Route::get('DiaChi/{khachHang}', [DiaChiController::class, "API_GetAll_DiaChi"]);
