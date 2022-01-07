@@ -61,8 +61,7 @@ Route::post('HoaDon/LapHoaDon', [HoaDonController::class, 'API_LapHoaDon']);
 Route::post('YeuThich/add', [YeuThichController::class, "API_Insert_KhachHang_YeuThich_SanPham"]);
 Route::delete('YeuThich/delete', [YeuThichController::class, "API_Delete_KhachHang_YeuThich_SanPham"]);
 Route::get('YeuThich/{khachHang}', [YeuThichController::class, "API_Get_YeuThich"]);
-Route::get('SanPham/YeuThich/{khachHang}', [YeuThichController::class, "API_Get_SanPham_YeuThich"]);
-Route::get('YeuThich', [YeuThichController::class, "API_Get_KhachHang_YeuThich_SanPham"]);
+Route::get('SanPham/YeuThich', [YeuThichController::class, "API_Get_SanPham_YeuThich"]);
 #Star
 Route::get('danh-gia/{SanPhamId}',[SanPhamController::class,'API_SanPham_Star']);
 
@@ -76,6 +75,8 @@ Route::get('khuyen-mai/{SanPhamId}',[SanPhamController::class,"API_Gia_Khuyen_Ma
 #get binh luan
 Route::get('binh-luan/{sanPham}', [BinhLuanController::class, 'API_Get_BinhLuan_SanPham']);
 
-#add binh luan
+#tra ve san pham tk dang hap duoc binh luan
+Route::get('binh-luan',[BinhLuanController::class, "API_Check_Auth_ProductComment"]);
 
+#add binh luan
 Route::post('binh-luan/add',[BinhLuanController::class, "API_Add_BinhLuan_SanPham"]);

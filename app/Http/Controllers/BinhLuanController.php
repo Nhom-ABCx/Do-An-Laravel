@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\BinhLuan;
+use App\Models\CT_HoaDon;
+use App\Models\HoaDon;
 use App\Models\KhachHang;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 
 class BinhLuanController extends Controller
@@ -107,6 +110,31 @@ class BinhLuanController extends Controller
         if (!empty($data))
             return response()->json($data, 200);
         return response()->json($data, 404);
+    }
+    #tra ve san pham khach hang dang nhap duoc binh luan
+    public function API_Check_Auth_ProductComment(Request $request){
+        //lay ra het tat ca hoa don co' trang thai' la 2, thuoc khach' hang nao
+        $hoaD = HoaDon::where("KhachHangId", $request["KhachHangId"])->where("TrangThai", 2)->get();
+        $dsSanPhamDuocMua = []; //bien' tam
+        $i = 0; //bien' tam
+        foreach ($hoaD as $item) {
+            //tung phan tu cua hoa' don, lay ra danh sach' chi tiet' hoa' don
+            $dsCTHoaDon = CT_HoaDon::where("HoaDonId", $item->id)->get();
+            //cai' file insert random du lieu ao? co 1 so' chi tiet hoa don no' ko co' nen phai cho vo !empty
+            if (!empty($dsCTHoaDon)) { //neu' hoa don ko rong~
+                foreach ($dsCTHoaDon as $ct) {
+                    //tung phan tu? cua chi tiet hoa don lay' ra SanPham
+                    $sanPham = $ct->SanPham;
+                    //them cai' san pham lay da do' vao 1 mang?
+                    $data = Arr::add($dsSanPhamDuocMua, "$i", $sanPham);
+                    //gan' lai phan tu? dc them vao`
+                    $dsSanPhamDuocMua = $data;
+                    $i++; //bien' ao? i tang len de no co the them vao tiep theo
+                }
+            }
+        }
+        //dd($dsSanPhamDuocMua);
+        return response()->json($dsSanPhamDuocMua,200); //xuat ra ket qua
     }
     # thêm bình luân 
     public function API_Add_BinhLuan_SanPham(Request $request){

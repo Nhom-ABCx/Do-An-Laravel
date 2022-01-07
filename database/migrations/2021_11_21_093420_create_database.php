@@ -157,6 +157,7 @@ class CreateDatabase extends Migration
             $table->timestamps();
             $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
             $table->foreign('SanPhamId')->references('Id')->on('san_phams');
+            $table->unique(['KhachHangId', 'SanPhamId']);
         });
         Schema::create('rep_binh_luans', function (Blueprint $table) {
             $table->Id();
@@ -187,6 +188,7 @@ class CreateDatabase extends Migration
             $table->timestamps();
             $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
             $table->foreign('SanPhamId')->references('Id')->on('san_phams');
+            $table->unique(['KhachHangId', 'SanPhamId']);
         });
         Schema::create('dia_chis', function (Blueprint $table) {
             $table->Id();

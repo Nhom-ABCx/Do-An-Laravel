@@ -92,6 +92,29 @@ class YeuThichController extends Controller
     {
         //
     }
+    //ham`ho tro API
+    public static function Them_isFavorite_Vao_ListSanPham($ListsanPham, Request $request)
+    {
+        //neu' request co' khachangId va` no' co' gia' tri (tuc' ko rong~)
+        //$value=$request["KhachHangId]                     su dung bien' sanPham o ngoai`
+        $request->whenFilled('KhachHangId', function ($value) use ($ListsanPham) {
+            //thuc hien cau lenh neu' ko rong~
+            foreach ($ListsanPham as $item) {
+                //lay ra thu~ yeu thich'
+                $yeuThich = YeuThich::where("KhachHangId", $value)->where("SanPhamId", $item->id)->first();
+                //neu' co' du~lieu thi` danh' dau' isFavorite la` 1
+                if (!empty($yeuThich))
+                    Arr::add($item, "isFavorite", 1);
+                else
+                    Arr::add($item, "isFavorite", 0);
+            }
+        }, function () use ($ListsanPham) {
+            //thuc hien cau lenh neu' rong~
+            //tung phan tu cua danh san $sanPham, them vao no thuoc tinh isFavorite=0 neu' chua co' request KhachHangId dang nhap
+            foreach ($ListsanPham as $item)
+                Arr::add($item, "isFavorite", 0);
+        });
+    }
     //API
     public function API_Get_YeuThich(KhachHang $khachHang)
     {
@@ -100,8 +123,9 @@ class YeuThichController extends Controller
         return response()->json($dsYeuThich, 200);
     }
 
-    public function API_Get_SanPham_YeuThich(KhachHang $khachHang)
+    public function API_Get_SanPham_YeuThich(Request $request)
     {
+        $khachHang=KhachHang::find($request["KhachHangId"]);
         $dsYeuThich = $khachHang->YeuThich;
 
         $dsSanPham = [];
@@ -115,14 +139,8 @@ class YeuThichController extends Controller
             $i++;
         }
 
+        YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
         return response()->json($dsSanPham, 200);
-    }
-    public function API_Get_KhachHang_YeuThich_SanPham(Request $request)
-    {
-        $yeuThich=YeuThich::where("KhachHangId",$request["KhachHangId"])->where("SanPhamId",$request["SanPhamId"])->first();
-        if(!empty($yeuThich))
-            return response()->json($yeuThich, 200);
-        return response()->json($yeuThich,404);
     }
 
     public function API_Insert_KhachHang_YeuThich_SanPham(Request $request)
