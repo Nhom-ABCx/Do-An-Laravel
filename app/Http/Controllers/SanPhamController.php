@@ -9,6 +9,8 @@ use App\Models\CTChuongTrinhKM;
 use App\Models\SanPham;
 use App\Models\LoaiSanPham;
 use App\Models\HangSanXuat;
+use App\Models\HoaDon;
+use App\Models\YeuThich;
 use Facade\FlareClient\View;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
@@ -20,6 +22,7 @@ use Illuminate\Support\Str;
 // Array
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class SanPhamController extends Controller
 {
@@ -191,16 +194,25 @@ class SanPhamController extends Controller
             $sanPham->HinhAnh = Storage::url("assets/images/404/Img_error.png");
     }
     //API
-    public function API_SanPham()
+    public function API_SanPham(Request $request)
     {
-        $data = SanPham::all();
-        //return json_encode($data);
-        return response()->json($data, 200);
+        //lay het san pham
+        $sanPham = SanPham::where('SoLuongTon', '>', 0) //so luonhg ton >0
+            ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
+
+        YeuThichController::Them_isFavorite_Vao_ListSanPham($sanPham, $request);
+
+        return json_encode($sanPham);
+        return response()->json($sanPham, 200);
     }
 
-    public function API_SanPham_LoaiSanPham(LoaiSanPham $loaiSanPham)
+    public function API_SanPham_LoaiSanPham(LoaiSanPham $loaiSanPham, Request $request)
     {
-        $data = SanPham::where('LoaiSanPhamId', $loaiSanPham->id)->get();
+        $data = SanPham::where('LoaiSanPhamId', $loaiSanPham->id)->where('SoLuongTon', '>', 0) //so luonhg ton >0
+            ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
+
+        YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
+
 
         //kt neu du lieu ko rong~ thi tra ve`
         if (!empty($data))
@@ -220,7 +232,10 @@ class SanPhamController extends Controller
     # tìm kiếm sản phẩm
     public function API_SanPham_TimKiem(Request $request)
     {
-        $data = SanPham::where('TenSanPham', 'LIKE', '%' . Str::of($request['TenSanPham'])->trim() . '%')->get();
+        $data = SanPham::where('TenSanPham', 'LIKE', '%' . Str::of($request['TenSanPham'])->trim() . '%')->where('SoLuongTon', '>', 0) //so luonhg ton >0
+        ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
+
+    YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
         # không có dữ liệu trả về
         if ($data == null) {
             return response()->json($data, 404);
@@ -232,33 +247,43 @@ class SanPhamController extends Controller
 
 
     #top sản phẩm bán chạy
-    public function API_SanPham_Top()
+    public function API_SanPham_Top(Request $request)
     {
-        $data = SanPham::where('LuotMua', '>', 10)->get();
+        $data = SanPham::where('LuotMua', '>', 10)->where('SoLuongTon', '>', 0) //so luonhg ton >0
+            ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
+
+        YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
         return response()->json($data, 200);
     }
 
     # sản phẩm đang giảm giá
-    public function API_SanPham_GiamGia()
+    public function API_SanPham_GiamGia(Request $request)
     {
         $ctkm = ChuongTrinhKhuyenMai::where('deleted_at', null)->get();
         $chiTietCtkm = CTChuongTrinhKM::where('ChuongTrinhKhuyenMaiId', $ctkm[0]->id)->get();
         $dsSanPham = [];
         $i = 0;
         foreach ($chiTietCtkm as $item) {
-            $sp = SanPham::find($item->SanPhamId);
+            $sp = SanPham::where('id', $item->SanPhamId)->where('SoLuongTon', '>', 0) //so luonhg ton >0
+                ->first(); //sap xep theo luot mua giam dan`
+
+
             $data = Arr::add($dsSanPham, "$i", $sp);
             $dsSanPham = $data;
             $i++;
         }
         //dd($dsSanPham);
+        YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
         return response()->json($dsSanPham, 200);
     }
 
     public function API_SanPham_GiaBan(Request $request)
     {
         //$data = SanPham::whereBetween('GiaBan', [$request["from"], $request["to"]])->where('LoaiSanPhamId',$request["id"])->get();
-        $data = SanPham::where('LoaiSanPhamId', $request["id"])->get();
+        $data = SanPham::where('LoaiSanPhamId', $request["id"])->where('SoLuongTon', '>', 0) //so luonhg ton >0
+            ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
+
+        YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
 
         $PriceFrom = $request["PriceFrom"];
         $PriceTo = $request["PriceTo"];
