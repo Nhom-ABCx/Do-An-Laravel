@@ -140,7 +140,7 @@ class YeuThichController extends Controller
         }
 
         YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
-        SanPhamController::Them_Star_Vat_ListSanPham($dsSanPham);
+        SanPhamController::Them_Star_Vao_ListSanPham($dsSanPham);
         return response()->json($dsSanPham, 200);
     }
 

@@ -194,7 +194,7 @@ class SanPhamController extends Controller
             $sanPham->HinhAnh = Storage::url("assets/images/404/Img_error.png");
     }
     //ham ho tro API
-    public static function Them_Star_Vat_ListSanPham($ListSanPham)
+    public static function Them_Star_Vao_ListSanPham($ListSanPham)
     {
         //tung phan tu cua ListsanPham, tinh trung binh so' Sao dua theo chi tiet hoa' don
         //API tra ve` trung binh` so' Sao
@@ -218,7 +218,7 @@ class SanPhamController extends Controller
             ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
 
         YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
-        SanPhamController::Them_Star_Vat_ListSanPham($dsSanPham);
+        SanPhamController::Them_Star_Vao_ListSanPham($dsSanPham);
 
         return response()->json($dsSanPham, 200);
     }
@@ -229,7 +229,7 @@ class SanPhamController extends Controller
             ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
 
         YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
-        $this->Them_Star_Vat_ListSanPham($data);
+        $this->Them_Star_Vao_ListSanPham($data);
 
 
         //kt neu du lieu ko rong~ thi tra ve`
@@ -254,7 +254,7 @@ class SanPhamController extends Controller
             ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
 
         YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
-        $this->Them_Star_Vat_ListSanPham($data);
+        $this->Them_Star_Vao_ListSanPham($data);
         # không có dữ liệu trả về
         if ($data == null) {
             return response()->json($data, 404);
@@ -272,7 +272,7 @@ class SanPhamController extends Controller
             ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
 
         YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
-        $this->Them_Star_Vat_ListSanPham($data);
+        $this->Them_Star_Vao_ListSanPham($data);
         return response()->json($data, 200);
     }
 
@@ -294,7 +294,7 @@ class SanPhamController extends Controller
         }
         //dd($dsSanPham);
         YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
-        $this->Them_Star_Vat_ListSanPham($dsSanPham);
+        $this->Them_Star_Vao_ListSanPham($dsSanPham);
         return response()->json($dsSanPham, 200);
     }
 
@@ -323,7 +323,7 @@ class SanPhamController extends Controller
         }
 
         YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
-        $this->Them_Star_Vat_ListSanPham($dsSanPham);
+        $this->Them_Star_Vao_ListSanPham($dsSanPham);
         return response()->json($dsSanPham, 200);
     }
 
