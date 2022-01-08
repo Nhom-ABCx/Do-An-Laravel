@@ -177,7 +177,7 @@ class HoaDonController extends Controller
     public static function API_Them_SanPham_To_CT_Hoa_Don($listChiTietHoaDon)
     {
         foreach ($listChiTietHoaDon as $item) {
-            $sanPham=SanPham::find($item->SanPhamId);
+            $sanPham=$item->SanPham;
             if (!empty($sanPham))
                 $data=Arr::add($item, "SanPham", $sanPham);
             else
