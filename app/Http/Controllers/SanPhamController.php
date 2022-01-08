@@ -320,8 +320,6 @@ class SanPhamController extends Controller
         foreach ($chiTietCtkm as $item) {
             $sp = SanPham::where('id', $item->SanPhamId)->where('SoLuongTon', '>', 0) //so luonhg ton >0
                 ->first(); //sap xep theo luot mua giam dan`
-
-
             $data = Arr::add($dsSanPham, "$i", $sp);
             $dsSanPham = $data;
             $i++;

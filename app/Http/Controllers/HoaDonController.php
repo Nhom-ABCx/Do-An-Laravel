@@ -171,4 +171,28 @@ class HoaDonController extends Controller
         $hoaDon->save();
         return response()->json(["Sucssess" => True], 200);
     }
+
+   #them san pham vao chi tiet hoa don khi tra ve
+    public static function API_Them_SanPham_To_CT_Hoa_Don($listChiTietHoaDon){
+        foreach ($listChiTietHoaDon as $item) {
+            $dsSanPham=$item->SanPham;
+            if(!empty($dsSanPham))
+            Arr::add($item,'SanPham',$dsSanPham);
+            else
+            Arr::add($item,'SanPham',null);
+        }
+    }
+
+    #tra ve chi tiet hao don theo giai doan
+    public function API__TraVe_CT_HoaDon_Theo_Tab(Request $request){
+        $hoaDon=HoaDon::where("KhachHangId",$request["KhachHangId"])->where("TrangThai",$request["TrangThai"])->First();
+        //dd($hoaDon);
+        $dsChiTietHD=[];
+        if(!empty($hoaDon)){
+            $dsChiTietHD = $hoaDon->CT_HoaDon;
+        }
+        //dd($dsChiTietHD);
+        $this->API_Them_SanPham_To_CT_Hoa_Don($dsChiTietHD);
+        return response()->json($dsChiTietHD,200);
+    }
 }
