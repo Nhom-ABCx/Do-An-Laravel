@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CT_HoaDon;
+use App\Models\DiaChi;
 use App\Models\HoaDon;
 use App\Models\SanPham;
 use App\Models\KhachHang;
@@ -172,27 +173,38 @@ class HoaDonController extends Controller
         return response()->json(["Sucssess" => True], 200);
     }
 
-   #them san pham vao chi tiet hoa don khi tra ve
-    public static function API_Them_SanPham_To_CT_Hoa_Don($listChiTietHoaDon){
+    #them san pham vao chi tiet hoa don khi tra ve
+    public static function API_Them_SanPham_To_CT_Hoa_Don($listChiTietHoaDon)
+    {
         foreach ($listChiTietHoaDon as $item) {
-            $dsSanPham=$item->SanPham;
-            if(!empty($dsSanPham))
-            Arr::add($item,'SanPham',$dsSanPham);
+            $sanPham=SanPham::find($item->SanPhamId);
+            if (!empty($sanPham))
+                $data=Arr::add($item, "SanPham", $sanPham);
             else
-            Arr::add($item,'SanPham',null);
+                Arr::add($item, 'SanPham', null);
         }
     }
 
     #tra ve chi tiet hao don theo giai doan
-    public function API__TraVe_CT_HoaDon_Theo_Tab(Request $request){
-        $hoaDon=HoaDon::where("KhachHangId",$request["KhachHangId"])->where("TrangThai",$request["TrangThai"])->First();
-        //dd($hoaDon);
-        $dsChiTietHD=[];
-        if(!empty($hoaDon)){
-            $dsChiTietHD = $hoaDon->CT_HoaDon;
-        }
-        //dd($dsChiTietHD);
+    public function API_TraVe_CT_HoaDon_Theo_Tab(Request $request)
+    {
+        // $dsChiTietHD=DB::table("ct_hoa_dons")
+        // ->join("hoa_dons","hoa_dons.id","=","ct_hoa_dons.HoaDonId")
+        // ->join("dia_chis","dia_chis.id","=","hoa_dons.DiaChiId")
+        // ->where("dia_chis.KhachHangId",$request["KhachHangId"])
+        // ->where("hoa_dons.TrangThai",$request["TrangThai"])
+        // ->whereNull("hoa_dons.deleted_at")
+        // ->whereNull("ct_hoa_dons.deleted_at")
+        // ->get("ct_hoa_dons.*");
+        //y nhu nhau
+        $dsChiTietHD=CT_HoaDon::join("hoa_dons","hoa_dons.id","=","ct_hoa_dons.HoaDonId")
+        ->join("dia_chis","dia_chis.id","=","hoa_dons.DiaChiId")
+        ->where("dia_chis.KhachHangId",$request["KhachHangId"])
+        ->where("hoa_dons.TrangThai",$request["TrangThai"])
+        ->whereNull("hoa_dons.deleted_at")
+        ->whereNull("ct_hoa_dons.deleted_at")
+        ->get("ct_hoa_dons.*");
         $this->API_Them_SanPham_To_CT_Hoa_Don($dsChiTietHD);
-        return response()->json($dsChiTietHD,200);
+        return response()->json($dsChiTietHD, 200);
     }
 }

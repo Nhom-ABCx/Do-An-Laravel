@@ -75,4 +75,4 @@ Route::get('binh-luan',[BinhLuanController::class, "API_Check_Auth_ProductToPay"
 #add binh luan
 Route::post('binh-luan/add',[BinhLuanController::class, "API_Add_BinhLuan_SanPham"]);
 #Hoa don theo tap
-Route::get('hoa-don',[HoaDonController::class, "API__TraVe_CT_HoaDon_Theo_Tab"]);
+Route::get('hoa-don',[HoaDonController::class, "API_TraVe_CT_HoaDon_Theo_Tab"]);
