@@ -111,16 +111,7 @@ class BinhLuanController extends Controller
             return response()->json($data, 200);
         return response()->json($data, 404);
     }
-    # them san pham vao chi tiet hoa don khi tra ve
-    public function API_Them_SanPham_To_CT_Hoa_Don($cthoa){
-        foreach ($cthoa as $item) {
-            $dsSanPham=SanPham::where("id",$item->SamPhamId);
-            if(!empty($dsSanPham))
-            Arr::add($item,'SanPham',$dsSanPham);
-            else
-            Arr::add($item,'SanPham',null);
-        }
-    }
+   
     #tra ve san pham khach hang dang nhap duoc binh luan
     public function API_Check_Auth_ProductToPay(Request $request){
         //lay ra het tat ca hoa don co' trang thai' la 2, thuoc khach' hang nao

@@ -200,7 +200,7 @@ class SanPhamController extends Controller
         //API tra ve` trung binh` so' Sao
         foreach ($ListSanPham as $item) {
             //lay ra danh sach' san pham duoc mua
-            $dsCtHoaDon = CT_HoaDon::where("SanPhamId",$item->id)->get();
+            $dsCtHoaDon = CT_HoaDon::where("SanPhamId", $item->id)->get();
             //$dsCtHoaDon = $item->CT_HoaDon;   //ko biet tai sao no' co' chi tiet hoa' don vao json
             //dd($dsCtHoaDon);
             $Star = $dsCtHoaDon->avg('Star'); //lay ra so' sao trung binh`
@@ -210,6 +210,35 @@ class SanPhamController extends Controller
                 Arr::add($item, "Star", 0);
         }
     }
+    //them giam gia' vao` api
+    public static function Them_GiamGia_Vao_ListsanPham($ListSanPham)
+    {
+        //lay ra cac chi tiet khuyen mai dang giam gia'
+        $dsCtChuongTrinhKM = DB::table("ct_chuong_trinh_kms")
+            ->join("chuong_trinh_khuyen_mais", "chuong_trinh_khuyen_mais.id", "=", "ct_chuong_trinh_kms.ChuongTrinhKhuyenMaiId")
+            ->select("ct_chuong_trinh_kms.*")
+            ->whereDate("chuong_trinh_khuyen_mais.FromDate", "<=", date('Y-m-d H:i:s'))
+            ->whereDate("chuong_trinh_khuyen_mais.ToDate", ">=", date('Y-m-d H:i:s'))
+            ->whereNull("chuong_trinh_khuyen_mais.deleted_at")
+            ->whereNull("ct_chuong_trinh_kms.deleted_at")
+            ->get();
+        //lay ra tat ca id san pham dang giam gia' luu vao trong mang?
+        $idSanPhamGiamGia = [];
+        $i = 0;
+        foreach ($dsCtChuongTrinhKM as $ctkm) {
+            $data = Arr::add($idSanPhamGiamGia, "$i", $ctkm->SanPhamId);
+            $idSanPhamGiamGia = $data;
+            $i++;
+        }
+        //tung phan tu cua danh sach San Pham
+        foreach ($ListSanPham as $item) {
+            //neu' id cua san pham do' thuoc mang? san pham dang giam gia' thi` them giam gia'
+            if (in_array($item->id,$idSanPhamGiamGia))
+                Arr::add($item, "GiamGia", $ctkm->GiamGia);
+            else //nguoc lai them giam gia' =0
+                Arr::add($item, "GiamGia", 0);
+        }
+    }
     //API
     public function API_SanPham(Request $request)
     {
@@ -217,9 +246,14 @@ class SanPhamController extends Controller
         $dsSanPham = SanPham::where('SoLuongTon', '>', 0) //so luonhg ton >0
             ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
 
+
+
+        //dd($dsSanPham);
+
         YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
         SanPhamController::Them_Star_Vao_ListSanPham($dsSanPham);
-        
+        SanPhamController::Them_GiamGia_Vao_ListsanPham($dsSanPham);
+
         return response()->json($dsSanPham, 200);
     }
 
@@ -230,6 +264,7 @@ class SanPhamController extends Controller
 
         YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
         $this->Them_Star_Vao_ListSanPham($data);
+        SanPhamController::Them_GiamGia_Vao_ListsanPham($data);
 
 
         //kt neu du lieu ko rong~ thi tra ve`
@@ -255,6 +290,7 @@ class SanPhamController extends Controller
 
         YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
         $this->Them_Star_Vao_ListSanPham($data);
+        SanPhamController::Them_GiamGia_Vao_ListsanPham($data);
         # không có dữ liệu trả về
         if ($data == null) {
             return response()->json($data, 404);
@@ -273,6 +309,7 @@ class SanPhamController extends Controller
 
         YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
         $this->Them_Star_Vao_ListSanPham($data);
+        SanPhamController::Them_GiamGia_Vao_ListsanPham($data);
         return response()->json($data, 200);
     }
 
@@ -286,8 +323,6 @@ class SanPhamController extends Controller
         foreach ($chiTietCtkm as $item) {
             $sp = SanPham::where('id', $item->SanPhamId)->where('SoLuongTon', '>', 0) //so luonhg ton >0
                 ->first(); //sap xep theo luot mua giam dan`
-
-
             $data = Arr::add($dsSanPham, "$i", $sp);
             $dsSanPham = $data;
             $i++;
@@ -295,6 +330,7 @@ class SanPhamController extends Controller
         //dd($dsSanPham);
         YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
         $this->Them_Star_Vao_ListSanPham($dsSanPham);
+        SanPhamController::Them_GiamGia_Vao_ListsanPham($dsSanPham);
         return response()->json($dsSanPham, 200);
     }
 
@@ -324,6 +360,7 @@ class SanPhamController extends Controller
 
         YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
         $this->Them_Star_Vao_ListSanPham($dsSanPham);
+        SanPhamController::Them_GiamGia_Vao_ListsanPham($dsSanPham);
         return response()->json($dsSanPham, 200);
     }
 
@@ -333,15 +370,5 @@ class SanPhamController extends Controller
         $data = BinhLuan::where("SanPhamId", $request["SanPhamId"])->get();
         dd($data);
         return response()->json($data, 200);
-    }
-    # api gia khuyen mai
-    //chua xong!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public function API_Gia_Khuyen_Mai(Request $request)
-    {
-        //$ctkm = ChuongTrinhKhuyenMai::where('deleted_at', null)->get();
-        $chiTietCtkm = CTChuongTrinhKM::where('SanPhamId', $request["SanPhamId"])->first();
-        if (!empty($chiTietCtkm))
-            return response()->json($chiTietCtkm, 200);
-        return response()->json($chiTietCtkm, 404);
     }
 }

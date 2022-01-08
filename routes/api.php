@@ -68,11 +68,11 @@ Route::get('DiaChi/{khachHang}', [DiaChiController::class, "API_GetAll_DiaChi"])
 Route::post('DiaChi/add', [DiaChiController::class, "API_Insert_DiaChi"]);
 Route::delete('DiaChi/delete/{diaChi}', [DiaChiController::class, "API_Delete_DiaChi"]);
 Route::put('DiaChi/update/{diaChi}', [DiaChiController::class, "API_Update_DiaChi"]);
-# gia sale
-Route::get('khuyen-mai/{SanPhamId}',[SanPhamController::class,"API_Gia_Khuyen_Mai"]);
 #get binh luan
 Route::get('binh-luan/{sanPham}', [BinhLuanController::class, 'API_Get_BinhLuan_SanPham']);
 #tra ve san pham tk dang hap duoc binh luan
 Route::get('binh-luan',[BinhLuanController::class, "API_Check_Auth_ProductToPay"]);
 #add binh luan
 Route::post('binh-luan/add',[BinhLuanController::class, "API_Add_BinhLuan_SanPham"]);
+#Hoa don theo tap
+Route::get('hoa-don',[HoaDonController::class, "API__TraVe_CT_HoaDon_Theo_Tab"]);
