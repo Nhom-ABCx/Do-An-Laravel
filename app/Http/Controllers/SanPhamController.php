@@ -214,14 +214,7 @@ class SanPhamController extends Controller
     public static function Them_GiamGia_Vao_ListsanPham($ListSanPham)
     {
         //lay ra cac chi tiet khuyen mai dang giam gia'
-        $dsCtChuongTrinhKM = DB::table("ct_chuong_trinh_kms")
-            ->join("chuong_trinh_khuyen_mais", "chuong_trinh_khuyen_mais.id", "=", "ct_chuong_trinh_kms.ChuongTrinhKhuyenMaiId")
-            ->select("ct_chuong_trinh_kms.*")
-            ->whereDate("chuong_trinh_khuyen_mais.FromDate", "<=", date('Y-m-d H:i:s'))
-            ->whereDate("chuong_trinh_khuyen_mais.ToDate", ">=", date('Y-m-d H:i:s'))
-            ->whereNull("chuong_trinh_khuyen_mais.deleted_at")
-            ->whereNull("ct_chuong_trinh_kms.deleted_at")
-            ->get();
+        $dsCtChuongTrinhKM = ChuongTrinhKhuyenMaiController::danhSachChiTietChuongTrinhKM();
         //lay ra tat ca id san pham dang giam gia' luu vao trong mang?
         $idSanPhamGiamGia = [];
         $i = 0;
@@ -232,11 +225,16 @@ class SanPhamController extends Controller
         }
         //tung phan tu cua danh sach San Pham
         foreach ($ListSanPham as $item) {
-            //neu' id cua san pham do' thuoc mang? san pham dang giam gia' thi` them giam gia'
-            if (in_array($item->id,$idSanPhamGiamGia))
-                Arr::add($item, "GiamGia", $ctkm->GiamGia);
-            else //nguoc lai them giam gia' =0
+            //neu' id san pham do' ko thuoc san pham dang giam gia' thi GiamGia=0
+            if (!in_array($item->id, $idSanPhamGiamGia))
                 Arr::add($item, "GiamGia", 0);
+            //nguoc lai tim` xem san pham giam? gia' do' no' Gia'Giam? bao nhieu
+            else {
+                foreach ($dsCtChuongTrinhKM as $ctkm) {
+                    if ($item->id == $ctkm->SanPhamId)
+                        Arr::add($item, "GiamGia", $ctkm->GiamGia);
+                }
+            }
         }
     }
     //API

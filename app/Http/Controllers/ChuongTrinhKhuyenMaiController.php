@@ -6,6 +6,7 @@ use App\Models\ChuongTrinhKhuyenMai;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 class ChuongTrinhKhuyenMaiController extends Controller
 {
@@ -40,7 +41,7 @@ class ChuongTrinhKhuyenMaiController extends Controller
     public function store(Request $request)
     {
         $CTkm= new ChuongTrinhKhuyenMai();
-        
+
         $CTkm->fill([
             "TenChuongTrinh"=>$request->input("TenChuongTrinh"),
             "MoTa"=>$request->input("MoTa"),
@@ -70,7 +71,7 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function edit(ChuongTrinhKhuyenMai $chuongTrinhKhuyenMai)
     {
-       
+
         //dd($chuongTrinhKhuyenMai);
         return view('KhuyenMai.KhuyenMai-edit',['ctkm'=>$chuongTrinhKhuyenMai]);
     }
@@ -85,15 +86,15 @@ class ChuongTrinhKhuyenMaiController extends Controller
     public function update(Request $request, ChuongTrinhKhuyenMai $chuongTrinhKhuyenMai)
     {
         //dd($chuongTrinhKhuyenMai);
-        
+
         $chuongTrinhKhuyenMai->fill([
             'TenChuongTrinh'=>$request->input('TenChuongTrinh'),
             'MoTa'=>$request->input('MoTa'),
             'FromDate'=>$request->input('FromDate'),
             'ToDate'=>$request->input('ToDate'),
-        
+
         ]);
-   
+
         $chuongTrinhKhuyenMai->save();
 
          return Redirect::route('KhuyenMai.index');
@@ -109,5 +110,16 @@ class ChuongTrinhKhuyenMaiController extends Controller
         $chuongTrinhKhuyenMai->delete();
         return Redirect::route('KhuyenMai.index');
 
+    }
+    public static function danhSachChiTietChuongTrinhKM()
+    {
+        return DB::table("ct_chuong_trinh_kms")
+        ->join("chuong_trinh_khuyen_mais", "chuong_trinh_khuyen_mais.id", "=", "ct_chuong_trinh_kms.ChuongTrinhKhuyenMaiId")
+        ->select("ct_chuong_trinh_kms.*")
+        ->whereDate("chuong_trinh_khuyen_mais.FromDate", "<=", date('Y-m-d H:i:s'))
+        ->whereDate("chuong_trinh_khuyen_mais.ToDate", ">=", date('Y-m-d H:i:s'))
+        ->whereNull("chuong_trinh_khuyen_mais.deleted_at")
+        ->whereNull("ct_chuong_trinh_kms.deleted_at")
+        ->get();
     }
 }
