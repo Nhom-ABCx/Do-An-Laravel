@@ -72,9 +72,7 @@ Route::put('DiaChi/update/{diaChi}', [DiaChiController::class, "API_Update_DiaCh
 Route::get('khuyen-mai/{SanPhamId}',[SanPhamController::class,"API_Gia_Khuyen_Mai"]);
 #get binh luan
 Route::get('binh-luan/{sanPham}', [BinhLuanController::class, 'API_Get_BinhLuan_SanPham']);
-
 #tra ve san pham tk dang hap duoc binh luan
-Route::get('binh-luan',[BinhLuanController::class, "API_Check_Auth_ProductComment"]);
-
+Route::get('binh-luan',[BinhLuanController::class, "API_Check_Auth_ProductToPay"]);
 #add binh luan
 Route::post('binh-luan/add',[BinhLuanController::class, "API_Add_BinhLuan_SanPham"]);

@@ -111,13 +111,23 @@ class BinhLuanController extends Controller
             return response()->json($data, 200);
         return response()->json($data, 404);
     }
+    # them san pham vao chi tiet hoa don khi tra ve
+    public function API_Them_SanPham_To_CT_Hoa_Don($cthoa){
+        foreach ($cthoa as $item) {
+            $dsSanPham=SanPham::where("id",$item->SamPhamId);
+            if(!empty($dsSanPham))
+            Arr::add($item,'SanPham',$dsSanPham);
+            else
+            Arr::add($item,'SanPham',null);
+        }
+    }
     #tra ve san pham khach hang dang nhap duoc binh luan
-    public function API_Check_Auth_ProductComment(Request $request){
+    public function API_Check_Auth_ProductToPay(Request $request){
         //lay ra het tat ca hoa don co' trang thai' la 2, thuoc khach' hang nao
-        $hoaD = HoaDon::where("KhachHangId", $request["KhachHangId"])->where("TrangThai", 2)->get();
+        $hoaDon = HoaDon::where("KhachHangId", $request["KhachHangId"])->where("TrangThai", 2)->get();
         $dsSanPhamDuocMua = []; //bien' tam
         $i = 0; //bien' tam
-        foreach ($hoaD as $item) {
+        foreach ($hoaDon as $item) {
             //tung phan tu cua hoa' don, lay ra danh sach' chi tiet' hoa' don
             $dsCTHoaDon = CT_HoaDon::where("HoaDonId", $item->id)->get();
             //cai' file insert random du lieu ao? co 1 so' chi tiet hoa don no' ko co' nen phai cho vo !empty
@@ -129,9 +139,11 @@ class BinhLuanController extends Controller
                     $data = Arr::add($dsSanPhamDuocMua, "$i", $sanPham);
                     //gan' lai phan tu? dc them vao`
                     $dsSanPhamDuocMua = $data;
+                    //$this->API_Them_SanPham_To_CT_Hoa_Don($dsSanPhamDuocMua);
                     $i++; //bien' ao? i tang len de no co the them vao tiep theo
                 }
             }
+            //dd($dsSanPhamDuocMua);
         }
         //dd($dsSanPhamDuocMua);
         return response()->json($dsSanPhamDuocMua,200); //xuat ra ket qua
