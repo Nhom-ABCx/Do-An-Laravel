@@ -179,7 +179,7 @@ class HoaDonController extends Controller
         foreach ($listChiTietHoaDon as $item) {
             $sanPham=$item->SanPham;
             if (!empty($sanPham))
-                $data=Arr::add($item, "SanPham", $sanPham);
+                Arr::add($item, "SanPham", $sanPham);
             else
                 Arr::add($item, 'SanPham', null);
         }
