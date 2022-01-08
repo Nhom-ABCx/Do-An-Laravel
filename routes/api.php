@@ -68,8 +68,6 @@ Route::get('DiaChi/{khachHang}', [DiaChiController::class, "API_GetAll_DiaChi"])
 Route::post('DiaChi/add', [DiaChiController::class, "API_Insert_DiaChi"]);
 Route::delete('DiaChi/delete/{diaChi}', [DiaChiController::class, "API_Delete_DiaChi"]);
 Route::put('DiaChi/update/{diaChi}', [DiaChiController::class, "API_Update_DiaChi"]);
-# gia sale
-Route::get('khuyen-mai/{SanPhamId}',[SanPhamController::class,"API_Gia_Khuyen_Mai"]);
 #get binh luan
 Route::get('binh-luan/{sanPham}', [BinhLuanController::class, 'API_Get_BinhLuan_SanPham']);
 
