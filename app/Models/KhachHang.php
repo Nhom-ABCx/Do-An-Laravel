@@ -29,10 +29,6 @@ class KhachHang extends Model
         'MatKhau',
     ];
 
-    public function HoaDon()
-    {
-        return $this->hasMany(HoaDon::class, 'KhachHangId');
-    }
     public function YeuThich()
     {
         return $this->hasMany(YeuThich::class, 'KhachHangId');

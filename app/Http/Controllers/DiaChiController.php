@@ -105,7 +105,7 @@ class DiaChiController extends Controller
         $validate = Validator::make($request->all(), [
             'KhachHangId' => ['required', 'numeric', 'integer', 'exists:khach_hangs,id'],
             'TenNguoiNhan' => ['required', 'max:255'],
-            'Phone' => ['required','numeric', 'integer'],
+            'Phone' => ['required','numeric'],
             'TinhThanhPho' => [],
             'QuanHuyen' => [],
             'PhuongXa' => [],
@@ -143,7 +143,7 @@ class DiaChiController extends Controller
         $validate = Validator::make($request->all(), [
             'KhachHangId' => ['required', 'numeric', 'integer', 'exists:khach_hangs,id'],
             'TenNguoiNhan' => ['required', 'max:255'],
-            'Phone' => ['required'],
+            'Phone' => ['required','numeric'],
             'TinhThanhPho' => [],
             'QuanHuyen' => [],
             'PhuongXa' => [],

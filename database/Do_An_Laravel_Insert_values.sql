@@ -66,6 +66,7 @@ insert into San_Phams(TenSanPham,MoTa,SoLuongTon,GiaNhap,GiaBan,HinhAnh,LuotMua,
 insert into Chuong_Trinh_Khuyen_Mais(TenChuongTrinh,MoTa,FromDate,ToDate,created_at) values(N'Khuyến mãi cực hot ngày 20/11',N' giảm giá đến 5000đ các loại phụ kiện','2021-11-20','2022-12-01','2021-10-19');
 
 insert into CT_Chuong_Trinh_KMs(ChuongTrinhKhuyenMaiId,SanPhamId,GiamGia,created_at) select a.Id,b.Id,5000,'2021-11-21' from Chuong_Trinh_Khuyen_Mais as a,San_Phams as b where b.LoaiSanPhamId=6 and a.Id=1;
+insert into CT_Chuong_Trinh_KMs(ChuongTrinhKhuyenMaiId,SanPhamId,GiamGia,created_at) select a.Id,b.Id,10000,'2021-11-21' from Chuong_Trinh_Khuyen_Mais as a,San_Phams as b where b.LoaiSanPhamId=4 and a.Id=1;
 
 insert into Don_Vi_Van_Chuyens(TenDonViVanChuyen,Website,Email,Phone)values(N'Viettel Post','https://www.viettelpost.com.vn/','viettelpost@gmail.com','84462660306')	   ;
 insert into Don_Vi_Van_Chuyens(TenDonViVanChuyen,Website,Email,Phone)values(N'Vietnam Post','https://www.ems.com.vn/','Vietnampost@gmail.com','84435371552')			   ;
@@ -83,36 +84,46 @@ insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,Dia
 insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0506781231',6,N'Trần Phi Long','1997-06-12',0,null,null,'2021-11-21');
 insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0298123123',7,N'Dương Tấn Tài','1989-08-29',1,null,null,'2021-11-21');
 
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(1,5,null,0,0,'2021/01/27');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(3,4,null,0,0,'2021/01/15');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(2,5,null,0,0,'2021/01/11');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(1,5,null,1,0,'2021/03/30');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(2,5,null,1,0,'2021/03/30');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(3,5,null,3,0,'2021/04/29');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(1,4,null,3,0,'2021/04/07');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(1,4,null,3,0,'2021/01/11');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(3,3,null,2,0,'2021/01/29');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(3,4,null,3,0,'2021/04/29');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(2,3,null,0,0,'2021/01/11');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(1,4,null,2,0,'2021/01/29');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(2,3,null,2,0,'2021/01/27');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(3,2,null,1,0,'2021/01/15');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(2,2,null,1,0,'2021/01/15');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(1,3,null,3,0,'2021/03/30');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(3,1,null,2,0,'2021/01/27');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(2,1,null,0,0,'2021/01/29');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(3,2,null,0,0,'2021/01/29');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(3,4,null,1,0,'2021/04/07');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(1,4,null,3,0,'2021/01/29');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(2,4,null,2,0,'2021/04/29');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(3,5,null,0,0,'2021/01/27');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(2,4,null,1,0,'2021/01/27');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(2,1,null,3,0,'2021/04/28');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(2,3,null,2,0,'2021/01/29');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(3,3,null,2,0,'2021/01/29');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(3,4,null,3,0,'2021/01/15');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(1,5,null,1,0,'2021/01/29');
-insert into Hoa_Dons(NhanVienId,KhachHangId,DiaChiGiao,TrangThai,TongTien,created_at) values(1,5,null,3,0,'2021/01/15');
+insert into Dia_Chis(KhachHangId,TenNguoiNhan,Phone,DiaChiChiTiet) select a.id,a.HoTen,a.Phone,a.DiaChi from khach_hangs as a
+insert into Dia_Chis(KhachHangId,TenNguoiNhan,Phone,TinhThanhPho,QuanHuyen,PhuongXa,DiaChiChiTiet,CodeTinhThanhPho,CodeQuanHuyen,CodePhuongXa)
+values(1,'Dat ne`','091928739',N'Thành phố Hồ Chí Minh',N'Huyện Bình Chánh',N'Thị trấn Tân Túc',N'123/ds1 Duong ABCXYZ',79,785,27595);
+insert into Dia_Chis(KhachHangId,TenNguoiNhan,Phone,TinhThanhPho,QuanHuyen,PhuongXa,DiaChiChiTiet,CodeTinhThanhPho,CodeQuanHuyen,CodePhuongXa)
+values(2,'Dattt ne``','0901283123',N'Thành phố Hà Nội',N'Quận Long Biên',N'Phường Thượng Thanh',N'123/asasd Đường An Dương Vương',1,4,115);
+insert into Dia_Chis(KhachHangId,TenNguoiNhan,Phone,TinhThanhPho,QuanHuyen,PhuongXa,DiaChiChiTiet,CodeTinhThanhPho,CodeQuanHuyen,CodePhuongXa)
+values(3,'Dat ne`','091928739',N'Thành phố Hồ Chí Minh',N'Huyện Bình Chánh',N'Thị trấn Tân Túc',N'123/ds1 Duong ABCXYZ',79,785,27595);
+insert into Dia_Chis(KhachHangId,TenNguoiNhan,Phone,TinhThanhPho,QuanHuyen,PhuongXa,DiaChiChiTiet,CodeTinhThanhPho,CodeQuanHuyen,CodePhuongXa)
+values(4,'Dattt ne``','0901283123',N'Thành phố Hà Nội',N'Quận Long Biên',N'Phường Thượng Thanh',N'123/asasd Đường An Dương Vương',1,4,115);
+
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(1,1,0,0,'2021/01/27');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(3,1,0,0,'2021/01/15');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(2,1,0,0,'2021/01/11');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(1,2,1,0,'2021/03/30');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(2,2,1,0,'2021/03/30');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(3,2,3,0,'2021/04/29');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(1,3,3,0,'2021/04/07');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(1,3,3,0,'2021/01/11');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(3,3,2,0,'2021/01/29');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(3,4,3,0,'2021/04/29');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(2,4,0,0,'2021/01/11');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(1,4,2,0,'2021/01/29');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(2,1,2,0,'2021/01/27');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(3,1,1,0,'2021/01/15');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(2,1,1,0,'2021/01/15');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(1,2,3,0,'2021/03/30');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(3,2,2,0,'2021/01/27');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(2,2,0,0,'2021/01/29');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(3,3,0,0,'2021/01/29');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(3,3,1,0,'2021/04/07');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(1,3,3,0,'2021/01/29');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(2,4,2,0,'2021/04/29');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(3,4,0,0,'2021/01/27');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(2,4,1,0,'2021/01/27');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(2,1,3,0,'2021/04/28');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(2,1,2,0,'2021/01/29');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(3,1,2,0,'2021/01/29');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(3,2,3,0,'2021/01/15');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(1,2,1,0,'2021/01/29');
+insert into Hoa_Dons(NhanVienId,DiaChiId,TrangThai,TongTien,created_at) values(1,2,3,0,'2021/01/15');
 
 insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(19,30,15,0,0,1) ;
 insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(18,11,17,0,0,2) ;

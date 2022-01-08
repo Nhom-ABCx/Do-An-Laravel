@@ -15,8 +15,7 @@ class HoaDon extends Model
     protected $fillable = [
         'Id',
         'NhanVienId',
-        'KhachHangId',
-        'DiaChiGiao',
+        'DiaChiId',
         'TrangThai',
         'TongTien',
     ];
@@ -25,9 +24,9 @@ class HoaDon extends Model
         return $this->belongsTo(NhanVien::class, 'NhanVienId');
     }
 
-    public function KhachHang()
+    public function DiaChi()
     {
-        return $this->belongsTo(KhachHang::class, 'KhachHangId');
+        return $this->belongsTo(DiaChi::class, 'DiaChiId');
     }
     public function CT_HoaDon()
     {

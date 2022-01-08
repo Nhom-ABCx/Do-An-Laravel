@@ -9,6 +9,8 @@ use App\Models\KhachHang;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 
 class HoaDonController extends Controller
 {
@@ -94,7 +96,7 @@ class HoaDonController extends Controller
     {
         //kiem tra du lieu
         $validate = Validator::make($request->all(), [
-            'KhachHangId' => ['required', 'numeric', 'integer', 'exists:khach_hangs,id'],
+            'DiaChiId' => ['required', 'numeric', 'integer', 'exists:dia_chis,id'],
             "Data.*.SanPhamId" => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
             "Data.*.SoLuong" => ['required', 'numeric', 'integer', 'min:0'],
         ]);
@@ -104,11 +106,24 @@ class HoaDonController extends Controller
 
         $hoaDon = HoaDon::create([
             'NhanVienId'       => 1,
-            'KhachHangId'       => $request['KhachHangId'],
-            'DiaChiGiao'         => '',
+            'DiaChiId'         => $request["DiaChiId"],
             'TrangThai' => 0, //vua lap
             'TongTien' => 0,
         ]);
+
+
+        //---------------------------------------------
+        //lay ra cac chi tiet khuyen mai dang giam gia'
+        $dsCtChuongTrinhKM = ChuongTrinhKhuyenMaiController::danhSachChiTietChuongTrinhKM();
+        //lay ra tat ca id san pham dang giam gia' luu vao trong mang?
+        $idSanPhamGiamGia = [];
+        $i = 0;
+        foreach ($dsCtChuongTrinhKM as $ctkm) {
+            $data = Arr::add($idSanPhamGiamGia, "$i", $ctkm->SanPhamId);
+            $idSanPhamGiamGia = $data;
+            $i++;
+        }
+        //---------------------------------------------
 
         //dd($request["Data"][0]["SanPhamId"]);
         $arrayRaw = json_decode($request->getContent(), true); //chuyen json thanh array de truy van
@@ -125,13 +140,21 @@ class HoaDonController extends Controller
                 ]);
                 $sp->save();
 
-                $thanhTien = $item["SoLuong"] * $sp->GiaBan;
+
+                $giaBan = $sp->GiaBan;
+                if (in_array($sp->id, $idSanPhamGiamGia))
+                    foreach ($dsCtChuongTrinhKM as $ctkm) {
+                        if ($sp->id == $ctkm->SanPhamId)
+                            $giaBan = $sp->GiaBan - $ctkm->GiamGia;
+                    }
+
+                $thanhTien = $item["SoLuong"] * $giaBan;
 
                 CT_HoaDon::create([
                     'HoaDonId'       => $hoaDon->id,
                     'SanPhamId'       => $item["SanPhamId"],
                     'SoLuong'         => $item["SoLuong"],
-                    'GiaBan' => $sp->GiaBan,
+                    'GiaBan' => $giaBan,
                     'GiaGiam' => 0,
                     'ThanhTien' => $thanhTien,
                     'Star' => 0,
@@ -139,8 +162,7 @@ class HoaDonController extends Controller
             }
         }
         //neu ko co chi tiet hoa don nao duoc lap
-        if(empty(CT_HoaDon::where('HoaDonId',$hoaDon->id)->first()))
-        {
+        if (empty(CT_HoaDon::where('HoaDonId', $hoaDon->id)->first())) {
             $hoaDon->delete();
             return response()->json(["Sucssess" => false], 400);
         }

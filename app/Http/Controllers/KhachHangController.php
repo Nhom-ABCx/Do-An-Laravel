@@ -157,8 +157,7 @@ class KhachHangController extends Controller
         $validate = Validator::make($request->all(), [
             'Username' => ["required"],
             'Email' => ["required", "Email"],
-            //'Phone'=>['numeric', 'integer', 'min:0'],
-            'Phone' => ['required','numeric', 'integer'],
+            'Phone' => ['required','numeric'],
             //'MatKhau'=>["required"],
             'HoTen' => [],
             'NgaySinh' => ["date"],

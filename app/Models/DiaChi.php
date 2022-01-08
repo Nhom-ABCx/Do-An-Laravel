@@ -26,4 +26,8 @@ class DiaChi extends Model
     {
         return $this->belongsTo(KhachHang::class, 'KhachHangId');
     }
+    public function HoaDon()
+    {
+        return $this->hasMany(HoaDon::class, 'DiaChiId');
+    }
 }
