@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\BinhLuan;
 use App\Models\ChuongTrinhKhuyenMai;
 use App\Models\CT_HoaDon;
@@ -46,5 +46,9 @@ class DatabaseSeeder extends Seeder
         //     'MoTa' => 'Đăng Nhập',
         // ]);
         // $quyen->save();
+
+
+        // $sql = file_get_contents(database_path() . '/Do_An_Laravel_Insert_values.sql');
+        // DB::statement($sql);
     }
 }

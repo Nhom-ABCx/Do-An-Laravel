@@ -43,4 +43,8 @@ class KhachHang extends Model
     {
         return $this->hasMany(DiaChi::class, 'KhachHangId');
     }
+    public function Message()
+    {
+        return $this->hasMany(Message::class, 'KhachHangId');
+    }
 }

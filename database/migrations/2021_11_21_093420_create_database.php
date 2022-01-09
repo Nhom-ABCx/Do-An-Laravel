@@ -204,6 +204,28 @@ class CreateDatabase extends Migration
             $table->foreign('SanPhamId')->references('Id')->on('san_phams');
             $table->unique(['KhachHangId', 'SanPhamId']);
         });
+        //cuoc tro chuyen/hoi thoai
+        Schema::create('conversations', function (Blueprint $table) {
+            $table->Id();
+            $table->foreignId('NhanVienId');
+            $table->foreignId('KhachHangId');
+            $table->timestamps();
+            $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
+            $table->foreign('NhanVienId')->references('Id')->on('nhan_viens');
+            $table->unique(['NhanVienId', 'KhachHangId']);
+        });
+        //tin nhan'
+        Schema::create('messages', function (Blueprint $table) {
+            $table->Id();
+            $table->text('Body');
+            $table->foreignId('NhanVienId')->nullable(); //1 trong 2
+            $table->foreignId('KhachHangId')->nullable(); //1 trong 2
+            $table->foreignId('ConversationId');
+            $table->timestamps();
+            $table->foreign('NhanVienId')->references('Id')->on('nhan_viens');
+            $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
+            $table->foreign('ConversationId')->references('Id')->on('conversations');
+        });
     }
 
     /**
@@ -230,6 +252,7 @@ class CreateDatabase extends Migration
         Schema::dropIfExists('lich_su_van_chuyens');
         Schema::dropIfExists('gio_hangs');
         Schema::dropIfExists('dia_chis');
-
+        Schema::dropIfExists('conversations');
+        Schema::dropIfExists('messages');
     }
 }

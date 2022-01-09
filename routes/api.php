@@ -10,6 +10,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\YeuThichController;
 use App\Http\Controllers\DiaChiController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,3 +77,5 @@ Route::get('binh-luan',[BinhLuanController::class, "API_Check_Auth_ProductToPay"
 Route::post('binh-luan/add',[BinhLuanController::class, "API_Add_BinhLuan_SanPham"]);
 #Hoa don theo tap
 Route::get('hoa-don',[HoaDonController::class, "API_TraVe_CT_HoaDon_Theo_Tab"]);
+//lay' het tin nhan ve tu` Admin, truyen` len KhachHangId
+Route::post('Message',[MessageController::class, "API_GetAll_Message_Admin"]);
