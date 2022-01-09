@@ -79,3 +79,4 @@ Route::post('binh-luan/add',[BinhLuanController::class, "API_Add_BinhLuan_SanPha
 Route::get('hoa-don',[HoaDonController::class, "API_TraVe_CT_HoaDon_Theo_Tab"]);
 //lay' het tin nhan ve tu` Admin, truyen` len KhachHangId
 Route::post('Message',[MessageController::class, "API_GetAll_Message_Admin"]);
+Route::post('Message/add',[MessageController::class, "API_Them_Message_Admin"]);

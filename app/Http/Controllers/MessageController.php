@@ -93,23 +93,27 @@ class MessageController extends Controller
     }
     public function API_GetAll_Message_Admin(Request $request)
     {
-        //cuoc tro` chuyen giua khach hang va admin 1
+        //gia lap cuoc tro` chuyen giua khach hang va admin 1
         $conv = Conversation::where("KhachHangId", $request['KhachHangId'])
             ->where("NhanVienId", 1)->first();
         //dang mo phong? la chat voi Admin nen bang? dConersation.NhanvienId la 1
         $data = Message::where("ConversationId", $conv->id)
-            ->orderBy('created_at')->get(); //sap xep theo luot mua giam dan`
+            ->orderByDesc('created_at')->get(); //sap xep theo luot mua giam dan`
 
         if (!empty($data))
             return response()->json($data, 200);
     }
-    public function API_Them(Request $request)
+    public function API_Them_Message_Admin(Request $request)
     {
-        //them nhuyng chua hoan thanh
+        //gia lap cuoc tro` chuyen giua khach hang va admin 1
+        $conv = Conversation::where("KhachHangId", $request['KhachHangId'])
+            ->where("NhanVienId", 1)->first();
+        //gui tin nhan khach hang` len Admin
         //kiem tra du lieu
         $validate = Validator::make($request->all(), [
             'Body' => ['required'],
             'KhachHangId' => ['required', 'exists:khach_hangs,id'],
+            //'ConversationId' => ['required', 'exists:conversations,id'], //chua can` den'
         ]);
         //neu du lieu no' sai thi`tra? ve` loi~
         if ($validate->fails())
@@ -118,12 +122,11 @@ class MessageController extends Controller
         $mess = Message::create([
             'Body'       => $request['Body'],
             'KhachHangId' => $request['KhachHangId'],
-            'ConversationId' => $request['ConversationId'],
+            'ConversationId' => $conv->id,
+            //'ConversationId' => $request['ConversationId'],
         ]);
-
-        $data = $mess;
         //neu du lieu ko co rong~ thi tra ve voi status la 200
-        if (!empty($data))
-            return response()->json($data, 200);
+        if (!empty($mess))
+            return response()->json(["Sucssess" => True], 200);
     }
 }
