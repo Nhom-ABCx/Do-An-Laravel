@@ -177,7 +177,7 @@ class HoaDonController extends Controller
     public static function API_Them_SanPham_To_CT_Hoa_Don($listChiTietHoaDon)
     {
         foreach ($listChiTietHoaDon as $item) {
-            $sanPham=$item->SanPham;
+            $sanPham = $item->SanPham;
             if (!empty($sanPham))
                 Arr::add($item, "SanPham", $sanPham);
             else
@@ -197,14 +197,34 @@ class HoaDonController extends Controller
         // ->whereNull("ct_hoa_dons.deleted_at")
         // ->get("ct_hoa_dons.*");
         //y nhu nhau
-        $dsChiTietHD=CT_HoaDon::join("hoa_dons","hoa_dons.id","=","ct_hoa_dons.HoaDonId")
-        ->join("dia_chis","dia_chis.id","=","hoa_dons.DiaChiId")
-        ->where("dia_chis.KhachHangId",$request["KhachHangId"])
-        ->where("hoa_dons.TrangThai",$request["TrangThai"])
-        ->whereNull("hoa_dons.deleted_at")
-        ->whereNull("ct_hoa_dons.deleted_at")
-        ->get("ct_hoa_dons.*");
+        $dsChiTietHD = CT_HoaDon::join("hoa_dons", "hoa_dons.id", "=", "ct_hoa_dons.HoaDonId")
+            ->join("dia_chis", "dia_chis.id", "=", "hoa_dons.DiaChiId")
+            ->where("dia_chis.KhachHangId", $request["KhachHangId"])
+            ->where("hoa_dons.TrangThai", $request["TrangThai"])
+            ->whereNull("hoa_dons.deleted_at")
+            ->whereNull("ct_hoa_dons.deleted_at")
+            ->get("ct_hoa_dons.*");
+
         $this->API_Them_SanPham_To_CT_Hoa_Don($dsChiTietHD);
         return response()->json($dsChiTietHD, 200);
+    }
+    #update danh gia san pham
+    public function API_Danh_Gia_SanPham(Request $request)
+    {
+        //dd($request->all());
+        $data = CT_HoaDon::where("HoaDonId", $request["HoaDonId"])
+            ->where("SanPhamId", $request["SanPhamId"])
+            ->First();
+
+        //dd($data->HoaDonId);
+        if($request["Star"]>0){
+            $data->fill([
+                'Star' => $request["Star"],
+            ]);
+            $data->save();
+            return response()->json(["Sucsess" => true], 200);
+        }
+        //dd($data->HoaDonId);
+       return response()->json(["Sucsess"=>false],405);
     }
 }

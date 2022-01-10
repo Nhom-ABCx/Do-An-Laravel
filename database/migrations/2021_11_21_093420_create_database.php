@@ -152,6 +152,7 @@ class CreateDatabase extends Migration
             $table->foreign('DiaChiId')->references('Id')->on('dia_chis');
         });
         Schema::create('ct_hoa_dons', function (Blueprint $table) {
+            $table->Id();
             $table->foreignId('HoaDonId');
             $table->foreignId('SanPhamId');
             $table->integer('SoLuong');

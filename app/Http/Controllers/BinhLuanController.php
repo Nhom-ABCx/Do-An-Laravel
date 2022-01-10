@@ -101,7 +101,7 @@ class BinhLuanController extends Controller
         $data = DB::table("san_phams")
             ->join("binh_luans", "san_phams.id", "=", "binh_luans.SanPhamId")
             ->join("khach_hangs", "khach_hangs.id", "=", "binh_luans.KhachHangId")
-            ->select("binh_luans.*","khach_hangs.Username","khach_hangs.HoTen","khach_hangs.HinhAnh")
+            ->select("binh_luans.*", "khach_hangs.Username", "khach_hangs.HoTen", "khach_hangs.HinhAnh")
             ->where("binh_luans.SanPhamId", $sanPham->id)
             ->where("san_phams.deleted_at", null)
             ->where("khach_hangs.deleted_at", null)
@@ -111,11 +111,16 @@ class BinhLuanController extends Controller
             return response()->json($data, 200);
         return response()->json($data, 404);
     }
-   
+
     #tra ve san pham khach hang dang nhap duoc binh luan
-    public function API_Check_Auth_ProductToPay(Request $request){
+    public function API_Check_Auth_ProductToPay(Request $request)
+    {
+        //dd($request["KhachHangId"]);
         //lay ra het tat ca hoa don co' trang thai' la 2, thuoc khach' hang nao
-        $hoaDon = HoaDon::where("KhachHangId", $request["KhachHangId"])->where("TrangThai", 2)->get();
+        //$hoaDon = HoaDon::where("KhachHangId", $request["KhachHangId"])->where("TrangThai", 2)->get();
+        $hoaDon = HoaDon::join("dia_chis", "dia_chis.id", "=", "hoa_dons.DiaChiId")
+            ->where("dia_chis.KhachHangId", $request["KhachHangId"])->where("TrangThai", 2)->get();
+        //dd($hoaDon);
         $dsSanPhamDuocMua = []; //bien' tam
         $i = 0; //bien' tam
         foreach ($hoaDon as $item) {
@@ -134,29 +139,30 @@ class BinhLuanController extends Controller
                     $i++; //bien' ao? i tang len de no co the them vao tiep theo
                 }
             }
-            //dd($dsSanPhamDuocMua);
+            
         }
         //dd($dsSanPhamDuocMua);
-        return response()->json($dsSanPhamDuocMua,200); //xuat ra ket qua
+        return response()->json($dsSanPhamDuocMua, 200); //xuat ra ket qua
     }
     # thêm bình luân 
-    public function API_Add_BinhLuan_SanPham(Request $request){
+    public function API_Add_BinhLuan_SanPham(Request $request)
+    {
         //kiem tra du lieu
         $validate = Validator::make($request->all(), [
-            'NoiDung' =>['required'],
+            'NoiDung' => ['required'],
             'KhachHangId' => ['required', 'numeric', 'integer', 'exists:khach_hangs,id'],
             "SanPhamId" => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
         ]);
         //neu du lieu no' sai thi`tra? ve` loi~
         if ($validate->fails())
             return response()->json($validate->errors(), 400);
-            
+
         $binhLuan = BinhLuan::firstOrCreate([
-            'NoiDung'        =>$request['NoiDung'],
+            'NoiDung'        => $request['NoiDung'],
             'KhachHangId'     => $request['KhachHangId'],
             'SanPhamId'       => $request["SanPhamId"],
         ]);
-        $data=$binhLuan;
+        $data = $binhLuan;
         if (!empty($data))
             return response()->json($data, 200);
         return response()->json($data, 404);
