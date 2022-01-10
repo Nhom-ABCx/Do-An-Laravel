@@ -9,6 +9,6 @@
 <body>
     <h1>Hi! {{$Data->Username}}</h1><br>
     <h4>You want to change the password, if not you, please ignore the email</h4><br>
-    <p>Link reset: http://localhost:8000/KhachHang/{{$Data->id}}/showResetPass</p><br>
+    <p>Link reset: http://localhost:8000/KhachHang/{{$Data->remember_token}}/showResetPass</p><br>
 </body>
 </html>

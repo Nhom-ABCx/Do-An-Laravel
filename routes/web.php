@@ -113,7 +113,6 @@ Route::resource('NguoiVanChuyen', NguoiVanChuyenController::class, [
 ]);
 
 Route::get('sendEmail', [SendEmailController::class, 'send'])->name('send');
-Route::get('sendEmail', [SendEmailController::class, 'send'])->name('send');
-Route::get('KhachHang/{khachHang}/showResetPass', [KhachHangController::class, 'showResetPassword_KhachHang'])->name('KhachHang.showReset');
+Route::get('KhachHang/{token}/showResetPass', [KhachHangController::class, 'showResetPassword_KhachHang'])->name('KhachHang.showReset');
 Route::put('KhachHang/{khachHang}/actionResetPass', [KhachHangController::class, 'actionResetPassword_KhachHang'])->name('KhachHang.actionReset');
 Route::get('ResetPassword-Susscess', [HomeController::class, 'Susscess'])->name('Home.Susscess');
