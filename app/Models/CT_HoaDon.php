@@ -12,7 +12,7 @@ class CT_HoaDon extends Model
     use SoftDeletes; //su dung chuc nang softdelete
 
     protected $table = 'ct_hoa_dons';
-    protected $primaryKey = null;
+    // protected $primaryKey = null;
     public $incrementing = false;
     protected $fillable = [
         'HoaDonId',
