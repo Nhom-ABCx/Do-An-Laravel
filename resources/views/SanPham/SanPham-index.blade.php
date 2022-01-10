@@ -155,6 +155,9 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="btn-link red"><i class="icon-trash bigger-130"></i></button>
                                                 </form>
+                                                {{-- <a class="red" href="{{ route('SanPham.destroy', $item) }}" data-method="delete">
+                                                    <i class="icon-trash bigger-130"></i>
+                                                </a> --}}
                                             </div>
 
                                             <div class="visible-xs visible-sm hidden-md hidden-lg">

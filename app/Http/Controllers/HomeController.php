@@ -18,4 +18,8 @@ class HomeController extends Controller
     {
         return view('Login.ResetPassword-Susscess',[]);
     }
+    public function Error()
+    {
+        return view('Login.Error-404');
+    }
 }
