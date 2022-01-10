@@ -193,6 +193,19 @@ insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'hoàn hảo',1,32
 insert into Lich_Su_Van_Chuyens(HoaDonId,NguoiVanChuyenId,TrangThai,created_at)
 SELECT a.Id,b.Id,0,a.created_at FROM Hoa_Dons as a,Nguoi_Van_Chuyens as b ORDER BY RAND() LIMIT 50;
 
+insert into conversations(NhanVienId,KhachHangId) select 1,a.id from khach_hangs as a;
+insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'Hello Admin',2,2,'2021-1-1');
+insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'Mon nay` ban nhu nao`?',2,2,'2021-1-3');
+insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'Gia bao nhieu',2,2,'2021-1-5');
+insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'200k ban ko',2,2,'2021-1-8');
+insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'abcxyz thoi ko mua nua',2,2,'2021-1-9');
+
+insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'Hello khach',1,2,'2021-1-2');
+insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'Mon nay sieu re~',1,2,'2021-1-4');
+insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'mua di mua di',1,2,'2021-1-6');
+insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'ban voi gia sale mua di dung ngai',1,2,'2021-1-7');
+insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'khong mua t chem',1,2,'2021-1-10');
+
 update CT_Hoa_Dons
 set GiaBan=(select GiaBan from San_Phams where Id=SanPhamId);
 update CT_Hoa_Dons

@@ -10,6 +10,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\YeuThichController;
 use App\Http\Controllers\DiaChiController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,3 +79,6 @@ Route::post('binh-luan/add',[BinhLuanController::class, "API_Add_BinhLuan_SanPha
 Route::get('hoa-don',[HoaDonController::class, "API_TraVe_CT_HoaDon_Theo_Tab"]);
 #danh gia cho san pham
 Route::post('danh-gia-san-pham',[HoaDonController::class, "API_Danh_Gia_SanPham"]);
+//lay' het tin nhan ve tu` Admin, truyen` len KhachHangId
+Route::post('Message',[MessageController::class, "API_GetAll_Message_Admin"]);
+Route::post('Message/add',[MessageController::class, "API_Them_Message_Admin"]);
