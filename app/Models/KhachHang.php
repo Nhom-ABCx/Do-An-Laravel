@@ -27,6 +27,7 @@ class KhachHang extends Model
 
     protected $hidden = [
         'MatKhau',
+        'remember_token',
     ];
 
     public function YeuThich()

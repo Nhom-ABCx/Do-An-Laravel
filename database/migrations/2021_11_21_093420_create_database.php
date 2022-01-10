@@ -39,6 +39,7 @@ class CreateDatabase extends Migration
             $table->boolean('GioiTinh'); //1 nam 0 nu~
             $table->string('DiaChi')->nullable();
             $table->string('HinhAnh')->nullable();
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
         });
