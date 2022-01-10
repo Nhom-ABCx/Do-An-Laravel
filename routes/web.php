@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 //controller
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\ChuongTrinhKhuyenMaiController;
 use App\Http\Controllers\CTChuongTrinhKMController;
@@ -12,7 +13,7 @@ use App\Http\Controllers\DonViVanChuyenController;
 use App\Http\Controllers\NguoiVanChuyenController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\KhachHangController;
-
+use App\Models\BinhLuan;
 
 //composer dump-autoload
 //composer update

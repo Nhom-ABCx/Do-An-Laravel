@@ -23,7 +23,8 @@ class BinhLuanController extends Controller
      */
     public function index()
     {
-        //
+        $data=BinhLuan::all();
+        return view('BinhLuan.binh-luan-index',$data);
     }
 
     /**
@@ -117,9 +118,15 @@ class BinhLuanController extends Controller
     {
         //dd($request["KhachHangId"]);
         //lay ra het tat ca hoa don co' trang thai' la 2, thuoc khach' hang nao
-        //$hoaDon = HoaDon::where("KhachHangId", $request["KhachHangId"])->where("TrangThai", 2)->get();
-        $hoaDon = HoaDon::join("dia_chis", "dia_chis.id", "=", "hoa_dons.DiaChiId")
-            ->where("dia_chis.KhachHangId", $request["KhachHangId"])->where("TrangThai", 2)->get();
+        $hoaDon = HoaDon::join("dia_chis", "hoa_dons.DiaChiId", "=", "dia_chis.id")
+            ->where("dia_chis.KhachHangId", $request["KhachHangId"])
+            ->where("TrangThai", 2)
+            ->get("hoa_dons.*");
+        
+        // $hoaDon = HoaDon::leftJoin('dia_chis', 'dia_chis.id', '=', 'hoa_dons.DiaChiId')->where('dia_chis.KhachHangId', 1)
+        //     ->select('hoa_dons.*', 'dia_chis.KhachHangId')
+        //     ->get();
+
         //dd($hoaDon);
         $dsSanPhamDuocMua = []; //bien' tam
         $i = 0; //bien' tam
@@ -139,7 +146,6 @@ class BinhLuanController extends Controller
                     $i++; //bien' ao? i tang len de no co the them vao tiep theo
                 }
             }
-            
         }
         //dd($dsSanPhamDuocMua);
         return response()->json($dsSanPhamDuocMua, 200); //xuat ra ket qua
