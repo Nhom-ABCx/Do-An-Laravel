@@ -311,20 +311,19 @@
                                     @for ($i = 0; $i < count($conversation); $i++)
 
                                         <li>
-                                            <a href="{{route("Message.index")}}">
+                                            <a href="{{ route('Message.index') }}?KhachHangId={{ $conversation[$i]->KhachHangId }}">
                                                 <img src="/storage/assets/images/avatar/User/{{ $conversation[$i]->KhachHangId }}/{{ $conversation[$i]->KhachHang->HinhAnh }}" class="msg-photo"
                                                     alt="Alex's Avatar" />
                                                 <span class="msg-body">
                                                     <span class="msg-title">
                                                         <span class="blue">
-                                                            {{-- neu nhu la` tin nhan cuoi cung la nhan vien nhan' thi` hien You, ngc lai hien username khach hang --}}
-                                                            @if (!empty($conversation[$i]->mess[0]->NhanVienId))
-                                                                Bạn
-                                                            @else
-                                                                {{ $conversation[$i]->KhachHang->Username }}
-                                                            @endif:
+                                                            {{ $conversation[$i]->KhachHang->Username }}:
                                                         </span>
-                                                        {{ $conversation[$i]->mess[0]->Body ?? '' }} ...
+                                                        {{-- nếu tin nhắn cuối cùng là bản thân thì để chữ "Bạn: cho nó giống facebook" --}}
+                                                        @if (!empty($conversation[$i]->mess->NhanVienId))
+                                                            Bạn:
+                                                        @endif
+                                                        {{ $conversation[$i]->mess->Body ?? '' }} ...
                                                     </span>
 
                                                     <span class="msg-time">
@@ -339,7 +338,7 @@
                                 @endif
 
                                 <li>
-                                    <a href="{{route("Message.index")}}">
+                                    <a href="{{ route('Message.index') }}">
                                         Xem tất cả tin nhắn
                                         <i class="icon-arrow-right"></i>
                                     </a>
@@ -798,10 +797,10 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-                            <script type="text/javascript">
-                                window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                            </script>
-                            <![endif]-->
+                                        <script type="text/javascript">
+                                            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                                        </script>
+                                        <![endif]-->
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +

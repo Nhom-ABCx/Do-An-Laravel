@@ -25,7 +25,32 @@
                             <div class="jspContainer" style="width: 320px; height: 550px;">
                                 <div class="jspPane" style="padding: 0px; top: 0px;">
                                     <ul class="ks-items">
-                                        <li class="ks-item ks-active">
+                                        @forelse ($dsCacCuocTroChuyen as $conversation)
+                                            <li class="ks-item @if ($conversation->id == $request['KhachHangId']) ks-active @endif">
+                                                <a href="{{ route('Message.index') }}?KhachHangId={{ $conversation->KhachHangId }}">
+                                                    <span class="ks-avatar">
+                                                        <img src="/storage/assets/images/avatar/User/{{ $conversation->KhachHangId }}/{{ $conversation->KhachHang->HinhAnh }}" width="36" height="36">
+                                                    </span>
+                                                    <div class="ks-body">
+                                                        <div class="ks-name">
+                                                            {{ $conversation->KhachHang->HoTen ?? $conversation->KhachHang->HoTen->Username }}
+                                                            @if (count($conversation->Message))
+                                                                <span class="ks-datetime">{{ $conversation->Message->last()->created_at->diffForHumans() }}</span>
+                                                            @endif
+                                                        </div>
+                                                        <div class="ks-message">
+                                                            @if (!empty($conversation->mess->NhanVienId))
+                                                                Bạn:
+                                                            @endif
+                                                            {{ $conversation->mess->Body ?? '' }}...
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        @empty
+                                            Không có cuộc trò chuyện nào, hãy thử tạo mới 1 cuộc trò chuyện
+                                        @endforelse
+                                        {{-- <li class="ks-item ks-active">
                                             <a href="#">
                                                 <span class="ks-group-amount">3</span>
                                                 <div class="ks-body">
@@ -39,8 +64,8 @@
                                                     </div>
                                                 </div>
                                             </a>
-                                        </li>
-                                        <li class="ks-item ks-unread">
+                                        </li> --}}
+                                        {{-- <li class="ks-item ks-unread">
                                             <a href="#">
                                                 <span class="ks-group-amount">5</span>
                                                 <div class="ks-body">
@@ -54,8 +79,8 @@
                                                     </div>
                                                 </div>
                                             </a>
-                                        </li>
-                                        <li class="ks-item">
+                                        </li> --}}
+                                        {{-- <li class="ks-item">
                                             <a href="#">
                                                 <span class="ks-avatar">
                                                     <img src="https://bootdey.com/img/Content/avatar/avatar3.png" width="36" height="36">
@@ -68,147 +93,8 @@
                                                     <div class="ks-message">Why didn't he come and talk to me himse...</div>
                                                 </div>
                                             </a>
-                                        </li>
-                                        <li class="ks-item">
-                                            <a href="#">
-                                                <span class="ks-avatar">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar4.png" width="36" height="36">
-                                                    <span class="badge badge-pill badge-danger ks-badge ks-notify">7</span>
-                                                </span>
-                                                <div class="ks-body">
-                                                    <div class="ks-name">
-                                                        Eric George
-                                                        <span class="ks-datetime">just now</span>
-                                                    </div>
-                                                    <div class="ks-message">Why didn't he come and talk to me himse...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="ks-item">
-                                            <a href="#">
-                                                <span class="ks-avatar">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar5.png" width="36" height="36">
-                                                </span>
-                                                <div class="ks-body">
-                                                    <div class="ks-name">
-                                                        Eric George
-                                                        <span class="ks-datetime">just now</span>
-                                                    </div>
-                                                    <div class="ks-message">Why didn't he come and talk to me himse...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="ks-item">
-                                            <a href="#">
-                                                <span class="ks-avatar">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" width="36" height="36">
-                                                </span>
-                                                <div class="ks-body">
-                                                    <div class="ks-name">
-                                                        Eric George
-                                                        <span class="ks-datetime">just now</span>
-                                                    </div>
-                                                    <div class="ks-message">Why didn't he come and talk to me himse...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="ks-item">
-                                            <a href="#">
-                                                <span class="ks-avatar">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" width="36" height="36">
-                                                </span>
-                                                <div class="ks-body">
-                                                    <div class="ks-name">
-                                                        Eric George
-                                                        <span class="ks-datetime">just now</span>
-                                                    </div>
-                                                    <div class="ks-message">Why didn't he come and talk to me himse...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="ks-item">
-                                            <a href="#">
-                                                <span class="ks-avatar ks-online">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="36" height="36">
-                                                </span>
-                                                <div class="ks-body">
-                                                    <div class="ks-name">
-                                                        Brian Diaz
-                                                        <span class="ks-datetime">just now</span>
-                                                    </div>
-                                                    <div class="ks-message">The weird future of movie theater food</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="ks-item">
-                                            <a href="#">
-                                                <span class="ks-group-amount">3 <span class="badge badge-pill badge-danger ks-badge ks-notify">7</span></span>
-                                                <div class="ks-body">
-                                                    <div class="ks-name">
-                                                        Eric George
-                                                        <span class="ks-datetime">just now</span>
-                                                    </div>
-                                                    <div class="ks-message">Why didn't he come and talk to me himse...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="ks-item">
-                                            <a href="#">
-                                                <span class="ks-avatar ks-offline">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" width="36" height="36">
-                                                </span>
-                                                <div class="ks-body">
-                                                    <div class="ks-name">
-                                                        Eric George
-                                                        <span class="ks-datetime">just now</span>
-                                                    </div>
-                                                    <div class="ks-message">Why didn't he come and talk to me himse...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="ks-item">
-                                            <a href="#">
-                                                <span class="ks-avatar">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" width="36" height="36">
-                                                </span>
-                                                <div class="ks-body">
-                                                    <div class="ks-name">
-                                                        Eric George
-                                                        <span class="ks-datetime">just now</span>
-                                                    </div>
-                                                    <div class="ks-message">Why didn't he come and talk to me himse...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="ks-item">
-                                            <a href="#">
-                                                <span class="ks-avatar">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar4.png" width="36" height="36">
-                                                </span>
-                                                <div class="ks-body">
-                                                    <div class="ks-name">
-                                                        Eric George
-                                                        <span class="ks-datetime">just now</span>
-                                                    </div>
-                                                    <div class="ks-message">Why didn't he come and talk to me himse...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="ks-item">
-                                            <a href="#">
-                                                <span class="ks-avatar">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar5.png" width="36" height="36">
-                                                </span>
-                                                <div class="ks-body">
-                                                    <div class="ks-name">
-                                                        Lauren Sandoval
-                                                        <span class="ks-datetime">just now</span>
-                                                    </div>
-                                                    <div class="ks-message">The weird future of movie theater food</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="ks-item ks-closed">
+                                        </li> --}}
+                                        {{-- <li class="ks-item ks-closed">
                                             <a href="#">
                                                 <span class="ks-avatar">
                                                     <img src="https://bootdey.com/img/Content/avatar/avatar6.png" width="36" height="36">
@@ -221,7 +107,7 @@
                                                     <div class="ks-message">The weird future of movie theater food</div>
                                                 </div>
                                             </a>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                 </div>
                                 {{-- <div class="jspVerticalBar">
@@ -242,8 +128,8 @@
                     <div class="ks-messages ks-messenger__messages">
                         <div class="ks-header">
                             <div class="ks-description">
-                                <div class="ks-name">Chat name</div>
-                                <div class="ks-amount">2 members</div>
+                                <div class="ks-name">Trò chuyện với {{$khachHang->HoTen??$khachHang->Username}}</div>
+                                <div class="ks-amount">2 thành viên</div>
                             </div>
                             <div class="ks-controls">
                                 <div class="dropdown">
@@ -281,125 +167,44 @@
                             </div>
                         </div>
                         <div class="ks-body ks-scrollable jspScrollable" data-auto-height="" data-reduce-height=".ks-footer" data-fix-height="32"
-                            style="height: 500px; overflow: hidden; padding: 0px; width: 701px;" tabindex="0">
-                            <div class="jspContainer" style="width: 701px; height: 481px;">
+                            style="height: 500px; overflow: auto; padding: 0px; width: 701px;" tabindex="0">
+                            <div class="jspContainer">
                                 <ul class="ks-items">
-                                    <li class="ks-item ks-self">
-                                        <span class="ks-avatar ks-offline">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="36" height="36" class="rounded-circle">
-                                        </span>
-                                        <div class="ks-body">
-                                            <div class="ks-header">
-                                                <span class="ks-name">Brian Diaz</span>
-                                                <span class="ks-datetime">6:46 PM</span>
-                                            </div>
-                                            <div class="ks-message">The weird future of movie theater food</div>
-                                        </div>
-                                    </li>
-                                    <li class="ks-item ks-from">
-                                        <span class="ks-avatar ks-online">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" width="36" height="36" class="rounded-circle">
-                                        </span>
-                                        <div class="ks-body">
-                                            <div class="ks-header">
-                                                <span class="ks-name">Brian Diaz</span>
-                                                <span class="ks-datetime">6:46 PM</span>
-                                            </div>
-                                            <div class="ks-message">The weird future of movie theater food</div>
-                                        </div>
-                                    </li>
-                                    <li class="ks-item ks-from">
-                                        <span class="ks-avatar ks-online">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" width="36" height="36" class="rounded-circle">
-                                        </span>
-                                        <div class="ks-body">
-                                            <div class="ks-header">
-                                                <span class="ks-name">Brian Diaz</span>
-                                                <span class="ks-datetime">6:46 PM</span>
-                                            </div>
-                                            <div class="ks-message">
-                                                The weird future of movie theater food
-
-                                                <div class="ks-link">
-                                                    <div class="ks-name">Google</div>
-                                                    <a href="http://www.google.com" target="_blank">www.google.com</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="ks-item ks-self">
-                                        <span class="ks-avatar ks-offline">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar4.png" width="36" height="36" class="rounded-circle">
-                                        </span>
-                                        <div class="ks-body">
-                                            <div class="ks-header">
-                                                <span class="ks-name">Brian Diaz</span>
-                                                <span class="ks-datetime">6:46 PM</span>
-                                            </div>
-                                            <div class="ks-message">The weird future of movie theater food</div>
-                                        </div>
-                                    </li>
-                                    <li class="ks-item ks-from ks-unread">
-                                        <span class="ks-avatar ks-online">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar5.png" width="36" height="36" class="rounded-circle">
-                                        </span>
-                                        <div class="ks-body">
-                                            <div class="ks-header">
-                                                <span class="ks-name">Brian Diaz</span>
-                                                <span class="ks-datetime">1 minute ago</span>
-                                            </div>
-                                            <div class="ks-message">
-                                                The weird future of movie theater food
-
-                                                <ul class="ks-files">
-                                                    <li class="ks-file">
-                                                        <a href="#">
-                                                            <span class="ks-thumb">
-                                                                <span class="ks-icon la la-file-word-o text-info"></span>
-                                                            </span>
-                                                            <span class="ks-info">
-                                                                <span class="ks-name">Project...</span>
-                                                                <span class="ks-size">15 kb</span>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="ks-file">
-                                                        <a href="#">
-                                                            <span class="ks-thumb">
-                                                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="36" height="36">
-                                                            </span>
-                                                            <span class="ks-info">
-                                                                <span class="ks-name">photo.jpg</span>
-                                                                <span class="ks-size">312 kb</span>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li class="ks-separator">Today</li>
-
-                                    <li class="ks-item ks-self">
-                                        <span class="ks-avatar ks-offline">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" width="36" height="36" class="rounded-circle">
-                                        </span>
-                                        <div class="ks-body">
-                                            <div class="ks-header">
-                                                <span class="ks-name">Brian Diaz</span>
-                                                <span class="ks-datetime">6:46 PM</span>
-                                            </div>
-                                            <div class="ks-message">
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
-                                                1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but
-                                                also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                                containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-                                            </div>
-                                        </div>
-                                    </li>
+                                    {{-- nếu có tin nhắn --}}
+                                    @if (count($tinNhan))
+                                        @foreach ($tinNhan as $item)
+                                            @if (!empty($item->NhanVienId))
+                                                <li class="ks-item ks-from">
+                                                    <span class="ks-avatar ks-online">
+                                                        <img src="/storage/assets/images/avatar/NhanVien/{{ $item->NhanVien->id }}/{{ $item->NhanVien->HinhAnh }}" width="36" height="36"
+                                                            class="rounded-circle">
+                                                    </span>
+                                                    <div class="ks-body">
+                                                        <div class="ks-header">
+                                                            <span class="ks-name">{{$item->NhanVien->HoTen??$item->NhanVien->Username}}</span>
+                                                            <span class="ks-datetime">{{$item->created_at->diffForHumans()}}</span>
+                                                        </div>
+                                                        <div class="ks-message">{{$item->Body}}</div>
+                                                    </div>
+                                                </li>
+                                            @else
+                                                <li class="ks-item ks-self">
+                                                    <span class="ks-avatar ks-offline">
+                                                        <img src="/storage/assets/images/avatar/User/{{ $item->KhachHang->id }}/{{ $item->KhachHang->HinhAnh }}" width="36" height="36" class="rounded-circle">
+                                                    </span>
+                                                    <div class="ks-body">
+                                                        <div class="ks-header">
+                                                            <span class="ks-name">{{$item->KhachHang->HoTen??$item->KhachHang->Username}}</span>
+                                                            <span class="ks-datetime">{{$item->created_at->diffForHumans()}}</span>
+                                                        </div>
+                                                        <div class="ks-message">{{$item->Body}}</div>
+                                                    </div>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </ul>
-                                <div class="jspVerticalBar">
+                                {{-- <div class="jspVerticalBar">
                                     <div class="jspCap jspCapTop"></div>
                                     <div class="jspTrack" style="height: 481px;">
                                         <div class="jspDrag" style="height: 206px;">
@@ -408,7 +213,7 @@
                                         </div>
                                     </div>
                                     <div class="jspCap jspCapBottom"></div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="ks-footer">
@@ -541,48 +346,48 @@
                     </div>
                     <div class="ks-info ks-messenger__info">
                         <div class="ks-header">
-                            User Info
+                            Thông tin khách hàng
                         </div>
                         <div class="ks-body">
                             <div class="ks-item ks-user">
                                 <span class="ks-avatar ks-online">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="36" height="36" class="rounded-circle">
+                                    <img src="/storage/assets/images/avatar/User/{{ $khachHang->id }}/{{ $khachHang->HinhAnh }}" width="36" height="36" class="rounded-circle">
                                 </span>
                                 <span class="ks-name">
-                                    Lauren Sandoval
+                                    {{$khachHang->HoTen}}
                                 </span>
                             </div>
 
                             <div class="ks-item">
                                 <div class="ks-name">Username</div>
                                 <div class="ks-text">
-                                    @lauren.sandoval
+                                    {{$khachHang->Username}}
                                 </div>
                             </div>
                             <div class="ks-item">
                                 <div class="ks-name">Email</div>
                                 <div class="ks-text">
-                                    lauren.sandoval@example.com
+                                    {{$khachHang->Email}}
                                 </div>
                             </div>
                             <div class="ks-item">
                                 <div class="ks-name">Phone Number</div>
                                 <div class="ks-text">
-                                    +1(555) 555-555
+                                    {{$khachHang->Phone??""}}
                                 </div>
                             </div>
                         </div>
                         <div class="ks-footer">
                             <div class="ks-item">
-                                <div class="ks-name">Created</div>
+                                <div class="ks-name">Ngày tạo</div>
                                 <div class="ks-text">
-                                    Febriary 17, 2016 at 11:38 PM
+                                    {{$khachHang->created_at->format('jS F Y h:i:s A')}}
                                 </div>
                             </div>
                             <div class="ks-item">
-                                <div class="ks-name">Last Activity</div>
+                                <div class="ks-name">Khoảng</div>
                                 <div class="ks-text">
-                                    1 minute ago
+                                    {{$khachHang->created_at->diffForHumans()}}
                                 </div>
                             </div>
                         </div>

@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             $dsCacCuocTroChuyen = Conversation::where("conversations.NhanVienId", Auth::user()->id)->limit(5)->get();
 
             foreach ($dsCacCuocTroChuyen as $item) {
-                $mess = Message::where("ConversationId", $item->id)->orderByDesc('created_at')->get();
+                $mess = Message::where("ConversationId", $item->id)->orderByDesc('created_at')->first();
 
                 if (!empty($mess))
                     Arr::add($item, "mess", $mess);
@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
                     Arr::add($item, 'mess', null);
             }
 
-            $view->with("conversation", $dsCacCuocTroChuyen)->with("mess",$mess??[]);
+            $view->with("conversation", $dsCacCuocTroChuyen);
         });
     }
 }

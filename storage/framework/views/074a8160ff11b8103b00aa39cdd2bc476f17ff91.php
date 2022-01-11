@@ -108,21 +108,19 @@
                                     <?php for($i = 0; $i < count($conversation); $i++): ?>
 
                                         <li>
-                                            <a href="<?php echo e(route("Message.index")); ?>">
+                                            <a href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation[$i]->KhachHangId); ?>">
                                                 <img src="/storage/assets/images/avatar/User/<?php echo e($conversation[$i]->KhachHangId); ?>/<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>" class="msg-photo"
                                                     alt="Alex's Avatar" />
                                                 <span class="msg-body">
                                                     <span class="msg-title">
                                                         <span class="blue">
-                                                            
-                                                            <?php if(!empty($conversation[$i]->mess[0]->NhanVienId)): ?>
-                                                                Bạn
-                                                            <?php else: ?>
-                                                                <?php echo e($conversation[$i]->KhachHang->Username); ?>
-
-                                                            <?php endif; ?>:
+                                                            <?php echo e($conversation[$i]->KhachHang->Username); ?>:
                                                         </span>
-                                                        <?php echo e($conversation[$i]->mess[0]->Body ?? ''); ?> ...
+                                                        
+                                                        <?php if(!empty($conversation[$i]->mess->NhanVienId)): ?>
+                                                            Bạn:
+                                                        <?php endif; ?>
+                                                        <?php echo e($conversation[$i]->mess->Body ?? ''); ?> ...
                                                     </span>
 
                                                     <span class="msg-time">
@@ -137,7 +135,7 @@
                                 <?php endif; ?>
 
                                 <li>
-                                    <a href="<?php echo e(route("Message.index")); ?>">
+                                    <a href="<?php echo e(route('Message.index')); ?>">
                                         Xem tất cả tin nhắn
                                         <i class="icon-arrow-right"></i>
                                     </a>
@@ -597,10 +595,10 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-                            <script type="text/javascript">
-                                window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                            </script>
-                            <![endif]-->
+                                        <script type="text/javascript">
+                                            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                                        </script>
+                                        <![endif]-->
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
