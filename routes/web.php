@@ -12,6 +12,7 @@ use App\Http\Controllers\DonViVanChuyenController;
 use App\Http\Controllers\NguoiVanChuyenController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\KhachHangController;
+use App\Http\Controllers\MessageController;
 use App\Models\SanPham;
 
 //composer dump-autoload
@@ -79,5 +80,9 @@ Route::middleware('auth')->group(function () {
             'NguoiVanChuyen' => 'nguoiVanChuyen'
         ]
     ]);
-
+    Route::resource('Message', MessageController::class, [
+        'parameters' => [
+            'Message' => 'message'
+        ]
+    ]);
 });

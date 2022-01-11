@@ -85,7 +85,7 @@
 
                 <div class="navbar-header pull-right" role="navigation">
                     <ul class="nav ace-nav">
-                        <li class="grey">
+                        {{-- <li class="grey">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <i class="icon-tasks"></i>
                                 <span class="badge badge-grey">4</span>
@@ -156,9 +156,9 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
 
-                        <li class="purple">
+                        {{-- <li class="purple">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <i class="icon-bell-alt icon-animated-bell"></i>
                                 <span class="badge badge-important">8</span>
@@ -220,9 +220,9 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
 
-                        <li class="green">
+                        {{-- <li class="green">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <i class="icon-envelope icon-animated-vertical"></i>
                                 <span class="badge badge-success">5</span>
@@ -292,15 +292,68 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li> --}}
+                        {{-- Tin Nhan chat --}}
+                        <li class="blue">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <i class="icon-comment icon-animated-vertical"></i>
+                                {{-- <span class="badge badge-success">{{count($conversation)}}</span> --}}
+                            </a>
+
+                            <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                                <li class="dropdown-header">
+                                    <i class="icon-comment-alt"></i>
+                                    {{-- {{ count($conversation) }} Messages --}}
+                                    Tin nhắn
+                                </li>
+                                {{-- true neu' !=0 ngc lai la false --}}
+                                @if (count($conversation))
+                                    @for ($i = 0; $i < count($conversation); $i++)
+
+                                        <li>
+                                            <a href="{{route("Message.index")}}">
+                                                <img src="/storage/assets/images/avatar/User/{{ $conversation[$i]->KhachHangId }}/{{ $conversation[$i]->KhachHang->HinhAnh }}" class="msg-photo"
+                                                    alt="Alex's Avatar" />
+                                                <span class="msg-body">
+                                                    <span class="msg-title">
+                                                        <span class="blue">
+                                                            {{-- neu nhu la` tin nhan cuoi cung la nhan vien nhan' thi` hien You, ngc lai hien username khach hang --}}
+                                                            @if (!empty($conversation[$i]->mess[0]->NhanVienId))
+                                                                Bạn
+                                                            @else
+                                                                {{ $conversation[$i]->KhachHang->Username }}
+                                                            @endif:
+                                                        </span>
+                                                        {{ $conversation[$i]->mess[0]->Body ?? '' }} ...
+                                                    </span>
+
+                                                    <span class="msg-time">
+                                                        <i class="icon-time"></i>
+                                                        <span>{{ $conversation[$i]->created_at->diffForHumans() }}</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                    @endfor
+                                @endif
+
+                                <li>
+                                    <a href="{{route("Message.index")}}">
+                                        Xem tất cả tin nhắn
+                                        <i class="icon-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="/storage/assets/avatars/@auth{{Auth::user()->HinhAnh}}@endauth @guest user2.png @endguest" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="/storage/assets/images/avatar/NhanVien/@auth{{ Auth::user()->id }}/{{ Auth::user()->HinhAnh }}@endauth" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     @auth
-                                        {{Auth::user()->Username}}
+                                        {{ Auth::user()->Username }}
                                     @endauth
 
                                     @guest
@@ -508,7 +561,7 @@
                         </a>
                     </li>
 
-                    <li >
+                    <li>
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Vận chuyển </span>
@@ -522,9 +575,9 @@
                                     </a>
                                 </li>
                                 <li class="{{ request()->is('NguoiVanChuyen') ? 'active' : '' }}">
-                                    <a href="{{route('NguoiVanChuyen.index')}}">
+                                    <a href="{{ route('NguoiVanChuyen.index') }}">
                                         <i class="icon-check"></i>
-                                         Người vận chuyển
+                                        Người vận chuyển
                                     </a>
                                 </li>
                             </ul>
@@ -745,10 +798,10 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-                <script type="text/javascript">
-                    window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                </script>
-                <![endif]-->
+                            <script type="text/javascript">
+                                window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                            </script>
+                            <![endif]-->
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +

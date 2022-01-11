@@ -193,7 +193,7 @@ insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'hoàn hảo',1,32
 insert into Lich_Su_Van_Chuyens(HoaDonId,NguoiVanChuyenId,TrangThai,created_at)
 SELECT a.Id,b.Id,0,a.created_at FROM Hoa_Dons as a,Nguoi_Van_Chuyens as b ORDER BY RAND() LIMIT 50;
 
-insert into conversations(NhanVienId,KhachHangId) select 1,a.id from khach_hangs as a;
+insert into conversations(NhanVienId,KhachHangId,created_at) select 1,a.id,current_timestamp() from khach_hangs as a;
 insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'Hello Admin',2,2,'2021-1-1');
 insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'Mon nay` ban nhu nao`?',2,2,'2021-1-3');
 insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'Gia bao nhieu',2,2,'2021-1-5');
