@@ -180,7 +180,7 @@ class SanPhamController extends Controller
         return Redirect::route('SanPham.index');
     }
     //phương thức hỗ trợ load hình ảnh và thay thế bằng hình mạc định nếu ko tìm thấy file
-    public function fixImage(SanPham $sanPham)
+    public static function fixImage(SanPham $sanPham)
     {
         //chạy lệnh sau: php artisan storage:link     de tu tao 1 lien ket den' folder public
         // nếu trong đường dẫn "storage/app/public" + "assets/images/product-image/..." tồn tại hình ảnh

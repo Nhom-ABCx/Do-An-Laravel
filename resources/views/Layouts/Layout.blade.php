@@ -531,26 +531,11 @@
                         </a>
                     </li>
                     {{-- binh luan --}}
-                     <li >
-                        <a href="#" class="dropdown-toggle">
+                     <li class="{{ request()->is('BinhLuan') ? 'active' : '' }}">
+                        <a href="{{ route('BinhLuan.index') }}">
                             <i class="icon-edit"></i>
-                            <span class="menu-text"> Bình luân </span>
-                            <b class="arrow icon-angle-down"></b>
-
-                            <ul class="submenu">
-                                <li class="{{ request()->is('DonViVanChuyen') ? 'active' : '' }}">
-                                    <a href="{{ route('DonViVanChuyen.index') }}">
-                                        <i class="icon-double-angle-right"></i>
-                                        Đơn vị vận chuyển
-                                    </a>
-                                </li>
-                                <li class="{{ request()->is('NguoiVanChuyen') ? 'active' : '' }}">
-                                    <a href="{{route('NguoiVanChuyen.index')}}">
-                                        <i class="icon-check"></i>
-                                         Người vận chuyển
-                                    </a>
-                                </li>
-                            </ul>
+                            <span class="menu-text"> Bình Luận </span>
+                            
                         </a>
                     </li>
                     <li>

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 //use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
 class KhachHangController extends Controller
 {
     /**
@@ -86,9 +88,12 @@ class KhachHangController extends Controller
         //
     }
 
-    public function showResetPassword_KhachHang(KhachHang $khachHang)
+    public function showResetPassword_KhachHang($token)
     {
-        return view('Login.ResetPassword', ['khachHang' => $khachHang]);
+        $khachHang=KhachHang::where("remember_token",$token)->first();
+        if(!empty($khachHang))
+            return view('Login.ResetPassword', ['khachHang' => $khachHang]);
+        return "Tai khoan cua ban co ve da duoc thay doi~";
     }
     public function actionResetPassword_KhachHang(Request $request, KhachHang $khachHang)
     {
@@ -97,7 +102,8 @@ class KhachHangController extends Controller
             'XacNhan_MatKhau' => ['required', 'same:MatKhau'],
         ]);
 
-        $khachHang->fill(['MatKhau' => $request['MatKhau'],]);
+        $khachHang->fill(['MatKhau' => $request['MatKhau']]);
+        $khachHang->remember_token=Str::random(60); //tao moi 1 token
         $khachHang->save();
 
         return Redirect::route('Home.Susscess');

@@ -9,6 +9,7 @@ use App\Mail\SendMail as SendMail;
 use App\Models\SanPham;
 use App\Models\KhachHang;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class SendEmailController extends Controller
 {
@@ -39,9 +40,11 @@ class SendEmailController extends Controller
         })
         ->first();
 
-        if($khachHang==null)
+        if(empty($khachHang))
         return response()->json(["Username"=>"User name or email not found"],400);
 
+        $khachHang->remember_token=Str::random(60); //tao moi 1 token
+        $khachHang->save(); //luu lai
         $data = [
             'TieuDe' => 'ShopSuHa-Reset your password',
             'NguoiGui'=>'ShopSuHa',

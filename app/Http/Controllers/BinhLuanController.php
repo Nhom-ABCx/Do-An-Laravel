@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\BinhLuan;
 use App\Models\CT_HoaDon;
 use App\Models\HoaDon;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\SanPhamController;
 
 class BinhLuanController extends Controller
 {
@@ -23,8 +25,16 @@ class BinhLuanController extends Controller
      */
     public function index()
     {
-        $data=BinhLuan::all();
-        return view('BinhLuan.binh-luan-index',$data);
+        $sanphamctl = new SanPhamController;
+        $lstKhachHang = KhachHang::all();
+        $lstSanPham = SanPham::all();
+        $data = BinhLuan::all();
+        foreach ($lstSanPham as $sp){
+            $sanphamctl->fixImage($sp);
+        }
+        //dd($lstSanPham);
+           
+        return view('BinhLuan.binh-luan-index', ["bLuan" => $data, 'khachHang' => $lstKhachHang, 'sanPham' => $lstSanPham]);
     }
 
     /**
@@ -90,7 +100,8 @@ class BinhLuanController extends Controller
      */
     public function destroy(BinhLuan $binhLuan)
     {
-        //
+        $binhLuan->delete();
+        return Redirect::route('BinhLuan.index');
     }
 
     #api
@@ -122,7 +133,7 @@ class BinhLuanController extends Controller
             ->where("dia_chis.KhachHangId", $request["KhachHangId"])
             ->where("TrangThai", 2)
             ->get("hoa_dons.*");
-        
+
         // $hoaDon = HoaDon::leftJoin('dia_chis', 'dia_chis.id', '=', 'hoa_dons.DiaChiId')->where('dia_chis.KhachHangId', 1)
         //     ->select('hoa_dons.*', 'dia_chis.KhachHangId')
         //     ->get();
