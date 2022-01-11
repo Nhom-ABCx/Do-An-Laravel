@@ -64,7 +64,7 @@
 
                     <form class="form-horizontal" role="form" action="{{ route('SanPham.update', $sanPham) }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        @method('PATCH')
+                        @method('PUT')
                         <div class="form-group">
                             <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Tên sản phẩm </label>
 

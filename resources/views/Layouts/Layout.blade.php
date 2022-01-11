@@ -296,7 +296,7 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="/storage/assets/avatars/user.jpg" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="/storage/assets/avatars/@auth{{Auth::user()->HinhAnh}}@endauth @guest user2.png @endguest" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     @auth

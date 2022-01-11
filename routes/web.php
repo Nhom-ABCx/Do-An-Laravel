@@ -12,7 +12,7 @@ use App\Http\Controllers\DonViVanChuyenController;
 use App\Http\Controllers\NguoiVanChuyenController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\KhachHangController;
-
+use App\Models\SanPham;
 
 //composer dump-autoload
 //composer update
@@ -35,7 +35,7 @@ Route::delete('Login', [AuthController::class, 'destroy'])->name('Login.destroy'
 Route::get('Login/{social}', [AuthController::class, 'social'])->name('Login.social');
 Route::get('Login/{social}/Callback', [AuthController::class, 'social_callback'])->name('Login.social_callback');
 
-Route::get('sendEmail', [SendEmailController::class, 'send'])->name('send');
+//Route::get('sendEmail', [SendEmailController::class, 'send'])->name('send');
 Route::get('KhachHang/{token}/showResetPass', [KhachHangController::class, 'showResetPassword_KhachHang'])->name('KhachHang.showReset');
 Route::put('KhachHang/{khachHang}/actionResetPass', [KhachHangController::class, 'actionResetPassword_KhachHang'])->name('KhachHang.actionReset');
 Route::get('ResetPassword-Susscess', [HomeController::class, 'Susscess'])->name('Home.Susscess');
@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function () {
             'SanPham' => 'sanPham'
         ]
     ]);
+    Route::get("SanPhamm/DaXoa",[SanPhamController::class,"SanPhamDaXoa"])->name("SanPham.DaXoa");
+    Route::post("SanPham/KhoiPhuc/{id}",[SanPhamController::class,"KhoiPhucSanPham"])->name("SanPham.KhoiPhuc");
     Route::resource('KhuyenMai', ChuongTrinhKhuyenMaiController::class, [
         'parameters' => [
             'KhuyenMai' => 'chuongTrinhKhuyenMai'
