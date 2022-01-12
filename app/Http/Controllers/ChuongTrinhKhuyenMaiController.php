@@ -71,6 +71,7 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function edit(ChuongTrinhKhuyenMai $chuongTrinhKhuyenMai)
     {
+        //dd($chuongTrinhKhuyenMai->FromDate);
 
         //dd($chuongTrinhKhuyenMai);
         return view('KhuyenMai.KhuyenMai-edit',['ctkm'=>$chuongTrinhKhuyenMai]);

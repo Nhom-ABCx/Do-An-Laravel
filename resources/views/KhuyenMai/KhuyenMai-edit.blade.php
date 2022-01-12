@@ -80,6 +80,7 @@
 
                             <div class="control-group">
                                 <div class="row-fluid input-prepend">
+                                    {{-- {{ dd($ctkm->FromDate) }} --}}
                                     <input  type="date" value="{{$ctkm->FromDate}}" name="FromDate"  />
                                 </div>
                             </div>
