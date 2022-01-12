@@ -1,13 +1,14 @@
 {{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
 @extends('layouts.Layout')
 
-@section('title', 'Page Title')
+@section('title', 'QL Sản phẩm')
 
 @section('headThisPage')
-
+    <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
 @endsection
 
 @section('body')
+
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
@@ -21,7 +22,10 @@
                     <i class="icon-home home-icon"></i>
                     <a href="{{ url('/') }}">Home</a>
                 </li>
-                <li class="active">Người vận chuyển</li>
+                <li>
+                    <a href="{{ route('SanPham.index') }}">Quản lý sản phẩm</a>
+                </li>
+                <li class="active">Đã xóa</li>
             </ul><!-- .breadcrumb -->
 
             {{-- <div class="nav-search" id="nav-search">
@@ -39,15 +43,50 @@
                 <div class="col-xs-12">
                     <div class="widget-box">
                         <div class="widget-header">
-                            <h3 class="header smaller lighter blue">Người vận chuyển</h3>
+                            <h3 class="header smaller lighter blue">Quản lý sản phẩm</h3>
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                <form class="form-inline" method="get">
-                                    <a href="{{ route('NguoiVanChuyen.create') }}" class="btn btn-success">
+                                <form class="form-inline" action="{{ route('SanPham.index') }}" method="get">
+                                    <a href="{{ route('SanPham.create') }}" class="btn btn-success">
                                         <i class="icon-plus"></i>
-                                        Thêm người vận chuyển
+                                        Thêm sản phẩm
                                     </a>
+                                    <a href="{{ route('SanPham.DaXoa') }}" class="btn btn-inverse">
+                                        <i class="icon-trash"></i>
+                                        Sản phẩm đã xóa
+                                    </a>
+
+                                    <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="{{ $request['TenSanPham'] }}"
+                                        name="TenSanPham" />
+                                    <label for=""> Hãng sãn xuất: </label>
+                                    <select class="width-10 chosen-select" id="form-field-select-4" name="HangSanXuatId">
+                                        <option value="">All</option>
+                                        @foreach ($lstHangSanXuat as $item)
+                                            <option value="{{ $item->id }}" @if ($item->id == $request['HangSanXuatId']) selected @endif>
+                                                {{ $item->Ten }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    <label for=""> Loại sản phẩm: </label>
+                                    <select class="width-10 chosen-select" id="form-field-select-4" name="LoaiSanPhamId">
+                                        <option value="">All</option>
+                                        @foreach ($lstLoaiSanPham as $item)
+                                            <option value="{{ $item->id }}" @if ($item->id == $request['LoaiSanPhamId']) selected @endif>
+                                                {{ $item->TenLoai }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    <button type="submit" class="btn btn-purple btn-sm">
+                                        Search
+                                        <i class="icon-search icon-on-right bigger-110"></i>
+                                    </button>
+                                    <button type="reset" class="btn btn-sm">
+                                        <i class="icon-refresh"></i>
+                                        Reset
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -56,21 +95,23 @@
                     <div class="hr hr-24"></div>
 
                     <div class="table-header">
-                        Bảng người vận chuyển
+                        Bảng sản phẩm
                     </div>
 
                     <div class="table-responsive">
                         <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th class="center">##</th>
-                                    <th>Họ tên</th>
-                                    <th>Ngày sinh</th>
-                                    <th>Giới tính</th>
-                                    <th>Địa chỉ</th>
+                                    <th class="center">Id</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Mô tả</th>
+                                    <th>Số lượng tồn</th>
+                                    <th>Giá nhập</th>
+                                    <th>Giá bán</th>
                                     <th>Hình ảnh</th>
-                                    <th>SĐT</th>
-                                    <th>Đơn vị VC</th>
+                                    <th>Lượt mua</th>
+                                    <th>Hãng sãn xuất</th>
+                                    <th>Loại sản phẩm</th>
                                     <th>
                                         <i class="icon-time bigger-110 hidden-480"></i>
                                         Create_at
@@ -79,94 +120,57 @@
                                         <i class="icon-time bigger-110 hidden-480"></i>
                                         Update_at
                                     </th>
-                                    {{-- <th>
+                                    <th>
                                         <i class="icon-time bigger-110 hidden-480"></i>
                                         Deleted_at
-                                    </th> --}}
+                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach ($nvc as $item)
+                                @foreach ($sanPham as $item)
 
                                     <tr>
                                         <td class="center">{{ $item->id }}</td>
-                                        <td>{{ $item->HoTen }}</td>
-                                        <td>{{ $item->NgaySinh }}</td>
-                                        @if ($item->GioiTinh == '0')
-                                            <td>Nữ</td>
-                                        @elseif($item->GioiTinh == '1')
-                                            <td>Nam</td>
-                                        @else($item->Gioitinh!=0||$item->gioitinh!=1)
-                                            <td>Không xác định</td>
-                                        @endif
-                                        </td>
-                                        <td>{{ $item->DiaChi }}</td>
+                                        <td>{{ $item->TenSanPham }}</td>
+                                        <td>{{ $item->MoTa }}</td>
+                                        <td>{{ $item->SoLuongTon }}</td>
+                                        <td>{{ $item->GiaNhap }}</td>
+                                        <td>{{ $item->GiaBan }}</td>
                                         <td>
-                                            <img src='{{ $item->HinhAnh }}' alt="{{ $item->HinhAnh }}" width='100'
-                                                height='100'>
+                                            <img src='{{ $item->HinhAnh }}' alt="{{ $item->HinhAnh }}" width='100' height='100'>
                                         </td>
-                                        <td>{{ $item->Phone }}</td>
-                                        {{-- {{ dd($item->DonViVanChuyen) }} --}}
-                                        <td>{{ $item->DonViVanChuyen->TenDonViVanChuyen }}</td>
+                                        <td>{{ $item->LuotMua }}</td>
+                                        <td>{{ $item->HangSanXuat->Ten }}</td>
+                                        <td>{{ $item->LoaiSanPham->TenLoai }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
-                                        {{-- <td>{{ $item->deleted_at }}</td> --}}
+                                        <td>{{ $item->deleted_at }}</td>
 
                                         <td>
                                             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#">
-                                                    <i class="icon-zoom-in bigger-130"></i>
-                                                </a>
-
-                                                <a class="green"
-                                                    href="{{ route('NguoiVanChuyen.edit', $item) }}">
-                                                    <i class="icon-pencil bigger-130"></i>
-                                                </a>
-
-                                                <form action="{{ route('NguoiVanChuyen.destroy', $item) }}"
-                                                    method="post">
+                                                <form action="{{ route('SanPham.KhoiPhuc',$item->id) }}" method="post">
                                                     @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn-link red"><i
-                                                            class="icon-trash bigger-130"></i></button>
+                                                    {{-- @method("PUT") --}}
+                                                    <button type="submit" class="btn-link blue" title="Khôi phục"><i class="icon-undo bigger-130"></i></button>
                                                 </form>
                                             </div>
 
                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                 <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle"
-                                                        data-toggle="dropdown">
+                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
                                                         <i class="icon-caret-down icon-only bigger-120"></i>
                                                     </button>
 
-                                                    <ul
-                                                        class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                         <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip"
-                                                                title="View">
-                                                                <span class="blue">
-                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                </span>
-                                                            </a>
+                                                            <form action="{{ route('SanPham.KhoiPhuc', $item->id) }}" method="post">
+                                                                @csrf
+                                                                {{-- @method("PUT") --}}
+                                                                <button type="submit" class="tooltip-error btn-link blue" data-rel="tooltip" title="Khôi phục"><i class="icon-undo bigger-120"></i></button>
+                                                            </form>
                                                         </li>
-
-                                                        <!-- <li>
-                                                        <a href="{{ route('SanPham.edit', $item) }}" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                            <span class="green">
-                                                                <i class="icon-edit bigger-120"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <form action="{{ route('SanPham.destroy', $item) }}" method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Delete"><i class="icon-trash bigger-120"></i></button>
-                                                        </form>
-                                                    </li> -->
                                                     </ul>
                                                 </div>
                                             </div>
@@ -179,8 +183,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+
+        </div><!-- /.page-content -->
     </div><!-- /.main-content -->
+
 @endsection
 
 @section('scriptThisPage')
@@ -191,22 +197,17 @@
             var oTable1 = $('#sample-table-2').dataTable({
                 "aoColumns": [
                     null, null,
-                    null, //NgaySinh
-                    null, //GioiTinh
                     {
                         "bSortable": false
-                    }, //HinhAnh
-                    {
-                        'bSortable': false
-                    },
-                    {
-                        'bSortable': false
-                    },
-                    null, null, null, null,
+                    }, //mota
+                    null, null, null,
                     {
                         "bSortable": false
-                    }, // edit,delete....
-
+                    }, //hinh anh
+                    null, null, null, null, null,null,
+                    {
+                        "bSortable": false
+                    }
                 ]
             });
 
@@ -249,4 +250,5 @@
             else $('#form-field-select-4').removeClass('tag-input-style');
         });
     </script>
+
 @endsection

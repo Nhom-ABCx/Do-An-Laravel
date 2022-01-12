@@ -236,7 +236,8 @@
 
                                 <li>
                                     <a href="#">
-                                        <img src="/storage/assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                                        <img src="/storage/assets/avatars/avatar.png" class="msg-photo"
+                                            alt="Alex's Avatar" />
                                         <span class="msg-body">
                                             <span class="msg-title">
                                                 <span class="blue">Alex:</span>
@@ -253,7 +254,8 @@
 
                                 <li>
                                     <a href="#">
-                                        <img src="/storage/assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+                                        <img src="/storage/assets/avatars/avatar3.png" class="msg-photo"
+                                            alt="Susan's Avatar" />
                                         <span class="msg-body">
                                             <span class="msg-title">
                                                 <span class="blue">Susan:</span>
@@ -270,7 +272,8 @@
 
                                 <li>
                                     <a href="#">
-                                        <img src="/storage/assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+                                        <img src="/storage/assets/avatars/avatar4.png" class="msg-photo"
+                                            alt="Bob's Avatar" />
                                         <span class="msg-body">
                                             <span class="msg-title">
                                                 <span class="blue">Bob:</span>
@@ -296,11 +299,13 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="/storage/assets/avatars/user.jpg" alt="Jason's Photo" />
+                                <img class="nav-user-photo"
+                                    src="/storage/assets/avatars/@auth{{ Auth::user()->HinhAnh }}@endauth @guest user2.png @endguest"
+                                    alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     @auth
-                                        {{Auth::user()->Username}}
+                                        {{ Auth::user()->Username }}
                                     @endauth
 
                                     @guest
@@ -479,7 +484,8 @@
                         </ul>
                     </li>
 
-                    <li class="{{ request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : '' }}">
+                    <li
+                        class="{{ request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Khuyến mãi </span>
@@ -508,7 +514,7 @@
                         </a>
                     </li>
                     {{-- Van chuyen --}}
-                    <li >
+                    <li>
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-fighter-jet"></i>
                             <span class="menu-text"> Vận chuyển </span>
@@ -522,20 +528,20 @@
                                     </a>
                                 </li>
                                 <li class="{{ request()->is('NguoiVanChuyen') ? 'active' : '' }}">
-                                    <a href="{{route('NguoiVanChuyen.index')}}">
+                                    <a href="{{ route('NguoiVanChuyen.index') }}">
                                         <i class="icon-check"></i>
-                                         Người vận chuyển
+                                        Người vận chuyển
                                     </a>
                                 </li>
                             </ul>
                         </a>
                     </li>
                     {{-- binh luan --}}
-                     <li class="{{ request()->is('BinhLuan') ? 'active' : '' }}">
+                    <li class="{{ request()->is('BinhLuan') ? 'active' : '' }}">
                         <a href="{{ route('BinhLuan.index') }}">
                             <i class="icon-edit"></i>
-                            <span class="menu-text"> Bình Luận </span>
-                            
+                            <span class="menu-text"> Bình Luận SP</span>
+
                         </a>
                     </li>
                     <li>
@@ -544,7 +550,8 @@
 
                             <span class="menu-text">
                                 Calendar
-                                <span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
+                                <span class="badge badge-transparent tooltip-error"
+                                    title="2&nbsp;Important&nbsp;Events">
                                     <i class="icon-warning-sign red bigger-130"></i>
                                 </span>
                             </span>
@@ -663,7 +670,8 @@
                 </ul><!-- /.nav-list -->
 
                 <div class="sidebar-collapse" id="sidebar-collapse">
-                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
+                        data-icon2="icon-double-angle-right"></i>
                 </div>
 
                 <script type="text/javascript">
@@ -752,10 +760,10 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-                <script type="text/javascript">
-                    window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                </script>
-                <![endif]-->
+                    <script type="text/javascript">
+                        window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                    </script>
+                    <![endif]-->
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +

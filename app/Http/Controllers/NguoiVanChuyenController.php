@@ -18,12 +18,10 @@ class NguoiVanChuyenController extends Controller
     public function index()
     {
         $data=NguoiVanChuyen::all();
+        $donViVanChuyen=DonViVanChuyen::all();
         foreach ($data as $nvc)
         $this->fixImage($nvc);
-
-        
-       
-        return view('NguoiVanChuyen.NguoiVanChuyen-index',['nvc'=>$data]);
+        return view('NguoiVanChuyen.NguoiVanChuyen-index',['nvc'=>$data,'dvvc'=>$donViVanChuyen]);
     }
 
     /**

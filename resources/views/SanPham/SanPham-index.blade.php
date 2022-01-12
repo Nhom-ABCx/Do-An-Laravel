@@ -49,6 +49,10 @@
                                         <i class="icon-plus"></i>
                                         Thêm sản phẩm
                                     </a>
+                                    <a href="{{ route('SanPham.DaXoa') }}" class="btn btn-inverse">
+                                        <i class="icon-trash"></i>
+                                        Sản phẩm đã xóa
+                                    </a>
 
                                     <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="{{$request['TenSanPham']}}" name="TenSanPham" />
                                     <label for=""> Hãng sãn xuất: </label>
@@ -95,15 +99,15 @@
                             <thead>
                                 <tr>
                                     <th class="center">Id</th>
-                                    <th>TenSanPham</th>
-                                    <th>MoTa</th>
-                                    <th>SoLuongTon</th>
-                                    <th>GiaNhap</th>
-                                    <th>GiaBan</th>
-                                    <th>HinhAnh</th>
-                                    <th>LuotMua</th>
-                                    <th>HangSanXuatId</th>
-                                    <th>LoaiSanPhamId</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Mô tả</th>
+                                    <th>Số lượng tồn</th>
+                                    <th>Giá nhập</th>
+                                    <th>Giá bán</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Lượt mua</th>
+                                    <th>Hãng sãn xuất</th>
+                                    <th>Loại sản phẩm</th>
                                     <th>
                                         <i class="icon-time bigger-110 hidden-480"></i>
                                         Create_at
@@ -111,10 +115,6 @@
                                     <th>
                                         <i class="icon-time bigger-110 hidden-480"></i>
                                         Update_at
-                                    </th>
-                                    <th>
-                                        <i class="icon-time bigger-110 hidden-480"></i>
-                                        Deleted_at
                                     </th>
                                     <th></th>
                                 </tr>
@@ -138,7 +138,6 @@
                                         <td>{{ $item->LoaiSanPham->TenLoai }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
-                                        <td>{{ $item->deleted_at }}</td>
 
                                         <td>
                                             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
@@ -223,7 +222,7 @@
                     {
                         "bSortable": false
                     }, //hinh anh
-                    null, null, null, null, null, null,
+                    null, null, null, null, null,
                     {
                         "bSortable": false
                     }

@@ -296,7 +296,7 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="/storage/assets/avatars/user.jpg" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="/storage/assets/avatars/<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?> <?php if(auth()->guard()->guest()): ?> user2.png <?php endif; ?>" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     <?php if(auth()->guard()->check()): ?>

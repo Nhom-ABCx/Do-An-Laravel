@@ -39,7 +39,7 @@
                 <div class="col-xs-12">
                     <div class="widget-box">
                         <div class="widget-header">
-                            <h3 class="header smaller lighter blue">Bình luận</h3>
+                            <h3 class="header smaller lighter blue">Bình luận </h3>
                         </div>
                         {{-- <div class="widget-body">
                         <div class="widget-main">
@@ -95,7 +95,7 @@
                                         <td>{{ $item->SanPham->TenSanPham }}
                                                     
                                             <img src='storage/assets/images/product-image/{{ $item->SanPham->HinhAnh }}' alt="{{ $item->SanPham->HinhAnh }}"
-                                                width='100' height='100'>
+                                                width='50' height='50'>
                                         </td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>

@@ -179,6 +179,30 @@ class SanPhamController extends Controller
         $sanPham->delete();
         return Redirect::route('SanPham.index');
     }
+    public function SanPhamDaXoa(Request $request)
+    {
+        $data=SanPham::onlyTrashed()->get();
+        if (!empty($request->input('TenSanPham')))
+            $data = $data->where('TenSanPham', 'LIKE', '%' . Str::of($request->input('TenSanPham'))->trim() . '%');
+        if (!empty($request->input('HangSanXuatId')))
+            $data = $data->where('HangSanXuatId', $request->input('HangSanXuatId'));
+        if (!empty($request->input('LoaiSanPhamId')))
+            $data = $data->where('LoaiSanPhamId', $request->input('LoaiSanPhamId'));
+
+        foreach ($data as $sp)
+            $this->fixImage($sp);
+        //gọi fixImage cho từng sp
+        $lstLoaiSanPham = LoaiSanPham::all();
+        $lstHangSanXuat = HangSanXuat::all();
+        //tra lai resquet ve cho view de hien thi lai tim` kiem' cu?
+        return view('SanPham.SanPham-daXoa', ["sanPham" => $data, 'lstLoaiSanPham' => $lstLoaiSanPham, 'lstHangSanXuat' => $lstHangSanXuat, 'request' => $request]);
+    }
+    public function KhoiPhucSanPham($id)
+    {
+        $sanPham=SanPham::onlyTrashed()->find($id);
+        $sanPham->restore();
+        return Redirect::route('SanPham.DaXoa');
+    }
     //phương thức hỗ trợ load hình ảnh và thay thế bằng hình mạc định nếu ko tìm thấy file
     public static function fixImage(SanPham $sanPham)
     {
