@@ -85,209 +85,58 @@
 
                 <div class="navbar-header pull-right" role="navigation">
                     <ul class="nav ace-nav">
-                        <li class="grey">
+                        
+
+                        
+
+                        
+                        
+                        <li class="blue">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <i class="icon-tasks"></i>
-                                <span class="badge badge-grey">4</span>
+                                <i class="icon-comment icon-animated-vertical"></i>
+                                
                             </a>
 
                             <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
                                 <li class="dropdown-header">
-                                    <i class="icon-ok"></i>
-                                    4 Tasks to complete
+                                    <i class="icon-comment-alt"></i>
+                                    
+                                    Tin nhắn
                                 </li>
+                                
+                                <?php if(count($conversation)): ?>
+                                    <?php for($i = 0; $i < count($conversation); $i++): ?>
+
+                                        <li>
+                                            <a href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation[$i]->KhachHangId); ?>">
+                                                <img src="/storage/assets/images/avatar/User/<?php echo e($conversation[$i]->KhachHangId); ?>/<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>" class="msg-photo"
+                                                    alt="Alex's Avatar" />
+                                                <span class="msg-body">
+                                                    <span class="msg-title">
+                                                        <span class="blue">
+                                                            <?php echo e($conversation[$i]->KhachHang->Username); ?>:
+                                                        </span>
+                                                        
+                                                        <?php if(!empty($conversation[$i]->mess->NhanVienId)): ?>
+                                                            Bạn:
+                                                        <?php endif; ?>
+                                                        <?php echo e($conversation[$i]->mess->Body ?? ''); ?> ...
+                                                    </span>
+
+                                                    <span class="msg-time">
+                                                        <i class="icon-time"></i>
+                                                        <span><?php echo e($conversation[$i]->created_at->diffForHumans()); ?></span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                    <?php endfor; ?>
+                                <?php endif; ?>
 
                                 <li>
-                                    <a href="#">
-                                        <div class="clearfix">
-                                            <span class="pull-left">Software Update</span>
-                                            <span class="pull-right">65%</span>
-                                        </div>
-
-                                        <div class="progress progress-mini ">
-                                            <div style="width:65%" class="progress-bar "></div>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <div class="clearfix">
-                                            <span class="pull-left">Hardware Upgrade</span>
-                                            <span class="pull-right">35%</span>
-                                        </div>
-
-                                        <div class="progress progress-mini ">
-                                            <div style="width:35%" class="progress-bar progress-bar-danger"></div>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <div class="clearfix">
-                                            <span class="pull-left">Unit Testing</span>
-                                            <span class="pull-right">15%</span>
-                                        </div>
-
-                                        <div class="progress progress-mini ">
-                                            <div style="width:15%" class="progress-bar progress-bar-warning"></div>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <div class="clearfix">
-                                            <span class="pull-left">Bug Fixes</span>
-                                            <span class="pull-right">90%</span>
-                                        </div>
-
-                                        <div class="progress progress-mini progress-striped active">
-                                            <div style="width:90%" class="progress-bar progress-bar-success"></div>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        See tasks with details
-                                        <i class="icon-arrow-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="purple">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <i class="icon-bell-alt icon-animated-bell"></i>
-                                <span class="badge badge-important">8</span>
-                            </a>
-
-                            <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
-                                <li class="dropdown-header">
-                                    <i class="icon-warning-sign"></i>
-                                    8 Notifications
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <div class="clearfix">
-                                            <span class="pull-left">
-                                                <i class="btn btn-xs no-hover btn-pink icon-comment"></i>
-                                                New Comments
-                                            </span>
-                                            <span class="pull-right badge badge-info">+12</span>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <i class="btn btn-xs btn-primary icon-user"></i>
-                                        Bob just signed up as an editor ...
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <div class="clearfix">
-                                            <span class="pull-left">
-                                                <i class="btn btn-xs no-hover btn-success icon-shopping-cart"></i>
-                                                New Orders
-                                            </span>
-                                            <span class="pull-right badge badge-success">+8</span>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <div class="clearfix">
-                                            <span class="pull-left">
-                                                <i class="btn btn-xs no-hover btn-info icon-twitter"></i>
-                                                Followers
-                                            </span>
-                                            <span class="pull-right badge badge-info">+11</span>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        See all notifications
-                                        <i class="icon-arrow-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="green">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <i class="icon-envelope icon-animated-vertical"></i>
-                                <span class="badge badge-success">5</span>
-                            </a>
-
-                            <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-                                <li class="dropdown-header">
-                                    <i class="icon-envelope-alt"></i>
-                                    5 Messages
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <img src="/storage/assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
-                                        <span class="msg-body">
-                                            <span class="msg-title">
-                                                <span class="blue">Alex:</span>
-                                                Ciao sociis natoque penatibus et auctor ...
-                                            </span>
-
-                                            <span class="msg-time">
-                                                <i class="icon-time"></i>
-                                                <span>a moment ago</span>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <img src="/storage/assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
-                                        <span class="msg-body">
-                                            <span class="msg-title">
-                                                <span class="blue">Susan:</span>
-                                                Vestibulum id ligula porta felis euismod ...
-                                            </span>
-
-                                            <span class="msg-time">
-                                                <i class="icon-time"></i>
-                                                <span>20 minutes ago</span>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <img src="/storage/assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
-                                        <span class="msg-body">
-                                            <span class="msg-title">
-                                                <span class="blue">Bob:</span>
-                                                Nullam quis risus eget urna mollis ornare ...
-                                            </span>
-
-                                            <span class="msg-time">
-                                                <i class="icon-time"></i>
-                                                <span>3:15 pm</span>
-                                            </span>
-                                        </span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="inbox.html">
-                                        See all messages
+                                    <a href="<?php echo e(route('Message.index')); ?>">
+                                        Xem tất cả tin nhắn
                                         <i class="icon-arrow-right"></i>
                                     </a>
                                 </li>
@@ -296,7 +145,7 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="/storage/assets/avatars/<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?> <?php if(auth()->guard()->guest()): ?> user2.png <?php endif; ?>" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="/storage/assets/images/avatar/NhanVien/<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->id); ?>/<?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?>" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     <?php if(auth()->guard()->check()): ?>
@@ -509,7 +358,7 @@
                         </a>
                     </li>
 
-                    <li >
+                    <li>
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Vận chuyển </span>
@@ -525,7 +374,7 @@
                                 <li class="<?php echo e(request()->is('NguoiVanChuyen') ? 'active' : ''); ?>">
                                     <a href="<?php echo e(route('NguoiVanChuyen.index')); ?>">
                                         <i class="icon-check"></i>
-                                         Người vận chuyển
+                                        Người vận chuyển
                                     </a>
                                 </li>
                             </ul>
@@ -746,10 +595,10 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-                <script type="text/javascript">
-                    window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                </script>
-                <![endif]-->
+                                        <script type="text/javascript">
+                                            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                                        </script>
+                                        <![endif]-->
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +

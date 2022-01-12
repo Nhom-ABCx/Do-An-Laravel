@@ -6,6 +6,7 @@ use App\Models\Message;
 use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests\UpdateMessageRequest;
 use App\Models\Conversation;
+use App\Models\KhachHang;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -21,9 +23,25 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //lay ra danh sach cac cuoc tro chuyen
+        $dsCacCuocTroChuyen = Conversation::where("conversations.NhanVienId", Auth::user()->id)->get();
+
+            foreach ($dsCacCuocTroChuyen as $item) {
+                //lay' ra cai' tin nhan cuoi' cung` luu kem` vao`
+                $mess = Message::where("ConversationId", $item->id)->orderByDesc('created_at')->first();
+                if (!empty($mess))
+                    Arr::add($item, "mess", $mess);
+                else
+                    Arr::add($item, 'mess', null);
+            }
+        $conv=Conversation::where("KhachHangId",$request["KhachHangId"])->where("NhanVienId",Auth::user()->id)->first();
+        $tinNhan=Message::where("ConversationId",$conv->id)->orderBy('created_at')->get();
+
+        $khachHang=KhachHang::find($request["KhachHangId"]);
+
+        return view('Message.Message-index', ["dsCacCuocTroChuyen"=>$dsCacCuocTroChuyen,'request' => $request,"tinNhan"=>$tinNhan,"khachHang"=>$khachHang]);
     }
 
     /**

@@ -42,10 +42,88 @@
 
                     <h3 class="header smaller lighter blue">Chương trình khuyến mãi</h3>
                     <div class="pull">
-                        <a type="button" class="btn btn-success " href="{{ route('KhuyenMai.create') }}"><i
-                                class="fa fa-plus"></i> Thêm chương trình khuyến mãi</a>
+                        {{-- <a type="button" class="btn btn-success " href="{{ route('KhuyenMai.create') }}"><i
+                                class="fa fa-plus"></i> Thêm chương trình khuyến mãi</a> --}}
+                        <!-- Button trigger modal -->
+                        <a type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter"><i
+                                class="fa fa-plus"></i>
+                            Thêm chương trình khuyến mãi
+                        </a>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">
+                                            <div class="widget-header">
+                                                <h4>Thêm chương trình khuyến mãi</h4>
+                                            </div>
+                                        </h5>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('KhuyenMai.store') }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="widget-box">
+                                                <div class="widget-body">
+                                                    <div class="widget-main">
+                                                        <div class="row-fluid">
+                                                            <label for="id-date-picker-1">Tên chương trình</label>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <div class="row-fluid input-append">
+                                                                <textarea name="TenChuongTrinh" id="w3review"
+                                                                    name="w3review" rows="4" cols="50">
+                                                                                    </textarea>
+                                                            </div>
+                                                        </div>
+                                                        <hr />
+                                                        <div class="row-fluid">
+                                                            <label for="id-date-picker-1">Mô tả</label>
+                                                        </div>
+
+                                                        <div class="control-group">
+                                                            <div class="row-fluid input-append">
+                                                                <textarea name="MoTa" id="w3review" name="w3review" rows="4"
+                                                                    cols="50">
+                                                                                    </textarea>
+                                                            </div>
+                                                        </div>
+                                                        <hr />
+                                                        <div class="control-group">
+                                                            <div class="form-group">
+                                                                <label for="input_from">Form date</label><br>
+
+                                                                <input class="form-control" type="date" name="FromDate"
+                                                                    placeholder="Start Date">
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <div class="form-group">
+                                                                <label for="input_to">To date</label><br>
+                                                                <input class="form-control" type="date" name="ToDate"
+                                                                    placeholder="End Date">
+                                                            </div>
+                                                        </div>
+                                                        <hr />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    </br>
+                    <hr>
                     <div class="table-header">
                         Bảng Chương Trình Khuyến mãi
                     </div>

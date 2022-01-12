@@ -14,6 +14,7 @@ use App\Http\Controllers\NguoiVanChuyenController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\KhachHangController;
 use App\Models\BinhLuan;
+use App\Http\Controllers\MessageController;
 use App\Models\SanPham;
 
 //composer dump-autoload
@@ -85,6 +86,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('BinhLuan', BinhLuanController::class, [
         'parameters' => [
             'BinhLuan' => 'binhLuan'
+        ]
+    ]);
+    Route::resource('Message', MessageController::class, [
+        'parameters' => [
+            'Message' => 'message'
         ]
     ]);
 });

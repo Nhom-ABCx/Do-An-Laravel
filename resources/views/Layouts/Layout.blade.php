@@ -17,7 +17,16 @@
     <link rel="stylesheet" href="/storage/assets/css/ace-responsive.min.css" />
     <link href="/storage/assets/css/bootstrap-responsive.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {{-- date time --}}
+    <!--  jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
+<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <!--[if IE 7]>
   <link rel="stylesheet" href="/storage/assets/css/font-awesome-ie7.min.css" />
   <![endif]-->
@@ -85,7 +94,7 @@
 
                 <div class="navbar-header pull-right" role="navigation">
                     <ul class="nav ace-nav">
-                        <li class="grey">
+                        {{-- <li class="grey">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <i class="icon-tasks"></i>
                                 <span class="badge badge-grey">4</span>
@@ -156,9 +165,9 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
 
-                        <li class="purple">
+                        {{-- <li class="purple">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <i class="icon-bell-alt icon-animated-bell"></i>
                                 <span class="badge badge-important">8</span>
@@ -220,9 +229,9 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
 
-                        <li class="green">
+                        {{-- <li class="green">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <i class="icon-envelope icon-animated-vertical"></i>
                                 <span class="badge badge-success">5</span>
@@ -295,13 +304,63 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li> --}}
+                        {{-- Tin Nhan chat --}}
+                        <li class="blue">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <i class="icon-comment icon-animated-vertical"></i>
+                                {{-- <span class="badge badge-success">{{count($conversation)}}</span> --}}
+                            </a>
+
+                            <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                                <li class="dropdown-header">
+                                    <i class="icon-comment-alt"></i>
+                                    {{-- {{ count($conversation) }} Messages --}}
+                                    Tin nhắn
+                                </li>
+                                {{-- true neu' !=0 ngc lai la false --}}
+                                @if (count($conversation))
+                                    @for ($i = 0; $i < count($conversation); $i++)
+
+                                        <li>
+                                            <a href="{{ route('Message.index') }}?KhachHangId={{ $conversation[$i]->KhachHangId }}">
+                                                <img src="/storage/assets/images/avatar/User/{{ $conversation[$i]->KhachHangId }}/{{ $conversation[$i]->KhachHang->HinhAnh }}" class="msg-photo"
+                                                    alt="Alex's Avatar" />
+                                                <span class="msg-body">
+                                                    <span class="msg-title">
+                                                        <span class="blue">
+                                                            {{ $conversation[$i]->KhachHang->Username }}:
+                                                        </span>
+                                                        {{-- nếu tin nhắn cuối cùng là bản thân thì để chữ "Bạn: cho nó giống facebook" --}}
+                                                        @if (!empty($conversation[$i]->mess->NhanVienId))
+                                                            Bạn:
+                                                        @endif
+                                                        {{ $conversation[$i]->mess->Body ?? '' }} ...
+                                                    </span>
+
+                                                    <span class="msg-time">
+                                                        <i class="icon-time"></i>
+                                                        <span>{{ $conversation[$i]->created_at->diffForHumans() }}</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                    @endfor
+                                @endif
+
+                                <li>
+                                    <a href="{{ route('Message.index') }}">
+                                        Xem tất cả tin nhắn
+                                        <i class="icon-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo"
-                                    src="/storage/assets/avatars/@auth{{ Auth::user()->HinhAnh }}@endauth @guest user2.png @endguest"
-                                    alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="/storage/assets/images/avatar/NhanVien/@auth{{ Auth::user()->id }}/{{ Auth::user()->HinhAnh }}@endauth" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     @auth
@@ -764,6 +823,10 @@
                         window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
                     </script>
                     <![endif]-->
+                                        <script type="text/javascript">
+                                            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                                        </script>
+                                        <![endif]-->
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
