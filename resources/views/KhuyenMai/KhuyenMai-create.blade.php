@@ -9,81 +9,95 @@
 
 @section('body')
 
-     <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">
-                                            <div class="widget-header">
-                                                <h4>Thêm chương trình khuyến mãi</h4>
-                                            </div>
-                                        </h5>
-                                        {{-- <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button> --}}
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="{{ route('KhuyenMai.store') }}" method="POST"
-                                            enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="widget-box">
-                                                <div class="widget-body">
-                                                    <div class="widget-main">
-                                                        <div class="row-fluid">
-                                                            <label for="id-date-picker-1">Tên chương trình</label>
-                                                        </div>
-                                                        <div class="control-group">
-                                                            <div class="row-fluid input-append">
-                                                                <textarea name="TenChuongTrinh" id="w3review"
-                                                                    name="w3review" rows="4" cols="50">
-                                                                            </textarea>
-                                                            </div>
-                                                        </div>
-                                                        <hr />
-                                                        <div class="row-fluid">
-                                                            <label for="id-date-picker-1">Mô tả</label>
-                                                        </div>
+    <div class="main-content">
 
-                                                        <div class="control-group">
-                                                            <div class="row-fluid input-append">
-                                                                <textarea name="MoTa" id="w3review" name="w3review" rows="4"
-                                                                    cols="50">
-                                                                            </textarea>
-                                                            </div>
-                                                        </div>
-                                                        <hr />
-                                                        <div class="control-group">
-                                                            <div class="form-group">
-                                                                <label for="input_from">Form date</label><br>
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="#">Home</a>
 
-                                                                <input class="form-control" type="date" name="FromDate"
-                                                                    placeholder="Start Date">
-                                                            </div>
-                                                        </div>
-                                                        <div class="control-group">
-                                                            <div class="form-group">
-                                                                <label for="input_to">To date</label><br>
-                                                                <input class="form-control" type="date" name="ToDate"
-                                                                    placeholder="End Date">
-                                                            </div>
-                                                        </div>
-                                                        <hr />
+                <span class="divider">
+                    <i class="icon-angle-right arrow-icon"></i>
+                </span>
+            </li>
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                        </form>
+            <li>
+                <a href="#">Forms</a>
+                <span class="divider">
+                    <i class="icon-angle-right arrow-icon"></i>
+                </span>
+            </li>
+            <li class="active">CT-Khuyến mãi</li>
+        </ul><!-- .breadcrumb -->
+
+        <div class="nav-search" id="nav-search">
+            <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input"
+                        autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                </span>
+            </form>
+        </div><!-- #nav-search -->
+        <div class="page-content">
+            <div class="span4">
+                <div class="pull">
+                    <a type="button" class="btn btn-info " href="{{ route('KhuyenMai.index') }}"><i
+                            class="fa fa-angle-double-left"></i> Back</a>
+                </div>
+                <form action="{{ route('KhuyenMai.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="widget-box">
+                        <div class="widget-header">
+                            <h4>Thêm CT-Khuyến mãi</h4>
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <div class="row-fluid">
+                                    <label for="id-date-picker-1">Tên chương trình</label>
+                                </div>
+
+                                <div class="control-group">
+                                    <div class="row-fluid input-append">
+                                        <input name="TenChuongTrinh" type="text" />
                                     </div>
                                 </div>
+                                <hr />
+                                <div class="row-fluid">
+                                    <label for="id-date-picker-1">Mô tả</label>
+                                </div>
+
+                                <div class="control-group">
+                                    <div class="row-fluid input-append">
+                                        <input type="text" name="MoTa" />
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="control-group">
+                                    <div class="form-group">
+                                        <label for="input_from">Form date</label><br>
+                                        <input type="text"  name="FromDate"
+                                            placeholder="Start Date">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="form-group">
+                                        <label for="input_to">To date</label><br>
+                                        <input type="text"  name="ToDate" placeholder="End Date">
+                                    </div>
+                                </div>
+                                <hr />
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-check-square-o"></i>
+                                    Thêm</button>
                             </div>
                         </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.page-content -->
+    </div><!-- /.main-content -->
 @endsection
 
 @section('scriptThisPage')

@@ -17,16 +17,7 @@
     <link rel="stylesheet" href="/storage/assets/css/ace-responsive.min.css" />
     <link href="/storage/assets/css/bootstrap-responsive.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    {{-- date time --}}
-    <!--  jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
-<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
-
-<!-- Bootstrap Date-Picker Plugin -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <!--[if IE 7]>
   <link rel="stylesheet" href="/storage/assets/css/font-awesome-ie7.min.css" />
   <![endif]-->
@@ -323,9 +314,10 @@
                                     @for ($i = 0; $i < count($conversation); $i++)
 
                                         <li>
-                                            <a href="{{ route('Message.index') }}?KhachHangId={{ $conversation[$i]->KhachHangId }}">
-                                                <img src="/storage/assets/images/avatar/User/{{ $conversation[$i]->KhachHangId }}/{{ $conversation[$i]->KhachHang->HinhAnh }}" class="msg-photo"
-                                                    alt="Alex's Avatar" />
+                                            <a
+                                                href="{{ route('Message.index') }}?KhachHangId={{ $conversation[$i]->KhachHangId }}">
+                                                <img src="/storage/assets/images/avatar/User/{{ $conversation[$i]->KhachHangId }}/{{ $conversation[$i]->KhachHang->HinhAnh }}"
+                                                    class="msg-photo" alt="Alex's Avatar" />
                                                 <span class="msg-body">
                                                     <span class="msg-title">
                                                         <span class="blue">
@@ -360,7 +352,9 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="/storage/assets/images/avatar/NhanVien/@auth{{ Auth::user()->id }}/{{ Auth::user()->HinhAnh }}@endauth" alt="Jason's Photo" />
+                                <img class="nav-user-photo"
+                                    src="/storage/assets/images/avatar/NhanVien/@auth{{ Auth::user()->id }}/{{ Auth::user()->HinhAnh }}@endauth"
+                                    alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     @auth
@@ -819,34 +813,34 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-                    <script type="text/javascript">
-                        window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                    </script>
-                    <![endif]-->
-                                        <script type="text/javascript">
-                                            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                                        </script>
-                                        <![endif]-->
-
+                        <script type="text/javascript">
+                            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                        </script>
+                        <![endif]-->
         <script type="text/javascript">
-            if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
-                "/script>");
+            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
         </script>
-        <script src="/storage/assets/js/bootstrap.min.js"></script>
-        <script src="/storage/assets/js/typeahead-bs2.min.js"></script>
+        <![endif]-->
 
-        <!-- page specific plugin scripts -->
+            <script type="text/javascript">
+                if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
+                    "/script>");
+            </script>
+            <script src="/storage/assets/js/bootstrap.min.js"></script>
+            <script src="/storage/assets/js/typeahead-bs2.min.js"></script>
 
-        <script src="/storage/assets/js/jquery.dataTables.min.js"></script>
-        <script src="/storage/assets/js/jquery.dataTables.bootstrap.js"></script>
-        <script src="/storage/assets/js/date-time/bootstrap-datepicker.min.js"></script>
-        <script src="/storage/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
-        <script src="/storage/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
+            <!-- page specific plugin scripts -->
 
-        <!-- ace scripts -->
+            <script src="/storage/assets/js/jquery.dataTables.min.js"></script>
+            <script src="/storage/assets/js/jquery.dataTables.bootstrap.js"></script>
+            <script src="/storage/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+            <script src="/storage/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+            <script src="/storage/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
 
-        <script src="/storage/assets/js/ace-elements.min.js"></script>
-        <script src="/storage/assets/js/ace.min.js"></script>
+            <!-- ace scripts -->
+
+            <script src="/storage/assets/js/ace-elements.min.js"></script>
+            <script src="/storage/assets/js/ace.min.js"></script>
     @show
 
     @yield('scriptThisPage')
