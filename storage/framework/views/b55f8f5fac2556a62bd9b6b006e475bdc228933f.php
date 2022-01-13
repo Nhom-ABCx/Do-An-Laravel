@@ -91,7 +91,7 @@
                                     <div class="modal-body">
                                         <form action="<?php echo e(route('KhuyenMai.store')); ?>" method="POST"
                                             enctype="multipart/form-data">
-                                            
+
                                             <?php echo csrf_field(); ?>
                                             <div class="widget-box">
                                                 <div class="widget-body">
@@ -101,9 +101,8 @@
                                                         </div>
                                                         <div class="control-group">
                                                             <div class="row-fluid input-append">
-                                                                <textarea name="TenChuongTrinh" rows="4" cols="50"
-                                                                     >
-                                                                                                                                                                                                                                                         </textarea>
+                                                                <textarea name="TenChuongTrinh" rows="4" cols="50">
+                                                                                                                                                                                                                                                                             </textarea>
                                                             </div>
                                                             <?php if($errors->has('TenChuongTrinh')): ?>
                                                                 <i class="icon-remove bigger-110 red">
@@ -117,9 +116,9 @@
 
                                                         <div class="control-group">
                                                             <div class="row-fluid input-append">
-                                                                <textarea  name="MoTa" id="w3review"
-                                                                    name="w3review" rows="4" cols="50" >
-                                                                                                                                                                                                                                                                        </textarea>
+                                                                <textarea name="MoTa" id="w3review" name="w3review" rows="4"
+                                                                    cols="50">
+                                                                                                                                                                                                                                                                                            </textarea>
                                                             </div>
                                                             <?php if($errors->has('MoTa')): ?>
                                                                 <i class="icon-remove bigger-110 red">
@@ -167,6 +166,20 @@
                     </div>
                     
                     <hr>
+                    <div class="row-fluid">
+                        <label for="id-date-range-picker-1">Date Range Picker</label>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="row-fluid input-prepend">
+                            <span class="add-on">
+                                <i class="icon-calendar"></i>
+                            </span>
+
+                            <input class="span10" type="text" name="date-range-picker"
+                                id="id-date-range-picker-1" />
+                        </div>
+                    </div>
                     <div class="table-header">
                         Bảng Chương Trình Khuyến mãi
                     </div>
@@ -295,15 +308,18 @@
 
     <script type="text/javascript">
         jQuery(function($) {
-            $('#gritter-error').on(ace.click_event, function() {
-                $.gritter.add({
-                    title: 'This is a warning notification',
-                    text: 'Just add a "gritter-light" class_name to your $.gritter.add or globally to $.gritter.options.class_name',
+            <?php if($errors->any()): ?>
+                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    $.gritter.add({
+                    title: 'Lỗi' ,
+                    text: '<?php echo e($error); ?>',
                     // class_name: 'gritter-error' + (!$('#gritter-light').get(0).checked ?
-                    //     ' gritter-light' : '')
-                });
-                return false;
-            });
+                    // ' gritter-light' : '')
+                    });
+                
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endif; ?>
+
             var oTable1 = $('#sample-table-2').dataTable({
                 "aoColumns": [
                     null, {
@@ -325,7 +341,9 @@
             $('[data-rel="tooltip"]').tooltip({
                 placement: tooltip_placement
             });
-
+            // $('#id-date-range-picker-1').daterangepicker().prev().on(ace.click_event, function(){
+            // 		$(this).next().focus();
+            // });
             function tooltip_placement(context, source) {
                 var $source = $(source);
                 var $parent = $source.closest('table')
