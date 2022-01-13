@@ -77,8 +77,12 @@
                                                             <div class="row-fluid input-append">
                                                                 <textarea name="TenChuongTrinh" id="w3review"
                                                                     name="w3review" rows="4" cols="50">
-                                                                                    </textarea>
+                                                                                                                                        </textarea>
                                                             </div>
+                                                            @if ($errors->has('TenChuongTrinh'))
+                                                                <i class="icon-remove bigger-110 red">
+                                                                    {{ $errors->first('TenChuongTrinh') }}</i>
+                                                            @endif
                                                         </div>
                                                         <hr />
                                                         <div class="row-fluid">
@@ -89,34 +93,45 @@
                                                             <div class="row-fluid input-append">
                                                                 <textarea name="MoTa" id="w3review" name="w3review" rows="4"
                                                                     cols="50">
-                                                                                    </textarea>
+                                                                            </textarea>
                                                             </div>
+                                                            @if ($errors->has('MoTa'))
+                                                                <i class="icon-remove bigger-110 red">
+                                                                    {{ $errors->first('MoTa') }}</i>
+                                                            @endif
                                                         </div>
                                                         <hr />
                                                         <div class="control-group">
                                                             <div class="form-group">
-                                                                <label for="input_from">Form date</label><br>
+                                                                <label for="input_from">Ngày bắt đầu</label><br>
 
-                                                                <input class="form-control" type="date" name="FromDate"
-                                                                    placeholder="Start Date">
+                                                                <input class="form-control" placeholder="Ngày bắt đầu"
+                                                                    type="date" name="FromDate">
                                                             </div>
+                                                            @if ($errors->has('FromDate'))
+                                                                <i class="icon-remove bigger-110 red">
+                                                                    {{ $errors->first('FromDate') }}</i>
+                                                            @endif
                                                         </div>
                                                         <div class="control-group">
                                                             <div class="form-group">
-                                                                <label for="input_to">To date</label><br>
-                                                                <input class="form-control" type="date" name="ToDate"
-                                                                    placeholder="End Date">
+                                                                <label for="input_to">Ngày kết thúc</label><br>
+                                                                <input class="form-control" placeholder="Ngày kết thúc"
+                                                                    type="date" name="ToDate">
                                                             </div>
+                                                            @if ($errors->has('ToDate'))
+                                                                <i class="icon-remove bigger-110 red">
+                                                                    {{ $errors->first('ToDate') }}</i>
+                                                            @endif
                                                         </div>
                                                         <hr />
-
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    data-dismiss="modal">Đóng</button>
+                                                <button type="submit" class="btn btn-primary">Lưu </button>
                                         </form>
                                     </div>
                                 </div>
@@ -157,10 +172,10 @@
                                         <i class="fa fa-check-square-o"></i>
                                         updated_at
                                     </th>
-                                    <th>
+                                    {{-- <th>
                                         <i class="fa fa-trash"></i>
                                         deleted_at
-                                    </th>
+                                    </th> --}}
                                     <th></th>
                                 </tr>
                             </thead>
@@ -174,7 +189,7 @@
                                         <td>{{ $item->ToDate }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
-                                        <td>{{ $item->deleted_at }}</td>
+                                        {{-- <td>{{ $item->deleted_at }}</td> --}}
 
                                         <td>
                                             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
@@ -252,14 +267,18 @@
             jQuery(function($) {
                 var oTable1 = $('#sample-table-2').dataTable({
                     "aoColumns": [
-                        null, null,
                         null, {
                             "bSortable": false
                         },
-                        null, null, null,
-                        {
+                        null, {
                             "bSortable": false
                         },
+                        null, null, {
+                            "bSortable": false
+                        },
+                        // {
+                        //     "bSortable": false
+                        // },
                     ]
                 });
 

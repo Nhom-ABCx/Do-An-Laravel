@@ -17,8 +17,8 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function index()
     {
-        $data=ChuongTrinhKhuyenMai::all();
-        return view('KhuyenMai.KhuyenMai-index',['ctkm'=>$data]);
+        $data = ChuongTrinhKhuyenMai::all();
+        return view('KhuyenMai.KhuyenMai-index', ['ctkm' => $data]);
     }
 
     /**
@@ -28,8 +28,8 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function create()
     {
-        $sanPhamId=SanPham::all();
-        return view('KhuyenMai.KhuyenMai-create',['sanPhamId'=>$sanPhamId]);
+        $sanPhamId = SanPham::all();
+        return view('KhuyenMai.KhuyenMai-create', ['sanPhamId' => $sanPhamId]);
     }
 
     /**
@@ -40,16 +40,25 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function store(Request $request)
     {
-        $CTkm= new ChuongTrinhKhuyenMai();
+        dd("Sdsaidhj");
+        // $request->validate(
+        //     [
+        //         'TenChuongTrinh' => ['required', 'unique:chuong_trinh_khuyen_mais,TenChuongTrinh', 'max:255'],
+        //         'MoTa' => ['required','max:255'],
+        //         'FromDate' => ['required'],
+        //         'ToDate' => ['required'],
+        //     ]
+        // );
+        // $CTkm = new ChuongTrinhKhuyenMai();
 
-        $CTkm->fill([
-            "TenChuongTrinh"=>$request->input("TenChuongTrinh"),
-            "MoTa"=>$request->input("MoTa"),
-            "FromDate"=>$request->input("FromDate"),
-            "ToDate"=>$request->input("ToDate")
-        ]);
-        $CTkm->save();
-         return Redirect::route('KhuyenMai.index');
+        // $CTkm->fill([
+        //     "TenChuongTrinh" => $request->input("TenChuongTrinh"),
+        //     "MoTa" => $request->input("MoTa"),
+        //     "FromDate" => $request->input("FromDate"),
+        //     "ToDate" => $request->input("ToDate")
+        // ]);
+        // $CTkm->save();
+        //return Redirect::route('KhuyenMai.index');
     }
 
     /**
@@ -71,10 +80,10 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function edit(ChuongTrinhKhuyenMai $chuongTrinhKhuyenMai)
     {
-        //dd($chuongTrinhKhuyenMai->FromDate);
 
-        //dd($chuongTrinhKhuyenMai);
-        return view('KhuyenMai.KhuyenMai-edit',['ctkm'=>$chuongTrinhKhuyenMai]);
+        //$chuongTrinhKhuyenMai->FromDate = date('d-m-Y', strtotime($chuongTrinhKhuyenMai->FromDate));
+        // dd($chuongTrinhKhuyenMai->FromDate);
+        return view('KhuyenMai.KhuyenMai-edit', ['ctkm' => $chuongTrinhKhuyenMai]);
     }
 
     /**
@@ -89,16 +98,16 @@ class ChuongTrinhKhuyenMaiController extends Controller
         //dd($chuongTrinhKhuyenMai);
 
         $chuongTrinhKhuyenMai->fill([
-            'TenChuongTrinh'=>$request->input('TenChuongTrinh'),
-            'MoTa'=>$request->input('MoTa'),
-            'FromDate'=>$request->input('FromDate'),
-            'ToDate'=>$request->input('ToDate'),
+            'TenChuongTrinh' => $request->input('TenChuongTrinh'),
+            'MoTa' => $request->input('MoTa'),
+            'FromDate' => $request->input('FromDate'),
+            'ToDate' => $request->input('ToDate'),
 
         ]);
 
         $chuongTrinhKhuyenMai->save();
 
-         return Redirect::route('KhuyenMai.index');
+        return Redirect::route('KhuyenMai.index');
     }
     /**
      * Remove the specified resource from storage.
@@ -110,17 +119,16 @@ class ChuongTrinhKhuyenMaiController extends Controller
     {
         $chuongTrinhKhuyenMai->delete();
         return Redirect::route('KhuyenMai.index');
-
     }
     public static function danhSachChiTietChuongTrinhKM()
     {
         return DB::table("ct_chuong_trinh_kms")
-        ->join("chuong_trinh_khuyen_mais", "chuong_trinh_khuyen_mais.id", "=", "ct_chuong_trinh_kms.ChuongTrinhKhuyenMaiId")
-        ->select("ct_chuong_trinh_kms.*")
-        ->whereDate("chuong_trinh_khuyen_mais.FromDate", "<=", date('Y-m-d H:i:s'))
-        ->whereDate("chuong_trinh_khuyen_mais.ToDate", ">=", date('Y-m-d H:i:s'))
-        ->whereNull("chuong_trinh_khuyen_mais.deleted_at")
-        ->whereNull("ct_chuong_trinh_kms.deleted_at")
-        ->get();
+            ->join("chuong_trinh_khuyen_mais", "chuong_trinh_khuyen_mais.id", "=", "ct_chuong_trinh_kms.ChuongTrinhKhuyenMaiId")
+            ->select("ct_chuong_trinh_kms.*")
+            ->whereDate("chuong_trinh_khuyen_mais.FromDate", "<=", date('Y-m-d H:i:s'))
+            ->whereDate("chuong_trinh_khuyen_mais.ToDate", ">=", date('Y-m-d H:i:s'))
+            ->whereNull("chuong_trinh_khuyen_mais.deleted_at")
+            ->whereNull("ct_chuong_trinh_kms.deleted_at")
+            ->get();
     }
 }

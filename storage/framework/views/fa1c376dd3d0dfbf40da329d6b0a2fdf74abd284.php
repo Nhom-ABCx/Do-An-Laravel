@@ -108,10 +108,9 @@
                                     <?php for($i = 0; $i < count($conversation); $i++): ?>
 
                                         <li>
-                                            <a
-                                                href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation[$i]->KhachHangId); ?>">
-                                                <img src="/storage/assets/images/avatar/User/<?php echo e($conversation[$i]->KhachHangId); ?>/<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>"
-                                                    class="msg-photo" alt="Alex's Avatar" />
+                                            <a href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation[$i]->KhachHangId); ?>">
+                                                <img src="/storage/assets/images/avatar/User/<?php echo e($conversation[$i]->KhachHangId); ?>/<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>" class="msg-photo"
+                                                    alt="Alex's Avatar" />
                                                 <span class="msg-body">
                                                     <span class="msg-title">
                                                         <span class="blue">
@@ -146,9 +145,7 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo"
-                                    src="/storage/assets/images/avatar/NhanVien/<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->id); ?>/<?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?>"
-                                    alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="/storage/assets/images/avatar/NhanVien/<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->id); ?>/<?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?>" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     <?php if(auth()->guard()->check()): ?>
@@ -608,34 +605,34 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-                        <script type="text/javascript">
-                            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                        </script>
-                        <![endif]-->
+                    <script type="text/javascript">
+                        window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                    </script>
+                    <![endif]-->
+                                        <script type="text/javascript">
+                                            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                                        </script>
+                                        <![endif]-->
+
         <script type="text/javascript">
-            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+            if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
+                "/script>");
         </script>
-        <![endif]-->
+        <script src="/storage/assets/js/bootstrap.min.js"></script>
+        <script src="/storage/assets/js/typeahead-bs2.min.js"></script>
 
-            <script type="text/javascript">
-                if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
-                    "/script>");
-            </script>
-            <script src="/storage/assets/js/bootstrap.min.js"></script>
-            <script src="/storage/assets/js/typeahead-bs2.min.js"></script>
+        <!-- page specific plugin scripts -->
 
-            <!-- page specific plugin scripts -->
+        <script src="/storage/assets/js/jquery.dataTables.min.js"></script>
+        <script src="/storage/assets/js/jquery.dataTables.bootstrap.js"></script>
+        <script src="/storage/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+        <script src="/storage/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+        <script src="/storage/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
 
-            <script src="/storage/assets/js/jquery.dataTables.min.js"></script>
-            <script src="/storage/assets/js/jquery.dataTables.bootstrap.js"></script>
-            <script src="/storage/assets/js/date-time/bootstrap-datepicker.min.js"></script>
-            <script src="/storage/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
-            <script src="/storage/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
+        <!-- ace scripts -->
 
-            <!-- ace scripts -->
-
-            <script src="/storage/assets/js/ace-elements.min.js"></script>
-            <script src="/storage/assets/js/ace.min.js"></script>
+        <script src="/storage/assets/js/ace-elements.min.js"></script>
+        <script src="/storage/assets/js/ace.min.js"></script>
     <?php echo $__env->yieldSection(); ?>
 
     <?php echo $__env->yieldContent('scriptThisPage'); ?>
