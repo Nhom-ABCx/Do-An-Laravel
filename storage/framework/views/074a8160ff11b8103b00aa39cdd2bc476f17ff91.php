@@ -13,20 +13,16 @@
     <link href="/storage/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/storage/assets/css/font-awesome.min.css" />
 
-    <!-- add  bootraps vs css -->
-    <link rel="stylesheet" href="/storage/assets/css/ace-responsive.min.css" />
-    <link href="/storage/assets/css/bootstrap-responsive.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <!--[if IE 7]>
   <link rel="stylesheet" href="/storage/assets/css/font-awesome-ie7.min.css" />
   <![endif]-->
 
     <!-- page specific plugin styles -->
-
     <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.full.min.css" />
     <link rel="stylesheet" href="/storage/assets/css/datepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/ui.jqgrid.css" />
+
+    <?php echo $__env->yieldContent('headThisPage'); ?>
 
     <!-- fonts -->
 
@@ -54,13 +50,6 @@
   <script src="/storage/assets/js/html5shiv.js"></script>
   <script src="/storage/assets/js/respond.min.js"></script>
   <![endif]-->
-    <style>
-        tfoot input {
-            width: 100%;
-        }
-
-    </style>
-    <?php echo $__env->yieldContent('headThisPage'); ?>
 </head>
 
 <body>
@@ -329,7 +318,8 @@
                         </ul>
                     </li>
 
-                    <li class="<?php echo e(request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : ''); ?>">
+                    <li
+                        class="<?php echo e(request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : ''); ?>">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Khuyến mãi </span>
@@ -357,10 +347,10 @@
                             <span class="menu-text"> Hãng Sản Xuất </span>
                         </a>
                     </li>
-
+                    
                     <li>
                         <a href="#" class="dropdown-toggle">
-                            <i class="icon-certificate"></i>
+                            <i class="icon-fighter-jet"></i>
                             <span class="menu-text"> Vận chuyển </span>
                             <b class="arrow icon-angle-down"></b>
 
@@ -380,14 +370,22 @@
                             </ul>
                         </a>
                     </li>
+                    
+                    <li class="<?php echo e(request()->is('BinhLuan') ? 'active' : ''); ?>">
+                        <a href="<?php echo e(route('BinhLuan.index')); ?>">
+                            <i class="icon-edit"></i>
+                            <span class="menu-text"> Bình Luận SP</span>
 
+                        </a>
+                    </li>
                     <li>
                         <a href="calendar.html">
                             <i class="icon-calendar"></i>
 
                             <span class="menu-text">
                                 Calendar
-                                <span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
+                                <span class="badge badge-transparent tooltip-error"
+                                    title="2&nbsp;Important&nbsp;Events">
                                     <i class="icon-warning-sign red bigger-130"></i>
                                 </span>
                             </span>
@@ -506,7 +504,8 @@
                 </ul><!-- /.nav-list -->
 
                 <div class="sidebar-collapse" id="sidebar-collapse">
-                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
+                        data-icon2="icon-double-angle-right"></i>
                 </div>
 
                 <script type="text/javascript">
@@ -595,6 +594,10 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
+                    <script type="text/javascript">
+                        window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                    </script>
+                    <![endif]-->
                                         <script type="text/javascript">
                                             window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
                                         </script>
@@ -608,13 +611,11 @@
         <script src="/storage/assets/js/typeahead-bs2.min.js"></script>
 
         <!-- page specific plugin scripts -->
-
         <script src="/storage/assets/js/jquery.dataTables.min.js"></script>
         <script src="/storage/assets/js/jquery.dataTables.bootstrap.js"></script>
         <script src="/storage/assets/js/date-time/bootstrap-datepicker.min.js"></script>
         <script src="/storage/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
         <script src="/storage/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
-
         <!-- ace scripts -->
 
         <script src="/storage/assets/js/ace-elements.min.js"></script>
