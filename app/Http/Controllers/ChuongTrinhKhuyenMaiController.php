@@ -40,25 +40,24 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function store(Request $request)
     {
-        dd("Sdsaidhj");
-        // $request->validate(
-        //     [
-        //         'TenChuongTrinh' => ['required', 'unique:chuong_trinh_khuyen_mais,TenChuongTrinh', 'max:255'],
-        //         'MoTa' => ['required','max:255'],
-        //         'FromDate' => ['required'],
-        //         'ToDate' => ['required'],
-        //     ]
-        // );
-        // $CTkm = new ChuongTrinhKhuyenMai();
+        $request->validate(
+            [
+                'TenChuongTrinh' => ['required', 'unique:chuong_trinh_khuyen_mais,TenChuongTrinh', 'max:255'],
+                'MoTa' => ['required','max:255'],
+                'FromDate' => ['required'],
+                'ToDate' => ['required'],
+            ]
+        );
+        $CTkm = new ChuongTrinhKhuyenMai();
 
-        // $CTkm->fill([
-        //     "TenChuongTrinh" => $request->input("TenChuongTrinh"),
-        //     "MoTa" => $request->input("MoTa"),
-        //     "FromDate" => $request->input("FromDate"),
-        //     "ToDate" => $request->input("ToDate")
-        // ]);
-        // $CTkm->save();
-        //return Redirect::route('KhuyenMai.index');
+        $CTkm->fill([
+            "TenChuongTrinh" => $request->input("TenChuongTrinh"),
+            "MoTa" => $request->input("MoTa"),
+            "FromDate" => $request->input("FromDate"),
+            "ToDate" => $request->input("ToDate")
+        ]);
+        $CTkm->save();
+        return Redirect::route('KhuyenMai.index');
     }
 
     /**

@@ -14,16 +14,12 @@ class HoaDon extends Model
     protected $table = 'hoa_dons';
     protected $fillable = [
         'Id',
-        'NhanVienId',
         'DiaChiId',
         'TrangThai',
+        "PhuongThucThanhToan",
+        "TongSoLuong",
         'TongTien',
     ];
-    public function NhanVien()
-    {
-        return $this->belongsTo(NhanVien::class, 'NhanVienId');
-    }
-
     public function DiaChi()
     {
         return $this->belongsTo(DiaChi::class, 'DiaChiId');

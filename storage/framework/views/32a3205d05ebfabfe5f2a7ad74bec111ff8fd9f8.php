@@ -1,6 +1,3 @@
-
-
-
 <?php $__env->startSection('title', 'QL Sản phẩm'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
@@ -123,8 +120,8 @@
                                         <td><?php echo e($item->TenSanPham); ?></td>
                                         <td><?php echo e($item->MoTa); ?></td>
                                         <td><?php echo e($item->SoLuongTon); ?></td>
-                                        <td><?php echo e($item->GiaNhap); ?></td>
-                                        <td><?php echo e($item->GiaBan); ?></td>
+                                        <td><?php echo e(number_format($item->GiaNhap)); ?></td>
+                                        <td><?php echo e(number_format($item->GiaBan)); ?></td>
                                         <td>
                                             <img src='<?php echo e($item->HinhAnh); ?>' alt="<?php echo e($item->HinhAnh); ?>" width='100' height='100'>
                                         </td>

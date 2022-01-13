@@ -106,9 +106,9 @@ class HoaDonController extends Controller
             return response()->json($validate->errors(), 400);
 
         $hoaDon = HoaDon::create([
-            'NhanVienId'       => 1,
             'DiaChiId'         => $request["DiaChiId"],
             'TrangThai' => 0, //vua lap
+            "PhuongThucThanhToan"=>0, //ghi tammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
             'TongTien' => 0,
         ]);
 

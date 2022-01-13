@@ -1,6 +1,3 @@
-
-
-
 <?php $__env->startSection('title', 'ChuongTrinh-Khuyến Mãi'); ?>
 
 <?php $__env->startSection('body'); ?>
@@ -297,7 +294,11 @@
                 }
             })
         </script>
-
+<script type="text/javascript">
+    <?php if(count($errors) > 0): ?>
+        $('#exampleModalCenter').modal('show');
+    <?php endif; ?>
+    </script>
     <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/KhuyenMai/KhuyenMai-index.blade.php ENDPATH**/ ?>

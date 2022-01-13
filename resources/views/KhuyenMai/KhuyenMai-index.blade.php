@@ -27,8 +27,7 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
                         <i class="icon-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -45,14 +44,12 @@
                         {{-- <a type="button" class="btn btn-success " href="{{ route('KhuyenMai.create') }}"><i
                                 class="fa fa-plus"></i> Thêm chương trình khuyến mãi</a> --}}
                         <!-- Button trigger modal -->
-                        <a type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter"><i
-                                class="fa fa-plus"></i>
+                        <a type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-plus"></i>
                             Thêm chương trình khuyến mãi
                         </a>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -64,8 +61,7 @@
 
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('KhuyenMai.store') }}" method="POST"
-                                            enctype="multipart/form-data">
+                                        <form action="{{ route('KhuyenMai.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="widget-box">
                                                 <div class="widget-body">
@@ -75,9 +71,8 @@
                                                         </div>
                                                         <div class="control-group">
                                                             <div class="row-fluid input-append">
-                                                                <textarea name="TenChuongTrinh" id="w3review"
-                                                                    name="w3review" rows="4" cols="50">
-                                                                                                                                        </textarea>
+                                                                <textarea name="TenChuongTrinh" id="w3review" name="w3review" rows="4" cols="50">
+                                                                                                                                            </textarea>
                                                             </div>
                                                             @if ($errors->has('TenChuongTrinh'))
                                                                 <i class="icon-remove bigger-110 red">
@@ -91,9 +86,8 @@
 
                                                         <div class="control-group">
                                                             <div class="row-fluid input-append">
-                                                                <textarea name="MoTa" id="w3review" name="w3review" rows="4"
-                                                                    cols="50">
-                                                                            </textarea>
+                                                                <textarea name="MoTa" id="w3review" name="w3review" rows="4" cols="50">
+                                                                                </textarea>
                                                             </div>
                                                             @if ($errors->has('MoTa'))
                                                                 <i class="icon-remove bigger-110 red">
@@ -105,8 +99,7 @@
                                                             <div class="form-group">
                                                                 <label for="input_from">Ngày bắt đầu</label><br>
 
-                                                                <input class="form-control" placeholder="Ngày bắt đầu"
-                                                                    type="date" name="FromDate">
+                                                                <input class="form-control" placeholder="Ngày bắt đầu" type="date" name="FromDate">
                                                             </div>
                                                             @if ($errors->has('FromDate'))
                                                                 <i class="icon-remove bigger-110 red">
@@ -116,8 +109,7 @@
                                                         <div class="control-group">
                                                             <div class="form-group">
                                                                 <label for="input_to">Ngày kết thúc</label><br>
-                                                                <input class="form-control" placeholder="Ngày kết thúc"
-                                                                    type="date" name="ToDate">
+                                                                <input class="form-control" placeholder="Ngày kết thúc" type="date" name="ToDate">
                                                             </div>
                                                             @if ($errors->has('ToDate'))
                                                                 <i class="icon-remove bigger-110 red">
@@ -129,8 +121,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Đóng</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                                                 <button type="submit" class="btn btn-primary">Lưu </button>
                                         </form>
                                     </div>
@@ -203,23 +194,19 @@
                                                 <form action="{{ route('KhuyenMai.destroy', $item) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn-link red"><i
-                                                            class="icon-trash bigger-130"></i></button>
+                                                    <button type="submit" class="btn-link red"><i class="icon-trash bigger-130"></i></button>
                                                 </form>
                                             </div>
 
                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                 <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle"
-                                                        data-toggle="dropdown">
+                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
                                                         <i class="icon-caret-down icon-only bigger-120"></i>
                                                     </button>
 
-                                                    <ul
-                                                        class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                         <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip"
-                                                                title="View">
+                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
                                                                 <span class="blue">
                                                                     <i class="icon-zoom-in bigger-120"></i>
                                                                 </span>
@@ -227,8 +214,7 @@
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" class="tooltip-success" data-rel="tooltip"
-                                                                title="Edit">
+                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
                                                                 <span class="green">
                                                                     <i class="icon-edit bigger-120"></i>
                                                                 </span>
@@ -236,8 +222,7 @@
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" class="tooltip-error" data-rel="tooltip"
-                                                                title="Delete">
+                                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
                                                                 <span class="red">
                                                                     <i class="icon-trash bigger-120"></i>
                                                                 </span>
@@ -301,5 +286,4 @@
                 }
             })
         </script>
-
     @endsection
