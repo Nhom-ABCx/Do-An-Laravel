@@ -107,13 +107,13 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function update(Request $request, ChuongTrinhKhuyenMai $chuongTrinhKhuyenMai)
     {
-        //dd($chuongTrinhKhuyenMai);
+        $catChuoi = explode(" - ", $request->input("date-range-picker"));
 
         $chuongTrinhKhuyenMai->fill([
             'TenChuongTrinh' => $request->input('TenChuongTrinh'),
             'MoTa' => $request->input('MoTa'),
-            'FromDate' => $request->input('FromDate'),
-            'ToDate' => $request->input('ToDate'),
+            'FromDate' => date_format(date_create($catChuoi[0]), 'Y-m-d'),
+            'ToDate' => date_format(date_create($catChuoi[1]), 'Y-m-d'),
 
         ]);
 
