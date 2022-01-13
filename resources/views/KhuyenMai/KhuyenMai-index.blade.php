@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
     <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
 
+    <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
+    <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
+    <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
+    <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
     <!-- inline styles related to this page -->
     <style>
         .spinner-preview {
@@ -60,7 +64,23 @@
         </div>
 
         <div class="page-content">
-            <button class="btn btn-danger" id="gritter-error">Error</button>
+            <label for="id-date-range-picker-1">Date Range Picker</label>
+
+            <div class="row">
+                <div class="col-xs-8 col-sm-11">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-calendar bigger-110"></i>
+                        </span>
+
+                        <input class="form-control" type="text" name="date-range-picker" id="id-date-range-picker-1" />
+                    </div>
+                </div>
+            </div>
+
+
+
+
 
             <div class="row">
                 <div class="col-xs-12">
@@ -75,8 +95,7 @@
                             Thêm chương trình khuyến mãi
                         </a>
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -88,8 +107,7 @@
 
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('KhuyenMai.store') }}" method="POST"
-                                            enctype="multipart/form-data">
+                                        <form action="{{ route('KhuyenMai.store') }}" method="POST" enctype="multipart/form-data">
 
                                             @csrf
                                             <div class="widget-box">
@@ -100,9 +118,8 @@
                                                         </div>
                                                         <div class="control-group">
                                                             <div class="row-fluid input-append">
-                                                                <textarea name="TenChuongTrinh" rows="4" cols="50"
-                                                                     >
-                                                                                                                                                                                                                                                         </textarea>
+                                                                <textarea name="TenChuongTrinh" rows="4" cols="50">
+                                                                                                                                                                                                                                                                 </textarea>
                                                             </div>
                                                             @if ($errors->has('TenChuongTrinh'))
                                                                 <i class="icon-remove bigger-110 red">
@@ -116,9 +133,8 @@
 
                                                         <div class="control-group">
                                                             <div class="row-fluid input-append">
-                                                                <textarea  name="MoTa" id="w3review"
-                                                                    name="w3review" rows="4" cols="50" >
-                                                                                                                                                                                                                                                                        </textarea>
+                                                                <textarea name="MoTa" id="w3review" name="w3review" rows="4" cols="50">
+                                                                                                                                                                                                                                                                                </textarea>
                                                             </div>
                                                             @if ($errors->has('MoTa'))
                                                                 <i class="icon-remove bigger-110 red">
@@ -285,6 +301,20 @@
     <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
     <script src="/storage/assets/js/jquery.gritter.min.js"></script>
     <script src="/storage/assets/js/spin.min.js"></script>
+    {{-- datetime picker` --}}
+    <script src="/storage/assets/js/chosen.jquery.min.js"></script>
+    <script src="/storage/assets/js/date-time/moment.min.js"></script>
+    <script src="/storage/assets/js/date-time/daterangepicker.min.js"></script>
+    <script src="/storage/assets/js/jquery.autosize.min.js"></script>
+    <script src="/storage/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+    <script src="/storage/assets/js/jquery.maskedinput.min.js"></script>
+    <script type="text/javascript">
+        $('input[name=date-range-picker]').daterangepicker().prev().on(ace.click_event, function() {
+            $(this).next().focus();
+        });
+    </script>
+    {{-- end datetime picker --}}
+
 
     <script type="text/javascript">
         jQuery(function($) {
@@ -338,7 +368,4 @@
             $('#exampleModalCenter').modal('show');
         @endif
     </script>
-
-
-
 @endsection
