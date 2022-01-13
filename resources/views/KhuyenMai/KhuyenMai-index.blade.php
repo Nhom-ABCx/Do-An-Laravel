@@ -49,7 +49,6 @@
                                 class="fa fa-plus"></i>
                             Thêm chương trình khuyến mãi
                         </a>
-
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -75,9 +74,9 @@
                                                         </div>
                                                         <div class="control-group">
                                                             <div class="row-fluid input-append">
-                                                                <textarea name="TenChuongTrinh" id="w3review"
-                                                                    name="w3review" rows="4" cols="50">
-                                                                                                                                        </textarea>
+                                                                <textarea name="TenChuongTrinh" rows="4" cols="50"
+                                                                    form="usrform" required>
+                                                                                                                                 </textarea>
                                                             </div>
                                                             @if ($errors->has('TenChuongTrinh'))
                                                                 <i class="icon-remove bigger-110 red">
@@ -91,9 +90,9 @@
 
                                                         <div class="control-group">
                                                             <div class="row-fluid input-append">
-                                                                <textarea name="MoTa" id="w3review" name="w3review" rows="4"
-                                                                    cols="50">
-                                                                            </textarea>
+                                                                <textarea form="usrform" name="MoTa" id="w3review"
+                                                                    name="w3review" rows="4" cols="50" required>
+                                                                                                                                                </textarea>
                                                             </div>
                                                             @if ($errors->has('MoTa'))
                                                                 <i class="icon-remove bigger-110 red">
@@ -106,7 +105,7 @@
                                                                 <label for="input_from">Ngày bắt đầu</label><br>
 
                                                                 <input class="form-control" placeholder="Ngày bắt đầu"
-                                                                    type="date" name="FromDate">
+                                                                    type="date" name="FromDate" required>
                                                             </div>
                                                             @if ($errors->has('FromDate'))
                                                                 <i class="icon-remove bigger-110 red">
@@ -117,7 +116,7 @@
                                                             <div class="form-group">
                                                                 <label for="input_to">Ngày kết thúc</label><br>
                                                                 <input class="form-control" placeholder="Ngày kết thúc"
-                                                                    type="date" name="ToDate">
+                                                                    type="date" name="ToDate" required>
                                                             </div>
                                                             @if ($errors->has('ToDate'))
                                                                 <i class="icon-remove bigger-110 red">
@@ -138,6 +137,7 @@
                             </div>
                         </div>
                     </div>
+                    {{-- kết thúc thêm --}}
                     <hr>
                     <div class="table-header">
                         Bảng Chương Trình Khuyến mãi
@@ -253,53 +253,53 @@
                         </table>
                     </div>
                 </div>
-
             </div>
-        </div><!-- /.main-content -->
+        </div>
+    </div><!-- /.main-content -->
+@endsection
 
-    @endsection
+@section('scriptThisPage')
+    {{-- Phần này là script thu gọn, phân trang lại của cái table --}}
+    <!-- inline scripts related to this page -->
 
-    @section('scriptThisPage')
-        {{-- Phần này là script thu gọn, phân trang lại của cái table --}}
-        <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        jQuery(function($) {
 
-        <script type="text/javascript">
-            jQuery(function($) {
-                var oTable1 = $('#sample-table-2').dataTable({
-                    "aoColumns": [
-                        null, {
-                            "bSortable": false
-                        },
-                        null, {
-                            "bSortable": false
-                        },
-                        null, null, {
-                            "bSortable": false
-                        },
-                        // {
-                        //     "bSortable": false
-                        // },
-                    ]
-                });
+            var oTable1 = $('#sample-table-2').dataTable({
+                "aoColumns": [
+                    null, {
+                        "bSortable": false
+                    },
+                    null, {
+                        "bSortable": false
+                    },
+                    null, null, {
+                        "bSortable": false
+                    },
+                    // {
+                    //     "bSortable": false
+                    // },
+                ]
+            });
 
 
-                $('[data-rel="tooltip"]').tooltip({
-                    placement: tooltip_placement
-                });
+            $('[data-rel="tooltip"]').tooltip({
+                placement: tooltip_placement
+            });
 
-                function tooltip_placement(context, source) {
-                    var $source = $(source);
-                    var $parent = $source.closest('table')
-                    var off1 = $parent.offset();
-                    var w1 = $parent.width();
+            function tooltip_placement(context, source) {
+                var $source = $(source);
+                var $parent = $source.closest('table')
+                var off1 = $parent.offset();
+                var w1 = $parent.width();
 
-                    var off2 = $source.offset();
-                    var w2 = $source.width();
+                var off2 = $source.offset();
+                var w2 = $source.width();
 
-                    if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
-                    return 'left';
-                }
-            })
-        </script>
+                if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
+                return 'left';
+            }
+        })
+    </script>
 
-    @endsection
+@endsection
