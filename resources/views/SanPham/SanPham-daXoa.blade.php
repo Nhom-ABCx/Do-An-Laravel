@@ -136,8 +136,8 @@
                                         <td>{{ $item->TenSanPham }}</td>
                                         <td>{{ $item->MoTa }}</td>
                                         <td>{{ $item->SoLuongTon }}</td>
-                                        <td>{{ $item->GiaNhap }}</td>
-                                        <td>{{ $item->GiaBan }}</td>
+                                        <td>{{ number_format($item->GiaNhap) }}</td>
+                                        <td>{{ number_format($item->GiaBan) }}</td>
                                         <td>
                                             <img src='{{ $item->HinhAnh }}' alt="{{ $item->HinhAnh }}" width='100' height='100'>
                                         </td>
@@ -150,7 +150,7 @@
 
                                         <td>
                                             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <form action="{{ route('SanPham.KhoiPhuc',$item->id) }}" method="post">
+                                                <form action="{{ route('SanPham.KhoiPhuc', $item->id) }}" method="post">
                                                     @csrf
                                                     {{-- @method("PUT") --}}
                                                     <button type="submit" class="btn-link blue" title="Khôi phục"><i class="icon-undo bigger-130"></i></button>
@@ -204,7 +204,7 @@
                     {
                         "bSortable": false
                     }, //hinh anh
-                    null, null, null, null, null,null,
+                    null, null, null, null, null, null,
                     {
                         "bSortable": false
                     }

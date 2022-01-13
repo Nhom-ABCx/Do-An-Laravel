@@ -139,17 +139,18 @@ class CreateDatabase extends Migration
             $table->integer('CodeQuanHuyen')->nullable();
             $table->integer('CodePhuongXa')->nullable();
             $table->timestamps();
+            $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
         });
         Schema::create('hoa_dons', function (Blueprint $table) {
             $table->Id();
-            $table->foreignId('NhanVienId');
             $table->foreignId('DiaChiId');
             $table->tinyInteger('TrangThai');
+            $table->tinyInteger('PhuongThucThanhToan');
+            $table->integer("TongSoLuong");
             $table->double('TongTien');
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
-            $table->foreign('NhanVienId')->references('Id')->on('nhan_viens');
             $table->foreign('DiaChiId')->references('Id')->on('dia_chis');
         });
         Schema::create('ct_hoa_dons', function (Blueprint $table) {

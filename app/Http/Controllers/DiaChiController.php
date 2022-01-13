@@ -105,7 +105,7 @@ class DiaChiController extends Controller
         $validate = Validator::make($request->all(), [
             'KhachHangId' => ['required', 'numeric', 'integer', 'exists:khach_hangs,id'],
             'TenNguoiNhan' => ['required', 'max:255'],
-            'Phone' => ['required','numeric'],
+            'Phone' => ['required', 'numeric'],
             'TinhThanhPho' => [],
             'QuanHuyen' => [],
             'PhuongXa' => [],
@@ -143,7 +143,7 @@ class DiaChiController extends Controller
         $validate = Validator::make($request->all(), [
             'KhachHangId' => ['required', 'numeric', 'integer', 'exists:khach_hangs,id'],
             'TenNguoiNhan' => ['required', 'max:255'],
-            'Phone' => ['required','numeric'],
+            'Phone' => ['required', 'numeric'],
             'TinhThanhPho' => [],
             'QuanHuyen' => [],
             'PhuongXa' => [],
@@ -179,8 +179,14 @@ class DiaChiController extends Controller
 
     public function API_Delete_DiaChi(DiaChi $diaChi)
     {
+        //neu' co' dia chi do'
         if (!empty($diaChi)) {
-            $data = $diaChi->delete();
+            //neu'dia chi do' da duoc lap hoa don thi` chi? xoa' tam, con` lai xoa' luon
+            $hd = $diaChi->HoaDon;
+            if (count($hd))
+                $data = $diaChi->delete();
+            else
+                $data = $diaChi->forceDelete();
             return response()->json($data, 200);
         }
         return response()->json($diaChi, 404);

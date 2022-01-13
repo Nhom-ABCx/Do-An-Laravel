@@ -26,10 +26,10 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('SanPham.index') }}">Sản phẩm</a>
+                    <a href="{{ route('SanPham.index') }}">Quản lý sản phẩm</a>
                 </li>
 
-                <li class="active">Create</li>
+                <li class="active">Thêm</li>
             </ul><!-- .breadcrumb -->
 
             <div class="nav-search" id="nav-search">

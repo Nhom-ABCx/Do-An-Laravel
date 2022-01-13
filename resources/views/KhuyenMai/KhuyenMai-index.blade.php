@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
     <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
     <!-- inline styles related to this page -->
     <style>
@@ -61,8 +62,6 @@
         </div>
 
         <div class="page-content">
-            <button class="btn btn-danger" id="gritter-error">Error</button>
-
             <div class="row">
                 <div class="col-xs-12">
 
@@ -103,7 +102,7 @@
                                                         <div class="control-group">
                                                             <div class="row-fluid input-append">
                                                                 <textarea name="TenChuongTrinh" rows="4" cols="50">
-                                                                                                                                                                                                                                                                             </textarea>
+                                                                                                                                                                                                                                                                                                                             </textarea>
                                                             </div>
                                                             @if ($errors->has('TenChuongTrinh'))
                                                                 <i class="icon-remove bigger-110 red">
@@ -119,7 +118,7 @@
                                                             <div class="row-fluid input-append">
                                                                 <textarea name="MoTa" id="w3review" name="w3review" rows="4"
                                                                     cols="50">
-                                                                                                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                             </div>
                                                             @if ($errors->has('MoTa'))
                                                                 <i class="icon-remove bigger-110 red">
@@ -132,7 +131,7 @@
                                                                 <label for="input_from">Ngày bắt đầu</label><br>
 
                                                                 <input class="form-control" placeholder="Ngày bắt đầu"
-                                                                    type="date" name="FromDate">
+                                                                    type="text" name="datetimes">
                                                             </div>
                                                             @if ($errors->has('FromDate'))
                                                                 <i class="icon-remove bigger-110 red">
@@ -167,20 +166,7 @@
                     </div>
                     {{-- kết thúc thêm --}}
                     <hr>
-                    <div class="row-fluid">
-                        <label for="id-date-range-picker-1">Date Range Picker</label>
-                    </div>
 
-                    <div class="control-group">
-                        <div class="row-fluid input-prepend">
-                            <span class="add-on">
-                                <i class="icon-calendar"></i>
-                            </span>
-
-                            <input class="span10" type="text" name="date-range-picker"
-                                id="id-date-range-picker-1" />
-                        </div>
-                    </div>
                     <div class="table-header">
                         Bảng Chương Trình Khuyến mãi
                     </div>
@@ -310,6 +296,9 @@
     <script src="/storage/assets/js/jquery.gritter.min.js"></script>
     <script src="/storage/assets/js/spin.min.js"></script>
 
+    
+
+
     <script type="text/javascript">
         jQuery(function($) {
             @if ($errors->any())
@@ -317,8 +306,8 @@
                     $.gritter.add({
                     title: 'Lỗi' ,
                     text: '{{ $error }}',
-                    // class_name: 'gritter-error' + (!$('#gritter-light').get(0).checked ?
-                    // ' gritter-light' : '')
+                    class_name: 'gritter-error' + (!$( '#gritter-light').get(0) ?
+                    ' gritter-light' : '')
                     });
                 
                 @endforeach
@@ -367,7 +356,5 @@
             $('#exampleModalCenter').modal('show');
         @endif
     </script>
-
-
 
 @endsection

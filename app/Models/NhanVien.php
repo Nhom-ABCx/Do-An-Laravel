@@ -35,11 +35,6 @@ class NhanVien extends Authenticatable
     {
         return $this->MatKhau;
     }
-
-    public function HoaDon()
-    {
-        return $this->hasMany(HoaDon::class, 'NhanVienId');
-    }
     public function Message()
     {
         return $this->hasMany(Message::class, 'KhachHangId');

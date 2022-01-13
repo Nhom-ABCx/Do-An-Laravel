@@ -26,7 +26,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('SanPham.index') }}">Sản phẩm</a>
+                    <a href="{{ route('SanPham.index') }}">Quản lý sản phẩm</a>
                 </li>
 
                 <li>

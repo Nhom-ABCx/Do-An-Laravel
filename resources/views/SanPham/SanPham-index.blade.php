@@ -128,8 +128,8 @@
                                         <td>{{ $item->TenSanPham }}</td>
                                         <td>{{ $item->MoTa }}</td>
                                         <td>{{ $item->SoLuongTon }}</td>
-                                        <td>{{ $item->GiaNhap }}</td>
-                                        <td>{{ $item->GiaBan }}</td>
+                                        <td>{{ number_format($item->GiaNhap) }}</td>
+                                        <td>{{ number_format($item->GiaBan) }}</td>
                                         <td>
                                             <img src='{{ $item->HinhAnh }}' alt="{{ $item->HinhAnh }}" width='100' height='100'>
                                         </td>

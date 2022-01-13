@@ -1,6 +1,3 @@
-
-
-
 <?php $__env->startSection('title', 'Edit-Sản Phẩm'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
@@ -644,4 +641,4 @@
     </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\tranphuocvinh\laravel\Do-An-Laravel\resources\views/SanPham/SanPham-edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/SanPham/SanPham-edit.blade.php ENDPATH**/ ?>

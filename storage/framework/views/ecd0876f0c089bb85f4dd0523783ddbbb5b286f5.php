@@ -1,7 +1,4 @@
-
-
-
-<?php $__env->startSection('title', 'Edit-Sản Phẩm'); ?>
+<?php $__env->startSection('title', 'Page Title'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
     <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
@@ -29,11 +26,7 @@
                     <a href="<?php echo e(route('SanPham.index')); ?>">Quản lý sản phẩm</a>
                 </li>
 
-                <li>
-                    <a href="<?php echo e(route('SanPham.show', ['sanPham' => $sanPham])); ?>"><?php echo e($sanPham->id); ?></a>
-                </li>
-
-                <li class="active">Chỉnh sửa</li>
+                <li class="active">Thêm</li>
             </ul><!-- .breadcrumb -->
 
             <div class="nav-search" id="nav-search">
@@ -52,7 +45,7 @@
                     Sản phẩm
                     <small>
                         <i class="icon-double-angle-right"></i>
-                        Nhập thông tin để chỉnh sửa
+                        Nhập thông tin để tạo mới 1 sản phẩm
                     </small>
                 </h1>
             </div><!-- /.page-header -->
@@ -62,9 +55,9 @@
                     <!-- PAGE CONTENT BEGINS -->
                     
 
-                    <form class="form-horizontal" role="form" action="<?php echo e(route('SanPham.update', $sanPham)); ?>" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" action="<?php echo e(route('SanPham.store')); ?>" method="post" enctype="multipart/form-data">
                         <?php echo csrf_field(); ?>
-                        <?php echo method_field('PUT'); ?>
+                        
                         <div class="form-group">
                             <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Tên sản phẩm </label>
 
@@ -74,9 +67,12 @@
                                         <i class="icon-coffee"></i>
                                     </span>
 
-                                    <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" value="<?php echo e($sanPham->TenSanPham); ?>" name="TenSanPham" />
+                                    <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" value="<?php echo e(old('TenSanPham')); ?>" name="TenSanPham" />
                                 </div>
                             </div>
+                            <?php if($errors->has('TenSanPham')): ?>
+                                <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('TenSanPham')); ?></i>
+                            <?php endif; ?>
                         </div>
 
                         <div class="space-4"></div>
@@ -90,9 +86,12 @@
                                         <i class="icon-edit"></i>
                                     </span>
 
-                                    <textarea id="form-field-11" class="autosize-transition form-control" name="MoTa"><?php echo e($sanPham->MoTa); ?></textarea>
+                                    <textarea id="form-field-11" class="autosize-transition form-control" placeholder="Nhập mô tả" name="MoTa"><?php echo e(old('MoTa')); ?></textarea>
                                 </div>
                             </div>
+                            <?php if($errors->has('MoTa')): ?>
+                                <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('MoTa')); ?></i>
+                            <?php endif; ?>
                         </div>
 
                         <div class="space-4"></div>
@@ -102,8 +101,11 @@
 
                             <div class="col-sm-3">
                                 
-                                <input type="text" class="input-mini" id="spinner3" value="<?php echo e($sanPham->SoLuongTon); ?>" name="SoLuongTon" />
+                                <input type="text" class="input-mini" id="spinner3" value="<?php echo e(old('SoLuongTon')); ?>" name="SoLuongTon" />
                             </div>
+                            <?php if($errors->has('SoLuongTon')): ?>
+                                <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('SoLuongTon')); ?></i>
+                            <?php endif; ?>
                         </div>
 
                         <div class="space-4"></div>
@@ -118,9 +120,12 @@
                                     </span>
 
                                     
-                                    <input type="text" class="input-mini" id="spinner1" value="<?php echo e($sanPham->GiaNhap); ?>" name="GiaNhap" />
+                                    <input type="text" class="input-mini" id="spinner1" value="<?php echo e(old('GiaNhap')); ?>" name="GiaNhap" />
                                 </div>
                             </div>
+                            <?php if($errors->has('GiaNhap')): ?>
+                                <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('GiaNhap')); ?></i>
+                            <?php endif; ?>
                         </div>
 
                         <div class="space-4"></div>
@@ -135,9 +140,12 @@
                                     </span>
 
                                     
-                                    <input type="text" class="input-mini" id="spinner2" value="<?php echo e($sanPham->GiaBan); ?>" name="GiaBan" />
+                                    <input type="text" class="input-mini" id="spinner2" value="<?php echo e(old('GiaBan')); ?>" name="GiaBan" />
                                 </div>
                             </div>
+                            <?php if($errors->has('GiaBan')): ?>
+                                <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('GiaBan')); ?></i>
+                            <?php endif; ?>
                         </div>
 
                         <div class="space-4"></div>
@@ -146,25 +154,12 @@
                             <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Hình ảnh </label>
 
                             <div class="col-sm-2">
-                                <input type="file" accept="image/*" id="id-input-file-3" name="HinhAnh">
+                                <input type="file" accept="image/*" id="id-input-file-3" onchange="showImage()" name="HinhAnh">
                             </div>
-                            <img style="width:150px;max-height:150px;object-fit:contain" src="<?php echo e($sanPham->HinhAnh); ?>" alt="">
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Lượt mua </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-bar-chart"></i>
-                                    </span>
-
-                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->LuotMua); ?>">
-                                </div>
-                            </div>
+                            <?php if($errors->has('HinhAnh')): ?>
+                                <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('HinhAnh')); ?></i>
+                            <?php endif; ?>
+                            <div id="displayImage"></div>
                         </div>
 
                         <div class="space-4"></div>
@@ -182,7 +177,7 @@
                                     <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="HangSanXuatId">
                                         <option value="">&nbsp;</option>
                                         <?php $__currentLoopData = $lstHangSanXuat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($item->id); ?>" <?php if($item->id == $sanPham->HangSanXuatId): ?> selected <?php endif; ?>>
+                                            <option value="<?php echo e($item->id); ?>" <?php if($item->id == old('HangSanXuatId')): ?> selected <?php endif; ?>>
                                                 <?php echo e($item->Ten); ?>
 
                                             </option>
@@ -190,6 +185,9 @@
                                     </select>
                                 </div>
                             </div>
+                            <?php if($errors->has('HangSanXuatId')): ?>
+                                <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('HangSanXuatId')); ?></i>
+                            <?php endif; ?>
                         </div>
 
                         <div class="space-4"></div>
@@ -207,7 +205,7 @@
                                     <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="LoaiSanPhamId">
                                         <option value="">&nbsp;</option>
                                         <?php $__currentLoopData = $lstLoaiSanPham; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($item->id); ?>" <?php if($item->id == $sanPham->LoaiSanPhamId): ?> selected <?php endif; ?>>
+                                            <option value="<?php echo e($item->id); ?>" <?php if($item->id == old('LoaiSanPhamId')): ?> selected <?php endif; ?>>
                                                 <?php echo e($item->TenLoai); ?>
 
                                             </option>
@@ -215,55 +213,9 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Ngày tạo </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-calendar"></i>
-                                    </span>
-
-                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->created_at); ?>">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Ngày cập nhật
-                            </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-calendar"></i>
-                                    </span>
-
-                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->updated_at); ?>">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Ngày xóa </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-calendar"></i>
-                                    </span>
-
-                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->deleted_at); ?>">
-                                </div>
-                            </div>
+                            <?php if($errors->has('LoaiSanPhamId')): ?>
+                                <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('LoaiSanPhamId')); ?></i>
+                            <?php endif; ?>
                         </div>
 
                         <div class="space-4"></div>
@@ -291,8 +243,8 @@
 
 <?php $__env->startSection('scriptThisPage'); ?>
     <!--[if lte IE 8]>
-                  <script src="/storage/assets/js/excanvas.min.js"></script>
-                  <![endif]-->
+              <script src="/storage/assets/js/excanvas.min.js"></script>
+              <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -523,12 +475,11 @@
             // });
 
 
-
-            _valueSL = <?php echo e($sanPham->SoLuongTon); ?>;
-            _valueGN = <?php echo e($sanPham->GiaNhap); ?>;
-            _valueGB = <?php echo e($sanPham->GiaBan); ?>;
+            _valueSL = <?php echo e(old('SoLuongTon') ?? 0); ?>;
+            _valueGN = <?php echo e(old('GiaNhap') ?? 0); ?>;
+            _valueGB = <?php echo e(old('GiaBan') ?? 0); ?>;
             $('#spinner0').ace_spinner({
-                    value: _valueSL,
+                    value: 0,
                     min: 0,
                     max: 200,
                     step: 10,
@@ -641,7 +592,24 @@
             */
 
         });
+
+        function showImage() {
+            let imgSelected = document.querySelector('#id-input-file-3').files;
+            if (imgSelected.length > 0) {
+                let fileToLoad = imgSelected[0];
+                let fileReader = new FileReader();
+                fileReader.onload = function(fileLoaderEvent) {
+                    let srcData = fileLoaderEvent.target.result;
+                    var newImage = document.createElement('img');
+                    newImage.src = srcData;
+                    newImage.style.width = "150px";
+                    newImage.style.height = "150px";
+                    document.getElementById('displayImage').innerHTML = newImage.outerHTML;
+                }
+                fileReader.readAsDataURL(fileToLoad);
+            }
+        }
     </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\tranphuocvinh\laravel\Do-An-Laravel\resources\views/SanPham/SanPham-edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/SanPham/SanPham-create.blade.php ENDPATH**/ ?>
