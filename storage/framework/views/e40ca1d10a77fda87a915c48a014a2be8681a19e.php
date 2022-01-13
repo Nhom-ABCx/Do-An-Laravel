@@ -1,7 +1,32 @@
 <?php $__env->startSection('title', 'ChuongTrinh-Khuyến Mãi'); ?>
+<?php $__env->startSection('headThisPage'); ?>
 
+    <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
+    <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
+
+    <!-- inline styles related to this page -->
+    <style>
+        .spinner-preview {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .dropdown-preview {
+            margin: 0 5px;
+            display: inline-block;
+        }
+
+        .dropdown-preview>.dropdown-menu {
+            display: block;
+            position: static;
+            margin-bottom: 5px;
+        }
+
+    </style>
+<?php $__env->stopSection(); ?>
 <?php $__env->startSection('body'); ?>
-
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
@@ -24,8 +49,7 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
                         <i class="icon-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -33,22 +57,22 @@
         </div>
 
         <div class="page-content">
+            <button class="btn btn-danger" id="gritter-error">Error</button>
 
             <div class="row">
                 <div class="col-xs-12">
 
                     <h3 class="header smaller lighter blue">Chương trình khuyến mãi</h3>
+
                     <div class="pull">
                         
                         <!-- Button trigger modal -->
-                        <a type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter"><i
-                                class="fa fa-plus"></i>
+                        <a type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-plus"></i>
                             Thêm chương trình khuyến mãi
                         </a>
-
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -62,6 +86,7 @@
                                     <div class="modal-body">
                                         <form action="<?php echo e(route('KhuyenMai.store')); ?>" method="POST"
                                             enctype="multipart/form-data">
+
                                             <?php echo csrf_field(); ?>
                                             <div class="widget-box">
                                                 <div class="widget-body">
@@ -71,9 +96,9 @@
                                                         </div>
                                                         <div class="control-group">
                                                             <div class="row-fluid input-append">
-                                                                <textarea name="TenChuongTrinh" id="w3review"
-                                                                    name="w3review" rows="4" cols="50">
-                                                                                                                                        </textarea>
+                                                                <textarea name="TenChuongTrinh" rows="4" cols="50"
+                                                                     >
+                                                                                                                                                                                                                                                         </textarea>
                                                             </div>
                                                             <?php if($errors->has('TenChuongTrinh')): ?>
                                                                 <i class="icon-remove bigger-110 red">
@@ -87,9 +112,9 @@
 
                                                         <div class="control-group">
                                                             <div class="row-fluid input-append">
-                                                                <textarea name="MoTa" id="w3review" name="w3review" rows="4"
-                                                                    cols="50">
-                                                                            </textarea>
+                                                                <textarea  name="MoTa" id="w3review"
+                                                                    name="w3review" rows="4" cols="50" >
+                                                                                                                                                                                                                                                                        </textarea>
                                                             </div>
                                                             <?php if($errors->has('MoTa')): ?>
                                                                 <i class="icon-remove bigger-110 red">
@@ -101,8 +126,7 @@
                                                             <div class="form-group">
                                                                 <label for="input_from">Ngày bắt đầu</label><br>
 
-                                                                <input class="form-control" placeholder="Ngày bắt đầu"
-                                                                    type="date" name="FromDate">
+                                                                <input class="form-control" placeholder="Ngày bắt đầu" type="date" name="FromDate">
                                                             </div>
                                                             <?php if($errors->has('FromDate')): ?>
                                                                 <i class="icon-remove bigger-110 red">
@@ -112,8 +136,7 @@
                                                         <div class="control-group">
                                                             <div class="form-group">
                                                                 <label for="input_to">Ngày kết thúc</label><br>
-                                                                <input class="form-control" placeholder="Ngày kết thúc"
-                                                                    type="date" name="ToDate">
+                                                                <input class="form-control" placeholder="Ngày kết thúc" type="date" name="ToDate">
                                                             </div>
                                                             <?php if($errors->has('ToDate')): ?>
                                                                 <i class="icon-remove bigger-110 red">
@@ -125,15 +148,16 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Đóng</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                                                 <button type="submit" class="btn btn-primary">Lưu </button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                     <hr>
                     <div class="table-header">
                         Bảng Chương Trình Khuyến mãi
@@ -196,23 +220,19 @@
                                                 <form action="<?php echo e(route('KhuyenMai.destroy', $item)); ?>" method="post">
                                                     <?php echo csrf_field(); ?>
                                                     <?php echo method_field('DELETE'); ?>
-                                                    <button type="submit" class="btn-link red"><i
-                                                            class="icon-trash bigger-130"></i></button>
+                                                    <button type="submit" class="btn-link red"><i class="icon-trash bigger-130"></i></button>
                                                 </form>
                                             </div>
 
                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                 <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle"
-                                                        data-toggle="dropdown">
+                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
                                                         <i class="icon-caret-down icon-only bigger-120"></i>
                                                     </button>
 
-                                                    <ul
-                                                        class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                         <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip"
-                                                                title="View">
+                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
                                                                 <span class="blue">
                                                                     <i class="icon-zoom-in bigger-120"></i>
                                                                 </span>
@@ -220,8 +240,7 @@
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" class="tooltip-success" data-rel="tooltip"
-                                                                title="Edit">
+                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
                                                                 <span class="green">
                                                                     <i class="icon-edit bigger-120"></i>
                                                                 </span>
@@ -229,8 +248,7 @@
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" class="tooltip-error" data-rel="tooltip"
-                                                                title="Delete">
+                                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
                                                                 <span class="red">
                                                                     <i class="icon-trash bigger-120"></i>
                                                                 </span>
@@ -246,59 +264,76 @@
                         </table>
                     </div>
                 </div>
-
             </div>
-        </div><!-- /.main-content -->
+        </div>
+    </div><!-- /.main-content -->
+<?php $__env->stopSection(); ?>
 
-    <?php $__env->stopSection(); ?>
+<?php $__env->startSection('scriptThisPage'); ?>
+    
+    <!-- inline scripts related to this page -->
+    <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="/storage/assets/js/bootbox.min.js"></script>
+    <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
+    <script src="/storage/assets/js/jquery.gritter.min.js"></script>
+    <script src="/storage/assets/js/spin.min.js"></script>
 
-    <?php $__env->startSection('scriptThisPage'); ?>
-        
-        <!-- inline scripts related to this page -->
-
-        <script type="text/javascript">
-            jQuery(function($) {
-                var oTable1 = $('#sample-table-2').dataTable({
-                    "aoColumns": [
-                        null, {
-                            "bSortable": false
-                        },
-                        null, {
-                            "bSortable": false
-                        },
-                        null, null, {
-                            "bSortable": false
-                        },
-                        // {
-                        //     "bSortable": false
-                        // },
-                    ]
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('#gritter-error').on(ace.click_event, function() {
+                $.gritter.add({
+                    title: 'This is a warning notification',
+                    text: 'Just add a "gritter-light" class_name to your $.gritter.add or globally to $.gritter.options.class_name',
+                    // class_name: 'gritter-error' + (!$('#gritter-light').get(0).checked ?
+                    //     ' gritter-light' : '')
                 });
+                return false;
+            });
+            var oTable1 = $('#sample-table-2').dataTable({
+                "aoColumns": [
+                    null, {
+                        "bSortable": false
+                    },
+                    null, {
+                        "bSortable": false
+                    },
+                    null, null, {
+                        "bSortable": false
+                    },
+                    // {
+                    //     "bSortable": false
+                    // },
+                ]
+            });
 
 
-                $('[data-rel="tooltip"]').tooltip({
-                    placement: tooltip_placement
-                });
+            $('[data-rel="tooltip"]').tooltip({
+                placement: tooltip_placement
+            });
 
-                function tooltip_placement(context, source) {
-                    var $source = $(source);
-                    var $parent = $source.closest('table')
-                    var off1 = $parent.offset();
-                    var w1 = $parent.width();
+            function tooltip_placement(context, source) {
+                var $source = $(source);
+                var $parent = $source.closest('table')
+                var off1 = $parent.offset();
+                var w1 = $parent.width();
 
-                    var off2 = $source.offset();
-                    var w2 = $source.width();
+                var off2 = $source.offset();
+                var w2 = $source.width();
 
-                    if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
-                    return 'left';
-                }
-            })
-        </script>
-<script type="text/javascript">
-    <?php if(count($errors) > 0): ?>
-        $('#exampleModalCenter').modal('show');
-    <?php endif; ?>
+                if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
+                return 'left';
+            }
+        })
     </script>
-    <?php $__env->stopSection(); ?>
+    <script type="text/javascript">
+        <?php if(count($errors) > 0): ?>
+            $('#exampleModalCenter').modal('show');
+        <?php endif; ?>
+    </script>
+
+
+
+<?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/KhuyenMai/KhuyenMai-index.blade.php ENDPATH**/ ?>

@@ -130,8 +130,8 @@
 
 <?php $__env->startSection('scriptThisPage'); ?>
     <!--[if lte IE 8]>
-                                                    <script src="/storage/assets/js/excanvas.min.js"></script>
-                                                    <![endif]-->
+                                                            <script src="/storage/assets/js/excanvas.min.js"></script>
+                                                            <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
