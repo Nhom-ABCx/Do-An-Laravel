@@ -7,6 +7,8 @@ use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Validator;
 
 class ChuongTrinhKhuyenMaiController extends Controller
 {
@@ -40,15 +42,26 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function store(Request $request)
     {
-        //dd("Sdsaidhj");
-        $request->validate(
-            [
-                'TenChuongTrinh' => ['required', 'unique:chuong_trinh_khuyen_mais,TenChuongTrinh', 'max:255'],
-                'MoTa' => ['required', 'max:255'],
-                'FromDate' => ['required'],
-                'ToDate' => ['required'],
-            ]
-        );
+        $request->validate([
+            'TenChuongTrinh' => ['required', 'unique:chuong_trinh_khuyen_mais,TenChuongTrinh', 'max:255'],
+            'MoTa' => ['required', 'max:255'],
+            'FromDate' => ['required'],
+            'ToDate' => ['required'],
+        ]);
+        // $validator = Validator::make(
+        //     $request->all(),
+        //     [
+        //         'TenChuongTrinh' => ['required', 'unique:chuong_trinh_khuyen_mais,TenChuongTrinh', 'max:255'],
+        //         'MoTa' => ['required', 'max:255'],
+        //         'FromDate' => ['required'],
+        //         'ToDate' => ['required'],
+        //     ]
+        // );
+        // if ($validator->fails()) {
+        //     $validator->errors()->add('msg', 'Vui lòng kiểm tra lại dữ liệu!');
+        // }
+        // else{
+        // }
         $CTkm = new ChuongTrinhKhuyenMai();
 
         $CTkm->fill([
@@ -60,7 +73,6 @@ class ChuongTrinhKhuyenMaiController extends Controller
         $CTkm->save();
         return Redirect::route('KhuyenMai.index');
     }
-
     /**
      * Display the specified resource.
      *
