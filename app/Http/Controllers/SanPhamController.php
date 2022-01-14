@@ -189,7 +189,7 @@ class SanPhamController extends Controller
         $lstLoaiSanPham = LoaiSanPham::all();
         $lstHangSanXuat = HangSanXuat::all();
         //tra lai resquet ve cho view de hien thi lai tim` kiem' cu?
-        return view('SanPham.SanPham-daXoa', ["sanPham" => $data, 'lstLoaiSanPham' => $lstLoaiSanPham, 'lstHangSanXuat' => $lstHangSanXuat, 'request' => $request]);
+        return view('SanPham.SanPham-index', ["sanPham" => $data, 'lstLoaiSanPham' => $lstLoaiSanPham, 'lstHangSanXuat' => $lstHangSanXuat, 'request' => $request]);
     }
     public function KhoiPhucSanPham($id)
     {

@@ -4,17 +4,38 @@
 @section('title', 'Page Title')
 
 @section('headThisPage')
-    <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
     {{-- datetime picker --}}
     <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
     <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
     {{-- datetime picker end --}}
+
+    <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
+    <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
+    <style>
+        .spinner-preview {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .dropdown-preview {
+            margin: 0 5px;
+            display: inline-block;
+        }
+
+        .dropdown-preview>.dropdown-menu {
+            display: block;
+            position: static;
+            margin-bottom: 5px;
+        }
+
+    </style>
 @endsection
 
 @section('body')
-
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
@@ -28,7 +49,19 @@
                     <i class="icon-home home-icon"></i>
                     <a href="{{ url('/') }}">Home</a>
                 </li>
-                <li class="active">Quản lý Hóa đơn</li>
+                @if (request()->is('HoaDonn/DaGiao'))
+                    <li>
+                        <a href="{{ route('HoaDon.index') }}">Quản lý hóa đơn</a>
+                    </li>
+                    <li class="active">Đã giao</li>
+                @elseif (request()->is('HoaDonn/DaHuy'))
+                    <li>
+                        <a href="{{ route('HoaDon.index') }}">Quản lý hóa đơn</a>
+                    </li>
+                    <li class="active">Đã hủy</li>
+                @else
+                    <li class="active">Quản lý hóa đơn</li>
+                @endif
             </ul><!-- .breadcrumb -->
 
             {{-- <div class="nav-search" id="nav-search">
@@ -50,11 +83,31 @@
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                <form class="form-inline" action="{{ route('HoaDon.index') }}" method="get">
-                                    <a href="{{ route('HoaDon.DaHuy') }}" class="btn btn-inverse">
-                                        <i class="icon-trash"></i>
-                                        Hóa đơn đã hủy
-                                    </a>
+                                <form class="form-inline"
+                                    action="{{ request()->is('HoaDonn/DaGiao') ? route('HoaDon.DaGiao') : (request()->is('HoaDonn/DaHuy') ? route('HoaDon.DaHuy') : route('HoaDon.index')) }}"
+                                    method="get">
+                                    @if (request()->is('HoaDonn/DaGiao'))
+                                        <a href="{{ route('HoaDon.DaHuy') }}" class="btn btn-inverse">
+                                            <i class="icon-trash"></i>
+                                            Hóa đơn đã hủy
+                                        </a>
+                                    @elseif (request()->is('HoaDonn/DaHuy'))
+
+                                        <a href="{{ route('HoaDon.DaGiao') }}" class="btn btn-success">
+                                            <i class="icon-check-sign"></i>
+                                            Hóa đơn đã giao
+                                        </a>
+                                    @else
+                                        <a href="{{ route('HoaDon.DaGiao') }}" class="btn btn-success">
+                                            <i class="icon-check-sign"></i>
+                                            Hóa đơn đã giao
+                                        </a>
+                                        <a href="{{ route('HoaDon.DaHuy') }}" class="btn btn-inverse">
+                                            <i class="icon-trash"></i>
+                                            Hóa đơn đã hủy
+                                        </a>
+                                    @endif
+
 
                                     {{-- <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên hoặc username khách hàng" data-placement="bottom"
                                         value="{{ $request['NameSearch'] }}" name="NameSearch" /> --}}
@@ -77,22 +130,25 @@
                                             ZaloPay
                                         </option>
                                     </select>
-                                    <label for=""> Trạng thái: </label>
-                                    <select class="width-10 chosen-select" id="form-field-select-4" name="TrangThai">
-                                        <option value="">All</option>
-                                        <option value="1" @if ('1' == $request['TrangThai']) selected @endif>
-                                            Đang xử lý
-                                        </option>
-                                        <option value="2" @if ('2' == $request['TrangThai']) selected @endif>
-                                            Đã xử lý
-                                        </option>
-                                        <option value="3" @if ('3' == $request['TrangThai']) selected @endif>
-                                            Đang giao
-                                        </option>
-                                        <option value="4" @if ('4' == $request['TrangThai']) selected @endif>
-                                            Đã giao
-                                        </option>
-                                    </select>
+                                    @if (request()->is('HoaDonn/DaGiao'))
+                                    @else
+                                        <label for=""> Trạng thái: </label>
+                                        <select class="width-10 chosen-select" id="form-field-select-4" name="TrangThai">
+                                            <option value="">All</option>
+                                            <option value="1" @if ('1' == $request['TrangThai']) selected @endif>
+                                                Đang xử lý
+                                            </option>
+                                            <option value="2" @if ('2' == $request['TrangThai']) selected @endif>
+                                                Đã xử lý
+                                            </option>
+                                            <option value="3" @if ('3' == $request['TrangThai']) selected @endif>
+                                                Đang giao
+                                            </option>
+                                            <option value="4" @if ('4' == $request['TrangThai']) selected @endif>
+                                                Đã giao
+                                            </option>
+                                        </select>
+                                    @endif
                                     <label for=""> Lọc theo ngày: </label>
                                     <input class="width-20" type="text" name="NgayDat" id="id-NgayDat-1" value="{{ $request['NgayDat'] }}" />
 
@@ -182,60 +238,100 @@
                                         </td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
-
-                                        <td>
-                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#" data-rel="tooltip" title="Xem chi tiết">
-                                                    <i class="icon-zoom-in bigger-130"></i>
-                                                </a>
-                                                {{-- neu trạng thái =4 tức dag94 giao hàng thành công thì ko được phép sửa hoặc hủy hóa đơn --}}
-                                                @if ($item->TrangThai != 4)
-
-                                                    <i class="icon-check-sign green bigger-130" data-rel="tooltip" title="Chỉnh sửa"></i>
-
-                                                    <form action="{{ route('HoaDon.destroy', $item) }}" method="post">
+                                        @if (request()->is('HoaDonn/DaHuy'))
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <form action="{{ route('HoaDon.KhoiPhuc', $item->id) }}" method="post">
                                                         @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-130"></i></button>
+                                                        {{-- @method("PUT") --}}
+                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i class="icon-undo bigger-130"></i></button>
                                                     </form>
-
-                                                @endif
-                                            </div>
-
-                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                        <i class="icon-caret-down icon-only bigger-120"></i>
-                                                    </button>
-
-                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                        <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
-                                                                <span class="blue">
-                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="{{ route('HoaDon.edit', $item) }}" class="tooltip-success" data-rel="tooltip" title="Chỉnh sửa">
-                                                                <span class="green">
-                                                                    <i class="icon-edit bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <form action="{{ route('HoaDon.destroy', $item) }}" method="post">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-120"></i></button>
-                                                            </form>
-                                                        </li>
-                                                    </ul>
                                                 </div>
-                                            </div>
-                                        </td>
+
+                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                    <div class="inline position-relative">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="icon-caret-down icon-only bigger-120"></i>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <li>
+                                                                <form action="{{ route('HoaDon.KhoiPhuc', $item->id) }}" method="post">
+                                                                    @csrf
+                                                                    {{-- @method("PUT") --}}
+                                                                    <button type="submit" class="tooltip-error btn-link blue" data-rel="tooltip" title="Khôi phục"><i
+                                                                            class="icon-undo bigger-120"></i></button>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+
+                                                    {{-- neu trạng thái =4 tức dag94 giao hàng thành công thì ko được phép sửa hoặc hủy hóa đơn --}}
+                                                    @if ($item->TrangThai != 4)
+                                                        <span class="dropdown-hover dropup dropdown-pink">
+                                                            <i class="icon-cog green bigger-200"></i>
+                                                            <ul class="dropdown-menu pull-right">
+                                                                <li>
+                                                                    <a href="{{ route('HoaDon.edit', $item) }}?TrangThai=1" tabindex="-1">Đang xử lý</a>
+                                                                    <a href="{{ route('HoaDon.edit', $item) }}?TrangThai=2" tabindex="-1">Đã xử lý</a>
+                                                                    <a href="{{ route('HoaDon.edit', $item) }}?TrangThai=3" tabindex="-1">Đang giao</a>
+                                                                    <a href="{{ route('HoaDon.edit', $item) }}?TrangThai=4" tabindex="-1">Đã giao</a>
+                                                                </li>
+                                                            </ul>
+                                                        </span>
+
+                                                        <form action="{{ route('HoaDon.destroy', $item) }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-130"></i></button>
+                                                        </form>
+
+                                                    @endif
+                                                    <a class="blue" href="#" data-rel="tooltip" title="Xem chi tiết">
+                                                        <i class="icon-zoom-in bigger-130"></i>
+                                                    </a>
+                                                </div>
+
+                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                    <div class="inline position-relative">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="icon-caret-down icon-only bigger-120"></i>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <li>
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
+                                                                    <span class="blue">
+                                                                        <i class="icon-zoom-in bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="{{ route('HoaDon.edit', $item) }}" class="tooltip-success" data-rel="tooltip" title="Chỉnh sửa">
+                                                                    <span class="green">
+                                                                        <i class="icon-edit bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <form action="{{ route('HoaDon.destroy', $item) }}" method="post">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-120"></i></button>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        @endif
                                     </tr>
 
                                 @endforeach
@@ -319,4 +415,32 @@
         });
     </script>
     {{-- datatable script End --}}
+
+    {{-- thông báo error --}}
+    <!-- page specific plugin scripts -->
+    <!--[if lte IE 8]>
+                                  <script src="assets/js/excanvas.min.js"></script>
+                                  <![endif]-->
+
+    <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="/storage/assets/js/bootbox.min.js"></script>
+    <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
+    <script src="/storage/assets/js/jquery.gritter.min.js"></script>
+    <script src="/storage/assets/js/spin.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    $.gritter.add({
+                    title: 'Có lỗi xảy ra',
+                    text: '{{ $error }}',
+                    class_name: 'gritter-error'
+                    });
+                @endforeach
+            @endif
+        });
+    </script>
+    {{-- thông báo error end --}}
 @endsection

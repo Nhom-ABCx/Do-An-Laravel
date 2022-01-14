@@ -22,7 +22,14 @@
                     <i class="icon-home home-icon"></i>
                     <a href="{{ url('/') }}">Home</a>
                 </li>
-                <li class="active">Quản lý sản phẩm</li>
+                @if (request()->is('SanPhamm/DaXoa'))
+                    <li>
+                        <a href="{{ route('SanPham.index') }}">Quản lý sản phẩm</a>
+                    </li>
+                    <li class="active">Đã xóa</li>
+                @else
+                    <li class="active">Quản lý sản phẩm</li>
+                @endif
             </ul><!-- .breadcrumb -->
 
             {{-- <div class="nav-search" id="nav-search">
@@ -44,15 +51,19 @@
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                <form class="form-inline" action="{{ route('SanPham.index') }}" method="get">
+                                <form class="form-inline" action="{{ request()->is('SanPhamm/DaXoa') ? route('SanPham.DaXoa') : route('SanPham.index') }}" method="get">
                                     <a href="{{ route('SanPham.create') }}" class="btn btn-success">
                                         <i class="icon-plus"></i>
                                         Thêm sản phẩm
                                     </a>
-                                    <a href="{{ route('SanPham.DaXoa') }}" class="btn btn-inverse">
-                                        <i class="icon-trash"></i>
-                                        Sản phẩm đã xóa
-                                    </a>
+                                    @if (request()->is('SanPhamm/DaXoa'))
+                                    @else
+                                        <a href="{{ route('SanPham.DaXoa') }}" class="btn btn-inverse">
+                                            <i class="icon-trash"></i>
+                                            Sản phẩm đã xóa
+                                        </a>
+                                    @endif
+
 
                                     <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="{{ $request['TenSanPham'] }}"
                                         name="TenSanPham" />
@@ -139,61 +150,91 @@
                                         <td>{{ $item->LoaiSanPham->TenLoai }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
+                                        @if (request()->is('SanPhamm/DaXoa'))
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <form action="{{ route('SanPham.KhoiPhuc', $item->id) }}" method="post">
+                                                        @csrf
+                                                        {{-- @method("PUT") --}}
+                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i class="icon-undo bigger-130"></i></button>
+                                                    </form>
+                                                </div>
 
-                                        <td>
-                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#">
-                                                    <i class="icon-zoom-in bigger-130"></i>
-                                                </a>
+                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                    <div class="inline position-relative">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="icon-caret-down icon-only bigger-120"></i>
+                                                        </button>
 
-                                                <a class="green" href="{{ route('SanPham.edit', $item) }}" data-rel="tooltip" title="Chỉnh sửa" data-placement="top">
-                                                    <i class="icon-pencil bigger-130"></i>
-                                                </a>
+                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <li>
+                                                                <form action="{{ route('SanPham.KhoiPhuc', $item->id) }}" method="post">
+                                                                    @csrf
+                                                                    {{-- @method("PUT") --}}
+                                                                    <button type="submit" class="tooltip-error btn-link blue" data-rel="tooltip" title="Khôi phục"><i
+                                                                            class="icon-undo bigger-120"></i></button>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <a class="blue" href="#">
+                                                        <i class="icon-zoom-in bigger-130"></i>
+                                                    </a>
 
-                                                <form action="{{ route('SanPham.destroy', $item) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn-link red" data-rel="tooltip" title="Xóa"><i class="icon-trash bigger-130"></i></button>
-                                                </form>
-                                                {{-- <a class="red" href="{{ route('SanPham.destroy', $item) }}" data-method="delete">
+                                                    <a class="green" href="{{ route('SanPham.edit', $item) }}" data-rel="tooltip" title="Chỉnh sửa" data-placement="top">
+                                                        <i class="icon-pencil bigger-130"></i>
+                                                    </a>
+
+                                                    <form action="{{ route('SanPham.destroy', $item) }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn-link red" data-rel="tooltip" title="Xóa"><i class="icon-trash bigger-130"></i></button>
+                                                    </form>
+                                                    {{-- <a class="red" href="{{ route('SanPham.destroy', $item) }}" data-method="delete">
                                                     <i class="icon-trash bigger-130"></i>
                                                 </a> --}}
-                                            </div>
-
-                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                        <i class="icon-caret-down icon-only bigger-120"></i>
-                                                    </button>
-
-                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                        <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                <span class="blue">
-                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="{{ route('SanPham.edit', $item) }}" class="tooltip-success" data-rel="tooltip" title="Chỉnh sửa">
-                                                                <span class="green">
-                                                                    <i class="icon-edit bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <form action="{{ route('SanPham.destroy', $item) }}" method="post">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Xóa"><i class="icon-trash bigger-120"></i></button>
-                                                            </form>
-                                                        </li>
-                                                    </ul>
                                                 </div>
-                                            </div>
-                                        </td>
+
+                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                    <div class="inline position-relative">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="icon-caret-down icon-only bigger-120"></i>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <li>
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                    <span class="blue">
+                                                                        <i class="icon-zoom-in bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="{{ route('SanPham.edit', $item) }}" class="tooltip-success" data-rel="tooltip" title="Chỉnh sửa">
+                                                                    <span class="green">
+                                                                        <i class="icon-edit bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <form action="{{ route('SanPham.destroy', $item) }}" method="post">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Xóa"><i class="icon-trash bigger-120"></i></button>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        @endif
                                     </tr>
 
                                 @endforeach

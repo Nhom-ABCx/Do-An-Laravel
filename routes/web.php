@@ -99,6 +99,9 @@ Route::middleware('auth')->group(function () {
             'HoaDon' => 'hoaDon'
         ]
     ]);
-    Route::get("HoaDon/DaHuy",[HoaDonController::class,"HoaDonDaHuy"])->name("HoaDon.DaHuy");
+    Route::get("HoaDonn/DaHuy",[HoaDonController::class,"HoaDonDaHuy"])->name("HoaDon.DaHuy");
     Route::post("HoaDon/KhoiPhuc/{id}",[HoaDonController::class,"KhoiPhucHoaDon"])->name("HoaDon.KhoiPhuc");
+    Route::get("HoaDonn/DaGiao",[HoaDonController::class,"HoaDonDaGiao"])->name("HoaDon.DaGiao");
+
+    Route::get("WidgetThongBao",function(){return view("WidgetThongBao");});
 });
