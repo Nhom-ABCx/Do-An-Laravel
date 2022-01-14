@@ -54,7 +54,8 @@
                                         Sản phẩm đã xóa
                                     </a>
 
-                                    <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="{{$request['TenSanPham']}}" name="TenSanPham" />
+                                    <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="{{ $request['TenSanPham'] }}"
+                                        name="TenSanPham" />
                                     <label for=""> Hãng sãn xuất: </label>
                                     <select class="width-10 chosen-select" id="form-field-select-4" name="HangSanXuatId">
                                         <option value="">All</option>
@@ -98,16 +99,16 @@
                         <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th class="center">Id</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Mô tả</th>
-                                    <th>Số lượng tồn</th>
-                                    <th>Giá nhập</th>
-                                    <th>Giá bán</th>
-                                    <th>Hình ảnh</th>
-                                    <th>Lượt mua</th>
-                                    <th>Hãng sãn xuất</th>
-                                    <th>Loại sản phẩm</th>
+                                    <th class="center"><i class="icon-adn"></i>Id</th>
+                                    <th><i class="icon-align-left"></i>Tên sản phẩm</th>
+                                    <th><i class="icon-file-text-alt"></i>Mô tả</th>
+                                    <th><i class="icon-bar-chart"></i>Số lượng tồn</th>
+                                    <th><i class="icon-money"></i>Giá nhập</th>
+                                    <th><i class="icon-money"></i>Giá bán</th>
+                                    <th><i class="icon-picture"></i>Hình ảnh</th>
+                                    <th><i class="icon-bar-chart"></i>Lượt mua</th>
+                                    <th><i class="icon-apple"></i>Hãng sãn xuất</th>
+                                    <th><i class="icon-android"></i>Loại sản phẩm</th>
                                     <th>
                                         <i class="icon-time bigger-110 hidden-480"></i>
                                         Create_at
@@ -145,14 +146,14 @@
                                                     <i class="icon-zoom-in bigger-130"></i>
                                                 </a>
 
-                                                <a class="green" href="{{ route('SanPham.edit', $item) }}">
+                                                <a class="green" href="{{ route('SanPham.edit', $item) }}" data-rel="tooltip" title="Chỉnh sửa" data-placement="top">
                                                     <i class="icon-pencil bigger-130"></i>
                                                 </a>
 
                                                 <form action="{{ route('SanPham.destroy', $item) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn-link red"><i class="icon-trash bigger-130"></i></button>
+                                                    <button type="submit" class="btn-link red" data-rel="tooltip" title="Xóa"><i class="icon-trash bigger-130"></i></button>
                                                 </form>
                                                 {{-- <a class="red" href="{{ route('SanPham.destroy', $item) }}" data-method="delete">
                                                     <i class="icon-trash bigger-130"></i>
@@ -175,7 +176,7 @@
                                                         </li>
 
                                                         <li>
-                                                            <a href="{{ route('SanPham.edit', $item) }}" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                            <a href="{{ route('SanPham.edit', $item) }}" class="tooltip-success" data-rel="tooltip" title="Chỉnh sửa">
                                                                 <span class="green">
                                                                     <i class="icon-edit bigger-120"></i>
                                                                 </span>
@@ -186,7 +187,7 @@
                                                             <form action="{{ route('SanPham.destroy', $item) }}" method="post">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Delete"><i class="icon-trash bigger-120"></i></button>
+                                                                <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Xóa"><i class="icon-trash bigger-120"></i></button>
                                                             </form>
                                                         </li>
                                                     </ul>
@@ -208,8 +209,10 @@
 @endsection
 
 @section('scriptThisPage')
+
     <script src="/storage/assets/js/chosen.jquery.min.js"></script>
     <!-- inline scripts related to this page -->
+    {{-- datatable script --}}
     <script type="text/javascript">
         jQuery(function($) {
             var oTable1 = $('#sample-table-2').dataTable({
@@ -268,5 +271,6 @@
             else $('#form-field-select-4').removeClass('tag-input-style');
         });
     </script>
+    {{-- datatable script End --}}
 
 @endsection

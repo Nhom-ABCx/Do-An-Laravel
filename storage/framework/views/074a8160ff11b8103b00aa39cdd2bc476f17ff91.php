@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- basic styles -->
-
     <link href="/storage/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/storage/assets/css/font-awesome.min.css" />
 
@@ -21,7 +20,9 @@
     <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.full.min.css" />
     <link rel="stylesheet" href="/storage/assets/css/datepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/ui.jqgrid.css" />
-
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <?php echo $__env->yieldContent('headThisPage'); ?>
 
     <!-- fonts -->
@@ -134,7 +135,7 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="/storage/assets/images/avatar/NhanVien/<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->id); ?>/<?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?>" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?>" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     <?php if(auth()->guard()->check()): ?>
@@ -240,10 +241,10 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="typography.html">
+                    <li class="<?php echo e(request()->is('HoaDon') ? 'active' : ''); ?>">
+                        <a href="<?php echo e(route('HoaDon.index')); ?>">
                             <i class="icon-text-width"></i>
-                            <span class="menu-text"> Typography </span>
+                            <span class="menu-text"> Quản lý hóa đơn </span>
                         </a>
                     </li>
 

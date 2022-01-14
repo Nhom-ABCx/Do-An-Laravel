@@ -145,10 +145,10 @@ class CreateDatabase extends Migration
         Schema::create('hoa_dons', function (Blueprint $table) {
             $table->Id();
             $table->foreignId('DiaChiId');
-            $table->tinyInteger('TrangThai');
             $table->tinyInteger('PhuongThucThanhToan');
             $table->integer("TongSoLuong");
             $table->double('TongTien');
+            $table->tinyInteger('TrangThai');
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('DiaChiId')->references('Id')->on('dia_chis');

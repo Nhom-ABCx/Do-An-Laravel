@@ -10,8 +10,10 @@ use App\Models\KhachHang;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class HoaDonController extends Controller
 {
@@ -20,9 +22,22 @@ class HoaDonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = HoaDon::all();
+        if (!empty($request->input('PhuongThucThanhToan')))
+            $data = $data->where('PhuongThucThanhToan', $request->input('PhuongThucThanhToan'));
+        if (!empty($request->input('TrangThai')))
+            $data = $data->where('TrangThai', $request->input('TrangThai'));
+            //chua dc
+        // if (!empty($request->input("NgayDat"))) {
+        //     $catChuoi = explode(" - ", $request->input("NgayDat"));
+
+        //     $data = $data->whereDate("created_at", ">=", date_format(date_create($catChuoi[0]), 'Y-m-d'));
+        //     $data = $data->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'));
+        // }
+        //tra lai resquet ve cho view de hien thi lai tim` kiem' cu?
+        return view('HoaDon.HoaDon-index', ["hoaDon" => $data, 'request' => $request]);
     }
 
     /**
@@ -77,7 +92,6 @@ class HoaDonController extends Controller
      */
     public function update(Request $request, HoaDon $hoaDon)
     {
-        //
     }
 
     /**
@@ -107,8 +121,8 @@ class HoaDonController extends Controller
 
         $hoaDon = HoaDon::create([
             'DiaChiId'         => $request["DiaChiId"],
-            'TrangThai' => 0, //vua lap
-            "PhuongThucThanhToan"=>0, //ghi tammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+            'TrangThai' => 1, //vua lap, dang xu ly
+            "PhuongThucThanhToan" => 1, //ghi tammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
             'TongTien' => 0,
         ]);
 
@@ -217,7 +231,7 @@ class HoaDonController extends Controller
             ->First();
 
         //dd($data->HoaDonId);
-        if($request["Star"]>0){
+        if ($request["Star"] > 0) {
             $data->fill([
                 'Star' => $request["Star"],
             ]);
@@ -225,6 +239,6 @@ class HoaDonController extends Controller
             return response()->json(["Sucsess" => true], 200);
         }
         //dd($data->HoaDonId);
-       return response()->json(["Sucsess"=>false],405);
+        return response()->json(["Sucsess" => false], 405);
     }
 }

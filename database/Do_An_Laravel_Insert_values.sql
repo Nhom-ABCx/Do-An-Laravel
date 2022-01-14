@@ -1,8 +1,8 @@
 ﻿
-insert into Nhan_Viens(Username,Email,Phone,MatKhau,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values ('Admin','Admin@gmail.com','0779597983','Admin',N'Administrator','2007/02/14',1,N'TP HCM','image-1.jpg','1991-11-11')							 ;
-insert into Nhan_Viens(Username,Email,Phone,MatKhau,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values ('NhanVien01','NhanVien01@gmail.com','0238506390','passwordNV01',N'Bà Huyện Thanh Quan','1997/04/14',0,N'O7, Cao Bá Nhạ, Hậu Giang','image-2.jpg','1991-11-11');
-insert into Nhan_Viens(Username,Email,Phone,MatKhau,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values ('NhanVien02','NhanVien02@gmail.com','0176440449','passwordNV02',N'Nguyễn Hữu Cảnh','2002/11/12',0,N'P7, Đồng Khởi, Lào Cai','image-3.jpg','1991-11-11')		;
-insert into Nhan_Viens(Username,Email,Phone,MatKhau,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values ('NhanVien03','NhanVien03@gmail.com','0300345555','passwordNV03',N'Alexandre de Rhodes','2020/08/03',0,N'B0, Lê Lai, Thái Bình','image-4.jpg','1991-11-11')	;
+insert into Nhan_Viens(Username,Email,Phone,MatKhau,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values ('Admin','Admin@gmail.com','0779597983','Admin',N'Administrator','2007/02/14',1,N'TP HCM','/storage/assets/images/avatar/NhanVien/1/image-1.jpg','1991-11-11')							 ;
+insert into Nhan_Viens(Username,Email,Phone,MatKhau,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values ('NhanVien01','NhanVien01@gmail.com','0238506390','passwordNV01',N'Bà Huyện Thanh Quan','1997/04/14',0,N'O7, Cao Bá Nhạ, Hậu Giang','/storage/assets/images/avatar/NhanVien/2/image-2.jpg','1991-11-11');
+insert into Nhan_Viens(Username,Email,Phone,MatKhau,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values ('NhanVien02','NhanVien02@gmail.com','0176440449','passwordNV02',N'Nguyễn Hữu Cảnh','2002/11/12',0,N'P7, Đồng Khởi, Lào Cai','/storage/assets/images/avatar/NhanVien/3/image-3.jpg','1991-11-11')		;
+insert into Nhan_Viens(Username,Email,Phone,MatKhau,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values ('NhanVien03','NhanVien03@gmail.com','0300345555','passwordNV03',N'Alexandre de Rhodes','2020/08/03',0,N'B0, Lê Lai, Thái Bình','/storage/assets/images/avatar/NhanVien/4/image-4.jpg','1991-11-11')	;
 
 insert into Khach_Hangs(Username,Email,Phone,MatKhau,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values ('Khach01','Khach01@gmail.com','0618431768','passwordKH01',N'Hồ Huấn Nghiệp','1990/11/24',0,N'J5, Nguyễn Hữu Cầu, Thanh Hóa','image-5.jpg','1991-11-11');
 insert into Khach_Hangs(Username,Email,Phone,MatKhau,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values ('Khach02','Khach02@gmail.com','0452803292','passwordKH02',N'Hàm Nghi','1996/10/15',0,N'D4, Huỳnh Khương Ninh, Tiền Giang','image-6.jpg','1991-11-11')	;
@@ -94,36 +94,36 @@ values(3,'Dat ne`','091928739',N'Thành phố Hồ Chí Minh',N'Huyện Bình Ch
 insert into Dia_Chis(KhachHangId,TenNguoiNhan,Phone,TinhThanhPho,QuanHuyen,PhuongXa,DiaChiChiTiet,CodeTinhThanhPho,CodeQuanHuyen,CodePhuongXa)
 values(4,'Dattt ne``','0901283123',N'Thành phố Hà Nội',N'Quận Long Biên',N'Phường Thượng Thanh',N'123/asasd Đường An Dương Vương',1,4,115);
 
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(1,0,0,'2021/01/27');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(1,0,0,'2021/01/15');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(1,0,0,'2021/01/11');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(2,1,0,'2021/03/30');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(2,1,0,'2021/03/30');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(2,3,0,'2021/04/29');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(3,3,0,'2021/04/07');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(3,3,0,'2021/01/11');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(3,2,0,'2021/01/29');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(4,3,0,'2021/04/29');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(4,0,0,'2021/01/11');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(4,2,0,'2021/01/29');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(1,2,0,'2021/01/27');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(1,1,0,'2021/01/15');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(1,1,0,'2021/01/15');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(2,3,0,'2021/03/30');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(2,2,0,'2021/01/27');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(2,0,0,'2021/01/29');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(3,0,0,'2021/01/29');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(3,1,0,'2021/04/07');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(3,3,0,'2021/01/29');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(4,2,0,'2021/04/29');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(4,0,0,'2021/01/27');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(4,1,0,'2021/01/27');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(1,3,0,'2021/04/28');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(1,2,0,'2021/01/29');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(1,2,0,'2021/01/29');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(2,3,0,'2021/01/15');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(2,1,0,'2021/01/29');
-insert into Hoa_Dons(DiaChiId,TrangThai,TongTien,created_at) values(2,3,0,'2021/01/15');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(1,1,1,0,'2021/01/27');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(5,1,4,0,'2021/01/15');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(1,1,4,0,'2021/01/11');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(5,2,1,0,'2021/03/30');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(5,2,1,0,'2021/03/30');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,2,2,0,'2021/04/29');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(3,3,2,0,'2021/04/07');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,3,2,0,'2021/01/11');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(5,3,2,0,'2021/01/29');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(3,4,1,0,'2021/04/29');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(5,4,4,0,'2021/01/11');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(1,4,1,0,'2021/01/29');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(1,1,3,0,'2021/01/27');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(2,1,2,0,'2021/01/15');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(2,1,2,0,'2021/01/15');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(2,2,2,0,'2021/03/30');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(3,2,1,0,'2021/01/27');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(5,2,3,0,'2021/01/29');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,3,3,0,'2021/01/29');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(1,3,2,0,'2021/04/07');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,3,4,0,'2021/01/29');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,4,4,0,'2021/04/29');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(2,4,1,0,'2021/01/27');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,4,1,0,'2021/01/27');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(3,1,4,0,'2021/04/28');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(5,1,4,0,'2021/01/29');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,1,3,0,'2021/01/29');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(2,2,4,0,'2021/01/15');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,2,2,0,'2021/01/29');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(1,2,3,0,'2021/01/15');
 
 insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(19,30,15,0,0,1) ;
 insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(18,11,17,0,0,2) ;
@@ -210,3 +210,6 @@ update CT_Hoa_Dons
 set GiaBan=(select GiaBan from San_Phams where Id=SanPhamId);
 update CT_Hoa_Dons
 set ThanhTien=(SoLuong*GiaBan)-GiaGiam;
+update hoa_dons a, (select HoaDonId,SUM(ThanhTien) as tongTien,SUM(SoLuong) as tongSoLuong from ct_hoa_dons GROUP BY HoaDonId) b
+set a.TongTien=b.tongTien,a.TongSoLuong=b.tongSoLuong
+where a.id=b.HoaDonId

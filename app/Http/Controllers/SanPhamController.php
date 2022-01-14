@@ -9,18 +9,12 @@ use App\Models\CTChuongTrinhKM;
 use App\Models\SanPham;
 use App\Models\LoaiSanPham;
 use App\Models\HangSanXuat;
-use App\Models\HoaDon;
-use App\Models\YeuThich;
-use Facade\FlareClient\View;
-use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage; //thu vien luu tru~ de tao lien ket den public
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class SanPhamController extends Controller
