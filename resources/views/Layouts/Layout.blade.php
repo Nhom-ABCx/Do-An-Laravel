@@ -524,8 +524,7 @@
                         </ul>
                     </li>
 
-                    <li
-                        class="{{ request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : '' }}">
+                    <li class="{{ request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Khuyến mãi </span>
@@ -554,7 +553,7 @@
                         </a>
                     </li>
                     {{-- Van chuyen --}}
-                    <li>
+                    <li class="{{ request()->is('DonViVanChuyen') || request()->is('NguoiVanChuyen') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-fighter-jet"></i>
                             <span class="menu-text"> Vận chuyển </span>

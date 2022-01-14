@@ -14,6 +14,7 @@
 @endsection
 
 @section('body')
+
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
@@ -93,7 +94,7 @@
                                         </option>
                                     </select>
                                     <label for=""> Lọc theo ngày: </label>
-                                    <input class="width-20" type="text" name="NgayDat" id="id-NgayDat-1" value="{{$request["NgayDat"]}}" />
+                                    <input class="width-20" type="text" name="NgayDat" id="id-NgayDat-1" value="{{ $request['NgayDat'] }}" />
 
                                     <button type="submit" class="btn btn-purple btn-sm">
                                         Search
@@ -184,22 +185,21 @@
 
                                         <td>
                                             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#">
+                                                <a class="blue" href="#" data-rel="tooltip" title="Xem chi tiết">
                                                     <i class="icon-zoom-in bigger-130"></i>
                                                 </a>
+                                                {{-- neu trạng thái =4 tức dag94 giao hàng thành công thì ko được phép sửa hoặc hủy hóa đơn --}}
+                                                @if ($item->TrangThai != 4)
 
-                                                <a class="green" href="{{ route('HoaDon.edit', $item) }}" data-rel="tooltip" title="Chỉnh sửa">
-                                                    <i class="icon-pencil bigger-130"></i>
-                                                </a>
+                                                    <i class="icon-check-sign green bigger-130" data-rel="tooltip" title="Chỉnh sửa"></i>
 
-                                                <form action="{{ route('HoaDon.destroy', $item) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-130"></i></button>
-                                                </form>
-                                                {{-- <a class="red" href="{{ route('HoaDon.destroy', $item) }}" data-method="delete">
-                                                <i class="icon-trash bigger-130"></i>
-                                            </a> --}}
+                                                    <form action="{{ route('HoaDon.destroy', $item) }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-130"></i></button>
+                                                    </form>
+
+                                                @endif
                                             </div>
 
                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -210,7 +210,7 @@
 
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                         <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
                                                                 <span class="blue">
                                                                     <i class="icon-zoom-in bigger-120"></i>
                                                                 </span>

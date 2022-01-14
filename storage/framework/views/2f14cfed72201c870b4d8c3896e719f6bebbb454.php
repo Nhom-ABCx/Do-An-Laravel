@@ -11,6 +11,49 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('body'); ?>
+<div class="dropup dropdown-preview">
+    <ul class="dropdown-menu dropdown-purple">
+        <li>
+            <a href="#" tabindex="-1">Action</a>
+        </li>
+
+        <li>
+            <a href="#" tabindex="-1">Another action</a>
+        </li>
+
+        <li>
+            <a href="#" tabindex="-1">Something else here</a>
+        </li>
+
+        <li class="divider"></li>
+
+        <li class="dropdown-hover dropup">
+            <a href="#" tabindex="-1">More options</a>
+
+            <ul class="dropdown-menu pull-right">
+                <li>
+                    <a href="#" tabindex="-1">Second level link</a>
+                </li>
+
+                <li>
+                    <a href="#" tabindex="-1">Second level link</a>
+                </li>
+
+                <li>
+                    <a href="#" tabindex="-1">Second level link</a>
+                </li>
+
+                <li>
+                    <a href="#" tabindex="-1">Second level link</a>
+                </li>
+
+                <li>
+                    <a href="#" tabindex="-1">Second level link</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
@@ -82,7 +125,7 @@
                                         </option>
                                     </select>
                                     <label for=""> Lọc theo ngày: </label>
-                                    <input class="width-20" type="text" name="NgayDat" id="id-NgayDat-1" value="<?php echo e($request["NgayDat"]); ?>" />
+                                    <input class="width-20" type="text" name="NgayDat" id="id-NgayDat-1" value="<?php echo e($request['NgayDat']); ?>" />
 
                                     <button type="submit" class="btn btn-purple btn-sm">
                                         Search
@@ -173,20 +216,21 @@
 
                                         <td>
                                             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#">
+                                                <a class="blue" href="#" data-rel="tooltip" title="Xem chi tiết">
                                                     <i class="icon-zoom-in bigger-130"></i>
                                                 </a>
-
-                                                <a class="green" href="<?php echo e(route('HoaDon.edit', $item)); ?>" data-rel="tooltip" title="Chỉnh sửa">
-                                                    <i class="icon-pencil bigger-130"></i>
-                                                </a>
-
-                                                <form action="<?php echo e(route('HoaDon.destroy', $item)); ?>" method="post">
-                                                    <?php echo csrf_field(); ?>
-                                                    <?php echo method_field('DELETE'); ?>
-                                                    <button type="submit" class="btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-130"></i></button>
-                                                </form>
                                                 
+                                                <?php if($item->TrangThai != 4): ?>
+
+                                                    <i class="icon-check-sign green bigger-130" data-rel="tooltip" title="Chỉnh sửa"></i>
+
+                                                    <form action="<?php echo e(route('HoaDon.destroy', $item)); ?>" method="post">
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('DELETE'); ?>
+                                                        <button type="submit" class="btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-130"></i></button>
+                                                    </form>
+
+                                                <?php endif; ?>
                                             </div>
 
                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -197,7 +241,7 @@
 
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                         <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
                                                                 <span class="blue">
                                                                     <i class="icon-zoom-in bigger-120"></i>
                                                                 </span>

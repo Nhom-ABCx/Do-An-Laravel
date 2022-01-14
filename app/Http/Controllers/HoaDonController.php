@@ -25,17 +25,16 @@ class HoaDonController extends Controller
     public function index(Request $request)
     {
         $data = HoaDon::all();
+        if (!empty($request->input("NgayDat"))) {
+            $catChuoi = explode(" - ", $request->input("NgayDat"));
+
+            $data = HoaDon::whereDate("created_at", ">=", date_format(date_create($catChuoi[0]), 'Y-m-d'))
+                ->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'))->get();
+        }
         if (!empty($request->input('PhuongThucThanhToan')))
             $data = $data->where('PhuongThucThanhToan', $request->input('PhuongThucThanhToan'));
         if (!empty($request->input('TrangThai')))
             $data = $data->where('TrangThai', $request->input('TrangThai'));
-            //chua dc
-        // if (!empty($request->input("NgayDat"))) {
-        //     $catChuoi = explode(" - ", $request->input("NgayDat"));
-
-        //     $data = $data->whereDate("created_at", ">=", date_format(date_create($catChuoi[0]), 'Y-m-d'));
-        //     $data = $data->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'));
-        // }
         //tra lai resquet ve cho view de hien thi lai tim` kiem' cu?
         return view('HoaDon.HoaDon-index', ["hoaDon" => $data, 'request' => $request]);
     }
