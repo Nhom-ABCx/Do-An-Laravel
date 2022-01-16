@@ -281,7 +281,7 @@
                                                         </form>
 
                                                     <?php endif; ?>
-                                                    <a class="blue" href="#" data-rel="tooltip" title="Xem chi tiết">
+                                                    <a class="blue" href="<?php echo e(route("HoaDon.show",$item)); ?>" data-rel="tooltip" title="Xem chi tiết">
                                                         <i class="icon-zoom-in bigger-130"></i>
                                                     </a>
                                                 </div>
@@ -294,7 +294,7 @@
 
                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
+                                                                <a href="<?php echo e(route("HoaDon.show",$item)); ?>" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>

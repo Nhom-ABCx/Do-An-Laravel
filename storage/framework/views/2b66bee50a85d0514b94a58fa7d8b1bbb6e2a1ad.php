@@ -61,12 +61,12 @@
                                 <tr>
                                     <th>
                                         <i class="fa fa-align-left"></i>
-                                        Chương trình KM-Id
+                                        Chương trình khuyến mãi
                                     </th>
 
                                     <th>
                                         <i class="fa fa-file-text-o"></i>
-                                        Sản phẩm Id
+                                        Sản phẩm
                                     </th>
                                     <th>
                                         <i class="fa fa-calendar"></i>
@@ -93,7 +93,11 @@
                                 <?php $__currentLoopData = $ctctkm; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td><?php echo e($item->ChuongTrinhKhuyenMai->TenChuongTrinh); ?></td>
-                                        <td><?php echo e($item->SanPham->TenSanPham); ?></td>
+                                        <td><?php echo e($item->SanPham->TenSanPham); ?>
+
+                                            <img src='/storage/assets/images/product-image/<?php echo e($item->SanPham->HinhAnh); ?>'
+                                                alt="<?php echo e($item->SanPham->HinhAnh); ?>" width='50' height='50'>
+                                        </td>
                                         <td><?php echo e($item->GiamGia); ?></td>
                                         <td><?php echo e($item->SoLuong); ?></td>
                                         <td><?php echo e($item->created_at); ?></td>
