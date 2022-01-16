@@ -1,22 +1,19 @@
-{{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
-@extends('layouts.Layout')
+<?php $__env->startSection('title', 'Edit_CT-Khuyen-Mai'); ?>
 
-@section('title', 'Edit_CT-Khuyen-Mai')
-
-@section('headThisPage')
+<?php $__env->startSection('headThisPage'); ?>
     <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
     <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
-    {{-- datetime picker --}}
+    
     <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
     <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
-    {{-- datetime picker end --}}
-@endsection
+    
+<?php $__env->stopSection(); ?>
 
-@section('body')
+<?php $__env->startSection('body'); ?>
 
     <div class="main-content">
 
@@ -50,11 +47,11 @@
         <div class="page-content">
             <div class="span4">
                 <div class="pull">
-                    <a type="button" class="btn btn-info " href="{{ route('KhuyenMai.index') }}"><i class="fa fa-angle-double-left"></i> Back</a>
+                    <a type="button" class="btn btn-info " href="<?php echo e(route('KhuyenMai.index')); ?>"><i class="fa fa-angle-double-left"></i> Back</a>
                 </div>
-                <form class="form-horizontal" role="form" action="{{ route('KhuyenMai.update', $ctkm) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+                <form class="form-horizontal" role="form" action="<?php echo e(route('KhuyenMai.update', $ctkm)); ?>" method="POST" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('PUT'); ?>
                     <div class="widget-box">
                         <div class="widget-header">
                             <h4>Edit CT-Khuyến mãi</h4>
@@ -68,7 +65,7 @@
 
                                 <div class="control-group">
                                     <div class="row-fluid input-append">
-                                        <textarea id="form-field-11" class="autosize-transition form-control" name="TenChuongTrinh">{{ $ctkm->TenChuongTrinh }}</textarea>
+                                        <textarea id="form-field-11" class="autosize-transition form-control" name="TenChuongTrinh"><?php echo e($ctkm->TenChuongTrinh); ?></textarea>
                                     </div>
                                 </div>
                                 <hr />
@@ -78,8 +75,8 @@
                                 </div>
                                 <div class="control-group">
                                     <div class="row-fluid input-append">
-                                        {{-- <input type="text" value="{{ $ctkm->MoTa }}" name="MoTa" /> --}}
-                                        <textarea id="form-field-11" class="autosize-transition form-control" name="MoTa">{{ $ctkm->MoTa }}</textarea>
+                                        
+                                        <textarea id="form-field-11" class="autosize-transition form-control" name="MoTa"><?php echo e($ctkm->MoTa); ?></textarea>
                                     </div>
                                 </div>
                                 <hr />
@@ -93,7 +90,7 @@
                                         <span class="input-group-addon">
                                             <i class="icon-calendar bigger-110"></i>
                                         </span>
-                                        <input class="form-control" type="text" name="date-range-picker" id="id-date-range-picker-1" value="{{date_format(date_create($ctkm->FromDate), 'm/d/Y')}} - {{date_format(date_create($ctkm->ToDate), 'm/d/Y')}}" />
+                                        <input class="form-control" type="text" name="date-range-picker" id="id-date-range-picker-1" value="<?php echo e(date_format(date_create($ctkm->FromDate), 'm/d/Y')); ?> - <?php echo e(date_format(date_create($ctkm->ToDate), 'm/d/Y')); ?>" />
                                     </div>
                                 </div>
                                 <hr />
@@ -107,9 +104,9 @@
         </div><!-- /.page-content -->
     </div><!-- /.main-content -->
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scriptThisPage')
+<?php $__env->startSection('scriptThisPage'); ?>
     <!--[if lte IE 8]>
                                                                 <script src="/storage/assets/js/excanvas.min.js"></script>
                                                                 <![endif]-->
@@ -128,7 +125,7 @@
     <script src="/storage/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
     <script src="/storage/assets/js/jquery.maskedinput.min.js"></script>
     <script src="/storage/assets/js/bootstrap-tag.min.js"></script>
-    {{-- datetime picker` --}}
+    
     <script src="/storage/assets/js/chosen.jquery.min.js"></script>
     <script src="/storage/assets/js/date-time/moment.min.js"></script>
     <script src="/storage/assets/js/date-time/daterangepicker.min.js"></script>
@@ -140,7 +137,7 @@
             $(this).next().focus();
         });
     </script>
-    {{-- end datetime picker --}}
+    
     <!-- inline scripts related to this page -->
 
     <script type="text/javascript">
@@ -494,4 +491,6 @@
 
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/KhuyenMai/KhuyenMai-edit.blade.php ENDPATH**/ ?>

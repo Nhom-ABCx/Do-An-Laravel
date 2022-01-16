@@ -4,7 +4,12 @@
 @section('title', 'Create_CT-Khuyen-Mai')
 
 @section('headThisPage')
-
+    {{-- datetime picker --}}
+    <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
+    <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
+    <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
+    <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
+    {{-- datetime picker end --}}
 @endsection
 
 @section('body')
@@ -47,7 +52,6 @@
                 </div>
                 <form action="{{ route('KhuyenMai.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
                     <div class="widget-box">
                         <div class="widget-header">
                             <h4>Thêm CT-Khuyến mãi</h4>
@@ -61,8 +65,11 @@
 
                                 <div class="control-group">
                                     <div class="row-fluid input-append">
-                                        <input name="TenChuongTrinh" type="text" />
+                                        <textarea name="TenChuongTrinh" cols="50" rows="3"></textarea>
                                     </div>
+                                    @if ($errors->has('TenChuongTrinh'))
+                                        <i class="icon-remove bigger-110 red"> {{ $errors->first('TenChuongTrinh') }}</i>
+                                    @endif
                                 </div>
                                 <hr />
                                 <div class="row-fluid">
@@ -71,29 +78,37 @@
 
                                 <div class="control-group">
                                     <div class="row-fluid input-append">
-                                        <input type="text" name="MoTa" />
+                                        <textarea name="MoTa" cols="50" rows="3"></textarea>
                                     </div>
+                                    @if ($errors->has('MoTa'))
+                                        <i class="icon-remove bigger-110 red"> {{ $errors->first('MoTa') }}</i>
+                                    @endif
                                 </div>
                                 <hr />
                                 <div class="control-group">
                                     <div class="form-group">
-                                        <label for="input_from">Form date</label><br>
-                                        <input type="text"  name="FromDate"
-                                            placeholder="Start Date">
+                                        <label for="input_from">Ngày bắt đầu-Ngày kết thúc</label><br>
+                                        <div class="control-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="icon-calendar bigger-110"></i>
+                                                </span>
+                                                <input class="form-control" type="text" name="date-range-picker"
+                                                    id="id-date-range-picker-1" />
+                                            </div>
+                                            @if ($errors->has('date-range-picker'))
+                                                <i class="icon-remove bigger-110 red">
+                                                    {{ $errors->first('date-range-picker') }}</i>
+                                            @endif
+                                        </div>
                                     </div>
+
+                                    <hr />
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-check-square-o"></i>
+                                        Thêm</button>
                                 </div>
-                                <div class="control-group">
-                                    <div class="form-group">
-                                        <label for="input_to">To date</label><br>
-                                        <input type="text"  name="ToDate" placeholder="End Date">
-                                    </div>
-                                </div>
-                                <hr />
-                                <button class="btn btn-primary" type="submit"><i class="fa fa-check-square-o"></i>
-                                    Thêm</button>
                             </div>
                         </div>
-                    </div>
                 </form>
             </div>
         </div><!-- /.page-content -->
@@ -102,8 +117,8 @@
 
 @section('scriptThisPage')
     <!--[if lte IE 8]>
-              <script src="/storage/assets/js/excanvas.min.js"></script>
-              <![endif]-->
+                          <script src="/storage/assets/js/excanvas.min.js"></script>
+                          <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -121,12 +136,12 @@
     <script src="/storage/assets/js/bootstrap-tag.min.js"></script>
     <!-- js date -->
     <!-- <script src="js/jquery-3.3.1.min.js"></script>
-            <script src="js/popper.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/picker.js"></script>
-            <script src="js/picker.date.js"></script>
+                                                    <script src="js/popper.min.js"></script>
+                                                    <script src="js/bootstrap.min.js"></script>
+                                                    <script src="js/picker.js"></script>
+                                                    <script src="js/picker.date.js"></script>
 
-            <script src="js/main.js"></script> -->
+                                                    <script src="js/main.js"></script> -->
 
     <!-- inline scripts related to this page -->
 

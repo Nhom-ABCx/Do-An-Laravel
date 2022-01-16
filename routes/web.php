@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 //controller
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BinhLuanController;
+use App\Http\Controllers\HoaDonController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\ChuongTrinhKhuyenMaiController;
 use App\Http\Controllers\CTChuongTrinhKMController;
@@ -93,4 +94,14 @@ Route::middleware('auth')->group(function () {
             'Message' => 'message'
         ]
     ]);
+    Route::resource('HoaDon', HoaDonController::class, [
+        'parameters' => [
+            'HoaDon' => 'hoaDon'
+        ]
+    ]);
+    Route::get("HoaDonn/DaHuy",[HoaDonController::class,"HoaDonDaHuy"])->name("HoaDon.DaHuy");
+    Route::post("HoaDon/KhoiPhuc/{id}",[HoaDonController::class,"KhoiPhucHoaDon"])->name("HoaDon.KhoiPhuc");
+    Route::get("HoaDonn/DaGiao",[HoaDonController::class,"HoaDonDaGiao"])->name("HoaDon.DaGiao");
+
+    Route::get("WidgetThongBao",function(){return view("WidgetThongBao");});
 });

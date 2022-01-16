@@ -19,7 +19,14 @@
                     <i class="icon-home home-icon"></i>
                     <a href="<?php echo e(url('/')); ?>">Home</a>
                 </li>
-                <li class="active">Quản lý sản phẩm</li>
+                <?php if(request()->is('SanPhamm/DaXoa')): ?>
+                    <li>
+                        <a href="<?php echo e(route('SanPham.index')); ?>">Quản lý sản phẩm</a>
+                    </li>
+                    <li class="active">Đã xóa</li>
+                <?php else: ?>
+                    <li class="active">Quản lý sản phẩm</li>
+                <?php endif; ?>
             </ul><!-- .breadcrumb -->
 
             
@@ -34,17 +41,22 @@
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                <form class="form-inline" action="<?php echo e(route('SanPham.index')); ?>" method="get">
+                                <form class="form-inline" action="<?php echo e(request()->is('SanPhamm/DaXoa') ? route('SanPham.DaXoa') : route('SanPham.index')); ?>" method="get">
                                     <a href="<?php echo e(route('SanPham.create')); ?>" class="btn btn-success">
                                         <i class="icon-plus"></i>
                                         Thêm sản phẩm
                                     </a>
-                                    <a href="<?php echo e(route('SanPham.DaXoa')); ?>" class="btn btn-inverse">
-                                        <i class="icon-trash"></i>
-                                        Sản phẩm đã xóa
-                                    </a>
+                                    <?php if(request()->is('SanPhamm/DaXoa')): ?>
+                                    <?php else: ?>
+                                        <a href="<?php echo e(route('SanPham.DaXoa')); ?>" class="btn btn-inverse">
+                                            <i class="icon-trash"></i>
+                                            Sản phẩm đã xóa
+                                        </a>
+                                    <?php endif; ?>
 
-                                    <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="<?php echo e($request['TenSanPham']); ?>" name="TenSanPham" />
+
+                                    <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="<?php echo e($request['TenSanPham']); ?>"
+                                        name="TenSanPham" />
                                     <label for=""> Hãng sãn xuất: </label>
                                     <select class="width-10 chosen-select" id="form-field-select-4" name="HangSanXuatId">
                                         <option value="">All</option>
@@ -90,16 +102,16 @@
                         <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th class="center">Id</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Mô tả</th>
-                                    <th>Số lượng tồn</th>
-                                    <th>Giá nhập</th>
-                                    <th>Giá bán</th>
-                                    <th>Hình ảnh</th>
-                                    <th>Lượt mua</th>
-                                    <th>Hãng sãn xuất</th>
-                                    <th>Loại sản phẩm</th>
+                                    <th class="center"><i class="icon-adn"></i>Id</th>
+                                    <th><i class="icon-align-left"></i>Tên sản phẩm</th>
+                                    <th><i class="icon-file-text-alt"></i>Mô tả</th>
+                                    <th><i class="icon-bar-chart"></i>Số lượng tồn</th>
+                                    <th><i class="icon-money"></i>Giá nhập</th>
+                                    <th><i class="icon-money"></i>Giá bán</th>
+                                    <th><i class="icon-picture"></i>Hình ảnh</th>
+                                    <th><i class="icon-bar-chart"></i>Lượt mua</th>
+                                    <th><i class="icon-apple"></i>Hãng sãn xuất</th>
+                                    <th><i class="icon-android"></i>Loại sản phẩm</th>
                                     <th>
                                         <i class="icon-time bigger-110 hidden-480"></i>
                                         Create_at
@@ -130,59 +142,89 @@
                                         <td><?php echo e($item->LoaiSanPham->TenLoai); ?></td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
-
-                                        <td>
-                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#">
-                                                    <i class="icon-zoom-in bigger-130"></i>
-                                                </a>
-
-                                                <a class="green" href="<?php echo e(route('SanPham.edit', $item)); ?>">
-                                                    <i class="icon-pencil bigger-130"></i>
-                                                </a>
-
-                                                <form action="<?php echo e(route('SanPham.destroy', $item)); ?>" method="post">
-                                                    <?php echo csrf_field(); ?>
-                                                    <?php echo method_field('DELETE'); ?>
-                                                    <button type="submit" class="btn-link red"><i class="icon-trash bigger-130"></i></button>
-                                                </form>
-                                                
-                                            </div>
-
-                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                        <i class="icon-caret-down icon-only bigger-120"></i>
-                                                    </button>
-
-                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                        <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                <span class="blue">
-                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="<?php echo e(route('SanPham.edit', $item)); ?>" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                <span class="green">
-                                                                    <i class="icon-edit bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <form action="<?php echo e(route('SanPham.destroy', $item)); ?>" method="post">
-                                                                <?php echo csrf_field(); ?>
-                                                                <?php echo method_field('DELETE'); ?>
-                                                                <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Delete"><i class="icon-trash bigger-120"></i></button>
-                                                            </form>
-                                                        </li>
-                                                    </ul>
+                                        <?php if(request()->is('SanPhamm/DaXoa')): ?>
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <form action="<?php echo e(route('SanPham.KhoiPhuc', $item->id)); ?>" method="post">
+                                                        <?php echo csrf_field(); ?>
+                                                        
+                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i class="icon-undo bigger-130"></i></button>
+                                                    </form>
                                                 </div>
-                                            </div>
-                                        </td>
+
+                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                    <div class="inline position-relative">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="icon-caret-down icon-only bigger-120"></i>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <li>
+                                                                <form action="<?php echo e(route('SanPham.KhoiPhuc', $item->id)); ?>" method="post">
+                                                                    <?php echo csrf_field(); ?>
+                                                                    
+                                                                    <button type="submit" class="tooltip-error btn-link blue" data-rel="tooltip" title="Khôi phục"><i
+                                                                            class="icon-undo bigger-120"></i></button>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        <?php else: ?>
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <a class="blue" href="#">
+                                                        <i class="icon-zoom-in bigger-130"></i>
+                                                    </a>
+
+                                                    <a class="green" href="<?php echo e(route('SanPham.edit', $item)); ?>" data-rel="tooltip" title="Chỉnh sửa" data-placement="top">
+                                                        <i class="icon-pencil bigger-130"></i>
+                                                    </a>
+
+                                                    <form action="<?php echo e(route('SanPham.destroy', $item)); ?>" method="post">
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('DELETE'); ?>
+                                                        <button type="submit" class="btn-link red" data-rel="tooltip" title="Xóa"><i class="icon-trash bigger-130"></i></button>
+                                                    </form>
+                                                    
+                                                </div>
+
+                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                    <div class="inline position-relative">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="icon-caret-down icon-only bigger-120"></i>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <li>
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                    <span class="blue">
+                                                                        <i class="icon-zoom-in bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="<?php echo e(route('SanPham.edit', $item)); ?>" class="tooltip-success" data-rel="tooltip" title="Chỉnh sửa">
+                                                                    <span class="green">
+                                                                        <i class="icon-edit bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <form action="<?php echo e(route('SanPham.destroy', $item)); ?>" method="post">
+                                                                    <?php echo csrf_field(); ?>
+                                                                    <?php echo method_field('DELETE'); ?>
+                                                                    <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Xóa"><i class="icon-trash bigger-120"></i></button>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        <?php endif; ?>
                                     </tr>
 
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -198,8 +240,10 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scriptThisPage'); ?>
+
     <script src="/storage/assets/js/chosen.jquery.min.js"></script>
     <!-- inline scripts related to this page -->
+    
     <script type="text/javascript">
         jQuery(function($) {
             var oTable1 = $('#sample-table-2').dataTable({
@@ -258,6 +302,7 @@
             else $('#form-field-select-4').removeClass('tag-input-style');
         });
     </script>
+    
 
 <?php $__env->stopSection(); ?>
 

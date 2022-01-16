@@ -10,8 +10,11 @@ use App\Models\KhachHang;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class HoaDonController extends Controller
 {
@@ -20,9 +23,22 @@ class HoaDonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = HoaDon::whereNotIn("TrangThai", [4])->get();
+        if (!empty($request->input("NgayDat"))) {
+            $catChuoi = explode(" - ", $request->input("NgayDat"));
+
+            $data = HoaDon::whereDate("created_at", ">=", date_format(date_create($catChuoi[0]), 'Y-m-d'))
+                ->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'))
+                ->whereNotIn("TrangThai", [4])->get();
+        }
+        if (!empty($request->input('PhuongThucThanhToan')))
+            $data = $data->where('PhuongThucThanhToan', $request->input('PhuongThucThanhToan'));
+        if (!empty($request->input('TrangThai')))
+            $data = $data->where('TrangThai', $request->input('TrangThai'));
+        //tra lai resquet ve cho view de hien thi lai tim` kiem' cu?
+        return view('HoaDon.HoaDon-index', ["hoaDon" => $data, 'request' => $request]);
     }
 
     /**
@@ -63,9 +79,16 @@ class HoaDonController extends Controller
      * @param  \App\Models\HoaDon  $hoaDon
      * @return \Illuminate\Http\Response
      */
-    public function edit(HoaDon $hoaDon)
+    public function edit(Request $request, HoaDon $hoaDon)
     {
-        //
+        //trang thai phai nam` trong 4 so', tranh truong` hop thay doi request tai giao dien
+        $request->validate(
+            ['TrangThai' => ['required', 'numeric', 'integer', Rule::in([1, 2, 3, 4]),]]
+        );
+
+        $hoaDon->TrangThai = $request["TrangThai"];
+        $hoaDon->save();
+        return Redirect::route('HoaDon.index');
     }
 
     /**
@@ -77,7 +100,6 @@ class HoaDonController extends Controller
      */
     public function update(Request $request, HoaDon $hoaDon)
     {
-        //
     }
 
     /**
@@ -88,9 +110,50 @@ class HoaDonController extends Controller
      */
     public function destroy(HoaDon $hoaDon)
     {
-        //
+        $hoaDon->delete();
+        return Redirect::route('HoaDon.index');
     }
+    public function HoaDonDaGiao(Request $request)
+    {
+        //y chang index khac' cai' where thang thai'
+        $data = HoaDon::where("TrangThai", 4)->get();
+        if (!empty($request->input("NgayDat"))) {
+            $catChuoi = explode(" - ", $request->input("NgayDat"));
 
+            $data = HoaDon::whereDate("created_at", ">=", date_format(date_create($catChuoi[0]), 'Y-m-d'))
+                ->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'))
+                ->where("TrangThai", 4)->get();
+        }
+        if (!empty($request->input('PhuongThucThanhToan')))
+            $data = $data->where('PhuongThucThanhToan', $request->input('PhuongThucThanhToan'));
+        if (!empty($request->input('TrangThai')))
+            $data = $data->where('TrangThai', $request->input('TrangThai'));
+        //tra lai resquet ve cho view de hien thi lai tim` kiem' cu?
+        return view('HoaDon.HoaDon-index', ["hoaDon" => $data, 'request' => $request]);
+    }
+    public function HoaDonDaHuy(Request $request)
+    {
+        //y chang index khac' cai' select deleted_at
+        $data = HoaDon::onlyTrashed()->get();
+        if (!empty($request->input("NgayDat"))) {
+            $catChuoi = explode(" - ", $request->input("NgayDat"));
+
+            $data = HoaDon::onlyTrashed()->whereDate("created_at", ">=", date_format(date_create($catChuoi[0]), 'Y-m-d'))
+                ->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'))->get();
+        }
+        if (!empty($request->input('PhuongThucThanhToan')))
+            $data = $data->where('PhuongThucThanhToan', $request->input('PhuongThucThanhToan'));
+        if (!empty($request->input('TrangThai')))
+            $data = $data->where('TrangThai', $request->input('TrangThai'));
+        //tra lai resquet ve cho view de hien thi lai tim` kiem' cu?
+        return view('HoaDon.HoaDon-index', ["hoaDon" => $data, 'request' => $request]);
+    }
+    public function KhoiPhucHoaDon($id)
+    {
+        $hoaDon = HoaDon::onlyTrashed()->find($id);
+        $hoaDon->restore();
+        return Redirect::route('HoaDon.DaHuy');
+    }
     //API
 
     public function API_LapHoaDon(Request $request)
@@ -107,8 +170,8 @@ class HoaDonController extends Controller
 
         $hoaDon = HoaDon::create([
             'DiaChiId'         => $request["DiaChiId"],
-            'TrangThai' => 0, //vua lap
-            "PhuongThucThanhToan"=>0, //ghi tammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+            'TrangThai' => 1, //vua lap, dang xu ly
+            "PhuongThucThanhToan" => 1, //ghi tammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
             'TongTien' => 0,
         ]);
 
@@ -217,7 +280,7 @@ class HoaDonController extends Controller
             ->First();
 
         //dd($data->HoaDonId);
-        if($request["Star"]>0){
+        if ($request["Star"] > 0) {
             $data->fill([
                 'Star' => $request["Star"],
             ]);
@@ -225,6 +288,6 @@ class HoaDonController extends Controller
             return response()->json(["Sucsess" => true], 200);
         }
         //dd($data->HoaDonId);
-       return response()->json(["Sucsess"=>false],405);
+        return response()->json(["Sucsess" => false], 405);
     }
 }

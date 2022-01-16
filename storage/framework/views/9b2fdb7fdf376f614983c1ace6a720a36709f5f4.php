@@ -1,7 +1,7 @@
 
 
 
-<?php $__env->startSection('title', 'CT-CT_khuyenMai-index'); ?>
+<?php $__env->startSection('title', 'Page Title'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
 
@@ -20,69 +20,55 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home home-icon"></i>
-                    <a href="#">Home</a>
+                    <a href="<?php echo e(url('/')); ?>">Home</a>
                 </li>
-
-                <li>
-                    <a href="#">KM</a>
-                </li>
-                <li class="active">CT_Khuyến mãi</li>
+                <li class="active">Đơn vị vận chuyển</li>
             </ul><!-- .breadcrumb -->
 
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
-                        <i class="icon-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- #nav-search -->
+            
         </div>
 
         <div class="page-content">
-
             <div class="row">
                 <div class="col-xs-12">
-
-                    <h3 class="header smaller lighter blue">Chi tiết CT-khuyến mãi</h3>
-                    <div class="pull">
-                        <a type="button" class="btn btn-success " href="<?php echo e(route('CTKhuyenMai.create')); ?>"><i
-                                class="fa fa-plus"></i> Thêm chi tiết chương trình khuyến mãi</a>
+                    <div class="widget-box">
+                        <div class="widget-header">
+                            <h3 class="header smaller lighter blue">Đơn vị vận chuyển</h3>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <form class="form-inline" method="get">
+                                    <a href="<?php echo e(route('DonViVanChuyen.create')); ?>" class="btn btn-success">
+                                        <i class="icon-plus"></i>
+                                        Thêm đơn vị vận chuyển
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <br />
+
+                    <div class="hr hr-24"></div>
+
                     <div class="table-header">
-                        Bảng Chi tiết CT-Khuyến mãi
+                        Bảng đơn vị vận chuyển
                     </div>
 
                     <div class="table-responsive">
                         <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
+                                    <th class="center">Id</th>
+                                    <th>Tên đơn vị vận chuyển</th>
+                                    <th>Website</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
                                     <th>
-                                        <i class="fa fa-align-left"></i>
-                                        Chương trình KM-Id
-                                    </th>
-
-                                    <th>
-                                        <i class="fa fa-file-text-o"></i>
-                                        Sản phẩm Id
-                                    </th>
-                                    <th>
-                                        <i class="fa fa-calendar"></i>
-                                        Giảm giá
+                                        <i class="icon-time bigger-110 hidden-480"></i>
+                                        Create_at
                                     </th>
                                     <th>
-                                        <i class="fa fa-calendar-check-o"></i>
-                                        Số lượng
-                                    </th>
-                                    <th>
-                                        <i class="fa fa-pencil"></i>
-                                        created_att
-                                    </th>
-                                    <th>
-                                        <i class="fa fa-check-square-o"></i>
-                                        updated_at
+                                        <i class="icon-time bigger-110 hidden-480"></i>
+                                        Update_at
                                     </th>
                                     
                                     <th></th>
@@ -90,12 +76,14 @@
                             </thead>
 
                             <tbody>
-                                <?php $__currentLoopData = $ctctkm; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $__currentLoopData = $dvvc; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
                                     <tr>
-                                        <td><?php echo e($item->ChuongTrinhKhuyenMai->TenChuongTrinh); ?></td>
-                                        <td><?php echo e($item->SanPham->TenSanPham); ?></td>
-                                        <td><?php echo e($item->GiamGia); ?></td>
-                                        <td><?php echo e($item->SoLuong); ?></td>
+                                        <td class="center"><?php echo e($item->id); ?></td>
+                                        <td><?php echo e($item->TenDonViVanChuyen); ?></td>
+                                        <td><?php echo e($item->Website); ?></td>
+                                        <td><?php echo e($item->Email); ?></td>
+                                        <td><?php echo e($item->Phone); ?></td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
                                         
@@ -103,14 +91,15 @@
                                         <td>
                                             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                 <a class="blue" href="#">
-                                                    <i class="fa fa-plus"></i>
+                                                    <i class="icon-zoom-in bigger-130"></i>
                                                 </a>
+
                                                 <a class="green"
-                                                    href="<?php echo e(route('CTKhuyenMai.edit', [$item->ChuongTrinhKhuyenMaiId, $item->SanPhamId])); ?>">
+                                                    href="<?php echo e(route('DonViVanChuyen.edit', $item)); ?>">
                                                     <i class="icon-pencil bigger-130"></i>
                                                 </a>
-                                                <form
-                                                    action="<?php echo e(route('CTKhuyenMai.destroy', [$item->ChuongTrinhKhuyenMaiId, $item->SanPhamId])); ?>"
+
+                                                <form action="<?php echo e(route('DonViVanChuyen.destroy', $item)); ?>"
                                                     method="post">
                                                     <?php echo csrf_field(); ?>
                                                     <?php echo method_field('DELETE'); ?>
@@ -138,8 +127,8 @@
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" class="tooltip-success" data-rel="tooltip"
-                                                                title="Edit">
+                                                            <a href="<?php echo e(route('SanPham.edit', $item)); ?>"
+                                                                class="tooltip-success" data-rel="tooltip" title="Edit">
                                                                 <span class="green">
                                                                     <i class="icon-edit bigger-120"></i>
                                                                 </span>
@@ -147,42 +136,64 @@
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" class="tooltip-error" data-rel="tooltip"
-                                                                title="Delete">
-                                                                <span class="red">
-                                                                    <i class="icon-trash bigger-120"></i>
-                                                                </span>
-                                                            </a>
+                                                            <form action="<?php echo e(route('SanPham.destroy', $item)); ?>"
+                                                                method="post">
+                                                                <?php echo csrf_field(); ?>
+                                                                <?php echo method_field('DELETE'); ?>
+                                                                <button type="submit" class="tooltip-error btn-link red"
+                                                                    data-rel="tooltip" title="Delete"><i
+                                                                        class="icon-trash bigger-120"></i></button>
+                                                            </form>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
+
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
-        </div><!-- /.page-content -->
+        </div>
     </div><!-- /.main-content -->
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scriptThisPage'); ?>
+    <script src="/storage/assets/js/chosen.jquery.min.js"></script>
     <!-- inline scripts related to this page -->
     <script type="text/javascript">
         jQuery(function($) {
             var oTable1 = $('#sample-table-2').dataTable({
                 "aoColumns": [
                     null, null,
-                    null, null,
-                    null, null,
                     {
                         "bSortable": false
-                    },
+                    }, //website
+                    {
+                        "bSortable": false
+                    }, //email
+                    {
+                        "bSortable": false
+                    }, //phone
+                    null, null, null,
+                    {
+                        "bSortable": false
+                    }, // edit,delete....
+
                 ]
+            });
+
+            $('table th input:checkbox').on('click', function() {
+                var that = this;
+                $(this).closest('table').find('tr > td:first-child input:checkbox')
+                    .each(function() {
+                        this.checked = that.checked;
+                        $(this).closest('tr').toggleClass('selected');
+                    });
+
             });
 
 
@@ -203,7 +214,17 @@
                 return 'left';
             }
         })
+        $('[data-rel=tooltip]').tooltip({
+            container: 'body'
+        });
+        $(".chosen-select").chosen();
+        $('#chosen-multiple-style').on('click', function(e) {
+            var target = $(e.target).find('input[type=radio]');
+            var which = parseInt(target.val());
+            if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
+            else $('#form-field-select-4').removeClass('tag-input-style');
+        });
     </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/CTKhuyenMai/CTKhuyenMai-index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/DonViVanChuyen/DonViVanChuyen-index.blade.php ENDPATH**/ ?>

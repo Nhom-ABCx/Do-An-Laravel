@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- basic styles -->
-
     <link href="/storage/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/storage/assets/css/font-awesome.min.css" />
 
@@ -21,7 +20,9 @@
     <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.full.min.css" />
     <link rel="stylesheet" href="/storage/assets/css/datepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/ui.jqgrid.css" />
-
+    {{-- icon link ngoài của vinh --}}
+    {{-- nên lấy icon có sẵn từ đây https://fontawesome.com/v3.2/icons/ --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @yield('headThisPage')
 
     <!-- fonts -->
@@ -340,7 +341,7 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="/storage/assets/images/avatar/NhanVien/@auth{{ Auth::user()->id }}/{{ Auth::user()->HinhAnh }}@endauth" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="@auth{{ Auth::user()->HinhAnh }}@endauth" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     @auth
@@ -445,10 +446,10 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="typography.html">
+                    <li class="{{ request()->is('HoaDon') ? 'active' : '' }}">
+                        <a href="{{route('HoaDon.index')}}">
                             <i class="icon-text-width"></i>
-                            <span class="menu-text"> Typography </span>
+                            <span class="menu-text"> Quản lý hóa đơn </span>
                         </a>
                     </li>
 
@@ -523,8 +524,7 @@
                         </ul>
                     </li>
 
-                    <li
-                        class="{{ request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : '' }}">
+                    <li class="{{ request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Khuyến mãi </span>
@@ -553,7 +553,7 @@
                         </a>
                     </li>
                     {{-- Van chuyen --}}
-                    <li>
+                    <li class="{{ request()->is('DonViVanChuyen') || request()->is('NguoiVanChuyen') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-fighter-jet"></i>
                             <span class="menu-text"> Vận chuyển </span>
