@@ -68,7 +68,7 @@ class NguoiVanChuyenController extends Controller
 
         $nvc->save();
         if ($request->hasFile('HinhAnh')) {
-            $nvc->HinhAnh = $request->file('HinhAnh')->store('assets/avatars/' . $nvc->id, 'public');
+            $nvc->HinhAnh = $request->file('HinhAnh')->store('assets/images/avatar/Shipper/' . $nvc->id, 'public');
             //cat chuoi ra, chi luu cai ten thoi
             $catChuoi = explode("/", $nvc->HinhAnh);
             $nvc->HinhAnh = $catChuoi[3];
@@ -115,7 +115,7 @@ class NguoiVanChuyenController extends Controller
         //Hình ảnh phải lưu trong public và phải có bước tạo link thì người dùng mới thấy dc
         //store() tự đặt hình bằng chuỗi random, nên tạo thư mục theo mã/tên sp để dễ quản lý
         if ($request->hasFile('HinhAnh')) {
-            $nguoiVanChuyen->HinhAnh = $request->file('HinhAnh')->store('assets/avatars/' . $nguoiVanChuyen->id, 'public');
+            $nguoiVanChuyen->HinhAnh = $request->file('HinhAnh')->store('assets/images/avatar/Shipper/' . $nguoiVanChuyen->id, 'public');
             //cat chuoi ra, chi luu cai ten thoi
             $catChuoi = explode("/", $nguoiVanChuyen->HinhAnh);
             $nguoiVanChuyen->HinhAnh = $catChuoi[3];

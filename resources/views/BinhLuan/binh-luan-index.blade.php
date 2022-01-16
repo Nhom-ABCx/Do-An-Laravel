@@ -40,17 +40,22 @@
                     <div class="widget-box">
                         <div class="widget-header">
                             <h3 class="header smaller lighter blue">Bình luận </h3>
-                        </div>
-                        {{-- <div class="widget-body">
-                        <div class="widget-main">
-                            <form class="form-inline"  method="get">
-                                <a href="{{route('DonViVanChuyen.create')}}" class="btn btn-success">
-                                    <i class="icon-plus"></i>
-                                    Thêm đơn vị vận chuyển
-                                </a>
+
+
+                            <form class="form-inline"
+                                action="{{ request()->is('BinhLuann/DaXoa') ? route('BinhLuan.DaXoa') : route('BinhLuan.index') }}"
+                                method="get">
+
+                                @if (request()->is('BinhLuann/DaXoa'))
+                                    <a class="btn btn-success" href="{{ route('BinhLuan.index') }}"> Black</a>
+                                @else
+                                    <a href="{{ route('BinhLuan.DaXoa') }}" class="btn btn-inverse">
+                                        <i class="icon-trash"></i>
+                                        Bình luận đã xoá
+                                    </a>
+                                @endif
                             </form>
                         </div>
-                    </div> --}}
                     </div>
 
                     <div class="hr hr-24"></div>
@@ -80,12 +85,12 @@
                                         <i class="icon-time bigger-110 hidden-480"></i>
                                         Deleted-at
                                     </th>
-                                    <th></th>
+                                    {{-- <th></th> --}}
                                 </tr>
                             </thead>
 
                             <tbody>
-                                
+
                                 @foreach ($bLuan as $item)
 
                                     <tr>
@@ -93,102 +98,51 @@
                                         <td>{{ $item->NoiDung }}</td>
                                         <td>{{ $item->KhachHang->Username }}</td>
                                         <td>{{ $item->SanPham->TenSanPham }}
-                                                    
-                                            <img src='storage/assets/images/product-image/{{ $item->SanPham->HinhAnh }}' alt="{{ $item->SanPham->HinhAnh }}"
-                                                width='50' height='50'>
+                                            <img src='/storage/assets/images/product-image/{{ $item->SanPham->HinhAnh }}'
+                                                alt="{{ $item->SanPham->HinhAnh }}" width='50' height='50'>
                                         </td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td>{{ $item->deleted_at }}</td>
-
-                                        <td>
-
-
-                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                        @if (request()->is('BinhLuann/DaXoa'))
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <form action="{{ route('BinhLuan.KhoiPhuc', $item->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        {{-- @method("PUT") --}}
+                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i
+                                                                class="icon-undo bigger-130"></i></button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <form action="{{ route('BinhLuan.destroy', $item) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn-link red"><i
+                                                            class="icon-trash bigger-130"></i></button>
+                                                </form>
+                                            <td>
+                                        @endif
+                                        {{-- <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                 <a class="blue" type="button" class="btn btn-primary"
                                                     data-toggle="modal" data-target="#exampleModalCenter">
                                                     <i class="icon-zoom-in bigger-130"></i>
                                                 </a>
                                                 <!-- Button trigger modal -->
-                                            </div>
-                                            {{-- <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Chi tiết bình luận</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        {{ $item->NoiDung }}
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div> --}}
 
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div> --}}
-                                            {{-- <a class="green" href="{{ route('DonViVanChuyen.edit', $item) }}">
-                                            <i class="icon-pencil bigger-130"></i>
-                                        </a> --}}
-
-                                            <form action="{{ route('BinhLuan.destroy', $item) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn-link red"><i
-                                                        class="icon-trash bigger-130"></i></button>
-                                            </form>
+                                        {{-- </div> --}}
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-
-                    <div class="visible-xs visible-sm hidden-md hidden-lg">
-                        <div class="inline position-relative">
-                            <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-caret-down icon-only bigger-120"></i>
-                            </button>
-
-                            <ul
-                                class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                <li>
-                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                        <span class="blue">
-                                            <i class="icon-zoom-in bigger-120"></i>
-                                        </span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('SanPham.edit', $item) }}" class="tooltip-success"
-                                        data-rel="tooltip" title="Edit">
-                                        <span class="green">
-                                            <i class="icon-edit bigger-120"></i>
-                                        </span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <form action="{{ route('SanPham.destroy', $item) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip"
-                                            title="Delete"><i class="icon-trash bigger-120"></i></button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    </td>
-                    </tr>
-
-                    @endforeach
-                    </tbody>
-                    </table>
                 </div>
             </div>
         </div>
-    </div>
     </div><!-- /.main-content -->
 @endsection
 
@@ -206,7 +160,7 @@
                     null,
                     null, null, null,
                     //hinh anh
-                    null, null,
+                    null, null
                 ]
             });
 

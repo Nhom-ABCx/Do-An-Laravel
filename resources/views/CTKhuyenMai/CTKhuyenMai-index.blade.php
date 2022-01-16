@@ -61,12 +61,12 @@
                                 <tr>
                                     <th>
                                         <i class="fa fa-align-left"></i>
-                                        Chương trình KM-Id
+                                        Chương trình khuyến mãi
                                     </th>
 
                                     <th>
                                         <i class="fa fa-file-text-o"></i>
-                                        Sản phẩm Id
+                                        Sản phẩm
                                     </th>
                                     <th>
                                         <i class="fa fa-calendar"></i>
@@ -96,7 +96,10 @@
                                 @foreach ($ctctkm as $item)
                                     <tr>
                                         <td>{{ $item->ChuongTrinhKhuyenMai->TenChuongTrinh }}</td>
-                                        <td>{{ $item->SanPham->TenSanPham }}</td>
+                                        <td>{{ $item->SanPham->TenSanPham }}
+                                            <img src='/storage/assets/images/product-image/{{ $item->SanPham->HinhAnh }}'
+                                                alt="{{ $item->SanPham->HinhAnh }}" width='50' height='50'>
+                                        </td>
                                         <td>{{ $item->GiamGia }}</td>
                                         <td>{{ $item->SoLuong }}</td>
                                         <td>{{ $item->created_at }}</td>
