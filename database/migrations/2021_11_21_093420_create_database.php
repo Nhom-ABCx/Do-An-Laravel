@@ -72,8 +72,8 @@ class CreateDatabase extends Migration
             $table->foreignId('LoaiSanPhamId');
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
-            $table->foreign('HangSanXuatId')->references('Id')->on('hang_san_xuats');
-            $table->foreign('LoaiSanPhamId')->references('Id')->on('loai_san_phams');
+            $table->foreign('HangSanXuatId')->references('id')->on('hang_san_xuats');
+            $table->foreign('LoaiSanPhamId')->references('id')->on('loai_san_phams');
         });
         Schema::create('binh_luans', function (Blueprint $table) {
             $table->Id();
@@ -82,8 +82,8 @@ class CreateDatabase extends Migration
             $table->foreignId('SanPhamId');
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
-            $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
-            $table->foreign('SanPhamId')->references('Id')->on('san_phams');
+            $table->foreign('KhachHangId')->references('id')->on('khach_hangs');
+            $table->foreign('SanPhamId')->references('id')->on('san_phams');
         });
         Schema::create('chuong_trinh_khuyen_mais', function (Blueprint $table) {
             $table->Id();
@@ -101,8 +101,8 @@ class CreateDatabase extends Migration
             $table->double('SoLuong');
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
-            $table->foreign('ChuongTrinhKhuyenMaiId')->references('Id')->on('chuong_trinh_khuyen_mais');
-            $table->foreign('SanPhamId')->references('Id')->on('san_phams');
+            $table->foreign('ChuongTrinhKhuyenMaiId')->references('id')->on('chuong_trinh_khuyen_mais');
+            $table->foreign('SanPhamId')->references('id')->on('san_phams');
         });
         Schema::create('don_vi_van_chuyens', function (Blueprint $table) {
             $table->Id();
@@ -124,7 +124,7 @@ class CreateDatabase extends Migration
             $table->foreignId('DonViVanChuyenId');
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
-            $table->foreign('DonViVanChuyenId')->references('Id')->on('don_vi_van_chuyens');
+            $table->foreign('DonViVanChuyenId')->references('id')->on('don_vi_van_chuyens');
         });
         Schema::create('dia_chis', function (Blueprint $table) {
             $table->Id();
@@ -140,7 +140,7 @@ class CreateDatabase extends Migration
             $table->integer('CodePhuongXa')->nullable();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
-            $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
+            $table->foreign('KhachHangId')->references('id')->on('khach_hangs');
         });
         Schema::create('hoa_dons', function (Blueprint $table) {
             $table->Id();
@@ -151,7 +151,7 @@ class CreateDatabase extends Migration
             $table->tinyInteger('TrangThai');
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
-            $table->foreign('DiaChiId')->references('Id')->on('dia_chis');
+            $table->foreign('DiaChiId')->references('id')->on('dia_chis');
         });
         Schema::create('ct_hoa_dons', function (Blueprint $table) {
             $table->Id();
@@ -164,16 +164,16 @@ class CreateDatabase extends Migration
             $table->tinyInteger('Star');
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
-            $table->foreign('HoaDonId')->references('Id')->on('hoa_dons');
-            $table->foreign('SanPhamId')->references('Id')->on('san_phams');
+            $table->foreign('HoaDonId')->references('id')->on('hoa_dons');
+            $table->foreign('SanPhamId')->references('id')->on('san_phams');
         });
         Schema::create('yeu_thichs', function (Blueprint $table) {
             $table->Id();
             $table->foreignId('KhachHangId');
             $table->foreignId('SanPhamId');
             $table->timestamps();
-            $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
-            $table->foreign('SanPhamId')->references('Id')->on('san_phams');
+            $table->foreign('KhachHangId')->references('id')->on('khach_hangs');
+            $table->foreign('SanPhamId')->references('id')->on('san_phams');
             $table->unique(['KhachHangId', 'SanPhamId']);
         });
         Schema::create('rep_binh_luans', function (Blueprint $table) {
@@ -184,9 +184,9 @@ class CreateDatabase extends Migration
             $table->string('NoiDung');
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
-            $table->foreign('BinhLuanId')->references('Id')->on('binh_luans');
-            $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
-            $table->foreign('NhanVienId')->references('Id')->on('nhan_viens');
+            $table->foreign('BinhLuanId')->references('id')->on('binh_luans');
+            $table->foreign('KhachHangId')->references('id')->on('khach_hangs');
+            $table->foreign('NhanVienId')->references('id')->on('nhan_viens');
         });
         Schema::create('lich_su_van_chuyens', function (Blueprint $table) {
             $table->foreignId('HoaDonId');
@@ -194,8 +194,8 @@ class CreateDatabase extends Migration
             $table->boolean('TrangThai')->nullable();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
-            $table->foreign('HoaDonId')->references('Id')->on('hoa_dons');
-            $table->foreign('NguoiVanChuyenId')->references('Id')->on('nguoi_van_chuyens');
+            $table->foreign('HoaDonId')->references('id')->on('hoa_dons');
+            $table->foreign('NguoiVanChuyenId')->references('id')->on('nguoi_van_chuyens');
         });
         Schema::create('gio_hangs', function (Blueprint $table) {
             $table->Id();
@@ -203,8 +203,8 @@ class CreateDatabase extends Migration
             $table->foreignId('SanPhamId');
             $table->integer('SoLuong');
             $table->timestamps();
-            $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
-            $table->foreign('SanPhamId')->references('Id')->on('san_phams');
+            $table->foreign('KhachHangId')->references('id')->on('khach_hangs');
+            $table->foreign('SanPhamId')->references('id')->on('san_phams');
             $table->unique(['KhachHangId', 'SanPhamId']);
         });
         //cuoc tro chuyen/hoi thoai
@@ -213,8 +213,8 @@ class CreateDatabase extends Migration
             $table->foreignId('NhanVienId');
             $table->foreignId('KhachHangId');
             $table->timestamps();
-            $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
-            $table->foreign('NhanVienId')->references('Id')->on('nhan_viens');
+            $table->foreign('KhachHangId')->references('id')->on('khach_hangs');
+            $table->foreign('NhanVienId')->references('id')->on('nhan_viens');
             $table->unique(['NhanVienId', 'KhachHangId']);
         });
         //tin nhan'
@@ -225,9 +225,9 @@ class CreateDatabase extends Migration
             $table->foreignId('KhachHangId')->nullable(); //1 trong 2
             $table->foreignId('ConversationId');
             $table->timestamps();
-            $table->foreign('NhanVienId')->references('Id')->on('nhan_viens');
-            $table->foreign('KhachHangId')->references('Id')->on('khach_hangs');
-            $table->foreign('ConversationId')->references('Id')->on('conversations');
+            $table->foreign('NhanVienId')->references('id')->on('nhan_viens');
+            $table->foreign('KhachHangId')->references('id')->on('khach_hangs');
+            $table->foreign('ConversationId')->references('id')->on('conversations');
         });
     }
 

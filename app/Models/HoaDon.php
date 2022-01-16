@@ -13,12 +13,11 @@ class HoaDon extends Model
 
     protected $table = 'hoa_dons';
     protected $fillable = [
-        'Id',
         'DiaChiId',
-        'TrangThai',
         "PhuongThucThanhToan",
         "TongSoLuong",
         'TongTien',
+        'TrangThai',
     ];
     public function DiaChi()
     {

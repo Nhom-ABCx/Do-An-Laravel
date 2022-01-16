@@ -170,8 +170,9 @@ class HoaDonController extends Controller
 
         $hoaDon = HoaDon::create([
             'DiaChiId'         => $request["DiaChiId"],
-            'TrangThai' => 1, //vua lap, dang xu ly
             "PhuongThucThanhToan" => 1, //ghi tammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+            'TrangThai' => 1, //vua lap, dang xu ly
+            'TongSoLuong' => 0,
             'TongTien' => 0,
         ]);
 
@@ -211,15 +212,15 @@ class HoaDonController extends Controller
                         if ($sp->id == $ctkm->SanPhamId)
                             $giaBan = $sp->GiaBan - $ctkm->GiamGia;
                     }
-
-                $thanhTien = $item["SoLuong"] * $giaBan;
+                $giaGiam=0; //ma giam gia'voucher
+                $thanhTien = $item["SoLuong"] * $giaBan -$giaGiam;
 
                 CT_HoaDon::create([
                     'HoaDonId'       => $hoaDon->id,
                     'SanPhamId'       => $item["SanPhamId"],
                     'SoLuong'         => $item["SoLuong"],
                     'GiaBan' => $giaBan,
-                    'GiaGiam' => 0,
+                    'GiaGiam' => $giaGiam,
                     'ThanhTien' => $thanhTien,
                     'Star' => 0,
                 ]);
@@ -231,6 +232,7 @@ class HoaDonController extends Controller
             return response()->json(["Sucssess" => false], 400);
         }
         //nguoc lai thi tinh' thanh` tien` cho hoa' don va` tra? ket qua ve 200
+        $hoaDon->TongSoLuong = CT_HoaDon::where('HoaDonId', $hoaDon->id)->sum('SoLuong');
         $hoaDon->TongTien = CT_HoaDon::where('HoaDonId', $hoaDon->id)->sum('ThanhTien');
         $hoaDon->save();
         return response()->json(["Sucssess" => True], 200);
