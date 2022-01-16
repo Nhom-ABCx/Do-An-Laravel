@@ -70,7 +70,19 @@ class HoaDonController extends Controller
      */
     public function show(HoaDon $hoaDon)
     {
-        //
+        $dsChiTietHD=CT_HoaDon::where("HoaDonId",$hoaDon->id)->get();
+
+        $dsSanPham = [];
+        $i = 0;
+        foreach ($dsChiTietHD as $item) {
+            $data = Arr::add($dsSanPham, "$i", $item->SanPham);
+
+            $dsSanPham = $data;
+            $i++;
+        }
+        foreach ($dsSanPham as $sp)
+            SanPhamController::fixImage($sp);
+        return view('HoaDon.HoaDon-show', ["hoaDon" => $hoaDon,"sanPham"=>$dsSanPham]);
     }
 
     /**
