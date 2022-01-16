@@ -18,8 +18,14 @@ use Illuminate\Validation\Rule;
 
 class HoaDonController extends Controller
 {
+    // Đang chờ xác nhận 0 //lúc khách vừa đặt hàng, gọi điện cho khách để tránh tình trạng đặt bừa
+    // Đang xử lý 1    //khách đặt hàng nhưng chưa soạn ra sản phẩm từ kho
+    // Đã xử lý 2 //đã soạn ra sản phẩm, chuẩn bị đưa đến đơn vị vận chuyển
+    // Đang giao 3 //shipper đang trong quá trình giao hàng
+    // Giao thành cỏng  4 //đã ship hàng thành công
+    // deleted_at   // khách đã hủy đơn
     /**
-     * Display a listing of the resource.
+ * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -70,19 +76,8 @@ class HoaDonController extends Controller
      */
     public function show(HoaDon $hoaDon)
     {
-        $dsChiTietHD=CT_HoaDon::where("HoaDonId",$hoaDon->id)->get();
-
-        $dsSanPham = [];
-        $i = 0;
-        foreach ($dsChiTietHD as $item) {
-            $data = Arr::add($dsSanPham, "$i", $item->SanPham);
-
-            $dsSanPham = $data;
-            $i++;
-        }
-        foreach ($dsSanPham as $sp)
-            SanPhamController::fixImage($sp);
-        return view('HoaDon.HoaDon-show', ["hoaDon" => $hoaDon,"sanPham"=>$dsSanPham]);
+        $dsChiTietHD = CT_HoaDon::where("HoaDonId", $hoaDon->id)->get();
+        return view('HoaDon.HoaDon-show', ["hoaDon" => $hoaDon, "dsChiTietHD" => $dsChiTietHD]);
     }
 
     /**
@@ -95,7 +90,7 @@ class HoaDonController extends Controller
     {
         //trang thai phai nam` trong 4 so', tranh truong` hop thay doi request tai giao dien
         $request->validate(
-            ['TrangThai' => ['required', 'numeric', 'integer', Rule::in([1, 2, 3, 4]),]]
+            ['TrangThai' => ['required', 'numeric', 'integer', Rule::in([0,1, 2, 3, 4]),]]
         );
 
         $hoaDon->TrangThai = $request["TrangThai"];
@@ -112,6 +107,14 @@ class HoaDonController extends Controller
      */
     public function update(Request $request, HoaDon $hoaDon)
     {
+        if ($hoaDon->TrangThai == 4)
+            //if nay` de tranh' tinh` trang gui request ao?, thu~ nghiem luon withErrors
+            return Redirect::back()->withErrors(['TrangThai' => 'Trạng thái đã giao thì không thể cập nhật']);
+        else {
+            $hoaDon->TrangThai = $hoaDon->TrangThai + 1;
+            $hoaDon->save();
+        }
+        return Redirect::route('HoaDon.index');
     }
 
     /**
@@ -183,7 +186,7 @@ class HoaDonController extends Controller
         $hoaDon = HoaDon::create([
             'DiaChiId'         => $request["DiaChiId"],
             "PhuongThucThanhToan" => 1, //ghi tammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-            'TrangThai' => 1, //vua lap, dang xu ly
+            'TrangThai' => 0, //vua lap, dang cho xac nhan
             'TongSoLuong' => 0,
             'TongTien' => 0,
         ]);
@@ -224,8 +227,8 @@ class HoaDonController extends Controller
                         if ($sp->id == $ctkm->SanPhamId)
                             $giaBan = $sp->GiaBan - $ctkm->GiamGia;
                     }
-                $giaGiam=0; //ma giam gia'voucher
-                $thanhTien = $item["SoLuong"] * $giaBan -$giaGiam;
+                $giaGiam = 0; //ma giam gia'voucher
+                $thanhTien = $item["SoLuong"] * $giaBan - $giaGiam;
 
                 CT_HoaDon::create([
                     'HoaDonId'       => $hoaDon->id,

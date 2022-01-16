@@ -124,6 +124,9 @@
                                         <label for=""> Trạng thái: </label>
                                         <select class="width-10 chosen-select" id="form-field-select-4" name="TrangThai">
                                             <option value="">All</option>
+                                            <option value="0" <?php if('0' == $request['TrangThai']): ?> selected <?php endif; ?>>
+                                                Đang chờ xác nhận
+                                            </option>
                                             <option value="1" <?php if('1' == $request['TrangThai']): ?> selected <?php endif; ?>>
                                                 Đang xử lý
                                             </option>
@@ -209,7 +212,10 @@
                                         <td><?php echo e(number_format($item->TongTien)); ?></td>
                                         <td>
                                             <?php switch($item->TrangThai):
-                                                case (1): ?>
+                                                case (0): ?>
+                                                    <span class="label label-danger arrowed">0 Đang chờ xác nhận</span>
+                                                <?php break; ?>
+                                                <?php case (1): ?>
                                                     <span class="label arrowed">1 Đang xử lý</span>
                                                 <?php break; ?>
                                                 <?php case (2): ?>
@@ -266,6 +272,7 @@
                                                             <i class="icon-cog green bigger-200" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
                                                             <ul class="dropdown-menu pull-right">
                                                                 <li>
+                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=0" tabindex="-1">0 Đang chờ xác nhận</a>
                                                                     <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=1" tabindex="-1">1 Đang xử lý</a>
                                                                     <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=2" tabindex="-1">2 Đã xử lý</a>
                                                                     <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=3" tabindex="-1">3 Đang giao</a>

@@ -189,6 +189,7 @@ class CreateDatabase extends Migration
             $table->foreign('NhanVienId')->references('id')->on('nhan_viens');
         });
         Schema::create('lich_su_van_chuyens', function (Blueprint $table) {
+            $table->Id();
             $table->foreignId('HoaDonId');
             $table->foreignId('NguoiVanChuyenId');
             $table->boolean('TrangThai')->nullable();

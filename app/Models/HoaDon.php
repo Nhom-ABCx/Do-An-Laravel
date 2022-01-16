@@ -27,4 +27,8 @@ class HoaDon extends Model
     {
         return $this->hasMany(CT_HoaDon::class, 'HoaDonId');
     }
+    public function LichSuVanChuyen()
+    {
+        return $this->hasMany(LichSuVanChuyen::class, 'HoaDonId');
+    }
 }

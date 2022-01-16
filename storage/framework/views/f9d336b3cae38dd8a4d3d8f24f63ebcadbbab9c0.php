@@ -1,12 +1,9 @@
-{{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
-@extends('layouts.Layout')
+<?php $__env->startSection('title', 'Page Title'); ?>
 
-@section('title', 'Page Title')
+<?php $__env->startSection('headThisPage'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('headThisPage')
-@endsection
-
-@section('body')
+<?php $__env->startSection('body'); ?>
     <div class="container">
         <div class="ks-page-content">
             <div class="ks-page-content-body">
@@ -25,101 +22,39 @@
                             <div class="jspContainer" style="width: 320px; height: 550px;">
                                 <div class="jspPane" style="padding: 0px; top: 0px;">
                                     <ul class="ks-items">
-                                        @forelse ($dsCacCuocTroChuyen as $conversation)
-                                            <li class="ks-item @if ($conversation->id == $request['KhachHangId']) ks-active @endif">
-                                                <a href="{{ route('Message.index') }}?KhachHangId={{ $conversation->KhachHangId }}">
+                                        <?php $__empty_1 = true; $__currentLoopData = $dsCacCuocTroChuyen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $conversation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                            <li class="ks-item <?php if($conversation->id == $request['KhachHangId']): ?> ks-active <?php endif; ?>">
+                                                <a href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation->KhachHangId); ?>">
                                                     <span class="ks-avatar">
-                                                        <img src="/storage/assets/images/avatar/User/{{ $conversation->KhachHangId }}/{{ $conversation->KhachHang->HinhAnh }}" width="36" height="36">
+                                                        <img src="/storage/assets/images/avatar/User/<?php echo e($conversation->KhachHangId); ?>/<?php echo e($conversation->KhachHang->HinhAnh); ?>" width="36" height="36">
                                                     </span>
                                                     <div class="ks-body">
                                                         <div class="ks-name">
-                                                            {{ $conversation->KhachHang->HoTen ?? $conversation->KhachHang->HoTen->Username }}
-                                                            @if (count($conversation->Message))
-                                                                <span class="ks-datetime">{{ $conversation->Message->last()->created_at->diffForHumans() }}</span>
-                                                            @endif
+                                                            <?php echo e($conversation->KhachHang->HoTen ?? $conversation->KhachHang->HoTen->Username); ?>
+
+                                                            <?php if(count($conversation->Message)): ?>
+                                                                <span class="ks-datetime"><?php echo e($conversation->Message->last()->created_at->diffForHumans()); ?></span>
+                                                            <?php endif; ?>
                                                         </div>
                                                         <div class="ks-message">
-                                                            @if (!empty($conversation->mess->NhanVienId))
+                                                            <?php if(!empty($conversation->mess->NhanVienId)): ?>
                                                                 Bạn:
-                                                            @endif
-                                                            {{ $conversation->mess->Body ?? '' }}...
+                                                            <?php endif; ?>
+                                                            <?php echo e($conversation->mess->Body ?? ''); ?>...
                                                         </div>
                                                     </div>
                                                 </a>
                                             </li>
-                                        @empty
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                             Không có cuộc trò chuyện nào, hãy thử tạo mới 1 cuộc trò chuyện
-                                        @endforelse
-                                        {{-- <li class="ks-item ks-active">
-                                            <a href="#">
-                                                <span class="ks-group-amount">3</span>
-                                                <div class="ks-body">
-                                                    <div class="ks-name">
-                                                        Group Chat
-                                                        <span class="ks-datetime">just now</span>
-                                                    </div>
-                                                    <div class="ks-message">
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="18" height="18" class="rounded-circle"> The weird future of movie theater
-                                                        food
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li> --}}
-                                        {{-- <li class="ks-item ks-unread">
-                                            <a href="#">
-                                                <span class="ks-group-amount">5</span>
-                                                <div class="ks-body">
-                                                    <div class="ks-name">
-                                                        Eric George
-                                                        <span class="ks-datetime">just now</span>
-                                                    </div>
-                                                    <div class="ks-message">
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" width="18" height="18" class="rounded-circle"> Why didn't he come and talk to
-                                                        me...
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li> --}}
-                                        {{-- <li class="ks-item">
-                                            <a href="#">
-                                                <span class="ks-avatar">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" width="36" height="36">
-                                                </span>
-                                                <div class="ks-body">
-                                                    <div class="ks-name">
-                                                        Eric George
-                                                        <span class="ks-datetime">just now</span>
-                                                    </div>
-                                                    <div class="ks-message">Why didn't he come and talk to me himse...</div>
-                                                </div>
-                                            </a>
-                                        </li> --}}
-                                        {{-- <li class="ks-item ks-closed">
-                                            <a href="#">
-                                                <span class="ks-avatar">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" width="36" height="36">
-                                                </span>
-                                                <div class="ks-body">
-                                                    <div class="ks-name">
-                                                        Brian Diaz
-                                                        <span class="ks-datetime">just now</span>
-                                                    </div>
-                                                    <div class="ks-message">The weird future of movie theater food</div>
-                                                </div>
-                                            </a>
-                                        </li> --}}
+                                        <?php endif; ?>
+                                        
+                                        
+                                        
+                                        
                                     </ul>
                                 </div>
-                                {{-- <div class="jspVerticalBar">
-                                    <div class="jspCap jspCapTop"></div>
-                                    <div class="jspTrack" style="height: 550px;">
-                                        <div class="jspDrag" style="height: 261px;">
-                                            <div class="jspDragTop"></div>
-                                            <div class="jspDragBottom"></div>
-                                        </div>
-                                    </div>
-                                    <div class="jspCap jspCapBottom"></div>
-                                </div> --}}
+                                
                             </div>
 
                         </div>
@@ -128,7 +63,7 @@
                     <div class="ks-messages ks-messenger__messages">
                         <div class="ks-header">
                             <div class="ks-description">
-                                <div class="ks-name">Trò chuyện với {{$khachHang->HoTen??$khachHang->Username}}</div>
+                                <div class="ks-name">Trò chuyện với <?php echo e($khachHang->HoTen??$khachHang->Username); ?></div>
                                 <div class="ks-amount">2 thành viên</div>
                             </div>
                             <div class="ks-controls">
@@ -170,50 +105,41 @@
                             style="height: 500px; overflow: auto; padding: 0px; width: 701px;" tabindex="0">
                             <div class="jspContainer">
                                 <ul class="ks-items">
-                                    {{-- nếu có tin nhắn --}}
-                                    @if (count($tinNhan))
-                                        @foreach ($tinNhan as $item)
-                                            @if (!empty($item->NhanVienId))
+                                    
+                                    <?php if(count($tinNhan)): ?>
+                                        <?php $__currentLoopData = $tinNhan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if(!empty($item->NhanVienId)): ?>
                                                 <li class="ks-item ks-from">
                                                     <span class="ks-avatar ks-online">
-                                                        <img src="{{ $item->NhanVien->HinhAnh }}" width="36" height="36"
+                                                        <img src="<?php echo e($item->NhanVien->HinhAnh); ?>" width="36" height="36"
                                                             class="rounded-circle">
                                                     </span>
                                                     <div class="ks-body">
                                                         <div class="ks-header">
-                                                            <span class="ks-name">{{$item->NhanVien->HoTen??$item->NhanVien->Username}}</span>
-                                                            <span class="ks-datetime">{{$item->created_at->diffForHumans()}}</span>
+                                                            <span class="ks-name"><?php echo e($item->NhanVien->HoTen??$item->NhanVien->Username); ?></span>
+                                                            <span class="ks-datetime"><?php echo e($item->created_at->diffForHumans()); ?></span>
                                                         </div>
-                                                        <div class="ks-message">{{$item->Body}}</div>
+                                                        <div class="ks-message"><?php echo e($item->Body); ?></div>
                                                     </div>
                                                 </li>
-                                            @else
+                                            <?php else: ?>
                                                 <li class="ks-item ks-self">
                                                     <span class="ks-avatar ks-offline">
-                                                        <img src="/storage/assets/images/avatar/User/{{ $item->KhachHang->id }}/{{ $item->KhachHang->HinhAnh }}" width="36" height="36" class="rounded-circle">
+                                                        <img src="/storage/assets/images/avatar/User/<?php echo e($item->KhachHang->id); ?>/<?php echo e($item->KhachHang->HinhAnh); ?>" width="36" height="36" class="rounded-circle">
                                                     </span>
                                                     <div class="ks-body">
                                                         <div class="ks-header">
-                                                            <span class="ks-name">{{$item->KhachHang->HoTen??$item->KhachHang->Username}}</span>
-                                                            <span class="ks-datetime">{{$item->created_at->diffForHumans()}}</span>
+                                                            <span class="ks-name"><?php echo e($item->KhachHang->HoTen??$item->KhachHang->Username); ?></span>
+                                                            <span class="ks-datetime"><?php echo e($item->created_at->diffForHumans()); ?></span>
                                                         </div>
-                                                        <div class="ks-message">{{$item->Body}}</div>
+                                                        <div class="ks-message"><?php echo e($item->Body); ?></div>
                                                     </div>
                                                 </li>
-                                            @endif
-                                        @endforeach
-                                    @endif
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
                                 </ul>
-                                {{-- <div class="jspVerticalBar">
-                                    <div class="jspCap jspCapTop"></div>
-                                    <div class="jspTrack" style="height: 481px;">
-                                        <div class="jspDrag" style="height: 206px;">
-                                            <div class="jspDragTop"></div>
-                                            <div class="jspDragBottom"></div>
-                                        </div>
-                                    </div>
-                                    <div class="jspCap jspCapBottom"></div>
-                                </div> --}}
+                                
                             </div>
                         </div>
                         <div class="ks-footer">
@@ -351,29 +277,33 @@
                         <div class="ks-body">
                             <div class="ks-item ks-user">
                                 <span class="ks-avatar ks-online">
-                                    <img src="/storage/assets/images/avatar/User/{{ $khachHang->id }}/{{ $khachHang->HinhAnh }}" width="36" height="36" class="rounded-circle">
+                                    <img src="/storage/assets/images/avatar/User/<?php echo e($khachHang->id); ?>/<?php echo e($khachHang->HinhAnh); ?>" width="36" height="36" class="rounded-circle">
                                 </span>
                                 <span class="ks-name">
-                                    {{$khachHang->HoTen}}
+                                    <?php echo e($khachHang->HoTen); ?>
+
                                 </span>
                             </div>
 
                             <div class="ks-item">
                                 <div class="ks-name">Username</div>
                                 <div class="ks-text">
-                                    {{$khachHang->Username}}
+                                    <?php echo e($khachHang->Username); ?>
+
                                 </div>
                             </div>
                             <div class="ks-item">
                                 <div class="ks-name">Email</div>
                                 <div class="ks-text">
-                                    {{$khachHang->Email}}
+                                    <?php echo e($khachHang->Email); ?>
+
                                 </div>
                             </div>
                             <div class="ks-item">
                                 <div class="ks-name">Phone Number</div>
                                 <div class="ks-text">
-                                    {{$khachHang->Phone??""}}
+                                    <?php echo e($khachHang->Phone??""); ?>
+
                                 </div>
                             </div>
                         </div>
@@ -381,13 +311,15 @@
                             <div class="ks-item">
                                 <div class="ks-name">Ngày tạo</div>
                                 <div class="ks-text">
-                                    {{$khachHang->created_at->format('jS F Y h:i:s A')}}
+                                    <?php echo e($khachHang->created_at->format('jS F Y h:i:s A')); ?>
+
                                 </div>
                             </div>
                             <div class="ks-item">
                                 <div class="ks-name">Khoảng</div>
                                 <div class="ks-text">
-                                    {{$khachHang->created_at->diffForHumans()}}
+                                    <?php echo e($khachHang->created_at->diffForHumans()); ?>
+
                                 </div>
                             </div>
                         </div>
@@ -396,9 +328,9 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scriptThisPage')
+<?php $__env->startSection('scriptThisPage'); ?>
     <style type="text/css">
         body {
             background: #eee
@@ -1237,7 +1169,7 @@
             margin-top: 15px
         }
 
-        @media screen and (max-width:1200px) {
+        @media  screen and (max-width:1200px) {
             .btn.ks-messenger-info-block-toggle {
                 position: static
             }
@@ -1261,7 +1193,7 @@
             }
         }
 
-        @media screen and (max-width:800px) {
+        @media  screen and (max-width:800px) {
             .ks-messenger .ks-discussions {
                 width: 100%
             }
@@ -1286,7 +1218,7 @@
             }
         }
 
-        @media screen and (max-width:560px) {
+        @media  screen and (max-width:560px) {
 
             .ks-messenger .ks-messages>.ks-footer,
             .ks-messenger__messages>.ks-footer {
@@ -1322,4 +1254,6 @@
             $('.jspContainer').jScrollPane();
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/Message/Message-index.blade.php ENDPATH**/ ?>
