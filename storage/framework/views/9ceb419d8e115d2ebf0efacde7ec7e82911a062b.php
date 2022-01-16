@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
+    
+    <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
+    <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
+    <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
+    <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
+    
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('body'); ?>
@@ -36,8 +42,7 @@
         <div class="nav-search" id="nav-search">
             <form class="form-search">
                 <span class="input-icon">
-                    <input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input"
-                        autocomplete="off" />
+                    <input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input" autocomplete="off" />
                     <i class="icon-search nav-search-icon"></i>
                 </span>
             </form>
@@ -45,11 +50,9 @@
         <div class="page-content">
             <div class="span4">
                 <div class="pull">
-                    <a type="button" class="btn btn-info " href="<?php echo e(route('KhuyenMai.index')); ?>"><i
-                            class="fa fa-angle-double-left"></i> Back</a>
+                    <a type="button" class="btn btn-info " href="<?php echo e(route('KhuyenMai.index')); ?>"><i class="fa fa-angle-double-left"></i> Back</a>
                 </div>
-                <form class="form-horizontal" role="form" action="<?php echo e(route('KhuyenMai.update', $ctkm)); ?>" method="POST"
-                    enctype="multipart/form-data">
+                <form class="form-horizontal" role="form" action="<?php echo e(route('KhuyenMai.update', $ctkm)); ?>" method="POST" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
                     <?php echo method_field('PUT'); ?>
                     <div class="widget-box">
@@ -65,8 +68,7 @@
 
                                 <div class="control-group">
                                     <div class="row-fluid input-append">
-                                        <textarea id="form-field-11" class="autosize-transition form-control"
-                                            name="TenChuongTrinh"><?php echo e($ctkm->TenChuongTrinh); ?></textarea>
+                                        <textarea id="form-field-11" class="autosize-transition form-control" name="TenChuongTrinh"><?php echo e($ctkm->TenChuongTrinh); ?></textarea>
                                     </div>
                                 </div>
                                 <hr />
@@ -77,42 +79,21 @@
                                 <div class="control-group">
                                     <div class="row-fluid input-append">
                                         
-                                        <textarea id="form-field-11" class="autosize-transition form-control"
-                                            name="MoTa"><?php echo e($ctkm->MoTa); ?></textarea>
+                                        <textarea id="form-field-11" class="autosize-transition form-control" name="MoTa"><?php echo e($ctkm->MoTa); ?></textarea>
                                     </div>
                                 </div>
                                 <hr />
 
                                 <div class="row-fluid">
-                                    <label>Ngày bắt đầu</label>
+                                    <label>Thời gian khuyến mãi (tháng/ngày/năm)</label>
                                 </div>
 
                                 <div class="control-group">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <i class="icon-calendar"></i>
+                                            <i class="icon-calendar bigger-110"></i>
                                         </span>
-                                        <div class="row-fluid input-prepend">
-                                            <input type="date" class="form-control" id="form-input-readonly"
-                                                value=<?php echo e($ctkm->FromDate); ?> name="FromDate" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr />
-                                <div class="row-fluid">
-                                    <label>Ngày kết thúc</label>
-                                </div>
-
-                                <div class="control-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="icon-calendar"></i>
-                                        </span>
-                                        <div class="row-fluid input-prepend">
-
-                                            <input type="date" class="form-control" id="form-input-readonly"
-                                                value=<?php echo e($ctkm->ToDate); ?> name="ToDate" />
-                                        </div>
+                                        <input class="form-control" type="text" name="date-range-picker" id="id-date-range-picker-1" value="<?php echo e(date_format(date_create($ctkm->FromDate), 'm/d/Y')); ?> - <?php echo e(date_format(date_create($ctkm->ToDate), 'm/d/Y')); ?>" />
                                     </div>
                                 </div>
                                 <hr />
@@ -130,8 +111,8 @@
 
 <?php $__env->startSection('scriptThisPage'); ?>
     <!--[if lte IE 8]>
-                                                            <script src="/storage/assets/js/excanvas.min.js"></script>
-                                                            <![endif]-->
+                                                                <script src="/storage/assets/js/excanvas.min.js"></script>
+                                                                <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -147,16 +128,28 @@
     <script src="/storage/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
     <script src="/storage/assets/js/jquery.maskedinput.min.js"></script>
     <script src="/storage/assets/js/bootstrap-tag.min.js"></script>
-
+    
+    <script src="/storage/assets/js/chosen.jquery.min.js"></script>
+    <script src="/storage/assets/js/date-time/moment.min.js"></script>
+    <script src="/storage/assets/js/date-time/daterangepicker.min.js"></script>
+    <script src="/storage/assets/js/jquery.autosize.min.js"></script>
+    <script src="/storage/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+    <script src="/storage/assets/js/jquery.maskedinput.min.js"></script>
+    <script type="text/javascript">
+        $('input[name=date-range-picker]').daterangepicker().prev().on(ace.click_event, function() {
+            $(this).next().focus();
+        });
+    </script>
+    
     <!-- inline scripts related to this page -->
 
     <script type="text/javascript">
         jQuery(function($) {
-            // Linked date and time picker 
-            // start date date and time picker 
+            // Linked date and time picker
+            // start date date and time picker
             $('#datepicker-start').datetimepicker();
 
-            // End date date and time picker 
+            // End date date and time picker
             $('#datepicker-end').datetimepicker({
                 useCurrent: false
             });

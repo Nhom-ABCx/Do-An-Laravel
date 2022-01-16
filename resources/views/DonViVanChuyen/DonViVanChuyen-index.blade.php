@@ -44,13 +44,26 @@
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                <form class="form-inline" method="get">
+                                <form class="form-inline"
+                                    action="{{ request()->is('DonViVanChuyenn/DaXoa') ? route('DonViVanChuyen.DaXoa') : route('DonViVanChuyen.index') }}"
+                                    method="get">
                                     <a href="{{ route('DonViVanChuyen.create') }}" class="btn btn-success">
                                         <i class="icon-plus"></i>
                                         Thêm đơn vị vận chuyển
                                     </a>
+
+                                    @if (request()->is('DonViVanChuyenn/DaXoa'))
+                                        <a class="btn btn-inverse" href="{{ route('DonViVanChuyen.index') }}">
+                                            Black</a>
+                                    @else
+                                        <a href="{{ route('DonViVanChuyen.DaXoa') }}" class="btn btn-inverse">
+                                            <i class="icon-trash"></i>
+                                            Đơn vị vận chuyển đã xoá
+                                        </a>
+                                    @endif
                                 </form>
                             </div>
+
                         </div>
                     </div>
 
@@ -77,10 +90,10 @@
                                         <i class="icon-time bigger-110 hidden-480"></i>
                                         Update_at
                                     </th>
-                                    {{-- <th>
-                                    <i class="icon-time bigger-110 hidden-480"></i>
-                                    Deleted_at
-                                </th> --}}
+                                    <th>
+                                        <i class="icon-time bigger-110 hidden-480"></i>
+                                        Deleted_at
+                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -96,69 +109,83 @@
                                         <td>{{ $item->Phone }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
-                                        {{-- <td>{{ $item->deleted_at }}</td> --}}
-
-                                        <td>
-                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#">
-                                                    <i class="icon-zoom-in bigger-130"></i>
-                                                </a>
-
-                                                <a class="green"
-                                                    href="{{ route('DonViVanChuyen.edit', $item) }}">
-                                                    <i class="icon-pencil bigger-130"></i>
-                                                </a>
-
-                                                <form action="{{ route('DonViVanChuyen.destroy', $item) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn-link red"><i
-                                                            class="icon-trash bigger-130"></i></button>
-                                                </form>
-                                            </div>
-
-                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle"
-                                                        data-toggle="dropdown">
-                                                        <i class="icon-caret-down icon-only bigger-120"></i>
-                                                    </button>
-
-                                                    <ul
-                                                        class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                        <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip"
-                                                                title="View">
-                                                                <span class="blue">
-                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="{{ route('SanPham.edit', $item) }}"
-                                                                class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                <span class="green">
-                                                                    <i class="icon-edit bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <form action="{{ route('SanPham.destroy', $item) }}"
-                                                                method="post">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="tooltip-error btn-link red"
-                                                                    data-rel="tooltip" title="Delete"><i
-                                                                        class="icon-trash bigger-120"></i></button>
-                                                            </form>
-                                                        </li>
-                                                    </ul>
+                                        <td>{{ $item->deleted_at }}</td>
+                                        @if (request()->is('DonViVanChuyenn/DaXoa'))
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <form action="{{ route('DonViVanChuyen.KhoiPhuc', $item->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        {{-- @method("PUT") --}}
+                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i
+                                                                class="icon-undo bigger-130"></i></button>
+                                                    </form>
                                                 </div>
-                                            </div>
-                                        </td>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <a class="blue" href="#">
+                                                        <i class="icon-zoom-in bigger-130"></i>
+                                                    </a>
+
+                                                    <a class="green"
+                                                        href="{{ route('DonViVanChuyen.edit', $item) }}">
+                                                        <i class="icon-pencil bigger-130"></i>
+                                                    </a>
+
+                                                    <form action="{{ route('DonViVanChuyen.destroy', $item) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn-link red"><i
+                                                                class="icon-trash bigger-130"></i></button>
+                                                    </form>
+                                                </div>
+
+                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                    <div class="inline position-relative">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
+                                                            <i class="icon-caret-down icon-only bigger-120"></i>
+                                                        </button>
+
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <li>
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
+                                                                    <span class="blue">
+                                                                        <i class="icon-zoom-in bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="{{ route('SanPham.edit', $item) }}"
+                                                                    class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                    <span class="green">
+                                                                        <i class="icon-edit bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <form action="{{ route('SanPham.destroy', $item) }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="tooltip-error btn-link red"
+                                                                        data-rel="tooltip" title="Delete"><i
+                                                                            class="icon-trash bigger-120"></i></button>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        @endif
+
                                     </tr>
 
                                 @endforeach

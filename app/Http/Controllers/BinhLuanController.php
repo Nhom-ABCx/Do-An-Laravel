@@ -29,7 +29,7 @@ class BinhLuanController extends Controller
         $lstKhachHang = KhachHang::all();
         $lstSanPham = SanPham::all();
         $data = BinhLuan::all();
-        foreach ($lstSanPham as $sp){
+        foreach ($lstSanPham as $sp) {
             $sanphamctl->fixImage($sp);
         }
         //dd($lstSanPham);
@@ -103,7 +103,23 @@ class BinhLuanController extends Controller
         $binhLuan->delete();
         return Redirect::route('BinhLuan.index');
     }
-
+    public function BinhLuanDaXoa(Request $request)
+    {
+        $sanphamctl = new SanPhamController;
+        $data = BinhLuan::onlyTrashed()->get();
+        $sanPham = SanPham::all();
+        foreach ($sanPham as $sp) {
+            $sanphamctl->fixImage($sp);
+        }
+        //dd($sanPham);
+        return view("BinhLuan.binh-luan-index", ['bLuan' => $data, 'sp' => $sanPham, 'request' => $request]);
+    }
+    public function  KhoiPhucBinhLuan($id)
+    {
+        $binhLuan = BinhLuan::onlyTrashed()->find($id);
+        $binhLuan->restore();
+        return Redirect::route('BinhLuan.DaXoa');
+    }
     #api
 
 

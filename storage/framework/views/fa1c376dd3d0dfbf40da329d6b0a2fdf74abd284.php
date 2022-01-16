@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- basic styles -->
-
     <link href="/storage/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/storage/assets/css/font-awesome.min.css" />
 
@@ -21,7 +20,9 @@
     <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.full.min.css" />
     <link rel="stylesheet" href="/storage/assets/css/datepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/ui.jqgrid.css" />
-
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <?php echo $__env->yieldContent('headThisPage'); ?>
 
     <!-- fonts -->
@@ -134,7 +135,7 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="/storage/assets/images/avatar/NhanVien/<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->id); ?>/<?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?>" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?>" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     <?php if(auth()->guard()->check()): ?>
@@ -233,93 +234,59 @@
                 </div><!-- #sidebar-shortcuts -->
 
                 <ul class="nav nav-list">
-                    <li>
-                        <a href="index.html">
+                    <li class="<?php echo e(request()->is('/') ? 'active' : ''); ?>">
+                        <a href="/">
                             <i class="icon-dashboard"></i>
-                            <span class="menu-text"> Dashboard </span>
+                            <span class="menu-text"> Bảng điều khiển </span>
                         </a>
                     </li>
 
-                    <li>
-                        <a href="typography.html">
+                    <li class="<?php echo e(request()->is('HoaDon') ? 'active' : ''); ?>">
+                        <a href="<?php echo e(route('HoaDon.index')); ?>">
                             <i class="icon-text-width"></i>
-                            <span class="menu-text"> Typography </span>
+                            <span class="menu-text"> Quản lý hóa đơn </span>
                         </a>
                     </li>
 
-                    <li class="<?php echo e(request()->is('SanPham') ? 'active' : ''); ?>">
-                        <a href="<?php echo e(route('SanPham.index')); ?>">
+                    <li class="<?php echo e(request()->is('SanPham') || request()->is('SanPham') ? 'active open' : ''); ?>">
+                        <a href="#" class="dropdown-toggle">
                             <i class="icon-desktop"></i>
                             <span class="menu-text"> Quản lý sản phẩm </span>
-                        </a>
-                    </li>
-
-                    <li class="<?php echo e(request()->is('/') ? 'active open' : ''); ?>">
-                        <a href="#" class="dropdown-toggle">
-                            <i class="icon-list"></i>
-                            <span class="menu-text"> Tables </span>
-
                             <b class="arrow icon-angle-down"></b>
                         </a>
 
                         <ul class="submenu">
-                            <li class="<?php echo e(request()->is('/') ? 'active' : ''); ?>">
-                                <a href="tables.html">
+                            <li class="<?php echo e(request()->is('SanPham') ? 'active' : ''); ?>">
+                                <a href="<?php echo e(route('SanPham.index')); ?>">
                                     <i class="icon-double-angle-right"></i>
-                                    Simple &amp; Dynamic
+                                    Sản phẩm
                                 </a>
                             </li>
 
                             <li>
-                                <a href="jqgrid.html">
+                                <a href="#">
                                     <i class="icon-double-angle-right"></i>
-                                    jqGrid plugin
+                                    Loại sản phẩm
                                 </a>
                             </li>
                         </ul>
                     </li>
 
                     <li>
-                        <a href="#" class="dropdown-toggle">
-                            <i class="icon-edit"></i>
-                            <span class="menu-text"> Forms </span>
-
-                            <b class="arrow icon-angle-down"></b>
+                        <a href="#">
+                            <i class="icon-list"></i>
+                            <span class="menu-text"> Tables </span>
                         </a>
-
-                        <ul class="submenu">
-                            <li>
-                                <a href="form-elements.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Form Elements
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="form-wizard.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Wizard &amp; Validation
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="wysiwyg.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Wysiwyg &amp; Markdown
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="dropzone.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Dropzone File Upload
-                                </a>
-                            </li>
-                        </ul>
                     </li>
 
-                    <li
-                        class="<?php echo e(request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : ''); ?>">
+                    <li>
+                        <a href="#">
+                            <i class="icon-edit"></i>
+                            <span class="menu-text"> Forms </span>
+                        </a>
+                    </li>
+
+                    <li class="<?php echo e(request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : ''); ?>">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Khuyến mãi </span>
@@ -348,7 +315,7 @@
                         </a>
                     </li>
                     
-                    <li>
+                    <li class="<?php echo e(request()->is('DonViVanChuyen') || request()->is('NguoiVanChuyen') ? 'active open' : ''); ?>">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-fighter-jet"></i>
                             <span class="menu-text"> Vận chuyển </span>

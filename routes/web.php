@@ -16,6 +16,8 @@ use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\KhachHangController;
 use App\Models\BinhLuan;
 use App\Http\Controllers\MessageController;
+use App\Models\ChuongTrinhKhuyenMai;
+use App\Models\DonViVanChuyen;
 use App\Models\SanPham;
 
 //composer dump-autoload
@@ -31,6 +33,7 @@ use App\Models\SanPham;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('Login', [AuthController::class, 'index'])->name('Login.index'); //show trang login
 Route::post('Login', [AuthController::class, 'show'])->name('Login.show'); //xu ly dang nhap -> tra ve home
 Route::get('Login/create', [AuthController::class, 'create'])->name('Login.create'); //dang ky
@@ -54,13 +57,17 @@ Route::middleware('auth')->group(function () {
             'SanPham' => 'sanPham'
         ]
     ]);
-    Route::get("SanPhamm/DaXoa",[SanPhamController::class,"SanPhamDaXoa"])->name("SanPham.DaXoa");
-    Route::post("SanPham/KhoiPhuc/{id}",[SanPhamController::class,"KhoiPhucSanPham"])->name("SanPham.KhoiPhuc");
+    Route::get("SanPhamm/DaXoa", [SanPhamController::class, "SanPhamDaXoa"])->name("SanPham.DaXoa");
+    Route::post("SanPham/KhoiPhuc/{id}", [SanPhamController::class, "KhoiPhucSanPham"])->name("SanPham.KhoiPhuc");
     Route::resource('KhuyenMai', ChuongTrinhKhuyenMaiController::class, [
         'parameters' => [
             'KhuyenMai' => 'chuongTrinhKhuyenMai'
         ]
     ]);
+    Route::get("KhuyenMaii/DaXoa", [ChuongTrinhKhuyenMaiController::class, "KhuyenMaiDaXoa"])->name("KhuyenMai.DaXoa");
+    Route::post("KhuyenMai/KhoiPhuc/{id}", [ChuongTrinhKhuyenMaiController::class, "KhoiPhucKhuyenMai"])->name("KhuyenMai.KhoiPhuc");
+
+
     Route::get('/CTKhuyenMai', [CTChuongTrinhKMController::class, 'index'])->name('CTKhuyenMai.index'); //Chi tiết CTKM index
     Route::get('/CTKhuyenMai/create', [CTChuongTrinhKMController::class, 'create'])->name('CTKhuyenMai.create'); //Chi tiết CTKM create
     Route::post('/CTKhuyenMai/store', [CTChuongTrinhKMController::class, 'store'])->name('CTKhuyenMai.store'); //Chi tiết CTKM store
@@ -78,6 +85,9 @@ Route::middleware('auth')->group(function () {
             'DonViVanChuyen' => 'donViVanChuyen'
         ]
     ]);
+    Route::get("DonViVanChuyenn/DaXoa", [DonViVanChuyenController::class, "DonViVanChuyenDaXoa"])->name("DonViVanChuyen.DaXoa");
+    Route::post("DonViVanChuyen/KhoiPhuc/{id}", [DonViVanChuyenController::class, "KhoiPhucDonViVanChuyen"])->name("DonViVanChuyen.KhoiPhuc");
+
     Route::resource('NguoiVanChuyen', NguoiVanChuyenController::class, [
         'parameters' => [
             'NguoiVanChuyen' => 'nguoiVanChuyen'
@@ -89,6 +99,9 @@ Route::middleware('auth')->group(function () {
             'BinhLuan' => 'binhLuan'
         ]
     ]);
+    Route::get("BinhLuann/DaXoa", [BinhLuanController::class, "BinhLuanDaXoa"])->name("BinhLuan.DaXoa");
+    Route::post("BinhLuan/KhoiPhuc/{id}", [BinhLuanController::class, "KhoiPhucBinhLuan"])->name("BinhLuan.KhoiPhuc");
+
     Route::resource('Message', MessageController::class, [
         'parameters' => [
             'Message' => 'message'
@@ -99,9 +112,11 @@ Route::middleware('auth')->group(function () {
             'HoaDon' => 'hoaDon'
         ]
     ]);
-    Route::get("HoaDonn/DaHuy",[HoaDonController::class,"HoaDonDaHuy"])->name("HoaDon.DaHuy");
-    Route::post("HoaDon/KhoiPhuc/{id}",[HoaDonController::class,"KhoiPhucHoaDon"])->name("HoaDon.KhoiPhuc");
-    Route::get("HoaDonn/DaGiao",[HoaDonController::class,"HoaDonDaGiao"])->name("HoaDon.DaGiao");
+    Route::get("HoaDonn/DaHuy", [HoaDonController::class, "HoaDonDaHuy"])->name("HoaDon.DaHuy");
+    Route::post("HoaDon/KhoiPhuc/{id}", [HoaDonController::class, "KhoiPhucHoaDon"])->name("HoaDon.KhoiPhuc");
+    Route::get("HoaDonn/DaGiao", [HoaDonController::class, "HoaDonDaGiao"])->name("HoaDon.DaGiao");
 
-    Route::get("WidgetThongBao",function(){return view("WidgetThongBao");});
+    Route::get("WidgetThongBao", function () {
+        return view("WidgetThongBao");
+    });
 });

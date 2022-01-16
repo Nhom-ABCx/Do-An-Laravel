@@ -42,33 +42,19 @@ class ChuongTrinhKhuyenMaiController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'TenChuongTrinh' => ['required', 'unique:chuong_trinh_khuyen_mais,TenChuongTrinh', 'max:255'],
             'MoTa' => ['required', 'max:255'],
-            'FromDate' => ['required'],
-            'ToDate' => ['required'],
+            'date-range-picker' => ['required'],
         ]);
-        // $validator = Validator::make(
-        //     $request->all(),
-        //     [
-        //         'TenChuongTrinh' => ['required', 'unique:chuong_trinh_khuyen_mais,TenChuongTrinh', 'max:255'],
-        //         'MoTa' => ['required', 'max:255'],
-        //         'FromDate' => ['required'],
-        //         'ToDate' => ['required'],
-        //     ]
-        // );
-        // if ($validator->fails()) {
-        //     $validator->errors()->add('msg', 'Vui lòng kiểm tra lại dữ liệu!');
-        // }
-        // else{
-        // }
+        $catChuoi = explode(" - ", $request->input("date-range-picker"));
         $CTkm = new ChuongTrinhKhuyenMai();
-
         $CTkm->fill([
             "TenChuongTrinh" => $request->input("TenChuongTrinh"),
             "MoTa" => $request->input("MoTa"),
-            "FromDate" => $request->input("FromDate"),
-            "ToDate" => $request->input("ToDate")
+            'FromDate' => date_format(date_create($catChuoi[0]), 'Y-m-d'),
+            'ToDate' => date_format(date_create($catChuoi[1]), 'Y-m-d'),
         ]);
         $CTkm->save();
         return Redirect::route('KhuyenMai.index');
@@ -132,6 +118,16 @@ class ChuongTrinhKhuyenMaiController extends Controller
         $chuongTrinhKhuyenMai->delete();
         return Redirect::route('KhuyenMai.index');
     }
+    public function KhuyenMaiDaXoa(Request $request){
+        $data=ChuongTrinhKhuyenMai::onlyTrashed()->get();
+        return view('KhuyenMai.KhuyenMai-index',['ctkm'=>$data,'request'=>$request]);
+    }
+    public function KhoiPhucKhuyenMai($id){
+        $data=ChuongTrinhKhuyenMai::onlyTrashed()->find($id);
+        $data->restore();
+        return Redirect::route('KhuyenMai.DaXoa');
+    }
+
     public static function danhSachChiTietChuongTrinhKM()
     {
         return DB::table("ct_chuong_trinh_kms")

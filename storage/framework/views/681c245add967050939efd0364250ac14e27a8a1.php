@@ -26,7 +26,7 @@
                 </li>
 
                 <li>
-                    <a href="<?php echo e(route('SanPham.index')); ?>">Sản phẩm</a>
+                    <a href="<?php echo e(route('SanPham.index')); ?>">Quản lý sản phẩm</a>
                 </li>
 
                 <li>
