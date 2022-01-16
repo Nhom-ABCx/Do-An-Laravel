@@ -29,11 +29,11 @@ class BinhLuanController extends Controller
         $lstKhachHang = KhachHang::all();
         $lstSanPham = SanPham::all();
         $data = BinhLuan::all();
-        foreach ($lstSanPham as $sp){
+        foreach ($lstSanPham as $sp) {
             $sanphamctl->fixImage($sp);
         }
         //dd($lstSanPham);
-           
+
         return view('BinhLuan.binh-luan-index', ["bLuan" => $data, 'khachHang' => $lstKhachHang, 'sanPham' => $lstSanPham]);
     }
 
@@ -102,6 +102,13 @@ class BinhLuanController extends Controller
     {
         $binhLuan->delete();
         return Redirect::route('BinhLuan.index');
+    }
+    public function BinhLuanDaXoa(Request $request)
+    {
+        dd('aaaasdsda');
+        $data = BinhLuan::onlyTrashed()->get();
+        $sanPham = SanPham::all();
+        return view("BinhLuan.binh-luan-index", ['bLuan' => $data, 'sp' => $sanPham, 'request' => $request]);
     }
 
     #api

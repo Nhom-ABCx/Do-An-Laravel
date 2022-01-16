@@ -89,6 +89,8 @@ Route::middleware('auth')->group(function () {
             'BinhLuan' => 'binhLuan'
         ]
     ]);
+    Route::get("BinhLuan/DaXoa", [SanPhamController::class, "BinhLuanDaXoa"])->name("BinhLuan.DaXoa");
+    Route::post("BinhLuan/KhoiPhuc/{id}", [SanPhamController::class, "KhoiPhucBinhLuan"])->name("BinhLuan.KhoiPhuc");
     Route::resource('Message', MessageController::class, [
         'parameters' => [
             'Message' => 'message'

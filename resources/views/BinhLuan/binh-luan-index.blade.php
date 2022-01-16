@@ -40,17 +40,54 @@
                     <div class="widget-box">
                         <div class="widget-header">
                             <h3 class="header smaller lighter blue">Bình luận </h3>
-                        </div>
-                        {{-- <div class="widget-body">
-                        <div class="widget-main">
-                            <form class="form-inline"  method="get">
-                                <a href="{{route('DonViVanChuyen.create')}}" class="btn btn-success">
-                                    <i class="icon-plus"></i>
-                                    Thêm đơn vị vận chuyển
-                                </a>
+
+
+                            <form class="form-inline"
+                                action="{{ request()->is('BinhLuan/DaXoa') ? route('BinhLuan.DaXoa') : route('BinhLuan.index') }}"
+                                method="get">
+
+                                @if (request()->is('BinhLuan/DaXoa'))
+                                @else
+                                    <a href="{{ route('BinhLuan.DaXoa') }}" class="btn btn-inverse">
+                                        <i class="icon-trash"></i>
+                                        Bình luận đã xoá
+                                    </a>
+                                @endif
+
+
+                                {{-- <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên"
+                                title="Tìm kiếm theo tên" data-placement="bottom" value="{{ $request['TenSanPham'] }}"
+                                name="TenSanPham" />
+                            <label for=""> Hãng sãn xuất: </label>
+                            <select class="width-10 chosen-select" id="form-field-select-4" name="HangSanXuatId">
+                                <option value="">All</option>
+                                @foreach ($lstHangSanXuat as $item)
+                                    <option value="{{ $item->id }}" @if ($item->id == $request['HangSanXuatId']) selected @endif>
+                                        {{ $item->Ten }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            <label for=""> Loại sản phẩm: </label>
+                            <select class="width-10 chosen-select" id="form-field-select-4" name="LoaiSanPhamId">
+                                <option value="">All</option>
+                                @foreach ($lstLoaiSanPham as $item)
+                                    <option value="{{ $item->id }}" @if ($item->id == $request['LoaiSanPhamId']) selected @endif>
+                                        {{ $item->TenLoai }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            <button type="submit" class="btn btn-purple btn-sm">
+                                Search
+                                <i class="icon-search icon-on-right bigger-110"></i>
+                            </button>
+                            <button type="reset" class="btn btn-sm">
+                                <i class="icon-refresh"></i>
+                                Reset
+                            </button> --}}
                             </form>
                         </div>
-                    </div> --}}
                     </div>
 
                     <div class="hr hr-24"></div>
@@ -85,7 +122,7 @@
                             </thead>
 
                             <tbody>
-                                
+
                                 @foreach ($bLuan as $item)
 
                                     <tr>
@@ -93,9 +130,9 @@
                                         <td>{{ $item->NoiDung }}</td>
                                         <td>{{ $item->KhachHang->Username }}</td>
                                         <td>{{ $item->SanPham->TenSanPham }}
-                                                    
-                                            <img src='storage/assets/images/product-image/{{ $item->SanPham->HinhAnh }}' alt="{{ $item->SanPham->HinhAnh }}"
-                                                width='50' height='50'>
+
+                                            <img src='storage/assets/images/product-image/{{ $item->SanPham->HinhAnh }}'
+                                                alt="{{ $item->SanPham->HinhAnh }}" width='50' height='50'>
                                         </td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>

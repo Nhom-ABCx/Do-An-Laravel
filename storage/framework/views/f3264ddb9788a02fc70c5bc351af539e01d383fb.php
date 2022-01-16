@@ -33,8 +33,24 @@
                     <div class="widget-box">
                         <div class="widget-header">
                             <h3 class="header smaller lighter blue">Bình luận </h3>
+
+
+                            <form class="form-inline"
+                                action="<?php echo e(request()->is('BinhLuan/DaXoa') ? route('BinhLuan.DaXoa') : route('BinhLuan.index')); ?>"
+                                method="get">
+
+                                <?php if(request()->is('BinhLuan/DaXoa')): ?>
+                                <?php else: ?>
+                                    <a href="<?php echo e(route('BinhLuan.DaXoa')); ?>" class="btn btn-inverse">
+                                        <i class="icon-trash"></i>
+                                        Bình luận đã xoá
+                                    </a>
+                                <?php endif; ?>
+
+
+                                
+                            </form>
                         </div>
-                        
                     </div>
 
                     <div class="hr hr-24"></div>
@@ -69,7 +85,7 @@
                             </thead>
 
                             <tbody>
-                                
+
                                 <?php $__currentLoopData = $bLuan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                                     <tr>
@@ -78,9 +94,9 @@
                                         <td><?php echo e($item->KhachHang->Username); ?></td>
                                         <td><?php echo e($item->SanPham->TenSanPham); ?>
 
-                                                    
-                                            <img src='storage/assets/images/product-image/<?php echo e($item->SanPham->HinhAnh); ?>' alt="<?php echo e($item->SanPham->HinhAnh); ?>"
-                                                width='50' height='50'>
+
+                                            <img src='storage/assets/images/product-image/<?php echo e($item->SanPham->HinhAnh); ?>'
+                                                alt="<?php echo e($item->SanPham->HinhAnh); ?>" width='50' height='50'>
                                         </td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>

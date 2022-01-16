@@ -117,8 +117,8 @@
 
 <?php $__env->startSection('scriptThisPage'); ?>
     <!--[if lte IE 8]>
-                                                  <script src="/storage/assets/js/excanvas.min.js"></script>
-                                                  <![endif]-->
+                          <script src="/storage/assets/js/excanvas.min.js"></script>
+                          <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -136,12 +136,12 @@
     <script src="/storage/assets/js/bootstrap-tag.min.js"></script>
     <!-- js date -->
     <!-- <script src="js/jquery-3.3.1.min.js"></script>
-                                                <script src="js/popper.min.js"></script>
-                                                <script src="js/bootstrap.min.js"></script>
-                                                <script src="js/picker.js"></script>
-                                                <script src="js/picker.date.js"></script>
+                                                    <script src="js/popper.min.js"></script>
+                                                    <script src="js/bootstrap.min.js"></script>
+                                                    <script src="js/picker.js"></script>
+                                                    <script src="js/picker.date.js"></script>
 
-                                                <script src="js/main.js"></script> -->
+                                                    <script src="js/main.js"></script> -->
 
     <!-- inline scripts related to this page -->
 
