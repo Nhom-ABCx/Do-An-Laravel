@@ -38,9 +38,21 @@
             <h3 class="header smaller lighter blue">Chương trình khuyến mãi</h3>
             <div class="page-content">
                 <div class="row">
-                    <a type="button" class="btn btn-success " href="{{ route('KhuyenMai.create') }}"><i
-                            class="fa fa-plus"></i> Thêm chương trình khuyến mãi</a>
-                    {{-- kết thúc thêm --}}
+                    <form class="form-inline"
+                        action="{{ request()->is('KhuyenMaii/DaXoa') ? route('KhuyenMai.DaXoa') : route('KhuyenMai.index') }}"
+                        method="get">
+                        <a type="button" class="btn btn-success " href="{{ route('KhuyenMai.create') }}"><i
+                                class="fa fa-plus"></i> Thêm chương trình khuyến mãi</a>
+                        @if (request()->is('KhuyenMaii/DaXoa'))
+                            <a class="btn btn-inverse" href="{{ route('KhuyenMai.index') }}"> Black</a>
+                        @else
+                            <a href="{{ route('KhuyenMai.DaXoa') }}" class="btn btn-inverse">
+                                <i class="icon-trash"></i>
+                                Chương trình k.mãi đã xoá
+                            </a>
+                        @endif
+                    </form>
+
                     <hr>
                     <div class="table-header">
                         Bảng Chương Trình Khuyến mãi
@@ -93,63 +105,80 @@
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         {{-- <td>{{ $item->deleted_at }}</td> --}}
+                                        @if (request()->is('KhuyenMaii/DaXoa'))
+                                            <td>
 
-                                        <td>
-                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#">
-                                                    <i class="fa fa-plus"></i>
-                                                </a>
-
-                                                <a class="green" href="{{ route('KhuyenMai.edit', $item) }}">
-                                                    <i class="icon-pencil bigger-130"></i>
-                                                </a>
-                                                <form action="{{ route('KhuyenMai.destroy', $item) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn-link red"><i
-                                                            class="icon-trash bigger-130"></i></button>
-                                                </form>
-                                            </div>
-
-                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle"
-                                                        data-toggle="dropdown">
-                                                        <i class="icon-caret-down icon-only bigger-120"></i>
-                                                    </button>
-
-                                                    <ul
-                                                        class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                        <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip"
-                                                                title="View">
-                                                                <span class="blue">
-                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#" class="tooltip-success" data-rel="tooltip"
-                                                                title="Edit">
-                                                                <span class="green">
-                                                                    <i class="icon-edit bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#" class="tooltip-error" data-rel="tooltip"
-                                                                title="Delete">
-                                                                <span class="red">
-                                                                    <i class="icon-trash bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <form action="{{ route('KhuyenMai.KhoiPhuc', $item->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        {{-- @method("PUT") --}}
+                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i
+                                                                class="icon-undo bigger-130"></i></button>
+                                                    </form>
                                                 </div>
-                                            </div>
-                                        </td>
+
+                                            </td>
+                                        @else
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <a class="blue" href="#">
+                                                        <i class="fa fa-plus"></i>
+                                                    </a>
+
+                                                    <a class="green" href="{{ route('KhuyenMai.edit', $item) }}"
+                                                        title="Sữa">
+                                                        <i class="icon-pencil bigger-130"></i>
+                                                    </a>
+                                                    <form action="{{ route('KhuyenMai.destroy', $item) }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn-link red" title="Xoá"><i
+                                                                class="icon-trash bigger-130"></i></button>
+                                                    </form>
+                                                </div>
+
+                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                    <div class="inline position-relative">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
+                                                            <i class="icon-caret-down icon-only bigger-120"></i>
+                                                        </button>
+
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <li>
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
+                                                                    <span class="blue">
+                                                                        <i class="icon-zoom-in bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
+                                                                    <span class="green">
+                                                                        <i class="icon-edit bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
+                                                                    <span class="red">
+                                                                        <i class="icon-trash bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        @endif
+
                                     </tr>
                                 @endforeach
                             </tbody>

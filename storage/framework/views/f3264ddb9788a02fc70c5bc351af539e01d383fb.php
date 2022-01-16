@@ -36,19 +36,17 @@
 
 
                             <form class="form-inline"
-                                action="<?php echo e(request()->is('BinhLuan/DaXoa') ? route('BinhLuan.DaXoa') : route('BinhLuan.index')); ?>"
+                                action="<?php echo e(request()->is('BinhLuann/DaXoa') ? route('BinhLuan.DaXoa') : route('BinhLuan.index')); ?>"
                                 method="get">
 
-                                <?php if(request()->is('BinhLuan/DaXoa')): ?>
+                                <?php if(request()->is('BinhLuann/DaXoa')): ?>
+                                    <a class="btn btn-success" href="<?php echo e(route('BinhLuan.index')); ?>"> Black</a>
                                 <?php else: ?>
                                     <a href="<?php echo e(route('BinhLuan.DaXoa')); ?>" class="btn btn-inverse">
                                         <i class="icon-trash"></i>
                                         Bình luận đã xoá
                                     </a>
                                 <?php endif; ?>
-
-
-                                
                             </form>
                         </div>
                     </div>
@@ -80,7 +78,7 @@
                                         <i class="icon-time bigger-110 hidden-480"></i>
                                         Deleted-at
                                     </th>
-                                    <th></th>
+                                    
                                 </tr>
                             </thead>
 
@@ -94,81 +92,45 @@
                                         <td><?php echo e($item->KhachHang->Username); ?></td>
                                         <td><?php echo e($item->SanPham->TenSanPham); ?>
 
-
-                                            <img src='storage/assets/images/product-image/<?php echo e($item->SanPham->HinhAnh); ?>'
+                                            <img src='/storage/assets/images/product-image/<?php echo e($item->SanPham->HinhAnh); ?>'
                                                 alt="<?php echo e($item->SanPham->HinhAnh); ?>" width='50' height='50'>
                                         </td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
                                         <td><?php echo e($item->deleted_at); ?></td>
+                                        <?php if(request()->is('BinhLuann/DaXoa')): ?>
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <form action="<?php echo e(route('BinhLuan.KhoiPhuc', $item->id)); ?>"
+                                                        method="post">
+                                                        <?php echo csrf_field(); ?>
+                                                        
+                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i
+                                                                class="icon-undo bigger-130"></i></button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        <?php else: ?>
+                                            <td>
+                                                <form action="<?php echo e(route('BinhLuan.destroy', $item)); ?>" method="post">
+                                                    <?php echo csrf_field(); ?>
+                                                    <?php echo method_field('DELETE'); ?>
+                                                    <button type="submit" class="btn-link red"><i
+                                                            class="icon-trash bigger-130"></i></button>
+                                                </form>
+                                            <td>
+                                        <?php endif; ?>
+                                        
 
-                                        <td>
-
-
-                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" type="button" class="btn btn-primary"
-                                                    data-toggle="modal" data-target="#exampleModalCenter">
-                                                    <i class="icon-zoom-in bigger-130"></i>
-                                                </a>
-                                                <!-- Button trigger modal -->
-                                            </div>
-                                            
-                                            
-
-                                            <form action="<?php echo e(route('BinhLuan.destroy', $item)); ?>" method="post">
-                                                <?php echo csrf_field(); ?>
-                                                <?php echo method_field('DELETE'); ?>
-                                                <button type="submit" class="btn-link red"><i
-                                                        class="icon-trash bigger-130"></i></button>
-                                            </form>
+                                        
+                                    </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </tbody>
+                        </table>
                     </div>
-
-                    <div class="visible-xs visible-sm hidden-md hidden-lg">
-                        <div class="inline position-relative">
-                            <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-caret-down icon-only bigger-120"></i>
-                            </button>
-
-                            <ul
-                                class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                <li>
-                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                        <span class="blue">
-                                            <i class="icon-zoom-in bigger-120"></i>
-                                        </span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="<?php echo e(route('SanPham.edit', $item)); ?>" class="tooltip-success"
-                                        data-rel="tooltip" title="Edit">
-                                        <span class="green">
-                                            <i class="icon-edit bigger-120"></i>
-                                        </span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <form action="<?php echo e(route('SanPham.destroy', $item)); ?>" method="post">
-                                        <?php echo csrf_field(); ?>
-                                        <?php echo method_field('DELETE'); ?>
-                                        <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip"
-                                            title="Delete"><i class="icon-trash bigger-120"></i></button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    </td>
-                    </tr>
-
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </tbody>
-                    </table>
                 </div>
             </div>
         </div>
-    </div>
     </div><!-- /.main-content -->
 <?php $__env->stopSection(); ?>
 
@@ -186,7 +148,7 @@
                     null,
                     null, null, null,
                     //hinh anh
-                    null, null,
+                    null, null
                 ]
             });
 

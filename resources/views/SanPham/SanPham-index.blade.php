@@ -153,7 +153,7 @@
                                         @if (request()->is('SanPhamm/DaXoa'))
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <form action="{{ route('SanPham.KhoiPhuc', $item->id) }}" method="post">
+                                                    <form action="{{ route('BinhLuan.KhoiPhuc', $item->id) }}" method="post">
                                                         @csrf
                                                         {{-- @method("PUT") --}}
                                                         <button type="submit" class="btn-link blue" title="Khôi phục"><i class="icon-undo bigger-130"></i></button>

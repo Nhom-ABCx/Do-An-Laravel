@@ -105,12 +105,21 @@ class BinhLuanController extends Controller
     }
     public function BinhLuanDaXoa(Request $request)
     {
-        dd('aaaasdsda');
+        $sanphamctl = new SanPhamController;
         $data = BinhLuan::onlyTrashed()->get();
         $sanPham = SanPham::all();
+        foreach ($sanPham as $sp) {
+            $sanphamctl->fixImage($sp);
+        }
+        //dd($sanPham);
         return view("BinhLuan.binh-luan-index", ['bLuan' => $data, 'sp' => $sanPham, 'request' => $request]);
     }
-
+    public function  KhoiPhucBinhLuan($id)
+    {
+        $binhLuan = BinhLuan::onlyTrashed()->find($id);
+        $binhLuan->restore();
+        return Redirect::route('BinhLuan.DaXoa');
+    }
     #api
 
 

@@ -118,6 +118,16 @@ class ChuongTrinhKhuyenMaiController extends Controller
         $chuongTrinhKhuyenMai->delete();
         return Redirect::route('KhuyenMai.index');
     }
+    public function KhuyenMaiDaXoa(Request $request){
+        $data=ChuongTrinhKhuyenMai::onlyTrashed()->get();
+        return view('KhuyenMai.KhuyenMai-index',['ctkm'=>$data,'request'=>$request]);
+    }
+    public function KhoiPhucKhuyenMai($id){
+        $data=ChuongTrinhKhuyenMai::onlyTrashed()->find($id);
+        $data->restore();
+        return Redirect::route('KhuyenMai.DaXoa');
+    }
+
     public static function danhSachChiTietChuongTrinhKM()
     {
         return DB::table("ct_chuong_trinh_kms")

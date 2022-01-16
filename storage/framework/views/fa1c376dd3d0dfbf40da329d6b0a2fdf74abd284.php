@@ -234,10 +234,10 @@
                 </div><!-- #sidebar-shortcuts -->
 
                 <ul class="nav nav-list">
-                    <li>
-                        <a href="index.html">
+                    <li class="<?php echo e(request()->is('/') ? 'active' : ''); ?>">
+                        <a href="/">
                             <i class="icon-dashboard"></i>
-                            <span class="menu-text"> Dashboard </span>
+                            <span class="menu-text"> Bảng điều khiển </span>
                         </a>
                     </li>
 
@@ -248,75 +248,42 @@
                         </a>
                     </li>
 
-                    <li class="<?php echo e(request()->is('SanPham') ? 'active' : ''); ?>">
-                        <a href="<?php echo e(route('SanPham.index')); ?>">
+                    <li class="<?php echo e(request()->is('SanPham') || request()->is('SanPham') ? 'active open' : ''); ?>">
+                        <a href="#" class="dropdown-toggle">
                             <i class="icon-desktop"></i>
                             <span class="menu-text"> Quản lý sản phẩm </span>
-                        </a>
-                    </li>
-
-                    <li class="<?php echo e(request()->is('/') ? 'active open' : ''); ?>">
-                        <a href="#" class="dropdown-toggle">
-                            <i class="icon-list"></i>
-                            <span class="menu-text"> Tables </span>
-
                             <b class="arrow icon-angle-down"></b>
                         </a>
 
                         <ul class="submenu">
-                            <li class="<?php echo e(request()->is('/') ? 'active' : ''); ?>">
-                                <a href="tables.html">
+                            <li class="<?php echo e(request()->is('SanPham') ? 'active' : ''); ?>">
+                                <a href="<?php echo e(route('SanPham.index')); ?>">
                                     <i class="icon-double-angle-right"></i>
-                                    Simple &amp; Dynamic
+                                    Sản phẩm
                                 </a>
                             </li>
 
                             <li>
-                                <a href="jqgrid.html">
+                                <a href="#">
                                     <i class="icon-double-angle-right"></i>
-                                    jqGrid plugin
+                                    Loại sản phẩm
                                 </a>
                             </li>
                         </ul>
                     </li>
 
                     <li>
-                        <a href="#" class="dropdown-toggle">
+                        <a href="#">
+                            <i class="icon-list"></i>
+                            <span class="menu-text"> Tables </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
                             <i class="icon-edit"></i>
                             <span class="menu-text"> Forms </span>
-
-                            <b class="arrow icon-angle-down"></b>
                         </a>
-
-                        <ul class="submenu">
-                            <li>
-                                <a href="form-elements.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Form Elements
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="form-wizard.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Wizard &amp; Validation
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="wysiwyg.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Wysiwyg &amp; Markdown
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="dropzone.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Dropzone File Upload
-                                </a>
-                            </li>
-                        </ul>
                     </li>
 
                     <li class="<?php echo e(request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : ''); ?>">

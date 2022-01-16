@@ -142,7 +142,7 @@
                                         </select>
                                     <?php endif; ?>
                                     <label for=""> Lọc theo ngày: </label>
-                                    <input class="width-20" type="text" name="NgayDat" id="id-NgayDat-1" value="<?php echo e($request['NgayDat']); ?>" />
+                                    <input class="width-20" type="text" name="NgayDat" id="id-NgayDat-1" value="<?php echo e($request['NgayDat']); ?>" data-rel="tooltip" title="Tháng-Ngày-Năm" data-placement="top"/>
 
                                     <button type="submit" class="btn btn-purple btn-sm">
                                         Search
@@ -266,13 +266,13 @@
                                                     
                                                     <?php if($item->TrangThai != 4): ?>
                                                         <span class="dropdown-hover dropup dropdown-pink">
-                                                            <i class="icon-cog green bigger-200"></i>
+                                                            <i class="icon-cog green bigger-200" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
                                                             <ul class="dropdown-menu pull-right">
                                                                 <li>
-                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=1" tabindex="-1">Đang xử lý</a>
-                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=2" tabindex="-1">Đã xử lý</a>
-                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=3" tabindex="-1">Đang giao</a>
-                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=4" tabindex="-1">Đã giao</a>
+                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=1" tabindex="-1">1 Đang xử lý</a>
+                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=2" tabindex="-1">2 Đã xử lý</a>
+                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=3" tabindex="-1">3 Đang giao</a>
+                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=4" tabindex="-1">4 Đã giao</a>
                                                                 </li>
                                                             </ul>
                                                         </span>

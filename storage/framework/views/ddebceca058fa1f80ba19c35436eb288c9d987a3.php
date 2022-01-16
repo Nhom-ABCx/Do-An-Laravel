@@ -148,7 +148,7 @@
                                         <?php if(request()->is('SanPhamm/DaXoa')): ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <form action="<?php echo e(route('SanPham.KhoiPhuc', $item->id)); ?>" method="post">
+                                                    <form action="<?php echo e(route('BinhLuan.KhoiPhuc', $item->id)); ?>" method="post">
                                                         <?php echo csrf_field(); ?>
                                                         
                                                         <button type="submit" class="btn-link blue" title="Khôi phục"><i class="icon-undo bigger-130"></i></button>

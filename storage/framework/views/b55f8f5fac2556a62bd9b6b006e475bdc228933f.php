@@ -38,9 +38,21 @@
             <h3 class="header smaller lighter blue">Chương trình khuyến mãi</h3>
             <div class="page-content">
                 <div class="row">
-                    <a type="button" class="btn btn-success " href="<?php echo e(route('KhuyenMai.create')); ?>"><i
-                            class="fa fa-plus"></i> Thêm chương trình khuyến mãi</a>
-                    
+                    <form class="form-inline"
+                        action="<?php echo e(request()->is('KhuyenMaii/DaXoa') ? route('KhuyenMai.DaXoa') : route('KhuyenMai.index')); ?>"
+                        method="get">
+                        <a type="button" class="btn btn-success " href="<?php echo e(route('KhuyenMai.create')); ?>"><i
+                                class="fa fa-plus"></i> Thêm chương trình khuyến mãi</a>
+                        <?php if(request()->is('KhuyenMaii/DaXoa')): ?>
+                            <a class="btn btn-inverse" href="<?php echo e(route('KhuyenMai.index')); ?>"> Black</a>
+                        <?php else: ?>
+                            <a href="<?php echo e(route('KhuyenMai.DaXoa')); ?>" class="btn btn-inverse">
+                                <i class="icon-trash"></i>
+                                Chương trình k.mãi đã xoá
+                            </a>
+                        <?php endif; ?>
+                    </form>
+
                     <hr>
                     <div class="table-header">
                         Bảng Chương Trình Khuyến mãi
@@ -90,63 +102,80 @@
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
                                         
+                                        <?php if(request()->is('KhuyenMaii/DaXoa')): ?>
+                                            <td>
 
-                                        <td>
-                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#">
-                                                    <i class="fa fa-plus"></i>
-                                                </a>
-
-                                                <a class="green" href="<?php echo e(route('KhuyenMai.edit', $item)); ?>">
-                                                    <i class="icon-pencil bigger-130"></i>
-                                                </a>
-                                                <form action="<?php echo e(route('KhuyenMai.destroy', $item)); ?>" method="post">
-                                                    <?php echo csrf_field(); ?>
-                                                    <?php echo method_field('DELETE'); ?>
-                                                    <button type="submit" class="btn-link red"><i
-                                                            class="icon-trash bigger-130"></i></button>
-                                                </form>
-                                            </div>
-
-                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle"
-                                                        data-toggle="dropdown">
-                                                        <i class="icon-caret-down icon-only bigger-120"></i>
-                                                    </button>
-
-                                                    <ul
-                                                        class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                        <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip"
-                                                                title="View">
-                                                                <span class="blue">
-                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#" class="tooltip-success" data-rel="tooltip"
-                                                                title="Edit">
-                                                                <span class="green">
-                                                                    <i class="icon-edit bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#" class="tooltip-error" data-rel="tooltip"
-                                                                title="Delete">
-                                                                <span class="red">
-                                                                    <i class="icon-trash bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <form action="<?php echo e(route('KhuyenMai.KhoiPhuc', $item->id)); ?>"
+                                                        method="post">
+                                                        <?php echo csrf_field(); ?>
+                                                        
+                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i
+                                                                class="icon-undo bigger-130"></i></button>
+                                                    </form>
                                                 </div>
-                                            </div>
-                                        </td>
+
+                                            </td>
+                                        <?php else: ?>
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <a class="blue" href="#">
+                                                        <i class="fa fa-plus"></i>
+                                                    </a>
+
+                                                    <a class="green" href="<?php echo e(route('KhuyenMai.edit', $item)); ?>"
+                                                        title="Sữa">
+                                                        <i class="icon-pencil bigger-130"></i>
+                                                    </a>
+                                                    <form action="<?php echo e(route('KhuyenMai.destroy', $item)); ?>" method="post">
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('DELETE'); ?>
+                                                        <button type="submit" class="btn-link red" title="Xoá"><i
+                                                                class="icon-trash bigger-130"></i></button>
+                                                    </form>
+                                                </div>
+
+                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                    <div class="inline position-relative">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
+                                                            <i class="icon-caret-down icon-only bigger-120"></i>
+                                                        </button>
+
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <li>
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
+                                                                    <span class="blue">
+                                                                        <i class="icon-zoom-in bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
+                                                                    <span class="green">
+                                                                        <i class="icon-edit bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
+                                                                    <span class="red">
+                                                                        <i class="icon-trash bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        <?php endif; ?>
+
                                     </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
