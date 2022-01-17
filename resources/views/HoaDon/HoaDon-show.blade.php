@@ -216,9 +216,14 @@
                                         <div class="clearfix form-actions">
                                             <div class="col-md-9">
                                                 <button class="btn btn-success" type="submit">
-                                                    Xác nhận chuyển tiếp trạng thái
+                                                    Xác nhận chuyển tiếp trạng thái   
                                                     <i class="icon-ok bigger-110"></i>
                                                 </button>
+
+                                                <a href="{{ route('HoaDon.PDF', $hoaDon) }}" class="btn btn-danger">
+                                                    Xuất file PDF   
+                                                    <i class="icon-file-text bigger-110"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     @endif
@@ -249,7 +254,7 @@
                                         <tbody>
                                             @foreach ($dsChiTietHD as $item)
                                                 @php
-                                                    App\Http\Controllers\SanPhamController::fixImage($item->SanPham)
+                                                    App\Http\Controllers\SanPhamController::fixImage($item->SanPham);
                                                 @endphp
                                                 <tr>
                                                     <td class="center">{{ $item->SanPham->id }}</td>
@@ -300,7 +305,7 @@
                     {
                         "bSortable": false
                     }, //hinh anh
-                    null, null, null, null, null,null,
+                    null, null, null, null, null, null,
                 ]
             });
 
@@ -348,8 +353,8 @@
     {{-- thông báo error --}}
     <!-- page specific plugin scripts -->
     <!--[if lte IE 8]>
-                                                              <script src="assets/js/excanvas.min.js"></script>
-                                                              <![endif]-->
+                                                                      <script src="assets/js/excanvas.min.js"></script>
+                                                                      <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>

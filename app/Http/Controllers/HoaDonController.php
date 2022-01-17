@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use PDF;
 
 class HoaDonController extends Controller
 {
@@ -25,7 +26,7 @@ class HoaDonController extends Controller
     // Giao thành cỏng  4 //đã ship hàng thành công
     // deleted_at   // khách đã hủy đơn
     /**
- * Display a listing of the resource.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -90,7 +91,7 @@ class HoaDonController extends Controller
     {
         //trang thai phai nam` trong 4 so', tranh truong` hop thay doi request tai giao dien
         $request->validate(
-            ['TrangThai' => ['required', 'numeric', 'integer', Rule::in([0,1, 2, 3, 4]),]]
+            ['TrangThai' => ['required', 'numeric', 'integer', Rule::in([0, 1, 2, 3, 4]),]]
         );
 
         $hoaDon->TrangThai = $request["TrangThai"];
@@ -168,6 +169,15 @@ class HoaDonController extends Controller
         $hoaDon = HoaDon::onlyTrashed()->find($id);
         $hoaDon->restore();
         return Redirect::route('HoaDon.DaHuy');
+    }
+
+    public function HoaDonPDF(HoaDon $hoaDon)
+    {
+        //return view('HoaDon.HoaDon-pdf');
+        $pdf = PDF::loadView('HoaDon.HoaDon-pdf');
+        return $pdf->stream();
+        //return $pdf->download('file-pdf.pdf');
+        //return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('HoaDon.HoaDon-pdf',[])->stream();
     }
     //API
 

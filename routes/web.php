@@ -120,4 +120,5 @@ Route::middleware('auth')->group(function () {
     Route::get("WidgetThongBao", function () {
         return view("WidgetThongBao");
     });
+    Route::get("HoaDon/{hoaDon}/PDF", [HoaDonController::class, "HoaDonPDF"])->name("HoaDon.PDF");
 });
