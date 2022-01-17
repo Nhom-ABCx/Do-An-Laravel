@@ -197,6 +197,12 @@ class SanPhamController extends Controller
         $sanPham->restore();
         return Redirect::route('SanPham.DaXoa');
     }
+    public function XoaVinhVienSanPham($id)
+    {
+        $sanPham=SanPham::onlyTrashed()->find($id);
+        $sanPham->forceDelete();
+        return Redirect::route('SanPham.DaXoa');
+    }
     //phương thức hỗ trợ load hình ảnh và thay thế bằng hình mạc định nếu ko tìm thấy file
     public static function fixImage(SanPham $sanPham)
     {

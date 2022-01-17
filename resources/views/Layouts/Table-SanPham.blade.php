@@ -51,6 +51,12 @@
                                     {{-- @method("PUT") --}}
                                     <button type="submit" class="btn-link blue" title="Khôi phục"><i class="icon-undo bigger-130"></i></button>
                                 </form>
+
+                                <form id="form" action="{{ route('SanPham.XoaVinhVien', $item->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" class="btn-link red bootbox-options" title="Xóa vĩnh viễn"><i class="icon-trash bigger-130"></i></button>
+                                </form>
                             </div>
 
                             <div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -64,8 +70,15 @@
                                             <form action="{{ route('SanPham.KhoiPhuc', $item->id) }}" method="post">
                                                 @csrf
                                                 {{-- @method("PUT") --}}
-                                                <button type="submit" class="tooltip-error btn-link blue" data-rel="tooltip" title="Khôi phục"><i
-                                                        class="icon-undo bigger-120"></i></button>
+                                                <button type="submit" class="tooltip-error btn-link blue" data-rel="tooltip" title="Khôi phục"><i class="icon-undo bigger-120"></i></button>
+                                            </form>
+                                        </li>
+
+                                        <li>
+                                            <form id="form" action="{{ route('SanPham.XoaVinhVien', $item->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="tooltip-error btn-link red bootbox-options" data-rel="tooltip" title="Xóa vĩnh viễn"><i class="icon-trash bigger-130"></i></button>
                                             </form>
                                         </li>
                                     </ul>
@@ -120,8 +133,7 @@
                                             <form action="{{ route('SanPham.destroy', $item) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Xóa"><i
-                                                        class="icon-trash bigger-120"></i></button>
+                                                <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Xóa"><i class="icon-trash bigger-120"></i></button>
                                             </form>
                                         </li>
                                     </ul>

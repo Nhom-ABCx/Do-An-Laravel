@@ -108,7 +108,7 @@ class HoaDonController extends Controller
     public function update(Request $request, HoaDon $hoaDon)
     {
         if ($hoaDon->TrangThai == 4)
-            //if nay` de tranh' tinh` trang gui request ao?, thu~ nghiem luon withErrors
+            //if nay` de tranh' tinh` trang gui request ao?, voi thu~ nghiem luon withErrors
             return Redirect::back()->withErrors(['TrangThai' => 'Trạng thái đã giao thì không thể cập nhật']);
         else {
             $hoaDon->TrangThai = $hoaDon->TrangThai + 1;

@@ -153,7 +153,8 @@
                                         </select>
                                     @endif
                                     <label for=""> Lọc theo ngày: </label>
-                                    <input class="width-20" type="text" name="NgayDat" id="id-NgayDat-1" value="{{ $request['NgayDat'] }}" data-rel="tooltip" title="Tháng-Ngày-Năm" data-placement="top"/>
+                                    <input class="width-20" type="text" name="NgayDat" id="id-NgayDat-1" value="{{ $request['NgayDat'] }}" data-rel="tooltip" title="Tháng-Ngày-Năm"
+                                        data-placement="top" />
 
                                     <button type="submit" class="btn btn-purple btn-sm">
                                         Search
@@ -299,7 +300,7 @@
                                                         </form>
 
                                                     @endif
-                                                    <a class="blue" href="{{route("HoaDon.show",$item)}}" data-rel="tooltip" title="Xem chi tiết">
+                                                    <a class="blue" href="{{ route('HoaDon.show', $item) }}" data-rel="tooltip" title="Xem chi tiết">
                                                         <i class="icon-zoom-in bigger-130"></i>
                                                     </a>
                                                 </div>
@@ -312,7 +313,7 @@
 
                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="{{route("HoaDon.show",$item)}}" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
+                                                                <a href="{{ route('HoaDon.show', $item) }}" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -426,8 +427,8 @@
     {{-- thông báo error --}}
     <!-- page specific plugin scripts -->
     <!--[if lte IE 8]>
-                                  <script src="assets/js/excanvas.min.js"></script>
-                                  <![endif]-->
+                                      <script src="assets/js/excanvas.min.js"></script>
+                                      <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
