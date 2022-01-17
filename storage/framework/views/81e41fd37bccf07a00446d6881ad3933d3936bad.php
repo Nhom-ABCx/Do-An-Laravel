@@ -85,7 +85,7 @@
                                         <label class="col-sm-3"> <b><?php echo e($hoaDon->id); ?></b> </label>
 
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-female pink"></i> Người vận chuyển lần cuối </label>
-                                        <label class="col-sm-5"> <b><?php echo e($hoaDon->LichSuVanChuyen->last()->NguoiVanChuyen->HoTen); ?></b> </label>
+                                        <label class="col-sm-5"> <b><?php echo e($hoaDon->LichSuVanChuyen->last()->NguoiVanChuyen->HoTen??""); ?></b> </label>
                                     </div>
 
                                     <div class="space-4"></div>

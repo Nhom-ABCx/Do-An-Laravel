@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Example 1</title>
     <style>
         .clearfix:after {
@@ -21,9 +23,9 @@
             margin: 0 auto;
             color: #001028;
             background: #FFFFFF;
-            font-family: Arial, sans-serif;
             font-size: 12px;
-            font-family: Arial;
+            font-family: DejaVu Sans;
+            /* font chu de hien thi UTF-8 tren pdf */
         }
 
         header {
@@ -149,83 +151,60 @@
         <div id="logo">
             <img src="https://previews.123rf.com/images/nitarismayanti/nitarismayanti2006/nitarismayanti200600129/150364199-.jpg?fj=1">
         </div>
-        <h1>INVOICE 3-2-1</h1>
+        <h1>Người nhận: {{ $hoaDon->DiaChi->TenNguoiNhan }}</h1>
         <div id="company" class="clearfix">
-            <div>Company Name</div>
-            <div>455 Foggy Heights,<br /> AZ 85004, US</div>
+            <div>Suha Shop</div>
+            <div>Địa chỉ tại abc/xyz Đường 123</div>
             <div>(602) 519-0450</div>
-            <div><a href="mailto:company@example.com">company@example.com</a></div>
+            <div><a href="mailto:ShuhaShop@example.com">ShuhaShop@example.com</a></div>
         </div>
         <div id="project">
-            <div><span>PROJECT</span> Website development</div>
-            <div><span>CLIENT</span> John Doe</div>
-            <div><span>ADDRESS</span> 796 Silver Harbour, TX 79273, US</div>
-            <div><span>EMAIL</span> <a href="mailto:john@example.com">john@example.com</a></div>
-            <div><span>DATE</span> August 17, 2015</div>
-            <div><span>DUE DATE</span> September 17, 2015</div>
+            <div><span>Mã đơn hàng</span> {{ $hoaDon->id }}</div>
+            <div><span>Khách</span> {{ $hoaDon->DiaChi->KhachHang->HoTen ?? $hoaDon->DiaChi->KhachHang->Username }}</div>
+            <div><span>Địa chỉ giao</span>
+                {{ $hoaDon->DiaChi->DiaChiChiTiet }}
+                @if (!empty($hoaDon->DiaChi->PhuongXa)), {{ $hoaDon->DiaChi->PhuongXa }}  @endif
+                @if (!empty($hoaDon->DiaChi->QuanHuyen)), {{ $hoaDon->DiaChi->QuanHuyen }}  @endif
+                @if (!empty($hoaDon->DiaChi->TinhThanhPho)), {{ $hoaDon->DiaChi->TinhThanhPho }}  @endif
+            </div>
+            <div><span>Số điện thoại</span> {{ $hoaDon->DiaChi->Phone }}</div>
+            <div><span>Ngày đặt</span> {{ $hoaDon->created_at->format('d-m-Y') }}</div>
         </div>
     </header>
     <main>
         <table>
             <thead>
                 <tr>
-                    <th class="service">SERVICE</th>
-                    <th class="desc">DESCRIPTION</th>
-                    <th>PRICE</th>
-                    <th>QTY</th>
-                    <th>TOTAL</th>
+                    <th class="service">Sản phẩm</th>
+                    <th class="desc">Số lượng</th>
+                    <th>Giá bán</th>
+                    <th>Giá giảm voucher</th>
+                    <th>Thành tiền</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach ($dsChiTietHD as $item)
+                    <tr>
+                        <td class="service">{{ $item->SanPham->TenSanPham }}</td>
+                        <td class="qty">{{ $item->SoLuong }}</td>
+                        <td class="unit">{{ number_format($item->GiaBan) }}</td>
+                        <td class="unit">{{ number_format($item->GiaGiam) }}</td>
+                        <td class="total">{{ number_format($item->ThanhTien) }}</td>
+                    </tr>
+                @endforeach
                 <tr>
-                    <td class="service">Design</td>
-                    <td class="desc">Creating a recognizable design solution based on the company's existing visual identity</td>
-                    <td class="unit">$40.00</td>
-                    <td class="qty">26</td>
-                    <td class="total">$1,040.00</td>
-                </tr>
-                <tr>
-                    <td class="service">Development</td>
-                    <td class="desc">Developing a Content Management System-based Website</td>
-                    <td class="unit">$40.00</td>
-                    <td class="qty">80</td>
-                    <td class="total">$3,200.00</td>
-                </tr>
-                <tr>
-                    <td class="service">SEO</td>
-                    <td class="desc">Optimize the site for search engines (SEO)</td>
-                    <td class="unit">$40.00</td>
-                    <td class="qty">20</td>
-                    <td class="total">$800.00</td>
-                </tr>
-                <tr>
-                    <td class="service">Training</td>
-                    <td class="desc">Initial training sessions for staff responsible for uploading web content</td>
-                    <td class="unit">$40.00</td>
-                    <td class="qty">4</td>
-                    <td class="total">$160.00</td>
-                </tr>
-                <tr>
-                    <td colspan="4">SUBTOTAL</td>
-                    <td class="total">$5,200.00</td>
-                </tr>
-                <tr>
-                    <td colspan="4">TAX 25%</td>
-                    <td class="total">$1,300.00</td>
-                </tr>
-                <tr>
-                    <td colspan="4" class="grand total">GRAND TOTAL</td>
-                    <td class="grand total">$6,500.00</td>
+                    <td colspan="4" class="grand total">Tổng tiền ({{$hoaDon->TongSoLuong}} SP)</td>
+                    <td class="grand total">{{$hoaDon->TongTien}}</td>
                 </tr>
             </tbody>
         </table>
         <div id="notices">
-            <div>NOTICE:</div>
-            <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+            <div>Lưu ý:</div>
+            <div class="notice">Lưu ý gì gì đó đó</div>
         </div>
     </main>
     <footer>
-        Invoice was created on a computer and is valid without the signature and seal.
+        Hóa đơn này được tạo trên máy tính, nó hợp lệ không cần chữ ký và con dấu.
     </footer>
 </body>
 

@@ -173,8 +173,8 @@ class HoaDonController extends Controller
 
     public function HoaDonPDF(HoaDon $hoaDon)
     {
-        //return view('HoaDon.HoaDon-pdf');
-        $pdf = PDF::loadView('HoaDon.HoaDon-pdf');
+        $dsChiTietHD = CT_HoaDon::where("HoaDonId", $hoaDon->id)->get();
+        $pdf = PDF::loadView('HoaDon.HoaDon-pdf',["hoaDon"=>$hoaDon,"dsChiTietHD" => $dsChiTietHD]);
         return $pdf->stream();
         //return $pdf->download('file-pdf.pdf');
         //return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('HoaDon.HoaDon-pdf',[])->stream();
