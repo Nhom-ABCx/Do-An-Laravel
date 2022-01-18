@@ -29,6 +29,6 @@ class HoaDon extends Model
     }
     public function LichSuVanChuyen()
     {
-        return $this->hasMany(LichSuVanChuyen::class, 'HoaDonId');
+        return $this->hasMany(LichSuVanChuyen::class, 'HoaDonId')->orderBy("created_at");
     }
 }

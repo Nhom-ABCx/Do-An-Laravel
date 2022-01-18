@@ -192,6 +192,7 @@ class CreateDatabase extends Migration
             $table->Id();
             $table->foreignId('HoaDonId');
             $table->foreignId('NguoiVanChuyenId');
+            $table->string('MoTa');
             $table->boolean('TrangThai')->nullable();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
