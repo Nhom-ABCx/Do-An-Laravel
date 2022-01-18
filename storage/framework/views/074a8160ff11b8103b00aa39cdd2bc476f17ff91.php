@@ -566,7 +566,6 @@
         <script type="text/javascript">
             window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
         </script>
-        <![endif]-->
 
             <script type="text/javascript">
                 if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +

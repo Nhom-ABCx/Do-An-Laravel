@@ -118,7 +118,12 @@
 @section('scriptThisPage')
 
     <script src="/storage/assets/js/chosen.jquery.min.js"></script>
+    {{-- dialog --}}
+    <script src="/storage/assets/js/bootbox.min.js"></script>
+    {{-- dialog --}}
+
     <!-- inline scripts related to this page -->
+
     {{-- datatable script --}}
     <script type="text/javascript">
         jQuery(function($) {
@@ -180,4 +185,28 @@
     </script>
     {{-- datatable script End --}}
 
+    {{-- show arler dialog --}}
+    <script type="text/javascript">
+        jQuery(function($) {
+            $(".bootbox-options").on(ace.click_event, function() {
+                bootbox.dialog({
+                    message: "<span class='bigger-110'>Bạn có chắc chắn muốn xóa vĩnh viễn mục này ??? <i class='icon-exclamation-sign red bigger-130'></i></span>",
+                    buttons: {
+                        "button": {
+                            "label": "Hủy",
+                            "className": "btn-sm"
+                        },
+                        "danger": {
+                            "label": "Xác nhận xóa",
+                            "className": "btn-sm btn-danger",
+                            "callback": function() {
+                                $("#form").submit()
+                            }
+                        },
+                    }
+                });
+            });
+        });
+    </script>
+    {{-- show arler dialog end --}}
 @endsection

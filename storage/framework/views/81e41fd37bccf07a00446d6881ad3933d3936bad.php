@@ -85,7 +85,7 @@
                                         <label class="col-sm-3"> <b><?php echo e($hoaDon->id); ?></b> </label>
 
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-female pink"></i> Người vận chuyển lần cuối </label>
-                                        <label class="col-sm-5"> <b><?php echo e($hoaDon->LichSuVanChuyen->last()->NguoiVanChuyen->HoTen); ?></b> </label>
+                                        <label class="col-sm-5"> <b><?php echo e($hoaDon->LichSuVanChuyen->last()->NguoiVanChuyen->HoTen??""); ?></b> </label>
                                     </div>
 
                                     <div class="space-4"></div>
@@ -207,9 +207,14 @@
                                         <div class="clearfix form-actions">
                                             <div class="col-md-9">
                                                 <button class="btn btn-success" type="submit">
-                                                    Xác nhận chuyển tiếp trạng thái
+                                                    Xác nhận chuyển tiếp trạng thái   
                                                     <i class="icon-ok bigger-110"></i>
                                                 </button>
+
+                                                <a href="<?php echo e(route('HoaDon.PDF', $hoaDon)); ?>" class="btn btn-danger">
+                                                    Xuất file PDF   
+                                                    <i class="icon-file-text bigger-110"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     <?php endif; ?>
@@ -240,7 +245,7 @@
                                         <tbody>
                                             <?php $__currentLoopData = $dsChiTietHD; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php
-                                                    App\Http\Controllers\SanPhamController::fixImage($item->SanPham)
+                                                    App\Http\Controllers\SanPhamController::fixImage($item->SanPham);
                                                 ?>
                                                 <tr>
                                                     <td class="center"><?php echo e($item->SanPham->id); ?></td>
@@ -291,7 +296,7 @@
                     {
                         "bSortable": false
                     }, //hinh anh
-                    null, null, null, null, null,null,
+                    null, null, null, null, null, null,
                 ]
             });
 
@@ -339,8 +344,8 @@
     
     <!-- page specific plugin scripts -->
     <!--[if lte IE 8]>
-                                                              <script src="assets/js/excanvas.min.js"></script>
-                                                              <![endif]-->
+                                                                      <script src="assets/js/excanvas.min.js"></script>
+                                                                      <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>

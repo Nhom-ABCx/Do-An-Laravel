@@ -113,7 +113,12 @@
 <?php $__env->startSection('scriptThisPage'); ?>
 
     <script src="/storage/assets/js/chosen.jquery.min.js"></script>
+    
+    <script src="/storage/assets/js/bootbox.min.js"></script>
+    
+
     <!-- inline scripts related to this page -->
+
     
     <script type="text/javascript">
         jQuery(function($) {
@@ -175,6 +180,30 @@
     </script>
     
 
+    
+    <script type="text/javascript">
+        jQuery(function($) {
+            $(".bootbox-options").on(ace.click_event, function() {
+                bootbox.dialog({
+                    message: "<span class='bigger-110'>Bạn có chắc chắn muốn xóa vĩnh viễn mục này ??? <i class='icon-exclamation-sign red bigger-130'></i></span>",
+                    buttons: {
+                        "button": {
+                            "label": "Hủy",
+                            "className": "btn-sm"
+                        },
+                        "danger": {
+                            "label": "Xác nhận xóa",
+                            "className": "btn-sm btn-danger",
+                            "callback": function() {
+                                $("#form").submit()
+                            }
+                        },
+                    }
+                });
+            });
+        });
+    </script>
+    
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\tranphuocvinh\laravel\Do-An-Laravel\resources\views/SanPham/SanPham-index.blade.php ENDPATH**/ ?>

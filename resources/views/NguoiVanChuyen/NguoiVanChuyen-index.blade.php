@@ -104,6 +104,7 @@
                                         </td>
                                         <td>{{ $item->DiaChi }}</td>
                                         <td>
+                                            {{-- {{ dd($item->HinhAnh) }} --}}
                                             <img src='{{ $item->HinhAnh }}' alt="{{ $item->HinhAnh }}" width='100'
                                                 height='100'>
                                         </td>
@@ -153,20 +154,20 @@
                                                         </li>
 
                                                         <!-- <li>
-                                                        <a href="{{ route('SanPham.edit', $item) }}" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                            <span class="green">
-                                                                <i class="icon-edit bigger-120"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
+                                                                <a href="{{ route('SanPham.edit', $item) }}" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                    <span class="green">
+                                                                        <i class="icon-edit bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
 
-                                                    <li>
-                                                        <form action="{{ route('SanPham.destroy', $item) }}" method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Delete"><i class="icon-trash bigger-120"></i></button>
-                                                        </form>
-                                                    </li> -->
+                                                            <li>
+                                                                <form action="{{ route('SanPham.destroy', $item) }}" method="post">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Delete"><i class="icon-trash bigger-120"></i></button>
+                                                                </form>
+                                                            </li> -->
                                                     </ul>
                                                 </div>
                                             </div>

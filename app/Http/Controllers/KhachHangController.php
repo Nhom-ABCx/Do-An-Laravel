@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KhachHang;
+use GrahamCampbell\ResultType\Result;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -87,7 +88,14 @@ class KhachHangController extends Controller
      */
     public function destroy(KhachHang $khachHang)
     {
-        //
+        // dd($khachHang);
+        $khachHang->delete();
+        return Redirect::route('KhachHang.index');
+    }
+    public function KhachHang_DS_Den(Request $request)
+    {
+        $data = KhachHang::onlyTrashed()->get();
+        return view('KhachHang.KhachHang-index', ['khachHang' => $data, 'request' => $request]);
     }
 
     public function showResetPassword_KhachHang($token)

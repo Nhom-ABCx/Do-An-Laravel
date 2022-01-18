@@ -21,6 +21,7 @@ class NguoiVanChuyenController extends Controller
         $donViVanChuyen = DonViVanChuyen::all();
         foreach ($data as $nvc)
             $this->fixImage($nvc);
+        // dd($data);
         return view('NguoiVanChuyen.NguoiVanChuyen-index', ['nvc' => $data, 'dvvc' => $donViVanChuyen]);
     }
 
@@ -71,7 +72,7 @@ class NguoiVanChuyenController extends Controller
             $nvc->HinhAnh = $request->file('HinhAnh')->store('assets/images/avatar/Shipper/' . $nvc->id, 'public');
             //cat chuoi ra, chi luu cai ten thoi
             $catChuoi = explode("/", $nvc->HinhAnh);
-            $nvc->HinhAnh = $catChuoi[3];
+            $nvc->HinhAnh = $catChuoi[5];
         }
         $nvc->save();
         return Redirect::route('NguoiVanChuyen.index');
@@ -118,7 +119,7 @@ class NguoiVanChuyenController extends Controller
             $nguoiVanChuyen->HinhAnh = $request->file('HinhAnh')->store('assets/images/avatar/Shipper/' . $nguoiVanChuyen->id, 'public');
             //cat chuoi ra, chi luu cai ten thoi
             $catChuoi = explode("/", $nguoiVanChuyen->HinhAnh);
-            $nguoiVanChuyen->HinhAnh = $catChuoi[3];
+            $nguoiVanChuyen->HinhAnh = $catChuoi[5];
         }
 
         // $input['password'] = bcrypt($input['password']);

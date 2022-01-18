@@ -40,13 +40,13 @@
             <div class="page-content">
                 <div class="row">
                     <form class="form-inline"
-                        action="{{ request()->is('KhuyenMaii/DaXoa') ? route('KhuyenMai.DaXoa') : route('KhuyenMai.index') }}"
+                        action="{{ request()->is('Khach_hang/dsden') ? route('KhachHang.dsDen') : route('KhachHang.index') }}"
                         method="get">
 
-                        @if (request()->is('KhuyenMaii/DaXoa'))
-                            <a class="btn btn-inverse" href="{{ route('KhuyenMai.index') }}"> Black</a>
+                        @if (request()->is('Khach_hang/dsden'))
+                            <a class="btn btn-inverse" href="{{ route('KhachHang.index') }}"> Black</a>
                         @else
-                            <a href="{{ route('KhuyenMai.DaXoa') }}" class="btn btn-inverse">
+                            <a href="{{ route('KhachHang.dsDen') }}" class="btn btn-inverse">
                                 <i class="icon-trash"></i>
                                 Danh sách đen
                             </a>
@@ -55,7 +55,7 @@
 
                     <hr>
                     <div class="table-header">
-                        Bảng Chương Trình Khuyến mãi
+                        Bảng khách hàng
                     </div>
 
                     <div class="table-responsive">
@@ -129,14 +129,24 @@
                                         <td>{{ $item->MatKhau }}</td>
                                         <td>{{ $item->HoTen }}</td>
                                         <td>{{ $item->NgaySinh }}</td>
-                                        <td>{{ $item->GioiTinh }}</td>
+                                        <td>
+                                            @if ($item->GioiTinh == 1)
+                                                <span>Nam</span>
+                                            @else
+                                                <span>Nữ</span>
+                                            @endif
+                                        </td>
                                         <td>{{ $item->DiaChi }}</td>
-                                        <td>{{ $item->HinhAnh }}</td>
-                                        <td>{{ $item->MatKhau }}</td>
+                                        <td>
+                                            <img src='/storage/assets/images/avatar/User/{{ $item->id }}/{{ $item->HinhAnh }}'
+                                                alt="{{ $item->HinhAnh }}" width='50' height='50'>
+
+                                        </td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
+                                        <td>{{ $item->deleted_at }}</td>
                                         {{-- <td>{{ $item->deleted_at }}</td> --}}
-                                        @if (request()->is('KhuyenMaii/DaXoa'))
+                                        {{-- @if (request()->is('KhuyenMaii/DaXoa'))
                                             <td>
 
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
@@ -144,71 +154,67 @@
                                                         method="post">
                                                         @csrf
                                                         {{-- @method("PUT") --}}
-                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i
-                                                                class="icon-undo bigger-130"></i></button>
-                                                    </form>
-                                                </div>
+                                        {{-- <button type="submit" class="btn-link blue" title="Khôi phục"><i
+                                                class="icon-undo bigger-130"></i></button>
+                                        </form>
+                    </div>
 
-                                            </td>
-                                        @else
-                                            <td>
-                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <a class="blue" href="#">
+                    </td>
+                @else --}}
+                                        <td>
+                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                {{-- <a class="blue" href="#">
                                                         <i class="fa fa-plus"></i>
-                                                    </a>
+                                                    </a> --}}
+                                                <form action="{{ route('KhachHang.destroy', $item) }}" method="post">
+                                                    {{-- {{ dd($item) }} --}}
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn-link red" title="Danh sách đen"><i
+                                                            class="icon-trash bigger-130"></i></button>
+                                                </form>
+                                            </div>
 
-                                                    <a class="green" href="{{ route('KhuyenMai.edit', $item) }}"
-                                                        title="Sữa">
-                                                        <i class="icon-pencil bigger-130"></i>
-                                                    </a>
-                                                    <form action="{{ route('KhuyenMai.destroy', $item) }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn-link red" title="Xoá"><i
-                                                                class="icon-trash bigger-130"></i></button>
-                                                    </form>
+                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                <div class="inline position-relative">
+                                                    <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                        data-toggle="dropdown">
+                                                        <i class="icon-caret-down icon-only bigger-120"></i>
+                                                    </button>
+
+                                                    <ul
+                                                        class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <li>
+                                                            <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                title="View">
+                                                                <span class="blue">
+                                                                    <i class="icon-zoom-in bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                title="Edit">
+                                                                <span class="green">
+                                                                    <i class="icon-edit bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                title="Delete">
+                                                                <span class="red">
+                                                                    <i class="icon-trash bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-
-                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                    <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
-                                                            data-toggle="dropdown">
-                                                            <i class="icon-caret-down icon-only bigger-120"></i>
-                                                        </button>
-
-                                                        <ul
-                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                            <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
-                                                                    title="View">
-                                                                    <span class="blue">
-                                                                        <i class="icon-zoom-in bigger-120"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
-                                                                    title="Edit">
-                                                                    <span class="green">
-                                                                        <i class="icon-edit bigger-120"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
-                                                                    title="Delete">
-                                                                    <span class="red">
-                                                                        <i class="icon-trash bigger-120"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        @endif
+                                            </div>
+                                        </td>
+                                        {{-- @endif --}}
 
                                     </tr>
                                 @endforeach
@@ -221,6 +227,74 @@
     </div><!-- /.main-content -->
 @endsection
 
+
 @section('scriptThisPage')
-    {{-- Đoạn script chỉ xài cho trang --}}
+    <script src="/storage/assets/js/chosen.jquery.min.js"></script>
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        jQuery(function($) {
+            var oTable1 = $('#sample-table-2').dataTable({
+                "aoColumns": [
+                    null,
+                    {
+                        "bSortable": false
+                    }, //mota
+                    null,
+                    null, null, null,
+                    //hinh anh
+                    null, {
+                        "bSortable": false
+                    },
+                    {
+                        "bSortable": false
+                    },
+                    null, null, {
+                        "bSortable": false
+                    }, {
+                        "bSortable": false
+                    },
+
+                ]
+            });
+
+            $('table th input:checkbox').on('click', function() {
+                var that = this;
+                $(this).closest('table').find('tr > td:first-child input:checkbox')
+                    .each(function() {
+                        this.checked = that.checked;
+                        $(this).closest('tr').toggleClass('selected');
+                    });
+
+            });
+
+
+            $('[data-rel="tooltip"]').tooltip({
+                placement: tooltip_placement
+            });
+
+            function tooltip_placement(context, source) {
+                var $source = $(source);
+                var $parent = $source.closest('table')
+                var off1 = $parent.offset();
+                var w1 = $parent.width();
+
+                var off2 = $source.offset();
+                var w2 = $source.width();
+
+                if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
+                return 'left';
+            }
+        })
+        $('[data-rel=tooltip]').tooltip({
+            container: 'body'
+        });
+        $(".chosen-select").chosen();
+        $('#chosen-multiple-style').on('click', function(e) {
+            var target = $(e.target).find('input[type=radio]');
+            var which = parseInt(target.val());
+            if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
+            else $('#form-field-select-4').removeClass('tag-input-style');
+        });
+    </script>
+
 @endsection
