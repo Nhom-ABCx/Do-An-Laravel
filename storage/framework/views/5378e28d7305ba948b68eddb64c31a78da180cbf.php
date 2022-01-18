@@ -69,42 +69,49 @@
                                     Danh sách sản phẩm
                                 </a>
                             </li>
+
+                            <li>
+                                <a data-toggle="tab" href="#LichSuVanChuyen">
+                                    <i class="blue icon-archive bigger-150"></i>
+                                    Lịch sử vận chuyển
+                                </a>
+                            </li>
                         </ul>
 
                         <div class="tab-content">
                             <div id="ChiTiet" class="tab-pane in active">
-                                <form class="form-horizontal" role="form" action="<?php echo e(route('SanPham.store')); ?>" method="post" enctype="multipart/form-data">
+                                <form class="form-horizontal" role="form" action="<?php echo e(route('HoaDon.update', $hoaDon)); ?>" method="post" enctype="multipart/form-data">
                                     <?php echo csrf_field(); ?>
-                                    
+                                    <?php echo method_field('PUT'); ?>
                                     <div class="form-group">
-                                        <label class="col-sm-2" for="form-field-1"> Mã đơn hàng </label>
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-adn red"></i> Mã đơn hàng </label>
                                         <label class="col-sm-3"> <b><?php echo e($hoaDon->id); ?></b> </label>
 
-                                        <label class="col-sm-2" for="form-field-1"> Người vận chuyển </label>
-                                        <label class="col-sm-5"> <b>Tên của người vận chuyển (chưa update)</b> </label>
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-female pink"></i> Người vận chuyển lần cuối </label>
+                                        <label class="col-sm-5"> <b><?php echo e($hoaDon->LichSuVanChuyen->last()->NguoiVanChuyen->HoTen); ?></b> </label>
                                     </div>
 
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2" for="form-field-1"> Khách hàng </label>
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-user blue"></i> Khách hàng </label>
                                         <label class="col-sm-3"> <b><?php echo e($hoaDon->DiaChi->KhachHang->HoTen ?? $hoaDon->DiaChi->KhachHang->Username); ?></b> </label>
 
-                                        <label class="col-sm-2" for="form-field-1"> Trạng thái vận chuyển </label>
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-fighter-jet blue"></i> Trạng thái vận chuyển </label>
                                         <label class="col-sm-5"> <b>Trạng thái đang vận chuyển lúc này (chưa update)</b> </label>
                                     </div>
 
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2" for="form-field-1"> Người nhận dùm </label>
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-user blue"></i> Người nhận dùm </label>
                                         <label class="col-sm-3"> <b><?php echo e($hoaDon->DiaChi->TenNguoiNhan); ?></b> </label>
                                     </div>
 
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2" for="form-field-1"> Địa chỉ giao </label>
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-location-arrow purple"></i> Địa chỉ giao </label>
                                         <label class="col-sm-3"> <b><?php echo e($hoaDon->DiaChi->DiaChiChiTiet); ?>
 
                                                 <?php if(!empty($hoaDon->DiaChi->PhuongXa)): ?>, <?php echo e($hoaDon->DiaChi->PhuongXa); ?>  <?php endif; ?>
@@ -116,14 +123,14 @@
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2" for="form-field-1"> Số điện thoại </label>
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-mobile-phone green"></i> Số điện thoại </label>
                                         <label class="col-sm-3"> <b><?php echo e($hoaDon->DiaChi->Phone); ?></b> </label>
                                     </div>
 
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2" for="form-field-1"> Phương thức thanh toán </label>
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-credit-card green"></i> Phương thức thanh toán </label>
                                         <label class="col-sm-3">
                                             <b>
                                                 <?php switch($hoaDon->PhuongThucThanhToan):
@@ -152,17 +159,20 @@
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2" for="form-field-1"> Ngày đặt </label>
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-calendar purple"></i> Ngày đặt </label>
                                         <label class="col-sm-3"> <b><?php echo e($hoaDon->created_at); ?></b> </label>
                                     </div>
 
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2" for="form-field-1"> Trạng thái </label>
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-exclamation-sign"></i> Trạng thái </label>
                                         <label class="col-sm-3">
-                                                <?php switch($hoaDon->TrangThai):
-                                                case (1): ?>
+                                            <?php switch($hoaDon->TrangThai):
+                                                case (0): ?>
+                                                    <span class="label label-danger arrowed">0 Đang chờ xác nhận</span>
+                                                <?php break; ?>
+                                                <?php case (1): ?>
                                                     <span class="label arrowed">1 Đang xử lý</span>
                                                 <?php break; ?>
                                                 <?php case (2): ?>
@@ -183,40 +193,84 @@
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2" for="form-field-1"> Tổng số lượng </label>
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-bar-chart"></i> Tổng số lượng </label>
                                         <label class="col-sm-3"> <b><?php echo e($hoaDon->TongSoLuong); ?></b> </label>
                                     </div>
 
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2" for="form-field-1"> Tổng thanh toán </label>
-                                        <label class="col-sm-3"> <b><?php echo e($hoaDon->TongTien); ?></b> </label>
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-money red"></i> Tổng thanh toán </label>
+                                        <label class="col-sm-3"> <b><?php echo e(number_format($hoaDon->TongTien)); ?> VNĐ</b> </label>
                                     </div>
 
-                                    <div class="space-4"></div>
+                                    <?php if($hoaDon->TrangThai != 4): ?>
+                                        <div class="space-4"></div>
 
-                                    <div class="clearfix form-actions">
-                                        <div class="col-md-9">
-                                            <button class="btn btn-info" type="submit">
-                                                <i class="icon-ok bigger-110"></i>
-                                                Submit
-                                            </button>
-
-                                            &nbsp; &nbsp; &nbsp;
-                                            <button class="btn" type="reset">
-                                                <i class="icon-undo bigger-110"></i>
-                                                Reset
-                                            </button>
+                                        <div class="clearfix form-actions">
+                                            <div class="col-md-9">
+                                                <button class="btn btn-success" type="submit">
+                                                    Xác nhận chuyển tiếp trạng thái
+                                                    <i class="icon-ok bigger-110"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    <?php endif; ?>
                                     <!-- PAGE CONTENT ENDS -->
-
                                 </form>
                             </div>
 
                             <div id="DanhSachSanPham" class="tab-pane">
-                                <?php echo $__env->make("layouts.Table-SanPham", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                <p><i class="icon-ok bigger-110 green"></i> Giá bán ra = Giá gốc - Giá đang khuyến mãi</p>
+                                <p><i class="icon-ok bigger-110 green"></i> Thành tiền = Số lượng * (Giá bán - Giá giảm voucher)</p>
+                                <div class="table-responsive">
+                                    <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="center"><i class="icon-adn"></i>Id</th>
+                                                <th><i class="icon-align-left"></i>Tên sản phẩm</th>
+                                                <th><i class="icon-picture"></i>Hình ảnh</th>
+                                                <th><i class="icon-bar-chart"></i>Số lượng</th>
+                                                <th><i class="icon-money"></i>Giá gốc</th>
+                                                <th><i class="icon-money"></i>Giá đang khuyến mãi</th>
+                                                <th><i class="icon-money"></i>Giá bán ra</th>
+                                                <th><i class="icon-money"></i>Giá giảm voucher</th>
+                                                <th><i class="icon-bar-chart"></i>Thành tiền</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <?php $__currentLoopData = $dsChiTietHD; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php
+                                                    App\Http\Controllers\SanPhamController::fixImage($item->SanPham)
+                                                ?>
+                                                <tr>
+                                                    <td class="center"><?php echo e($item->SanPham->id); ?></td>
+                                                    <td><?php echo e($item->SanPham->TenSanPham); ?></td>
+                                                    <td>
+                                                        <img src='<?php echo e($item->SanPham->HinhAnh); ?>' alt="<?php echo e($item->SanPham->HinhAnh); ?>" width='100' height='100'>
+                                                    </td>
+                                                    <td><?php echo e($item->SoLuong); ?></td>
+                                                    <td><?php echo e(number_format($item->SanPham->GiaBan)); ?></td>
+                                                    <td><?php echo e(count($item->SanPham->CTChuongTrinhKM) ? number_format($item->SanPham->CTChuongTrinhKM->first()->GiamGia) : 0); ?></td>
+                                                    <td><?php echo e(number_format($item->GiaBan)); ?></td>
+                                                    <td><?php echo e(number_format($item->GiaGiam)); ?></td>
+                                                    <td><?php echo e(number_format($item->ThanhTien)); ?></td>
+                                                    <td></td>
+                                                </tr>
+
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div id="LichSuVanChuyen" class="tab-pane">
+                                <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
                             </div>
                         </div>
                     </div>
@@ -239,15 +293,8 @@
                     null, null,
                     {
                         "bSortable": false
-                    }, //mota
-                    null, null, null,
-                    {
-                        "bSortable": false
                     }, //hinh anh
-                    null, null, null, null, null,
-                    {
-                        "bSortable": false
-                    }
+                    null, null, null, null, null,null,
                 ]
             });
 
@@ -295,8 +342,8 @@
     
     <!-- page specific plugin scripts -->
     <!--[if lte IE 8]>
-                                                  <script src="assets/js/excanvas.min.js"></script>
-                                                  <![endif]-->
+                                                              <script src="assets/js/excanvas.min.js"></script>
+                                                              <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>

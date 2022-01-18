@@ -98,9 +98,10 @@
                                     <?php for($i = 0; $i < count($conversation); $i++): ?>
 
                                         <li>
-                                            <a href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation[$i]->KhachHangId); ?>">
-                                                <img src="/storage/assets/images/avatar/User/<?php echo e($conversation[$i]->KhachHangId); ?>/<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>" class="msg-photo"
-                                                    alt="Alex's Avatar" />
+                                            <a
+                                                href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation[$i]->KhachHangId); ?>">
+                                                <img src="/storage/assets/images/avatar/User/<?php echo e($conversation[$i]->KhachHangId); ?>/<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>"
+                                                    class="msg-photo" alt="Alex's Avatar" />
                                                 <span class="msg-body">
                                                     <span class="msg-title">
                                                         <span class="blue">
@@ -135,7 +136,8 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?>" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?>"
+                                    alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     <?php if(auth()->guard()->check()): ?>
@@ -286,7 +288,8 @@
                         </a>
                     </li>
 
-                    <li class="<?php echo e(request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : ''); ?>">
+                    <li
+                        class="<?php echo e(request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : ''); ?>">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Khuyến mãi </span>
@@ -315,7 +318,8 @@
                         </a>
                     </li>
                     
-                    <li class="<?php echo e(request()->is('DonViVanChuyen') || request()->is('NguoiVanChuyen') ? 'active open' : ''); ?>">
+                    <li
+                        class="<?php echo e(request()->is('DonViVanChuyen') || request()->is('NguoiVanChuyen') ? 'active open' : ''); ?>">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-fighter-jet"></i>
                             <span class="menu-text"> Vận chuyển </span>
@@ -340,8 +344,16 @@
                     
                     <li class="<?php echo e(request()->is('BinhLuan') ? 'active' : ''); ?>">
                         <a href="<?php echo e(route('BinhLuan.index')); ?>">
-                            <i class="icon-edit"></i>
+                            <i class="icon-edit "></i>
                             <span class="menu-text"> Bình Luận SP</span>
+
+                        </a>
+                    </li>
+                    
+                    <li class="<?php echo e(request()->is('KhachHang') ? 'active' : ''); ?>">
+                        <a href="<?php echo e(route('KhachHang.index')); ?>">
+                            <i class="icon-user"></i>
+                            <span class="menu-text"> Khách Hàng</span>
 
                         </a>
                     </li>
@@ -561,32 +573,32 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-                    <script type="text/javascript">
-                        window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                    </script>
-                    <![endif]-->
-                                        <script type="text/javascript">
-                                            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                                        </script>
-                                        <![endif]-->
-
+                                <script type="text/javascript">
+                                    window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                                </script>
+                                <![endif]-->
         <script type="text/javascript">
-            if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
-                "/script>");
+            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
         </script>
-        <script src="/storage/assets/js/bootstrap.min.js"></script>
-        <script src="/storage/assets/js/typeahead-bs2.min.js"></script>
+        <![endif]-->
 
-        <!-- page specific plugin scripts -->
-        <script src="/storage/assets/js/jquery.dataTables.min.js"></script>
-        <script src="/storage/assets/js/jquery.dataTables.bootstrap.js"></script>
-        <script src="/storage/assets/js/date-time/bootstrap-datepicker.min.js"></script>
-        <script src="/storage/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
-        <script src="/storage/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
-        <!-- ace scripts -->
+                    <script type="text/javascript">
+                        if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
+                            "/script>");
+                    </script>
+                    <script src="/storage/assets/js/bootstrap.min.js"></script>
+                    <script src="/storage/assets/js/typeahead-bs2.min.js"></script>
 
-        <script src="/storage/assets/js/ace-elements.min.js"></script>
-        <script src="/storage/assets/js/ace.min.js"></script>
+                    <!-- page specific plugin scripts -->
+                    <script src="/storage/assets/js/jquery.dataTables.min.js"></script>
+                    <script src="/storage/assets/js/jquery.dataTables.bootstrap.js"></script>
+                    <script src="/storage/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+                    <script src="/storage/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+                    <script src="/storage/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
+                    <!-- ace scripts -->
+
+                    <script src="/storage/assets/js/ace-elements.min.js"></script>
+                    <script src="/storage/assets/js/ace.min.js"></script>
     <?php echo $__env->yieldSection(); ?>
 
     <?php echo $__env->yieldContent('scriptThisPage'); ?>

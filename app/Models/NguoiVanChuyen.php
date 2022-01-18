@@ -24,4 +24,8 @@ class NguoiVanChuyen extends Model
     public function DonViVanChuyen(){
         return $this->belongsTo(DonViVanChuyen::class,'DonViVanChuyenId');
     }
+    public function LichSuVanChuyen()
+    {
+        return $this->hasMany(LichSuVanChuyen::class, 'NguoiVanChuyenId');
+    }
 }

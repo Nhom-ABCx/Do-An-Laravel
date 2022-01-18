@@ -19,7 +19,9 @@ class KhachHangController extends Controller
      */
     public function index()
     {
-        //
+        $data = KhachHang::all();
+        // dd($data);
+        return view("KhachHang.KhachHang-index", ["khachHang" => $data]);
     }
 
     /**
@@ -90,8 +92,8 @@ class KhachHangController extends Controller
 
     public function showResetPassword_KhachHang($token)
     {
-        $khachHang=KhachHang::where("remember_token",$token)->first();
-        if(!empty($khachHang))
+        $khachHang = KhachHang::where("remember_token", $token)->first();
+        if (!empty($khachHang))
             return view('Login.ResetPassword', ['khachHang' => $khachHang]);
         return "Tai khoan cua ban co ve da duoc thay doi~";
     }
@@ -103,7 +105,7 @@ class KhachHangController extends Controller
         ]);
 
         $khachHang->fill(['MatKhau' => $request['MatKhau']]);
-        $khachHang->remember_token=Str::random(60); //tao moi 1 token
+        $khachHang->remember_token = Str::random(60); //tao moi 1 token
         $khachHang->save();
 
         return Redirect::route('Home.Susscess');
@@ -141,7 +143,7 @@ class KhachHangController extends Controller
         $khachHang = KhachHang::create([
             'Username'       => strip_tags($request['Username']),
             'Email'       => strip_tags($request['Email']),
-            'Phone'=>"0",
+            'Phone' => "0",
             //'MatKhau'         => Hash::make($request['MatKhau']),
             'MatKhau'         => strip_tags($request['MatKhau']),
             'HoTen' => '', //cap nhat sau
@@ -163,7 +165,7 @@ class KhachHangController extends Controller
         $validate = Validator::make($request->all(), [
             'Username' => ["required"],
             'Email' => ["required", "Email"],
-            'Phone' => ['required','numeric'],
+            'Phone' => ['required', 'numeric'],
             //'MatKhau'=>["required"],
             'HoTen' => [],
             'NgaySinh' => ["date"],
@@ -247,6 +249,6 @@ class KhachHangController extends Controller
     {
         if (!empty($khachHang))
             return response()->json($khachHang, 200);
-        return response()->json(["Error"=>"Item Not found"],404);
+        return response()->json(["Error" => "Item Not found"], 404);
     }
 }

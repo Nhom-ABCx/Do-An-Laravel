@@ -37,13 +37,26 @@
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                <form class="form-inline" method="get">
+                                <form class="form-inline"
+                                    action="<?php echo e(request()->is('DonViVanChuyenn/DaXoa') ? route('DonViVanChuyen.DaXoa') : route('DonViVanChuyen.index')); ?>"
+                                    method="get">
                                     <a href="<?php echo e(route('DonViVanChuyen.create')); ?>" class="btn btn-success">
                                         <i class="icon-plus"></i>
                                         Thêm đơn vị vận chuyển
                                     </a>
+
+                                    <?php if(request()->is('DonViVanChuyenn/DaXoa')): ?>
+                                        <a class="btn btn-inverse" href="<?php echo e(route('DonViVanChuyen.index')); ?>">
+                                            Black</a>
+                                    <?php else: ?>
+                                        <a href="<?php echo e(route('DonViVanChuyen.DaXoa')); ?>" class="btn btn-inverse">
+                                            <i class="icon-trash"></i>
+                                            Đơn vị vận chuyển đã xoá
+                                        </a>
+                                    <?php endif; ?>
                                 </form>
                             </div>
+
                         </div>
                     </div>
 
@@ -70,7 +83,10 @@
                                         <i class="icon-time bigger-110 hidden-480"></i>
                                         Update_at
                                     </th>
-                                    
+                                    <th>
+                                        <i class="icon-time bigger-110 hidden-480"></i>
+                                        Deleted_at
+                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -86,69 +102,83 @@
                                         <td><?php echo e($item->Phone); ?></td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
-                                        
-
-                                        <td>
-                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#">
-                                                    <i class="icon-zoom-in bigger-130"></i>
-                                                </a>
-
-                                                <a class="green"
-                                                    href="<?php echo e(route('DonViVanChuyen.edit', $item)); ?>">
-                                                    <i class="icon-pencil bigger-130"></i>
-                                                </a>
-
-                                                <form action="<?php echo e(route('DonViVanChuyen.destroy', $item)); ?>"
-                                                    method="post">
-                                                    <?php echo csrf_field(); ?>
-                                                    <?php echo method_field('DELETE'); ?>
-                                                    <button type="submit" class="btn-link red"><i
-                                                            class="icon-trash bigger-130"></i></button>
-                                                </form>
-                                            </div>
-
-                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle"
-                                                        data-toggle="dropdown">
-                                                        <i class="icon-caret-down icon-only bigger-120"></i>
-                                                    </button>
-
-                                                    <ul
-                                                        class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                        <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip"
-                                                                title="View">
-                                                                <span class="blue">
-                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="<?php echo e(route('SanPham.edit', $item)); ?>"
-                                                                class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                <span class="green">
-                                                                    <i class="icon-edit bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <form action="<?php echo e(route('SanPham.destroy', $item)); ?>"
-                                                                method="post">
-                                                                <?php echo csrf_field(); ?>
-                                                                <?php echo method_field('DELETE'); ?>
-                                                                <button type="submit" class="tooltip-error btn-link red"
-                                                                    data-rel="tooltip" title="Delete"><i
-                                                                        class="icon-trash bigger-120"></i></button>
-                                                            </form>
-                                                        </li>
-                                                    </ul>
+                                        <td><?php echo e($item->deleted_at); ?></td>
+                                        <?php if(request()->is('DonViVanChuyenn/DaXoa')): ?>
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <form action="<?php echo e(route('DonViVanChuyen.KhoiPhuc', $item->id)); ?>"
+                                                        method="post">
+                                                        <?php echo csrf_field(); ?>
+                                                        
+                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i
+                                                                class="icon-undo bigger-130"></i></button>
+                                                    </form>
                                                 </div>
-                                            </div>
-                                        </td>
+                                            </td>
+                                        <?php else: ?>
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <a class="blue" href="#">
+                                                        <i class="icon-zoom-in bigger-130"></i>
+                                                    </a>
+
+                                                    <a class="green"
+                                                        href="<?php echo e(route('DonViVanChuyen.edit', $item)); ?>">
+                                                        <i class="icon-pencil bigger-130"></i>
+                                                    </a>
+
+                                                    <form action="<?php echo e(route('DonViVanChuyen.destroy', $item)); ?>"
+                                                        method="post">
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('DELETE'); ?>
+                                                        <button type="submit" class="btn-link red"><i
+                                                                class="icon-trash bigger-130"></i></button>
+                                                    </form>
+                                                </div>
+
+                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                    <div class="inline position-relative">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
+                                                            <i class="icon-caret-down icon-only bigger-120"></i>
+                                                        </button>
+
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <li>
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
+                                                                    <span class="blue">
+                                                                        <i class="icon-zoom-in bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="<?php echo e(route('SanPham.edit', $item)); ?>"
+                                                                    class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                    <span class="green">
+                                                                        <i class="icon-edit bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <form action="<?php echo e(route('SanPham.destroy', $item)); ?>"
+                                                                    method="post">
+                                                                    <?php echo csrf_field(); ?>
+                                                                    <?php echo method_field('DELETE'); ?>
+                                                                    <button type="submit" class="tooltip-error btn-link red"
+                                                                        data-rel="tooltip" title="Delete"><i
+                                                                            class="icon-trash bigger-120"></i></button>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        <?php endif; ?>
+
                                     </tr>
 
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

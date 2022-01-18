@@ -119,4 +119,6 @@ Route::middleware('auth')->group(function () {
     Route::get("WidgetThongBao", function () {
         return view("WidgetThongBao");
     });
+    // khach hang
+    Route::resource('KhachHang', KhachHangController::class);
 });
