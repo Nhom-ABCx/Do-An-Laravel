@@ -39,6 +39,7 @@
                                     <th><i class="icon-picture"></i>Hình ảnh</th>
                                     <th><i class="icon-apple"></i>Hãng sãn xuất</th>
                                     <th><i class="icon-android"></i>Loại sản phẩm</th>
+                                    <th><i class="icon-android"></i>Lượt mua</th>
                                     <th><i class="icon-android"></i>Trung bình đánh giá</th>
                                     {{-- <th>
                     <i class="icon-time bigger-110 hidden-480"></i>
@@ -65,7 +66,8 @@
                                         </td>
                                         <td>{{ $item->HangSanXuat->Ten }}</td>
                                         <td>{{ $item->LoaiSanPham->TenLoai }}</td>
-                                        <td>{{ $item->Star }}</td>
+                                        <td>{{ $item->LuotMua }}</td>
+                                        <td><span id="rateMe1"></span></td>
                                         {{-- <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td> --}}
                                         @if (request()->is('SanPhamm/DaXoa'))

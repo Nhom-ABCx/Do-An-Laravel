@@ -39,6 +39,7 @@
                                     <th><i class="icon-picture"></i>Hình ảnh</th>
                                     <th><i class="icon-apple"></i>Hãng sãn xuất</th>
                                     <th><i class="icon-android"></i>Loại sản phẩm</th>
+                                    <th><i class="icon-android"></i>Lượt mua</th>
                                     <th><i class="icon-android"></i>Trung bình đánh giá</th>
                                     
                                     <th></th>
@@ -58,6 +59,7 @@
                                         </td>
                                         <td><?php echo e($item->HangSanXuat->Ten); ?></td>
                                         <td><?php echo e($item->LoaiSanPham->TenLoai); ?></td>
+                                        <td><?php echo e($item->LuotMua); ?></td>
                                         <td><?php echo e($item->Star); ?></td>
                                         
                                         <?php if(request()->is('SanPhamm/DaXoa')): ?>
