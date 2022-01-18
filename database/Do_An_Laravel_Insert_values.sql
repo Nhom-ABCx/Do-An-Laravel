@@ -76,13 +76,13 @@ insert into Don_Vi_Van_Chuyens(TenDonViVanChuyen,Website,Email,Phone)values(N'Ke
 insert into Don_Vi_Van_Chuyens(TenDonViVanChuyen,Website,Email,Phone)values(N'SShip','https://sship.vn/','sship@gmail.com','1900969684')								   ;
 insert into Don_Vi_Van_Chuyens(TenDonViVanChuyen,Website,Email,Phone)values(N'Shipchung','https://www.shipchung.vn/','shipchung@gmail.com','1900636030')				   ;
 
-insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0484658492',1,N'Nguyễn Huy Tự','1979-12-03',1,null,null,'2021-11-21');
-insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0927281266',2,N'Cô Bắc','1981-04-07',0,null,null,'2021-11-21')		;
-insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0325167511',3,N'Mạc Thị Bưởi','1998-07-05',1,null,null,'2021-11-21')	;
-insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0204082858',4,N'Lê Công Kiều','2001-11-09',1,null,null,'2021-11-21')	;
-insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0506788273',5,N'Hồ Hảo Hớn','1985-12-02',1,null,null,'2021-11-21')	;
-insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0506781231',6,N'Trần Phi Long','1997-06-12',0,null,null,'2021-11-21');
-insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0298123123',7,N'Dương Tấn Tài','1989-08-29',1,null,null,'2021-11-21');
+insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0484658492',1,N'Nguyễn Huy Tự','1979-12-03',1,null,'thumb-1','2021-11-21');
+insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0927281266',2,N'Cô Bắc','1981-04-07',0,null,'thumb-1','2021-11-21')		;
+insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0325167511',3,N'Mạc Thị Bưởi','1998-07-05',1,null,'thumb-1','2021-11-21')	;
+insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0204082858',4,N'Lê Công Kiều','2001-11-09',1,null,'thumb-1','2021-11-21')	;
+insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0506788273',5,N'Hồ Hảo Hớn','1985-12-02',1,null,'thumb-1','2021-11-21')	;
+insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0506781231',6,N'Trần Phi Long','1997-06-12',0,null,'thumb-1','2021-11-21');
+insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,created_at) values('0298123123',7,N'Dương Tấn Tài','1989-08-29',1,null,'thumb-1','2021-11-21');
 
 insert into Dia_Chis(KhachHangId,TenNguoiNhan,Phone,DiaChiChiTiet) select a.id,a.HoTen,a.Phone,a.DiaChi from khach_hangs as a;
 insert into Dia_Chis(KhachHangId,TenNguoiNhan,Phone,TinhThanhPho,QuanHuyen,PhuongXa,DiaChiChiTiet,CodeTinhThanhPho,CodeQuanHuyen,CodePhuongXa)

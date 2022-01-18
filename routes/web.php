@@ -120,5 +120,16 @@ Route::middleware('auth')->group(function () {
     Route::get("WidgetThongBao", function () {
         return view("WidgetThongBao");
     });
+    // khach hang
+    Route::resource('KhachHang', KhachHangController::class, [
+        'parameters' => [
+            'KhachHang' => 'khachHang'
+        ]
+    ]);
+    Route::get("Khach_hang/dsden", [KhachHangController::class, "KhachHang_DS_Den"])->name("KhachHang.dsDen");
+    // Route::post("HoaDon/KhoiPhuc/{id}", [HoaDonController::class, "KhoiPhucHoaDon"])->name("HoaDon.KhoiPhuc");
+
+    //Route số sao sản phẩm
+    Route::get("San_Pham/Sao",[SanPhamController::class,"SoSao"])->name('SanPham.SoSao');
     Route::get("HoaDon/{hoaDon}/PDF", [HoaDonController::class, "HoaDonPDF"])->name("HoaDon.PDF");
 });

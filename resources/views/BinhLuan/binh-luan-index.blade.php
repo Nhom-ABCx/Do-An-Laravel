@@ -85,7 +85,7 @@
                                         <i class="icon-time bigger-110 hidden-480"></i>
                                         Deleted-at
                                     </th>
-                                    {{-- <th></th> --}}
+                                    <th> </th>
                                 </tr>
                             </thead>
 
@@ -104,6 +104,7 @@
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td>{{ $item->deleted_at }}</td>
+
                                         @if (request()->is('BinhLuann/DaXoa'))
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
@@ -116,6 +117,8 @@
                                                     </form>
                                                 </div>
                                             </td>
+
+
                                         @else
                                             <td>
                                                 <form action="{{ route('BinhLuan.destroy', $item) }}" method="post">
@@ -124,17 +127,12 @@
                                                     <button type="submit" class="btn-link red"><i
                                                             class="icon-trash bigger-130"></i></button>
                                                 </form>
-                                            <td>
-                                        @endif
-                                        {{-- <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" type="button" class="btn btn-primary"
-                                                    data-toggle="modal" data-target="#exampleModalCenter">
-                                                    <i class="icon-zoom-in bigger-130"></i>
-                                                </a>
-                                                <!-- Button trigger modal -->
-                                            </div> --}}
+                                            </td>
 
-                                        {{-- </div> --}}
+
+                                        @endif
+
+
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -160,7 +158,10 @@
                     null,
                     null, null, null,
                     //hinh anh
-                    null, null
+                    null, {
+                        "bSortable": false
+                    },
+
                 ]
             });
 

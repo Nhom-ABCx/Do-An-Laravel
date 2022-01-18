@@ -304,9 +304,10 @@
                                     @for ($i = 0; $i < count($conversation); $i++)
 
                                         <li>
-                                            <a href="{{ route('Message.index') }}?KhachHangId={{ $conversation[$i]->KhachHangId }}">
-                                                <img src="/storage/assets/images/avatar/User/{{ $conversation[$i]->KhachHangId }}/{{ $conversation[$i]->KhachHang->HinhAnh }}" class="msg-photo"
-                                                    alt="Alex's Avatar" />
+                                            <a
+                                                href="{{ route('Message.index') }}?KhachHangId={{ $conversation[$i]->KhachHangId }}">
+                                                <img src="/storage/assets/images/avatar/User/{{ $conversation[$i]->KhachHangId }}/{{ $conversation[$i]->KhachHang->HinhAnh }}"
+                                                    class="msg-photo" alt="Alex's Avatar" />
                                                 <span class="msg-body">
                                                     <span class="msg-title">
                                                         <span class="blue">
@@ -341,7 +342,8 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="@auth{{ Auth::user()->HinhAnh }}@endauth" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="@auth{{ Auth::user()->HinhAnh }}@endauth"
+                                    alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     @auth
@@ -484,14 +486,17 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="#">
-                            <i class="icon-edit"></i>
-                            <span class="menu-text"> Forms </span>
+                    <li
+                        class="{{ request()->is('San_Pham/Sao') || request()->is('San_Pham/Sao') ? 'active open' : '' }}">
+
+                        <a href="{{ route('SanPham.SoSao') }}">
+                            <i class="icon-star"></i>
+                            <span class="menu-text"> Đánh giá sản phẩm </span>
                         </a>
                     </li>
 
-                    <li class="{{ request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : '' }}">
+                    <li
+                        class="{{ request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Khuyến mãi </span>
@@ -520,7 +525,8 @@
                         </a>
                     </li>
                     {{-- Van chuyen --}}
-                    <li class="{{ request()->is('DonViVanChuyen') || request()->is('NguoiVanChuyen') ? 'active open' : '' }}">
+                    <li
+                        class="{{ request()->is('DonViVanChuyen') || request()->is('NguoiVanChuyen') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-fighter-jet"></i>
                             <span class="menu-text"> Vận chuyển </span>
@@ -545,8 +551,16 @@
                     {{-- binh luan --}}
                     <li class="{{ request()->is('BinhLuan') ? 'active' : '' }}">
                         <a href="{{ route('BinhLuan.index') }}">
-                            <i class="icon-edit"></i>
+                            <i class="icon-edit "></i>
                             <span class="menu-text"> Bình Luận SP</span>
+
+                        </a>
+                    </li>
+                    {{-- binh luan --}}
+                    <li class="{{ request()->is('KhachHang') ? 'active' : '' }}">
+                        <a href="{{ route('KhachHang.index') }}">
+                            <i class="icon-user"></i>
+                            <span class="menu-text"> Khách Hàng</span>
 
                         </a>
                     </li>
@@ -556,7 +570,8 @@
 
                             <span class="menu-text">
                                 Calendar
-                                <span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
+                                <span class="badge badge-transparent tooltip-error"
+                                    title="2&nbsp;Important&nbsp;Events">
                                     <i class="icon-warning-sign red bigger-130"></i>
                                 </span>
                             </span>
@@ -675,7 +690,8 @@
                 </ul><!-- /.nav-list -->
 
                 <div class="sidebar-collapse" id="sidebar-collapse">
-                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
+                        data-icon2="icon-double-angle-right"></i>
                 </div>
 
                 <script type="text/javascript">
@@ -764,31 +780,32 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-                        <script type="text/javascript">
-                            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                        </script>
-                        <![endif]-->
+                                                            <script type="text/javascript">
+                                                                window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                                                            </script>
+                                                            <![endif]-->
         <script type="text/javascript">
             window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
         </script>
 
-            <script type="text/javascript">
-                if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
-                    "/script>");
-            </script>
-            <script src="/storage/assets/js/bootstrap.min.js"></script>
-            <script src="/storage/assets/js/typeahead-bs2.min.js"></script>
 
-            <!-- page specific plugin scripts -->
-            <script src="/storage/assets/js/jquery.dataTables.min.js"></script>
-            <script src="/storage/assets/js/jquery.dataTables.bootstrap.js"></script>
-            <script src="/storage/assets/js/date-time/bootstrap-datepicker.min.js"></script>
-            <script src="/storage/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
-            <script src="/storage/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
-            <!-- ace scripts -->
+        <script type="text/javascript">
+            if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
+                "/script>");
+        </script>
+        <script src="/storage/assets/js/bootstrap.min.js"></script>
+        <script src="/storage/assets/js/typeahead-bs2.min.js"></script>
 
-            <script src="/storage/assets/js/ace-elements.min.js"></script>
-            <script src="/storage/assets/js/ace.min.js"></script>
+        <!-- page specific plugin scripts -->
+        <script src="/storage/assets/js/jquery.dataTables.min.js"></script>
+        <script src="/storage/assets/js/jquery.dataTables.bootstrap.js"></script>
+        <script src="/storage/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+        <script src="/storage/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+        <script src="/storage/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
+        <!-- ace scripts -->
+
+        <script src="/storage/assets/js/ace-elements.min.js"></script>
+        <script src="/storage/assets/js/ace.min.js"></script>
     @show
 
     @yield('scriptThisPage')

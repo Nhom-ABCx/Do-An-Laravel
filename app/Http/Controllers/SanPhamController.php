@@ -175,7 +175,7 @@ class SanPhamController extends Controller
     }
     public function SanPhamDaXoa(Request $request)
     {
-        $data=SanPham::onlyTrashed()->get();
+        $data = SanPham::onlyTrashed()->get();
         if (!empty($request->input('TenSanPham')))
             $data = $data->where('TenSanPham', 'LIKE', '%' . Str::of($request->input('TenSanPham'))->trim() . '%');
         if (!empty($request->input('HangSanXuatId')))
@@ -193,13 +193,13 @@ class SanPhamController extends Controller
     }
     public function KhoiPhucSanPham($id)
     {
-        $sanPham=SanPham::onlyTrashed()->find($id);
+        $sanPham = SanPham::onlyTrashed()->find($id);
         $sanPham->restore();
         return Redirect::route('SanPham.DaXoa');
     }
     public function XoaVinhVienSanPham($id)
     {
-        $sanPham=SanPham::onlyTrashed()->find($id);
+        $sanPham = SanPham::onlyTrashed()->find($id);
         $sanPham->forceDelete();
         return Redirect::route('SanPham.DaXoa');
     }
@@ -215,6 +215,17 @@ class SanPhamController extends Controller
             $sanPham->HinhAnh = Storage::url("assets/images/product-image/" . $sanPham->HinhAnh);
         else
             $sanPham->HinhAnh = Storage::url("assets/images/404/Img_error.png");
+    }
+    //lay so  sao cua san pham
+    public function SoSao()
+    {
+        $data = SanPham::all();
+        $this::Them_Star_Vao_ListSanPham($data);
+        foreach ($data as $value) {
+            $this->fixImage($value);
+        }
+        // dd($data);
+        return view('SanPham.SanPham-sao', ['sanPhamSao' => $data]);
     }
     //ham ho tro API
     public static function Them_Star_Vao_ListSanPham($ListSanPham)
@@ -385,11 +396,11 @@ class SanPhamController extends Controller
         return response()->json($dsSanPham, 200);
     }
 
-    #api binh luan
-    public function API_Get_BinhLuan_SanPham(Request $request)
-    {
-        $data = BinhLuan::where("SanPhamId", $request["SanPhamId"])->get();
-        dd($data);
-        return response()->json($data, 200);
-    }
+    // #api binh luan
+    // public function API_Get_BinhLuan_SanPham(Request $request)
+    // {
+    //     $data = BinhLuan::where("SanPhamId", $request["SanPhamId"])->get();
+    //     dd($data);
+    //     return response()->json($data, 200);
+    // }
 }

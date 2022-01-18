@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="/storage/assets/css/font-awesome.min.css" />
 
     <!--[if IE 7]>
-  <link rel="stylesheet" href="/storage/assets/css/font-awesome-ie7.min.css" />
-  <![endif]-->
+      <link rel="stylesheet" href="/storage/assets/css/font-awesome-ie7.min.css" />
+      <![endif]-->
 
     <!-- page specific plugin styles -->
     <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.full.min.css" />
@@ -36,8 +36,8 @@
     <link rel="stylesheet" href="/storage/assets/css/ace-skins.min.css" />
 
     <!--[if lte IE 8]>
-  <link rel="stylesheet" href="/storage/assets/css/ace-ie.min.css" />
-  <![endif]-->
+      <link rel="stylesheet" href="/storage/assets/css/ace-ie.min.css" />
+      <![endif]-->
 
     <!-- inline styles related to this page -->
 
@@ -48,9 +48,9 @@
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
     <!--[if lt IE 9]>
-  <script src="/storage/assets/js/html5shiv.js"></script>
-  <script src="/storage/assets/js/respond.min.js"></script>
-  <![endif]-->
+      <script src="/storage/assets/js/html5shiv.js"></script>
+      <script src="/storage/assets/js/respond.min.js"></script>
+      <![endif]-->
 </head>
 
 <body>
@@ -98,9 +98,10 @@
                                     <?php for($i = 0; $i < count($conversation); $i++): ?>
 
                                         <li>
-                                            <a href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation[$i]->KhachHangId); ?>">
-                                                <img src="/storage/assets/images/avatar/User/<?php echo e($conversation[$i]->KhachHangId); ?>/<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>" class="msg-photo"
-                                                    alt="Alex's Avatar" />
+                                            <a
+                                                href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation[$i]->KhachHangId); ?>">
+                                                <img src="/storage/assets/images/avatar/User/<?php echo e($conversation[$i]->KhachHangId); ?>/<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>"
+                                                    class="msg-photo" alt="Alex's Avatar" />
                                                 <span class="msg-body">
                                                     <span class="msg-title">
                                                         <span class="blue">
@@ -135,7 +136,8 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?>" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?>"
+                                    alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     <?php if(auth()->guard()->check()): ?>
@@ -279,14 +281,17 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="#">
-                            <i class="icon-edit"></i>
-                            <span class="menu-text"> Forms </span>
+                    <li
+                        class="<?php echo e(request()->is('San_Pham/Sao') || request()->is('San_Pham/Sao') ? 'active open' : ''); ?>">
+
+                        <a href="<?php echo e(route('SanPham.SoSao')); ?>">
+                            <i class="icon-star"></i>
+                            <span class="menu-text"> Đánh giá sản phẩm </span>
                         </a>
                     </li>
 
-                    <li class="<?php echo e(request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : ''); ?>">
+                    <li
+                        class="<?php echo e(request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : ''); ?>">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Khuyến mãi </span>
@@ -315,7 +320,8 @@
                         </a>
                     </li>
                     
-                    <li class="<?php echo e(request()->is('DonViVanChuyen') || request()->is('NguoiVanChuyen') ? 'active open' : ''); ?>">
+                    <li
+                        class="<?php echo e(request()->is('DonViVanChuyen') || request()->is('NguoiVanChuyen') ? 'active open' : ''); ?>">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-fighter-jet"></i>
                             <span class="menu-text"> Vận chuyển </span>
@@ -340,8 +346,16 @@
                     
                     <li class="<?php echo e(request()->is('BinhLuan') ? 'active' : ''); ?>">
                         <a href="<?php echo e(route('BinhLuan.index')); ?>">
-                            <i class="icon-edit"></i>
+                            <i class="icon-edit "></i>
                             <span class="menu-text"> Bình Luận SP</span>
+
+                        </a>
+                    </li>
+                    
+                    <li class="<?php echo e(request()->is('KhachHang') ? 'active' : ''); ?>">
+                        <a href="<?php echo e(route('KhachHang.index')); ?>">
+                            <i class="icon-user"></i>
+                            <span class="menu-text"> Khách Hàng</span>
 
                         </a>
                     </li>
@@ -561,14 +575,14 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-                    <script type="text/javascript">
-                        window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                    </script>
-                    <![endif]-->
-                                        <script type="text/javascript">
-                                            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                                        </script>
-                                        <![endif]-->
+                                                            <script type="text/javascript">
+                                                                window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                                                            </script>
+                                                            <![endif]-->
+        <script type="text/javascript">
+            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+        </script>
+
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
