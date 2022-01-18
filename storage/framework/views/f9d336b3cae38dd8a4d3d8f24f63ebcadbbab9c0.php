@@ -23,28 +23,31 @@
                                 <div class="jspPane" style="padding: 0px; top: 0px;">
                                     <ul class="ks-items">
                                         <?php $__empty_1 = true; $__currentLoopData = $dsCacCuocTroChuyen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $conversation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                                            <li class="ks-item <?php if($conversation->id == $request['KhachHangId']): ?> ks-active <?php endif; ?>">
-                                                <a href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation->KhachHangId); ?>">
-                                                    <span class="ks-avatar">
-                                                        <img src="/storage/assets/images/avatar/User/<?php echo e($conversation->KhachHangId); ?>/<?php echo e($conversation->KhachHang->HinhAnh); ?>" width="36" height="36">
-                                                    </span>
-                                                    <div class="ks-body">
-                                                        <div class="ks-name">
-                                                            <?php echo e($conversation->KhachHang->HoTen ?? $conversation->KhachHang->HoTen->Username); ?>
+                                            <?php if(!empty($conversation->KhachHang)): ?>
+                                                <li class="ks-item <?php if($conversation->id == $request['KhachHangId']): ?> ks-active <?php endif; ?>">
+                                                    <a href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation->KhachHangId); ?>">
+                                                        <span class="ks-avatar">
+                                                            <img src="/storage/assets/images/avatar/User/<?php echo e($conversation->KhachHangId); ?>/<?php echo e($conversation->KhachHang->HinhAnh); ?>" width="36"
+                                                                height="36">
+                                                        </span>
+                                                        <div class="ks-body">
+                                                            <div class="ks-name">
+                                                                <?php echo e($conversation->KhachHang->HoTen ?? $conversation->KhachHang->HoTen->Username); ?>
 
-                                                            <?php if(count($conversation->Message)): ?>
-                                                                <span class="ks-datetime"><?php echo e($conversation->Message->last()->created_at->diffForHumans()); ?></span>
-                                                            <?php endif; ?>
+                                                                <?php if(count($conversation->Message)): ?>
+                                                                    <span class="ks-datetime"><?php echo e($conversation->Message->last()->created_at->diffForHumans()); ?></span>
+                                                                <?php endif; ?>
+                                                            </div>
+                                                            <div class="ks-message">
+                                                                <?php if(!empty($conversation->mess->NhanVienId)): ?>
+                                                                    Bạn:
+                                                                <?php endif; ?>
+                                                                <?php echo e($conversation->mess->Body ?? ''); ?>...
+                                                            </div>
                                                         </div>
-                                                        <div class="ks-message">
-                                                            <?php if(!empty($conversation->mess->NhanVienId)): ?>
-                                                                Bạn:
-                                                            <?php endif; ?>
-                                                            <?php echo e($conversation->mess->Body ?? ''); ?>...
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
+                                                    </a>
+                                                </li>
+                                            <?php endif; ?>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                             Không có cuộc trò chuyện nào, hãy thử tạo mới 1 cuộc trò chuyện
                                         <?php endif; ?>
@@ -63,7 +66,7 @@
                     <div class="ks-messages ks-messenger__messages">
                         <div class="ks-header">
                             <div class="ks-description">
-                                <div class="ks-name">Trò chuyện với <?php echo e($khachHang->HoTen??$khachHang->Username); ?></div>
+                                <div class="ks-name">Trò chuyện với <?php echo e($khachHang->HoTen ?? $khachHang->Username); ?></div>
                                 <div class="ks-amount">2 thành viên</div>
                             </div>
                             <div class="ks-controls">
@@ -111,12 +114,11 @@
                                             <?php if(!empty($item->NhanVienId)): ?>
                                                 <li class="ks-item ks-from">
                                                     <span class="ks-avatar ks-online">
-                                                        <img src="<?php echo e($item->NhanVien->HinhAnh); ?>" width="36" height="36"
-                                                            class="rounded-circle">
+                                                        <img src="<?php echo e($item->NhanVien->HinhAnh); ?>" width="36" height="36" class="rounded-circle">
                                                     </span>
                                                     <div class="ks-body">
                                                         <div class="ks-header">
-                                                            <span class="ks-name"><?php echo e($item->NhanVien->HoTen??$item->NhanVien->Username); ?></span>
+                                                            <span class="ks-name"><?php echo e($item->NhanVien->HoTen ?? $item->NhanVien->Username); ?></span>
                                                             <span class="ks-datetime"><?php echo e($item->created_at->diffForHumans()); ?></span>
                                                         </div>
                                                         <div class="ks-message"><?php echo e($item->Body); ?></div>
@@ -125,11 +127,12 @@
                                             <?php else: ?>
                                                 <li class="ks-item ks-self">
                                                     <span class="ks-avatar ks-offline">
-                                                        <img src="/storage/assets/images/avatar/User/<?php echo e($item->KhachHang->id); ?>/<?php echo e($item->KhachHang->HinhAnh); ?>" width="36" height="36" class="rounded-circle">
+                                                        <img src="/storage/assets/images/avatar/User/<?php echo e($item->KhachHang->id); ?>/<?php echo e($item->KhachHang->HinhAnh); ?>" width="36" height="36"
+                                                            class="rounded-circle">
                                                     </span>
                                                     <div class="ks-body">
                                                         <div class="ks-header">
-                                                            <span class="ks-name"><?php echo e($item->KhachHang->HoTen??$item->KhachHang->Username); ?></span>
+                                                            <span class="ks-name"><?php echo e($item->KhachHang->HoTen ?? $item->KhachHang->Username); ?></span>
                                                             <span class="ks-datetime"><?php echo e($item->created_at->diffForHumans()); ?></span>
                                                         </div>
                                                         <div class="ks-message"><?php echo e($item->Body); ?></div>
@@ -302,7 +305,7 @@
                             <div class="ks-item">
                                 <div class="ks-name">Phone Number</div>
                                 <div class="ks-text">
-                                    <?php echo e($khachHang->Phone??""); ?>
+                                    <?php echo e($khachHang->Phone ?? ''); ?>
 
                                 </div>
                             </div>

@@ -94,6 +94,7 @@
                                         </td>
                                         <td><?php echo e($item->DiaChi); ?></td>
                                         <td>
+                                            
                                             <img src='<?php echo e($item->HinhAnh); ?>' alt="<?php echo e($item->HinhAnh); ?>" width='100'
                                                 height='100'>
                                         </td>
@@ -143,20 +144,20 @@
                                                         </li>
 
                                                         <!-- <li>
-                                                        <a href="<?php echo e(route('SanPham.edit', $item)); ?>" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                            <span class="green">
-                                                                <i class="icon-edit bigger-120"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
+                                                                <a href="<?php echo e(route('SanPham.edit', $item)); ?>" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                    <span class="green">
+                                                                        <i class="icon-edit bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
 
-                                                    <li>
-                                                        <form action="<?php echo e(route('SanPham.destroy', $item)); ?>" method="post">
-                                                            <?php echo csrf_field(); ?>
-                                                            <?php echo method_field('DELETE'); ?>
-                                                            <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Delete"><i class="icon-trash bigger-120"></i></button>
-                                                        </form>
-                                                    </li> -->
+                                                            <li>
+                                                                <form action="<?php echo e(route('SanPham.destroy', $item)); ?>" method="post">
+                                                                    <?php echo csrf_field(); ?>
+                                                                    <?php echo method_field('DELETE'); ?>
+                                                                    <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Delete"><i class="icon-trash bigger-120"></i></button>
+                                                                </form>
+                                                            </li> -->
                                                     </ul>
                                                 </div>
                                             </div>

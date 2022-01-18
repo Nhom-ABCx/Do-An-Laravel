@@ -26,27 +26,30 @@
                                 <div class="jspPane" style="padding: 0px; top: 0px;">
                                     <ul class="ks-items">
                                         @forelse ($dsCacCuocTroChuyen as $conversation)
-                                            <li class="ks-item @if ($conversation->id == $request['KhachHangId']) ks-active @endif">
-                                                <a href="{{ route('Message.index') }}?KhachHangId={{ $conversation->KhachHangId }}">
-                                                    <span class="ks-avatar">
-                                                        <img src="/storage/assets/images/avatar/User/{{ $conversation->KhachHangId }}/{{ $conversation->KhachHang->HinhAnh }}" width="36" height="36">
-                                                    </span>
-                                                    <div class="ks-body">
-                                                        <div class="ks-name">
-                                                            {{ $conversation->KhachHang->HoTen ?? $conversation->KhachHang->HoTen->Username }}
-                                                            @if (count($conversation->Message))
-                                                                <span class="ks-datetime">{{ $conversation->Message->last()->created_at->diffForHumans() }}</span>
-                                                            @endif
+                                            @if (!empty($conversation->KhachHang))
+                                                <li class="ks-item @if ($conversation->id == $request['KhachHangId']) ks-active @endif">
+                                                    <a href="{{ route('Message.index') }}?KhachHangId={{ $conversation->KhachHangId }}">
+                                                        <span class="ks-avatar">
+                                                            <img src="/storage/assets/images/avatar/User/{{ $conversation->KhachHangId }}/{{ $conversation->KhachHang->HinhAnh }}" width="36"
+                                                                height="36">
+                                                        </span>
+                                                        <div class="ks-body">
+                                                            <div class="ks-name">
+                                                                {{ $conversation->KhachHang->HoTen ?? $conversation->KhachHang->HoTen->Username }}
+                                                                @if (count($conversation->Message))
+                                                                    <span class="ks-datetime">{{ $conversation->Message->last()->created_at->diffForHumans() }}</span>
+                                                                @endif
+                                                            </div>
+                                                            <div class="ks-message">
+                                                                @if (!empty($conversation->mess->NhanVienId))
+                                                                    Bạn:
+                                                                @endif
+                                                                {{ $conversation->mess->Body ?? '' }}...
+                                                            </div>
                                                         </div>
-                                                        <div class="ks-message">
-                                                            @if (!empty($conversation->mess->NhanVienId))
-                                                                Bạn:
-                                                            @endif
-                                                            {{ $conversation->mess->Body ?? '' }}...
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
+                                                    </a>
+                                                </li>
+                                            @endif
                                         @empty
                                             Không có cuộc trò chuyện nào, hãy thử tạo mới 1 cuộc trò chuyện
                                         @endforelse
@@ -128,7 +131,7 @@
                     <div class="ks-messages ks-messenger__messages">
                         <div class="ks-header">
                             <div class="ks-description">
-                                <div class="ks-name">Trò chuyện với {{$khachHang->HoTen??$khachHang->Username}}</div>
+                                <div class="ks-name">Trò chuyện với {{ $khachHang->HoTen ?? $khachHang->Username }}</div>
                                 <div class="ks-amount">2 thành viên</div>
                             </div>
                             <div class="ks-controls">
@@ -176,28 +179,28 @@
                                             @if (!empty($item->NhanVienId))
                                                 <li class="ks-item ks-from">
                                                     <span class="ks-avatar ks-online">
-                                                        <img src="{{ $item->NhanVien->HinhAnh }}" width="36" height="36"
-                                                            class="rounded-circle">
+                                                        <img src="{{ $item->NhanVien->HinhAnh }}" width="36" height="36" class="rounded-circle">
                                                     </span>
                                                     <div class="ks-body">
                                                         <div class="ks-header">
-                                                            <span class="ks-name">{{$item->NhanVien->HoTen??$item->NhanVien->Username}}</span>
-                                                            <span class="ks-datetime">{{$item->created_at->diffForHumans()}}</span>
+                                                            <span class="ks-name">{{ $item->NhanVien->HoTen ?? $item->NhanVien->Username }}</span>
+                                                            <span class="ks-datetime">{{ $item->created_at->diffForHumans() }}</span>
                                                         </div>
-                                                        <div class="ks-message">{{$item->Body}}</div>
+                                                        <div class="ks-message">{{ $item->Body }}</div>
                                                     </div>
                                                 </li>
                                             @else
                                                 <li class="ks-item ks-self">
                                                     <span class="ks-avatar ks-offline">
-                                                        <img src="/storage/assets/images/avatar/User/{{ $item->KhachHang->id }}/{{ $item->KhachHang->HinhAnh }}" width="36" height="36" class="rounded-circle">
+                                                        <img src="/storage/assets/images/avatar/User/{{ $item->KhachHang->id }}/{{ $item->KhachHang->HinhAnh }}" width="36" height="36"
+                                                            class="rounded-circle">
                                                     </span>
                                                     <div class="ks-body">
                                                         <div class="ks-header">
-                                                            <span class="ks-name">{{$item->KhachHang->HoTen??$item->KhachHang->Username}}</span>
-                                                            <span class="ks-datetime">{{$item->created_at->diffForHumans()}}</span>
+                                                            <span class="ks-name">{{ $item->KhachHang->HoTen ?? $item->KhachHang->Username }}</span>
+                                                            <span class="ks-datetime">{{ $item->created_at->diffForHumans() }}</span>
                                                         </div>
-                                                        <div class="ks-message">{{$item->Body}}</div>
+                                                        <div class="ks-message">{{ $item->Body }}</div>
                                                     </div>
                                                 </li>
                                             @endif
@@ -354,26 +357,26 @@
                                     <img src="/storage/assets/images/avatar/User/{{ $khachHang->id }}/{{ $khachHang->HinhAnh }}" width="36" height="36" class="rounded-circle">
                                 </span>
                                 <span class="ks-name">
-                                    {{$khachHang->HoTen}}
+                                    {{ $khachHang->HoTen }}
                                 </span>
                             </div>
 
                             <div class="ks-item">
                                 <div class="ks-name">Username</div>
                                 <div class="ks-text">
-                                    {{$khachHang->Username}}
+                                    {{ $khachHang->Username }}
                                 </div>
                             </div>
                             <div class="ks-item">
                                 <div class="ks-name">Email</div>
                                 <div class="ks-text">
-                                    {{$khachHang->Email}}
+                                    {{ $khachHang->Email }}
                                 </div>
                             </div>
                             <div class="ks-item">
                                 <div class="ks-name">Phone Number</div>
                                 <div class="ks-text">
-                                    {{$khachHang->Phone??""}}
+                                    {{ $khachHang->Phone ?? '' }}
                                 </div>
                             </div>
                         </div>
@@ -381,13 +384,13 @@
                             <div class="ks-item">
                                 <div class="ks-name">Ngày tạo</div>
                                 <div class="ks-text">
-                                    {{$khachHang->created_at->format('jS F Y h:i:s A')}}
+                                    {{ $khachHang->created_at->format('jS F Y h:i:s A') }}
                                 </div>
                             </div>
                             <div class="ks-item">
                                 <div class="ks-name">Khoảng</div>
                                 <div class="ks-text">
-                                    {{$khachHang->created_at->diffForHumans()}}
+                                    {{ $khachHang->created_at->diffForHumans() }}
                                 </div>
                             </div>
                         </div>
