@@ -190,9 +190,10 @@ insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'Sản phẩm rấ
 insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'Sản phẩm tốt',1,28);
 insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'giao hang nhanh, sản phẩm tốt',2,29);
 insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'hoàn hảo',1,32);
+
 insert into Lich_Su_Van_Chuyens(HoaDonId,NguoiVanChuyenId,TrangThai,created_at)
 SELECT a.Id,b.Id,0,(SELECT FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP() - UNIX_TIMESTAMP('2021-01-01')) + UNIX_TIMESTAMP('2021-01-01')))
-FROM Hoa_Dons as a,Nguoi_Van_Chuyens as b ORDER BY RAND() LIMIT 50;
+FROM Hoa_Dons as a,Nguoi_Van_Chuyens as b ORDER BY RAND() LIMIT 200;
 
 insert into conversations(NhanVienId,KhachHangId,created_at) select 1,a.id,current_timestamp() from khach_hangs as a;
 insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'Hello Admin',2,2,'2021-1-1');
@@ -209,7 +210,7 @@ insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'khong m
 
 update Lich_Su_Van_Chuyens a, (select * from hoa_dons where TrangThai=4) b
 set a.TrangThai=1
-where a.id=(select id from lich_su_van_chuyens where HoaDonId=b.id ORDER BY created_at DESC LIMIT 1)
+where a.id=(select id from lich_su_van_chuyens where HoaDonId=b.id ORDER BY created_at DESC LIMIT 1);
 
 update CT_Hoa_Dons
 set GiaBan=(select GiaBan from San_Phams where Id=SanPhamId);

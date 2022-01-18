@@ -107,7 +107,7 @@
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-fighter-jet blue"></i> Trạng thái vận chuyển </label>
                                         <label class="col-sm-5">
                                             <b>
-                                                @if ($hoaDon->LichSuVanChuyen->last()->TrangThai)
+                                                @if ($hoaDon->LichSuVanChuyen->last()->TrangThai??0)
                                                     <span class="label label-success arrowed-in arrowed-in-right">Thành công</span>
                                                 @else
                                                     <span class="label arrowed">Chưa thành công</span>
@@ -307,7 +307,7 @@
                                                 <tr>
                                                     <td class="center">{{ $item->NguoiVanChuyen->DonViVanChuyen->TenDonViVanChuyen }}</td>
                                                     <td>{{ $item->NguoiVanChuyen->HoTen }}</td>
-                                                    <td>{{ $item->NguoiVanChuyen->NgaySinh }}</td>
+                                                    <td>{{ date_format(date_create($item->NguoiVanChuyen->NgaySinh),"Y-m-d") }}</td>
                                                     <td>
                                                         @if ($item->NguoiVanChuyen->GioiTinh)
                                                             Nam
