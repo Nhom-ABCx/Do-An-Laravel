@@ -1,7 +1,7 @@
 {{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
 @extends('layouts.Layout')
 
-@section('title', 'Page Title')
+@section('title', 'Hóa đơn')
 
 @section('headThisPage')
     {{-- datetime picker --}}

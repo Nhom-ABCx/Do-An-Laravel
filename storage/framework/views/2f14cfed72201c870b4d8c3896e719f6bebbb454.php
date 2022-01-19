@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Page Title'); ?>
+<?php $__env->startSection('title', 'Hóa đơn'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
     

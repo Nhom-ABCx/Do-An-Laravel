@@ -13,14 +13,8 @@
                 <th><i class="icon-bar-chart"></i>Lượt mua</th>
                 <th><i class="icon-apple"></i>Hãng sãn xuất</th>
                 <th><i class="icon-android"></i>Loại sản phẩm</th>
-                <th>
-                    <i class="icon-time bigger-110 hidden-480"></i>
-                    Create_at
-                </th>
-                <th>
-                    <i class="icon-time bigger-110 hidden-480"></i>
-                    Update_at
-                </th>
+                <th><i class="icon-time bigger-110 hidden-480"></i>Create_at</th>
+                <th><i class="icon-time bigger-110 hidden-480"></i>Update_at</th>
                 <th></th>
             </tr>
         </thead>

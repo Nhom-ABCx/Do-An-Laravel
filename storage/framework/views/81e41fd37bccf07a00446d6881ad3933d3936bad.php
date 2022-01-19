@@ -97,11 +97,16 @@
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-fighter-jet blue"></i> Trạng thái vận chuyển </label>
                                         <label class="col-sm-5">
                                             <b>
-                                                <?php if($hoaDon->LichSuVanChuyen->last()->TrangThai??0): ?>
-                                                    <span class="label label-success arrowed-in arrowed-in-right">Thành công</span>
-                                                <?php else: ?>
-                                                    <span class="label arrowed">Chưa thành công</span>
-                                                <?php endif; ?>
+                                                <?php switch($hoaDon->LichSuVanChuyen->last()->TrangThai??-1):
+                                                    case (0): ?>
+                                                        <span class="label arrowed">Chưa thành công</span>
+                                                    <?php break; ?>
+                                                    <?php case (1): ?>
+                                                        <span class="label label-success arrowed-in arrowed-in-right">Thành công</span>
+                                                    <?php break; ?>
+                                                    <?php default: ?>
+                                                    Chưa giao
+                                                <?php endswitch; ?>
                                             </b>
                                         </label>
                                     </div>
@@ -298,7 +303,7 @@
                                                 <tr>
                                                     <td class="center"><?php echo e($item->NguoiVanChuyen->DonViVanChuyen->TenDonViVanChuyen); ?></td>
                                                     <td><?php echo e($item->NguoiVanChuyen->HoTen); ?></td>
-                                                    <td><?php echo e(date_format(date_create($item->NguoiVanChuyen->NgaySinh),"Y-m-d")); ?></td>
+                                                    <td><?php echo e(date_format(date_create($item->NguoiVanChuyen->NgaySinh), 'Y-m-d')); ?></td>
                                                     <td>
                                                         <?php if($item->NguoiVanChuyen->GioiTinh): ?>
                                                             Nam
@@ -408,8 +413,8 @@
     
     <!-- page specific plugin scripts -->
     <!--[if lte IE 8]>
-                                                                                                  <script src="assets/js/excanvas.min.js"></script>
-                                                                                                  <![endif]-->
+                                                                                                      <script src="assets/js/excanvas.min.js"></script>
+                                                                                                      <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>

@@ -194,7 +194,7 @@
                 @endforeach
                 <tr>
                     <td colspan="4" class="grand total">Tổng tiền ({{$hoaDon->TongSoLuong}} SP)</td>
-                    <td class="grand total">{{$hoaDon->TongTien}}</td>
+                    <td class="grand total">{{number_format($hoaDon->TongTien)}}</td>
                 </tr>
             </tbody>
         </table>

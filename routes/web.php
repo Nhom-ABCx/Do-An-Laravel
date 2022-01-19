@@ -117,6 +117,7 @@ Route::middleware('auth')->group(function () {
     Route::get("HoaDonn/DaHuy", [HoaDonController::class, "HoaDonDaHuy"])->name("HoaDon.DaHuy");
     Route::post("HoaDon/KhoiPhuc/{id}", [HoaDonController::class, "KhoiPhucHoaDon"])->name("HoaDon.KhoiPhuc");
     Route::get("HoaDonn/DaGiao", [HoaDonController::class, "HoaDonDaGiao"])->name("HoaDon.DaGiao");
+    Route::get("HoaDon/{hoaDon}/PDF", [HoaDonController::class, "HoaDonPDF"])->name("HoaDon.PDF");
 
     Route::get("WidgetThongBao", function () {
         return view("WidgetThongBao");
@@ -127,10 +128,14 @@ Route::middleware('auth')->group(function () {
             'KhachHang' => 'khachHang'
         ]
     ]);
+<<<<<<< HEAD
     Route::get("Khach_hang/dsden", [KhachHangController::class, "KhachHang_DS_Den"])->name("KhachHang.dsDen");
     Route::post("Khach_hang/KhoiPhuc/{id}", [KhachHangController::class, "KhoiPhucKhachHang"])->name("KhachHang.KhoiPhuc");
+=======
+    Route::get("KhachHang/dsden", [KhachHangController::class, "KhachHang_DS_Den"])->name("KhachHang.dsDen");
+    // Route::post("HoaDon/KhoiPhuc/{id}", [HoaDonController::class, "KhoiPhucHoaDon"])->name("HoaDon.KhoiPhuc");
+>>>>>>> 1ceb29724e6ec9c3a770b5b92fac61b721dc81bf
 
     //Route số sao sản phẩm
-    Route::get("San_Pham/Sao",[SanPhamController::class,"SoSao"])->name('SanPham.SoSao');
-    Route::get("HoaDon/{hoaDon}/PDF", [HoaDonController::class, "HoaDonPDF"])->name("HoaDon.PDF");
+    Route::get("SanPham/Sao", [SanPhamController::class, "SoSao"])->name('SanPham.SoSao');
 });

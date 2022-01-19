@@ -176,18 +176,6 @@ class CreateDatabase extends Migration
             $table->foreign('SanPhamId')->references('id')->on('san_phams');
             $table->unique(['KhachHangId', 'SanPhamId']);
         });
-        Schema::create('rep_binh_luans', function (Blueprint $table) {
-            $table->Id();
-            $table->foreignId('BinhLuanId');
-            $table->foreignId('KhachHangId')->nullable();
-            $table->foreignId('NhanVienId')->nullable();
-            $table->string('NoiDung');
-            $table->timestamps();
-            $table->softDeletes(); //nay la trang thai xoa
-            $table->foreign('BinhLuanId')->references('id')->on('binh_luans');
-            $table->foreign('KhachHangId')->references('id')->on('khach_hangs');
-            $table->foreign('NhanVienId')->references('id')->on('nhan_viens');
-        });
         Schema::create('lich_su_van_chuyens', function (Blueprint $table) {
             $table->Id();
             $table->foreignId('HoaDonId');
@@ -231,6 +219,29 @@ class CreateDatabase extends Migration
             $table->foreign('KhachHangId')->references('id')->on('khach_hangs');
             $table->foreign('ConversationId')->references('id')->on('conversations');
         });
+        Schema::create('hoa_don_nhaps', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('NhanVienId'); //nhập bởi ai
+            $table->string('NhaCungCap'); // ai là người cung cấp (do ko có bảng nhà cung cấp nên ghi chuỗi)
+            $table->integer('TongSoLuong');
+            $table->double('TongTien');
+            $table->tinyInteger('TrangThai');
+            $table->timestamps();
+            $table->softDeletes(); //nay la trang thai xoa
+            $table->foreign('NhanVienId')->references('id')->on('nhan_viens');
+        });
+        Schema::create('ct_hoa_don_nhaps', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('SanPhamId'); //nhập sản phẩm nào
+            $table->foreignId('HoaDonNhapId'); //được nhập từ hóa đơn nào
+            $table->integer('SoLuong');
+            $table->double('GiaNhap'); //giá nhập vào bao nhiêu
+            $table->double('ThanhTien');
+            $table->timestamps();
+            $table->softDeletes(); //nay la trang thai xoa
+            $table->foreign('SanPhamId')->references('id')->on('san_phams');
+            $table->foreign('HoaDonNhapId')->references('id')->on('hoa_don_nhaps');
+        });
     }
 
     /**
@@ -259,5 +270,7 @@ class CreateDatabase extends Migration
         Schema::dropIfExists('dia_chis');
         Schema::dropIfExists('conversations');
         Schema::dropIfExists('messages');
+        Schema::dropIfExists('hoa_don_nhaps');
+        Schema::dropIfExists('ct_hoa_don_nhaps');
     }
 }

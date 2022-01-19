@@ -1,7 +1,7 @@
 {{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
 @extends('layouts.Layout')
 
-@section('title', 'Page Title')
+@section('title', 'Chi tiết hóa đơn')
 
 @section('headThisPage')
     <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
@@ -107,11 +107,16 @@
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-fighter-jet blue"></i> Trạng thái vận chuyển </label>
                                         <label class="col-sm-5">
                                             <b>
-                                                @if ($hoaDon->LichSuVanChuyen->last()->TrangThai??0)
-                                                    <span class="label label-success arrowed-in arrowed-in-right">Thành công</span>
-                                                @else
-                                                    <span class="label arrowed">Chưa thành công</span>
-                                                @endif
+                                                @switch($hoaDon->LichSuVanChuyen->last()->TrangThai??-1)
+                                                    @case(0)
+                                                        <span class="label arrowed">Chưa thành công</span>
+                                                    @break
+                                                    @case(1)
+                                                        <span class="label label-success arrowed-in arrowed-in-right">Thành công</span>
+                                                    @break
+                                                    @default
+                                                        Chưa giao
+                                                @endswitch
                                             </b>
                                         </label>
                                     </div>
@@ -307,7 +312,7 @@
                                                 <tr>
                                                     <td class="center">{{ $item->NguoiVanChuyen->DonViVanChuyen->TenDonViVanChuyen }}</td>
                                                     <td>{{ $item->NguoiVanChuyen->HoTen }}</td>
-                                                    <td>{{ date_format(date_create($item->NguoiVanChuyen->NgaySinh),"Y-m-d") }}</td>
+                                                    <td>{{ date_format(date_create($item->NguoiVanChuyen->NgaySinh), 'Y-m-d') }}</td>
                                                     <td>
                                                         @if ($item->NguoiVanChuyen->GioiTinh)
                                                             Nam
@@ -417,8 +422,8 @@
     {{-- thông báo error --}}
     <!-- page specific plugin scripts -->
     <!--[if lte IE 8]>
-                                                                                                  <script src="assets/js/excanvas.min.js"></script>
-                                                                                                  <![endif]-->
+                                                                                                          <script src="assets/js/excanvas.min.js"></script>
+                                                                                                          <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
