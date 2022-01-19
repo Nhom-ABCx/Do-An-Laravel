@@ -98,7 +98,8 @@
                                     <?php for($i = 0; $i < count($conversation); $i++): ?>
                                         <?php if(!empty($conversation[$i]->KhachHang)): ?>
                                             <li>
-                                                <a href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation[$i]->KhachHangId); ?>">
+                                                <a
+                                                    href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation[$i]->KhachHangId); ?>">
                                                     <img src="/storage/assets/images/avatar/User/<?php echo e($conversation[$i]->KhachHangId); ?>/<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>"
                                                         class="msg-photo" alt="Alex's Avatar" />
                                                     <span class="msg-body">
@@ -135,7 +136,8 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?>" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="<?php if(auth()->guard()->check()): ?><?php echo e(Auth::user()->HinhAnh); ?><?php endif; ?>"
+                                    alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     <?php if(auth()->guard()->check()): ?>
@@ -248,7 +250,7 @@
                         </a>
                     </li>
 
-                    <li class="<?php echo e(request()->is('SanPham') || request()->is('SanPham') ? 'active open' : ''); ?>">
+                    <li class="<?php echo e(request()->is('SanPham') || request()->is('LoaiSanPham') ? 'active open' : ''); ?>">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-desktop"></i>
                             <span class="menu-text"> Quản lý sản phẩm </span>
@@ -263,8 +265,8 @@
                                 </a>
                             </li>
 
-                            <li>
-                                <a href="#">
+                            <li class="<?php echo e(request()->is('LoaiSanPham') ? 'active' : ''); ?>">
+                                <a href="<?php echo e(route('LoaiSanPham.index')); ?>">
                                     <i class="icon-double-angle-right"></i>
                                     Loại sản phẩm
                                 </a>
@@ -279,7 +281,8 @@
                         </a>
                     </li>
 
-                    <li class="<?php echo e(request()->is('San_Pham/Sao') || request()->is('San_Pham/Sao') ? 'active open' : ''); ?>">
+                    <li
+                        class="<?php echo e(request()->is('San_Pham/Sao') || request()->is('San_Pham/Sao') ? 'active open' : ''); ?>">
 
                         <a href="<?php echo e(route('SanPham.SoSao')); ?>">
                             <i class="icon-star"></i>
@@ -287,7 +290,8 @@
                         </a>
                     </li>
 
-                    <li class="<?php echo e(request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : ''); ?>">
+                    <li
+                        class="<?php echo e(request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : ''); ?>">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Khuyến mãi </span>
@@ -316,7 +320,8 @@
                         </a>
                     </li>
                     
-                    <li class="<?php echo e(request()->is('DonViVanChuyen') || request()->is('NguoiVanChuyen') ? 'active open' : ''); ?>">
+                    <li
+                        class="<?php echo e(request()->is('DonViVanChuyen') || request()->is('NguoiVanChuyen') ? 'active open' : ''); ?>">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-fighter-jet"></i>
                             <span class="menu-text"> Vận chuyển </span>
@@ -360,7 +365,8 @@
 
                             <span class="menu-text">
                                 Calendar
-                                <span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
+                                <span class="badge badge-transparent tooltip-error"
+                                    title="2&nbsp;Important&nbsp;Events">
                                     <i class="icon-warning-sign red bigger-130"></i>
                                 </span>
                             </span>
@@ -479,7 +485,8 @@
                 </ul><!-- /.nav-list -->
 
                 <div class="sidebar-collapse" id="sidebar-collapse">
-                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
+                        data-icon2="icon-double-angle-right"></i>
                 </div>
 
                 <script type="text/javascript">
@@ -568,10 +575,10 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-                                                                    <script type="text/javascript">
-                                                                        window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                                                                    </script>
-                                                                    <![endif]-->
+                                                                            <script type="text/javascript">
+                                                                                window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                                                                            </script>
+                                                                            <![endif]-->
         <script type="text/javascript">
             window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
         </script>

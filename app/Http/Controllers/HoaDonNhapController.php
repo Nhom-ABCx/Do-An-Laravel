@@ -95,13 +95,25 @@ class HoaDonNhapController extends Controller
      */
     public function edit(Request $request, HoaDonNhap $hoaDonNhap)
     {
-        //trang thai phai nam` trong 4 so', tranh truong` hop thay doi request tai giao dien
+        //trang thai phai nam` trong 2 so', tranh truong` hop thay doi request tai giao dien
         $request->validate(
             ['TrangThai' => ['required', 'numeric', 'integer', Rule::in([0, 1])]]
         );
 
         $hoaDonNhap->TrangThai = $request["TrangThai"];
         $hoaDonNhap->save();
+
+        //neu trang thai' thanh`cong thi cap nhat lai gia' ban' cua san pham tuong ung'
+        if ($hoaDonNhap->TrangThai) {
+            $dsChiTietHD = $hoaDonNhap->CT_HoaDonNhap;
+            if (count($dsChiTietHD)) {
+                foreach ($dsChiTietHD as $item) {
+                    $sanPham = $item->SanPham;
+                    $sanPham->GiaNhap = $item->GiaNhap;
+                    $sanPham->save();
+                }
+            }
+        }
         return Redirect::route('HoaDonNhap.index');
     }
 
@@ -121,14 +133,26 @@ class HoaDonNhapController extends Controller
             'GiaNhap' => ['required', 'numeric', 'integer', 'min:0', Rule::notIn([0])],
         ]);
 
-        $thanhTien = $request->input('SoLuong') * $request->input('GiaNhap');
-        CT_HoaDonNhap::create([
-            'HoaDonNhapId' => $hoaDonNhap->id,
-            'SanPhamId' => $request->input('SanPhamId'),
-            'SoLuong' => $request->input('SoLuong'),
-            'GiaNhap' => $request->input('GiaNhap'),
-            'ThanhTien' => $thanhTien,
-        ]);
+        $ctHoaDonNhap = CT_HoaDonNhap::where("SanPhamId", $request["SanPhamId"])->where("HoaDonNhapId", $hoaDonNhap->id)->first();
+        if (!empty($ctHoaDonNhap)) {
+            $soLuong = $ctHoaDonNhap->SoLuong + $request->input('SoLuong');
+            $giaNhap = $ctHoaDonNhap->GiaNhap + $request->input('GiaNhap');
+            $ctHoaDonNhap->fill([
+                'SoLuong' => $soLuong,
+                'GiaNhap' => $giaNhap,
+                'ThanhTien' => $soLuong * $giaNhap,
+            ]);
+            $ctHoaDonNhap->save();
+        } else {
+            $thanhTien = $request->input('SoLuong') * $request->input('GiaNhap');
+            $ctHoaDonNhap = CT_HoaDonNhap::create([
+                'HoaDonNhapId' => $hoaDonNhap->id,
+                'SanPhamId' => $request->input('SanPhamId'),
+                'SoLuong' => $request->input('SoLuong'),
+                'GiaNhap' => $request->input('GiaNhap'),
+                'ThanhTien' => $thanhTien,
+            ]);
+        }
 
         $hoaDonNhap->TongSoLuong = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('SoLuong');
         $hoaDonNhap->TongTien = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('ThanhTien');

@@ -78,17 +78,18 @@
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                <a href="#modal-form" role="button" data-toggle="modal" class="btn btn-success">
-                                    <i class="icon-plus"></i>
-                                    Thêm hóa đơn nhập
-                                </a>
                                 @if (!request()->is('HoaDonNhapp/DaHuy'))
+                                    <a href="#modal-form" role="button" data-toggle="modal" class="btn btn-success">
+                                        <i class="icon-plus"></i>
+                                        Thêm hóa đơn nhập
+                                    </a>
                                     <a href="{{ route('HoaDonNhap.DaHuy') }}" class="btn btn-inverse">
                                         <i class="icon-trash"></i>
                                         Hóa đơn nhập đã hủy
                                     </a>
                                 @endif
-                                <form class="form-inline" action="{{ request()->is('HoaDonNhapp/DaHuy') ? route('HoaDonNhap.DaHuy') : route('HoaDonNhap.index') }}" method="get">
+                                <form class="form-inline" action="{{ request()->is('HoaDonNhapp/DaHuy') ? route('HoaDonNhap.DaHuy') : route('HoaDonNhap.index') }}" method="get"
+                                    style="margin-top: 10px">
                                     {{-- <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên hoặc username khách hàng" data-placement="bottom"
                                         value="{{ $request['NameSearch'] }}" name="NameSearch" /> --}}
                                     <label> Tên nhân viên: </label>
@@ -213,14 +214,16 @@
                                                         </ul>
                                                     </span>
 
-                                                    <form action="{{ route('HoaDonNhap.destroy', $item) }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-130"></i></button>
-                                                    </form>
+                                                    @if (!$item->TrangThai)
+                                                        <form action="{{ route('HoaDonNhap.destroy', $item) }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-130"></i></button>
+                                                        </form>
+                                                    @endif
 
                                                     <a class="blue" href="{{ route('HoaDonNhap.show', $item) }}" data-rel="tooltip" title="Xem hoặc thêm chi tiết hóa đơn nhập">
-                                                        <i class="icon-plus bigger-130"></i>
+                                                        <i class="icon-zoom-in bigger-130"></i>
                                                     </a>
                                                 </div>
 
@@ -241,18 +244,21 @@
                                                                 </ul>
                                                             </span>
 
-                                                            <li>
-                                                                <form action="{{ route('HoaDonNhap.destroy', $item) }}" method="post">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-120"></i></button>
-                                                                </form>
-                                                            </li>
+                                                            @if (!$item->TrangThai)
+                                                                <li>
+                                                                    <form action="{{ route('HoaDonNhap.destroy', $item) }}" method="post">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Hủy"><i
+                                                                                class="icon-trash bigger-120"></i></button>
+                                                                    </form>
+                                                                </li>
+                                                            @endif
 
                                                             <li>
                                                                 <a href="{{ route('HoaDonNhap.show', $item) }}" class="tooltip-info" data-rel="tooltip" title="Xem hoặc thêm chi tiết hóa đơn nhập">
                                                                     <span class="blue">
-                                                                        <i class="icon-plus bigger-120"></i>
+                                                                        <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
                                                                 </a>
                                                             </li>
@@ -395,8 +401,8 @@
         {{-- thông báo error --}}
         <!-- page specific plugin scripts -->
         <!--[if lte IE 8]>
-                                                                                                  <script src="assets/js/excanvas.min.js"></script>
-                                                                                                  <![endif]-->
+                                                                                                                  <script src="assets/js/excanvas.min.js"></script>
+                                                                                                                  <![endif]-->
 
         <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
         <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>

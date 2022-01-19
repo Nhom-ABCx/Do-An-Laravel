@@ -68,17 +68,18 @@
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                <a href="#modal-form" role="button" data-toggle="modal" class="btn btn-success">
-                                    <i class="icon-plus"></i>
-                                    Thêm hóa đơn nhập
-                                </a>
                                 <?php if(!request()->is('HoaDonNhapp/DaHuy')): ?>
+                                    <a href="#modal-form" role="button" data-toggle="modal" class="btn btn-success">
+                                        <i class="icon-plus"></i>
+                                        Thêm hóa đơn nhập
+                                    </a>
                                     <a href="<?php echo e(route('HoaDonNhap.DaHuy')); ?>" class="btn btn-inverse">
                                         <i class="icon-trash"></i>
                                         Hóa đơn nhập đã hủy
                                     </a>
                                 <?php endif; ?>
-                                <form class="form-inline" action="<?php echo e(request()->is('HoaDonNhapp/DaHuy') ? route('HoaDonNhap.DaHuy') : route('HoaDonNhap.index')); ?>" method="get">
+                                <form class="form-inline" action="<?php echo e(request()->is('HoaDonNhapp/DaHuy') ? route('HoaDonNhap.DaHuy') : route('HoaDonNhap.index')); ?>" method="get"
+                                    style="margin-top: 10px">
                                     
                                     <label> Tên nhân viên: </label>
                                     <select class="width-10 chosen-select" id="form-field-select-4" name="NhanVienId">
@@ -203,14 +204,16 @@
                                                         </ul>
                                                     </span>
 
-                                                    <form action="<?php echo e(route('HoaDonNhap.destroy', $item)); ?>" method="post">
-                                                        <?php echo csrf_field(); ?>
-                                                        <?php echo method_field('DELETE'); ?>
-                                                        <button type="submit" class="btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-130"></i></button>
-                                                    </form>
+                                                    <?php if(!$item->TrangThai): ?>
+                                                        <form action="<?php echo e(route('HoaDonNhap.destroy', $item)); ?>" method="post">
+                                                            <?php echo csrf_field(); ?>
+                                                            <?php echo method_field('DELETE'); ?>
+                                                            <button type="submit" class="btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-130"></i></button>
+                                                        </form>
+                                                    <?php endif; ?>
 
                                                     <a class="blue" href="<?php echo e(route('HoaDonNhap.show', $item)); ?>" data-rel="tooltip" title="Xem hoặc thêm chi tiết hóa đơn nhập">
-                                                        <i class="icon-plus bigger-130"></i>
+                                                        <i class="icon-zoom-in bigger-130"></i>
                                                     </a>
                                                 </div>
 
@@ -231,18 +234,21 @@
                                                                 </ul>
                                                             </span>
 
-                                                            <li>
-                                                                <form action="<?php echo e(route('HoaDonNhap.destroy', $item)); ?>" method="post">
-                                                                    <?php echo csrf_field(); ?>
-                                                                    <?php echo method_field('DELETE'); ?>
-                                                                    <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-120"></i></button>
-                                                                </form>
-                                                            </li>
+                                                            <?php if(!$item->TrangThai): ?>
+                                                                <li>
+                                                                    <form action="<?php echo e(route('HoaDonNhap.destroy', $item)); ?>" method="post">
+                                                                        <?php echo csrf_field(); ?>
+                                                                        <?php echo method_field('DELETE'); ?>
+                                                                        <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Hủy"><i
+                                                                                class="icon-trash bigger-120"></i></button>
+                                                                    </form>
+                                                                </li>
+                                                            <?php endif; ?>
 
                                                             <li>
                                                                 <a href="<?php echo e(route('HoaDonNhap.show', $item)); ?>" class="tooltip-info" data-rel="tooltip" title="Xem hoặc thêm chi tiết hóa đơn nhập">
                                                                     <span class="blue">
-                                                                        <i class="icon-plus bigger-120"></i>
+                                                                        <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
                                                                 </a>
                                                             </li>
@@ -385,8 +391,8 @@
         
         <!-- page specific plugin scripts -->
         <!--[if lte IE 8]>
-                                                                                                  <script src="assets/js/excanvas.min.js"></script>
-                                                                                                  <![endif]-->
+                                                                                                                  <script src="assets/js/excanvas.min.js"></script>
+                                                                                                                  <![endif]-->
 
         <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
         <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
