@@ -85,7 +85,7 @@
                                         <label class="col-sm-3"> <b><?php echo e($hoaDon->id); ?></b> </label>
 
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-female pink"></i> Người vận chuyển lần cuối </label>
-                                        <label class="col-sm-5"> <b><?php echo e($hoaDon->LichSuVanChuyen->last()->NguoiVanChuyen->HoTen??""); ?></b> </label>
+                                        <label class="col-sm-5"> <b><?php echo e($hoaDon->LichSuVanChuyen->last()->NguoiVanChuyen->HoTen ?? ''); ?></b> </label>
                                     </div>
 
                                     <div class="space-4"></div>
@@ -95,7 +95,15 @@
                                         <label class="col-sm-3"> <b><?php echo e($hoaDon->DiaChi->KhachHang->HoTen ?? $hoaDon->DiaChi->KhachHang->Username); ?></b> </label>
 
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-fighter-jet blue"></i> Trạng thái vận chuyển </label>
-                                        <label class="col-sm-5"> <b>Trạng thái đang vận chuyển lúc này (chưa update)</b> </label>
+                                        <label class="col-sm-5">
+                                            <b>
+                                                <?php if($hoaDon->LichSuVanChuyen->last()->TrangThai??0): ?>
+                                                    <span class="label label-success arrowed-in arrowed-in-right">Thành công</span>
+                                                <?php else: ?>
+                                                    <span class="label arrowed">Chưa thành công</span>
+                                                <?php endif; ?>
+                                            </b>
+                                        </label>
                                     </div>
 
                                     <div class="space-4"></div>
@@ -226,7 +234,7 @@
                                 <p><i class="icon-ok bigger-110 green"></i> Giá bán ra = Giá gốc - Giá đang khuyến mãi</p>
                                 <p><i class="icon-ok bigger-110 green"></i> Thành tiền = Số lượng * (Giá bán - Giá giảm voucher)</p>
                                 <div class="table-responsive">
-                                    <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+                                    <table id="chi-tiet-san-pham" class="table table-striped table-bordered table-hover">
                                         <thead>
                                             <tr>
                                                 <th class="center"><i class="icon-adn"></i>Id</th>
@@ -261,7 +269,6 @@
                                                     <td><?php echo e(number_format($item->ThanhTien)); ?></td>
                                                     <td></td>
                                                 </tr>
-
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table>
@@ -269,10 +276,53 @@
                             </div>
 
                             <div id="LichSuVanChuyen" class="tab-pane">
-                                <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-                                <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-                                <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-                                <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                <div class="table-responsive">
+                                    <table id="lich-su-nguoi-van-chuyen" class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="center"><i class="icon-adn"></i> Đơn vị vận chuyển</th>
+                                                <th><i class="icon-user"></i> Người vận chuyển</th>
+                                                <th><i class="icon-calendar"></i> Ngày sinh</th>
+                                                <th><i class="fa fa-transgender"></i> Giới tính</th>
+                                                <th><i class="icon-align-left"></i> Địa chỉ</th>
+                                                <th><i class="icon-phone"></i> Điện thoại</th>
+                                                <th><i class="icon-align-left"></i> Mô tả</th>
+                                                <th><i class="icon-check"></i> Trạng thái</th>
+                                                <th><i class="icon-time bigger-110 hidden-480"></i> Ngày giao</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <?php $__currentLoopData = $lichSuVanChuyen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <tr>
+                                                    <td class="center"><?php echo e($item->NguoiVanChuyen->DonViVanChuyen->TenDonViVanChuyen); ?></td>
+                                                    <td><?php echo e($item->NguoiVanChuyen->HoTen); ?></td>
+                                                    <td><?php echo e(date_format(date_create($item->NguoiVanChuyen->NgaySinh),"Y-m-d")); ?></td>
+                                                    <td>
+                                                        <?php if($item->NguoiVanChuyen->GioiTinh): ?>
+                                                            Nam
+                                                        <?php else: ?>
+                                                            Nữ
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td><?php echo e($item->NguoiVanChuyen->DiaChi); ?></td>
+                                                    <td><?php echo e($item->NguoiVanChuyen->Phone); ?></td>
+                                                    <td><?php echo e($item->MoTa); ?></td>
+                                                    <td>
+                                                        <?php if($item->TrangThai): ?>
+                                                            <span class="label label-success arrowed-in arrowed-in-right">Thành công</span>
+                                                        <?php else: ?>
+                                                            <span class="label arrowed">Chưa thành công</span>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td><?php echo e($item->created_at); ?></td>
+                                                    <td></td>
+                                                </tr>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -290,14 +340,28 @@
     
     <script type="text/javascript">
         jQuery(function($) {
-            var oTable1 = $('#sample-table-2').dataTable({
+            var oTable1 = $('#chi-tiet-san-pham').dataTable({
                 "aoColumns": [
                     null, null,
                     {
                         "bSortable": false
                     }, //hinh anh
                     null, null, null, null, null, null,
+                    {
+                        "bSortable": false
+                    },
                 ]
+            });
+
+            var oTable2 = $('#lich-su-nguoi-van-chuyen').dataTable({
+                "aoColumns": [{
+                        "bSortable": false
+                    }, null, null, null, null,
+                    null, null, null, null,
+                    {
+                        "bSortable": false
+                    },
+                ],
             });
 
             $('table th input:checkbox').on('click', function() {
@@ -344,8 +408,8 @@
     
     <!-- page specific plugin scripts -->
     <!--[if lte IE 8]>
-                                                                      <script src="assets/js/excanvas.min.js"></script>
-                                                                      <![endif]-->
+                                                                                                  <script src="assets/js/excanvas.min.js"></script>
+                                                                                                  <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>

@@ -7,6 +7,7 @@ use App\Models\DiaChi;
 use App\Models\HoaDon;
 use App\Models\SanPham;
 use App\Models\KhachHang;
+use App\Models\LichSuVanChuyen;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -78,7 +79,8 @@ class HoaDonController extends Controller
     public function show(HoaDon $hoaDon)
     {
         $dsChiTietHD = CT_HoaDon::where("HoaDonId", $hoaDon->id)->get();
-        return view('HoaDon.HoaDon-show', ["hoaDon" => $hoaDon, "dsChiTietHD" => $dsChiTietHD]);
+        $lichSuVanChuyen=LichSuVanChuyen::where("HoaDonId",$hoaDon->id)->orderBy('created_at')->get();
+        return view('HoaDon.HoaDon-show', ["hoaDon" => $hoaDon, "dsChiTietHD" => $dsChiTietHD,"lichSuVanChuyen"=>$lichSuVanChuyen]);
     }
 
     /**

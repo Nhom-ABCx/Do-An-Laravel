@@ -94,104 +94,30 @@ values(3,'Dat ne`','091928739',N'Thành phố Hồ Chí Minh',N'Huyện Bình Ch
 insert into Dia_Chis(KhachHangId,TenNguoiNhan,Phone,TinhThanhPho,QuanHuyen,PhuongXa,DiaChiChiTiet,CodeTinhThanhPho,CodeQuanHuyen,CodePhuongXa)
 values(4,'Dattt ne``','0901283123',N'Thành phố Hà Nội',N'Quận Long Biên',N'Phường Thượng Thanh',N'123/asasd Đường An Dương Vương',1,4,115);
 
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(1,1,4,0,'2021/01/27');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(5,1,2,0,'2021/01/15');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(1,1,2,0,'2021/01/11');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(5,2,2,0,'2021/03/30');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(5,2,1,0,'2021/03/30');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,2,0,0,'2021/04/29');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(3,3,0,0,'2021/04/07');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,3,1,0,'2021/01/11');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(5,3,2,0,'2021/01/29');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(3,4,0,0,'2021/04/29');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(5,4,4,0,'2021/01/11');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(1,4,4,0,'2021/01/29');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(1,1,3,0,'2021/01/27');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(2,1,0,0,'2021/01/15');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(2,1,3,0,'2021/01/15');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(2,2,2,0,'2021/03/30');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(3,2,2,0,'2021/01/27');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(5,2,0,0,'2021/01/29');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,3,1,0,'2021/01/29');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(1,3,4,0,'2021/04/07');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,3,3,0,'2021/01/29');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,4,1,0,'2021/04/29');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(2,4,1,0,'2021/01/27');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,4,0,0,'2021/01/27');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(3,1,1,0,'2021/04/28');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(5,1,2,0,'2021/01/29');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,1,4,0,'2021/01/29');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(2,2,2,0,'2021/01/15');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(4,2,4,0,'2021/01/29');
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at) values(1,2,3,0,'2021/01/15');
+insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at)
+SELECT (SELECT FLOOR((RAND() * (5-1+1))+1)),b.id,(SELECT FLOOR((RAND() * (4-1+1))+1)),0,(SELECT FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP('2015-1-1') - UNIX_TIMESTAMP('2020-01-01')) + UNIX_TIMESTAMP('2020-01-01')))
+FROM Dia_Chis as b,san_phams ORDER BY RAND() LIMIT 100;
 
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(19,30,15,0,0,1) ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(18,11,17,0,0,2) ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(6,12,5,0,0,3)   ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(17,32,3,0,0,4)  ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(8,13,1,0,0,5)	   ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(4,26,2,0,0,5)   ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(12,20,7,0,0,3)   ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(6,18,9,0,0,3)   ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(21,29,9,0,0,4)  ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(8,17,12,0,0,2)  ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(23,19,1,0,0,4)   ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(15,7,9,0,0,5)   ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(2,17,3,0,0,1)   ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(29,17,14,0,0,2);
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(7,31,10,0,0,3) ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(9,10,6,0,0,4)  ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(12,18,5,0,0,5) ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(22,28,11,0,0,5);
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(28,30,2,0,0,5)  ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(14,13,5,0,0,5) ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(1,11,6,0,0,0)  ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(28,10,6,0,0,4) ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(3,10,10,0,0,5) ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(6,20,18,0,0,4) ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(17,4,16,0,0,5) ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(2,14,20,0,0,2);
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(8,12,8,0,0,4)  ;
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(28,3,15,0,0,1);
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(23,14,11,0,0,3);
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star) values(18,4,12,0,0,4);
+insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star)
+SELECT a.id,b.id,(SELECT FLOOR((RAND() * (5-1+1))+1)),0,0,(SELECT FLOOR((RAND() * (5-0+1))+0))
+FROM hoa_dons as a,san_phams as b ORDER BY RAND() LIMIT 500;
 
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(1,30,10);
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(1,29,10);
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(1,28,10);
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(2,27,10);
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(2,26,10);
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(2,25,10);
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(3,24,10);
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(3,23,10);
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(3,22,10);
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(4,21,10);
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(4,20,10);
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(4,19,10);
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(5,18,10);
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong) values(5,17,10);
+insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong)
+SELECT a.id,b.id,(SELECT FLOOR((RAND() * (5-1+1))+1))
+FROM khach_hangs as a,san_phams as b ORDER BY RAND() LIMIT 100;
 
-insert into Yeu_Thichs(KhachHangId,SanPhamId) values(1,30);
-insert into Yeu_Thichs(KhachHangId,SanPhamId) values(1,29);
-insert into Yeu_Thichs(KhachHangId,SanPhamId) values(1,28);
-insert into Yeu_Thichs(KhachHangId,SanPhamId) values(2,27);
-insert into Yeu_Thichs(KhachHangId,SanPhamId) values(2,26);
-insert into Yeu_Thichs(KhachHangId,SanPhamId) values(2,25);
-insert into Yeu_Thichs(KhachHangId,SanPhamId) values(3,24);
-insert into Yeu_Thichs(KhachHangId,SanPhamId) values(3,23);
-insert into Yeu_Thichs(KhachHangId,SanPhamId) values(3,22);
-insert into Yeu_Thichs(KhachHangId,SanPhamId) values(4,21);
-insert into Yeu_Thichs(KhachHangId,SanPhamId) values(4,20);
-insert into Yeu_Thichs(KhachHangId,SanPhamId) values(4,19);
-insert into Yeu_Thichs(KhachHangId,SanPhamId) values(5,18);
-insert into Yeu_Thichs(KhachHangId,SanPhamId) values(5,17);
+insert into Yeu_Thichs(KhachHangId,SanPhamId)
+SELECT a.id,b.id
+FROM khach_hangs as a,san_phams as b ORDER BY RAND() LIMIT 50;
 
 insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'Sản phẩm rất tốt triệu like',1,30);
 insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'Sản phẩm tốt',1,28);
 insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'giao hang nhanh, sản phẩm tốt',2,29);
 insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'hoàn hảo',1,32);
+
 insert into Lich_Su_Van_Chuyens(HoaDonId,NguoiVanChuyenId,TrangThai,created_at)
-SELECT a.Id,b.Id,0,a.created_at FROM Hoa_Dons as a,Nguoi_Van_Chuyens as b ORDER BY RAND() LIMIT 50;
+SELECT a.Id,b.Id,0,(SELECT FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP() - UNIX_TIMESTAMP('2021-01-01')) + UNIX_TIMESTAMP('2021-01-01')))
+FROM (select * from hoa_dons where hoa_dons.TrangThai=3 or hoa_dons.TrangThai=4) as a,Nguoi_Van_Chuyens as b ORDER BY RAND() LIMIT 200;
 
 insert into conversations(NhanVienId,KhachHangId,created_at) select 1,a.id,current_timestamp() from khach_hangs as a;
 insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'Hello Admin',2,2,'2021-1-1');
@@ -206,13 +132,20 @@ insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'mua di 
 insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'ban voi gia sale mua di dung ngai',1,2,'2021-1-7');
 insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'khong mua t chem',1,2,'2021-1-10');
 
+update Lich_Su_Van_Chuyens a, (select * from hoa_dons where TrangThai=4) b
+set a.TrangThai=1
+where a.id=(select id from lich_su_van_chuyens where HoaDonId=b.id ORDER BY created_at DESC LIMIT 1);
+
 update CT_Hoa_Dons
 set GiaBan=(select GiaBan from San_Phams where Id=SanPhamId);
+
 update CT_Hoa_Dons a, (select a.id,b.GiamGia from san_phams as a,ct_chuong_trinh_kms as b WHERE a.id=b.SanPhamId) b
 set a.GiaBan=a.GiaBan-b.GiamGia
 where a.SanPhamId=b.id;
+
 update CT_Hoa_Dons
 set ThanhTien=(SoLuong*GiaBan)-GiaGiam;
+
 update hoa_dons a, (select HoaDonId,SUM(ThanhTien) as tongTien,SUM(SoLuong) as tongSoLuong from ct_hoa_dons GROUP BY HoaDonId) b
 set a.TongTien=b.tongTien,a.TongSoLuong=b.tongSoLuong
-where a.id=b.HoaDonId
+where a.id=b.HoaDonId;
