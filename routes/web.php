@@ -143,9 +143,6 @@ Route::middleware('auth')->group(function () {
 
     //Route số sao sản phẩm
     Route::get("SanPham/Sao", [SanPhamController::class, "SoSao"])->name('SanPham.SoSao');
-<<<<<<< HEAD
-});
-=======
     Route::resource("LoaiSanPham", LoaiSanPhamController::class, [
         'parameters' => [
             'LoaiSanPham' => 'loaiSanPham'
@@ -154,4 +151,3 @@ Route::middleware('auth')->group(function () {
     Route::get("LoaiSanPhamm/DaXoa", [LoaiSanPhamController::class, "LoaiSanPhamDaXoa"])->name("LoaiSanPham.DaXoa");
     Route::post("LoaiSanPham/KhoiPhuc/{id}", [LoaiSanPhamController::class, "KhoiPhucLoaiSanPham"])->name("LoaiSanPham.KhoiPhuc");
 });
->>>>>>> c0d7329df8a7d0ffc9087e8d28c2fa6a57955b30
