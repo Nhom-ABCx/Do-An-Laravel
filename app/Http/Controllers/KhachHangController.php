@@ -97,6 +97,14 @@ class KhachHangController extends Controller
         $data = KhachHang::onlyTrashed()->get();
         return view('KhachHang.KhachHang-index', ['khachHang' => $data, 'request' => $request]);
     }
+    public  function KhoiPhucKhachHang($id)
+    {
+        $data = KhachHang::onlyTrashed()->find($id);
+        $data->restore();
+        return Redirect::route('KhachHang.dsDen');
+    }
+
+    //Api
 
     public function showResetPassword_KhachHang($token)
     {

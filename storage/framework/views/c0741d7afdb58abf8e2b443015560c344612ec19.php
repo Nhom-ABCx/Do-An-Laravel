@@ -78,7 +78,7 @@
                                         <i class="icon-time bigger-110 hidden-480"></i>
                                         Deleted-at
                                     </th>
-                                    
+                                    <th> </th>
                                 </tr>
                             </thead>
 
@@ -98,6 +98,7 @@
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
                                         <td><?php echo e($item->deleted_at); ?></td>
+
                                         <?php if(request()->is('BinhLuann/DaXoa')): ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
@@ -110,6 +111,8 @@
                                                     </form>
                                                 </div>
                                             </td>
+
+
                                         <?php else: ?>
                                             <td>
                                                 <form action="<?php echo e(route('BinhLuan.destroy', $item)); ?>" method="post">
@@ -118,11 +121,12 @@
                                                     <button type="submit" class="btn-link red"><i
                                                             class="icon-trash bigger-130"></i></button>
                                                 </form>
-                                            <td>
-                                        <?php endif; ?>
-                                        
+                                            </td>
 
-                                        
+
+                                        <?php endif; ?>
+
+
                                     </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
@@ -148,7 +152,10 @@
                     null,
                     null, null, null,
                     //hinh anh
-                    null, null
+                    null, {
+                        "bSortable": false
+                    },
+
                 ]
             });
 

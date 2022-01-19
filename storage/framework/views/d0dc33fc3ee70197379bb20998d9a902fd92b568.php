@@ -142,62 +142,73 @@
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
                                         <td><?php echo e($item->deleted_at); ?></td>
-                                        
-                                        
-                                        
-                                        <td>
-                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                
-                                                <form action="<?php echo e(route('KhachHang.destroy', $item)); ?>" method="post">
-                                                    
-                                                    <?php echo csrf_field(); ?>
-                                                    <?php echo method_field('DELETE'); ?>
-                                                    <button type="submit" class="btn-link red" title="Danh sách đen"><i
-                                                            class="icon-trash bigger-130"></i></button>
-                                                </form>
-                                            </div>
 
-                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle"
-                                                        data-toggle="dropdown">
-                                                        <i class="icon-caret-down icon-only bigger-120"></i>
-                                                    </button>
-
-                                                    <ul
-                                                        class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                        <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip"
-                                                                title="View">
-                                                                <span class="blue">
-                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#" class="tooltip-success" data-rel="tooltip"
-                                                                title="Edit">
-                                                                <span class="green">
-                                                                    <i class="icon-edit bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#" class="tooltip-error" data-rel="tooltip"
-                                                                title="Delete">
-                                                                <span class="red">
-                                                                    <i class="icon-trash bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
+                                        <?php if(request()->is('Khach_hang/dsden')): ?>
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <form action="<?php echo e(route('KhachHang.KhoiPhuc', $item->id)); ?>"
+                                                        method="post">
+                                                        <?php echo csrf_field(); ?>
+                                                        
+                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i
+                                                                class="icon-undo bigger-130"></i></button>
+                                                    </form>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        
+                                            </td>
+                                        <?php else: ?>
+                                            <td>
+                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    
+                                                    <form action="<?php echo e(route('KhachHang.destroy', $item)); ?>" method="post">
+                                                        
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('DELETE'); ?>
+                                                        <button type="submit" class="btn-link red"
+                                                            title="Danh sách đen"><i
+                                                                class="icon-trash bigger-130"></i></button>
+                                                    </form>
+                                                </div>
 
+                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                    <div class="inline position-relative">
+                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown">
+                                                            <i class="icon-caret-down icon-only bigger-120"></i>
+                                                        </button>
+
+                                                        <ul
+                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <li>
+                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                    title="View">
+                                                                    <span class="blue">
+                                                                        <i class="icon-zoom-in bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
+                                                                    <span class="green">
+                                                                        <i class="icon-edit bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
+                                                                    <span class="red">
+                                                                        <i class="icon-trash bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        <?php endif; ?>
                                     </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>

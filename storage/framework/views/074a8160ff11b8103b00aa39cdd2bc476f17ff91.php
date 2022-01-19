@@ -96,31 +96,31 @@
                                 
                                 <?php if(count($conversation)): ?>
                                     <?php for($i = 0; $i < count($conversation); $i++): ?>
-
-                                        <li>
-                                            <a href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation[$i]->KhachHangId); ?>">
-                                                <img src="/storage/assets/images/avatar/User/<?php echo e($conversation[$i]->KhachHangId); ?>/<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>" class="msg-photo"
-                                                    alt="Alex's Avatar" />
-                                                <span class="msg-body">
-                                                    <span class="msg-title">
-                                                        <span class="blue">
-                                                            <?php echo e($conversation[$i]->KhachHang->Username); ?>:
+                                        <?php if(!empty($conversation[$i]->KhachHang)): ?>
+                                            <li>
+                                                <a href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation[$i]->KhachHangId); ?>">
+                                                    <img src="/storage/assets/images/avatar/User/<?php echo e($conversation[$i]->KhachHangId); ?>/<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>"
+                                                        class="msg-photo" alt="Alex's Avatar" />
+                                                    <span class="msg-body">
+                                                        <span class="msg-title">
+                                                            <span class="blue">
+                                                                <?php echo e($conversation[$i]->KhachHang->Username); ?>:
+                                                            </span>
+                                                            
+                                                            <?php if(!empty($conversation[$i]->mess->NhanVienId)): ?>
+                                                                Bạn:
+                                                            <?php endif; ?>
+                                                            <?php echo e($conversation[$i]->mess->Body ?? ''); ?> ...
                                                         </span>
-                                                        
-                                                        <?php if(!empty($conversation[$i]->mess->NhanVienId)): ?>
-                                                            Bạn:
-                                                        <?php endif; ?>
-                                                        <?php echo e($conversation[$i]->mess->Body ?? ''); ?> ...
-                                                    </span>
 
-                                                    <span class="msg-time">
-                                                        <i class="icon-time"></i>
-                                                        <span><?php echo e($conversation[$i]->created_at->diffForHumans()); ?></span>
+                                                        <span class="msg-time">
+                                                            <i class="icon-time"></i>
+                                                            <span><?php echo e($conversation[$i]->created_at->diffForHumans()); ?></span>
+                                                        </span>
                                                     </span>
-                                                </span>
-                                            </a>
-                                        </li>
-
+                                                </a>
+                                            </li>
+                                        <?php endif; ?>
                                     <?php endfor; ?>
                                 <?php endif; ?>
 
@@ -279,10 +279,11 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="#">
-                            <i class="icon-edit"></i>
-                            <span class="menu-text"> Forms </span>
+                    <li class="<?php echo e(request()->is('San_Pham/Sao') || request()->is('San_Pham/Sao') ? 'active open' : ''); ?>">
+
+                        <a href="<?php echo e(route('SanPham.SoSao')); ?>">
+                            <i class="icon-star"></i>
+                            <span class="menu-text"> Đánh giá sản phẩm </span>
                         </a>
                     </li>
 
@@ -340,8 +341,16 @@
                     
                     <li class="<?php echo e(request()->is('BinhLuan') ? 'active' : ''); ?>">
                         <a href="<?php echo e(route('BinhLuan.index')); ?>">
-                            <i class="icon-edit"></i>
+                            <i class="icon-edit "></i>
                             <span class="menu-text"> Bình Luận SP</span>
+
+                        </a>
+                    </li>
+                    
+                    <li class="<?php echo e(request()->is('KhachHang') ? 'active' : ''); ?>">
+                        <a href="<?php echo e(route('KhachHang.index')); ?>">
+                            <i class="icon-user"></i>
+                            <span class="menu-text"> Khách Hàng</span>
 
                         </a>
                     </li>
@@ -559,31 +568,32 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-                        <script type="text/javascript">
-                            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                        </script>
-                        <![endif]-->
+                                                                    <script type="text/javascript">
+                                                                        window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                                                                    </script>
+                                                                    <![endif]-->
         <script type="text/javascript">
             window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
         </script>
 
-            <script type="text/javascript">
-                if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
-                    "/script>");
-            </script>
-            <script src="/storage/assets/js/bootstrap.min.js"></script>
-            <script src="/storage/assets/js/typeahead-bs2.min.js"></script>
 
-            <!-- page specific plugin scripts -->
-            <script src="/storage/assets/js/jquery.dataTables.min.js"></script>
-            <script src="/storage/assets/js/jquery.dataTables.bootstrap.js"></script>
-            <script src="/storage/assets/js/date-time/bootstrap-datepicker.min.js"></script>
-            <script src="/storage/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
-            <script src="/storage/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
-            <!-- ace scripts -->
+        <script type="text/javascript">
+            if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
+                "/script>");
+        </script>
+        <script src="/storage/assets/js/bootstrap.min.js"></script>
+        <script src="/storage/assets/js/typeahead-bs2.min.js"></script>
 
-            <script src="/storage/assets/js/ace-elements.min.js"></script>
-            <script src="/storage/assets/js/ace.min.js"></script>
+        <!-- page specific plugin scripts -->
+        <script src="/storage/assets/js/jquery.dataTables.min.js"></script>
+        <script src="/storage/assets/js/jquery.dataTables.bootstrap.js"></script>
+        <script src="/storage/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+        <script src="/storage/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+        <script src="/storage/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
+        <!-- ace scripts -->
+
+        <script src="/storage/assets/js/ace-elements.min.js"></script>
+        <script src="/storage/assets/js/ace.min.js"></script>
     <?php echo $__env->yieldSection(); ?>
 
     <?php echo $__env->yieldContent('scriptThisPage'); ?>

@@ -18,6 +18,7 @@ use App\Models\BinhLuan;
 use App\Http\Controllers\MessageController;
 use App\Models\ChuongTrinhKhuyenMai;
 use App\Models\DonViVanChuyen;
+use App\Models\KhachHang;
 use App\Models\SanPham;
 
 //composer dump-autoload
@@ -127,7 +128,7 @@ Route::middleware('auth')->group(function () {
         ]
     ]);
     Route::get("Khach_hang/dsden", [KhachHangController::class, "KhachHang_DS_Den"])->name("KhachHang.dsDen");
-    // Route::post("HoaDon/KhoiPhuc/{id}", [HoaDonController::class, "KhoiPhucHoaDon"])->name("HoaDon.KhoiPhuc");
+    Route::post("Khach_hang/KhoiPhuc/{id}", [KhachHangController::class, "KhoiPhucKhachHang"])->name("KhachHang.KhoiPhuc");
 
     //Route số sao sản phẩm
     Route::get("San_Pham/Sao",[SanPhamController::class,"SoSao"])->name('SanPham.SoSao');

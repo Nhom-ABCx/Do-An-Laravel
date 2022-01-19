@@ -1,13 +1,13 @@
-{{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
-@extends('layouts.Layout')
 
-@section('title', 'Page Title')
 
-@section('headThisPage')
-    {{-- đoạn include Link chỉ dành cho trang tránh gây lỗi CSS --}}
-@endsection
 
-@section('body')
+<?php $__env->startSection('title', 'Page Title'); ?>
+
+<?php $__env->startSection('headThisPage'); ?>
+    
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('body'); ?>
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
@@ -40,17 +40,17 @@
             <div class="page-content">
                 <div class="row">
                     <form class="form-inline"
-                        action="{{ request()->is('Khach_hang/dsden') ? route('KhachHang.dsDen') : route('KhachHang.index') }}"
+                        action="<?php echo e(request()->is('Khach_hang/dsden') ? route('KhachHang.dsDen') : route('KhachHang.index')); ?>"
                         method="get">
 
-                        @if (request()->is('Khach_hang/dsden'))
-                            <a class="btn btn-inverse" href="{{ route('KhachHang.index') }}"> Black</a>
-                        @else
-                            <a href="{{ route('KhachHang.dsDen') }}" class="btn btn-inverse">
+                        <?php if(request()->is('Khach_hang/dsden')): ?>
+                            <a class="btn btn-inverse" href="<?php echo e(route('KhachHang.index')); ?>"> Black</a>
+                        <?php else: ?>
+                            <a href="<?php echo e(route('KhachHang.dsDen')); ?>" class="btn btn-inverse">
                                 <i class="icon-trash"></i>
                                 Danh sách đen
                             </a>
-                        @endif
+                        <?php endif; ?>
                     </form>
 
                     <hr>
@@ -111,111 +111,95 @@
                                         <i class="fa fa-check-square-o"></i>
                                         delete at
                                     </th>
-                                    {{-- <th>
-                                        <i class="fa fa-trash"></i>
-                                        deleted_at
-                                    </th> --}}
+                                    
                                     <th></th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {{-- {{ dd($khachHang) }} --}}
-                                @foreach ($khachHang as $item)
+                                
+                                <?php $__currentLoopData = $khachHang; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td>{{ $item->Username }}</td>
-                                        <td>{{ $item->Email }}</td>
-                                        <td>{{ $item->Phone }}</td>
-                                        <td>{{ $item->MatKhau }}</td>
-                                        <td>{{ $item->HoTen }}</td>
-                                        <td>{{ $item->NgaySinh }}</td>
+                                        <td><?php echo e($item->Username); ?></td>
+                                        <td><?php echo e($item->Email); ?></td>
+                                        <td><?php echo e($item->Phone); ?></td>
+                                        <td><?php echo e($item->MatKhau); ?></td>
+                                        <td><?php echo e($item->HoTen); ?></td>
+                                        <td><?php echo e($item->NgaySinh); ?></td>
                                         <td>
-                                            @if ($item->GioiTinh == 1)
+                                            <?php if($item->GioiTinh == 1): ?>
                                                 <span>Nam</span>
-                                            @else
+                                            <?php else: ?>
                                                 <span>Nữ</span>
-                                            @endif
+                                            <?php endif; ?>
                                         </td>
-                                        <td>{{ $item->DiaChi }}</td>
+                                        <td><?php echo e($item->DiaChi); ?></td>
                                         <td>
-                                            <img src='/storage/assets/images/avatar/User/{{ $item->id }}/{{ $item->HinhAnh }}'
-                                                alt="{{ $item->HinhAnh }}" width='50' height='50'>
+                                            <img src='/storage/assets/images/avatar/User/<?php echo e($item->id); ?>/<?php echo e($item->HinhAnh); ?>'
+                                                alt="<?php echo e($item->HinhAnh); ?>" width='50' height='50'>
 
                                         </td>
-                                        <td>{{ $item->created_at }}</td>
-                                        <td>{{ $item->updated_at }}</td>
-                                        <td>{{ $item->deleted_at }}</td>
+                                        <td><?php echo e($item->created_at); ?></td>
+                                        <td><?php echo e($item->updated_at); ?></td>
+                                        <td><?php echo e($item->deleted_at); ?></td>
+                                        
+                                        
+                                        
+                                        <td>
+                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                
+                                                <form action="<?php echo e(route('KhachHang.destroy', $item)); ?>" method="post">
+                                                    
+                                                    <?php echo csrf_field(); ?>
+                                                    <?php echo method_field('DELETE'); ?>
+                                                    <button type="submit" class="btn-link red" title="Danh sách đen"><i
+                                                            class="icon-trash bigger-130"></i></button>
+                                                </form>
+                                            </div>
 
-                                        @if (request()->is('Khach_hang/dsden'))
-                                            <td>
-                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <form action="{{ route('KhachHang.KhoiPhuc', $item->id) }}"
-                                                        method="post">
-                                                        @csrf
-                                                        {{-- @method("PUT") --}}
-                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i
-                                                                class="icon-undo bigger-130"></i></button>
-                                                    </form>
+                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                <div class="inline position-relative">
+                                                    <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                        data-toggle="dropdown">
+                                                        <i class="icon-caret-down icon-only bigger-120"></i>
+                                                    </button>
+
+                                                    <ul
+                                                        class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <li>
+                                                            <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                                title="View">
+                                                                <span class="blue">
+                                                                    <i class="icon-zoom-in bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                title="Edit">
+                                                                <span class="green">
+                                                                    <i class="icon-edit bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                title="Delete">
+                                                                <span class="red">
+                                                                    <i class="icon-trash bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-                                            </td>
-                                        @else
-                                            <td>
-                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    {{-- <a class="blue" href="#">
-                                                        <i class="fa fa-plus"></i>
-                                                    </a> --}}
-                                                    <form action="{{ route('KhachHang.destroy', $item) }}" method="post">
-                                                        {{-- {{ dd($item) }} --}}
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn-link red"
-                                                            title="Danh sách đen"><i
-                                                                class="icon-trash bigger-130"></i></button>
-                                                    </form>
-                                                </div>
+                                            </div>
+                                        </td>
+                                        
 
-                                                <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                    <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
-                                                            data-toggle="dropdown">
-                                                            <i class="icon-caret-down icon-only bigger-120"></i>
-                                                        </button>
-
-                                                        <ul
-                                                            class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                            <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip"
-                                                                    title="View">
-                                                                    <span class="blue">
-                                                                        <i class="icon-zoom-in bigger-120"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
-                                                                    title="Edit">
-                                                                    <span class="green">
-                                                                        <i class="icon-edit bigger-120"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
-                                                                    title="Delete">
-                                                                    <span class="red">
-                                                                        <i class="icon-trash bigger-120"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        @endif
                                     </tr>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                         </table>
                     </div>
@@ -223,10 +207,10 @@
             </div>
         </div>
     </div><!-- /.main-content -->
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@section('scriptThisPage')
+<?php $__env->startSection('scriptThisPage'); ?>
     <script src="/storage/assets/js/chosen.jquery.min.js"></script>
     <!-- inline scripts related to this page -->
     <script type="text/javascript">
@@ -295,4 +279,6 @@
         });
     </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/KhachHang/KhachHang-index.blade.php ENDPATH**/ ?>

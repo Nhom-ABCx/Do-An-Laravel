@@ -9,26 +9,6 @@
 
 <?php $__env->startSection('body'); ?>
     <div class="main-content">
-        <div class="breadcrumbs" id="breadcrumbs">
-            <script type="text/javascript">
-                try {
-                    ace.settings.check('breadcrumbs', 'fixed')
-                } catch (e) {}
-            </script>
-
-            <ul class="breadcrumb">
-                <li>
-                    <i class="icon-home home-icon"></i>
-                    <a href="<?php echo e(url('/')); ?>">Home</a>
-                </li>
-
-                <li>
-                    <a href="<?php echo e(route('SanPham.index')); ?>">Quản lý đánh giá sản phẩm</a>
-                </li>
-            </ul><!-- .breadcrumb -->
-
-            
-        </div>
         <div class="page-content">
             <div class="row">
                 <div class="col-xs-12">
@@ -59,7 +39,6 @@
                                     <th><i class="icon-picture"></i>Hình ảnh</th>
                                     <th><i class="icon-apple"></i>Hãng sãn xuất</th>
                                     <th><i class="icon-android"></i>Loại sản phẩm</th>
-                                    <th><i class="icon-android"></i>Lượt mua</th>
                                     <th><i class="icon-android"></i>Trung bình đánh giá</th>
                                     
                                     <th></th>
@@ -79,7 +58,6 @@
                                         </td>
                                         <td><?php echo e($item->HangSanXuat->Ten); ?></td>
                                         <td><?php echo e($item->LoaiSanPham->TenLoai); ?></td>
-                                        <td><?php echo e($item->LuotMua); ?></td>
                                         <td><?php echo e($item->Star); ?></td>
                                         
                                         <?php if(request()->is('SanPhamm/DaXoa')): ?>
@@ -93,8 +71,7 @@
                                                                 class="icon-undo bigger-130"></i></button>
                                                     </form>
 
-                                                    <form id="form"
-                                                        action="<?php echo e(route('SanPham.XoaVinhVien', $item->id)); ?>"
+                                                    <form id="form" action="<?php echo e(route('SanPham.XoaVinhVien', $item->id)); ?>"
                                                         method="post">
                                                         <?php echo csrf_field(); ?>
                                                         <?php echo method_field('DELETE'); ?>
@@ -242,7 +219,10 @@
                     {
                         "bSortable": false
                     }, //hinh anh
-                    null
+                    null, null, null, null, null,
+                    {
+                        "bSortable": false
+                    }
                 ]
             });
 
@@ -313,4 +293,4 @@
     
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\tranphuocvinh\laravel\Do-An-Laravel\resources\views/SanPham/SanPham-sao.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/SanPham/SanPham-sao.blade.php ENDPATH**/ ?>

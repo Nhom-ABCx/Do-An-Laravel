@@ -9,6 +9,33 @@
 
 @section('body')
     <div class="main-content">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('breadcrumbs', 'fixed')
+                } catch (e) {}
+            </script>
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="{{ url('/') }}">Home</a>
+                </li>
+
+                <li>
+                    <a href="{{ route('SanPham.index') }}">Quản lý đánh giá sản phẩm</a>
+                </li>
+            </ul><!-- .breadcrumb -->
+
+            {{-- <div class="nav-search" id="nav-search">
+                <form class="form-search">
+                    <span class="input-icon">
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <i class="icon-search nav-search-icon"></i>
+                    </span>
+                </form>
+            </div><!-- #nav-search --> --}}
+        </div>
         <div class="page-content">
             <div class="row">
                 <div class="col-xs-12">
@@ -67,7 +94,7 @@
                                         <td>{{ $item->HangSanXuat->Ten }}</td>
                                         <td>{{ $item->LoaiSanPham->TenLoai }}</td>
                                         <td>{{ $item->LuotMua }}</td>
-                                        <td><span id="rateMe1"></span></td>
+                                        <td>{{ $item->Star }}</td>
                                         {{-- <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td> --}}
                                         @if (request()->is('SanPhamm/DaXoa'))
@@ -81,7 +108,8 @@
                                                                 class="icon-undo bigger-130"></i></button>
                                                     </form>
 
-                                                    <form id="form" action="{{ route('SanPham.XoaVinhVien', $item->id) }}"
+                                                    <form id="form"
+                                                        action="{{ route('SanPham.XoaVinhVien', $item->id) }}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
@@ -231,10 +259,7 @@
                     {
                         "bSortable": false
                     }, //hinh anh
-                    null, null, null, null, null,
-                    {
-                        "bSortable": false
-                    }
+                    null
                 ]
             });
 
