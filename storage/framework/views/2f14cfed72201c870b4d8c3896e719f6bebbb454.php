@@ -301,28 +301,38 @@
                                                         </button>
 
                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <?php if($item->TrangThai != 4): ?>
+                                                                <li>
+                                                                    <span class="dropdown-hover dropup dropdown-pink">
+                                                                        <i class="icon-cog green bigger-150" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
+                                                                        <ul class="dropdown-menu pull-right">
+                                                                            <li>
+                                                                                <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=0" tabindex="-1">0 Đang chờ xác nhận</a>
+                                                                                <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=1" tabindex="-1">1 Đang xử lý</a>
+                                                                                <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=2" tabindex="-1">2 Đã xử lý</a>
+                                                                                <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=3" tabindex="-1">3 Đang giao</a>
+                                                                                <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=4" tabindex="-1">4 Đã giao</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </span>
+                                                                </li>
+
+                                                                <li>
+                                                                    <form action="<?php echo e(route('HoaDon.destroy', $item)); ?>" method="post">
+                                                                        <?php echo csrf_field(); ?>
+                                                                        <?php echo method_field('DELETE'); ?>
+                                                                        <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Hủy"><i
+                                                                                class="icon-trash bigger-120"></i></button>
+                                                                    </form>
+                                                                </li>
+                                                            <?php endif; ?>
+
                                                             <li>
                                                                 <a href="<?php echo e(route('HoaDon.show', $item)); ?>" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
                                                                 </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="<?php echo e(route('HoaDon.edit', $item)); ?>" class="tooltip-success" data-rel="tooltip" title="Chỉnh sửa">
-                                                                    <span class="green">
-                                                                        <i class="icon-edit bigger-120"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <form action="<?php echo e(route('HoaDon.destroy', $item)); ?>" method="post">
-                                                                    <?php echo csrf_field(); ?>
-                                                                    <?php echo method_field('DELETE'); ?>
-                                                                    <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-120"></i></button>
-                                                                </form>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -416,8 +426,8 @@
     
     <!-- page specific plugin scripts -->
     <!--[if lte IE 8]>
-                                      <script src="assets/js/excanvas.min.js"></script>
-                                      <![endif]-->
+                                          <script src="assets/js/excanvas.min.js"></script>
+                                          <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>

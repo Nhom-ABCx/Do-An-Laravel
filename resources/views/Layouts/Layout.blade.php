@@ -449,7 +449,7 @@
                     <li class="{{ request()->is('HoaDon') ? 'active' : '' }}">
                         <a href="{{ route('HoaDon.index') }}">
                             <i class="icon-text-width"></i>
-                            <span class="menu-text"> Quản lý hóa đơn </span>
+                            <span class="menu-text"> Hóa đơn bán </span>
                         </a>
                     </li>
 
@@ -477,8 +477,8 @@
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="#">
+                    <li class="{{ request()->is('HoaDonNhap') ? 'active' : '' }}">
+                        <a href="{{ route('HoaDonNhap.index') }}">
                             <i class="icon-list"></i>
                             <span class="menu-text"> Hóa đơn nhập </span>
                         </a>

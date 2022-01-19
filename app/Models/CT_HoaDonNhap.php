@@ -13,18 +13,18 @@ class CT_HoaDonNhap extends Model
 
     protected $table = 'ct_hoa_don_nhaps';
     protected $fillable = [
-        'SanPhamId', //nhập sản phẩm nào
         'HoaDonNhapId', //được nhập từ hóa đơn nào
+        'SanPhamId', //nhập sản phẩm nào
         'SoLuong',
         'GiaNhap', //giá nhập vào bao nhiêu
         'ThanhTien',
     ];
-    public function SanPham()
-    {
-        return $this->belongsTo(SanPham::class, 'SanPhamId');
-    }
     public function HoaDonNhap()
     {
         return $this->belongsTo(HoaDonNhap::class, 'HoaDonNhapId');
+    }
+    public function SanPham()
+    {
+        return $this->belongsTo(SanPham::class, 'SanPhamId');
     }
 }

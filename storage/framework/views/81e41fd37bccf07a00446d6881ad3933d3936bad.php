@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Page Title'); ?>
+<?php $__env->startSection('title', 'Chi tiết hóa đơn'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
     <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
@@ -105,7 +105,7 @@
                                                         <span class="label label-success arrowed-in arrowed-in-right">Thành công</span>
                                                     <?php break; ?>
                                                     <?php default: ?>
-                                                    Chưa giao
+                                                        Chưa giao
                                                 <?php endswitch; ?>
                                             </b>
                                         </label>
@@ -413,8 +413,8 @@
     
     <!-- page specific plugin scripts -->
     <!--[if lte IE 8]>
-                                                                                                      <script src="assets/js/excanvas.min.js"></script>
-                                                                                                      <![endif]-->
+                                                                                                          <script src="assets/js/excanvas.min.js"></script>
+                                                                                                          <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>

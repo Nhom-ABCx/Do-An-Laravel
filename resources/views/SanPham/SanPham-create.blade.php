@@ -1,7 +1,7 @@
 {{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
 @extends('layouts.Layout')
 
-@section('title', 'Page Title')
+@section('title', 'Thêm sản phẩm')
 
 @section('headThisPage')
     <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
@@ -235,10 +235,7 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- PAGE CONTENT ENDS -->
-
                     </form>
-
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.page-content -->

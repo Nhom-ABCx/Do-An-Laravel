@@ -1,6 +1,3 @@
-
-
-
 <?php $__env->startSection('title', 'QL Sản phẩm'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
@@ -58,8 +55,7 @@
                                     <?php endif; ?>
 
 
-                                    <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="<?php echo e($request['TenSanPham']); ?>"
-                                        name="TenSanPham" />
+                                    <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="<?php echo e($request['TenSanPham']); ?>" name="TenSanPham" />
                                     <label for=""> Hãng sãn xuất: </label>
                                     <select class="width-10 chosen-select" id="form-field-select-4" name="HangSanXuatId">
                                         <option value="">All</option>

@@ -223,24 +223,24 @@ class CreateDatabase extends Migration
             $table->id();
             $table->foreignId('NhanVienId'); //nhập bởi ai
             $table->string('NhaCungCap'); // ai là người cung cấp (do ko có bảng nhà cung cấp nên ghi chuỗi)
-            $table->integer('TongSoLuong');
-            $table->double('TongTien');
-            $table->tinyInteger('TrangThai');
+            $table->integer('TongSoLuong')->nullable();
+            $table->double('TongTien')->nullable();
+            $table->boolean('TrangThai')->default(false);
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('NhanVienId')->references('id')->on('nhan_viens');
         });
         Schema::create('ct_hoa_don_nhaps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('SanPhamId'); //nhập sản phẩm nào
             $table->foreignId('HoaDonNhapId'); //được nhập từ hóa đơn nào
+            $table->foreignId('SanPhamId'); //nhập sản phẩm nào
             $table->integer('SoLuong');
             $table->double('GiaNhap'); //giá nhập vào bao nhiêu
             $table->double('ThanhTien');
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
-            $table->foreign('SanPhamId')->references('id')->on('san_phams');
             $table->foreign('HoaDonNhapId')->references('id')->on('hoa_don_nhaps');
+            $table->foreign('SanPhamId')->references('id')->on('san_phams');
         });
     }
 

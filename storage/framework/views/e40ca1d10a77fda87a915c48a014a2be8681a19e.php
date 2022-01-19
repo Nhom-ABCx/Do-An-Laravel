@@ -182,67 +182,69 @@
                         </table>
                     </div>
                 </div>
-            </div><!-- /.main-content -->
-        <?php $__env->stopSection(); ?>
+            </div>
+        </div>
+    </div><!-- /.main-content -->
+<?php $__env->stopSection(); ?>
 
-        <?php $__env->startSection('scriptThisPage'); ?>
-            
-            <!-- inline scripts related to this page -->
-            <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-            <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
-            <script src="/storage/assets/js/bootbox.min.js"></script>
-            <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
-            <script src="/storage/assets/js/jquery.gritter.min.js"></script>
-            <script src="/storage/assets/js/spin.min.js"></script>
+<?php $__env->startSection('scriptThisPage'); ?>
+    
+    <!-- inline scripts related to this page -->
+    <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="/storage/assets/js/bootbox.min.js"></script>
+    <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
+    <script src="/storage/assets/js/jquery.gritter.min.js"></script>
+    <script src="/storage/assets/js/spin.min.js"></script>
 
-            <script type="text/javascript">
-                jQuery(function($) {
-                    <?php if($errors->any()): ?>
-                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            $.gritter.add({
-                            title: 'Lỗi' ,
-                            text: '<?php echo e($error); ?>',
-                            class_name: 'gritter-error' + (!$( '#gritter-light').get(0) ?
-                            ' gritter-light' : '')
-                            });
-                        
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php endif; ?>
-
-                    var oTable1 = $('#sample-table-2').dataTable({
-                        "aoColumns": [
-                            null, {
-                                "bSortable": false
-                            },
-                            null, {
-                                "bSortable": false
-                            },
-                            null, null, {
-                                "bSortable": false
-                            },
-
-                        ]
+    <script type="text/javascript">
+        jQuery(function($) {
+            <?php if($errors->any()): ?>
+                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    $.gritter.add({
+                    title: 'Lỗi' ,
+                    text: '<?php echo e($error); ?>',
+                    class_name: 'gritter-error' + (!$( '#gritter-light').get(0) ?
+                    ' gritter-light' : '')
                     });
+                
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endif; ?>
+
+            var oTable1 = $('#sample-table-2').dataTable({
+                "aoColumns": [
+                    null, {
+                        "bSortable": false
+                    },
+                    null, {
+                        "bSortable": false
+                    },
+                    null, null, {
+                        "bSortable": false
+                    },
+
+                ]
+            });
 
 
-                    $('[data-rel="tooltip"]').tooltip({
-                        placement: tooltip_placement
-                    });
+            $('[data-rel="tooltip"]').tooltip({
+                placement: tooltip_placement
+            });
 
-                    function tooltip_placement(context, source) {
-                        var $source = $(source);
-                        var $parent = $source.closest('table')
-                        var off1 = $parent.offset();
-                        var w1 = $parent.width();
+            function tooltip_placement(context, source) {
+                var $source = $(source);
+                var $parent = $source.closest('table')
+                var off1 = $parent.offset();
+                var w1 = $parent.width();
 
-                        var off2 = $source.offset();
-                        var w2 = $source.width();
+                var off2 = $source.offset();
+                var w2 = $source.width();
 
-                        if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
-                        return 'left';
-                    }
-                })
-            </script>
-        <?php $__env->stopSection(); ?>
+                if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
+                return 'left';
+            }
+        })
+    </script>
+<?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/KhuyenMai/KhuyenMai-index.blade.php ENDPATH**/ ?>

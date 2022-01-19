@@ -4,8 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\CT_HoaDonNhap;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCT_HoaDonNhapRequest;
-use App\Http\Requests\UpdateCT_HoaDonNhapRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class CTHoaDonNhapController extends Controller
 {
@@ -35,7 +41,7 @@ class CTHoaDonNhapController extends Controller
      * @param  \App\Http\Requests\StoreCT_HoaDonNhapRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCT_HoaDonNhapRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -69,7 +75,7 @@ class CTHoaDonNhapController extends Controller
      * @param  \App\Models\CT_HoaDonNhap  $cT_HoaDonNhap
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCT_HoaDonNhapRequest $request, CT_HoaDonNhap $cT_HoaDonNhap)
+    public function update(Request $request, CT_HoaDonNhap $cT_HoaDonNhap)
     {
         //
     }
