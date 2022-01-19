@@ -23,7 +23,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('SanPham.index') }}">Quản lý đánh giá sản phẩm</a>
+                    <a href="{{ route('SanPham.index') }}">Quản lý đánh giá  sản phẩm</a>
                 </li>
             </ul><!-- .breadcrumb -->
 

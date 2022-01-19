@@ -14,6 +14,7 @@ use App\Http\Controllers\DonViVanChuyenController;
 use App\Http\Controllers\NguoiVanChuyenController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\KhachHangController;
+use App\Http\Controllers\LoaiSanPhamController;
 use App\Models\BinhLuan;
 use App\Http\Controllers\MessageController;
 use App\Models\ChuongTrinhKhuyenMai;
@@ -133,4 +134,11 @@ Route::middleware('auth')->group(function () {
 
     //Route số sao sản phẩm
     Route::get("SanPham/Sao", [SanPhamController::class, "SoSao"])->name('SanPham.SoSao');
+    Route::resource("LoaiSanPham", LoaiSanPhamController::class, [
+        'parameters' => [
+            'LoaiSanPham' => 'loaiSanPham'
+        ]
+    ]);
+    Route::get("LoaiSanPhamm/DaXoa", [LoaiSanPhamController::class, "LoaiSanPhamDaXoa"])->name("LoaiSanPham.DaXoa");
+    Route::post("LoaiSanPham/KhoiPhuc/{id}", [LoaiSanPhamController::class, "KhoiPhucLoaiSanPham"])->name("LoaiSanPham.KhoiPhuc");
 });

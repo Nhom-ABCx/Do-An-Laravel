@@ -304,7 +304,8 @@
                                     @for ($i = 0; $i < count($conversation); $i++)
                                         @if (!empty($conversation[$i]->KhachHang))
                                             <li>
-                                                <a href="{{ route('Message.index') }}?KhachHangId={{ $conversation[$i]->KhachHangId }}">
+                                                <a
+                                                    href="{{ route('Message.index') }}?KhachHangId={{ $conversation[$i]->KhachHangId }}">
                                                     <img src="/storage/assets/images/avatar/User/{{ $conversation[$i]->KhachHangId }}/{{ $conversation[$i]->KhachHang->HinhAnh }}"
                                                         class="msg-photo" alt="Alex's Avatar" />
                                                     <span class="msg-body">
@@ -341,7 +342,8 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="@auth{{ Auth::user()->HinhAnh }}@endauth" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="@auth{{ Auth::user()->HinhAnh }}@endauth"
+                                    alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     @auth
@@ -468,8 +470,8 @@
                                 </a>
                             </li>
 
-                            <li>
-                                <a href="#">
+                            <li class="{{ request()->is('LoaiSanPham') ? 'active' : '' }}">
+                                <a href="{{ route('LoaiSanPham.index') }}">
                                     <i class="icon-double-angle-right"></i>
                                     Loại sản phẩm
                                 </a>
@@ -484,7 +486,8 @@
                         </a>
                     </li>
 
-                    <li class="{{ request()->is('San_Pham/Sao') || request()->is('San_Pham/Sao') ? 'active open' : '' }}">
+                    <li
+                        class="{{ request()->is('San_Pham/Sao') || request()->is('San_Pham/Sao') ? 'active open' : '' }}">
 
                         <a href="{{ route('SanPham.SoSao') }}">
                             <i class="icon-star"></i>
@@ -492,7 +495,8 @@
                         </a>
                     </li>
 
-                    <li class="{{ request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : '' }}">
+                    <li
+                        class="{{ request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Khuyến mãi </span>
@@ -521,7 +525,8 @@
                         </a>
                     </li>
                     {{-- Van chuyen --}}
-                    <li class="{{ request()->is('DonViVanChuyen') || request()->is('NguoiVanChuyen') ? 'active open' : '' }}">
+                    <li
+                        class="{{ request()->is('DonViVanChuyen') || request()->is('NguoiVanChuyen') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-fighter-jet"></i>
                             <span class="menu-text"> Vận chuyển </span>
@@ -565,7 +570,8 @@
 
                             <span class="menu-text">
                                 Calendar
-                                <span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
+                                <span class="badge badge-transparent tooltip-error"
+                                    title="2&nbsp;Important&nbsp;Events">
                                     <i class="icon-warning-sign red bigger-130"></i>
                                 </span>
                             </span>
@@ -684,7 +690,8 @@
                 </ul><!-- /.nav-list -->
 
                 <div class="sidebar-collapse" id="sidebar-collapse">
-                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
+                        data-icon2="icon-double-angle-right"></i>
                 </div>
 
                 <script type="text/javascript">
@@ -773,10 +780,10 @@
         <!-- <![endif]-->
 
         <!--[if IE]>
-                                                                    <script type="text/javascript">
-                                                                        window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                                                                    </script>
-                                                                    <![endif]-->
+                                                                            <script type="text/javascript">
+                                                                                window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+                                                                            </script>
+                                                                            <![endif]-->
         <script type="text/javascript">
             window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
         </script>

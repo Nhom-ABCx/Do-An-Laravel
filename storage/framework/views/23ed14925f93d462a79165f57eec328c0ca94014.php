@@ -1,13 +1,13 @@
-{{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
-@extends('layouts.Layout')
 
-@section('title', 'Đơn vị vận chuyển')
 
-@section('headThisPage')
 
-@endsection
+<?php $__env->startSection('title', 'QL loại sản phẩm'); ?>
 
-@section('body')
+<?php $__env->startSection('headThisPage'); ?>
+    <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('body'); ?>
 
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
@@ -20,19 +20,19 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home home-icon"></i>
-                    <a href="{{ url('/') }}">Home</a>
+                    <a href="<?php echo e(url('/')); ?>">Home</a>
                 </li>
-                <li class="active">Đơn vị vận chuyển</li>
+                <?php if(request()->is('LoaiSanPhamm/DaXoa')): ?>
+                    <li>
+                        Loại sản phẩm đã xoá
+                    </li>
+
+                <?php else: ?>
+                    <li class="active">Quản lý loại sản phẩm</li>
+                <?php endif; ?>
             </ul><!-- .breadcrumb -->
 
-            {{-- <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-                        <i class="icon-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- #nav-search --> --}}
+            
         </div>
 
         <div class="page-content">
@@ -40,105 +40,114 @@
                 <div class="col-xs-12">
                     <div class="widget-box">
                         <div class="widget-header">
-                            <h3 class="header smaller lighter blue">Đơn vị vận chuyển</h3>
+                            <?php if(request()->is('LoaiSanPhamm/DaXoa')): ?>
+                                <h3 class="header smaller lighter blue">Quản lý loại sản phẩm đã xoá</h3>
+                            <?php else: ?>
+                                <h3 class="header smaller lighter blue">Quản lý loại sản phẩm</h3>
+                            <?php endif; ?>
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
                                 <form class="form-inline"
-                                    action="{{ request()->is('DonViVanChuyenn/DaXoa') ? route('DonViVanChuyen.DaXoa') : route('DonViVanChuyen.index') }}"
+                                    action="<?php echo e(request()->is('LoaiSanPhamm/DaXoa') ? route('LoaiSanPham.DaXoa') : route('LoaiSanPham.index')); ?>"
                                     method="get">
-                                    <a href="{{ route('DonViVanChuyen.create') }}" class="btn btn-success">
-                                        <i class="icon-plus"></i>
-                                        Thêm đơn vị vận chuyển
-                                    </a>
 
-                                    @if (request()->is('DonViVanChuyenn/DaXoa'))
-                                        <a class="btn btn-inverse" href="{{ route('DonViVanChuyen.index') }}">
-                                            Black</a>
-                                    @else
-                                        <a href="{{ route('DonViVanChuyen.DaXoa') }}" class="btn btn-inverse">
-                                            <i class="icon-trash"></i>
-                                            Đơn vị vận chuyển đã xoá
+                                    <?php if(request()->is('LoaiSanPhamm/DaXoa')): ?>
+                                        <a href="<?php echo e(route('LoaiSanPham.index')); ?>" class="btn btn-inverse">Back</a>
+                                    <?php else: ?>
+                                        <a href="<?php echo e(route('LoaiSanPham.create')); ?>" class="btn btn-success">
+                                            <i class="icon-plus"></i>
+                                            Thêm loại sản phẩm
                                         </a>
-                                    @endif
+                                        <a href="<?php echo e(route('LoaiSanPham.DaXoa')); ?>" class="btn btn-inverse">
+                                            <i class="icon-trash"></i>
+                                            Loại sản phẩm đã xóa
+                                        </a>
+                                    <?php endif; ?>
                                 </form>
                             </div>
-
                         </div>
                     </div>
 
                     <div class="hr hr-24"></div>
 
                     <div class="table-header">
-                        Bảng đơn vị vận chuyển
+                        Bảng loại sản phẩm
                     </div>
-
+                    
                     <div class="table-responsive">
                         <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th class="center">Id</th>
-                                    <th>Tên đơn vị vận chuyển</th>
-                                    <th>Website</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
                                     <th>
-                                        <i class="icon-time bigger-110 hidden-480"></i>
-                                        Create_at
+                                        <i class="fa fa-key "></i>
+                                        ##
+                                    </th>
+
+                                    <th>
+                                        <i class="fa fa-align-left"></i>
+                                        Tên loại
+                                    </th>
+
+                                    <th>
+                                        <i class="fa fa-file-text-o"></i>
+                                        Mô tả
                                     </th>
                                     <th>
-                                        <i class="icon-time bigger-110 hidden-480"></i>
-                                        Update_at
+                                        <i class="fa fa-pencil"></i>
+                                        created_att
                                     </th>
                                     <th>
-                                        <i class="icon-time bigger-110 hidden-480"></i>
-                                        Deleted_at
+                                        <i class="fa fa-check-square-o"></i>
+                                        updated_at
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-trash"></i>
+                                        deleted_at
                                     </th>
                                     <th></th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach ($dvvc as $item)
-
+                                <?php $__currentLoopData = $loaiSp; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td class="center">{{ $item->id }}</td>
-                                        <td>{{ $item->TenDonViVanChuyen }}</td>
-                                        <td>{{ $item->Website }}</td>
-                                        <td>{{ $item->Email }}</td>
-                                        <td>{{ $item->Phone }}</td>
-                                        <td>{{ $item->created_at }}</td>
-                                        <td>{{ $item->updated_at }}</td>
-                                        <td>{{ $item->deleted_at }}</td>
-                                        @if (request()->is('DonViVanChuyenn/DaXoa'))
+                                        <td class="center"><?php echo e($item->id); ?></td>
+                                        <td><?php echo e($item->TenLoai); ?></td>
+                                        <td><?php echo e($item->MoTa); ?></td>
+                                        <td><?php echo e($item->created_at); ?></td>
+                                        <td><?php echo e($item->updated_at); ?></td>
+                                        <td><?php echo e($item->deleted_at); ?></td>
+                                        <?php if(request()->is('LoaiSanPhamm/DaXoa')): ?>
                                             <td>
+
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <form action="{{ route('DonViVanChuyen.KhoiPhuc', $item->id) }}"
+                                                    <form action="<?php echo e(route('LoaiSanPham.KhoiPhuc', $item->id)); ?>"
                                                         method="post">
-                                                        @csrf
-                                                        {{-- @method("PUT") --}}
+                                                        <?php echo csrf_field(); ?>
+                                                        
                                                         <button type="submit" class="btn-link blue" title="Khôi phục"><i
                                                                 class="icon-undo bigger-130"></i></button>
                                                     </form>
                                                 </div>
+
                                             </td>
-                                        @else
+                                        <?php else: ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                     <a class="blue" href="#">
-                                                        <i class="icon-zoom-in bigger-130"></i>
+                                                        <i class="fa fa-plus"></i>
                                                     </a>
 
                                                     <a class="green"
-                                                        href="{{ route('DonViVanChuyen.edit', $item) }}">
+                                                        href="<?php echo e(route('LoaiSanPham.edit', $item)); ?>" title="Sữa">
                                                         <i class="icon-pencil bigger-130"></i>
                                                     </a>
-
-                                                    <form action="{{ route('DonViVanChuyen.destroy', $item) }}"
+                                                    <form action="<?php echo e(route('LoaiSanPham.destroy', $item)); ?>"
                                                         method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn-link red"><i
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('DELETE'); ?>
+                                                        <button type="submit" class="btn-link red" title="Xoá"><i
                                                                 class="icon-trash bigger-130"></i></button>
                                                     </form>
                                                 </div>
@@ -162,8 +171,8 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="{{ route('SanPham.edit', $item) }}"
-                                                                    class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                    title="Edit">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -171,36 +180,42 @@
                                                             </li>
 
                                                             <li>
-                                                                <form action="{{ route('SanPham.destroy', $item) }}"
-                                                                    method="post">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="tooltip-error btn-link red"
-                                                                        data-rel="tooltip" title="Delete"><i
-                                                                            class="icon-trash bigger-120"></i></button>
-                                                                </form>
+                                                                <a href="#" class="tooltip-error" data-rel="tooltip"
+                                                                    title="Delete">
+                                                                    <span class="red">
+                                                                        <i class="icon-trash bigger-120"></i>
+                                                                    </span>
+                                                                </a>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </td>
-                                        @endif
+                                        <?php endif; ?>
 
                                     </tr>
-
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-        </div>
-    </div><!-- /.main-content -->
-@endsection
 
-@section('scriptThisPage')
+        </div><!-- /.page-content -->
+    </div><!-- /.main-content -->
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scriptThisPage'); ?>
+
     <script src="/storage/assets/js/chosen.jquery.min.js"></script>
+    
+    <script src="/storage/assets/js/bootbox.min.js"></script>
+    
+
     <!-- inline scripts related to this page -->
+
+    
     <script type="text/javascript">
         jQuery(function($) {
             var oTable1 = $('#sample-table-2').dataTable({
@@ -208,17 +223,11 @@
                     null, null,
                     {
                         "bSortable": false
-                    }, //website
-                    {
-                        "bSortable": false
-                    }, //email
-                    {
-                        "bSortable": false
-                    }, //phone
+                    }, //mota
                     null, null, null,
                     {
                         "bSortable": false
-                    }, // edit,delete....
+                    }, //hinh anh
 
                 ]
             });
@@ -262,4 +271,32 @@
             else $('#form-field-select-4').removeClass('tag-input-style');
         });
     </script>
-@endsection
+    
+
+    
+    <script type="text/javascript">
+        jQuery(function($) {
+            $(".bootbox-options").on(ace.click_event, function() {
+                bootbox.dialog({
+                    message: "<span class='bigger-110'>Bạn có chắc chắn muốn xóa vĩnh viễn mục này ??? <i class='icon-exclamation-sign red bigger-130'></i></span>",
+                    buttons: {
+                        "button": {
+                            "label": "Hủy",
+                            "className": "btn-sm"
+                        },
+                        "danger": {
+                            "label": "Xác nhận xóa",
+                            "className": "btn-sm btn-danger",
+                            "callback": function() {
+                                $("#form").submit()
+                            }
+                        },
+                    }
+                });
+            });
+        });
+    </script>
+    
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\tranphuocvinh\laravel\Do-An-Laravel\resources\views/LoaiSanPham/LoaiSanPham-index.blade.php ENDPATH**/ ?>

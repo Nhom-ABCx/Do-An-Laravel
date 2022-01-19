@@ -1,7 +1,7 @@
 
 
 
-<?php $__env->startSection('title', 'Page Title'); ?>
+<?php $__env->startSection('title', 'Người vận chuyên'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
 
@@ -144,20 +144,20 @@
                                                         </li>
 
                                                         <!-- <li>
-                                                                <a href="<?php echo e(route('SanPham.edit', $item)); ?>" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                    <span class="green">
-                                                                        <i class="icon-edit bigger-120"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </li>
+                                                                        <a href="<?php echo e(route('SanPham.edit', $item)); ?>" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                            <span class="green">
+                                                                                <i class="icon-edit bigger-120"></i>
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
 
-                                                            <li>
-                                                                <form action="<?php echo e(route('SanPham.destroy', $item)); ?>" method="post">
-                                                                    <?php echo csrf_field(); ?>
-                                                                    <?php echo method_field('DELETE'); ?>
-                                                                    <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Delete"><i class="icon-trash bigger-120"></i></button>
-                                                                </form>
-                                                            </li> -->
+                                                                    <li>
+                                                                        <form action="<?php echo e(route('SanPham.destroy', $item)); ?>" method="post">
+                                                                            <?php echo csrf_field(); ?>
+                                                                            <?php echo method_field('DELETE'); ?>
+                                                                            <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Delete"><i class="icon-trash bigger-120"></i></button>
+                                                                        </form>
+                                                                    </li> -->
                                                     </ul>
                                                 </div>
                                             </div>

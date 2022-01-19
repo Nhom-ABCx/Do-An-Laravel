@@ -10,7 +10,11 @@ class LoaiSanPham extends Model
 {
     use HasFactory;
     use SoftDeletes; //su dung chuc nang softdelete
-
+    protected $table = 'loai_san_phams';
+    protected $fillable = [
+        'TenLoai',
+        'MoTa',
+    ];
     public function SanPham()
     {
         return $this->hasMany(SanPham::class,'LoaiSanPhamId');
