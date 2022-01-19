@@ -275,7 +275,7 @@
                     <li>
                         <a href="#">
                             <i class="icon-list"></i>
-                            <span class="menu-text"> Tables </span>
+                            <span class="menu-text"> Hóa đơn nhập </span>
                         </a>
                     </li>
 

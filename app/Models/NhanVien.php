@@ -37,6 +37,10 @@ class NhanVien extends Authenticatable
     }
     public function Message()
     {
-        return $this->hasMany(Message::class, 'KhachHangId');
+        return $this->hasMany(Message::class, 'NhanVienId');
+    }
+    public function HoaDonNhap()
+    {
+        return $this->hasMany(HoaDonNhap::class, 'NhanVienId');
     }
 }

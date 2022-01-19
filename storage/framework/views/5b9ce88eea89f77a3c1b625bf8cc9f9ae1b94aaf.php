@@ -195,7 +195,7 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                     <td colspan="4" class="grand total">Tổng tiền (<?php echo e($hoaDon->TongSoLuong); ?> SP)</td>
-                    <td class="grand total"><?php echo e($hoaDon->TongTien); ?></td>
+                    <td class="grand total"><?php echo e(number_format($hoaDon->TongTien)); ?></td>
                 </tr>
             </tbody>
         </table>
