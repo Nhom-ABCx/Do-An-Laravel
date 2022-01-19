@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\LoaiSanPham;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use PDO;
 
 class LoaiSanPhamController extends Controller
 {
@@ -14,7 +16,8 @@ class LoaiSanPhamController extends Controller
      */
     public function index()
     {
-        //
+        $data = LoaiSanPham::all();
+        return view('LoaiSanPham.LoaiSanPham-index', ['loaiSp' => $data]);
     }
 
     /**
@@ -24,7 +27,7 @@ class LoaiSanPhamController extends Controller
      */
     public function create()
     {
-        //
+        return view("LoaiSanPham.LoaiSanPham-create");
     }
 
     /**
@@ -35,9 +38,19 @@ class LoaiSanPhamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $request->validate([
+            'TenLoai' => ['required', 'unique:loai_san_phams,TenLoai', 'max:255'],
+            'MoTa' => ['max:255'],
+        ]);
+        $loaiSp = new LoaiSanPham();
+        $loaiSp->fill([
+            'TenLoai' => $request->input('TenLoai'),
+            'MoTa' => $request->input('MoTa') ?? '',
+        ]);
+        $loaiSp->save();
+        return Redirect::route('LoaiSanPham.index');
     }
-
     /**
      * Display the specified resource.
      *
@@ -57,7 +70,7 @@ class LoaiSanPhamController extends Controller
      */
     public function edit(LoaiSanPham $loaiSanPham)
     {
-        //
+        return view('LoaiSanPham.LoaiSanPham-edit', ['loaiSanPham' => $loaiSanPham]);
     }
 
     /**
@@ -69,7 +82,20 @@ class LoaiSanPhamController extends Controller
      */
     public function update(Request $request, LoaiSanPham $loaiSanPham)
     {
-        //
+        // $request->validate(
+        //     [
+        //         "TenLoai" => $request["TenLoai"],
+        //         "MoTa" => $request["MoTa"]
+        //     ]
+        // );
+        $loaiSanPham->fill(
+            [
+                "TenLoai" => $request->input("TenLoai"),
+                "MoTa" => $request->input("MoTa")
+            ]
+        );
+        $loaiSanPham->save();
+        return Redirect::route('LoaiSanPham.index');
     }
 
     /**
@@ -80,6 +106,19 @@ class LoaiSanPhamController extends Controller
      */
     public function destroy(LoaiSanPham $loaiSanPham)
     {
-        //
+        $loaiSanPham->delete();
+        $loaiSanPham->save();
+        return Redirect::route("LoaiSanPham.index");
+    }
+    public function LoaiSanPhamDaXoa(Request $request)
+    {
+        $data = LoaiSanPham::onlyTrashed()->get();
+        return view("LoaiSanPham.LoaiSanPham-index", ['loaiSp' => $data]);
+    }
+    public function KhoiPhucLoaiSanPham($id)
+    {
+        $data = LoaiSanPham::onlyTrashed()->find($id);
+        $data->restore();
+        return Redirect::route('LoaiSanPham.DaXoa');
     }
 }

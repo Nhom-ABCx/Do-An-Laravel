@@ -1,7 +1,7 @@
 
 
 
-<?php $__env->startSection('title', 'Page Title'); ?>
+<?php $__env->startSection('title', 'QL khách hàng'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
     
