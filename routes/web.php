@@ -128,13 +128,8 @@ Route::middleware('auth')->group(function () {
             'KhachHang' => 'khachHang'
         ]
     ]);
-<<<<<<< HEAD
-    Route::get("Khach_hang/dsden", [KhachHangController::class, "KhachHang_DS_Den"])->name("KhachHang.dsDen");
-    Route::post("Khach_hang/KhoiPhuc/{id}", [KhachHangController::class, "KhoiPhucKhachHang"])->name("KhachHang.KhoiPhuc");
-=======
-    Route::get("KhachHang/dsden", [KhachHangController::class, "KhachHang_DS_Den"])->name("KhachHang.dsDen");
-    // Route::post("HoaDon/KhoiPhuc/{id}", [HoaDonController::class, "KhoiPhucHoaDon"])->name("HoaDon.KhoiPhuc");
->>>>>>> 1ceb29724e6ec9c3a770b5b92fac61b721dc81bf
+    Route::get("KhachHangg/dsden", [KhachHangController::class, "KhachHang_DS_Den"])->name("KhachHang.dsDen");
+    Route::post("KhachHang/KhoiPhuc/{id}", [KhachHangController::class, "KhoiPhucKhachHang"])->name("KhachHang.KhoiPhuc");
 
     //Route số sao sản phẩm
     Route::get("SanPham/Sao", [SanPhamController::class, "SoSao"])->name('SanPham.SoSao');

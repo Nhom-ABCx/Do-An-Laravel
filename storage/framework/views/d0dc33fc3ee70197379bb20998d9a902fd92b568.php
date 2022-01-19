@@ -40,10 +40,10 @@
             <div class="page-content">
                 <div class="row">
                     <form class="form-inline"
-                        action="<?php echo e(request()->is('Khach_hang/dsden') ? route('KhachHang.dsDen') : route('KhachHang.index')); ?>"
+                        action="<?php echo e(request()->is('KhachHangg/dsden') ? route('KhachHang.dsDen') : route('KhachHang.index')); ?>"
                         method="get">
 
-                        <?php if(request()->is('Khach_hang/dsden')): ?>
+                        <?php if(request()->is('KhachHangg/dsden')): ?>
                             <a class="btn btn-inverse" href="<?php echo e(route('KhachHang.index')); ?>"> Black</a>
                         <?php else: ?>
                             <a href="<?php echo e(route('KhachHang.dsDen')); ?>" class="btn btn-inverse">
@@ -143,7 +143,7 @@
                                         <td><?php echo e($item->updated_at); ?></td>
                                         <td><?php echo e($item->deleted_at); ?></td>
 
-                                        <?php if(request()->is('Khach_hang/dsden')): ?>
+                                        <?php if(request()->is('KhachHangg/dsden')): ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                     <form action="<?php echo e(route('KhachHang.KhoiPhuc', $item->id)); ?>"

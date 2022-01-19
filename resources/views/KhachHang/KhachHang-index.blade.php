@@ -40,10 +40,10 @@
             <div class="page-content">
                 <div class="row">
                     <form class="form-inline"
-                        action="{{ request()->is('Khach_hang/dsden') ? route('KhachHang.dsDen') : route('KhachHang.index') }}"
+                        action="{{ request()->is('KhachHangg/dsden') ? route('KhachHang.dsDen') : route('KhachHang.index') }}"
                         method="get">
 
-                        @if (request()->is('Khach_hang/dsden'))
+                        @if (request()->is('KhachHangg/dsden'))
                             <a class="btn btn-inverse" href="{{ route('KhachHang.index') }}"> Black</a>
                         @else
                             <a href="{{ route('KhachHang.dsDen') }}" class="btn btn-inverse">
@@ -146,7 +146,7 @@
                                         <td>{{ $item->updated_at }}</td>
                                         <td>{{ $item->deleted_at }}</td>
 
-                                        @if (request()->is('Khach_hang/dsden'))
+                                        @if (request()->is('KhachHangg/dsden'))
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                     <form action="{{ route('KhachHang.KhoiPhuc', $item->id) }}"
