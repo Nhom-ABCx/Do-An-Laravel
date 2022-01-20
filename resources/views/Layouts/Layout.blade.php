@@ -444,7 +444,7 @@
                     <li class="{{ request()->is('/') ? 'active' : '' }}">
                         <a href="/">
                             <i class="icon-dashboard"></i>
-                            <span class="menu-text"> Bảng điều khiển </span>
+                            <span class="menu-text"> Trang chủ </span>
                         </a>
                     </li>
 
@@ -455,7 +455,7 @@
                         </a>
                     </li>
 
-                    <li class="{{ request()->is('SanPham') || request()->is('SanPham') ? 'active open' : '' }}">
+                    <li class="{{ request()->is('SanPham') || request()->is('LoaiSanPham') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-desktop"></i>
                             <span class="menu-text"> Quản lý sản phẩm </span>
