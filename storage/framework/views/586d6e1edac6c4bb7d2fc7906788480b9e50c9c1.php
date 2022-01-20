@@ -1,10 +1,14 @@
 
 
 
-<?php $__env->startSection('title', 'ChuongTrinh-Khuyến Mãi'); ?>
+<?php $__env->startSection('title', 'QL loại sản phẩm'); ?>
+
 <?php $__env->startSection('headThisPage'); ?>
+    <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
 <?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('body'); ?>
+
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
@@ -16,68 +20,78 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home home-icon"></i>
-                    <a href="#">Home</a>
+                    <a href="<?php echo e(url('/')); ?>">Home</a>
                 </li>
-                <li>
-                    <a href="#">Tables</a>
-                </li>
-                <li class="active">Chương Trình_Khuyến mãi</li>
+                <?php if(request()->is('LoaiSanPhamm/DaXoa')): ?>
+                    <li>
+                        Loại sản phẩm đã xoá
+                    </li>
+
+                <?php else: ?>
+                    <li class="active">Quản lý loại sản phẩm</li>
+                <?php endif; ?>
             </ul><!-- .breadcrumb -->
 
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                            autocomplete="off" />
-                        <i class="icon-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- #nav-search -->
+            
         </div>
-        <div class="col-xs-12">
-            <h3 class="header smaller lighter blue">Chương trình khuyến mãi</h3>
-            <div class="page-content">
-                <div class="row">
-                    <form class="form-inline"
-                        action="<?php echo e(request()->is('KhuyenMaii/DaXoa') ? route('KhuyenMai.DaXoa') : route('KhuyenMai.index')); ?>"
-                        method="get">
-                        <a type="button" class="btn btn-success " href="<?php echo e(route('KhuyenMai.create')); ?>"><i
-                                class="fa fa-plus"></i> Thêm chương trình khuyến mãi</a>
-                        <?php if(request()->is('KhuyenMaii/DaXoa')): ?>
-                            <a class="btn btn-inverse" href="<?php echo e(route('KhuyenMai.index')); ?>"> Black</a>
-                        <?php else: ?>
-                            <a href="<?php echo e(route('KhuyenMai.DaXoa')); ?>" class="btn btn-inverse">
-                                <i class="icon-trash"></i>
-                                Chương trình k.mãi đã xoá
-                            </a>
-                        <?php endif; ?>
-                    </form>
 
-                    <hr>
-                    <div class="table-header">
-                        Bảng Chương Trình Khuyến mãi
+        <div class="page-content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="widget-box">
+                        <div class="widget-header">
+                            <?php if(request()->is('LoaiSanPhamm/DaXoa')): ?>
+                                <h3 class="header smaller lighter blue">Quản lý loại sản phẩm đã xoá</h3>
+                            <?php else: ?>
+                                <h3 class="header smaller lighter blue">Quản lý loại sản phẩm</h3>
+                            <?php endif; ?>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <form class="form-inline"
+                                    action="<?php echo e(request()->is('LoaiSanPhamm/DaXoa') ? route('LoaiSanPham.DaXoa') : route('LoaiSanPham.index')); ?>"
+                                    method="get">
+
+                                    <?php if(request()->is('LoaiSanPhamm/DaXoa')): ?>
+                                        <a href="<?php echo e(route('LoaiSanPham.index')); ?>" class="btn btn-inverse">Back</a>
+                                    <?php else: ?>
+                                        <a href="<?php echo e(route('LoaiSanPham.create')); ?>" class="btn btn-success">
+                                            <i class="icon-plus"></i>
+                                            Thêm loại sản phẩm
+                                        </a>
+                                        <a href="<?php echo e(route('LoaiSanPham.DaXoa')); ?>" class="btn btn-inverse">
+                                            <i class="icon-trash"></i>
+                                            Loại sản phẩm đã xóa
+                                        </a>
+                                    <?php endif; ?>
+                                </form>
+                            </div>
+                        </div>
                     </div>
 
+                    <div class="hr hr-24"></div>
+
+                    <div class="table-header">
+                        Bảng loại sản phẩm
+                    </div>
+                    
                     <div class="table-responsive">
                         <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>
+                                        <i class="fa fa-key "></i>
+                                        ##
+                                    </th>
+
+                                    <th>
                                         <i class="fa fa-align-left"></i>
-                                        Tên chương trình
+                                        Tên loại
                                     </th>
 
                                     <th>
                                         <i class="fa fa-file-text-o"></i>
                                         Mô tả
-                                    </th>
-                                    <th>
-                                        <i class="fa fa-calendar"></i>
-                                        Ngày bắt đầu
-                                    </th>
-                                    <th>
-                                        <i class="fa fa-calendar-check-o"></i>
-                                        Ngày kết thúc
                                     </th>
                                     <th>
                                         <i class="fa fa-pencil"></i>
@@ -87,26 +101,28 @@
                                         <i class="fa fa-check-square-o"></i>
                                         updated_at
                                     </th>
-                                    
+                                    <th>
+                                        <i class="fa fa-trash"></i>
+                                        deleted_at
+                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <?php $__currentLoopData = $ctkm; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $__currentLoopData = $loaiSp; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td><?php echo e($item->TenChuongTrinh); ?></td>
+                                        <td class="center"><?php echo e($item->id); ?></td>
+                                        <td><?php echo e($item->TenLoai); ?></td>
                                         <td><?php echo e($item->MoTa); ?></td>
-                                        <td><?php echo e($item->FromDate); ?></td>
-                                        <td><?php echo e($item->ToDate); ?></td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
-                                        
-                                        <?php if(request()->is('KhuyenMaii/DaXoa')): ?>
+                                        <td><?php echo e($item->deleted_at); ?></td>
+                                        <?php if(request()->is('LoaiSanPhamm/DaXoa')): ?>
                                             <td>
 
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <form action="<?php echo e(route('KhuyenMai.KhoiPhuc', $item->id)); ?>"
+                                                    <form action="<?php echo e(route('LoaiSanPham.KhoiPhuc', $item->id)); ?>"
                                                         method="post">
                                                         <?php echo csrf_field(); ?>
                                                         
@@ -123,11 +139,12 @@
                                                         <i class="fa fa-plus"></i>
                                                     </a>
 
-                                                    <a class="green" href="<?php echo e(route('KhuyenMai.edit', $item)); ?>"
-                                                        title="Sữa">
+                                                    <a class="green"
+                                                        href="<?php echo e(route('LoaiSanPham.edit', $item)); ?>" title="Sữa">
                                                         <i class="icon-pencil bigger-130"></i>
                                                     </a>
-                                                    <form action="<?php echo e(route('KhuyenMai.destroy', $item)); ?>" method="post">
+                                                    <form action="<?php echo e(route('LoaiSanPham.destroy', $item)); ?>"
+                                                        method="post">
                                                         <?php echo csrf_field(); ?>
                                                         <?php echo method_field('DELETE'); ?>
                                                         <button type="submit" class="btn-link red" title="Xoá"><i
@@ -183,47 +200,46 @@
                     </div>
                 </div>
             </div>
-        </div>
+
+        </div><!-- /.page-content -->
     </div><!-- /.main-content -->
+
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scriptThisPage'); ?>
-    
-    <!-- inline scripts related to this page -->
-    <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
-    <script src="/storage/assets/js/bootbox.min.js"></script>
-    <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
-    <script src="/storage/assets/js/jquery.gritter.min.js"></script>
-    <script src="/storage/assets/js/spin.min.js"></script>
 
+    <script src="/storage/assets/js/chosen.jquery.min.js"></script>
+    
+    <script src="/storage/assets/js/bootbox.min.js"></script>
+    
+
+    <!-- inline scripts related to this page -->
+
+    
     <script type="text/javascript">
         jQuery(function($) {
-            <?php if($errors->any()): ?>
-                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    $.gritter.add({
-                    title: 'Lỗi' ,
-                    text: '<?php echo e($error); ?>',
-                    class_name: 'gritter-error' + (!$( '#gritter-light').get(0) ?
-                    ' gritter-light' : '')
-                    });
-                
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            <?php endif; ?>
-
             var oTable1 = $('#sample-table-2').dataTable({
                 "aoColumns": [
-                    null, {
+                    null, null,
+                    {
                         "bSortable": false
-                    },
-                    null, {
+                    }, //mota
+                    null, null, null,
+                    {
                         "bSortable": false
-                    },
-                    null, null, {
-                        "bSortable": false
-                    },
+                    }, //hinh anh
 
                 ]
+            });
+
+            $('table th input:checkbox').on('click', function() {
+                var that = this;
+                $(this).closest('table').find('tr > td:first-child input:checkbox')
+                    .each(function() {
+                        this.checked = that.checked;
+                        $(this).closest('tr').toggleClass('selected');
+                    });
+
             });
 
 
@@ -244,7 +260,43 @@
                 return 'left';
             }
         })
+        $('[data-rel=tooltip]').tooltip({
+            container: 'body'
+        });
+        $(".chosen-select").chosen();
+        $('#chosen-multiple-style').on('click', function(e) {
+            var target = $(e.target).find('input[type=radio]');
+            var which = parseInt(target.val());
+            if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
+            else $('#form-field-select-4').removeClass('tag-input-style');
+        });
     </script>
+    
+
+    
+    <script type="text/javascript">
+        jQuery(function($) {
+            $(".bootbox-options").on(ace.click_event, function() {
+                bootbox.dialog({
+                    message: "<span class='bigger-110'>Bạn có chắc chắn muốn xóa vĩnh viễn mục này ??? <i class='icon-exclamation-sign red bigger-130'></i></span>",
+                    buttons: {
+                        "button": {
+                            "label": "Hủy",
+                            "className": "btn-sm"
+                        },
+                        "danger": {
+                            "label": "Xác nhận xóa",
+                            "className": "btn-sm btn-danger",
+                            "callback": function() {
+                                $("#form").submit()
+                            }
+                        },
+                    }
+                });
+            });
+        });
+    </script>
+    
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/KhuyenMai/KhuyenMai-index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/LoaiSanPham/LoaiSanPham-index.blade.php ENDPATH**/ ?>

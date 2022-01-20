@@ -106,8 +106,12 @@ class LoaiSanPhamController extends Controller
      */
     public function destroy(LoaiSanPham $loaiSanPham)
     {
-        $loaiSanPham->delete();
-        $loaiSanPham->save();
+        if (count($loaiSanPham->SanPham)) {
+            $loaiSanPham->delete();
+            $loaiSanPham->save();
+            return Redirect::route("LoaiSanPham.index");
+        }
+        $loaiSanPham->forceDelete();
         return Redirect::route("LoaiSanPham.index");
     }
     public function LoaiSanPhamDaXoa(Request $request)

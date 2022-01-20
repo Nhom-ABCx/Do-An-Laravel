@@ -1,251 +1,124 @@
-{{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
-@extends('layouts.Layout')
 
-@section('title', 'Thêm sản phẩm')
 
-@section('headThisPage')
+
+<?php $__env->startSection('title', 'Create_CT-Khuyen-Mai'); ?>
+
+<?php $__env->startSection('headThisPage'); ?>
+    
     <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
     <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
-@endsection
+    
+<?php $__env->stopSection(); ?>
 
-@section('body')
+<?php $__env->startSection('body'); ?>
+
     <div class="main-content">
-        <div class="breadcrumbs" id="breadcrumbs">
-            <script type="text/javascript">
-                try {
-                    ace.settings.check('breadcrumbs', 'fixed')
-                } catch (e) {}
-            </script>
 
-            <ul class="breadcrumb">
-                <li>
-                    <i class="icon-home home-icon"></i>
-                    <a href="{{ url('/') }}">Home</a>
-                </li>
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="#">Home</a>
 
-                <li>
-                    <a href="{{ route('SanPham.index') }}">Quản lý sản phẩm</a>
-                </li>
+                <span class="divider">
+                    <i class="icon-angle-right arrow-icon"></i>
+                </span>
+            </li>
 
-                <li class="active">Thêm</li>
-            </ul><!-- .breadcrumb -->
+            <li>
+                <a href="#">Forms</a>
+                <span class="divider">
+                    <i class="icon-angle-right arrow-icon"></i>
+                </span>
+            </li>
+            <li class="active">CT-Khuyến mãi</li>
+        </ul><!-- .breadcrumb -->
 
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-                        <i class="icon-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- #nav-search -->
-        </div>
-
+        <div class="nav-search" id="nav-search">
+            <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input"
+                        autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                </span>
+            </form>
+        </div><!-- #nav-search -->
         <div class="page-content">
-            <div class="page-header">
-                <h1>
-                    Sản phẩm
-                    <small>
-                        <i class="icon-double-angle-right"></i>
-                        Nhập thông tin để tạo mới 1 sản phẩm
-                    </small>
-                </h1>
-            </div><!-- /.page-header -->
+            <div class="span4">
+                <div class="pull">
+                    <a type="button" class="btn btn-info " href="<?php echo e(route('KhuyenMai.index')); ?>"><i
+                            class="fa fa-angle-double-left"></i> Back</a>
+                </div>
+                <form action="<?php echo e(route('KhuyenMai.store')); ?>" method="POST" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
+                    <div class="widget-box">
+                        <div class="widget-header">
+                            <h4>Thêm CT-Khuyến mãi</h4>
+                        </div>
 
-            <div class="row">
-                <div class="col-xs-12">
-                    <!-- PAGE CONTENT BEGINS -->
-                    {{-- web để search Icon trong template https://fontawesome.com/v3.2/icons/ --}}
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <div class="row-fluid">
+                                    <label for="id-date-picker-1">Tên chương trình</label>
+                                </div>
 
-                    <form class="form-horizontal" role="form" action="{{ route('SanPham.store') }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        {{-- @method('PATCH') --}}
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Tên sản phẩm </label>
+                                <div class="control-group">
+                                    <div class="row-fluid input-append">
+                                        <textarea name="TenChuongTrinh" cols="50" rows="3"></textarea>
+                                    </div>
+                                    <?php if($errors->has('TenChuongTrinh')): ?>
+                                        <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('TenChuongTrinh')); ?></i>
+                                    <?php endif; ?>
+                                </div>
+                                <hr />
+                                <div class="row-fluid">
+                                    <label for="id-date-picker-1">Mô tả</label>
+                                </div>
 
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-coffee"></i>
-                                    </span>
+                                <div class="control-group">
+                                    <div class="row-fluid input-append">
+                                        <textarea name="MoTa" cols="50" rows="3"></textarea>
+                                    </div>
+                                    <?php if($errors->has('MoTa')): ?>
+                                        <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('MoTa')); ?></i>
+                                    <?php endif; ?>
+                                </div>
+                                <hr />
+                                <div class="control-group">
+                                    <div class="form-group">
+                                        <label for="input_from">Ngày bắt đầu-Ngày kết thúc</label><br>
+                                        <div class="control-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="icon-calendar bigger-110"></i>
+                                                </span>
+                                                <input class="form-control" type="text" name="date-range-picker"
+                                                    id="id-date-range-picker-1" />
+                                            </div>
+                                            <?php if($errors->has('date-range-picker')): ?>
+                                                <i class="icon-remove bigger-110 red">
+                                                    <?php echo e($errors->first('date-range-picker')); ?></i>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
 
-                                    <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" value="{{ old('TenSanPham') }}" name="TenSanPham" />
+                                    <hr />
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-check-square-o"></i>
+                                        Thêm</button>
                                 </div>
                             </div>
-                            @if ($errors->has('TenSanPham'))
-                                <i class="icon-remove bigger-110 red"> {{ $errors->first('TenSanPham') }}</i>
-                            @endif
                         </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Mô tả </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-edit"></i>
-                                    </span>
-
-                                    <textarea id="form-field-11" class="autosize-transition form-control" placeholder="Nhập mô tả" name="MoTa">{{ old('MoTa') }}</textarea>
-                                </div>
-                            </div>
-                            @if ($errors->has('MoTa'))
-                                <i class="icon-remove bigger-110 red"> {{ $errors->first('MoTa') }}</i>
-                            @endif
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Số lượng tồn </label>
-
-                            <div class="col-sm-3">
-                                {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner3" --}}
-                                <input type="text" class="input-mini" id="spinner3" value="{{ old('SoLuongTon') }}" name="SoLuongTon" />
-                            </div>
-                            @if ($errors->has('SoLuongTon'))
-                                <i class="icon-remove bigger-110 red"> {{ $errors->first('SoLuongTon') }}</i>
-                            @endif
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Giá Nhập </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-credit-card"></i>
-                                    </span>
-
-                                    {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner1" --}}
-                                    <input type="text" class="input-mini" id="spinner1" value="{{ old('GiaNhap') }}" name="GiaNhap" />
-                                </div>
-                            </div>
-                            @if ($errors->has('GiaNhap'))
-                                <i class="icon-remove bigger-110 red"> {{ $errors->first('GiaNhap') }}</i>
-                            @endif
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Giá bán </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-money"></i>
-                                    </span>
-
-                                    {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner2" --}}
-                                    <input type="text" class="input-mini" id="spinner2" value="{{ old('GiaBan') }}" name="GiaBan" />
-                                </div>
-                            </div>
-                            @if ($errors->has('GiaBan'))
-                                <i class="icon-remove bigger-110 red"> {{ $errors->first('GiaBan') }}</i>
-                            @endif
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Hình ảnh </label>
-
-                            <div class="col-sm-2">
-                                <input type="file" accept="image/*" id="id-input-file-3" onchange="showImage()" name="HinhAnh">
-                            </div>
-                            @if ($errors->has('HinhAnh'))
-                                <i class="icon-remove bigger-110 red"> {{ $errors->first('HinhAnh') }}</i>
-                            @endif
-                            <div id="displayImage"></div>
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Hãng sản xuất
-                            </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-sort-by-attributes"></i>
-                                    </span>
-
-                                    <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="HangSanXuatId">
-                                        <option value="">&nbsp;</option>
-                                        @foreach ($lstHangSanXuat as $item)
-                                            <option value="{{ $item->id }}" @if ($item->id == old('HangSanXuatId')) selected @endif>
-                                                {{ $item->Ten }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            @if ($errors->has('HangSanXuatId'))
-                                <i class="icon-remove bigger-110 red"> {{ $errors->first('HangSanXuatId') }}</i>
-                            @endif
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Loại sản phẩm
-                            </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-sort-by-attributes"></i>
-                                    </span>
-
-                                    <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="LoaiSanPhamId">
-                                        <option value="">&nbsp;</option>
-                                        @foreach ($lstLoaiSanPham as $item)
-                                            <option value="{{ $item->id }}" @if ($item->id == old('LoaiSanPhamId')) selected @endif>
-                                                {{ $item->TenLoai }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            @if ($errors->has('LoaiSanPhamId'))
-                                <i class="icon-remove bigger-110 red"> {{ $errors->first('LoaiSanPhamId') }}</i>
-                            @endif
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="clearfix form-actions">
-                            <div class="col-md-9">
-                                <button class="btn btn-info" type="submit">
-                                    <i class="icon-ok bigger-110"></i>
-                                    Submit
-                                </button>
-
-                                &nbsp; &nbsp; &nbsp;
-                                <button class="btn" type="reset">
-                                    <i class="icon-undo bigger-110"></i>
-                                    Reset
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
+                </form>
+            </div>
         </div><!-- /.page-content -->
     </div><!-- /.main-content -->
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scriptThisPage')
+<?php $__env->startSection('scriptThisPage'); ?>
     <!--[if lte IE 8]>
-                  <script src="/storage/assets/js/excanvas.min.js"></script>
-                  <![endif]-->
+                          <script src="/storage/assets/js/excanvas.min.js"></script>
+                          <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -261,6 +134,14 @@
     <script src="/storage/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
     <script src="/storage/assets/js/jquery.maskedinput.min.js"></script>
     <script src="/storage/assets/js/bootstrap-tag.min.js"></script>
+    <!-- js date -->
+    <!-- <script src="js/jquery-3.3.1.min.js"></script>
+                                                    <script src="js/popper.min.js"></script>
+                                                    <script src="js/bootstrap.min.js"></script>
+                                                    <script src="js/picker.js"></script>
+                                                    <script src="js/picker.date.js"></script>
+
+                                                    <script src="js/main.js"></script> -->
 
     <!-- inline scripts related to this page -->
 
@@ -476,9 +357,7 @@
             // });
 
 
-            _valueSL = {{ old('SoLuongTon') ?? 0 }};
-            _valueGN = {{ old('GiaNhap') ?? 0 }};
-            _valueGB = {{ old('GiaBan') ?? 0 }};
+
             $('#spinner0').ace_spinner({
                     value: 0,
                     min: 0,
@@ -491,7 +370,7 @@
                     //alert(this.value)
                 });
             $('#spinner1').ace_spinner({
-                value: _valueGN,
+                value: 0,
                 min: 0,
                 max: 1000000000,
                 step: 10000,
@@ -500,7 +379,7 @@
                 icon_down: 'icon-caret-down'
             });
             $('#spinner2').ace_spinner({
-                value: _valueGB,
+                value: 0,
                 min: 0,
                 max: 1000000000,
                 step: 10000,
@@ -509,7 +388,7 @@
                 icon_down: 'icon-caret-down'
             });
             $('#spinner3').ace_spinner({
-                value: _valueSL,
+                value: 0,
                 min: 0,
                 max: 10000,
                 step: 5,
@@ -591,24 +470,9 @@
                 $(this).find('.modal-chosen').chosen();
             })
             */
-
         });
-
-        function showImage() {
-            let imgSelected = document.querySelector('#id-input-file-3').files;
-            if (imgSelected.length > 0) {
-                let fileToLoad = imgSelected[0];
-                let fileReader = new FileReader();
-                fileReader.onload = function(fileLoaderEvent) {
-                    let srcData = fileLoaderEvent.target.result;
-                    var newImage = document.createElement('img');
-                    newImage.src = srcData;
-                    newImage.style.width = "150px";
-                    newImage.style.height = "150px";
-                    document.getElementById('displayImage').innerHTML = newImage.outerHTML;
-                }
-                fileReader.readAsDataURL(fileToLoad);
-            }
-        }
+        // <!-- Script -->
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/KhuyenMai/KhuyenMai-create.blade.php ENDPATH**/ ?>

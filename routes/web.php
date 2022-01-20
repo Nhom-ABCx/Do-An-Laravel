@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\HoaDonController;
+use App\Http\Controllers\HoaDonNhapController;
+use App\Http\Controllers\CTHoaDonNhapController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\ChuongTrinhKhuyenMaiController;
 use App\Http\Controllers\CTChuongTrinhKMController;
@@ -119,6 +121,13 @@ Route::middleware('auth')->group(function () {
     Route::post("HoaDon/KhoiPhuc/{id}", [HoaDonController::class, "KhoiPhucHoaDon"])->name("HoaDon.KhoiPhuc");
     Route::get("HoaDonn/DaGiao", [HoaDonController::class, "HoaDonDaGiao"])->name("HoaDon.DaGiao");
     Route::get("HoaDon/{hoaDon}/PDF", [HoaDonController::class, "HoaDonPDF"])->name("HoaDon.PDF");
+    Route::resource('HoaDonNhap', HoaDonNhapController::class, [
+        'parameters' => [
+            'HoaDonNhap' => 'hoaDonNhap'
+            ]
+        ]);
+    Route::get("HoaDonNhapp/DaHuy", [HoaDonNhapController::class, "HoaDonNhapDaHuy"])->name("HoaDonNhap.DaHuy");
+    Route::post("HoaDonNhap/KhoiPhuc/{id}", [HoaDonNhapController::class, "KhoiPhucHoaDonNhap"])->name("HoaDonNhap.KhoiPhuc");
 
     Route::get("WidgetThongBao", function () {
         return view("WidgetThongBao");

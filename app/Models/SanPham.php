@@ -26,11 +26,11 @@ class SanPham extends Model
     ];
     public function HangSanXuat()
     {
-        return $this->belongsTo(HangSanXuat::class, 'HangSanXuatId');
+        return $this->belongsTo(HangSanXuat::class, 'HangSanXuatId')->withTrashed();
     }
     public function LoaiSanPham()
     {
-        return $this->belongsTo(LoaiSanPham::class, 'LoaiSanPhamId');
+        return $this->belongsTo(LoaiSanPham::class, 'LoaiSanPhamId')->withTrashed();
     }
     public function CTChuongTrinhKM()
     {
