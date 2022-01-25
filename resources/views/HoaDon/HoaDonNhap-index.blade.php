@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
     {{-- datetime picker end --}}
 
+    {{-- thông báo --}}
     <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
     <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
     <style>
@@ -33,6 +34,7 @@
         }
 
     </style>
+    {{-- thông báo end --}}
 @endsection
 
 @section('body')
@@ -298,12 +300,12 @@
                                 <div class="modal-footer">
                                     <button class="btn btn-sm" data-dismiss="modal">
                                         <i class="icon-remove"></i>
-                                        Cancel
+                                        Hủy
                                     </button>
 
                                     <button type="submit" class="btn btn-sm btn-primary">
                                         <i class="icon-ok"></i>
-                                        Save
+                                        Lưu
                                     </button>
                                 </div>
                             </form>
@@ -401,8 +403,8 @@
         {{-- thông báo error --}}
         <!-- page specific plugin scripts -->
         <!--[if lte IE 8]>
-                                                                                                                  <script src="assets/js/excanvas.min.js"></script>
-                                                                                                                  <![endif]-->
+                                                                                                                      <script src="assets/js/excanvas.min.js"></script>
+                                                                                                                      <![endif]-->
 
         <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
         <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -414,6 +416,7 @@
         <script type="text/javascript">
             jQuery(function($) {
                 @if ($errors->any())
+                    $('#modal-form').modal('show');
                     @foreach ($errors->all() as $error)
                         $.gritter.add({
                         title: 'Có lỗi xảy ra',

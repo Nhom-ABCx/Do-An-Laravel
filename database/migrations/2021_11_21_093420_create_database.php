@@ -64,8 +64,8 @@ class CreateDatabase extends Migration
             $table->string('TenSanPham')->unique();
             $table->string('MoTa')->nullable();
             $table->integer('SoLuongTon');
-            $table->double('GiaNhap');
-            $table->double('GiaBan');
+            $table->double('GiaNhap')->nullable();
+            $table->double('GiaBan')->nullable();
             $table->string('HinhAnh')->nullable();
             $table->integer('LuotMua');
             $table->foreignId('HangSanXuatId');

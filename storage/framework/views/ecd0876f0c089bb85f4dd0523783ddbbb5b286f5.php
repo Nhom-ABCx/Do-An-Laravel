@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Page Title'); ?>
+<?php $__env->startSection('title', 'Thêm sản phẩm'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
     <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
