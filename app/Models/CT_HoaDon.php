@@ -18,6 +18,7 @@ class CT_HoaDon extends Model
         'HoaDonId',
         'SanPhamId',
         'SoLuong',
+        'GiaNhap',
         'GiaBan',
         'GiaGiam',
         'ThanhTien',

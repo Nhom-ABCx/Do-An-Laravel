@@ -129,6 +129,12 @@ class HoaDonController extends Controller
     public function destroy(HoaDon $hoaDon)
     {
         $hoaDon->delete();
+        if (count($hoaDon->CT_HoaDon)) {
+            $hoaDon->delete();
+            $hoaDon->save();
+            return Redirect::route("HoaDon.index");
+        }
+        $hoaDon->forceDelete();
         return Redirect::route('HoaDon.index');
     }
     public function HoaDonDaGiao(Request $request)
@@ -176,8 +182,10 @@ class HoaDonController extends Controller
     public function HoaDonPDF(HoaDon $hoaDon)
     {
         $dsChiTietHD = CT_HoaDon::where("HoaDonId", $hoaDon->id)->get();
+        //return view("HoaDon.HoaDon-pdf",["hoaDon"=>$hoaDon,"dsChiTietHD" => $dsChiTietHD]);
         $pdf = PDF::loadView('HoaDon.HoaDon-pdf',["hoaDon"=>$hoaDon,"dsChiTietHD" => $dsChiTietHD]);
         return $pdf->stream();
+
         //return $pdf->download('file-pdf.pdf');
         //return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('HoaDon.HoaDon-pdf',[])->stream();
     }
@@ -229,6 +237,7 @@ class HoaDonController extends Controller
             else { //nguoc lai thi lap hoa don
                 $sp->fill([
                     'SoLuongTon' => $sp->SoLuongTon - $item["SoLuong"],
+                    "LuotMua"=>$sp->LuotMua+1,
                 ]);
                 $sp->save();
 
@@ -246,6 +255,7 @@ class HoaDonController extends Controller
                     'HoaDonId'       => $hoaDon->id,
                     'SanPhamId'       => $item["SanPhamId"],
                     'SoLuong'         => $item["SoLuong"],
+                    'GiaNhap' => $sp->GiaNhap,
                     'GiaBan' => $giaBan,
                     'GiaGiam' => $giaGiam,
                     'ThanhTien' => $thanhTien,

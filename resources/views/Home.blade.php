@@ -39,8 +39,11 @@
                 <div class="col-xs-12">
                     <!-- PAGE CONTENT BEGINS -->
                     <div class="row">
+                        <h4 class="lighter red center">
+                            <i class="icon-calendar"></i>
+                            Thống kê trong tháng
+                        </h4>
                         <div class="space-6"></div>
-
                         <div class="col-sm-7 infobox-container">
                             <div class="infobox infobox-green  ">
                                 <div class="infobox-icon">
@@ -48,7 +51,7 @@
                                 </div>
 
                                 <div class="infobox-data">
-                                    <span class="infobox-data-number">32</span>
+                                    <span class="infobox-data-number">32**</span>
                                     <div class="infobox-content">Lượt bình luận</div>
                                 </div>
                                 <div class="stat stat-success">8%</div>
@@ -60,7 +63,7 @@
                                 </div>
 
                                 <div class="infobox-data">
-                                    <span class="infobox-data-number">11</span>
+                                    <span class="infobox-data-number">11**</span>
                                     <div class="infobox-content">Lượt đánh giá</div>
                                 </div>
 
@@ -76,7 +79,7 @@
                                 </div>
 
                                 <div class="infobox-data">
-                                    <span class="infobox-data-number">8</span>
+                                    <span class="infobox-data-number">{{$thongKe["DonDatHang"]}}</span>
                                     <div class="infobox-content">Đơn đặt hàng</div>
                                 </div>
                                 <div class="stat stat-important">4%</div>
@@ -388,8 +391,8 @@
                                 </div>
 
                                 <div class="widget-body">
-                                    <div class="widget-main padding-4">
-                                        <div id="sales-charts"></div>
+                                    <div class="widget-main">
+                                        <div id="lineDoanhThu"></div>
                                     </div><!-- /widget-main -->
                                 </div><!-- /widget-body -->
                             </div><!-- /widget-box -->
@@ -403,11 +406,12 @@
 @endsection
 
 @section('scriptThisPage')
+    <script src="/storage/assets/js/vendor/apexcharts.min.js"></script>
     <!-- page specific plugin scripts -->
 
     <!--[if lte IE 8]>
-      <script src="/storage/assets/js/excanvas.min.js"></script>
-      <![endif]-->
+                                  <script src="/storage/assets/js/excanvas.min.js"></script>
+                                  <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -567,53 +571,6 @@
                 d3.push([i, Math.tan(i)]);
             }
 
-
-            var sales_charts = $('#sales-charts').css({
-                'width': '100%',
-                'height': '220px'
-            });
-            $.plot("#sales-charts", [{
-                    label: "Domains",
-                    data: d1
-                },
-                {
-                    label: "Hosting",
-                    data: d2
-                },
-                {
-                    label: "Services",
-                    data: d3
-                }
-            ], {
-                hoverable: true,
-                shadowSize: 0,
-                series: {
-                    lines: {
-                        show: true
-                    },
-                    points: {
-                        show: true
-                    }
-                },
-                xaxis: {
-                    tickLength: 0
-                },
-                yaxis: {
-                    ticks: 10,
-                    min: -2,
-                    max: 2,
-                    tickDecimals: 3
-                },
-                grid: {
-                    backgroundColor: {
-                        colors: ["#fff", "#fff"]
-                    },
-                    borderWidth: 1,
-                    borderColor: '#555'
-                }
-            });
-
-
             $('#recent-box [data-rel="tooltip"]').tooltip({
                 placement: tooltip_placement
             });
@@ -665,7 +622,25 @@
                 else $(this).closest('li').removeClass('selected');
             });
 
-
-        })
+            //bieu do`
+        var lineOptions = {
+            chart: {
+                type: "line",
+            },
+            series: [{
+                name: "Số tiền kiếm được",
+                data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
+            }, ],
+            xaxis: {
+                categories: [
+                    {{ date('Y') - 8 }}, {{ date('Y') - 7 }}, {{ date('Y') - 6 }}, {{ date('Y') - 5 }},
+                    {{ date('Y') - 4 }}, {{ date('Y') - 3 }}, {{ date('Y') - 2 }}, {{ date('Y') - 1 }}, {{ date('Y') }}
+                ],
+            },
+        };
+        var line = new ApexCharts(document.querySelector("#lineDoanhThu"), lineOptions);
+        line.render();
+        //bieu do` end
+        });
     </script>
 @endsection

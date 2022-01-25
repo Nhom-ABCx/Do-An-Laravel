@@ -103,13 +103,16 @@ class HoaDonNhapController extends Controller
         $hoaDonNhap->TrangThai = $request["TrangThai"];
         $hoaDonNhap->save();
 
-        //neu trang thai' thanh`cong thi cap nhat lai gia' ban' cua san pham tuong ung'
+        //neu trang thai' thanh`cong thi cap nhat lai gia' ban' va so luong ton` cua san pham tuong ung'
         if ($hoaDonNhap->TrangThai) {
             $dsChiTietHD = $hoaDonNhap->CT_HoaDonNhap;
             if (count($dsChiTietHD)) {
                 foreach ($dsChiTietHD as $item) {
                     $sanPham = $item->SanPham;
-                    $sanPham->GiaNhap = $item->GiaNhap;
+                    $sanPham->fill([
+                        "GiaNhap" => $item->GiaNhap,
+                        "SoLuongTon" => $sanPham->SoLuongTon + $item->SoLuong,
+                    ]);
                     $sanPham->save();
                 }
             }
@@ -169,8 +172,14 @@ class HoaDonNhapController extends Controller
      */
     public function destroy(HoaDonNhap $hoaDonNhap)
     {
-        $hoaDonNhap->delete();
+        if (count($hoaDonNhap->CT_HoaDonNhap)) {
+            $hoaDonNhap->delete();
+            $hoaDonNhap->save();
+            return Redirect::route("HoaDonNhap.index");
+        }
+        $hoaDonNhap->forceDelete();
         return Redirect::route('HoaDonNhap.index');
+
     }
 
     public function HoaDonNhapDaHuy(Request $request)

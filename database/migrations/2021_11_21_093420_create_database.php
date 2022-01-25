@@ -131,13 +131,13 @@ class CreateDatabase extends Migration
             $table->foreignId('KhachHangId');
             $table->string('TenNguoiNhan');
             $table->string('Phone');
-            $table->string('TinhThanhPho')->nullable();
-            $table->string('QuanHuyen')->nullable();
-            $table->string('PhuongXa')->nullable();
             $table->string('DiaChiChiTiet');
-            $table->integer('CodeTinhThanhPho')->nullable();
-            $table->integer('CodeQuanHuyen')->nullable();
+            $table->string('PhuongXa')->nullable();
+            $table->string('QuanHuyen')->nullable();
+            $table->string('TinhThanhPho')->nullable();
             $table->integer('CodePhuongXa')->nullable();
+            $table->integer('CodeQuanHuyen')->nullable();
+            $table->integer('CodeTinhThanhPho')->nullable();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('KhachHangId')->references('id')->on('khach_hangs');
@@ -158,6 +158,7 @@ class CreateDatabase extends Migration
             $table->foreignId('HoaDonId');
             $table->foreignId('SanPhamId');
             $table->integer('SoLuong');
+            $table->double('GiaNhap');
             $table->double('GiaBan');
             $table->double('GiaGiam')->nullable();
             $table->double('ThanhTien');
