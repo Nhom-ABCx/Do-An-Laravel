@@ -41,7 +41,7 @@
                                 </div>
 
                                 <div class="infobox-data">
-                                    <span class="infobox-data-number">32**</span>
+                                    <span class="infobox-data-number"><?php echo e($thongKe['LuotBinhLuan']); ?></span>
                                     <div class="infobox-content">Lượt bình luận</div>
                                 </div>
                                 <div class="stat stat-success">8%</div>
@@ -53,7 +53,7 @@
                                 </div>
 
                                 <div class="infobox-data">
-                                    <span class="infobox-data-number">11**</span>
+                                    <span class="infobox-data-number"><?php echo e($thongKe['LuotDanhGia']); ?></span>
                                     <div class="infobox-content">Lượt đánh giá</div>
                                 </div>
 
@@ -69,7 +69,7 @@
                                 </div>
 
                                 <div class="infobox-data">
-                                    <span class="infobox-data-number"><?php echo e($thongKe["DonDatHang"]); ?></span>
+                                    <span class="infobox-data-number"><?php echo e($thongKe['DonDatHang']); ?></span>
                                     <div class="infobox-content">Đơn đặt hàng</div>
                                 </div>
                                 <div class="stat stat-important">4%</div>
@@ -83,7 +83,7 @@
                                 </div>
 
                                 <div class="infobox-data">
-                                    <span class="infobox-data-number">6,251</span>
+                                    <span class="infobox-data-number">9,999</span>
                                     <div class="infobox-content">Lượt truy cập</div>
                                 </div>
 
@@ -99,12 +99,13 @@
 
                             <div class="infobox infobox-green infobox-dark">
                                 <div class="infobox-progress">
-                                    <div class="easy-pie-chart percentage" data-percent="61" data-size="55">
-                                        <span class="percent">61</span>%
+                                    <div class="easy-pie-chart percentage" data-percent="<?php echo e(number_format(($thongKe['DonGiaoThanhCong'] / $thongKe['DonDatHang']) * 100)); ?>" data-size="55">
+                                        <span class="percent"><?php echo e(number_format(($thongKe['DonGiaoThanhCong'] / $thongKe['DonDatHang']) * 100)); ?></span>%
                                     </div>
                                 </div>
 
-                                <div class="infobox-data" style="margin: 20px 0px 0px 15px">
+                                <div class="infobox-data" style="margin: 7px 0px 0px 15px">
+                                    <div class="infobox-content"><?php echo e($thongKe['DonGiaoThanhCong'] . '/' . $thongKe['DonDatHang']); ?></div>
                                     <div class="infobox-content">Đơn giao thành công</div>
                                 </div>
                             </div>
@@ -116,7 +117,7 @@
 
                                 <div class="infobox-data" style="position: absolute; top: 12px">
                                     <div class="infobox-content">Thu nhập</div>
-                                    <div class="infobox-content">3,000,099,990</div>
+                                    <div class="infobox-content"><?php echo e(number_format($thongKe['ThuNhap'])); ?></div>
                                 </div>
                             </div>
 
@@ -130,45 +131,10 @@
                                 <div class="widget-header widget-header-flat widget-header-small">
                                     <h5>
                                         <i class="icon-signal"></i>
-                                        Top 5 sản phẩm mua nhiều nhất
+                                        Top 5 loại sản phẩm mua nhiều nhất
                                     </h5>
 
-                                    <div class="widget-toolbar no-border">
-                                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
-                                            Thống kê tiêu chí
-                                            <i class="icon-angle-down icon-on-right bigger-110"></i>
-                                        </button>
-
-                                        <ul class="dropdown-menu pull-right dropdown-125 dropdown-lighter dropdown-caret">
-                                            <li class="active">
-                                                <a href="#" class="blue">
-                                                    <i class="icon-caret-right bigger-110">&nbsp;</i>
-                                                    Trong ngày
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">
-                                                    <i class="icon-caret-right bigger-110 invisible">&nbsp;</i>
-                                                    Trong tuần
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">
-                                                    <i class="icon-caret-right bigger-110 invisible">&nbsp;</i>
-                                                    Trong tháng
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">
-                                                    <i class="icon-caret-right bigger-110 invisible">&nbsp;</i>
-                                                    Trong năm
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    
                                 </div>
 
                                 <div class="widget-body">
@@ -180,26 +146,55 @@
                                         <div class="clearfix">
                                             <div class="grid3">
                                                 <span class="grey">
-                                                    <i class="icon-facebook-sign icon-2x blue"></i>
-                                                    &nbsp; likes
+                                                    <i class="icon-renren icon-2x blue"></i>
+                                                    &nbsp; <?php echo e($thongKe['LoaiSanPham'][0]['TenLoai']); ?>
+
                                                 </span>
-                                                <h4 class="bigger pull-right">1,255</h4>
+                                                <h4 class="bigger pull-right"><?php echo e($thongKe['LoaiSanPham'][0]['LuotMua']); ?></h4>
                                             </div>
 
                                             <div class="grid3">
                                                 <span class="grey">
-                                                    <i class="icon-twitter-sign icon-2x purple"></i>
-                                                    &nbsp; tweets
+                                                    <i class="icon-bug icon-2x green"></i>
+                                                    &nbsp; <?php echo e($thongKe['LoaiSanPham'][1]['TenLoai']); ?>
+
                                                 </span>
-                                                <h4 class="bigger pull-right">941</h4>
+                                                <h4 class="bigger pull-right"><?php echo e($thongKe['LoaiSanPham'][1]['LuotMua']); ?></h4>
                                             </div>
 
                                             <div class="grid3">
                                                 <span class="grey">
-                                                    <i class="icon-pinterest-sign icon-2x red"></i>
-                                                    &nbsp; pins
+                                                    <i class="icon-anchor icon-2x purple"></i>
+                                                    &nbsp; <?php echo e($thongKe['LoaiSanPham'][2]['TenLoai']); ?>
+
                                                 </span>
-                                                <h4 class="bigger pull-right">1,050</h4>
+                                                <h4 class="bigger pull-right"><?php echo e($thongKe['LoaiSanPham'][2]['LuotMua']); ?></h4>
+                                            </div>
+
+                                            <div class="grid3">
+                                                <span class="grey">
+                                                    <i class="icon-weibo icon-2x red"></i>
+                                                    &nbsp; <?php echo e($thongKe['LoaiSanPham'][3]['TenLoai']); ?>
+
+                                                </span>
+                                                <h4 class="bigger pull-right"><?php echo e($thongKe['LoaiSanPham'][3]['LuotMua']); ?></h4>
+                                            </div>
+
+                                            <div class="grid3">
+                                                <span class="grey">
+                                                    <i class="icon-sun icon-2x orange"></i>
+                                                    &nbsp; <?php echo e($thongKe['LoaiSanPham'][4]['TenLoai']); ?>
+
+                                                </span>
+                                                <h4 class="bigger pull-right"><?php echo e($thongKe['LoaiSanPham'][4]['LuotMua']); ?></h4>
+                                            </div>
+
+                                            <div class="grid3">
+                                                <span class="grey">
+                                                    <i class="icon-compass icon-2x"></i>
+                                                    &nbsp; Tổng
+                                                </span>
+                                                <h4 class="bigger pull-right"><?php echo e($thongKe['SoLuongChiTietHoaDon']); ?></h4>
                                             </div>
                                         </div>
                                     </div><!-- /widget-main -->
@@ -216,7 +211,7 @@
                                 <div class="widget-header widget-header-flat">
                                     <h4 class="lighter">
                                         <i class="icon-star orange"></i>
-                                        Khách hàng tiềm năng
+                                        Top 5 khách hàng mua nhiều nhất
                                     </h4>
 
                                     <div class="widget-toolbar">
@@ -261,67 +256,9 @@
 
                                                     <td class="hidden-480">
                                                         <span class="label label-info arrowed-right arrowed-in">on sale</span>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>online.com</td>
-
-                                                    <td>
-                                                        <small>
-                                                            <s class="red"></s>
-                                                        </small>
-                                                        <b class="green">$16.45</b>
-                                                    </td>
-
-                                                    <td class="hidden-480">
                                                         <span class="label label-success arrowed-in arrowed-in-right">approved</span>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>newnet.com</td>
-
-                                                    <td>
-                                                        <small>
-                                                            <s class="red"></s>
-                                                        </small>
-                                                        <b class="green">$15.00</b>
-                                                    </td>
-
-                                                    <td class="hidden-480">
                                                         <span class="label label-danger arrowed">pending</span>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>web.com</td>
-
-                                                    <td>
-                                                        <small>
-                                                            <s class="red">$24.99</s>
-                                                        </small>
-                                                        <b class="green">$19.95</b>
-                                                    </td>
-
-                                                    <td class="hidden-480">
-                                                        <span class="label arrowed">
-                                                            <s>out of stock</s>
-                                                        </span>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>domain.com</td>
-
-                                                    <td>
-                                                        <small>
-                                                            <s class="red"></s>
-                                                        </small>
-                                                        <b class="green">$12.00</b>
-                                                    </td>
-
-                                                    <td class="hidden-480">
+                                                        <span class="label arrowed"><s>out of stock</s></span>
                                                         <span class="label label-warning arrowed arrowed-right">SOLD</span>
                                                     </td>
                                                 </tr>
@@ -367,8 +304,8 @@
     <!-- page specific plugin scripts -->
 
     <!--[if lte IE 8]>
-                                  <script src="/storage/assets/js/excanvas.min.js"></script>
-                                  <![endif]-->
+                                                          <script src="/storage/assets/js/excanvas.min.js"></script>
+                                                          <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -409,42 +346,34 @@
                 });
             });
 
-
-
-
             var placeholder = $('#piechart-placeholder').css({
                 'width': '90%',
                 'min-height': '150px'
             });
             var data = [{
-                    label: "Sản phẩm 1",
-                    data: 38.7,
-                    color: "#68BC31"
-                },
-                {
-                    label: "sản phẩm 2",
-                    data: 24.5,
+                    label: "<?php echo e($thongKe['LoaiSanPham'][0]['TenLoai']); ?>",
+                    data: <?php echo e(number_format(($thongKe['LoaiSanPham'][0]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2)); ?>,
                     color: "#2091CF"
                 },
                 {
-                    label: "Sản phẩm 3",
-                    data: 8.2,
+                    label: "<?php echo e($thongKe['LoaiSanPham'][1]['TenLoai']); ?>",
+                    data: <?php echo e(number_format(($thongKe['LoaiSanPham'][1]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2)); ?>,
+                    color: "#68BC31"
+                },
+                {
+                    label: "<?php echo e($thongKe['LoaiSanPham'][2]['TenLoai']); ?>",
+                    data: <?php echo e(number_format(($thongKe['LoaiSanPham'][2]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2)); ?>,
                     color: "#AF4E96"
                 },
                 {
-                    label: "Sản phẩm 4",
-                    data: 18.6,
+                    label: "<?php echo e($thongKe['LoaiSanPham'][3]['TenLoai']); ?>",
+                    data: <?php echo e(number_format(($thongKe['LoaiSanPham'][3]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2)); ?>,
                     color: "#DA5430"
                 },
                 {
-                    label: "Sản phẩm 5",
-                    data: 10,
+                    label: "<?php echo e($thongKe['LoaiSanPham'][4]['TenLoai']); ?>",
+                    data: <?php echo e(number_format(($thongKe['LoaiSanPham'][4]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2)); ?>,
                     color: "#FEE074"
-                },
-                {
-                    label: "Sản phẩm khác",
-                    data: 10,
-                    color: "#3b3b3b"
                 },
             ]
 

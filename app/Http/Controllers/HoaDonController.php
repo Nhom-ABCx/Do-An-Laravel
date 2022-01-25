@@ -259,7 +259,6 @@ class HoaDonController extends Controller
                     'GiaBan' => $giaBan,
                     'GiaGiam' => $giaGiam,
                     'ThanhTien' => $thanhTien,
-                    'Star' => 0,
                 ]);
             }
         }
