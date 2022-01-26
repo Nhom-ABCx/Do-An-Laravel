@@ -31,7 +31,7 @@
                     <div class="row">
                         <h4 class="lighter red center">
                             <i class="icon-calendar"></i>
-                            Thống kê trong tháng
+                            Thống kê hóa đơn được tạo trong tháng
                         </h4>
                         <div class="space-6"></div>
                         <div class="col-sm-7 infobox-container">
@@ -99,8 +99,9 @@
 
                             <div class="infobox infobox-green infobox-dark">
                                 <div class="infobox-progress">
-                                    <div class="easy-pie-chart percentage" data-percent="<?php echo e(number_format(($thongKe['DonGiaoThanhCong'] / $thongKe['DonDatHang']) * 100)); ?>" data-size="55">
-                                        <span class="percent"><?php echo e(number_format(($thongKe['DonGiaoThanhCong'] / $thongKe['DonDatHang']) * 100)); ?></span>%
+                                    <div class="easy-pie-chart percentage"
+                                        data-percent="<?php echo e($thongKe['DonDatHang'] != 0 ? number_format(($thongKe['DonGiaoThanhCong'] / $thongKe['DonDatHang']) * 100) : 0); ?>" data-size="55">
+                                        <span class="percent"><?php echo e($thongKe['DonDatHang'] != 0 ? number_format(($thongKe['DonGiaoThanhCong'] / $thongKe['DonDatHang']) * 100) : 0); ?></span>%
                                     </div>
                                 </div>
 
@@ -211,7 +212,7 @@
                                 <div class="widget-header widget-header-flat">
                                     <h4 class="lighter">
                                         <i class="icon-star orange"></i>
-                                        Top 5 khách hàng mua nhiều nhất
+                                        Top 10 khách hàng mua nhiều nhất (trong tháng)
                                     </h4>
 
                                     <div class="widget-toolbar">
@@ -244,24 +245,36 @@
                                             </thead>
 
                                             <tbody>
-                                                <tr>
-                                                    <td>internet.com</td>
+                                                <?php $__currentLoopData = $thongKe['KhachHangMuaNhieuNhat']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <tr>
+                                                        <td><?php echo e($item->HoTen ?? $item->Username); ?></td>
 
-                                                    <td>
-                                                        <small>
-                                                            <s class="red">$29.99</s>
-                                                        </small>
-                                                        <b class="green">$19.99</b>
-                                                    </td>
+                                                        <td>
+                                                            <b class="green"><?php echo e($item->TongSoLuongMua); ?></b>
+                                                        </td>
 
-                                                    <td class="hidden-480">
-                                                        <span class="label label-info arrowed-right arrowed-in">on sale</span>
-                                                        <span class="label label-success arrowed-in arrowed-in-right">approved</span>
-                                                        <span class="label label-danger arrowed">pending</span>
-                                                        <span class="label arrowed"><s>out of stock</s></span>
-                                                        <span class="label label-warning arrowed arrowed-right">SOLD</span>
-                                                    </td>
-                                                </tr>
+                                                        <td class="hidden-480">
+                                                            <?php switch($item->TrangThaiHDHienTai):
+                                                                case (0): ?>
+                                                                    <span class="label label-danger arrowed">0 Đang chờ xác nhận</span>
+                                                                <?php break; ?>
+                                                                <?php case (1): ?>
+                                                                    <span class="label arrowed">1 Đang xử lý</span>
+                                                                <?php break; ?>
+                                                                <?php case (2): ?>
+                                                                    <span class="label label-info arrowed-right arrowed-in">2 Đã xử lý</span>
+                                                                <?php break; ?>
+                                                                <?php case (3): ?>
+                                                                    <span class="label label-warning arrowed arrowed-right">3 Đang giao</span>
+                                                                <?php break; ?>
+                                                                <?php case (4): ?>
+                                                                    <span class="label label-success arrowed-in arrowed-in-right">4 Đã giao</span>
+                                                                <?php break; ?>
+                                                                <?php default: ?>
+                                                            <?php endswitch; ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </tbody>
                                         </table>
                                     </div><!-- /widget-main -->
@@ -274,7 +287,7 @@
                                 <div class="widget-header widget-header-flat">
                                     <h4 class="lighter">
                                         <i class="icon-signal"></i>
-                                        Doanh thu
+                                        Doanh thu <small>((Giá bán-Giá nhập) * Số lượng)</small>
                                     </h4>
 
                                     <div class="widget-toolbar">
@@ -304,8 +317,8 @@
     <!-- page specific plugin scripts -->
 
     <!--[if lte IE 8]>
-                                                          <script src="/storage/assets/js/excanvas.min.js"></script>
-                                                          <![endif]-->
+                                                                                          <script src="/storage/assets/js/excanvas.min.js"></script>
+                                                                                          <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -352,27 +365,27 @@
             });
             var data = [{
                     label: "<?php echo e($thongKe['LoaiSanPham'][0]['TenLoai']); ?>",
-                    data: <?php echo e(number_format(($thongKe['LoaiSanPham'][0]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2)); ?>,
+                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][0]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0); ?>,
                     color: "#2091CF"
                 },
                 {
                     label: "<?php echo e($thongKe['LoaiSanPham'][1]['TenLoai']); ?>",
-                    data: <?php echo e(number_format(($thongKe['LoaiSanPham'][1]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2)); ?>,
+                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][1]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0); ?>,
                     color: "#68BC31"
                 },
                 {
                     label: "<?php echo e($thongKe['LoaiSanPham'][2]['TenLoai']); ?>",
-                    data: <?php echo e(number_format(($thongKe['LoaiSanPham'][2]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2)); ?>,
+                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][2]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0); ?>,
                     color: "#AF4E96"
                 },
                 {
                     label: "<?php echo e($thongKe['LoaiSanPham'][3]['TenLoai']); ?>",
-                    data: <?php echo e(number_format(($thongKe['LoaiSanPham'][3]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2)); ?>,
+                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][3]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0); ?>,
                     color: "#DA5430"
                 },
                 {
                     label: "<?php echo e($thongKe['LoaiSanPham'][4]['TenLoai']); ?>",
-                    data: <?php echo e(number_format(($thongKe['LoaiSanPham'][4]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2)); ?>,
+                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][4]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0); ?>,
                     color: "#FEE074"
                 },
             ]
@@ -515,13 +528,19 @@
             },
             series: [{
                 name: "Số tiền kiếm được",
-                data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
+                data: [
+                    <?php $__currentLoopData = $thongKe['DoanhThu']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php echo e($item['DoanhThu'] . ','); ?>
+
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                ],
             }, ],
             xaxis: {
                 categories: [
-                    <?php echo e(date('Y') - 8); ?>, <?php echo e(date('Y') - 7); ?>, <?php echo e(date('Y') - 6); ?>, <?php echo e(date('Y') - 5); ?>,
-                    <?php echo e(date('Y') - 4); ?>, <?php echo e(date('Y') - 3); ?>, <?php echo e(date('Y') - 2); ?>, <?php echo e(date('Y') - 1); ?>, <?php echo e(date('Y')); ?>
+                    <?php $__currentLoopData = $thongKe['DoanhThu']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php echo e($item['Year'] . ','); ?>
 
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 ],
             },
         };

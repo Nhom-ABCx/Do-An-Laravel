@@ -240,7 +240,6 @@
                                                     <span class="label label-success arrowed-in arrowed-in-right">4 Đã giao</span>
                                                 @break
                                                 @default
-
                                             @endswitch
                                         </td>
                                         <td>{{ $item->created_at }}</td>

@@ -229,7 +229,6 @@
                                                     <span class="label label-success arrowed-in arrowed-in-right">4 Đã giao</span>
                                                 <?php break; ?>
                                                 <?php default: ?>
-
                                             <?php endswitch; ?>
                                         </td>
                                         <td><?php echo e($item->created_at); ?></td>
