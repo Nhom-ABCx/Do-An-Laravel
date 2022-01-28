@@ -14,14 +14,29 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    public function Index()
+    public function Index(Request $request)
     {
         //lay ra het' tat ca du lieu tu modal SanPham luu vao trong bien'
         $dsSanPham = SanPham::all();
-        //lay danh sach bat dau` tu` ngay` 1 trong thang' den' ngay` hien tai
+        //mac dinh lay danh sach bat dau` tu` ngay` 1 trong thang' den' ngay` hien tai
         $dsBinhLuan = BinhLuan::whereDate("created_at", ">=", date_create(date("Y-m") . "-1"))->whereDate("created_at", "<=", date("Y-m-d"))->count();
         $dsHoaDon = HoaDon::whereDate("created_at", ">=", date_create(date("Y-m") . "-1"))->whereDate("created_at", "<=", date("Y-m-d"))
             ->orderByDesc("TongSoLuong")->get();
+
+
+        $catChuoi = explode(" - ", $request->input("NgayDat"));
+        //neu'co' thoi gian ko rong~ va` dung' dinh dang datetime thi` tim` kiem' theo moc' thoi gian
+        if ((!empty($request->input("NgayDat"))) && date_create($catChuoi[0]) != false && date_create($catChuoi[1]) != false) {
+            $dsBinhLuan = BinhLuan::whereDate("created_at", ">=", date_format(date_create($catChuoi[0]), 'Y-m-d'))
+                ->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'))->count();
+
+            $dsHoaDon = HoaDon::whereDate("created_at", ">=", date_format(date_create($catChuoi[0]), 'Y-m-d'))
+                ->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'))
+                ->orderByDesc("TongSoLuong")->get();
+        }
+        //unset de no' huy? bien' do~ ton' dung luong
+        unset($catChuoi);
+
 
         //doanh thu nam 2019  select sum((b.giaban-b.gianhap)*b.soluong) from hoa_dons as a,ct_hoa_dons as b where a.id=b.hoadonid and year(a.created_at)=2019
         $doanhThu = DB::select(
@@ -31,7 +46,7 @@ class HomeController extends Controller
             GROUP BY Year(a.created_at)"
         );
         //chuyen doi DB::select thanh` array
-        $doanhThu=json_decode(json_encode($doanhThu), true);
+        $doanhThu = json_decode(json_encode($doanhThu), true);
         $danhGia = 0;
         $donGiaoThanhCong = 0;
         $thuNhap = 0;
@@ -102,11 +117,11 @@ class HomeController extends Controller
             ],
             "SoLuongChiTietHoaDon" => $soLuongChiTietHoaDon,
             "KhachHangMuaNhieuNhat" => $dsKhachHangMuaNhieuNhat,
-            "DoanhThu"=>$doanhThu,
+            "DoanhThu" => $doanhThu,
         ];
 
         //truyen cai' bien' do' ra view
-        return view('Home', ['dsSanPham' => $dsSanPham, "thongKe" => $thongKe]);
+        return view('Home', ['dsSanPham' => $dsSanPham, "thongKe" => $thongKe, "request" => $request]);
     }
     public function Susscess()
     {

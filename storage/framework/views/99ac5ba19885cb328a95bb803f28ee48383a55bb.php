@@ -129,7 +129,7 @@
                             <thead>
                                 <tr>
                                     <th class="center"><i class="icon-adn"></i>Id</th>
-                                    <th><i class="icon-user"></i>Nhân viên</th>
+                                    <th><i class="icon-user"></i>Người lập</th>
                                     <th><i class="icon-cogs"></i>Nhà cung cấp</th>
                                     <th><i class="icon-bar-chart"></i>Tổng số lượng</th>
                                     <th><i class="icon-money"></i>Tổng tiền</th>

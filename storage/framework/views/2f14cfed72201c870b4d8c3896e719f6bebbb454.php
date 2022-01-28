@@ -353,7 +353,6 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scriptThisPage'); ?>
-    <script src="/storage/assets/js/chosen.jquery.min.js"></script>
     
     <script src="/storage/assets/js/chosen.jquery.min.js"></script>
     <script src="/storage/assets/js/date-time/moment.min.js"></script>
@@ -408,7 +407,8 @@
                 if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
                 return 'left';
             }
-        })
+        });
+
         $('[data-rel=tooltip]').tooltip({
             container: 'body'
         });

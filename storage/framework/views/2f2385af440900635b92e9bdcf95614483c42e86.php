@@ -1,7 +1,12 @@
 <?php $__env->startSection('title', 'Trang chủ'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
-
+    
+    <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
+    <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
+    <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
+    <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
+    
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('body'); ?>
@@ -28,10 +33,40 @@
             <div class="row">
                 <div class="col-xs-12">
                     <!-- PAGE CONTENT BEGINS -->
+                    <div class="widget-box">
+                        <div class="widget-header">
+                            <h3 class="header smaller lighter blue">Thống kê tiêu chí</h3>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <form class="form-inline" action="<?php echo e(route('Home.index')); ?>" method="get">
+                                    
+                                    <label> Thống kê theo đoạn thời gian: </label>
+                                    <input class="width-20" type="text" name="NgayDat" id="id-NgayDat-1" value="<?php echo e($request['NgayDat']); ?>" data-rel="tooltip" title="Tháng-Ngày-Năm"
+                                        data-placement="top" />
+
+                                    <button type="submit" class="btn btn-purple btn-sm">
+                                        Search
+                                        <i class="icon-search icon-on-right bigger-110"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <h4 class="lighter red center">
                             <i class="icon-calendar"></i>
-                            Thống kê hóa đơn được tạo trong tháng
+                            <?php
+                                $catChuoi = explode(' - ', $request->input('NgayDat'));
+                                //neu'co' thoi gian ko rong~ va` dung' dinh dang datetime thi` tim` kiem' theo moc' thoi gian
+                                if (!empty($request->input('NgayDat')) && date_create($catChuoi[0]) != false && date_create($catChuoi[1]) != false) {
+                                    echo 'Thống kê từ ' . $catChuoi[0] . ' đến ' . $catChuoi[1];
+                                } else {
+                                    echo 'Thống kê trong tháng';
+                                }
+                                unset($catChuoi);
+                            ?>
                         </h4>
                         <div class="space-6"></div>
                         <div class="col-sm-7 infobox-container">
@@ -317,8 +352,8 @@
     <!-- page specific plugin scripts -->
 
     <!--[if lte IE 8]>
-                                                                                          <script src="/storage/assets/js/excanvas.min.js"></script>
-                                                                                          <![endif]-->
+                                                                                                                                              <script src="/storage/assets/js/excanvas.min.js"></script>
+                                                                                                                                              <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -328,6 +363,19 @@
     <script src="/storage/assets/js/flot/jquery.flot.min.js"></script>
     <script src="/storage/assets/js/flot/jquery.flot.pie.min.js"></script>
     <script src="/storage/assets/js/flot/jquery.flot.resize.min.js"></script>
+    
+    <script src="/storage/assets/js/chosen.jquery.min.js"></script>
+    <script src="/storage/assets/js/date-time/moment.min.js"></script>
+    <script src="/storage/assets/js/date-time/daterangepicker.min.js"></script>
+    <script src="/storage/assets/js/jquery.autosize.min.js"></script>
+    <script src="/storage/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+    <script src="/storage/assets/js/jquery.maskedinput.min.js"></script>
+    <script type="text/javascript">
+        $('input[name=NgayDat]').daterangepicker().prev().on(ace.click_event, function() {
+            $(this).next().focus();
+        });
+    </script>
+    
 
     <script type="text/javascript">
         jQuery(function($) {
