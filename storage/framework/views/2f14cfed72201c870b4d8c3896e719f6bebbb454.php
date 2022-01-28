@@ -229,7 +229,6 @@
                                                     <span class="label label-success arrowed-in arrowed-in-right">4 Đã giao</span>
                                                 <?php break; ?>
                                                 <?php default: ?>
-
                                             <?php endswitch; ?>
                                         </td>
                                         <td><?php echo e($item->created_at); ?></td>
@@ -354,7 +353,6 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scriptThisPage'); ?>
-    <script src="/storage/assets/js/chosen.jquery.min.js"></script>
     
     <script src="/storage/assets/js/chosen.jquery.min.js"></script>
     <script src="/storage/assets/js/date-time/moment.min.js"></script>
@@ -409,7 +407,8 @@
                 if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
                 return 'left';
             }
-        })
+        });
+
         $('[data-rel=tooltip]').tooltip({
             container: 'body'
         });

@@ -50,6 +50,7 @@ class SanPhamController extends Controller
      */
     public function create()
     {
+        //phan nay da sua lai thanh modal
         $lstLoaiSanPham = LoaiSanPham::all();
         $lstHangSanXuat = HangSanXuat::all();
         //truyền thêm danh sách loại sản phẩm để tạo thẻ <options>
@@ -69,28 +70,21 @@ class SanPhamController extends Controller
             [
                 'TenSanPham' => ['required', 'unique:san_phams,TenSanPham', 'max:255'],
                 'MoTa' => ['max:255'],
-                'SoLuongTon' => ['required', 'numeric', 'integer', 'min:0'],
-                'GiaNhap' => ['required', 'numeric', 'integer', 'min:0'],
-                'GiaBan' => ['numeric', 'integer', 'min:0'],
                 'HinhAnh' => ['required', 'image', "max:102400"], //max:100 Mb
                 'HangSanXuatId' => ['required', 'numeric', 'integer', 'exists:loai_san_phams,id'],
                 'LoaiSanPhamId' => ['required', 'numeric', 'integer', 'exists:hang_san_xuats,id'],
             ]
         );
 
-        $sanPham = new SanPham();
-        $sanPham->fill([
+        $sanPham = SanPham::create([
             'TenSanPham' => $request->input('TenSanPham'),
             'MoTa' => $request->input('MoTa') ?? '',
-            'SoLuongTon' => $request->input('SoLuongTon'),
-            'GiaNhap' => $request->input('GiaNhap'),
-            'GiaBan' => $request->input('GiaBan') ?? 0,
+            'SoLuongTon' => 0,
             'HinhAnh' => '', //cap nhat sau
             'LuotMua' => 0,
             'HangSanXuatId' => $request->input('HangSanXuatId'),
             'LoaiSanPhamId' => $request->input('LoaiSanPhamId'),
         ]);
-        $sanPham->save(); //luu xong moi có mã sản phẩm
 
         if ($request->hasFile('HinhAnh')) {
             $sanPham->HinhAnh = $request->file('HinhAnh')->store('assets/images/product-image/' . $sanPham->id, 'public');
@@ -100,7 +94,7 @@ class SanPhamController extends Controller
         }
 
         $sanPham->save(); //luu lại đường dẫn hình
-        return Redirect::route('SanPham.index');
+        return Redirect::route('SanPham.index', ["SanPhamMoi" => $sanPham->TenSanPham]);
     }
 
     /**

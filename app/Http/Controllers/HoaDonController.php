@@ -34,13 +34,15 @@ class HoaDonController extends Controller
     public function index(Request $request)
     {
         $data = HoaDon::whereNotIn("TrangThai", [4])->get();
-        if (!empty($request->input("NgayDat"))) {
-            $catChuoi = explode(" - ", $request->input("NgayDat"));
-
+        $catChuoi = explode(" - ", $request->input("NgayDat"));
+        //neu' ko rong~ va` dung' dinh dang datetime thi` tim` kiem'
+        if ((!empty($request->input("NgayDat"))) && date_create($catChuoi[0]) != false && date_create($catChuoi[1]) != false) {
             $data = HoaDon::whereDate("created_at", ">=", date_format(date_create($catChuoi[0]), 'Y-m-d'))
                 ->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'))
                 ->whereNotIn("TrangThai", [4])->get();
         }
+        //unset de no' huy? bien' do~ ton' dung luong
+        unset($catChuoi);
         if (!empty($request->input('PhuongThucThanhToan')))
             $data = $data->where('PhuongThucThanhToan', $request->input('PhuongThucThanhToan'));
         if (!empty($request->input('TrangThai')))
@@ -79,8 +81,8 @@ class HoaDonController extends Controller
     public function show(HoaDon $hoaDon)
     {
         $dsChiTietHD = CT_HoaDon::where("HoaDonId", $hoaDon->id)->get();
-        $lichSuVanChuyen=LichSuVanChuyen::where("HoaDonId",$hoaDon->id)->orderBy('created_at')->get();
-        return view('HoaDon.HoaDon-show', ["hoaDon" => $hoaDon, "dsChiTietHD" => $dsChiTietHD,"lichSuVanChuyen"=>$lichSuVanChuyen]);
+        $lichSuVanChuyen = LichSuVanChuyen::where("HoaDonId", $hoaDon->id)->orderBy('created_at')->get();
+        return view('HoaDon.HoaDon-show', ["hoaDon" => $hoaDon, "dsChiTietHD" => $dsChiTietHD, "lichSuVanChuyen" => $lichSuVanChuyen]);
     }
 
     /**
@@ -129,6 +131,12 @@ class HoaDonController extends Controller
     public function destroy(HoaDon $hoaDon)
     {
         $hoaDon->delete();
+        if (count($hoaDon->CT_HoaDon)) {
+            $hoaDon->delete();
+            $hoaDon->save();
+            return Redirect::route("HoaDon.index");
+        }
+        $hoaDon->forceDelete();
         return Redirect::route('HoaDon.index');
     }
     public function HoaDonDaGiao(Request $request)
@@ -176,8 +184,10 @@ class HoaDonController extends Controller
     public function HoaDonPDF(HoaDon $hoaDon)
     {
         $dsChiTietHD = CT_HoaDon::where("HoaDonId", $hoaDon->id)->get();
-        $pdf = PDF::loadView('HoaDon.HoaDon-pdf',["hoaDon"=>$hoaDon,"dsChiTietHD" => $dsChiTietHD]);
+        //return view("HoaDon.HoaDon-pdf",["hoaDon"=>$hoaDon,"dsChiTietHD" => $dsChiTietHD]);
+        $pdf = PDF::loadView('HoaDon.HoaDon-pdf', ["hoaDon" => $hoaDon, "dsChiTietHD" => $dsChiTietHD]);
         return $pdf->stream();
+
         //return $pdf->download('file-pdf.pdf');
         //return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('HoaDon.HoaDon-pdf',[])->stream();
     }
@@ -229,6 +239,7 @@ class HoaDonController extends Controller
             else { //nguoc lai thi lap hoa don
                 $sp->fill([
                     'SoLuongTon' => $sp->SoLuongTon - $item["SoLuong"],
+                    "LuotMua" => $sp->LuotMua + 1,
                 ]);
                 $sp->save();
 
@@ -246,10 +257,10 @@ class HoaDonController extends Controller
                     'HoaDonId'       => $hoaDon->id,
                     'SanPhamId'       => $item["SanPhamId"],
                     'SoLuong'         => $item["SoLuong"],
+                    'GiaNhap' => $sp->GiaNhap,
                     'GiaBan' => $giaBan,
                     'GiaGiam' => $giaGiam,
                     'ThanhTien' => $thanhTien,
-                    'Star' => 0,
                 ]);
             }
         }

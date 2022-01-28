@@ -39,8 +39,8 @@
         }
 
         /* .hinhAnh img {
-                                                        max-width: 150px;
-                                                    } */
+                                                            max-width: 150px;
+                                                        } */
 
     </style>
 <?php $__env->stopSection(); ?>
@@ -79,7 +79,7 @@
                             <div class="widget-main">
                                 <a href="#modal-form" role="button" data-toggle="modal" class="btn btn-success">
                                     <i class="icon-plus"></i>
-                                    Thêm sản phẩm vào chi tiết hóa đơn nhập
+                                    Chọn sản phẩm thêm vào
                                 </a>
                             </div>
                         </div>
@@ -119,7 +119,31 @@
                                         <td><?php echo e($item->SoLuong); ?></td>
                                         <td><?php echo e(number_format($item->GiaNhap)); ?></td>
                                         <td><?php echo e(number_format($item->ThanhTien)); ?></td>
-                                        <td></td>
+                                        <td>
+                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                <a class="blue" href="<?php echo e(route('SanPham.index', $item->SanPham->id)); ?>" data-rel="tooltip" title="Xem sản phẩm">
+                                                    <i class="icon-zoom-in bigger-130"></i>
+                                                </a>
+                                            </div>
+
+                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                <div class="inline position-relative">
+                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-caret-down icon-only bigger-120"></i>
+                                                    </button>
+
+                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <li>
+                                                            <a href="<?php echo e(route('SanPham.index', $item->SanPham->id)); ?>" class="tooltip-info" data-rel="tooltip" title="Xem sản phẩm">
+                                                                <span class="blue">
+                                                                    <i class="icon-zoom-in bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
@@ -353,8 +377,8 @@
         
         <!-- page specific plugin scripts -->
         <!--[if lte IE 8]>
-                                                                                                                                                                      <script src="assets/js/excanvas.min.js"></script>
-                                                                                                                                                                      <![endif]-->
+                                                                                                                                                                          <script src="assets/js/excanvas.min.js"></script>
+                                                                                                                                                                          <![endif]-->
 
         <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
         <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>

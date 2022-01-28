@@ -137,7 +137,8 @@ set a.TrangThai=1
 where a.id=(select id from lich_su_van_chuyens where HoaDonId=b.id ORDER BY created_at DESC LIMIT 1);
 
 update CT_Hoa_Dons
-set GiaBan=(select GiaBan from San_Phams where Id=SanPhamId);
+set GiaNhap=(select GiaNhap from San_Phams where Id=SanPhamId),
+    GiaBan=(select GiaBan from San_Phams where Id=SanPhamId);
 
 update CT_Hoa_Dons a, (select a.id,b.GiamGia from san_phams as a,ct_chuong_trinh_kms as b WHERE a.id=b.SanPhamId) b
 set a.GiaBan=a.GiaBan-b.GiamGia

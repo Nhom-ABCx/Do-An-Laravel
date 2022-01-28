@@ -27,12 +27,14 @@ class HoaDonNhapController extends Controller
     public function index(Request $request)
     {
         $data = HoaDonNhap::all();
-        if (!empty($request->input("NgayDat"))) {
-            $catChuoi = explode(" - ", $request->input("NgayDat"));
-
+        $catChuoi = explode(" - ", $request->input("NgayDat"));
+        //neu' ko rong~ va` dung' dinh dang datetime thi` tim` kiem'
+        if ((!empty($request->input("NgayDat"))) && date_create($catChuoi[0]) != false && date_create($catChuoi[1]) != false) {
             $data = HoaDonNhap::whereDate("created_at", ">=", date_format(date_create($catChuoi[0]), 'Y-m-d'))
                 ->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'))->get();
         }
+        //unset de no' huy? bien' do~ ton' dung luong
+        unset($catChuoi);
         if (!empty($request->input('TrangThai')))
             $data = $data->where('TrangThai', $request->input('TrangThai'));
         if (!empty($request->input('NhanVienId')))
@@ -103,13 +105,16 @@ class HoaDonNhapController extends Controller
         $hoaDonNhap->TrangThai = $request["TrangThai"];
         $hoaDonNhap->save();
 
-        //neu trang thai' thanh`cong thi cap nhat lai gia' ban' cua san pham tuong ung'
+        //neu trang thai' thanh`cong thi cap nhat lai gia' ban' va so luong ton` cua san pham tuong ung'
         if ($hoaDonNhap->TrangThai) {
             $dsChiTietHD = $hoaDonNhap->CT_HoaDonNhap;
             if (count($dsChiTietHD)) {
                 foreach ($dsChiTietHD as $item) {
                     $sanPham = $item->SanPham;
-                    $sanPham->GiaNhap = $item->GiaNhap;
+                    $sanPham->fill([
+                        "GiaNhap" => $item->GiaNhap,
+                        "SoLuongTon" => $sanPham->SoLuongTon + $item->SoLuong,
+                    ]);
                     $sanPham->save();
                 }
             }
@@ -169,7 +174,12 @@ class HoaDonNhapController extends Controller
      */
     public function destroy(HoaDonNhap $hoaDonNhap)
     {
-        $hoaDonNhap->delete();
+        if (count($hoaDonNhap->CT_HoaDonNhap)) {
+            $hoaDonNhap->delete();
+            $hoaDonNhap->save();
+            return Redirect::route("HoaDonNhap.index");
+        }
+        $hoaDonNhap->forceDelete();
         return Redirect::route('HoaDonNhap.index');
     }
 

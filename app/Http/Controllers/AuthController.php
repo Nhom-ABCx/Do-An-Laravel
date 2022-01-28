@@ -86,7 +86,7 @@ class AuthController extends Controller
             Auth::login($select);
             //$request->session()->regenerate();
             //return redirect()->intended('/');
-            return Redirect::route('SanPham.index');
+            return Redirect::route('Home.index');
         }
         return back()->withErrors(['Username'=>'Sai Username hoac mat khau']);
     }

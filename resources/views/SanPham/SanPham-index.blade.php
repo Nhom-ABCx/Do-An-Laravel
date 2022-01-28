@@ -5,6 +5,33 @@
 
 @section('headThisPage')
     <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
+    <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
+    <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
+    <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
+    {{-- thông báo --}}
+    <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
+    <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
+    <style>
+        .spinner-preview {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .dropdown-preview {
+            margin: 0 5px;
+            display: inline-block;
+        }
+
+        .dropdown-preview>.dropdown-menu {
+            display: block;
+            position: static;
+            margin-bottom: 5px;
+        }
+
+    </style>
+    {{-- thông báo end --}}
 @endsection
 
 @section('body')
@@ -52,7 +79,7 @@
                         <div class="widget-body">
                             <div class="widget-main">
                                 <form class="form-inline" action="{{ request()->is('SanPhamm/DaXoa') ? route('SanPham.DaXoa') : route('SanPham.index') }}" method="get">
-                                    <a href="{{ route('SanPham.create') }}" class="btn btn-success">
+                                    <a href="#modal-form" role="button" data-toggle="modal" class="btn btn-success">
                                         <i class="icon-plus"></i>
                                         Thêm sản phẩm
                                     </a>
@@ -119,8 +146,8 @@
                                     <th><i class="icon-bar-chart"></i>Lượt mua</th>
                                     <th><i class="icon-apple"></i>Hãng sãn xuất</th>
                                     <th><i class="icon-android"></i>Loại sản phẩm</th>
-                                    <th><i class="icon-time bigger-110 hidden-480"></i>Create_at</th>
-                                    <th><i class="icon-time bigger-110 hidden-480"></i>Update_at</th>
+                                    <th><i class="icon-time bigger-110 hidden-480"></i>Ngày thêm</th>
+                                    <th><i class="icon-time bigger-110 hidden-480"></i>Ngày sửa</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -249,106 +276,295 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
 
-        </div><!-- /.page-content -->
-    </div><!-- /.main-content -->
+            <div id="modal-form" class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="blue bigger">Thêm sản phẩm</h4>
+                        </div>
 
-@endsection
+                        <div class="modal-body overflow-visible">
+                            <form class="form-horizontal" role="form" action="{{ route('SanPham.store') }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                {{-- @method('PATCH') --}}
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-5">
+                                        <label>Hình ảnh</label>
+                                        <input type="file" accept="image/*" name="HinhAnh">
+                                        @if ($errors->has('HinhAnh'))
+                                            <i class="icon-remove bigger-110 red"> {{ $errors->first('HinhAnh') }}</i>
+                                        @endif
+                                    </div>
 
-@section('scriptThisPage')
+                                    <div class="col-xs-12 col-sm-7">
+                                        <div class="form-group">
+                                            <label>Tên sản phẩm</label>
 
-    <script src="/storage/assets/js/chosen.jquery.min.js"></script>
-    {{-- dialog --}}
-    <script src="/storage/assets/js/bootbox.min.js"></script>
-    {{-- dialog --}}
+                                            <div>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon green">
+                                                        <i class="icon-coffee"></i>
+                                                    </span>
+                                                    <textarea class="autosize-transition form-control" placeholder="Nhập tên sản phẩm" name="TenSanPham">{{ old('TenSanPham') }}</textarea>
+                                                </div>
+                                            </div>
+                                            @if ($errors->has('TenSanPham'))
+                                                <i class="icon-remove bigger-110 red"> {{ $errors->first('TenSanPham') }}</i>
+                                            @endif
+                                        </div>
 
-    <!-- inline scripts related to this page -->
+                                        <div class="space-4"></div>
 
-    {{-- datatable script --}}
-    <script type="text/javascript">
-        jQuery(function($) {
-            var oTable1 = $('#sample-table-2').dataTable({
-                "aoColumns": [
-                    null, null,
-                    {
-                        "bSortable": false
-                    }, //mota
-                    null, null, null,
-                    {
-                        "bSortable": false
-                    }, //hinh anh
-                    null, null, null, null, null,
-                    {
-                        "bSortable": false
-                    }
-                ]
-            });
+                                        <div class="form-group">
+                                            <label>Mô tả</label>
 
-            $('table th input:checkbox').on('click', function() {
-                var that = this;
-                $(this).closest('table').find('tr > td:first-child input:checkbox')
-                    .each(function() {
-                        this.checked = that.checked;
-                        $(this).closest('tr').toggleClass('selected');
+                                            <div>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon blue">
+                                                        <i class="icon-edit"></i>
+                                                    </span>
+
+                                                    <textarea class="autosize-transition form-control" placeholder="Nhập mô tả" name="MoTa">{{ old('MoTa') }}</textarea>
+                                                </div>
+                                            </div>
+                                            @if ($errors->has('MoTa'))
+                                                <i class="icon-remove bigger-110 red"> {{ $errors->first('MoTa') }}</i>
+                                            @endif
+                                        </div>
+
+                                        <div class="space-4"></div>
+
+                                        <div class="form-group">
+                                            <label>Hãng sản xuất</label>
+
+                                            <div>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon red">
+                                                        <i class="icon-sort-by-attributes"></i>
+                                                    </span>
+
+                                                    <select class="chosen-select" data-placeholder="" name="HangSanXuatId">
+                                                        <option value="">&nbsp;</option>
+                                                        @foreach ($lstHangSanXuat as $item)
+                                                            <option value="{{ $item->id }}" @if ($item->id == old('HangSanXuatId')) selected @endif>
+                                                                {{ $item->Ten }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            @if ($errors->has('HangSanXuatId'))
+                                                <i class="icon-remove bigger-110 red"> {{ $errors->first('HangSanXuatId') }}</i>
+                                            @endif
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Loại sản phẩm</label>
+
+                                            <div>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon pink">
+                                                        <i class="icon-sort-by-attributes"></i>
+                                                    </span>
+
+                                                    <select class="chosen-select" data-placeholder="" name="LoaiSanPhamId">
+                                                        <option value="">&nbsp;</option>
+                                                        @foreach ($lstLoaiSanPham as $item)
+                                                            <option value="{{ $item->id }}" @if ($item->id == old('LoaiSanPhamId')) selected @endif>
+                                                                {{ $item->TenLoai }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            @if ($errors->has('LoaiSanPhamId'))
+                                                <i class="icon-remove bigger-110 red"> {{ $errors->first('LoaiSanPhamId') }}</i>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-sm" data-dismiss="modal">
+                                        <i class="icon-remove"></i>
+                                        Hủy
+                                    </button>
+
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        <i class="icon-ok"></i>
+                                        Lưu
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /.page-content -->
+        </div><!-- /.main-content -->
+
+    @endsection
+
+    @section('scriptThisPage')
+        <script src="/storage/assets/js/chosen.jquery.min.js"></script>
+        <script src="/storage/assets/js/fuelux/fuelux.spinner.min.js"></script>
+        <script src="/storage/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+        <script src="/storage/assets/js/date-time/bootstrap-timepicker.min.js"></script>
+        <script src="/storage/assets/js/date-time/moment.min.js"></script>
+        <script src="/storage/assets/js/date-time/daterangepicker.min.js"></script>
+        <script src="/storage/assets/js/bootstrap-colorpicker.min.js"></script>
+        <script src="/storage/assets/js/jquery.knob.min.js"></script>
+        <script src="/storage/assets/js/jquery.autosize.min.js"></script>
+        <script src="/storage/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+        <script src="/storage/assets/js/jquery.maskedinput.min.js"></script>
+        <script src="/storage/assets/js/bootstrap-tag.min.js"></script>
+        <!-- inline scripts related to this page -->
+        <script type="text/javascript">
+            jQuery(function($) {
+                /////////
+                $('#modal-form input[type=file]').ace_file_input({
+                    style: 'well',
+                    btn_choose: 'Drop files here or click to choose',
+                    btn_change: null,
+                    no_icon: 'icon-cloud-upload',
+                    droppable: true,
+                    thumbnail: 'large'
+                })
+
+                //chosen plugin inside a modal will have a zero width because the select element is originally hidden
+                //and its width cannot be determined.
+                //so we set the width after modal is show
+                $('#modal-form').on('shown.bs.modal', function() {
+                    $(this).find('.chosen-container').each(function() {
+                        $(this).find('a:first-child').css('width', '210px');
+                        $(this).find('.chosen-drop').css('width', '210px');
+                        $(this).find('.chosen-search input').css('width', '200px');
                     });
-
+                })
             });
+        </script>
+        {{-- datatable script --}}
+        <script type="text/javascript">
+            jQuery(function($) {
+                var oTable1 = $('#sample-table-2').dataTable({
+                    "aoColumns": [
+                        null, null,
+                        {
+                            "bSortable": false
+                        }, //mota
+                        null, null, null,
+                        {
+                            "bSortable": false
+                        }, //hinh anh
+                        null, null, null, null, null,
+                        {
+                            "bSortable": false
+                        }
+                    ]
+                });
+
+                $('table th input:checkbox').on('click', function() {
+                    var that = this;
+                    $(this).closest('table').find('tr > td:first-child input:checkbox')
+                        .each(function() {
+                            this.checked = that.checked;
+                            $(this).closest('tr').toggleClass('selected');
+                        });
+
+                });
 
 
-            $('[data-rel="tooltip"]').tooltip({
-                placement: tooltip_placement
+                $('[data-rel="tooltip"]').tooltip({
+                    placement: tooltip_placement
+                });
+
+                function tooltip_placement(context, source) {
+                    var $source = $(source);
+                    var $parent = $source.closest('table')
+                    var off1 = $parent.offset();
+                    var w1 = $parent.width();
+
+                    var off2 = $source.offset();
+                    var w2 = $source.width();
+
+                    if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
+                    return 'left';
+                }
+            })
+            $('[data-rel=tooltip]').tooltip({
+                container: 'body'
             });
+            $(".chosen-select").chosen();
+            $('#chosen-multiple-style').on('click', function(e) {
+                var target = $(e.target).find('input[type=radio]');
+                var which = parseInt(target.val());
+                if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
+                else $('#form-field-select-4').removeClass('tag-input-style');
+            });
+        </script>
+        {{-- datatable script End --}}
 
-            function tooltip_placement(context, source) {
-                var $source = $(source);
-                var $parent = $source.closest('table')
-                var off1 = $parent.offset();
-                var w1 = $parent.width();
-
-                var off2 = $source.offset();
-                var w2 = $source.width();
-
-                if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
-                return 'left';
-            }
-        })
-        $('[data-rel=tooltip]').tooltip({
-            container: 'body'
-        });
-        $(".chosen-select").chosen();
-        $('#chosen-multiple-style').on('click', function(e) {
-            var target = $(e.target).find('input[type=radio]');
-            var which = parseInt(target.val());
-            if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
-            else $('#form-field-select-4').removeClass('tag-input-style');
-        });
-    </script>
-    {{-- datatable script End --}}
-
-    {{-- show arler dialog --}}
-    <script type="text/javascript">
-        jQuery(function($) {
-            $(".bootbox-options").on(ace.click_event, function() {
-                bootbox.dialog({
-                    message: "<span class='bigger-110'>Bạn có chắc chắn muốn xóa vĩnh viễn mục này ??? <i class='icon-exclamation-sign red bigger-130'></i></span>",
-                    buttons: {
-                        "button": {
-                            "label": "Hủy",
-                            "className": "btn-sm"
-                        },
-                        "danger": {
-                            "label": "Xác nhận xóa",
-                            "className": "btn-sm btn-danger",
-                            "callback": function() {
-                                $("#form").submit()
-                            }
-                        },
-                    }
+        {{-- show arler dialog --}}
+        <script type="text/javascript">
+            jQuery(function($) {
+                $(".bootbox-options").on(ace.click_event, function() {
+                    bootbox.dialog({
+                        message: "<span class='bigger-110'>Bạn có chắc chắn muốn xóa vĩnh viễn mục này ??? <i class='icon-exclamation-sign red bigger-130'></i></span>",
+                        buttons: {
+                            "button": {
+                                "label": "Hủy",
+                                "className": "btn-sm"
+                            },
+                            "danger": {
+                                "label": "Xác nhận xóa",
+                                "className": "btn-sm btn-danger",
+                                "callback": function() {
+                                    $("#form").submit()
+                                }
+                            },
+                        }
+                    });
                 });
             });
-        });
-    </script>
-    {{-- show arler dialog end --}}
-@endsection
+        </script>
+        {{-- show arler dialog end --}}
+
+        {{-- thông báo error --}}
+        <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
+        <script src="/storage/assets/js/bootbox.min.js"></script>
+        <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
+        <script src="/storage/assets/js/jquery.gritter.min.js"></script>
+        <script src="/storage/assets/js/spin.min.js"></script>
+
+        <script type="text/javascript">
+            jQuery(function($) {
+                @if ($errors->any())
+                    $('#modal-form').modal('show');
+                    @foreach ($errors->all() as $error)
+                        $.gritter.add({
+                        title: 'Có lỗi xảy ra',
+                        text: '{{ $error }}',
+                        class_name: 'gritter-error'
+                        });
+                    @endforeach
+                @endif
+
+                @if (!empty($request['SanPhamMoi']))
+                    $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: 'Thành công',
+                    // (string | mandatory) the text inside the notification
+                    text: 'Thêm sản phẩm {{$request["SanPhamMoi"]}} thành công',
+                    class_name: 'gritter-success'
+                    });
+                @endif
+            });
+        </script>
+        {{-- thông báo error end --}}
+    @endsection
