@@ -63,11 +63,12 @@ class HoaDonNhapController extends Controller
     public function store(Request $request)
     {
         //xác thực đầu vào, xem các luật tại https://laravel.com/docs/8.x/validation#available-validation-rules
-        $request->validate(['NhaCungCap' => ['required', 'max:255'],]);
+        $request->validate(['NhaCungCap' => ['required', 'max:255'],'Phone' => ['required', 'numeric'],]);
 
         HoaDonNhap::create([
             'NhanVienId' => Auth::user()->id,
             'NhaCungCap' => $request->input('NhaCungCap'),
+            'Phone' => $request->input('Phone'),
         ]);
 
         return Redirect::route('HoaDonNhap.index');
@@ -84,7 +85,12 @@ class HoaDonNhapController extends Controller
         $dsChiTietHD = CT_HoaDonNhap::where("HoaDonNhapId", $hoaDonNhap->id)->get();
         $dsSanPham = SanPham::all();
         foreach ($dsSanPham as $sp)
+        {
             SanPhamController::fixImage($sp);
+            //sua lai luon de xai cho javascript
+            $sp["HangSanXuatId"]=$sp->HangSanXuat->Ten;
+            $sp["LoaiSanPhamId"]=$sp->LoaiSanPham->TenLoai;
+        }
         //gọi fixImage cho từng sp
         return view('HoaDon.HoaDonNhap-show', ["hoaDonNhap" => $hoaDonNhap, "dsChiTietHD" => $dsChiTietHD, "dsSanPham" => $dsSanPham]);
     }

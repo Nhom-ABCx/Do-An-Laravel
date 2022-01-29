@@ -116,6 +116,7 @@
                                     <th class="center"><i class="icon-adn"></i>Id</th>
                                     <th><i class="icon-user"></i>Người lập</th>
                                     <th><i class="icon-cogs"></i>Nhà cung cấp</th>
+                                    <th><i class="icon-phone"></i>Phone</th>
                                     <th><i class="icon-bar-chart"></i>Tổng số lượng</th>
                                     <th><i class="icon-money"></i>Tổng tiền</th>
                                     <th><i class="icon-exclamation-sign"></i>Trạng thái</th>
@@ -138,6 +139,7 @@
                                         <td class="center">{{ $item->id }}</td>
                                         <td>{{ $item->NhanVien->HoTen ?? $item->NhanVien->Username }}</td>
                                         <td>{{ $item->NhaCungCap }}</td>
+                                        <td>{{ $item->Phone }}</td>
                                         <td>{{ $item->TongSoLuong ?? 0 }}</td>
                                         <td>{{ number_format($item->TongTien) }}</td>
                                         <td>
@@ -265,10 +267,16 @@
                             <form action="{{ route('HoaDonNhap.store') }}" method="post">
                                 @csrf
                                 <div class="row">
-                                    <label for="form-field-username">Nhà cung cấp nào ?</label>
-                                    <input class="form-control" type="text" id="form-field-username" placeholder="Tên nhà cung cấp" value="{{ old('NhaCungCap') }}" name="NhaCungCap" />
+                                    <label>Nhà cung cấp nào ?</label>
+                                    <input class="form-control" type="text" placeholder="Tên nhà cung cấp" value="{{ old('NhaCungCap') }}" name="NhaCungCap" />
                                     @if ($errors->has('NhaCungCap'))
                                         <i class="icon-remove bigger-110 red"> {{ $errors->first('NhaCungCap') }}</i>
+                                    @endif
+
+                                    <label>Điện thoại liên lạc</label>
+                                    <input class="form-control" type="number" placeholder="Điện thoại" value="{{ old('Phone') }}" name="Phone" />
+                                    @if ($errors->has('Phone'))
+                                        <i class="icon-remove bigger-110 red"> {{ $errors->first('Phone') }}</i>
                                     @endif
                                 </div>
 

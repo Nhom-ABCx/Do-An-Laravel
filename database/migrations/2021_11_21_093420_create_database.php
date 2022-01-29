@@ -224,6 +224,7 @@ class CreateDatabase extends Migration
             $table->id();
             $table->foreignId('NhanVienId'); //nhập bởi ai
             $table->string('NhaCungCap'); // ai là người cung cấp (do ko có bảng nhà cung cấp nên ghi chuỗi)
+            $table->string('Phone'); // thông tin liên lạc
             $table->integer('TongSoLuong')->nullable();
             $table->double('TongTien')->nullable();
             $table->boolean('TrangThai')->default(false);

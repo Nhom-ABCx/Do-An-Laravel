@@ -590,7 +590,6 @@
 
         <script src="/storage/assets/js/ace-elements.min.js"></script>
         <script src="/storage/assets/js/ace.min.js"></script>
-        <script src="/storage/assets/js/jquery.dataTables.min.js"></script>
 
         <script src="/storage/assets/js/vendor/toastr.min.js"></script>
     <?php echo $__env->yieldSection(); ?>
