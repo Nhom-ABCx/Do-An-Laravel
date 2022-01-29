@@ -7,6 +7,7 @@
 
     <meta name="description" content="User login page" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- basic styles -->
 
@@ -29,17 +30,18 @@
     <link rel="stylesheet" href="/storage/assets/css/ace-rtl.min.css" />
 
     <!--[if lte IE 8]>
-  <link rel="stylesheet" href="/storage/assets/css/ace-ie.min.css" />
-  <![endif]-->
+        <link rel="stylesheet" href="/storage/assets/css/ace-ie.min.css" />
+        <![endif]-->
 
     <!-- inline styles related to this page -->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
     <!--[if lt IE 9]>
-  <script src="/storage/assets/js/html5shiv.js"></script>
-  <script src="/storage/assets/js/respond.min.js"></script>
-  <![endif]-->
+            <script src="/storage/assets/js/html5shiv.js"></script>
+            <script src="/storage/assets/js/respond.min.js"></script>
+            <![endif]-->
+    <link rel="stylesheet" href="/storage/assets/css/toastr.min.css" />
 </head>
 
 <body class="login-layout">
@@ -70,27 +72,22 @@
 
                                         <div class="space-6"></div>
 
-                                        @if ($errors->has('Username'))
-                                            <i class="icon-remove bigger-110 red">{{ $errors->first('Username') }}</i>
-                                        @endif
-
-                                        <form action="{{ route('Login.show') }}" method="post">
+                                        <form action="{{ route('Login.show') }}" method="post" id="submitForm">
                                             @csrf
                                             <fieldset>
+                                                <span class="error-text Username-error"></span>
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="text" class="form-control" placeholder="Username" name="Username" value="Admin"/>
+                                                        <input type="text" class="form-control" placeholder="Username" name="Username" value="Admin" />
                                                         <i class="icon-user"></i>
                                                     </span>
                                                 </label>
 
-                                                @if ($errors->has('MatKhau'))
-                                                    <i class="icon-remove bigger-110 red">{{ $errors->first('MatKhau') }}</i>
-                                                @endif
+                                                <span class="error-text MatKhau-error"></span>
 
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        <input type="password" class="form-control" placeholder="Password" name="MatKhau" value="Admin"/>
+                                                        <input type="password" class="form-control" placeholder="Password" name="MatKhau" value="Admin" />
                                                         <i class="icon-lock"></i>
                                                     </span>
                                                 </label>
@@ -120,10 +117,10 @@
                                                 <i class="icon-twitter"></i>
                                             </a>
 
-                                            <a class="btn btn-danger" href="{{route('Login.social','Google')}}">
+                                            <a class="btn btn-danger" href="{{ route('Login.social', 'Google') }}">
                                                 <i class="icon-google-plus"></i>
                                             </a>
-                                            <a class="btn btn-dark" href="{{route('Login.social','Github')}}">
+                                            <a class="btn btn-dark" href="{{ route('Login.social', 'Github') }}">
                                                 <i class="icon-github-sign"></i>
                                             </a>
                                         </div>
@@ -195,23 +192,63 @@
     </div><!-- /.main-container -->
 
     <!-- basic scripts -->
-
-    <!--[if !IE]> -->
-
     <script type="text/javascript">
         window.jQuery || document.write("<script src='/storage/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
     </script>
 
-    <!-- <![endif]-->
-
-    <!--[if IE]>
-<script type="text/javascript">
-    window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-</script>
-<![endif]-->
     <script type="text/javascript">
         if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
             "/script>");
+    </script>
+
+    <script src="/storage/assets/js/vendor/toastr.min.js"></script>
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        //ajax
+        $('#submitForm').on('submit', function(e) {
+            //ngan chan form gui di
+            e.preventDefault();
+            let form = this;
+            $.ajax({
+                //gui di voi phuong thuc' cua Form
+                method: $(form).attr('method'),
+                //url = duong dan cua form
+                url: $(form).attr('action'),
+                //du lieu gui di
+                data: new FormData(form),
+                //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
+                processData: false,
+                // Kiểu nội dung của dữ liệu được gửi lên server. mac dinh la json, minh gui len la FormData nen de false
+                contentType: false,
+                //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+                //dataType: 'json',
+                //truoc khi gui di thi thuc hien gi do', o day chinh loi~ = rong~
+                beforeSend: function() {
+                    $(form).find('span.error-text').empty();
+                },
+                success: function(response) {
+                    console.log("request ok");
+                    window.location.href = response;
+                },
+                error: function(response) {
+                    console.log("request lỗi");
+                    //console.log(response.responseJSON.Username[0]);
+                    $.each(response.responseJSON, function(key, val) {
+                        $(form).find('span.' + key + '-error').html('<i class="icon-remove bigger-110 red">' + val[0] + '</i>');
+                        toastr.error(val[0], 'Có lỗi xảy ra', {
+                            timeOut: 3000
+                        });
+                    });
+                },
+            });
+        });
     </script>
 </body>
 

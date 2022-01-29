@@ -10,31 +10,6 @@
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
     {{-- datetime picker end --}}
-
-    {{-- thông báo --}}
-    <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
-    <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
-    <style>
-        .spinner-preview {
-            width: 100px;
-            height: 100px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .dropdown-preview {
-            margin: 0 5px;
-            display: inline-block;
-        }
-
-        .dropdown-preview>.dropdown-menu {
-            display: block;
-            position: static;
-            margin-bottom: 5px;
-        }
-
-    </style>
-    {{-- thông báo end --}}
 @endsection
 
 @section('body')
@@ -401,27 +376,13 @@
         {{-- datatable script End --}}
 
         {{-- thông báo error --}}
-        <!-- page specific plugin scripts -->
-        <!--[if lte IE 8]>
-                                                                                                                      <script src="assets/js/excanvas.min.js"></script>
-                                                                                                                      <![endif]-->
-
-        <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-        <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
-        <script src="/storage/assets/js/bootbox.min.js"></script>
-        <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
-        <script src="/storage/assets/js/jquery.gritter.min.js"></script>
-        <script src="/storage/assets/js/spin.min.js"></script>
-
         <script type="text/javascript">
             jQuery(function($) {
                 @if ($errors->any())
                     $('#modal-form').modal('show');
                     @foreach ($errors->all() as $error)
-                        $.gritter.add({
-                        title: 'Có lỗi xảy ra',
-                        text: '{{ $error }}',
-                        class_name: 'gritter-error'
+                    toastr.error('{{ $error }}', 'Có lỗi xảy ra', {
+                        timeOut: 3000
                         });
                     @endforeach
                 @endif

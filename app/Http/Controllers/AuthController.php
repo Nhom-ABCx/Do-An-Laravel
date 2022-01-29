@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Validator;
+
 class AuthController extends Controller
 {
     //composer require laravel/ui --dev
@@ -77,18 +79,23 @@ class AuthController extends Controller
     //dang nhap ne`
     public function show(Request $request)
     {
-        $request->validate([
+        //kiem tra du lieu
+        $validate = Validator::make($request->all(), [
             'Username' => ['required'],
             'MatKhau' => ['required'],
         ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+
         $select = NhanVien::where('Username', $request->input("Username"))->where('MatKhau', $request->input("MatKhau"))->first();
         if (!empty($select)) { //neu' ko rong~
             Auth::login($select);
             //$request->session()->regenerate();
             //return redirect()->intended('/');
-            return Redirect::route('Home.index');
+            return route('Home.index');
         }
-        return back()->withErrors(['Username'=>'Sai Username hoac mat khau']);
+        return response()->json(['Username'=>['Sai Username hoac mat khau']], 400);
     }
 
     /**

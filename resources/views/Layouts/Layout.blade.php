@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.full.min.css" />
     <link rel="stylesheet" href="/storage/assets/css/datepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/ui.jqgrid.css" />
+    {{-- cai nay la thong báo https://github.com/CodeSeven/toastr--}}
+    <link rel="stylesheet" href="/storage/assets/css/toastr.min.css" />
     {{-- icon link ngoài của vinh --}}
     {{-- nên lấy icon có sẵn từ đây https://fontawesome.com/v3.2/icons/ --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -770,24 +772,11 @@
     @section('script')
         {{-- phan nay la Script --}}
         <!-- basic scripts -->
-
         <!--[if !IE]> -->
 
         <script type="text/javascript">
             window.jQuery || document.write("<script src='/storage/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
         </script>
-
-        <!-- <![endif]-->
-
-        <!--[if IE]>
-                                                                            <script type="text/javascript">
-                                                                                window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                                                                            </script>
-                                                                            <![endif]-->
-        <script type="text/javascript">
-            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-        </script>
-
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
@@ -806,10 +795,12 @@
 
         <script src="/storage/assets/js/ace-elements.min.js"></script>
         <script src="/storage/assets/js/ace.min.js"></script>
+        <script src="/storage/assets/js/jquery.dataTables.min.js"></script>
+
+        <script src="/storage/assets/js/vendor/toastr.min.js"></script>
     @show
 
     @yield('scriptThisPage')
 </body>
 
 </html>
-<script src="/storage/assets/js/jquery.dataTables.min.js"></script>

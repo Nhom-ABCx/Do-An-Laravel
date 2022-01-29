@@ -8,30 +8,6 @@
     <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
-    {{-- thông báo --}}
-    <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
-    <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
-    <style>
-        .spinner-preview {
-            width: 100px;
-            height: 100px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .dropdown-preview {
-            margin: 0 5px;
-            display: inline-block;
-        }
-
-        .dropdown-preview>.dropdown-menu {
-            display: block;
-            position: static;
-            margin-bottom: 5px;
-        }
-
-    </style>
-    {{-- thông báo end --}}
 @endsection
 
 @section('body')
@@ -535,34 +511,21 @@
         {{-- show arler dialog end --}}
 
         {{-- thông báo error --}}
-        <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-        <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
-        <script src="/storage/assets/js/bootbox.min.js"></script>
-        <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
-        <script src="/storage/assets/js/jquery.gritter.min.js"></script>
-        <script src="/storage/assets/js/spin.min.js"></script>
-
         <script type="text/javascript">
             jQuery(function($) {
                 @if ($errors->any())
                     $('#modal-form').modal('show');
                     @foreach ($errors->all() as $error)
-                        $.gritter.add({
-                        title: 'Có lỗi xảy ra',
-                        text: '{{ $error }}',
-                        class_name: 'gritter-error'
+                        toastr.error('{{ $error }}', 'Có lỗi xảy ra', {
+                        timeOut: 3000
                         });
                     @endforeach
                 @endif
 
                 @if (!empty($request['SanPhamMoi']))
-                    $.gritter.add({
-                    // (string | mandatory) the heading of the notification
-                    title: 'Thành công',
-                    // (string | mandatory) the text inside the notification
-                    text: 'Thêm sản phẩm {{$request["SanPhamMoi"]}} thành công',
-                    class_name: 'gritter-success'
-                    });
+                toastr.success('Thêm sản phẩm {{ $request['SanPhamMoi'] }} thành công', 'Thành công', {
+                        timeOut: 3000
+                        });
                 @endif
             });
         </script>

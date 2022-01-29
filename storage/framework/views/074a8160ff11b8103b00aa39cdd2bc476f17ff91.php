@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="/storage/assets/css/datepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/ui.jqgrid.css" />
     
+    <link rel="stylesheet" href="/storage/assets/css/toastr.min.css" />
+    
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <?php echo $__env->yieldContent('headThisPage'); ?>
@@ -565,24 +567,11 @@
     <?php $__env->startSection('script'); ?>
         
         <!-- basic scripts -->
-
         <!--[if !IE]> -->
 
         <script type="text/javascript">
             window.jQuery || document.write("<script src='/storage/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
         </script>
-
-        <!-- <![endif]-->
-
-        <!--[if IE]>
-                                                                            <script type="text/javascript">
-                                                                                window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                                                                            </script>
-                                                                            <![endif]-->
-        <script type="text/javascript">
-            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-        </script>
-
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
@@ -601,11 +590,13 @@
 
         <script src="/storage/assets/js/ace-elements.min.js"></script>
         <script src="/storage/assets/js/ace.min.js"></script>
+        <script src="/storage/assets/js/jquery.dataTables.min.js"></script>
+
+        <script src="/storage/assets/js/vendor/toastr.min.js"></script>
     <?php echo $__env->yieldSection(); ?>
 
     <?php echo $__env->yieldContent('scriptThisPage'); ?>
 </body>
 
 </html>
-<script src="/storage/assets/js/jquery.dataTables.min.js"></script>
 <?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/layouts/Layout.blade.php ENDPATH**/ ?>

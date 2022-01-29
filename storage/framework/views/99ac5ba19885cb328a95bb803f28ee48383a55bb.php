@@ -7,31 +7,6 @@
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
     
-
-    
-    <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
-    <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
-    <style>
-        .spinner-preview {
-            width: 100px;
-            height: 100px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .dropdown-preview {
-            margin: 0 5px;
-            display: inline-block;
-        }
-
-        .dropdown-preview>.dropdown-menu {
-            display: block;
-            position: static;
-            margin-bottom: 5px;
-        }
-
-    </style>
-    
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('body'); ?>
@@ -391,27 +366,13 @@
         
 
         
-        <!-- page specific plugin scripts -->
-        <!--[if lte IE 8]>
-                                                                                                                      <script src="assets/js/excanvas.min.js"></script>
-                                                                                                                      <![endif]-->
-
-        <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-        <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
-        <script src="/storage/assets/js/bootbox.min.js"></script>
-        <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
-        <script src="/storage/assets/js/jquery.gritter.min.js"></script>
-        <script src="/storage/assets/js/spin.min.js"></script>
-
         <script type="text/javascript">
             jQuery(function($) {
                 <?php if($errors->any()): ?>
                     $('#modal-form').modal('show');
                     <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        $.gritter.add({
-                        title: 'Có lỗi xảy ra',
-                        text: '<?php echo e($error); ?>',
-                        class_name: 'gritter-error'
+                    toastr.error('<?php echo e($error); ?>', 'Có lỗi xảy ra', {
+                        timeOut: 3000
                         });
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <?php endif; ?>
