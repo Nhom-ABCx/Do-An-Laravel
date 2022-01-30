@@ -128,6 +128,7 @@ Route::middleware('auth')->group(function () {
         ]);
     Route::get("HoaDonNhapp/DaHuy", [HoaDonNhapController::class, "HoaDonNhapDaHuy"])->name("HoaDonNhap.DaHuy");
     Route::post("HoaDonNhap/KhoiPhuc/{id}", [HoaDonNhapController::class, "KhoiPhucHoaDonNhap"])->name("HoaDonNhap.KhoiPhuc");
+    Route::post("HoaDonNhap/ThemSanPham/{hoaDonNhap}", [HoaDonNhapController::class, "ThemSanPham"])->name("HoaDonNhap.ThemSanPham");
 
     Route::get("WidgetThongBao", function () {
         return view("WidgetThongBao");

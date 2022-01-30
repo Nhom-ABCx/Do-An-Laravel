@@ -225,7 +225,7 @@
                 data: new FormData(form),
                 //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
                 processData: false,
-                // Kiểu nội dung của dữ liệu được gửi lên server. mac dinh la json, minh gui len la FormData nen de false
+                // Kiểu nội dung của dữ liệu được gửi lên server. minh gui len la FormData nen de false
                 contentType: false,
                 //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
                 //dataType: 'json',

@@ -75,7 +75,7 @@
 
                         <div class="tab-content">
                             <div id="ChiTiet" class="tab-pane in active">
-                                <form class="form-horizontal" role="form" action="{{ route('HoaDonNhap.update', $hoaDonNhap) }}" method="post" enctype="multipart/form-data">
+                                <form class="form-horizontal" role="form" action="#" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
@@ -180,49 +180,6 @@
                                                 <th></th>
                                             </tr>
                                         </thead>
-
-                                        <tbody>
-                                            @foreach ($dsChiTietHD as $item)
-                                                @php
-                                                    App\Http\Controllers\SanPhamController::fixImage($item->SanPham);
-                                                @endphp
-                                                <tr>
-                                                    <td class="center">{{ $item->SanPham->id }}</td>
-                                                    <td>{{ $item->SanPham->TenSanPham }}</td>
-                                                    <td>
-                                                        <img src='{{ $item->SanPham->HinhAnh }}' alt="{{ $item->SanPham->HinhAnh }}" width='100' height='100'>
-                                                    </td>
-                                                    <td>{{ $item->SoLuong }}</td>
-                                                    <td>{{ number_format($item->GiaNhap) }}</td>
-                                                    <td>{{ number_format($item->ThanhTien) }}</td>
-                                                    <td>
-                                                        <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                            <a class="blue" href="{{ route('SanPham.index', $item->SanPham->id) }}" data-rel="tooltip" title="Xem sản phẩm">
-                                                                <i class="icon-zoom-in bigger-130"></i>
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                            <div class="inline position-relative">
-                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
-                                                                </button>
-
-                                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                    <li>
-                                                                        <a href="{{ route('SanPham.index', $item->SanPham->id) }}" class="tooltip-info" data-rel="tooltip" title="Xem sản phẩm">
-                                                                            <span class="blue">
-                                                                                <i class="icon-zoom-in bigger-120"></i>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -234,9 +191,9 @@
             <div id="modal-form" class="modal" tabindex="-1">
                 <div class="modal-dialog" style="width: 90%;">
                     <div class="modal-content">
-                        <form action="{{ route('HoaDonNhap.update', $hoaDonNhap) }}" method="post" id="submitForm">
+                        <form action="{{ route('HoaDonNhap.ThemSanPham', $hoaDonNhap) }}" method="post" id="submitForm">
                             @csrf
-                            @method("PUT")
+                            {{-- @method("PUT") --}}
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 <h4 class="blue bigger">Chọn sản phẩm</h4>
@@ -357,12 +314,12 @@
                             <div class="modal-footer">
                                 <button class="btn btn-sm" data-dismiss="modal">
                                     <i class="icon-remove"></i>
-                                    Cancel
+                                    Hủy
                                 </button>
 
                                 <button type="submit" class="btn btn-sm btn-primary">
                                     <i class="icon-ok"></i>
-                                    Save
+                                    OK
                                 </button>
                             </div>
                         </form>
@@ -402,16 +359,49 @@
 
             jQuery(function($) {
                 $('#ChiTietHoaDonNhap').dataTable({
-                    "aoColumns": [
-                        null, null,
-                        {
-                            "bSortable": false
+                    autoWidth: false, //ko co cai nay` la` no' thu nho? lai max xau'
+                    ajax: {
+                        url: "{{ route('HoaDonNhap.APIChiTiet', $hoaDonNhap) }}",
+                        method: 'GET',
+                        dataSrc: "" //lay vi tri la rong~ ko phai mac dinh "data"=>[...]
+                    },
+                    //do du lieu vao cot
+                    columns: [{
+                            data: 'san_pham.id',
+                            className: "center",
+                            searchable: false
                         },
-                        null, null, null,
                         {
-                            "bSortable": false
+                            data: 'san_pham.TenSanPham'
                         },
-                    ]
+                        {
+                            //render cot hinh anh?
+                            data: 'san_pham.HinhAnh',
+                            render: function(data, type, row, meta) {
+                                return '<img src="' + data + '" height="100" width="100"/>';
+                            },
+                            searchable: false
+                        },
+                        {
+                            data: 'SoLuong',
+                            searchable: false
+                        },
+                        {
+                            data: 'GiaNhap',
+                            //render: DataTable.render.number(',', '.', 2, '$'),
+                        },
+                        {
+                            data: 'ThanhTien',
+                        },
+                        {
+                            //render cot checkbox
+                            data: "id",
+                            className: "center",
+
+                            orderable: false,
+                            searchable: false
+                        },
+                    ],
                 });
 
                 $('table th input:checkbox').on('click', function() {
@@ -462,14 +452,15 @@
                     $(this).find('.chosen-search input').css('width', '200px');
                 });
 
-                //viet tat', lay het sanPham, chuyen thanh mang? json dua vo trong javascript
-                var json = @json($dsSanPham);
                 $('#ChonSanPham').DataTable({
-                    destroy: true, //tap ra ngoai` la se huy cai bang?, de tranh' thong bao'
-            data: json,
+                    //tap ra ngoai` la se huy cai bang?, de tranh' thong bao'
+            destroy: true,
+            //viet tat', lay het sanPham, chuyen thanh mang? json dua vo trong javascript
+            data: @json($dsSanPham),
             //do du lieu vao cot
             columns: [{
                     data: 'id',
+                    className: "center",
                     searchable: false
                 },
                 {
@@ -516,47 +507,56 @@
                     e.preventDefault();
                     let form = this;
 
+                    //lay het tat ca san pham da check
                     var dsSPCheck = [];
                     $('tbody input[type=checkbox]:checked').each(function(i) {
                         dsSPCheck[i] = $(this).val();
                     });
-                    console.log(dsSPCheck);
 
-                    toastr.error(a, 'Có lỗi xảy ra', {
-                        timeOut: 3000
+                    $.ajax({
+                        //gui di voi phuong thuc' cua Form
+                        method: $(form).attr('method'),
+                        //url = duong dan cua form
+                        url: $(form).attr('action'),
+                        //du lieu gui di
+                        data: JSON.stringify({
+                            "SanPhamId": dsSPCheck
+                        }),
+                        //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
+                        processData: false,
+                        // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la json nen de la json
+                        contentType: "application/json; charset=utf-8",
+                        //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+                        //dataType: 'json',
+                        //truoc khi gui di thi thuc hien gi do', o day chinh loi~ = rong~
+                        beforeSend: function() {
+                            //$(form).find('span.error-text').empty();
+                        },
+                        success: function(response) {
+                            if (response.length != 0) {
+                                console.log("request ok");
+                                $('#modal-form').modal('hide');
+                                toastr.success("Thêm sản phẩm " + dsSPCheck, 'Thành công', {
+                                    timeOut: 3000
+                                });
+                                //reload lại table
+                                $('#ChiTietHoaDonNhap').DataTable().ajax.reload()
+                            } else {
+                                toastr.warning("Không có sản phẩm nào được thêm", 'Cảnh báo', {
+                                    timeOut: 3000
+                                });
+                            }
+                        },
+                        error: function(response) {
+                            console.log("request lỗi");
+                            //console.log(response.responseJSON.Username[0]);
+                            $.each(response.responseJSON, function(key, val) {
+                                toastr.error(val[0], 'Có lỗi xảy ra', {
+                                    timeOut: 3000
+                                });
+                            });
+                        },
                     });
-                    // $.ajax({
-                    //     //gui di voi phuong thuc' cua Form
-                    //     method: $(form).attr('method'),
-                    //     //url = duong dan cua form
-                    //     url: $(form).attr('action'),
-                    //     //du lieu gui di
-                    //     data: new FormData(form),
-                    //     //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
-                    //     processData: false,
-                    //     // Kiểu nội dung của dữ liệu được gửi lên server. mac dinh la json, minh gui len la FormData nen de false
-                    //     contentType: false,
-                    //     //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
-                    //     //dataType: 'json',
-                    //     //truoc khi gui di thi thuc hien gi do', o day chinh loi~ = rong~
-                    //     beforeSend: function() {
-                    //         $(form).find('span.error-text').empty();
-                    //     },
-                    //     success: function(response) {
-                    //         console.log("request ok");
-                    //         window.location.href = response;
-                    //     },
-                    //     error: function(response) {
-                    //         console.log("request lỗi");
-                    //         //console.log(response.responseJSON.Username[0]);
-                    //         $.each(response.responseJSON, function(key, val) {
-                    //             $(form).find('span.' + key + '-error').html('<i class="icon-remove bigger-110 red">' + val[0] + '</i>');
-                    //             toastr.error(val[0], 'Có lỗi xảy ra', {
-                    //                 timeOut: 3000
-                    //             });
-                    //         });
-                    //     },
-                    // });
                 });
 
             });

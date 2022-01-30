@@ -236,9 +236,9 @@ class CreateDatabase extends Migration
             $table->id();
             $table->foreignId('HoaDonNhapId'); //được nhập từ hóa đơn nào
             $table->foreignId('SanPhamId'); //nhập sản phẩm nào
-            $table->integer('SoLuong');
-            $table->double('GiaNhap'); //giá nhập vào bao nhiêu
-            $table->double('ThanhTien');
+            $table->integer('SoLuong')->default(0);
+            $table->double('GiaNhap')->default(0); //giá nhập vào bao nhiêu
+            $table->double('ThanhTien')->default(0);
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('HoaDonNhapId')->references('id')->on('hoa_don_nhaps');

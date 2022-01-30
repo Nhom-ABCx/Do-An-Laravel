@@ -11,6 +11,7 @@ use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\YeuThichController;
 use App\Http\Controllers\DiaChiController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\HoaDonNhapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ use App\Http\Controllers\MessageController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('HoaDonNhap/{hoaDonNhap}', [HoaDonNhapController::class, "API_HoaDonNhap_ChiTiet"])->name("HoaDonNhap.APIChiTiet");
+
 Route::get('SanPham', [SanPhamController::class, "API_SanPham"]);
 
 Route::get('SanPham/LoaiSanPham/{loaiSanPham}', [SanPhamController::class, "API_SanPham_LoaiSanPham"]);

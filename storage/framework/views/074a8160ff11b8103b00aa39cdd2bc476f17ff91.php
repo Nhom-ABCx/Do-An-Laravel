@@ -7,6 +7,7 @@
 
     <meta name="description" content="Static &amp; Dynamic Tables" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
     <!-- basic styles -->
     <link href="/storage/assets/css/bootstrap.min.css" rel="stylesheet" />
