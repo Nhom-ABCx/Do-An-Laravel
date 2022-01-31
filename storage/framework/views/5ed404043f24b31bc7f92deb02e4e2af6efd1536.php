@@ -289,54 +289,113 @@
                             //render: DataTable.render.number(',', '.', 2, '$'),
                         },
                     ],
-                    createdRow:function(row, data, rowIndex)
-		{
-			$.each($('td', row), function(colIndex){
-				if(colIndex == 3)
-				{
-					$(this).attr('data-name', 'SoLuong');
-					$(this).attr('class', 'SoLuong');
-					$(this).attr('data-type', 'text');
-					$(this).attr('data-pk', data[0]);
-				}
-				if(colIndex == 4)
-				{
-					$(this).attr('data-name', 'GiaNhap');
-					$(this).attr('class', 'GiaNhap');
-					$(this).attr('data-type', 'text');
-					$(this).attr('data-pk', data[0]);
-				}
-			});
-		},
+                    createdRow: function(row, data, rowIndex) {
+                        //khi tao moi 1 row, them cac thuoc tinh vao cac td
+                        $.each($('td', row), function(colIndex) {
+                            if (colIndex == 3) {
+                                $(this).attr('class', 'SoLuong');
+                                $(this).attr('data-name', 'SoLuong');
+                                $(this).attr('data-pk', data.san_pham.id);
+                            }
+                            if (colIndex == 4) {
+                                $(this).attr('class', 'GiaNhap');
+                                $(this).attr('data-name', 'GiaNhap');
+                                $(this).attr('data-pk', data.san_pham.id);
+                            }
+                        });
+                    },
                 });
 
                 $('#ChiTietHoaDonNhap').editable({
-		container:'body',
-		selector:'td.SoLuong',
-		url:'update.php',
-		title:'First Nameeeeeeeeeeeeeeeee',
-		type:'POST',
-		validate:function(value){
-			if($.trim(value) == '')
-			{
-				return 'This field is required';
-			}
-		}
-	});
+                    title: 'Nhập số lượng',
+                    url: '<?php echo e(route('HoaDonNhap.update', $hoaDonNhap)); ?>',
+                    container: 'body',
+                    selector: 'td.SoLuong',
+                    type: 'text',
+                    send: 'always',
+                    ajaxOptions: {
+                        //gui len voi phuong thuc, mac dinh la POST
+                        type: "PUT",
+                        //mong muon kieu du lieu tra ve tu sever
+                        dataType: 'json'
+                    },
+                    //name: 'SoLuong',
+                    validate: function(value) {
+                        if ($.trim(value) == '')
+                            return 'Không được rỗng';
+                        if ($.isNumeric(value) == '')
+                            return 'Nhập số';
 
-	$('#ChiTietHoaDonNhap').editable({
-		container:'body',
-		selector:'td.GiaNhap',
-		url:'update.php',
-		title:'Last Name',
-		type:'POST',
-		validate:function(value){
-			if($.trim(value) == '')
-			{
-				return 'This field is required';
-			}
-		}
-	});
+                    },
+                    success: function(response) {
+                        if (response != null) {
+                            console.log("request ok");
+                            toastr.success("Cập nhật thành công", 'Thành công', {
+                                timeOut: 3000
+                            });
+                            //reload lại table
+                            $('#ChiTietHoaDonNhap').DataTable().ajax.reload()
+                        } else {
+                            toastr.warning("Có gì đó xảy ra", 'Cảnh báo', {
+                                timeOut: 3000
+                            });
+                        }
+                    },
+                    error: function(response) {
+                        console.log("request lỗi");
+                        //console.log(response.responseJSON.Username[0]);
+                        $.each(response.responseJSON, function(key, val) {
+                            toastr.error(val[0], 'Có lỗi xảy ra', {
+                                timeOut: 3000
+                            });
+                        });
+                    },
+                });
+
+                $('#ChiTietHoaDonNhap').editable({
+                    title: 'Nhập giá',
+                    url: '<?php echo e(route('HoaDonNhap.update', $hoaDonNhap)); ?>',
+                    container: 'body',
+                    selector: 'td.GiaNhap',
+                    type: 'text',
+                    send: 'always',
+                    ajaxOptions: {
+                        //gui len voi phuong thuc, mac dinh la POST
+                        type: "PUT",
+                        //mong muon kieu du lieu tra ve tu sever
+                        dataType: 'json'
+                    },
+                    //name: 'SoLuong',
+                    validate: function(value) {
+                        if ($.trim(value) == '')
+                            return 'Không được rỗng';
+                        if ($.isNumeric(value) == '')
+                            return 'Nhập số';
+                    },
+                    success: function(response) {
+                        if (response != null) {
+                            console.log("request ok");
+                            toastr.success("Cập nhật thành công", 'Thành công', {
+                                timeOut: 3000
+                            });
+                            //reload lại table
+                            $('#ChiTietHoaDonNhap').DataTable().ajax.reload()
+                        } else {
+                            toastr.warning("Có gì đó xảy ra", 'Cảnh báo', {
+                                timeOut: 3000
+                            });
+                        }
+                    },
+                    error: function(response) {
+                        console.log("request lỗi");
+                        //console.log(response.responseJSON.Username[0]);
+                        $.each(response.responseJSON, function(key, val) {
+                            toastr.error(val[0], 'Có lỗi xảy ra', {
+                                timeOut: 3000
+                            });
+                        });
+                    },
+                });
 
                 $('table th input:checkbox').on('click', function() {
                     var that = this;

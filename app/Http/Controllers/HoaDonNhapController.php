@@ -138,17 +138,19 @@ class HoaDonNhapController extends Controller
     public function update(Request $request, HoaDonNhap $hoaDonNhap)
     {
         //xác thực đầu vào, xem các luật tại https://laravel.com/docs/8.x/validation#available-validation-rules
-        $request->validate([
-            'SanPhamId' => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
-            'SoLuong' => ['required', 'numeric', 'integer', 'min:0', Rule::notIn([0])],
-            'GiaNhap' => ['required', 'numeric', 'integer', 'min:0', Rule::notIn([0])],
+        //kiem tra du lieu
+        $validate = Validator::make($request->all(), [
+            'pk' => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
+            'value' => ['required', 'numeric', 'min:0', Rule::notIn([0])],
         ]);
-
-        //neu ton` tai roi` thi update ngc lai thi` them moi
-        $ctHoaDonNhap = CT_HoaDonNhap::where("SanPhamId", $request["SanPhamId"])->where("HoaDonNhapId", $hoaDonNhap->id)->first();
+        // //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+        //neu ton` tai roi` thi update ngc lai thi` bao' loi~
+        $ctHoaDonNhap = CT_HoaDonNhap::where("SanPhamId", $request["pk"])->where("HoaDonNhapId", $hoaDonNhap->id)->first();
         if (!empty($ctHoaDonNhap)) {
-            $soLuong = $ctHoaDonNhap->SoLuong + $request->input('SoLuong');
-            $giaNhap = $ctHoaDonNhap->GiaNhap + $request->input('GiaNhap');
+            $soLuong = ($request['name'] == "SoLuong") ? $request['value'] : $ctHoaDonNhap->SoLuong;
+            $giaNhap = ($request['name'] == "GiaNhap") ? $request['value'] : $ctHoaDonNhap->GiaNhap;
             $ctHoaDonNhap->fill([
                 'SoLuong' => $soLuong,
                 'GiaNhap' => $giaNhap,
@@ -156,21 +158,14 @@ class HoaDonNhapController extends Controller
             ]);
             $ctHoaDonNhap->save();
         } else {
-            $thanhTien = $request->input('SoLuong') * $request->input('GiaNhap');
-            $ctHoaDonNhap = CT_HoaDonNhap::create([
-                'HoaDonNhapId' => $hoaDonNhap->id,
-                'SanPhamId' => $request->input('SanPhamId'),
-                'SoLuong' => $request->input('SoLuong'),
-                'GiaNhap' => $request->input('GiaNhap'),
-                'ThanhTien' => $thanhTien,
-            ]);
+            return response()->json(["error" => "Không tìm thấy dữ liệu"], 404);
         }
 
         $hoaDonNhap->TongSoLuong = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('SoLuong');
         $hoaDonNhap->TongTien = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('ThanhTien');
         $hoaDonNhap->save();
 
-        return Redirect::route('HoaDonNhap.show', $hoaDonNhap);
+        return response()->json($ctHoaDonNhap, 200);
     }
 
     /**

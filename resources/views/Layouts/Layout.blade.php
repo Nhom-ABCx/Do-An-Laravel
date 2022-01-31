@@ -799,6 +799,8 @@
         <script src="/storage/assets/js/ace-elements.min.js"></script>
         <script src="/storage/assets/js/ace.min.js"></script>
 
+        {{-- https://www.webslesson.info/2020/10/how-to-make-editable-datatable-in-php-using-x-editable-plugin.html --}}
+        {{-- https://viblo.asia/p/cach-su-dung-thu-vien-jquery-x-editable-zb7vDVEOMjKd --}}
         <script src="/storage/assets/js/bootstrap-editable.js"></script>
         <script src="/storage/assets/js/vendor/toastr.min.js"></script>
     @show
