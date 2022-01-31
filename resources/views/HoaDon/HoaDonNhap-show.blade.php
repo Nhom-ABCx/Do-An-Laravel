@@ -10,17 +10,6 @@
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
     {{-- datetime picker end --}}
-    <style>
-        /* hien thi hinh anh khi select */
-        .hinhAnh {
-            display: none;
-        }
-
-        select option:first-child {
-            display: none;
-        }
-
-    </style>
 @endsection
 
 @section('body')
@@ -177,7 +166,6 @@
                                                 <th><i class="icon-bar-chart"></i>Số lượng</th>
                                                 <th><i class="icon-money"></i>Giá nhập</th>
                                                 <th><i class="icon-bar-chart"></i>Thành tiền</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -201,73 +189,6 @@
 
                             <div class="modal-body overflow-visible">
                                 <div class="row">
-                                    {{-- <div class="col-xs-12 col-sm-5">
-                                        <div class="space"></div>
-
-                                        @foreach ($dsSanPham as $item)
-                                            <div class="imageSelector show-image output">
-                                                <div id="{{ $item->id }}" class="hinhAnh">
-                                                    <img src="{{ $item->HinhAnh }}" style="width: 100%" />
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div> --}}
-
-                                    {{-- <div class="col-xs-12 col-sm-7">
-                                        <div class="form-group">
-                                            <label>Sản phẩm</label>
-
-                                            <div>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="icon-sort-by-attributes"></i>
-                                                    </span>
-
-                                                    <select class="width-90 chosen-select" id='imageSelector' name="SanPhamId">
-                                                        <option value=''></option>
-                                                        @foreach ($dsSanPham as $item)
-                                                            <option value="{{ $item->id }}" {{ $item->id == old('SanPhamId') ? 'selected' : '' }}>{{ $item->TenSanPham }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                @if ($errors->has('SanPhamId'))
-                                                    <i class="icon-remove bigger-110 red"> {{ $errors->first('SanPhamId') }}</i>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="space-4"></div>
-
-                                        <div class="form-group">
-                                            <label for="form-field-first">Số lượng</label>
-
-                                            <div>
-                                                <input type="text" class="input-mini" id="spinner3" value="{{ old('SoLuong') }}" name="SoLuong" />
-                                            </div>
-                                            @if ($errors->has('SoLuong'))
-                                                <i class="icon-remove bigger-110 red"> {{ $errors->first('SoLuong') }}</i>
-                                            @endif
-                                        </div>
-
-                                        <div class="space-4"></div>
-
-                                        <div class="form-group">
-                                            <label for="form-field-first">Giá nhập</label>
-
-                                            <div>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="icon-credit-card"></i>
-                                                    </span>
-
-                                                    <input type="text" class="input-mini" id="spinner1" value="{{ old('GiaNhap') }}" name="GiaNhap" />
-                                                </div>
-                                            </div>
-                                            @if ($errors->has('GiaNhap'))
-                                                <i class="icon-remove bigger-110 red"> {{ $errors->first('GiaNhap') }}</i>
-                                            @endif
-                                        </div>
-                                    </div> --}}
                                     <div class="table-responsive">
                                         <table id="ChonSanPham" class="table table-striped table-bordered table-hover">
                                             <thead>
@@ -286,26 +207,6 @@
                                                     </th>
                                                 </tr>
                                             </thead>
-                                            {{-- <tbody>
-                                                @foreach ($dsSanPham as $item)
-                                                <tr>
-                                                    <td class="center">{{ $item->id }}</td>
-                                                    <td>{{ $item->TenSanPham }}</td>
-                                                    <td>{{ $item->SoLuongTon }}</td>
-                                                    <td>
-                                                        <img src='{{ $item->HinhAnh }}' alt="{{ $item->HinhAnh }}" width='100' height='100'>
-                                                    </td>
-                                                    <td>{{ $item->HangSanXuatId }}</td>
-                                                    <td>{{ $item->LoaiSanPhamId }}</td>
-                                                    <td class="center">
-                                                        <label>
-                                                            <input type="checkbox" class="ace" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody> --}}
                                         </table>
                                     </div>
                                 </div>
@@ -384,22 +285,18 @@
                         },
                         {
                             data: 'SoLuong',
+                            className: "green",
                             searchable: false
                         },
                         {
                             data: 'GiaNhap',
-                            //render: DataTable.render.number(',', '.', 2, '$'),
+                            className: "green",
+                            render: DataTable.render.number(',', '.'),
                         },
                         {
                             data: 'ThanhTien',
-                        },
-                        {
-                            //render cot checkbox
-                            data: "id",
-                            className: "center",
-
-                            orderable: false,
-                            searchable: false
+                            render: DataTable.render.number(',', '.'),
+                            //render: DataTable.render.number(',', '.', 2, '$'),
                         },
                     ],
                 });
@@ -560,54 +457,6 @@
                 });
 
             });
-
-            _valueSL = {{ old('SoLuong') ?? 0 }};
-            _valueGN = {{ old('GiaNhap') ?? 0 }};
-            $('#spinner1').ace_spinner({
-                value: _valueGN,
-                min: 0,
-                max: 1000000000,
-                step: 10000,
-                touch_spinner: true,
-                icon_up: 'icon-caret-up',
-                icon_down: 'icon-caret-down'
-            });
-            $('#spinner3').ace_spinner({
-                value: _valueSL,
-                min: 0,
-                max: 10000,
-                step: 5,
-                on_sides: true,
-                icon_up: 'icon-plus smaller-75',
-                icon_down: 'icon-minus smaller-75',
-                btn_up_class: 'btn-success',
-                btn_down_class: 'btn-danger'
-            });
-
-            // hien thi hinh anh khi select
-            // $('#imageSelector').change(function() {
-            //     var select = $(this);
-            //     $('.' + select.attr("id") + ' .hinhAnh').hide();
-            //     $('#' + select.val()).show();
-            // });
         </script>
         {{-- datatable script End --}}
-
-        {{-- thông báo error --}}
-        <script type="text/javascript">
-            jQuery(function($) {
-                @if ($errors->any())
-                    $(document).ready(function(){
-                    $("#modal-form").modal("show");
-                    });
-
-                    @foreach ($errors->all() as $error)
-                        toastr.error('{{ $error }}', 'Có lỗi xảy ra', {
-                        timeOut: 3000
-                        });
-                    @endforeach
-                @endif
-            });
-        </script>
-        {{-- thông báo error end --}}
     @endsection

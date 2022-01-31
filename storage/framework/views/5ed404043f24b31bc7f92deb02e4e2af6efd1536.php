@@ -7,17 +7,6 @@
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
     
-    <style>
-        /* hien thi hinh anh khi select */
-        .hinhAnh {
-            display: none;
-        }
-
-        select option:first-child {
-            display: none;
-        }
-
-    </style>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('body'); ?>
@@ -167,7 +156,6 @@
                                                 <th><i class="icon-bar-chart"></i>Số lượng</th>
                                                 <th><i class="icon-money"></i>Giá nhập</th>
                                                 <th><i class="icon-bar-chart"></i>Thành tiền</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -191,9 +179,6 @@
 
                             <div class="modal-body overflow-visible">
                                 <div class="row">
-                                    
-
-                                    
                                     <div class="table-responsive">
                                         <table id="ChonSanPham" class="table table-striped table-bordered table-hover">
                                             <thead>
@@ -212,7 +197,6 @@
                                                     </th>
                                                 </tr>
                                             </thead>
-                                            
                                         </table>
                                     </div>
                                 </div>
@@ -291,22 +275,18 @@
                         },
                         {
                             data: 'SoLuong',
+                            className: "green",
                             searchable: false
                         },
                         {
                             data: 'GiaNhap',
-                            //render: DataTable.render.number(',', '.', 2, '$'),
+                            className: "green",
+                            render: DataTable.render.number(',', '.'),
                         },
                         {
                             data: 'ThanhTien',
-                        },
-                        {
-                            //render cot checkbox
-                            data: "id",
-                            className: "center",
-
-                            orderable: false,
-                            searchable: false
+                            render: DataTable.render.number(',', '.'),
+                            //render: DataTable.render.number(',', '.', 2, '$'),
                         },
                     ],
                 });
@@ -466,54 +446,6 @@
                     });
                 });
 
-            });
-
-            _valueSL = <?php echo e(old('SoLuong') ?? 0); ?>;
-            _valueGN = <?php echo e(old('GiaNhap') ?? 0); ?>;
-            $('#spinner1').ace_spinner({
-                value: _valueGN,
-                min: 0,
-                max: 1000000000,
-                step: 10000,
-                touch_spinner: true,
-                icon_up: 'icon-caret-up',
-                icon_down: 'icon-caret-down'
-            });
-            $('#spinner3').ace_spinner({
-                value: _valueSL,
-                min: 0,
-                max: 10000,
-                step: 5,
-                on_sides: true,
-                icon_up: 'icon-plus smaller-75',
-                icon_down: 'icon-minus smaller-75',
-                btn_up_class: 'btn-success',
-                btn_down_class: 'btn-danger'
-            });
-
-            // hien thi hinh anh khi select
-            // $('#imageSelector').change(function() {
-            //     var select = $(this);
-            //     $('.' + select.attr("id") + ' .hinhAnh').hide();
-            //     $('#' + select.val()).show();
-            // });
-        </script>
-        
-
-        
-        <script type="text/javascript">
-            jQuery(function($) {
-                <?php if($errors->any()): ?>
-                    $(document).ready(function(){
-                    $("#modal-form").modal("show");
-                    });
-
-                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        toastr.error('<?php echo e($error); ?>', 'Có lỗi xảy ra', {
-                        timeOut: 3000
-                        });
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                <?php endif; ?>
             });
         </script>
         
