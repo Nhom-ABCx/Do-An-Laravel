@@ -103,8 +103,9 @@ class SanPhamController extends Controller
      * @param  \App\Models\SanPham  $sanPham
      * @return \Illuminate\Http\Response
      */
-    public function show(SanPham $sanPham)
+    public function show($sanPham)
     {
+        $sanPham=SanPham::withTrashed()->find($sanPham);
         $this->fixImage($sanPham);
         return view("SanPham.SanPham-show-modal",["sanPham"=>$sanPham]);
     }

@@ -256,11 +256,37 @@
                                                     </td>
                                                     <td>{{ $item->SoLuong }}</td>
                                                     <td>{{ number_format($item->SanPham->GiaBan) }}</td>
-                                                    <td>{{ count($item->SanPham->CTChuongTrinhKM) ? number_format($item->SanPham->CTChuongTrinhKM->first()->GiamGia) : 0 }}</td>
+                                                    <td>{{ count($item->SanPham->CTChuongTrinhKM)? number_format($item->SanPham->CTChuongTrinhKM->first()->GiamGia): 0 }}</td>
                                                     <td>{{ number_format($item->GiaBan) }}</td>
                                                     <td>{{ number_format($item->GiaGiam) }}</td>
                                                     <td>{{ number_format($item->ThanhTien) }}</td>
-                                                    <td></td>
+                                                    <td>
+                                                        <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                            <a class="blue" href="javascript:void(0)" onclick="showSanPham({{ $item->SanPham->id }})" role="button" data-toggle="modal"
+                                                                data-rel="tooltip" title="Xem chi tiết">
+                                                                <i class="icon-zoom-in bigger-130"></i>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                            <div class="inline position-relative">
+                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
+                                                                </button>
+
+                                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                                    <li>
+                                                                        <a href="javascript:void(0)" onclick="showSanPham({{ $item->SanPham->id }})" role="button" data-toggle="modal"
+                                                                            class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
+                                                                            <span class="blue">
+                                                                                <i class="icon-zoom-in bigger-120"></i>
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -322,6 +348,7 @@
                 </div><!-- /span -->
             </div>
 
+            <div id="showModal"></div>
         </div><!-- /.page-content -->
     </div><!-- /.main-content -->
 
@@ -397,4 +424,5 @@
         });
     </script>
     {{-- datatable script End --}}
+    @include("SanPham.script.SanPham-show-script")
 @endsection

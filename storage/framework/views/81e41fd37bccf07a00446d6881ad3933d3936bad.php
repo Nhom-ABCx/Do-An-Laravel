@@ -247,11 +247,37 @@
                                                     </td>
                                                     <td><?php echo e($item->SoLuong); ?></td>
                                                     <td><?php echo e(number_format($item->SanPham->GiaBan)); ?></td>
-                                                    <td><?php echo e(count($item->SanPham->CTChuongTrinhKM) ? number_format($item->SanPham->CTChuongTrinhKM->first()->GiamGia) : 0); ?></td>
+                                                    <td><?php echo e(count($item->SanPham->CTChuongTrinhKM)? number_format($item->SanPham->CTChuongTrinhKM->first()->GiamGia): 0); ?></td>
                                                     <td><?php echo e(number_format($item->GiaBan)); ?></td>
                                                     <td><?php echo e(number_format($item->GiaGiam)); ?></td>
                                                     <td><?php echo e(number_format($item->ThanhTien)); ?></td>
-                                                    <td></td>
+                                                    <td>
+                                                        <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                            <a class="blue" href="javascript:void(0)" onclick="showSanPham(<?php echo e($item->SanPham->id); ?>)" role="button" data-toggle="modal"
+                                                                data-rel="tooltip" title="Xem chi tiết">
+                                                                <i class="icon-zoom-in bigger-130"></i>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                            <div class="inline position-relative">
+                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
+                                                                </button>
+
+                                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                                    <li>
+                                                                        <a href="javascript:void(0)" onclick="showSanPham(<?php echo e($item->SanPham->id); ?>)" role="button" data-toggle="modal"
+                                                                            class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
+                                                                            <span class="blue">
+                                                                                <i class="icon-zoom-in bigger-120"></i>
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
@@ -313,6 +339,7 @@
                 </div><!-- /span -->
             </div>
 
+            <div id="showModal"></div>
         </div><!-- /.page-content -->
     </div><!-- /.main-content -->
 
@@ -388,6 +415,7 @@
         });
     </script>
     
+    <?php echo $__env->make("SanPham.script.SanPham-show-script", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/HoaDon/HoaDon-show.blade.php ENDPATH**/ ?>

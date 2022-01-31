@@ -193,8 +193,11 @@
                                         @else
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <a class="blue" href="#">
-                                                        <i class="icon-zoom-in bigger-130"></i>
+                                                    <a href="javascript:void(0)" onclick="showSanPham({{ $item->id }})" role="button" data-toggle="modal" class="tooltip-info" data-rel="tooltip"
+                                                        title="Xem chi tiết">
+                                                        <span class="blue">
+                                                            <i class="icon-zoom-in bigger-120"></i>
+                                                        </span>
                                                     </a>
 
                                                     <a class="green" href="{{ route('SanPham.edit', $item) }}" data-rel="tooltip" title="Chỉnh sửa" data-placement="top">
@@ -219,7 +222,8 @@
 
                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="javascript:void(0)" onclick="showSanPham({{ $item->id }})" role="button" data-toggle="modal" class="tooltip-info"
+                                                                    data-rel="tooltip" title="Xem chi tiết">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -380,8 +384,9 @@
                         </div>
                     </div>
                 </div>
-
             </div><!-- /.page-content -->
+
+            <div id="showModal"></div>
         </div><!-- /.main-content -->
 
     @endsection
@@ -523,11 +528,13 @@
                 @endif
 
                 @if (!empty($request['SanPhamMoi']))
-                toastr.success('Thêm sản phẩm {{ $request['SanPhamMoi'] }} thành công', 'Thành công', {
-                        timeOut: 3000
-                        });
+                    toastr.success('Thêm sản phẩm {{ $request['SanPhamMoi'] }} thành công', 'Thành công', {
+                    timeOut: 3000
+                    });
                 @endif
             });
         </script>
         {{-- thông báo error end --}}
+
+        @include("SanPham.script.SanPham-show-script")
     @endsection

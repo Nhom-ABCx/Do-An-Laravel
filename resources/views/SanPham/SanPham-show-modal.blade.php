@@ -1,4 +1,5 @@
-{{-- <a href="javascript:void(0)" onclick="showSanPham(` + data + `)" role="button" data-toggle="modal" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
+{{-- <a href="javascript:void(0)" onclick="showSanPham({{ $item->id }})" role="button" data-toggle="modal" class="tooltip-info"
+    data-rel="tooltip" title="Xem chi tiết">
     <span class="blue">
         <i class="icon-zoom-in bigger-120"></i>
     </span>
