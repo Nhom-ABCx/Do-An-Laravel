@@ -24,6 +24,8 @@
     
     <link rel="stylesheet" href="/storage/assets/css/toastr.min.css" />
     
+    <link rel="stylesheet" href="/storage/assets/css/bootstrap-editable.css" />
+    
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <?php echo $__env->yieldContent('headThisPage'); ?>
@@ -592,6 +594,7 @@
         <script src="/storage/assets/js/ace-elements.min.js"></script>
         <script src="/storage/assets/js/ace.min.js"></script>
 
+        <script src="/storage/assets/js/bootstrap-editable.js"></script>
         <script src="/storage/assets/js/vendor/toastr.min.js"></script>
     <?php echo $__env->yieldSection(); ?>
 

@@ -289,7 +289,54 @@
                             //render: DataTable.render.number(',', '.', 2, '$'),
                         },
                     ],
+                    createdRow:function(row, data, rowIndex)
+		{
+			$.each($('td', row), function(colIndex){
+				if(colIndex == 3)
+				{
+					$(this).attr('data-name', 'SoLuong');
+					$(this).attr('class', 'SoLuong');
+					$(this).attr('data-type', 'text');
+					$(this).attr('data-pk', data[0]);
+				}
+				if(colIndex == 4)
+				{
+					$(this).attr('data-name', 'GiaNhap');
+					$(this).attr('class', 'GiaNhap');
+					$(this).attr('data-type', 'text');
+					$(this).attr('data-pk', data[0]);
+				}
+			});
+		},
                 });
+
+                $('#ChiTietHoaDonNhap').editable({
+		container:'body',
+		selector:'td.SoLuong',
+		url:'update.php',
+		title:'First Nameeeeeeeeeeeeeeeee',
+		type:'POST',
+		validate:function(value){
+			if($.trim(value) == '')
+			{
+				return 'This field is required';
+			}
+		}
+	});
+
+	$('#ChiTietHoaDonNhap').editable({
+		container:'body',
+		selector:'td.GiaNhap',
+		url:'update.php',
+		title:'Last Name',
+		type:'POST',
+		validate:function(value){
+			if($.trim(value) == '')
+			{
+				return 'This field is required';
+			}
+		}
+	});
 
                 $('table th input:checkbox').on('click', function() {
                     var that = this;

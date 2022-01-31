@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="/storage/assets/css/ui.jqgrid.css" />
     {{-- cai nay la thong báo https://github.com/CodeSeven/toastr --}}
     <link rel="stylesheet" href="/storage/assets/css/toastr.min.css" />
+    {{-- inline editTable  https://github.com/vitalets/x-editable --}}
+    <link rel="stylesheet" href="/storage/assets/css/bootstrap-editable.css" />
     {{-- icon link ngoài của vinh --}}
     {{-- nên lấy icon có sẵn từ đây https://fontawesome.com/v3.2/icons/ --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -797,6 +799,7 @@
         <script src="/storage/assets/js/ace-elements.min.js"></script>
         <script src="/storage/assets/js/ace.min.js"></script>
 
+        <script src="/storage/assets/js/bootstrap-editable.js"></script>
         <script src="/storage/assets/js/vendor/toastr.min.js"></script>
     @show
 
