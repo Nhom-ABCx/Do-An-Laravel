@@ -130,6 +130,7 @@ Route::middleware('auth')->group(function () {
     Route::post("HoaDonNhap/KhoiPhuc/{id}", [HoaDonNhapController::class, "KhoiPhucHoaDonNhap"])->name("HoaDonNhap.KhoiPhuc");
     Route::post("HoaDonNhap/ThemSanPham/{hoaDonNhap}", [HoaDonNhapController::class, "ThemSanPham"])->name("HoaDonNhap.ThemSanPham");
     Route::delete("HoaDonNhap/XoaSanPham/{id}", [HoaDonNhapController::class, "XoaSanPham"])->name("HoaDonNhap.XoaSanPham");
+    Route::patch("HoaDonNhap/CapNhatTrangThai/{hoaDonNhap}", [HoaDonNhapController::class, "CapNhatTrangThai"])->name("HoaDonNhap.CapNhatTrangThai");
 
     Route::get("WidgetThongBao", function () {
         return view("WidgetThongBao");

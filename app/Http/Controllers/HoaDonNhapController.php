@@ -234,12 +234,43 @@ class HoaDonNhapController extends Controller
     }
     public function XoaSanPham($id)
     {
-        $ctHoaDonNhap = CT_HoaDonNhap::find($id);
+        $ctHoaDonNhap = CT_HoaDonNhap::where("SanPhamId",$id)->first();
         if (!empty($ctHoaDonNhap)) {
             $ctHoaDonNhap->forceDelete();
+            //tinh' lai TongSL voi TongTien
+            $hoaDonNhap=$ctHoaDonNhap->HoaDonNhap;
+            $hoaDonNhap->TongSoLuong = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('SoLuong');
+            $hoaDonNhap->TongTien = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('ThanhTien');
+            $hoaDonNhap->save();
             return response()->json([], 200);
         }
-        return response()->json(["Error"=>"Không tìm thấy"], 404);
+        return response()->json(["Error" => "Không tìm thấy"], 404);
+    }
+    public function CapNhatTrangThai(HoaDonNhap $hoaDonNhap)
+    {
+        if ($hoaDonNhap->TrangThai == 1)
+            //if nay` de tranh' tinh` trang gui request ao?, voi thu~ nghiem luon withErrors
+            return Redirect::back()->withErrors(['TrangThai' => 'Trạng thái đã thành công thì không thể cập nhật tiếp']);
+        else {
+            $hoaDonNhap->TrangThai = $hoaDonNhap->TrangThai + 1;
+            $hoaDonNhap->save();
+
+            //neu trang thai' thanh`cong thi cap nhat lai gia' ban' va so luong ton` cua san pham tuong ung'
+            if ($hoaDonNhap->TrangThai) {
+                $dsChiTietHD = $hoaDonNhap->CT_HoaDonNhap;
+                if (count($dsChiTietHD)) {
+                    foreach ($dsChiTietHD as $item) {
+                        $sanPham = $item->SanPham;
+                        $sanPham->fill([
+                            "GiaNhap" => $item->GiaNhap,
+                            "SoLuongTon" => $sanPham->SoLuongTon + $item->SoLuong,
+                        ]);
+                        $sanPham->save();
+                    }
+                }
+            }
+        }
+        return Redirect::route('HoaDonNhap.index');
     }
     //api
     public function API_HoaDonNhap_ChiTiet(HoaDonNhap $hoaDonNhap)

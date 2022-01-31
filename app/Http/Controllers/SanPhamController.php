@@ -105,7 +105,8 @@ class SanPhamController extends Controller
      */
     public function show(SanPham $sanPham)
     {
-        dd($sanPham);
+        $this->fixImage($sanPham);
+        return view("SanPham.SanPham-show-modal",["sanPham"=>$sanPham]);
     }
 
     /**
