@@ -156,6 +156,7 @@
                                                 <th><i class="icon-bar-chart"></i>Số lượng</th>
                                                 <th><i class="icon-money"></i>Giá nhập</th>
                                                 <th><i class="icon-bar-chart"></i>Thành tiền</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -248,181 +249,252 @@
                 }
             });
 
-            jQuery(function($) {
-                $('#ChiTietHoaDonNhap').dataTable({
-                    autoWidth: false, //ko co cai nay` la` no' thu nho? lai max xau'
-                    ajax: {
-                        url: "<?php echo e(route('HoaDonNhap.APIChiTiet', $hoaDonNhap)); ?>",
-                        method: 'GET',
-                        dataSrc: "" //lay vi tri la rong~ ko phai mac dinh "data"=>[...]
+            $('#ChiTietHoaDonNhap').dataTable({
+                autoWidth: false, //ko co cai nay` la` no' thu nho? lai max xau'
+                ajax: {
+                    url: "<?php echo e(route('HoaDonNhap.APIChiTiet', $hoaDonNhap)); ?>",
+                    method: 'GET',
+                    dataSrc: "" //lay vi tri la rong~ ko phai mac dinh "data"=>[...]
+                },
+                //do du lieu vao cot
+                columns: [{
+                        data: 'san_pham.id',
+                        className: "center",
+                        searchable: false
                     },
-                    //do du lieu vao cot
-                    columns: [{
-                            data: 'san_pham.id',
-                            className: "center",
-                            searchable: false
-                        },
-                        {
-                            data: 'san_pham.TenSanPham'
-                        },
-                        {
-                            //render cot hinh anh?
-                            data: 'san_pham.HinhAnh',
-                            render: function(data, type, row, meta) {
-                                return '<img src="' + data + '" height="100" width="100"/>';
-                            },
-                            searchable: false
-                        },
-                        {
-                            data: 'SoLuong',
-                            className: "green",
-                            searchable: false
-                        },
-                        {
-                            data: 'GiaNhap',
-                            className: "green",
-                            render: DataTable.render.number(',', '.'),
-                        },
-                        {
-                            data: 'ThanhTien',
-                            render: DataTable.render.number(',', '.'),
-                            //render: DataTable.render.number(',', '.', 2, '$'),
-                        },
-                    ],
-                    createdRow: function(row, data, rowIndex) {
-                        //khi tao moi 1 row, them cac thuoc tinh vao cac td
-                        $.each($('td', row), function(colIndex) {
-                            if (colIndex == 3) {
-                                $(this).attr('class', 'SoLuong');
-                                $(this).attr('data-name', 'SoLuong');
-                                $(this).attr('data-pk', data.san_pham.id);
-                            }
-                            if (colIndex == 4) {
-                                $(this).attr('class', 'GiaNhap');
-                                $(this).attr('data-name', 'GiaNhap');
-                                $(this).attr('data-pk', data.san_pham.id);
-                            }
-                        });
+                    {
+                        data: 'san_pham.TenSanPham'
                     },
-                });
+                    {
+                        //render cot hinh anh?
+                        data: 'san_pham.HinhAnh',
+                        render: function(data, type, row, meta) {
+                            return '<img src="' + data + '" height="100" width="100"/>';
+                        },
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'SoLuong',
+                        className: "pink",
+                        searchable: false
+                    },
+                    {
+                        data: 'GiaNhap',
+                        className: "pink",
+                        render: DataTable.render.number(',', '.'),
+                    },
+                    {
+                        data: 'ThanhTien',
+                        render: DataTable.render.number(',', '.'),
+                        //render: DataTable.render.number(',', '.', 2, '$'),
+                    },
+                    {
+                        //render tool
+                        data: 'id',
+                        render: function(data, type, row, meta) {
+                            return `<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                            <a class="red" href="javascript:void(0)" onclick="xoaSanPham(` + data + `)" data-rel="tooltip" title="Xóa" data-id="` + data + `" id="xoaSanPham">
+                                                <i class="icon-trash bigger-130"></i>
+                                            </a>
+                                        </div>
 
-                $('#ChiTietHoaDonNhap').editable({
-                    title: 'Nhập số lượng',
-                    url: '<?php echo e(route('HoaDonNhap.update', $hoaDonNhap)); ?>',
-                    container: 'body',
-                    selector: 'td.SoLuong',
-                    type: 'text',
-                    send: 'always',
-                    ajaxOptions: {
-                        //gui len voi phuong thuc, mac dinh la POST
-                        type: "PUT",
-                        //mong muon kieu du lieu tra ve tu sever
-                        dataType: 'json'
-                    },
-                    //name: 'SoLuong',
-                    validate: function(value) {
-                        if ($.trim(value) == '')
-                            return 'Không được rỗng';
-                        if ($.isNumeric(value) == '')
-                            return 'Nhập số';
+                                        <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                            <div class="inline position-relative">
+                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                    <i class="icon-caret-down icon-only bigger-120"></i>
+                                                </button>
 
+                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                    <li>
+                                                        <a href="javascript:void(0)" onclick="xoaSanPham(` + data + `)" class="tooltip-error" data-rel="tooltip" title="Xóa" data-id="` + data + `" id="xoaSanPham">
+                                                            <span class="red">
+                                                                <i class="icon-trash bigger-120"></i>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>`;
+                        },
+                        orderable: false,
+                        searchable: false
+                    },
+                ],
+                createdRow: function(row, data, rowIndex) {
+                    //khi tao moi 1 row, them cac thuoc tinh vao cac td
+                    $.each($('td', row), function(colIndex) {
+                        if (colIndex == 3) {
+                            $(this).attr('class', 'SoLuong pink');
+                            $(this).attr('data-name', 'SoLuong');
+                            $(this).attr('data-pk', data.san_pham.id);
+                        }
+                        if (colIndex == 4) {
+                            $(this).attr('class', 'GiaNhap pink');
+                            $(this).attr('data-name', 'GiaNhap');
+                            $(this).attr('data-pk', data.san_pham.id);
+                        }
+                    });
+                },
+            });
+
+            function xoaSanPham(id) {
+                $.ajax({
+                    //gui di voi phuong thuc' cua Form
+                    method: "DELETE",
+                    //url = duong dan cua form
+                    url: "<?php echo e(route('HoaDonNhap.XoaSanPham', '')); ?>/" + id,
+                    //du lieu gui di
+                    data: {},
+                    //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
+                    processData: false,
+                    // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la rong~
+                    contentType: false,
+                    //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+                    //dataType: 'json',
+                    //truoc khi gui di thi thuc hien gi do', o day chinh loi~ = rong~
+                    beforeSend: function() {
+                        //$(form).find('span.error-text').empty();
                     },
                     success: function(response) {
-                        if (response != null) {
-                            console.log("request ok");
-                            toastr.success("Cập nhật thành công", 'Thành công', {
-                                timeOut: 3000
-                            });
-                            //reload lại table
-                            $('#ChiTietHoaDonNhap').DataTable().ajax.reload()
-                        } else {
-                            toastr.warning("Có gì đó xảy ra", 'Cảnh báo', {
-                                timeOut: 3000
-                            });
-                        }
+                        console.log("request ok");
+                        toastr.success("Xóa thành công", 'Thành công', {
+                            timeOut: 3000
+                        });
+                        //reload lại table
+                        $('#ChiTietHoaDonNhap').DataTable().ajax.reload()
                     },
                     error: function(response) {
                         console.log("request lỗi");
                         //console.log(response.responseJSON.Username[0]);
                         $.each(response.responseJSON, function(key, val) {
-                            toastr.error(val[0], 'Có lỗi xảy ra', {
+                            toastr.error(val, 'Có lỗi xảy ra', {
                                 timeOut: 3000
                             });
                         });
                     },
                 });
+            }
 
-                $('#ChiTietHoaDonNhap').editable({
-                    title: 'Nhập giá',
-                    url: '<?php echo e(route('HoaDonNhap.update', $hoaDonNhap)); ?>',
-                    container: 'body',
-                    selector: 'td.GiaNhap',
-                    type: 'text',
-                    send: 'always',
-                    ajaxOptions: {
-                        //gui len voi phuong thuc, mac dinh la POST
-                        type: "PUT",
-                        //mong muon kieu du lieu tra ve tu sever
-                        dataType: 'json'
-                    },
-                    //name: 'SoLuong',
-                    validate: function(value) {
-                        if ($.trim(value) == '')
-                            return 'Không được rỗng';
-                        if ($.isNumeric(value) == '')
-                            return 'Nhập số';
-                    },
-                    success: function(response) {
-                        if (response != null) {
-                            console.log("request ok");
-                            toastr.success("Cập nhật thành công", 'Thành công', {
-                                timeOut: 3000
-                            });
-                            //reload lại table
-                            $('#ChiTietHoaDonNhap').DataTable().ajax.reload()
-                        } else {
-                            toastr.warning("Có gì đó xảy ra", 'Cảnh báo', {
-                                timeOut: 3000
-                            });
-                        }
-                    },
-                    error: function(response) {
-                        console.log("request lỗi");
-                        //console.log(response.responseJSON.Username[0]);
-                        $.each(response.responseJSON, function(key, val) {
-                            toastr.error(val[0], 'Có lỗi xảy ra', {
-                                timeOut: 3000
-                            });
+            $('#ChiTietHoaDonNhap').editable({
+                title: 'Nhập số lượng',
+                url: '<?php echo e(route('HoaDonNhap.update', $hoaDonNhap)); ?>',
+                container: 'body',
+                selector: 'td.SoLuong',
+                type: 'text',
+                send: 'always',
+                ajaxOptions: {
+                    //gui len voi phuong thuc, mac dinh la POST
+                    type: "PUT",
+                    //mong muon kieu du lieu tra ve tu sever
+                    dataType: 'json'
+                },
+                //name: 'SoLuong',
+                validate: function(value) {
+                    if ($.trim(value) == '')
+                        return 'Không được rỗng';
+                    if ($.isNumeric(value) == '')
+                        return 'Nhập số';
+
+                },
+                success: function(response) {
+                    if (response != null) {
+                        console.log("request ok");
+                        toastr.success("Cập nhật thành công", 'Thành công', {
+                            timeOut: 3000
                         });
-                    },
-                });
-
-                $('table th input:checkbox').on('click', function() {
-                    var that = this;
-                    $(this).closest('table').find('tr > td:last-child input:checkbox')
-                        .each(function(i) {
-                            this.checked = that.checked;
-                            $(this).closest('tr').toggleClass('selected');
+                        //reload lại table
+                        $('#ChiTietHoaDonNhap').DataTable().ajax.reload()
+                    } else {
+                        toastr.warning("Có gì đó xảy ra", 'Cảnh báo', {
+                            timeOut: 3000
                         });
-                });
+                    }
+                },
+                error: function(response) {
+                    console.log("request lỗi");
+                    //console.log(response.responseJSON.Username[0]);
+                    $.each(response.responseJSON, function(key, val) {
+                        toastr.error(val[0], 'Có lỗi xảy ra', {
+                            timeOut: 3000
+                        });
+                    });
+                },
+            });
 
-                $('[data-rel="tooltip"]').tooltip({
-                    placement: tooltip_placement
-                });
+            $('#ChiTietHoaDonNhap').editable({
+                title: 'Nhập giá',
+                url: '<?php echo e(route('HoaDonNhap.update', $hoaDonNhap)); ?>',
+                container: 'body',
+                selector: 'td.GiaNhap',
+                type: 'text',
+                send: 'always',
+                ajaxOptions: {
+                    //gui len voi phuong thuc, mac dinh la POST
+                    type: "PUT",
+                    //mong muon kieu du lieu tra ve tu sever
+                    dataType: 'json'
+                },
+                //name: 'SoLuong',
+                validate: function(value) {
+                    if ($.trim(value) == '')
+                        return 'Không được rỗng';
+                    if ($.isNumeric(value) == '')
+                        return 'Nhập số';
+                },
+                success: function(response) {
+                    if (response != null) {
+                        console.log("request ok");
+                        toastr.success("Cập nhật thành công", 'Thành công', {
+                            timeOut: 3000
+                        });
+                        //reload lại table
+                        $('#ChiTietHoaDonNhap').DataTable().ajax.reload()
+                    } else {
+                        toastr.warning("Có gì đó xảy ra", 'Cảnh báo', {
+                            timeOut: 3000
+                        });
+                    }
+                },
+                error: function(response) {
+                    console.log("request lỗi");
+                    //console.log(response.responseJSON.Username[0]);
+                    $.each(response.responseJSON, function(key, val) {
+                        toastr.error(val[0], 'Có lỗi xảy ra', {
+                            timeOut: 3000
+                        });
+                    });
+                },
+            });
 
-                function tooltip_placement(context, source) {
-                    var $source = $(source);
-                    var $parent = $source.closest('table')
-                    var off1 = $parent.offset();
-                    var w1 = $parent.width();
 
-                    var off2 = $source.offset();
-                    var w2 = $source.width();
+            $('table th input:checkbox').on('click', function() {
+                var that = this;
+                $(this).closest('table').find('tr > td:last-child input:checkbox')
+                    .each(function(i) {
+                        this.checked = that.checked;
+                        $(this).closest('tr').toggleClass('selected');
+                    });
+            });
 
-                    if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
-                    return 'left';
-                }
-            })
+            $('[data-rel="tooltip"]').tooltip({
+                placement: tooltip_placement
+            });
+
+            function tooltip_placement(context, source) {
+                var $source = $(source);
+                var $parent = $source.closest('table')
+                var off1 = $parent.offset();
+                var w1 = $parent.width();
+
+                var off2 = $source.offset();
+                var w2 = $source.width();
+
+                if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
+                return 'left';
+            }
+
+
             $('[data-rel=tooltip]').tooltip({
                 container: 'body'
             });
@@ -469,6 +541,7 @@
                     render: function(data, type, row, meta) {
                         return '<img src="' + data + '" height="100" width="100"/>';
                     },
+                    orderable: false,
                     searchable: false
                 },
                 {

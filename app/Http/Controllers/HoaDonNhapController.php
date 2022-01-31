@@ -232,6 +232,15 @@ class HoaDonNhapController extends Controller
         }
         return response()->json($dsChiTietHD, 200);
     }
+    public function XoaSanPham($id)
+    {
+        $ctHoaDonNhap = CT_HoaDonNhap::find($id);
+        if (!empty($ctHoaDonNhap)) {
+            $ctHoaDonNhap->forceDelete();
+            return response()->json([], 200);
+        }
+        return response()->json(["Error"=>"Không tìm thấy"], 404);
+    }
     //api
     public function API_HoaDonNhap_ChiTiet(HoaDonNhap $hoaDonNhap)
     {
