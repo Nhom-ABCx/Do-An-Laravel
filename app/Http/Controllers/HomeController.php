@@ -131,4 +131,24 @@ class HomeController extends Controller
     {
         return view('Login.Error-404');
     }
+    public function Test()
+    {
+        $response = file_get_contents('https://randomuser.me/api/?results=50');
+        $user = json_decode($response, true)["results"];
+dd($user);
+        foreach ($user as $item) {
+            KhachHang::firstOrCreate([
+                'Email' => $item["email"]
+            ], [
+                'Username' => $item["login"]["username"],
+                "Phone" => $item["phone"],
+                'HoTen' => $item["name"]["title"] . '.' . $item["name"]["first"] . '_' . $item["name"]["last"],
+                "NgaySinh" => date_create($item["dob"]["date"]),
+                "GioiTinh" => ($item["gender"] == "male") ? 1 : 0,
+                "MatKhau" => "password123",
+                "DiaChi" => $item["location"]["street"]["name"].", ".$item["location"]["city"].", ".$item["location"]["country"],
+                "HinhAnh" => $item["picture"]["large"],
+            ]);
+        }
+    }
 }

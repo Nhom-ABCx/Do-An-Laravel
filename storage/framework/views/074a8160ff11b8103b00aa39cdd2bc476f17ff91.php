@@ -105,7 +105,7 @@
                                             <li>
                                                 <a
                                                     href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation[$i]->KhachHangId); ?>">
-                                                    <img src="/storage/assets/images/avatar/User/<?php echo e($conversation[$i]->KhachHangId); ?>/<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>"
+                                                    <img src="<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>"
                                                         class="msg-photo" alt="Alex's Avatar" />
                                                     <span class="msg-body">
                                                         <span class="msg-title">

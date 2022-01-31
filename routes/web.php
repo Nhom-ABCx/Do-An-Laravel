@@ -51,6 +51,7 @@ Route::get('KhachHang/{token}/showResetPass', [KhachHangController::class, 'show
 Route::put('KhachHang/{khachHang}/actionResetPass', [KhachHangController::class, 'actionResetPassword_KhachHang'])->name('KhachHang.actionReset');
 Route::get('ResetPassword-Susscess', [HomeController::class, 'Susscess'])->name('Home.Susscess');
 Route::get('Error', [HomeController::class, 'Error'])->name('Home.Error');
+Route::get('Test', [HomeController::class, 'Test'])->name('Home.Test');
 
 //bat buoc dang nhap
 Route::middleware('auth')->group(function () {
@@ -124,8 +125,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('HoaDonNhap', HoaDonNhapController::class, [
         'parameters' => [
             'HoaDonNhap' => 'hoaDonNhap'
-            ]
-        ]);
+        ]
+    ]);
     Route::get("HoaDonNhapp/DaHuy", [HoaDonNhapController::class, "HoaDonNhapDaHuy"])->name("HoaDonNhap.DaHuy");
     Route::post("HoaDonNhap/KhoiPhuc/{id}", [HoaDonNhapController::class, "KhoiPhucHoaDonNhap"])->name("HoaDonNhap.KhoiPhuc");
     Route::post("HoaDonNhap/ThemSanPham/{hoaDonNhap}", [HoaDonNhapController::class, "ThemSanPham"])->name("HoaDonNhap.ThemSanPham");

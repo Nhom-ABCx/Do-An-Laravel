@@ -311,7 +311,7 @@
                                             <li>
                                                 <a
                                                     href="{{ route('Message.index') }}?KhachHangId={{ $conversation[$i]->KhachHangId }}">
-                                                    <img src="/storage/assets/images/avatar/User/{{ $conversation[$i]->KhachHangId }}/{{ $conversation[$i]->KhachHang->HinhAnh }}"
+                                                    <img src="{{ $conversation[$i]->KhachHang->HinhAnh }}"
                                                         class="msg-photo" alt="Alex's Avatar" />
                                                     <span class="msg-body">
                                                         <span class="msg-title">

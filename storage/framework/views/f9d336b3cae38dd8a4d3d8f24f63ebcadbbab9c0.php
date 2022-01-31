@@ -27,7 +27,7 @@
                                                 <li class="ks-item <?php if($conversation->id == $request['KhachHangId']): ?> ks-active <?php endif; ?>">
                                                     <a href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation->KhachHangId); ?>">
                                                         <span class="ks-avatar">
-                                                            <img src="/storage/assets/images/avatar/User/<?php echo e($conversation->KhachHangId); ?>/<?php echo e($conversation->KhachHang->HinhAnh); ?>" width="36"
+                                                            <img src="<?php echo e($conversation->KhachHang->HinhAnh); ?>" width="36"
                                                                 height="36">
                                                         </span>
                                                         <div class="ks-body">
@@ -127,7 +127,7 @@
                                             <?php else: ?>
                                                 <li class="ks-item ks-self">
                                                     <span class="ks-avatar ks-offline">
-                                                        <img src="/storage/assets/images/avatar/User/<?php echo e($item->KhachHang->id); ?>/<?php echo e($item->KhachHang->HinhAnh); ?>" width="36" height="36"
+                                                        <img src="<?php echo e($item->KhachHang->HinhAnh); ?>" width="36" height="36"
                                                             class="rounded-circle">
                                                     </span>
                                                     <div class="ks-body">
@@ -280,7 +280,7 @@
                         <div class="ks-body">
                             <div class="ks-item ks-user">
                                 <span class="ks-avatar ks-online">
-                                    <img src="/storage/assets/images/avatar/User/<?php echo e($khachHang->id); ?>/<?php echo e($khachHang->HinhAnh); ?>" width="36" height="36" class="rounded-circle">
+                                    <img src="<?php echo e($khachHang->HinhAnh); ?>" width="36" height="36" class="rounded-circle">
                                 </span>
                                 <span class="ks-name">
                                     <?php echo e($khachHang->HoTen); ?>
