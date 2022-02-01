@@ -16,8 +16,6 @@ class HomeController extends Controller
 {
     public function Index(Request $request)
     {
-        //lay ra het' tat ca du lieu tu modal SanPham luu vao trong bien'
-        $dsSanPham = SanPham::all();
         //mac dinh lay danh sach bat dau` tu` ngay` 1 trong thang' den' ngay` hien tai
         $dsBinhLuan = BinhLuan::whereDate("created_at", ">=", date_create(date("Y-m") . "-1"))->whereDate("created_at", "<=", date("Y-m-d"))->count();
         $dsHoaDon = HoaDon::whereDate("created_at", ">=", date_create(date("Y-m") . "-1"))->whereDate("created_at", "<=", date("Y-m-d"))
@@ -60,23 +58,37 @@ class HomeController extends Controller
         $dsKhachHangMuaNhieuNhat = collect([]);
         $i = 0; //bien' ao? cho vong lap
 
+        $dsSanPhamBanChay = collect([]);
+        $j = 0; //bien' ao? cho vong lap
         foreach ($dsHoaDon as $hoaDon) {
             foreach ($hoaDon->CT_HoaDon as $ctHoaDon) {
+                $sanPham=$ctHoaDon->SanPham;
                 if ($ctHoaDon->Star != 0 || !empty($ctHoaDon->Star))
-                    $danhGia++;
+                $danhGia++;
 
                 //tim xem san pham trong chi tiet hoa don thuoc loai san pham nao`, sau do' ++ len
-                $loaiSanPham = $dsLoaiSanPham->where("id", $ctHoaDon->SanPham->LoaiSanPham->id)->first();
+                $loaiSanPham = $dsLoaiSanPham->where("id", $sanPham->LoaiSanPham->id)->first();
                 $loaiSanPham->LuotMua++;
-
                 $soLuongChiTietHoaDon++;
+
+                //Neu san pham da ton` tai trong mang? thi` cong don` so' luot mua, nguoc lai them vao trong mang?
+                $sp=$dsSanPhamBanChay->where("id",$sanPham->id)->first();
+                if (empty($sp)) {
+                    //ghi nhu vay` no van hieu la tu them vao` khoi can Arr::add
+                    SanPhamController::fixImage($sanPham);
+                    $sanPham["TongSoLuongBan"]=$ctHoaDon->SoLuong;
+                    $dsSanPhamBanChay[$j]=$sanPham;
+                    $j++;
+                } else {
+                    $sp["TongSoLuongBan"]+=$ctHoaDon->SoLuong;
+                }
             }
             //neu da giao thanh` cong
             if ($hoaDon->TrangThai == 4) {
                 $donGiaoThanhCong++;
                 $thuNhap += ($ctHoaDon["GiaBan"] - $ctHoaDon["GiaNhap"]) * $ctHoaDon["SoLuong"];
             }
-            //lap lai 5 lan`, top 5 khachHang
+            //lap lai 10 lan`, top 10 khachHang
             if (count($dsKhachHangMuaNhieuNhat) <= 10) {
                 $khachHang = $dsKhachHangMuaNhieuNhat->where("id", $hoaDon->DiaChi->KhachHang->id)->first();
                 //neu' trong mang? khong ton` tai khachHang` do' thi` them moi khach hang`, nguoc lai ko them
@@ -98,9 +110,7 @@ class HomeController extends Controller
         }
         //huy~ bien' ao? de giam? tai vung` nho'
         unset($i);
-
-        //sap xep lai theo luot mua
-        $dsLoaiSanPham = $dsLoaiSanPham->sortByDesc("LuotMua")->values();
+        unset($j);
 
         $thongKe = [
             "LuotBinhLuan" => $dsBinhLuan,
@@ -108,20 +118,18 @@ class HomeController extends Controller
             "LuotDanhGia" => $danhGia,
             "DonGiaoThanhCong" => $donGiaoThanhCong,
             "ThuNhap" => $thuNhap,
-            "LoaiSanPham" => [
-                0 => ["TenLoai" => $dsLoaiSanPham[0]->TenLoai, "LuotMua" => $dsLoaiSanPham[0]->LuotMua],
-                1 => ["TenLoai" => $dsLoaiSanPham[1]->TenLoai, "LuotMua" => $dsLoaiSanPham[1]->LuotMua],
-                2 => ["TenLoai" => $dsLoaiSanPham[2]->TenLoai, "LuotMua" => $dsLoaiSanPham[2]->LuotMua],
-                3 => ["TenLoai" => $dsLoaiSanPham[3]->TenLoai, "LuotMua" => $dsLoaiSanPham[3]->LuotMua],
-                4 => ["TenLoai" => $dsLoaiSanPham[4]->TenLoai, "LuotMua" => $dsLoaiSanPham[4]->LuotMua],
-            ],
+            //sap xep lai theo luot mua, chi lay 5 san pham
+            "LoaiSanPham" => $dsLoaiSanPham->sortByDesc("LuotMua")->values()->take(5),
             "SoLuongChiTietHoaDon" => $soLuongChiTietHoaDon,
-            "KhachHangMuaNhieuNhat" => $dsKhachHangMuaNhieuNhat,
+            //sap xep lai TongSoLuongMua
+            "KhachHangMuaNhieuNhat" => $dsKhachHangMuaNhieuNhat->sortByDesc("TongSoLuongMua")->values(),
             "DoanhThu" => $doanhThu,
+            //lay 10 sp ban chay
+            "dsSanPhamBanChay"=>$dsSanPhamBanChay->sortByDesc("TongSoLuongBan")->values()->take(10),
         ];
 
         //truyen cai' bien' do' ra view
-        return view('Home', ['dsSanPham' => $dsSanPham, "thongKe" => $thongKe, "request" => $request]);
+        return view('Home', ["thongKe" => $thongKe, "request" => $request]);
     }
     public function Susscess()
     {
@@ -135,7 +143,7 @@ class HomeController extends Controller
     {
         $response = file_get_contents('https://randomuser.me/api/?results=50');
         $user = json_decode($response, true)["results"];
-dd($user);
+        dd($user);
         foreach ($user as $item) {
             KhachHang::firstOrCreate([
                 'Email' => $item["email"]
@@ -146,7 +154,7 @@ dd($user);
                 "NgaySinh" => date_create($item["dob"]["date"]),
                 "GioiTinh" => ($item["gender"] == "male") ? 1 : 0,
                 "MatKhau" => "password123",
-                "DiaChi" => $item["location"]["street"]["name"].", ".$item["location"]["city"].", ".$item["location"]["country"],
+                "DiaChi" => $item["location"]["street"]["name"] . ", " . $item["location"]["city"] . ", " . $item["location"]["country"],
                 "HinhAnh" => $item["picture"]["large"],
             ]);
         }

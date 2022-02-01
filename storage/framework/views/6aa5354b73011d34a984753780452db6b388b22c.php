@@ -1,4 +1,3 @@
-
 <div id="showSanPham" class="modal" tabindex="-1">
     <div class="modal-dialog" style="width: 53%;">
         <div class="modal-content">

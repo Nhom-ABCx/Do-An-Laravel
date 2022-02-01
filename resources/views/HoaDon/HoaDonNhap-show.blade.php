@@ -259,4 +259,5 @@
         {{-- datatable script --}}
         @include("HoaDon.script.HoaDonNhap-show-script")
         {{-- datatable script End --}}
+        @include("SanPham.script.SanPham-show-script")
     @endsection

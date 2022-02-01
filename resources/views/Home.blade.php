@@ -170,8 +170,8 @@
                             <div class="infobox infobox-green infobox-dark">
                                 <div class="infobox-progress">
                                     <div class="easy-pie-chart percentage"
-                                        data-percent="{{ $thongKe['DonDatHang'] != 0 ? number_format(($thongKe['DonGiaoThanhCong'] / $thongKe['DonDatHang']) * 100) : 0 }}" data-size="55">
-                                        <span class="percent">{{ $thongKe['DonDatHang'] != 0 ? number_format(($thongKe['DonGiaoThanhCong'] / $thongKe['DonDatHang']) * 100) : 0 }}</span>%
+                                        data-percent="{{ $thongKe['DonDatHang'] != 0? number_format(($thongKe['DonGiaoThanhCong'] / $thongKe['DonDatHang']) * 100): 0 }}" data-size="55">
+                                        <span class="percent">{{ $thongKe['DonDatHang'] != 0? number_format(($thongKe['DonGiaoThanhCong'] / $thongKe['DonDatHang']) * 100): 0 }}</span>%
                                     </div>
                                 </div>
 
@@ -321,7 +321,7 @@
                                 <div class="widget-header widget-header-flat">
                                     <h4 class="lighter">
                                         <i class="icon-star orange"></i>
-                                        Top 10 khách hàng mua nhiều nhất (trong tháng)
+                                        Top 10 khách hàng mua nhiều nhất
                                     </h4>
 
                                     <div class="widget-toolbar">
@@ -414,9 +414,74 @@
                             </div><!-- /widget-box -->
                         </div>
                     </div>
+
+                    <div class="hr hr32 hr-dotted"></div>
+
+                    <div class="row">
+                        <div class="widget-box transparent">
+                            <div class="widget-header widget-header-flat">
+                                <h4 class="lighter">
+                                    <i class="icon-rss orange"></i>
+                                    Top 10 Sản phẩm bán chạy
+                                </h4>
+
+                                <div class="widget-toolbar">
+                                    <a href="#" data-action="collapse">
+                                        <i class="icon-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main no-padding">
+                                    <table class="table table-bordered table-striped">
+                                        <thead class="thin-border-bottom">
+                                            <tr>
+                                                <th>
+                                                    <i class="icon-caret-right blue"></i>
+                                                    Tên sản phẩm
+                                                </th>
+
+                                                <th>
+                                                    <i class="icon-caret-right blue"></i>
+                                                    Hình ảnh
+                                                </th>
+
+                                                <th class="hidden-480">
+                                                    <i class="icon-caret-right blue"></i>
+                                                    Tổng số lượng bán
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach ($thongKe['dsSanPhamBanChay'] as $item)
+                                                <tr>
+                                                    <td>{{ $item->TenSanPham }}</td>
+
+                                                    <td>
+                                                        <a href="javascript:void(0)" onclick="showSanPham({{ $item->id }})" role="button" data-toggle="modal" class="tooltip-info"
+                                                            data-rel="tooltip" title="Xem chi tiết">
+                                                            <img src='{{ $item->HinhAnh }}' alt="{{ $item->HinhAnh }}" width='100' height='100'>
+                                                        </a>
+                                                    </td>
+
+                                                    <td>
+                                                        <b class="green">{{ $item->TongSoLuongBan }}</b>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div><!-- /widget-main -->
+                            </div><!-- /widget-body -->
+                        </div><!-- /widget-box -->
+                    </div>
                     <!-- PAGE CONTENT ENDS -->
                 </div><!-- /.col -->
             </div><!-- /.row -->
+
+            <div id="showModal"></div>
         </div><!-- /.page-content -->
     </div><!-- /.main-content -->
 @endsection
@@ -426,8 +491,8 @@
     <!-- page specific plugin scripts -->
 
     <!--[if lte IE 8]>
-                                                                                                                                              <script src="/storage/assets/js/excanvas.min.js"></script>
-                                                                                                                                              <![endif]-->
+                                                                                                                                                                      <script src="/storage/assets/js/excanvas.min.js"></script>
+                                                                                                                                                                      <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -467,7 +532,7 @@
                     animate: /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase()) ? false : 1000,
                     size: size
                 });
-            })
+            });
 
             $('.sparkline').each(function() {
                 var $box = $(this).closest('.infobox');
@@ -487,30 +552,30 @@
             });
             var data = [{
                     label: "{{ $thongKe['LoaiSanPham'][0]['TenLoai'] }}",
-                    data: {{ $thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][0]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0 }},
+                    data: {{ $thongKe['SoLuongChiTietHoaDon'] != 0? number_format(($thongKe['LoaiSanPham'][0]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2): 0 }},
                     color: "#2091CF"
                 },
                 {
                     label: "{{ $thongKe['LoaiSanPham'][1]['TenLoai'] }}",
-                    data: {{ $thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][1]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0 }},
+                    data: {{ $thongKe['SoLuongChiTietHoaDon'] != 0? number_format(($thongKe['LoaiSanPham'][1]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2): 0 }},
                     color: "#68BC31"
                 },
                 {
                     label: "{{ $thongKe['LoaiSanPham'][2]['TenLoai'] }}",
-                    data: {{ $thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][2]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0 }},
+                    data: {{ $thongKe['SoLuongChiTietHoaDon'] != 0? number_format(($thongKe['LoaiSanPham'][2]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2): 0 }},
                     color: "#AF4E96"
                 },
                 {
                     label: "{{ $thongKe['LoaiSanPham'][3]['TenLoai'] }}",
-                    data: {{ $thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][3]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0 }},
+                    data: {{ $thongKe['SoLuongChiTietHoaDon'] != 0? number_format(($thongKe['LoaiSanPham'][3]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2): 0 }},
                     color: "#DA5430"
                 },
                 {
                     label: "{{ $thongKe['LoaiSanPham'][4]['TenLoai'] }}",
-                    data: {{ $thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][4]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0 }},
+                    data: {{ $thongKe['SoLuongChiTietHoaDon'] != 0? number_format(($thongKe['LoaiSanPham'][4]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2): 0 }},
                     color: "#FEE074"
                 },
-            ]
+            ];
 
             function drawPieChart(placeholder, data, position) {
                 $.plot(placeholder, data, {
@@ -643,30 +708,31 @@
                 else $(this).closest('li').removeClass('selected');
             });
 
-            //bieu do`
-        var lineOptions = {
-            chart: {
-                type: "line",
-            },
-            series: [{
-                name: "Số tiền kiếm được",
-                data: [
-                    @foreach ($thongKe['DoanhThu'] as $item)
-                        {{ $item['DoanhThu'] . ',' }}
-                    @endforeach
-                ],
-            }, ],
-            xaxis: {
-                categories: [
-                    @foreach ($thongKe['DoanhThu'] as $item)
-                        {{ $item['Year'] . ',' }}
-                    @endforeach
-                ],
-            },
-        };
-        var line = new ApexCharts(document.querySelector("#lineDoanhThu"), lineOptions);
-        line.render();
-        //bieu do` end
         });
+        //bieu do`
+    var lineOptions = {
+        chart: {
+            type: "line",
+        },
+        series: [{
+            name: "Số tiền kiếm được",
+            data: [
+                @foreach ($thongKe['DoanhThu'] as $item)
+                    {{ $item['DoanhThu'] . ',' }}
+                @endforeach
+            ],
+        }, ],
+        xaxis: {
+            categories: [
+                @foreach ($thongKe['DoanhThu'] as $item)
+                    {{ $item['Year'] . ',' }}
+                @endforeach
+            ],
+        },
+    };
+    var line = new ApexCharts(document.querySelector("#lineDoanhThu"), lineOptions);
+    line.render();
+    //bieu do` end
     </script>
+    @include("SanPham.script.SanPham-show-script")
 @endsection

@@ -412,5 +412,4 @@
 
     });
 </script>
-<?php echo $__env->make("SanPham.script.SanPham-show-script", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/HoaDon/script/HoaDonNhap-show-script.blade.php ENDPATH**/ ?>

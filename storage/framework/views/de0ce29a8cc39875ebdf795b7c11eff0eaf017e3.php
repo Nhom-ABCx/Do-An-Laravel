@@ -1,4 +1,6 @@
 
+
+
 <script type="text/javascript">
     function showSanPham(id) {
         $.ajax({

@@ -1,4 +1,11 @@
 {{-- <div id="showModal"></div> --}}
+
+{{-- <a href="javascript:void(0)" onclick="showSanPham({{ $item->id }})" role="button" data-toggle="modal" class="tooltip-info"
+    data-rel="tooltip" title="Xem chi tiết">
+    <span class="blue">
+        <i class="icon-zoom-in bigger-120"></i>
+    </span>
+</a> --}}
 <script type="text/javascript">
     function showSanPham(id) {
         $.ajax({
