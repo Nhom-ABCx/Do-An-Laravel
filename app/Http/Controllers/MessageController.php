@@ -26,7 +26,7 @@ class MessageController extends Controller
     public function index(Request $request)
     {
         //lay ra danh sach cac cuoc tro chuyen
-        $dsCacCuocTroChuyen = Conversation::where("conversations.NhanVienId", Auth::user()->id)->get();
+        $dsCacCuocTroChuyen = Conversation::where("NhanVienId", Auth::user()->id)->orderBy("KhachHangId")->get();
 
             foreach ($dsCacCuocTroChuyen as $item) {
                 //lay' ra cai' tin nhan cuoi' cung` luu kem` vao`
@@ -60,7 +60,7 @@ class MessageController extends Controller
      * @param  \App\Http\Requests\StoreMessageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMessageRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -94,7 +94,7 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMessageRequest $request, Message $message)
+    public function update(Request $request, Message $message)
     {
         //
     }

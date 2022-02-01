@@ -32,19 +32,18 @@ class AppServiceProvider extends ServiceProvider
     {
         //truyen du lieu sang layout
         view()->composer('layouts.Layout', function ($view) {
-            $dsCacCuocTroChuyen = DB::select("select d.*
-                            from messages d
-                            inner join  (select max(b.id) as maxID,b.ConversationId
-                                        from conversations a
-                                        inner join messages b
-                                        on a.id=b.ConversationId
-                                        where a.NhanVienId=?
-                                        group by b.ConversationId) c
-                            on c.maxID=d.id
-                            limit 5",[Auth::user()->id]);
-            //chuyen no thanh array
-            //$dsCacCuocTroChuyen=json_decode(json_encode($dsCacCuocTroChuyen),true);
-            dd($dsCacCuocTroChuyen[0]);
+            $dsCacCuocTroChuyen = Conversation::where("NhanVienId", Auth::user()->id)
+            ->orderBy("KhachHangId")->limit(5)->get();
+
+            foreach ($dsCacCuocTroChuyen as $item) {
+                $mess = Message::where("ConversationId", $item->id)->orderByDesc('created_at')->first();
+
+                if (!empty($mess))
+                    Arr::add($item, "mess", $mess);
+                else
+                    Arr::add($item, 'mess', null);
+            }
+
             $view->with("conversation", $dsCacCuocTroChuyen);
         });
     }

@@ -27,7 +27,7 @@
                                     <ul class="ks-items">
                                         @forelse ($dsCacCuocTroChuyen as $conversation)
                                             @if (!empty($conversation->KhachHang))
-                                                <li class="ks-item @if ($conversation->id == $request['KhachHangId']) ks-active @endif">
+                                                <li class="ks-item @if ($conversation->KhachHang->id == $request['KhachHangId']) ks-active @endif">
                                                     <a href="{{ route('Message.index') }}?KhachHangId={{ $conversation->KhachHangId }}">
                                                         <span class="ks-avatar">
                                                             <img src="{{ $conversation->KhachHang->HinhAnh }}" width="36"

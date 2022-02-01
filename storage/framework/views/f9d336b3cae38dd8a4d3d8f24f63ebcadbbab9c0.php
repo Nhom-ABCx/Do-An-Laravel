@@ -24,7 +24,7 @@
                                     <ul class="ks-items">
                                         <?php $__empty_1 = true; $__currentLoopData = $dsCacCuocTroChuyen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $conversation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                             <?php if(!empty($conversation->KhachHang)): ?>
-                                                <li class="ks-item <?php if($conversation->id == $request['KhachHangId']): ?> ks-active <?php endif; ?>">
+                                                <li class="ks-item <?php if($conversation->KhachHang->id == $request['KhachHangId']): ?> ks-active <?php endif; ?>">
                                                     <a href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation->KhachHangId); ?>">
                                                         <span class="ks-avatar">
                                                             <img src="<?php echo e($conversation->KhachHang->HinhAnh); ?>" width="36"
