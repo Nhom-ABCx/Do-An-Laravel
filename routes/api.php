@@ -44,6 +44,7 @@ Route::get('san-pham-top', [SanPhamController::class, 'API_SanPham_Top']);
 
 Route::post('DangNhap', [KhachHangController::class, "API_DangNhap"]);
 Route::post('DangKy', [KhachHangController::class, "API_DangKy"]);
+Route::post('DangKy/Social', [KhachHangController::class, "API_DangKy_Social"]);
 
 Route::get('KhachHang/{khachHang}', [KhachHangController::class, "API_Get_KhachHang"]);
 Route::put('KhachHang/{khachHang}', [KhachHangController::class, "API_Update_KhachHang"]);
@@ -75,13 +76,13 @@ Route::put('DiaChi/update/{diaChi}', [DiaChiController::class, "API_Update_DiaCh
 #get binh luan
 Route::get('binh-luan/{sanPham}', [BinhLuanController::class, 'API_Get_BinhLuan_SanPham']);
 #tra ve san pham tk dang nhap duoc binh luan
-Route::get('binh-luan',[BinhLuanController::class, "API_Check_Auth_ProductToPay"]);
+Route::get('binh-luan', [BinhLuanController::class, "API_Check_Auth_ProductToPay"]);
 #add binh luan
-Route::post('binh-luan/add',[BinhLuanController::class, "API_Add_BinhLuan_SanPham"]);
+Route::post('binh-luan/add', [BinhLuanController::class, "API_Add_BinhLuan_SanPham"]);
 #Hoa don theo tap
-Route::get('hoa-don',[HoaDonController::class, "API_TraVe_CT_HoaDon_Theo_Tab"]);
+Route::get('hoa-don', [HoaDonController::class, "API_TraVe_CT_HoaDon_Theo_Tab"]);
 #danh gia cho san pham
-Route::post('danh-gia-san-pham',[HoaDonController::class, "API_Danh_Gia_SanPham"]);
+Route::post('danh-gia-san-pham', [HoaDonController::class, "API_Danh_Gia_SanPham"]);
 //lay' het tin nhan ve tu` Admin, truyen` len KhachHangId
-Route::post('Message',[MessageController::class, "API_GetAll_Message_Admin"]);
-Route::post('Message/add',[MessageController::class, "API_Them_Message_Admin"]);
+Route::post('Message', [MessageController::class, "API_GetAll_Message_Admin"]);
+Route::post('Message/add', [MessageController::class, "API_Them_Message_Admin"]);

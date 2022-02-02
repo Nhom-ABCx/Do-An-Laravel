@@ -105,9 +105,9 @@ class SanPhamController extends Controller
      */
     public function show($sanPham)
     {
-        $sanPham=SanPham::withTrashed()->find($sanPham);
+        $sanPham = SanPham::withTrashed()->find($sanPham);
         $this->fixImage($sanPham);
-        return view("SanPham.SanPham-show-modal",["sanPham"=>$sanPham]);
+        return view("SanPham.SanPham-show-modal", ["sanPham" => $sanPham]);
     }
 
     /**

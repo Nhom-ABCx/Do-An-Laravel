@@ -43,7 +43,7 @@ class DiaChiController extends Controller
      * @param  \App\Http\Requests\StoreDiaChiRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDiaChiRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -77,7 +77,7 @@ class DiaChiController extends Controller
      * @param  \App\Models\DiaChi  $diaChi
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDiaChiRequest $request, DiaChi $diaChi)
+    public function update(Request $request, DiaChi $diaChi)
     {
         //
     }
