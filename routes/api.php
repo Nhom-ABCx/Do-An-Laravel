@@ -66,7 +66,6 @@ Route::post('HoaDon/LapHoaDon', [HoaDonController::class, 'API_LapHoaDon']);
 Route::post('YeuThich/add', [YeuThichController::class, "API_Insert_KhachHang_YeuThich_SanPham"]);
 Route::delete('YeuThich/delete', [YeuThichController::class, "API_Delete_KhachHang_YeuThich_SanPham"]);
 Route::get('YeuThich/{khachHang}', [YeuThichController::class, "API_Get_YeuThich"]);
-Route::get('SanPham/YeuThich', [YeuThichController::class, "API_Get_SanPham_YeuThich"]);
 
 //dia chi
 Route::get('DiaChi/{khachHang}', [DiaChiController::class, "API_GetAll_DiaChi"]);

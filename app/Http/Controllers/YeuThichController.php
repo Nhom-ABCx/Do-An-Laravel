@@ -119,15 +119,6 @@ class YeuThichController extends Controller
     public function API_Get_YeuThich(KhachHang $khachHang)
     {
         $dsYeuThich = $khachHang->YeuThich;
-
-        return response()->json($dsYeuThich, 200);
-    }
-
-    public function API_Get_SanPham_YeuThich(Request $request)
-    {
-        $khachHang=KhachHang::find($request["KhachHangId"]);
-        $dsYeuThich = $khachHang->YeuThich;
-
         $dsSanPham = [];
         $i = 0;
         foreach ($dsYeuThich as $item) {
@@ -139,7 +130,9 @@ class YeuThichController extends Controller
             $i++;
         }
 
-        YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
+        YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, new Request([
+            'KhachHangId'   => $khachHang->id,
+        ]));
         SanPhamController::Them_Star_Vao_ListSanPham($dsSanPham);
         SanPhamController::Them_GiamGia_Vao_ListsanPham($dsSanPham);
         return response()->json($dsSanPham, 200);
@@ -179,9 +172,10 @@ class YeuThichController extends Controller
 
         $yeuThich = YeuThich::where("KhachHangId", $request["KhachHangId"])->where("SanPhamId", $request["SanPhamId"])->first();
 
-        if (!empty($yeuThich))
-            {$data=$yeuThich->delete();
-             return response()->json($data, 200);}
+        if (!empty($yeuThich)) {
+            $data = $yeuThich->delete();
+            return response()->json($data, 200);
+        }
         return response()->json($yeuThich, 404);
     }
 }
