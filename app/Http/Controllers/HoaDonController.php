@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CT_HoaDon;
 use App\Models\DiaChi;
+use App\Models\GioHang;
 use App\Models\HoaDon;
 use App\Models\SanPham;
 use App\Models\KhachHang;
@@ -198,15 +199,15 @@ class HoaDonController extends Controller
         //kiem tra du lieu
         $validate = Validator::make($request->all(), [
             'DiaChiId' => ['required', 'numeric', 'integer', 'exists:dia_chis,id'],
-            "Data.*.SanPhamId" => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
-            "Data.*.SoLuong" => ['required', 'numeric', 'integer', 'min:0'],
+            // "Data.*.SanPhamId" => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
+            // "Data.*.SoLuong" => ['required', 'numeric', 'integer', 'min:0'],
         ]);
         //neu du lieu no' sai thi`tra? ve` loi~
         if ($validate->fails())
             return response()->json($validate->errors(), 400);
-
+        $diaChi = DiaChi::find($request["DiaChiId"]);
         $hoaDon = HoaDon::create([
-            'DiaChiId'         => $request["DiaChiId"],
+            'DiaChiId'         => $diaChi->id,
             "PhuongThucThanhToan" => 1, //ghi tammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
             'TrangThai' => 0, //vua lap, dang cho xac nhan
             'TongSoLuong' => 0,
@@ -219,44 +220,45 @@ class HoaDonController extends Controller
         $dsCtChuongTrinhKM = ChuongTrinhKhuyenMaiController::danhSachChiTietChuongTrinhKM();
         //lay ra tat ca id san pham dang giam gia' luu vao trong mang?
         $idSanPhamGiamGia = [];
-        $i = 0;
-        foreach ($dsCtChuongTrinhKM as $ctkm) {
-            $data = Arr::add($idSanPhamGiamGia, "$i", $ctkm->SanPhamId);
-            $idSanPhamGiamGia = $data;
-            $i++;
+        foreach ($dsCtChuongTrinhKM as $key => $ctkm) {
+            $idSanPhamGiamGia = Arr::add($idSanPhamGiamGia, $key, $ctkm->SanPhamId);
         }
+
         //---------------------------------------------
 
-        //dd($request["Data"][0]["SanPhamId"]);
-        $arrayRaw = json_decode($request->getContent(), true); //chuyen json thanh array de truy van
-        //dd($arrayRaw["Data"][0]);
-        foreach ($arrayRaw["Data"] as $item) {
+        //$arrayRaw = json_decode($request->getContent(), true); //chuyen json thanh array de truy van
+        $dsGioHang = GioHang::where("KhachHangId", $diaChi->KhachHang->id)->get();
+
+        foreach ($dsGioHang as $item) {
             //echo $item["SanPhamId"] . "\n";
-            $sp = SanPham::find($item["SanPhamId"]);
-            //tru di so luong ton`, neu san pham do' co' so luong <=0
-            if ($sp->SoLuongTon < $item["SoLuong"])
+            $sp = $item->SanPham;
+            //neu san pham do' co' so luong ton` nho? hon so' luong dat hang` thi` thoat khoi vong` lap, den spp tiep theo
+            if ($sp->SoLuongTon < $item->SoLuong)
                 continue; //thoat ra khoi vong lap
-            else { //nguoc lai thi lap hoa don
+            else {
+                //nguoc lai thi lap hoa don, tru` di so luong ton` trong kho
                 $sp->fill([
-                    'SoLuongTon' => $sp->SoLuongTon - $item["SoLuong"],
+                    'SoLuongTon' => $sp->SoLuongTon - $item->SoLuong,
                     "LuotMua" => $sp->LuotMua + 1,
                 ]);
                 $sp->save();
 
 
                 $giaBan = $sp->GiaBan;
+                //neu' san pham id thuoc danh sach' id sp dang giam gia'
                 if (in_array($sp->id, $idSanPhamGiamGia))
+                //neu' san pham do' dang giam~ gia' thi` tru` tien` cua? giam gia'
                     foreach ($dsCtChuongTrinhKM as $ctkm) {
                         if ($sp->id == $ctkm->SanPhamId)
                             $giaBan = $sp->GiaBan - $ctkm->GiamGia;
                     }
                 $giaGiam = 0; //ma giam gia'voucher
-                $thanhTien = $item["SoLuong"] * $giaBan - $giaGiam;
+                $thanhTien = $item->SoLuong * $giaBan - $giaGiam;
 
                 CT_HoaDon::create([
                     'HoaDonId'       => $hoaDon->id,
                     'SanPhamId'       => $item["SanPhamId"],
-                    'SoLuong'         => $item["SoLuong"],
+                    'SoLuong'         => $item->SoLuong,
                     'GiaNhap' => $sp->GiaNhap,
                     'GiaBan' => $giaBan,
                     'GiaGiam' => $giaGiam,
@@ -264,15 +266,17 @@ class HoaDonController extends Controller
                 ]);
             }
         }
-        //neu ko co chi tiet hoa don nao duoc lap
+        //neu ko co chi tiet hoa don nao duoc lap thi xoa' luon cai hoa don
         if (empty(CT_HoaDon::where('HoaDonId', $hoaDon->id)->first())) {
-            $hoaDon->delete();
+            $hoaDon->forceDelete();
             return response()->json(["Sucssess" => false], 400);
         }
         //nguoc lai thi tinh' thanh` tien` cho hoa' don va` tra? ket qua ve 200
         $hoaDon->TongSoLuong = CT_HoaDon::where('HoaDonId', $hoaDon->id)->sum('SoLuong');
         $hoaDon->TongTien = CT_HoaDon::where('HoaDonId', $hoaDon->id)->sum('ThanhTien');
         $hoaDon->save();
+        DB::table('gio_hangs')->where('KhachHangId', $diaChi->KhachHang->id)->delete();
+
         return response()->json(["Sucssess" => True], 200);
     }
 

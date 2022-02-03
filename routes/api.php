@@ -12,6 +12,7 @@ use App\Http\Controllers\YeuThichController;
 use App\Http\Controllers\DiaChiController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\HoaDonNhapController;
+use App\Http\Controllers\GioHangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,3 +86,8 @@ Route::post('danh-gia-san-pham', [HoaDonController::class, "API_Danh_Gia_SanPham
 //lay' het tin nhan ve tu` Admin, truyen` len KhachHangId
 Route::post('Message', [MessageController::class, "API_GetAll_Message_Admin"]);
 Route::post('Message/add', [MessageController::class, "API_Them_Message_Admin"]);
+//gio hang
+Route::post('GioHang/add', [GioHangController::class, "API_Insert_SanPham_GioHang"]);
+Route::put('GioHang/update', [GioHangController::class, "API_Update_SanPham_GioHang"]);
+Route::delete('GioHang/delete', [GioHangController::class, "API_Delete_SanPham_GioHang"]);
+Route::get('GioHang/{khachHang}', [GioHangController::class, "API_Get_GioHang"]);

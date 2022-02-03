@@ -122,7 +122,7 @@ class YeuThichController extends Controller
         $dsSanPham = [];
         $i = 0;
         foreach ($dsYeuThich as $item) {
-            $sanPham = SanPham::find($item->SanPhamId);
+            $sanPham = $item->SanPham;
 
             $data = Arr::add($dsSanPham, "$i", $sanPham);
 

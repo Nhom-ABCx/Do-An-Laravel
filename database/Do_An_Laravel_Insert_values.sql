@@ -85,38 +85,38 @@ insert into Loai_San_Phams(TenLoai,MoTa) values(N'Điện lạnh',null),
 (N'Phụ kiện',null);
 
 insert into San_Phams(TenSanPham,MoTa,SoLuongTon,GiaNhap,GiaBan,HinhAnh,LuotMua,HangSanXuatId,LoaiSanPhamId,created_at) values
-(N'Xiaomi Redmi Note 6 Pro30','64GB',10,1000000,2000000,'DT_1.jpg',12,2,2,'2022-12-22'),
-(N'Máy giặt Electrolux 10 Kg29','2 Năm',4,5376969,6376969,'DL_1.jpg',3,8,1,'2022-12-22'),
-(N'Máy giặt Beko 9Kg28','2 Năm',8,2560459,3560459,'DL_2.jpg',5,8,1,'2022-12-22'),
-(N'Samsung Inverter 1227','2 Năm',46,9208494,10208494,'DT_2.jpg',9,6,2,'2022-12-22'),
-(N'Máy giặt Toshiba 9.5 Kg26','32Gb',10,8996345,9996345,'DL_3.jpg',1,10,1,'2022-12-22'),
+(N'Xiaomi Redmi Note 6 Pro30','64GB',10,         1000000,2000000,'DT_1.jpg',12,2,2,'2022-12-22'),
+(N'Máy giặt Electrolux 10 Kg29','2 Năm',4,       5376969,6376969,'DL_1.jpg',3,8,1,'2022-12-22'),
+(N'Máy giặt Beko 9Kg28','2 Năm',8,               2560459,3560459,'DL_2.jpg',5,8,1,'2022-12-22'),
+(N'Samsung Inverter 1227','2 Năm',46,            9208494,10208494,'DT_2.jpg',9,6,2,'2022-12-22'),
+(N'Máy giặt Toshiba 9.5 Kg26','32Gb',10,         8996345,9996345,'DL_3.jpg',1,10,1,'2022-12-22'),
 (N'Điện thoại xiaomi-mi-a125','1 Năm FullBox',39,5139972,6139972,'DT_3.jpg',0,3,2,'2022-12-22'),
-(N'Điện thoại xiaomi-mi-a224','16Gb',5,1367603,2367603,'DT_4.jpg',2,3,2,'2022-12-22'),
-(N'Đt xiaomi-redmi-5-plus23','32Gb',6,8322064,9322064,'DT_5.jpg',3,3,2,'2022-12-22'),
+(N'Điện thoại xiaomi-mi-a224','16Gb',5,          1367603,2367603,'DT_4.jpg',2,3,2,'2022-12-22'),
+(N'Đt xiaomi-redmi-5-plus23','32Gb',6,           8322064,9322064,'DT_5.jpg',3,3,2,'2022-12-22'),
 (N'Điện thoại xiaomi-mi-a122','1 Năm FullBox',17,5817358,6817358,'DT_6.jpg',7,3,2,'2022-12-22'),
-(N'Điện thoại xiaomi-mi-a221','16Gb',33,2647340,3647340,'DT_7.jpg',8,3,2,'2022-12-22'),
-(N'Đt xiaomi-redmi-5-plus20','32Gb',2,2299870,3299870,'DT_8.jpg',90,3,2,'2022-12-22'),
+(N'Điện thoại xiaomi-mi-a221','16Gb',33,         2647340,3647340,'DT_7.jpg',8,3,2,'2022-12-22'),
+(N'Đt xiaomi-redmi-5-plus20','32Gb',2,           2299870,3299870,'DT_8.jpg',90,3,2,'2022-12-22'),
 (N'Điện thoại xiaomi-mi-a119','1 Năm FullBox',24,2674972,3674972,'DT_9.jpg',4,3,2,'2022-12-22'),
-(N'Điện thoại xiaomi-mi-a218','16Gb',48,6927375,7927375,'DT_10.jpg',1,3,2,'2022-12-22'),
-(N'Đt xiaomi-redmi-5-plus17','1 Năm FullBox',19,8344018,9344018,'DT_11.jpg',2,3,2,'2022-12-22'),
+(N'Điện thoại xiaomi-mi-a218','16Gb',48,         6927375,7927375,'DT_10.jpg',1,3,2,'2022-12-22'),
+(N'Đt xiaomi-redmi-5-plus17','1 Năm FullBox',19, 8344018,9344018,'DT_11.jpg',2,3,2,'2022-12-22'),
 (N'samsung-galaxy-tab-e-9616','1 Năm FullBox',25,5775860,6775860,'DT_12.jpg',3,6,2,'2022-12-22'),
 (N'samsung-galaxy-tab-e-9615','1 Năm FullBox',23,5175337,6175337,'DT_13.jpg',7,6,2,'2022-12-22'),
 (N'samsung-galaxy-tab-e-9614','1 Năm FullBox',39,3102066,4102066,'DT_14.jpg',5,6,2,'2022-12-22'),
-(N'Điện thoại vivo-y85-red13','I3',43,7205830,8205830,'DT_15.jpg',4,7,2,'2022-12-22'),
-(N'LapTop acer-aspire-a31412','I7',28,4421204,5421204,'LT_1.jpg',9,11,3,'2022-12-22'),
-(N'LapTop acer-aspire-a71511','I5',22,6477731,7477731,'LT_2.jpg',10,11,3,'2022-12-22'),
-(N'LapTop asus-s510ua-i50','I3',30,7542377,8542377,'LT_3.jpg',15,12,3,'2022-12-22'),
-(N'LapTop asus-x44lua-i39','Full box',14,8256867,9256867,'LT_4.jpg',17,12,3,'2022-12-22'),
-(N'Máy ảnh Cannon EOS 6D8','Full box',5,8396596,9396596,'Camera_1.jpg',12,1,4,'2022-12-22'),
-(N'Máy ảnh Canon Ixus 1857','Full box',3,1812596,2812596,'Camera_2.jpg',2,1,4,'2022-12-22'),
-(N'Máy ảnh Canon EOS M506','Full box',19,4217622,5217622,'Camera_3.jpg',3,1,4,'2022-12-22'),
-(N'Máy ảnh Canon Ixus 2855','Full box',37,9344565,10344565,'Camera_1.jpg',4,1,4,'2022-12-22'),
-(N'Máy ảnh Canon Powershot4 ','Test',41,5761988,6761988,'Camera_2.jpg',1,1,4,'2022-12-22'),
-(N'cap-lightning-2m-evalu3','Test',47,7613987,8613987,'SP_1.jpg',5,6,6,'2022-12-22'),
-(N'cap-lightning-20cm-esaver2','Test',30,7403373,8403373,'SP_2.jpg',1,5,6,'2022-12-22'),
-(N'cap-micro-1m-esaver1','Test',44,8930751,9930751,'SP_3.jpg',2,5,6,'2022-12-22'),
-(N'cap-micro-usb-20cm1','Test',32,3214440,4214440,'SP_4.jpg',3,5,6,'2022-12-22'),
-(N'tai-nghe-chup-tai-kanen1','',27,8870860,9870860,'SP_5.jpg',7,12,6,'2022-12-22');
+(N'Điện thoại vivo-y85-red13','I3',43,           7205830,8205830,'DT_15.jpg',4,7,2,'2022-12-22'),
+(N'LapTop acer-aspire-a31412','I7',28,           4421204,5421204,'LT_1.jpg',9,11,3,'2022-12-22'),
+(N'LapTop acer-aspire-a71511','I5',22,           6477731,7477731,'LT_2.jpg',10,11,3,'2022-12-22'),
+(N'LapTop asus-s510ua-i50','I3',30,              7542377,8542377,'LT_3.jpg',15,12,3,'2022-12-22'),
+(N'LapTop asus-x44lua-i39','Full box',14,        8256867,9256867,'LT_4.jpg',17,12,3,'2022-12-22'),
+(N'Máy ảnh Cannon EOS 6D8','Full box',5,         8396596,9396596,'Camera_1.jpg',12,1,4,'2022-12-22'),
+(N'Máy ảnh Canon Ixus 1857','Full box',3,        1812596,2812596,'Camera_2.jpg',2,1,4,'2022-12-22'),
+(N'Máy ảnh Canon EOS M506','Full box',19,        4217622,5217622,'Camera_3.jpg',3,1,4,'2022-12-22'),
+(N'Máy ảnh Canon Ixus 2855','Full box',37,       9344565,10344565,'Camera_1.jpg',4,1,4,'2022-12-22'),
+(N'Máy ảnh Canon Powershot4 ','Test',41,         5761988,6761988,'Camera_2.jpg',1,1,4,'2022-12-22'),
+(N'cap-lightning-2m-evalu3','Test',47,           7613987,8613987,'SP_1.jpg',5,6,6,'2022-12-22'),
+(N'cap-lightning-20cm-esaver2','Test',30,        7403373,8403373,'SP_2.jpg',1,5,6,'2022-12-22'),
+(N'cap-micro-1m-esaver1','Test',44,              8930751,9930751,'SP_3.jpg',2,5,6,'2022-12-22'),
+(N'cap-micro-usb-20cm1','Test',32,               3214440,4214440,'SP_4.jpg',3,5,6,'2022-12-22'),
+(N'tai-nghe-chup-tai-kanen1','',27,              8870860,9870860,'SP_5.jpg',7,12,6,'2022-12-22');
 
 insert into Chuong_Trinh_Khuyen_Mais(TenChuongTrinh,MoTa,FromDate,ToDate,created_at) values(N'Khuyến mãi cực hot ngày 20/11',N' giảm giá đến 5000đ các loại phụ kiện','2021-11-20','2022-12-01','2021-10-19');
 
@@ -207,3 +207,12 @@ set ThanhTien=(SoLuong*GiaBan)-GiaGiam;
 update hoa_dons a, (select HoaDonId,SUM(ThanhTien) as tongTien,SUM(SoLuong) as tongSoLuong from ct_hoa_dons GROUP BY HoaDonId) b
 set a.TongTien=b.tongTien,a.TongSoLuong=b.tongSoLuong
 where a.id=b.HoaDonId;
+
+update san_phams
+set GiaNhap=(SELECT FLOOR((RAND() * (15-3+1))+3)*1000000),
+	GiaBan=GiaNhap+1000000;
+
+update san_phams
+set GiaNhap=(SELECT FLOOR((RAND() * (15-3+1))+3)*10000),
+	GiaBan=GiaNhap+10000
+where LoaiSanPhamId=6;
