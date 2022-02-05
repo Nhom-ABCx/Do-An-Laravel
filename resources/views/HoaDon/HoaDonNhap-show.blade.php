@@ -132,15 +132,21 @@
 
                                         <div class="clearfix form-actions">
                                             <div class="col-md-9">
+                                                <form action="{{ route('HoaDon.destroy', $hoaDonNhap) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">Hủy   <i class="icon-trash bigger-130"></i></button>
+                                                </form>
+
                                                 <button class="btn btn-success" type="submit">
                                                     Xác nhận hóa đơn
                                                     <i class="icon-ok bigger-110"></i>
                                                 </button>
 
-                                                <a href="#" class="btn btn-danger">
+                                                {{-- <a href="#" class="btn btn-info">
                                                     Xuất file PDF
                                                     <i class="icon-file-text bigger-110"></i>
-                                                </a>
+                                                </a> --}}
                                             </div>
                                         </div>
                                     @endif

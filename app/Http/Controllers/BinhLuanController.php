@@ -129,14 +129,19 @@ class BinhLuanController extends Controller
         $data = DB::table("san_phams")
             ->join("binh_luans", "san_phams.id", "=", "binh_luans.SanPhamId")
             ->join("khach_hangs", "khach_hangs.id", "=", "binh_luans.KhachHangId")
-            ->select("binh_luans.*", "khach_hangs.Username", "khach_hangs.HoTen", "khach_hangs.HinhAnh")
             ->where("binh_luans.SanPhamId", $sanPham->id)
-            ->where("san_phams.deleted_at", null)
-            ->where("khach_hangs.deleted_at", null)
-            ->where("binh_luans.deleted_at", null)
+            ->whereNull("san_phams.deleted_at")
+            ->whereNull("khach_hangs.deleted_at")
+            ->whereNull("binh_luans.deleted_at")
+            ->select("binh_luans.*", "khach_hangs.Username", "khach_hangs.HoTen", "khach_hangs.HinhAnh")
             ->get();
-        if (!empty($data))
+
+        if (!empty($data)) {
+            foreach ($data as $item) {
+                $item->HinhAnh = KhachHangController::fixImage($item->HinhAnh);
+            }
             return response()->json($data, 200);
+        }
         return response()->json($data, 404);
     }
 

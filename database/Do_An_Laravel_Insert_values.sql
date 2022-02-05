@@ -189,6 +189,15 @@ insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'mua di 
 insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'ban voi gia sale mua di dung ngai',1,(select id from conversations where KhachHangId=2 and NhanVienId=1),'2021-1-7');
 insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'khong mua t chem',1,(select id from conversations where KhachHangId=2 and NhanVienId=1),'2021-1-10');
 
+update san_phams
+set GiaNhap=(SELECT FLOOR((RAND() * (15-3+1))+3)*1000000),
+	GiaBan=GiaNhap+1000000;
+
+update san_phams
+set GiaNhap=(SELECT FLOOR((RAND() * (15-3+1))+3)*10000),
+	GiaBan=GiaNhap+10000
+where LoaiSanPhamId=6;
+
 update Lich_Su_Van_Chuyens a, (select * from hoa_dons where TrangThai=4) b
 set a.TrangThai=1
 where a.id=(select id from lich_su_van_chuyens where HoaDonId=b.id ORDER BY created_at DESC LIMIT 1);
@@ -207,12 +216,3 @@ set ThanhTien=(SoLuong*GiaBan)-GiaGiam;
 update hoa_dons a, (select HoaDonId,SUM(ThanhTien) as tongTien,SUM(SoLuong) as tongSoLuong from ct_hoa_dons GROUP BY HoaDonId) b
 set a.TongTien=b.tongTien,a.TongSoLuong=b.tongSoLuong
 where a.id=b.HoaDonId;
-
-update san_phams
-set GiaNhap=(SELECT FLOOR((RAND() * (15-3+1))+3)*1000000),
-	GiaBan=GiaNhap+1000000;
-
-update san_phams
-set GiaNhap=(SELECT FLOOR((RAND() * (15-3+1))+3)*10000),
-	GiaBan=GiaNhap+10000
-where LoaiSanPhamId=6;

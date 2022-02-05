@@ -127,7 +127,15 @@ class KhachHangController extends Controller
 
         return Redirect::route('Home.Susscess');
     }
-
+    //ham ho tro API
+    static public function fixImage(string $hinhAnh)
+    {
+        //neu' hinh` anh cua khach hang` khong phai la` 1 website co' https/http
+        // thi` ta se them dia chi vao truoc chuoi~ de tra ve cho di dong xai`
+        if (!(Str::contains($hinhAnh, 'https')) || !(Str::contains($hinhAnh, 'http'))) {
+            return "http://10.0.2.2:8000" . $hinhAnh;
+        }
+    }
     //API
     public function API_DangNhap(Request $request)
     {
@@ -139,11 +147,12 @@ class KhachHangController extends Controller
                     ->orwhere('Phone', $request['Phone']);
             })
             ->first();
-        //chua~ chay'
-        $data->HinhAnh = "http://10.0.2.2:8000" . $data->HinhAnh;
+
         //neu du lieu ko co rong~ thi tra ve voi status la 200
-        if (!empty($data))
+        if (!empty($data)) {
+            $data->HinhAnh = KhachHangController::fixImage($data->HinhAnh);
             return response()->json($data, 200);
+        }
         //nguoc lai du lieu rong~ thi tra ve status 404
         return response()->json($data, 404);
     }
@@ -266,8 +275,10 @@ class KhachHangController extends Controller
 
     public function API_Get_KhachHang(KhachHang $khachHang)
     {
-        if (!empty($khachHang))
+        if (!empty($khachHang)) {
+            $khachHang->HinhAnh = KhachHangController::fixImage($khachHang->HinhAnh);
             return response()->json($khachHang, 200);
+        }
         return response()->json(["Error" => "Item Not found"], 404);
     }
 

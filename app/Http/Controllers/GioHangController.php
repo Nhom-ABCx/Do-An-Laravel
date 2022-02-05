@@ -131,6 +131,15 @@ class GioHangController extends Controller
         if ($validate->fails())
             return response()->json($validate->errors(), 400);
 
+
+
+        //neu' so luong trong gio hang` lon' hon so luong ton` trong kho thi`ko them vao duoc
+        $sanPham = SanPham::find($request["SanPhamId"]);
+        if ($request["SoLuong"] > $sanPham->SoLuongTon)
+            return response()->json(["SoLuong" => "Maximum quantity in stock has been reached"], 400);
+
+
+
         $gioHang = GioHang::firstOrCreate([
             'KhachHangId'       => $request['KhachHangId'],
             'SanPhamId'       => $request["SanPhamId"],
@@ -160,6 +169,12 @@ class GioHangController extends Controller
 
         //neu co' gio~ hang` thi` cap nhat so luong
         if (!empty($gioHang)) {
+            //neu' so luong trong gio hang` lon' hon so luong ton` trong kho thi`ko cap nhat duoc
+            $sanPham = SanPham::find($request["SanPhamId"]);
+            if ($request["SoLuong"] > $sanPham->SoLuongTon)
+                return response()->json(["SoLuong" => "Maximum quantity in stock has been reached"], 400);
+
+
             $gioHang->SoLuong = $request["SoLuong"];
             $gioHang->save();
             return response()->json($gioHang, 200);

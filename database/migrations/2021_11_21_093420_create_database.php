@@ -244,6 +244,8 @@ class CreateDatabase extends Migration
             $table->foreign('HoaDonNhapId')->references('id')->on('hoa_don_nhaps');
             $table->foreign('SanPhamId')->references('id')->on('san_phams');
         });
+        //social login
+        //id,ten,mota,displayname,imageurl,...
     }
 
     /**

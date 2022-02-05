@@ -131,12 +131,23 @@ class HoaDonController extends Controller
      */
     public function destroy(HoaDon $hoaDon)
     {
-        $hoaDon->delete();
-        if (count($hoaDon->CT_HoaDon)) {
+        $dsChiTietHD = $hoaDon->CT_HoaDon;
+        //neu co bat ki` san pham nao duoc mua thi` hoa don do' chi xoa' tam
+        if (count($dsChiTietHD)) {
+            //hoan` lai so KHO
+            foreach ($dsChiTietHD as $item) {
+                $sp = $item->SanPham;
+                $sp->fill([
+                    'SoLuongTon' => $sp->SoLuongTon + $item->SoLuong,
+                    "LuotMua" => $sp->LuotMua - 1,
+                ]);
+                $sp->save();
+            }
+
             $hoaDon->delete();
-            $hoaDon->save();
             return Redirect::route("HoaDon.index");
         }
+        //nguoc lai xoa' luon cai hoa' don do'
         $hoaDon->forceDelete();
         return Redirect::route('HoaDon.index');
     }
@@ -178,6 +189,15 @@ class HoaDonController extends Controller
     public function KhoiPhucHoaDon($id)
     {
         $hoaDon = HoaDon::onlyTrashed()->find($id);
+        //khi bam khoi phuc thi` lai tru` so luong ton` cua san pham
+        foreach ($hoaDon->CT_HoaDon as $item) {
+            $sp = $item->SanPham;
+            $sp->fill([
+                'SoLuongTon' => $sp->SoLuongTon - $item->SoLuong,
+                "LuotMua" => $sp->LuotMua + 1,
+            ]);
+            $sp->save();
+        }
         $hoaDon->restore();
         return Redirect::route('HoaDon.DaHuy');
     }
@@ -232,8 +252,8 @@ class HoaDonController extends Controller
         foreach ($dsGioHang as $item) {
             //echo $item["SanPhamId"] . "\n";
             $sp = $item->SanPham;
-            //neu san pham do' co' so luong ton` nho? hon so' luong dat hang` thi` thoat khoi vong` lap, den spp tiep theo
-            if ($sp->SoLuongTon < $item->SoLuong)
+            //neu san pham do' co' so'luong dat hang` lon' hon so luong ton` thi` thoat khoi vong` lap, den spp tiep theo
+            if ($item->SoLuong > $sp->SoLuongTon)
                 continue; //thoat ra khoi vong lap
             else {
                 //nguoc lai thi lap hoa don, tru` di so luong ton` trong kho
@@ -247,7 +267,7 @@ class HoaDonController extends Controller
                 $giaBan = $sp->GiaBan;
                 //neu' san pham id thuoc danh sach' id sp dang giam gia'
                 if (in_array($sp->id, $idSanPhamGiamGia))
-                //neu' san pham do' dang giam~ gia' thi` tru` tien` cua? giam gia'
+                    //neu' san pham do' dang giam~ gia' thi` tru` tien` cua? giam gia'
                     foreach ($dsCtChuongTrinhKM as $ctkm) {
                         if ($sp->id == $ctkm->SanPhamId)
                             $giaBan = $sp->GiaBan - $ctkm->GiamGia;
@@ -304,6 +324,7 @@ class HoaDonController extends Controller
         // ->whereNull("ct_hoa_dons.deleted_at")
         // ->get("ct_hoa_dons.*");
         //y nhu nhau
+        //https://stackoverflow.com/questions/38172857/how-to-select-specific-columns-in-laravel-eloquent
         $dsChiTietHD = CT_HoaDon::join("hoa_dons", "hoa_dons.id", "=", "ct_hoa_dons.HoaDonId")
             ->join("dia_chis", "dia_chis.id", "=", "hoa_dons.DiaChiId")
             ->where("dia_chis.KhachHangId", $request["KhachHangId"])

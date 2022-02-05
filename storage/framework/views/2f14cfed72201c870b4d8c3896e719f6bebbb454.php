@@ -51,8 +51,7 @@
                         <div class="widget-body">
                             <div class="widget-main">
                                 <form class="form-inline"
-                                    action="<?php echo e(request()->is('HoaDonn/DaGiao') ? route('HoaDon.DaGiao') : (request()->is('HoaDonn/DaHuy') ? route('HoaDon.DaHuy') : route('HoaDon.index'))); ?>"
-                                    method="get">
+                                    action="<?php echo e(request()->is('HoaDonn/DaGiao')? route('HoaDon.DaGiao'): (request()->is('HoaDonn/DaHuy')? route('HoaDon.DaHuy'): route('HoaDon.index'))); ?>" method="get">
                                     <?php if(request()->is('HoaDonn/DaGiao')): ?>
                                         <a href="<?php echo e(route('HoaDon.DaHuy')); ?>" class="btn btn-inverse">
                                             <i class="icon-trash"></i>
@@ -348,11 +347,24 @@
     <script type="text/javascript">
         jQuery(function($) {
             var oTable1 = $('#sample-table-2').dataTable({
-                "aoColumns": [
-                    null, null, null, null,
-                    null, null, null, null,
+                "aoColumns": [null, null, {
+                        searchable: false
+                    }, {
+                        searchable: false
+                    },
                     {
-                        "bSortable": false
+                        searchable: false
+                    },
+                    {
+                        searchable: false
+                    },
+                    {
+                        searchable: false
+                    }, {
+                        searchable: false
+                    },
+                    {
+                        bSortable: false
                     }
                 ]
             });

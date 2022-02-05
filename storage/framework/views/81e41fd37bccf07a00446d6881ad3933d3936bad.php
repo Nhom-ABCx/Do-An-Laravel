@@ -198,12 +198,18 @@
 
                                         <div class="clearfix form-actions">
                                             <div class="col-md-9">
+                                                <form action="<?php echo e(route('HoaDon.destroy', $hoaDon)); ?>" method="post">
+                                                    <?php echo csrf_field(); ?>
+                                                    <?php echo method_field('DELETE'); ?>
+                                                    <button type="submit" class="btn btn-danger">Hủy   <i class="icon-trash bigger-130"></i></button>
+                                                </form>
+
                                                 <button class="btn btn-success" type="submit">
                                                     Xác nhận chuyển tiếp trạng thái   
                                                     <i class="icon-ok bigger-110"></i>
                                                 </button>
 
-                                                <a href="<?php echo e(route('HoaDon.PDF', $hoaDon)); ?>" class="btn btn-danger">
+                                                <a href="<?php echo e(route('HoaDon.PDF', $hoaDon)); ?>" class="btn btn-info">
                                                     Xuất file PDF   
                                                     <i class="icon-file-text bigger-110"></i>
                                                 </a>

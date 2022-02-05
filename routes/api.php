@@ -47,6 +47,7 @@ Route::post('DangNhap', [KhachHangController::class, "API_DangNhap"]);
 Route::post('DangKy', [KhachHangController::class, "API_DangKy"]);
 Route::post('DangKy/Social', [KhachHangController::class, "API_DangKy_Social"]);
 
+//chua co token nen tam thoi` de la phuong thuc GET
 Route::get('KhachHang/{khachHang}', [KhachHangController::class, "API_Get_KhachHang"]);
 Route::put('KhachHang/{khachHang}', [KhachHangController::class, "API_Update_KhachHang"]);
 Route::put('KhachHang/{khachHang}/updatePassword', [KhachHangController::class, "API_Update_KhachHang_MatKhau"]);
