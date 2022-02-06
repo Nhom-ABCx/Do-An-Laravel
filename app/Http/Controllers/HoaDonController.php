@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TrangThaiHD;
 use App\Models\CT_HoaDon;
 use App\Models\DiaChi;
 use App\Models\GioHang;
@@ -17,15 +18,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use BenSampo\Enum\Rules\EnumValue;
+use BenSampo\Enum\Rules\EnumKey;
 use PDF;
 
 class HoaDonController extends Controller
 {
-    // Đang chờ xác nhận 0 //lúc khách vừa đặt hàng, gọi điện cho khách để tránh tình trạng đặt bừa
-    // Đang xử lý 1    //khách đặt hàng nhưng chưa soạn ra sản phẩm từ kho
-    // Đã xử lý 2 //đã soạn ra sản phẩm, chuẩn bị đưa đến đơn vị vận chuyển
-    // Đang giao 3 //shipper đang trong quá trình giao hàng
-    // Giao thành cỏng  4 //đã ship hàng thành công
+    // Đang chờ xác nhận 1 //lúc khách vừa đặt hàng, gọi điện cho khách để tránh tình trạng đặt bừa
+    // Đang xử lý 2    //khách đặt hàng nhưng chưa soạn ra sản phẩm từ kho
+    // Đã xử lý 3 //đã soạn ra sản phẩm, chuẩn bị đưa đến đơn vị vận chuyển
+    // Đang giao 4 //shipper đang trong quá trình giao hàng
+    // Giao thành cỏng  5 //đã ship hàng thành công
     // deleted_at   // khách đã hủy đơn
     /**
      * Display a listing of the resource.
@@ -34,13 +37,13 @@ class HoaDonController extends Controller
      */
     public function index(Request $request)
     {
-        $data = HoaDon::whereNotIn("TrangThai", [4])->get();
+        $data = HoaDon::whereNotIn("TrangThai", [TrangThaiHD::DaGiao])->get();
         $catChuoi = explode(" - ", $request->input("NgayDat"));
         //neu' ko rong~ va` dung' dinh dang datetime thi` tim` kiem'
         if ((!empty($request->input("NgayDat"))) && date_create($catChuoi[0]) != false && date_create($catChuoi[1]) != false) {
             $data = HoaDon::whereDate("created_at", ">=", date_format(date_create($catChuoi[0]), 'Y-m-d'))
                 ->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'))
-                ->whereNotIn("TrangThai", [4])->get();
+                ->whereNotIn("TrangThai", [TrangThaiHD::DaGiao])->get();
         }
         //unset de no' huy? bien' do~ ton' dung luong
         unset($catChuoi);
@@ -96,7 +99,7 @@ class HoaDonController extends Controller
     {
         //trang thai phai nam` trong 4 so', tranh truong` hop thay doi request tai giao dien
         $request->validate(
-            ['TrangThai' => ['required', 'numeric', 'integer', Rule::in([0, 1, 2, 3, 4]),]]
+            ['TrangThai' => ['required', 'numeric', 'integer', Rule::in(TrangThaiHD::getValues()),]]
         );
 
         $hoaDon->TrangThai = $request["TrangThai"];
@@ -113,7 +116,7 @@ class HoaDonController extends Controller
      */
     public function update(Request $request, HoaDon $hoaDon)
     {
-        if ($hoaDon->TrangThai == 4)
+        if ($hoaDon->TrangThai == TrangThaiHD::DaGiao)
             //if nay` de tranh' tinh` trang gui request ao?, voi thu~ nghiem luon withErrors
             return Redirect::back()->withErrors(['TrangThai' => 'Trạng thái đã giao thì không thể cập nhật']);
         else {
@@ -154,13 +157,13 @@ class HoaDonController extends Controller
     public function HoaDonDaGiao(Request $request)
     {
         //y chang index khac' cai' where thang thai'
-        $data = HoaDon::where("TrangThai", 4)->get();
+        $data = HoaDon::where("TrangThai", TrangThaiHD::DaGiao)->get();
         if (!empty($request->input("NgayDat"))) {
             $catChuoi = explode(" - ", $request->input("NgayDat"));
 
             $data = HoaDon::whereDate("created_at", ">=", date_format(date_create($catChuoi[0]), 'Y-m-d'))
                 ->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'))
-                ->where("TrangThai", 4)->get();
+                ->where("TrangThai", TrangThaiHD::DaGiao)->get();
         }
         if (!empty($request->input('PhuongThucThanhToan')))
             $data = $data->where('PhuongThucThanhToan', $request->input('PhuongThucThanhToan'));
@@ -219,6 +222,8 @@ class HoaDonController extends Controller
         //kiem tra du lieu
         $validate = Validator::make($request->all(), [
             'DiaChiId' => ['required', 'numeric', 'integer', 'exists:dia_chis,id'],
+            //phuong thuc thanh toan' dang' ly' ra la` phai co trong 1 cai' bang? database
+            "PhuongThucThanhToan" => ['required', 'numeric', 'integer', Rule::in([1, 2, 3, 4, 5])],
             // "Data.*.SanPhamId" => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
             // "Data.*.SoLuong" => ['required', 'numeric', 'integer', 'min:0'],
         ]);
@@ -228,8 +233,8 @@ class HoaDonController extends Controller
         $diaChi = DiaChi::find($request["DiaChiId"]);
         $hoaDon = HoaDon::create([
             'DiaChiId'         => $diaChi->id,
-            "PhuongThucThanhToan" => 1, //ghi tammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-            'TrangThai' => 0, //vua lap, dang cho xac nhan
+            "PhuongThucThanhToan" => $request["PhuongThucThanhToan"],
+            //'TrangThai' => 1, //vua lap, dang cho xac nhan
             'TongSoLuong' => 0,
             'TongTien' => 0,
         ]);

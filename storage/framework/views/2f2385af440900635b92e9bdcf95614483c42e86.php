@@ -290,20 +290,23 @@
 
                                                         <td class="hidden-480">
                                                             <?php switch($item->TrangThaiHDHienTai):
-                                                                case (0): ?>
-                                                                    <span class="label label-danger arrowed">0 Đang chờ xác nhận</span>
+                                                                case (App\Enums\TrangThaiHD::DangXacNhan): ?>
+                                                                    <span class="label label-danger arrowed"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan)); ?></span>
                                                                 <?php break; ?>
-                                                                <?php case (1): ?>
-                                                                    <span class="label arrowed">1 Đang xử lý</span>
+                                                                <?php case (App\Enums\TrangThaiHD::DangXuLy): ?>
+                                                                    <span class="label arrowed"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy)); ?></span>
                                                                 <?php break; ?>
-                                                                <?php case (2): ?>
-                                                                    <span class="label label-info arrowed-right arrowed-in">2 Đã xử lý</span>
+                                                                <?php case (App\Enums\TrangThaiHD::DaXuLy): ?>
+                                                                    <span
+                                                                        class="label label-info arrowed-right arrowed-in"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy)); ?></span>
                                                                 <?php break; ?>
-                                                                <?php case (3): ?>
-                                                                    <span class="label label-warning arrowed arrowed-right">3 Đang giao</span>
+                                                                <?php case (App\Enums\TrangThaiHD::DangGiao): ?>
+                                                                    <span
+                                                                        class="label label-warning arrowed arrowed-right"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao)); ?></span>
                                                                 <?php break; ?>
-                                                                <?php case (4): ?>
-                                                                    <span class="label label-success arrowed-in arrowed-in-right">4 Đã giao</span>
+                                                                <?php case (App\Enums\TrangThaiHD::DaGiao): ?>
+                                                                    <span
+                                                                        class="label label-success arrowed-in arrowed-in-right"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao)); ?></span>
                                                                 <?php break; ?>
                                                                 <?php default: ?>
                                                             <?php endswitch; ?>
@@ -417,8 +420,8 @@
     <!-- page specific plugin scripts -->
 
     <!--[if lte IE 8]>
-                                                                                                                                                                      <script src="/storage/assets/js/excanvas.min.js"></script>
-                                                                                                                                                                      <![endif]-->
+                                                                                                                                                                              <script src="/storage/assets/js/excanvas.min.js"></script>
+                                                                                                                                                                              <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>

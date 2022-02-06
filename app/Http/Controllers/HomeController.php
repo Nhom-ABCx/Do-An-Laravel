@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TrangThaiHD;
 use App\Models\BinhLuan;
 use App\Models\KhachHang;
 use App\Models\HoaDon;
@@ -62,9 +63,9 @@ class HomeController extends Controller
         $j = 0; //bien' ao? cho vong lap
         foreach ($dsHoaDon as $hoaDon) {
             foreach ($hoaDon->CT_HoaDon as $ctHoaDon) {
-                $sanPham=$ctHoaDon->SanPham;
+                $sanPham = $ctHoaDon->SanPham;
                 if ($ctHoaDon->Star != 0 || !empty($ctHoaDon->Star))
-                $danhGia++;
+                    $danhGia++;
 
                 //tim xem san pham trong chi tiet hoa don thuoc loai san pham nao`, sau do' ++ len
                 $loaiSanPham = $dsLoaiSanPham->where("id", $sanPham->LoaiSanPham->id)->first();
@@ -72,19 +73,19 @@ class HomeController extends Controller
                 $soLuongChiTietHoaDon++;
 
                 //Neu san pham da ton` tai trong mang? thi` cong don` so' luot mua, nguoc lai them vao trong mang?
-                $sp=$dsSanPhamBanChay->where("id",$sanPham->id)->first();
+                $sp = $dsSanPhamBanChay->where("id", $sanPham->id)->first();
                 if (empty($sp)) {
                     //ghi nhu vay` no van hieu la tu them vao` khoi can Arr::add
                     SanPhamController::fixImage($sanPham);
-                    $sanPham["TongSoLuongBan"]=$ctHoaDon->SoLuong;
-                    $dsSanPhamBanChay[$j]=$sanPham;
+                    $sanPham["TongSoLuongBan"] = $ctHoaDon->SoLuong;
+                    $dsSanPhamBanChay[$j] = $sanPham;
                     $j++;
                 } else {
-                    $sp["TongSoLuongBan"]+=$ctHoaDon->SoLuong;
+                    $sp["TongSoLuongBan"] += $ctHoaDon->SoLuong;
                 }
             }
             //neu da giao thanh` cong
-            if ($hoaDon->TrangThai == 4) {
+            if ($hoaDon->TrangThai == TrangThaiHD::DaGiao) {
                 $donGiaoThanhCong++;
                 $thuNhap += ($ctHoaDon["GiaBan"] - $ctHoaDon["GiaNhap"]) * $ctHoaDon["SoLuong"];
             }
@@ -125,7 +126,7 @@ class HomeController extends Controller
             "KhachHangMuaNhieuNhat" => $dsKhachHangMuaNhieuNhat->sortByDesc("TongSoLuongMua")->values(),
             "DoanhThu" => $doanhThu,
             //lay 10 sp ban chay
-            "dsSanPhamBanChay"=>$dsSanPhamBanChay->sortByDesc("TongSoLuongBan")->values()->take(10),
+            "dsSanPhamBanChay" => $dsSanPhamBanChay->sortByDesc("TongSoLuongBan")->values()->take(10),
         ];
 
         //truyen cai' bien' do' ra view
@@ -150,7 +151,7 @@ class HomeController extends Controller
             ], [
                 'Username' => $item["login"]["username"],
                 "Phone" => $item["phone"],
-                'HoTen' => $item["name"]["title"] . '.' . $item["name"]["first"] . '_' . $item["name"]["last"],
+                'HoTen' => $item["name"]["first"] . '_' . $item["name"]["last"],
                 "NgaySinh" => date_create($item["dob"]["date"]),
                 "GioiTinh" => ($item["gender"] == "male") ? 1 : 0,
                 "MatKhau" => "password123",

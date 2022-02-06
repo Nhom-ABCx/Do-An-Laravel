@@ -51,7 +51,7 @@ Route::get('KhachHang/{token}/showResetPass', [KhachHangController::class, 'show
 Route::put('KhachHang/{khachHang}/actionResetPass', [KhachHangController::class, 'actionResetPassword_KhachHang'])->name('KhachHang.actionReset');
 Route::get('ResetPassword-Susscess', [HomeController::class, 'Susscess'])->name('Home.Susscess');
 Route::get('Error', [HomeController::class, 'Error'])->name('Home.Error');
-Route::get('Test', [HomeController::class, 'Test'])->name('Home.Test');
+//Route::get('Test', [HomeController::class, 'Test'])->name('Home.Test'); //cai nay` la` tao user ao?
 
 //bat buoc dang nhap
 Route::middleware('auth')->group(function () {

@@ -111,19 +111,19 @@
                                         <label for=""> Trạng thái: </label>
                                         <select class="width-10 chosen-select" id="form-field-select-4" name="TrangThai">
                                             <option value="">All</option>
-                                            <option value="0" @if ('0' == $request['TrangThai']) selected @endif>
+                                            <option value="{{ App\Enums\TrangThaiHD::DangXacNhan }}" @if ('1' == $request['TrangThai']) selected @endif>
                                                 Đang chờ xác nhận
                                             </option>
-                                            <option value="1" @if ('1' == $request['TrangThai']) selected @endif>
+                                            <option value="{{ App\Enums\TrangThaiHD::DangXuLy }}" @if ('2' == $request['TrangThai']) selected @endif>
                                                 Đang xử lý
                                             </option>
-                                            <option value="2" @if ('2' == $request['TrangThai']) selected @endif>
+                                            <option value="{{ App\Enums\TrangThaiHD::DaXuLy }}" @if ('3' == $request['TrangThai']) selected @endif>
                                                 Đã xử lý
                                             </option>
-                                            <option value="3" @if ('3' == $request['TrangThai']) selected @endif>
+                                            <option value="{{ App\Enums\TrangThaiHD::DangGiao }}" @if ('4' == $request['TrangThai']) selected @endif>
                                                 Đang giao
                                             </option>
-                                            <option value="4" @if ('4' == $request['TrangThai']) selected @endif>
+                                            <option value="{{ App\Enums\TrangThaiHD::DaGiao }}" @if ('5' == $request['TrangThai']) selected @endif>
                                                 Đã giao
                                             </option>
                                         </select>
@@ -200,20 +200,20 @@
                                         <td>{{ number_format($item->TongTien) }}</td>
                                         <td>
                                             @switch($item->TrangThai)
-                                                @case(0)
-                                                    <span class="label label-danger arrowed">0 Đang chờ xác nhận</span>
+                                                @case(App\Enums\TrangThaiHD::DangXacNhan)
+                                                    <span class="label label-danger arrowed">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan) }}</span>
                                                 @break
-                                                @case(1)
-                                                    <span class="label arrowed">1 Đang xử lý</span>
+                                                @case(App\Enums\TrangThaiHD::DangXuLy)
+                                                    <span class="label arrowed">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy) }}</span>
                                                 @break
-                                                @case(2)
-                                                    <span class="label label-info arrowed-right arrowed-in">2 Đã xử lý</span>
+                                                @case(App\Enums\TrangThaiHD::DaXuLy)
+                                                    <span class="label label-info arrowed-right arrowed-in">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy) }}</span>
                                                 @break
-                                                @case(3)
-                                                    <span class="label label-warning arrowed arrowed-right">3 Đang giao</span>
+                                                @case(App\Enums\TrangThaiHD::DangGiao)
+                                                    <span class="label label-warning arrowed arrowed-right">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao) }}</span>
                                                 @break
-                                                @case(4)
-                                                    <span class="label label-success arrowed-in arrowed-in-right">4 Đã giao</span>
+                                                @case(App\Enums\TrangThaiHD::DaGiao)
+                                                    <span class="label label-success arrowed-in arrowed-in-right">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao) }}</span>
                                                 @break
                                                 @default
                                             @endswitch
@@ -253,17 +253,22 @@
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                                    {{-- neu trạng thái =4 tức dag94 giao hàng thành công thì ko được phép sửa hoặc hủy hóa đơn --}}
-                                                    @if ($item->TrangThai != 4)
+                                                    {{-- neu trạng thái dag94 giao hàng thành công thì ko được phép sửa hoặc hủy hóa đơn --}}
+                                                    @if ($item->TrangThai != App\Enums\TrangThaiHD::DaGiao)
                                                         <span class="dropdown-hover dropup dropdown-pink">
                                                             <i class="icon-cog green bigger-200" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
                                                             <ul class="dropdown-menu pull-right">
                                                                 <li>
-                                                                    <a href="{{ route('HoaDon.edit', $item) }}?TrangThai=0" tabindex="-1">0 Đang chờ xác nhận</a>
-                                                                    <a href="{{ route('HoaDon.edit', $item) }}?TrangThai=1" tabindex="-1">1 Đang xử lý</a>
-                                                                    <a href="{{ route('HoaDon.edit', $item) }}?TrangThai=2" tabindex="-1">2 Đã xử lý</a>
-                                                                    <a href="{{ route('HoaDon.edit', $item) }}?TrangThai=3" tabindex="-1">3 Đang giao</a>
-                                                                    <a href="{{ route('HoaDon.edit', $item) }}?TrangThai=4" tabindex="-1">4 Đã giao</a>
+                                                                    <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DangXacNhan }}"
+                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan) }}</a>
+                                                                    <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DangXuLy }}"
+                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy) }}</a>
+                                                                    <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DaXuLy }}"
+                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy) }}</a>
+                                                                    <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DangGiao }}"
+                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao) }}</a>
+                                                                    <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DaGiao }}"
+                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao) }}</a>
                                                                 </li>
                                                             </ul>
                                                         </span>
@@ -287,17 +292,22 @@
                                                         </button>
 
                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                            @if ($item->TrangThai != 4)
+                                                            @if ($item->TrangThai != App\Enums\TrangThaiHD::DaGiao)
                                                                 <li>
                                                                     <span class="dropdown-hover dropup dropdown-pink">
                                                                         <i class="icon-cog green bigger-150" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
                                                                         <ul class="dropdown-menu pull-right">
                                                                             <li>
-                                                                                <a href="{{ route('HoaDon.edit', $item) }}?TrangThai=0" tabindex="-1">0 Đang chờ xác nhận</a>
-                                                                                <a href="{{ route('HoaDon.edit', $item) }}?TrangThai=1" tabindex="-1">1 Đang xử lý</a>
-                                                                                <a href="{{ route('HoaDon.edit', $item) }}?TrangThai=2" tabindex="-1">2 Đã xử lý</a>
-                                                                                <a href="{{ route('HoaDon.edit', $item) }}?TrangThai=3" tabindex="-1">3 Đang giao</a>
-                                                                                <a href="{{ route('HoaDon.edit', $item) }}?TrangThai=4" tabindex="-1">4 Đã giao</a>
+                                                                                <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DangXacNhan }}"
+                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan) }}</a>
+                                                                                <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DangXuLy }}"
+                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy) }}</a>
+                                                                                <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DaXuLy }}"
+                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy) }}</a>
+                                                                                <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DangGiao }}"
+                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao) }}</a>
+                                                                                <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DaGiao }}"
+                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao) }}</a>
                                                                             </li>
                                                                         </ul>
                                                                     </span>

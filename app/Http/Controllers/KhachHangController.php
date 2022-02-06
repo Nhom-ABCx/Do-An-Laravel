@@ -135,6 +135,7 @@ class KhachHangController extends Controller
         if (!(Str::contains($hinhAnh, 'https')) || !(Str::contains($hinhAnh, 'http'))) {
             return "http://10.0.2.2:8000" . $hinhAnh;
         }
+        return $hinhAnh;
     }
     //API
     public function API_DangNhap(Request $request)
@@ -301,9 +302,8 @@ class KhachHangController extends Controller
             "HinhAnh" => $request["HinhAnh"],
         ]);
 
-        $data = $khachHang;
         //neu du lieu ko co rong~ thi tra ve voi status la 200
-        if (!empty($data))
-            return response()->json($data, 200);
+        if (!empty($khachHang))
+            return response()->json($khachHang, 200);
     }
 }

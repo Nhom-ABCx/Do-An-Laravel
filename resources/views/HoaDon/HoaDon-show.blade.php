@@ -167,23 +167,22 @@
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-exclamation-sign"></i> Trạng thái </label>
                                         <label class="col-sm-3">
                                             @switch($hoaDon->TrangThai)
-                                                @case(0)
-                                                    <span class="label label-danger arrowed">0 Đang chờ xác nhận</span>
+                                                @case(App\Enums\TrangThaiHD::DangXacNhan)
+                                                    <span class="label label-danger arrowed">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan) }}</span>
                                                 @break
-                                                @case(1)
-                                                    <span class="label arrowed">1 Đang xử lý</span>
+                                                @case(App\Enums\TrangThaiHD::DangXuLy)
+                                                    <span class="label arrowed">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy) }}</span>
                                                 @break
-                                                @case(2)
-                                                    <span class="label label-info arrowed-right arrowed-in">2 Đã xử lý</span>
+                                                @case(App\Enums\TrangThaiHD::DaXuLy)
+                                                    <span class="label label-info arrowed-right arrowed-in">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy) }}</span>
                                                 @break
-                                                @case(3)
-                                                    <span class="label label-warning arrowed arrowed-right">3 Đang giao</span>
+                                                @case(App\Enums\TrangThaiHD::DangGiao)
+                                                    <span class="label label-warning arrowed arrowed-right">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao) }}</span>
                                                 @break
-                                                @case(4)
-                                                    <span class="label label-success arrowed-in arrowed-in-right">4 Đã giao</span>
+                                                @case(App\Enums\TrangThaiHD::DaGiao)
+                                                    <span class="label label-success arrowed-in arrowed-in-right">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao) }}</span>
                                                 @break
                                                 @default
-
                                             @endswitch
                                         </label>
                                     </div>
@@ -202,7 +201,7 @@
                                         <label class="col-sm-3"> <b>{{ number_format($hoaDon->TongTien) }} VNĐ</b> </label>
                                     </div>
 
-                                    @if ($hoaDon->TrangThai != 4)
+                                    @if ($hoaDon->TrangThai != App\Enums\TrangThaiHD::DaGiao)
                                         <div class="space-4"></div>
 
                                         <div class="clearfix form-actions">

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\TrangThaiHD;
 
 class CreateDatabase extends Migration
 {
@@ -148,7 +149,9 @@ class CreateDatabase extends Migration
             $table->tinyInteger('PhuongThucThanhToan');
             $table->integer("TongSoLuong");
             $table->double('TongTien');
-            $table->tinyInteger('TrangThai');
+            //https://viblo.asia/p/tim-hieu-va-su-dung-enum-trong-laravel-vyDZOYVk5wj
+            $table->enum('TrangThai', TrangThaiHD::getValues())->default(TrangThaiHD::DangXacNhan);
+            //$table->tinyInteger('TrangThai')->default(0);
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('DiaChiId')->references('id')->on('dia_chis');
