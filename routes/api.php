@@ -81,7 +81,7 @@ Route::get('binh-luan', [BinhLuanController::class, "API_Check_Auth_ProductToPay
 #add binh luan
 Route::post('binh-luan/add', [BinhLuanController::class, "API_Add_BinhLuan_SanPham"]);
 #Hoa don theo tap
-Route::get('hoa-don', [HoaDonController::class, "API_TraVe_CT_HoaDon_Theo_Tab"]);
+Route::get('HoaDon/KhachHang/{khachHang}', [HoaDonController::class, "API_GET_HoaDon_KhachHang_Theo_TrangThai"]);
 #danh gia cho san pham
 Route::post('danh-gia-san-pham', [HoaDonController::class, "API_Danh_Gia_SanPham"]);
 //lay' het tin nhan ve tu` Admin, truyen` len KhachHangId

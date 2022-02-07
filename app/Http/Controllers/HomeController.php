@@ -142,22 +142,62 @@ class HomeController extends Controller
     }
     public function Test()
     {
-        $response = file_get_contents('https://randomuser.me/api/?results=50');
-        $user = json_decode($response, true)["results"];
-        dd($user);
-        foreach ($user as $item) {
-            KhachHang::firstOrCreate([
-                'Email' => $item["email"]
-            ], [
-                'Username' => $item["login"]["username"],
-                "Phone" => $item["phone"],
-                'HoTen' => $item["name"]["first"] . '_' . $item["name"]["last"],
-                "NgaySinh" => date_create($item["dob"]["date"]),
-                "GioiTinh" => ($item["gender"] == "male") ? 1 : 0,
-                "MatKhau" => "password123",
-                "DiaChi" => $item["location"]["street"]["name"] . ", " . $item["location"]["city"] . ", " . $item["location"]["country"],
-                "HinhAnh" => $item["picture"]["large"],
-            ]);
+        //mang? ban đầu
+        $arr = [
+            "Status" => 200,
+            "Data" => [
+                0 => [
+                    "Ten" => "xxx",
+                    "MoTa" => "xxx nè",
+                    "SoLuong" => "12",
+                ],
+                1 => [
+                    "Ten" => "yyy",
+                    "MoTa" => "yyy nè",
+                    "SoLuong" => "82",
+                ],
+            ],
+        ];
+
+        //vòng lặp
+        for ($i = 0; $i < 5; $i++) {
+
+            //nếu điều kiện đúng thì thêm mảng mới vào Data
+            if (true) {
+                //mảng mới, ở đây ghi đại
+                $dataNew = [
+                    "Ten" => "tên $i nè",
+                    "MoTa" => "mô tả $i nè",
+                    "SoLuong" => "99999999",
+                ];
+                //thêm vào ngay chổ Data với 1 mảng mới
+                //ghi ["Data"][]   nó tự hiểu là thêm vào
+                $arr["Data"][] = $dataNew;
+            }
         }
+        dd($arr); //xuất ra kết quả
+
+        //$lengths = max(array_keys($arr["Data"]));
+        //dd($lengths);
+        //$arr["Data"] = Arr::add($arr["Data"], $lengths + 1, $dataNew);
+        dd(array_keys($arr["Data"]));
+        //create user
+        // $response = file_get_contents('https://randomuser.me/api/?results=50');
+        // $user = json_decode($response, true)["results"];
+        // dd($user);
+        // foreach ($user as $item) {
+        //     KhachHang::firstOrCreate([
+        //         'Email' => $item["email"]
+        //     ], [
+        //         'Username' => $item["login"]["username"],
+        //         "Phone" => $item["phone"],
+        //         'HoTen' => $item["name"]["first"] . '_' . $item["name"]["last"],
+        //         "NgaySinh" => date_create($item["dob"]["date"]),
+        //         "GioiTinh" => ($item["gender"] == "male") ? 1 : 0,
+        //         "MatKhau" => "password123",
+        //         "DiaChi" => $item["location"]["street"]["name"] . ", " . $item["location"]["city"] . ", " . $item["location"]["country"],
+        //         "HinhAnh" => $item["picture"]["large"],
+        //     ]);
+        // }
     }
 }

@@ -305,40 +305,18 @@ class HoaDonController extends Controller
         return response()->json(["Sucssess" => True], 200);
     }
 
-    #them san pham vao chi tiet hoa don khi tra ve
-    public static function API_Them_SanPham_To_CT_Hoa_Don($listChiTietHoaDon)
-    {
-        foreach ($listChiTietHoaDon as $item) {
-            $sanPham = $item->SanPham;
-            if (!empty($sanPham))
-                Arr::add($item, "SanPham", $sanPham);
-            else
-                Arr::add($item, 'SanPham', null);
-        }
-    }
-
     #tra ve chi tiet hao don theo giai doan
-    public function API_TraVe_CT_HoaDon_Theo_Tab(Request $request)
+    public function API_GET_HoaDon_KhachHang_Theo_TrangThai(Request $request, KhachHang $khachHang)
     {
-        // $dsChiTietHD=DB::table("ct_hoa_dons")
-        // ->join("hoa_dons","hoa_dons.id","=","ct_hoa_dons.HoaDonId")
-        // ->join("dia_chis","dia_chis.id","=","hoa_dons.DiaChiId")
-        // ->where("dia_chis.KhachHangId",$request["KhachHangId"])
-        // ->where("hoa_dons.TrangThai",$request["TrangThai"])
-        // ->whereNull("hoa_dons.deleted_at")
-        // ->whereNull("ct_hoa_dons.deleted_at")
-        // ->get("ct_hoa_dons.*");
-        //y nhu nhau
         //https://stackoverflow.com/questions/38172857/how-to-select-specific-columns-in-laravel-eloquent
-        $dsChiTietHD = CT_HoaDon::join("hoa_dons", "hoa_dons.id", "=", "ct_hoa_dons.HoaDonId")
-            ->join("dia_chis", "dia_chis.id", "=", "hoa_dons.DiaChiId")
-            ->where("dia_chis.KhachHangId", $request["KhachHangId"])
+        $dsChiTietHD = HoaDon::join("dia_chis", "dia_chis.id", "hoa_dons.DiaChiId")
+            ->where("dia_chis.KhachHangId", $khachHang->id)
             ->where("hoa_dons.TrangThai", $request["TrangThai"])
             ->whereNull("hoa_dons.deleted_at")
-            ->whereNull("ct_hoa_dons.deleted_at")
-            ->get("ct_hoa_dons.*");
+            ->with("CT_HoaDon") //load theo khoa' ngoai cua CTHoaDon, no tu them vao`
+            ->with("CT_HoaDon.SanPham")
+            ->get("hoa_dons.*");
 
-        $this->API_Them_SanPham_To_CT_Hoa_Don($dsChiTietHD);
         return response()->json($dsChiTietHD, 200);
     }
     #update danh gia san pham
