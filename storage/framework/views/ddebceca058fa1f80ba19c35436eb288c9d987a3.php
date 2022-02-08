@@ -8,30 +8,6 @@
     <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
-    
-    <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
-    <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
-    <style>
-        .spinner-preview {
-            width: 100px;
-            height: 100px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .dropdown-preview {
-            margin: 0 5px;
-            display: inline-block;
-        }
-
-        .dropdown-preview>.dropdown-menu {
-            display: block;
-            position: static;
-            margin-bottom: 5px;
-        }
-
-    </style>
-    
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('body'); ?>
@@ -212,8 +188,11 @@
                                         <?php else: ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <a class="blue" href="#">
-                                                        <i class="icon-zoom-in bigger-130"></i>
+                                                    <a href="javascript:void(0)" onclick="showSanPham(<?php echo e($item->id); ?>)" role="button" data-toggle="modal" class="tooltip-info" data-rel="tooltip"
+                                                        title="Xem chi tiết">
+                                                        <span class="blue">
+                                                            <i class="icon-zoom-in bigger-120"></i>
+                                                        </span>
                                                     </a>
 
                                                     <a class="green" href="<?php echo e(route('SanPham.edit', $item)); ?>" data-rel="tooltip" title="Chỉnh sửa" data-placement="top">
@@ -236,7 +215,8 @@
 
                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <a href="javascript:void(0)" onclick="showSanPham(<?php echo e($item->id); ?>)" role="button" data-toggle="modal" class="tooltip-info"
+                                                                    data-rel="tooltip" title="Xem chi tiết">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
@@ -399,8 +379,9 @@
                         </div>
                     </div>
                 </div>
-
             </div><!-- /.page-content -->
+
+            <div id="showModal"></div>
         </div><!-- /.main-content -->
 
     <?php $__env->stopSection(); ?>
@@ -530,38 +511,27 @@
         
 
         
-        <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-        <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
-        <script src="/storage/assets/js/bootbox.min.js"></script>
-        <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
-        <script src="/storage/assets/js/jquery.gritter.min.js"></script>
-        <script src="/storage/assets/js/spin.min.js"></script>
-
         <script type="text/javascript">
             jQuery(function($) {
                 <?php if($errors->any()): ?>
                     $('#modal-form').modal('show');
                     <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        $.gritter.add({
-                        title: 'Có lỗi xảy ra',
-                        text: '<?php echo e($error); ?>',
-                        class_name: 'gritter-error'
+                        toastr.error('<?php echo e($error); ?>', 'Có lỗi xảy ra', {
+                        timeOut: 3000
                         });
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <?php endif; ?>
 
                 <?php if(!empty($request['SanPhamMoi'])): ?>
-                    $.gritter.add({
-                    // (string | mandatory) the heading of the notification
-                    title: 'Thành công',
-                    // (string | mandatory) the text inside the notification
-                    text: 'Thêm sản phẩm <?php echo e($request["SanPhamMoi"]); ?> thành công',
-                    class_name: 'gritter-success'
+                    toastr.success('Thêm sản phẩm <?php echo e($request['SanPhamMoi']); ?> thành công', 'Thành công', {
+                    timeOut: 3000
                     });
                 <?php endif; ?>
             });
         </script>
         
+
+        <?php echo $__env->make("SanPham.script.SanPham-show-script", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\tranphuocvinh\laravel\Do-An-Laravel\resources\views/SanPham/SanPham-index.blade.php ENDPATH**/ ?>

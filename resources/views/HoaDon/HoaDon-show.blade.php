@@ -4,28 +4,7 @@
 @section('title', 'Chi tiết hóa đơn')
 
 @section('headThisPage')
-    <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
-    <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
-    <style>
-        .spinner-preview {
-            width: 100px;
-            height: 100px;
-            text-align: center;
-            margin-top: 60px;
-        }
 
-        .dropdown-preview {
-            margin: 0 5px;
-            display: inline-block;
-        }
-
-        .dropdown-preview>.dropdown-menu {
-            display: block;
-            position: static;
-            margin-bottom: 5px;
-        }
-
-    </style>
 @endsection
 
 @section('body')
@@ -188,23 +167,22 @@
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-exclamation-sign"></i> Trạng thái </label>
                                         <label class="col-sm-3">
                                             @switch($hoaDon->TrangThai)
-                                                @case(0)
-                                                    <span class="label label-danger arrowed">0 Đang chờ xác nhận</span>
+                                                @case(App\Enums\TrangThaiHD::DangXacNhan)
+                                                    <span class="label label-danger arrowed">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan) }}</span>
                                                 @break
-                                                @case(1)
-                                                    <span class="label arrowed">1 Đang xử lý</span>
+                                                @case(App\Enums\TrangThaiHD::DangXuLy)
+                                                    <span class="label arrowed">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy) }}</span>
                                                 @break
-                                                @case(2)
-                                                    <span class="label label-info arrowed-right arrowed-in">2 Đã xử lý</span>
+                                                @case(App\Enums\TrangThaiHD::DaXuLy)
+                                                    <span class="label label-info arrowed-right arrowed-in">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy) }}</span>
                                                 @break
-                                                @case(3)
-                                                    <span class="label label-warning arrowed arrowed-right">3 Đang giao</span>
+                                                @case(App\Enums\TrangThaiHD::DangGiao)
+                                                    <span class="label label-warning arrowed arrowed-right">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao) }}</span>
                                                 @break
-                                                @case(4)
-                                                    <span class="label label-success arrowed-in arrowed-in-right">4 Đã giao</span>
+                                                @case(App\Enums\TrangThaiHD::DaGiao)
+                                                    <span class="label label-success arrowed-in arrowed-in-right">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao) }}</span>
                                                 @break
                                                 @default
-
                                             @endswitch
                                         </label>
                                     </div>
@@ -223,17 +201,23 @@
                                         <label class="col-sm-3"> <b>{{ number_format($hoaDon->TongTien) }} VNĐ</b> </label>
                                     </div>
 
-                                    @if ($hoaDon->TrangThai != 4)
+                                    @if ($hoaDon->TrangThai != App\Enums\TrangThaiHD::DaGiao)
                                         <div class="space-4"></div>
 
                                         <div class="clearfix form-actions">
                                             <div class="col-md-9">
+                                                <form action="{{ route('HoaDon.destroy', $hoaDon) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">Hủy   <i class="icon-trash bigger-130"></i></button>
+                                                </form>
+
                                                 <button class="btn btn-success" type="submit">
                                                     Xác nhận chuyển tiếp trạng thái   
                                                     <i class="icon-ok bigger-110"></i>
                                                 </button>
 
-                                                <a href="{{ route('HoaDon.PDF', $hoaDon) }}" class="btn btn-danger">
+                                                <a href="{{ route('HoaDon.PDF', $hoaDon) }}" class="btn btn-info">
                                                     Xuất file PDF   
                                                     <i class="icon-file-text bigger-110"></i>
                                                 </a>
@@ -277,11 +261,37 @@
                                                     </td>
                                                     <td>{{ $item->SoLuong }}</td>
                                                     <td>{{ number_format($item->SanPham->GiaBan) }}</td>
-                                                    <td>{{ count($item->SanPham->CTChuongTrinhKM) ? number_format($item->SanPham->CTChuongTrinhKM->first()->GiamGia) : 0 }}</td>
+                                                    <td>{{ count($item->SanPham->CTChuongTrinhKM)? number_format($item->SanPham->CTChuongTrinhKM->first()->GiamGia): 0 }}</td>
                                                     <td>{{ number_format($item->GiaBan) }}</td>
                                                     <td>{{ number_format($item->GiaGiam) }}</td>
                                                     <td>{{ number_format($item->ThanhTien) }}</td>
-                                                    <td></td>
+                                                    <td>
+                                                        <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                            <a class="blue" href="javascript:void(0)" onclick="showSanPham({{ $item->SanPham->id }})" role="button" data-toggle="modal"
+                                                                data-rel="tooltip" title="Xem chi tiết">
+                                                                <i class="icon-zoom-in bigger-130"></i>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                            <div class="inline position-relative">
+                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
+                                                                </button>
+
+                                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                                    <li>
+                                                                        <a href="javascript:void(0)" onclick="showSanPham({{ $item->SanPham->id }})" role="button" data-toggle="modal"
+                                                                            class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
+                                                                            <span class="blue">
+                                                                                <i class="icon-zoom-in bigger-120"></i>
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -343,6 +353,7 @@
                 </div><!-- /span -->
             </div>
 
+            <div id="showModal"></div>
         </div><!-- /.page-content -->
     </div><!-- /.main-content -->
 
@@ -418,32 +429,5 @@
         });
     </script>
     {{-- datatable script End --}}
-
-    {{-- thông báo error --}}
-    <!-- page specific plugin scripts -->
-    <!--[if lte IE 8]>
-                                                                                                          <script src="assets/js/excanvas.min.js"></script>
-                                                                                                          <![endif]-->
-
-    <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
-    <script src="/storage/assets/js/bootbox.min.js"></script>
-    <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
-    <script src="/storage/assets/js/jquery.gritter.min.js"></script>
-    <script src="/storage/assets/js/spin.min.js"></script>
-
-    <script type="text/javascript">
-        jQuery(function($) {
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    $.gritter.add({
-                    title: 'Có lỗi xảy ra',
-                    text: '{{ $error }}',
-                    class_name: 'gritter-error'
-                    });
-                @endforeach
-            @endif
-        });
-    </script>
-    {{-- thông báo error end --}}
+    @include("SanPham.script.SanPham-show-script")
 @endsection

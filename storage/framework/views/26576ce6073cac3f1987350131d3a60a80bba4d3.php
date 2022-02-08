@@ -138,8 +138,8 @@
                             <div class="infobox infobox-green infobox-dark">
                                 <div class="infobox-progress">
                                     <div class="easy-pie-chart percentage"
-                                        data-percent="<?php echo e($thongKe['DonDatHang'] != 0 ? number_format(($thongKe['DonGiaoThanhCong'] / $thongKe['DonDatHang']) * 100) : 0); ?>" data-size="55">
-                                        <span class="percent"><?php echo e($thongKe['DonDatHang'] != 0 ? number_format(($thongKe['DonGiaoThanhCong'] / $thongKe['DonDatHang']) * 100) : 0); ?></span>%
+                                        data-percent="<?php echo e($thongKe['DonDatHang'] != 0? number_format(($thongKe['DonGiaoThanhCong'] / $thongKe['DonDatHang']) * 100): 0); ?>" data-size="55">
+                                        <span class="percent"><?php echo e($thongKe['DonDatHang'] != 0? number_format(($thongKe['DonGiaoThanhCong'] / $thongKe['DonDatHang']) * 100): 0); ?></span>%
                                     </div>
                                 </div>
 
@@ -250,7 +250,7 @@
                                 <div class="widget-header widget-header-flat">
                                     <h4 class="lighter">
                                         <i class="icon-star orange"></i>
-                                        Top 10 khách hàng mua nhiều nhất (trong tháng)
+                                        Top 10 khách hàng mua nhiều nhất
                                     </h4>
 
                                     <div class="widget-toolbar">
@@ -293,20 +293,23 @@
 
                                                         <td class="hidden-480">
                                                             <?php switch($item->TrangThaiHDHienTai):
-                                                                case (0): ?>
-                                                                    <span class="label label-danger arrowed">0 Đang chờ xác nhận</span>
+                                                                case (App\Enums\TrangThaiHD::DangXacNhan): ?>
+                                                                    <span class="label label-danger arrowed"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan)); ?></span>
                                                                 <?php break; ?>
-                                                                <?php case (1): ?>
-                                                                    <span class="label arrowed">1 Đang xử lý</span>
+                                                                <?php case (App\Enums\TrangThaiHD::DangXuLy): ?>
+                                                                    <span class="label arrowed"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy)); ?></span>
                                                                 <?php break; ?>
-                                                                <?php case (2): ?>
-                                                                    <span class="label label-info arrowed-right arrowed-in">2 Đã xử lý</span>
+                                                                <?php case (App\Enums\TrangThaiHD::DaXuLy): ?>
+                                                                    <span
+                                                                        class="label label-info arrowed-right arrowed-in"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy)); ?></span>
                                                                 <?php break; ?>
-                                                                <?php case (3): ?>
-                                                                    <span class="label label-warning arrowed arrowed-right">3 Đang giao</span>
+                                                                <?php case (App\Enums\TrangThaiHD::DangGiao): ?>
+                                                                    <span
+                                                                        class="label label-warning arrowed arrowed-right"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao)); ?></span>
                                                                 <?php break; ?>
-                                                                <?php case (4): ?>
-                                                                    <span class="label label-success arrowed-in arrowed-in-right">4 Đã giao</span>
+                                                                <?php case (App\Enums\TrangThaiHD::DaGiao): ?>
+                                                                    <span
+                                                                        class="label label-success arrowed-in arrowed-in-right"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao)); ?></span>
                                                                 <?php break; ?>
                                                                 <?php default: ?>
                                                             <?php endswitch; ?>
@@ -343,9 +346,74 @@
                             </div><!-- /widget-box -->
                         </div>
                     </div>
+
+                    <div class="hr hr32 hr-dotted"></div>
+
+                    <div class="row">
+                        <div class="widget-box transparent">
+                            <div class="widget-header widget-header-flat">
+                                <h4 class="lighter">
+                                    <i class="icon-rss orange"></i>
+                                    Top 10 Sản phẩm bán chạy
+                                </h4>
+
+                                <div class="widget-toolbar">
+                                    <a href="#" data-action="collapse">
+                                        <i class="icon-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main no-padding">
+                                    <table class="table table-bordered table-striped">
+                                        <thead class="thin-border-bottom">
+                                            <tr>
+                                                <th>
+                                                    <i class="icon-caret-right blue"></i>
+                                                    Tên sản phẩm
+                                                </th>
+
+                                                <th>
+                                                    <i class="icon-caret-right blue"></i>
+                                                    Hình ảnh
+                                                </th>
+
+                                                <th class="hidden-480">
+                                                    <i class="icon-caret-right blue"></i>
+                                                    Tổng số lượng bán
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <?php $__currentLoopData = $thongKe['dsSanPhamBanChay']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <tr>
+                                                    <td><?php echo e($item->TenSanPham); ?></td>
+
+                                                    <td>
+                                                        <a href="javascript:void(0)" onclick="showSanPham(<?php echo e($item->id); ?>)" role="button" data-toggle="modal" class="tooltip-info"
+                                                            data-rel="tooltip" title="Xem chi tiết">
+                                                            <img src='<?php echo e($item->HinhAnh); ?>' alt="<?php echo e($item->HinhAnh); ?>" width='100' height='100'>
+                                                        </a>
+                                                    </td>
+
+                                                    <td>
+                                                        <b class="green"><?php echo e($item->TongSoLuongBan); ?></b>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </tbody>
+                                    </table>
+                                </div><!-- /widget-main -->
+                            </div><!-- /widget-body -->
+                        </div><!-- /widget-box -->
+                    </div>
                     <!-- PAGE CONTENT ENDS -->
                 </div><!-- /.col -->
             </div><!-- /.row -->
+
+            <div id="showModal"></div>
         </div><!-- /.page-content -->
     </div><!-- /.main-content -->
 <?php $__env->stopSection(); ?>
@@ -355,8 +423,8 @@
     <!-- page specific plugin scripts -->
 
     <!--[if lte IE 8]>
-                                                                                                                                              <script src="/storage/assets/js/excanvas.min.js"></script>
-                                                                                                                                              <![endif]-->
+                                                                                                                                                                              <script src="/storage/assets/js/excanvas.min.js"></script>
+                                                                                                                                                                              <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -396,7 +464,7 @@
                     animate: /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase()) ? false : 1000,
                     size: size
                 });
-            })
+            });
 
             $('.sparkline').each(function() {
                 var $box = $(this).closest('.infobox');
@@ -416,30 +484,30 @@
             });
             var data = [{
                     label: "<?php echo e($thongKe['LoaiSanPham'][0]['TenLoai']); ?>",
-                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][0]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0); ?>,
+                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0? number_format(($thongKe['LoaiSanPham'][0]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2): 0); ?>,
                     color: "#2091CF"
                 },
                 {
                     label: "<?php echo e($thongKe['LoaiSanPham'][1]['TenLoai']); ?>",
-                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][1]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0); ?>,
+                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0? number_format(($thongKe['LoaiSanPham'][1]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2): 0); ?>,
                     color: "#68BC31"
                 },
                 {
                     label: "<?php echo e($thongKe['LoaiSanPham'][2]['TenLoai']); ?>",
-                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][2]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0); ?>,
+                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0? number_format(($thongKe['LoaiSanPham'][2]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2): 0); ?>,
                     color: "#AF4E96"
                 },
                 {
                     label: "<?php echo e($thongKe['LoaiSanPham'][3]['TenLoai']); ?>",
-                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][3]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0); ?>,
+                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0? number_format(($thongKe['LoaiSanPham'][3]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2): 0); ?>,
                     color: "#DA5430"
                 },
                 {
                     label: "<?php echo e($thongKe['LoaiSanPham'][4]['TenLoai']); ?>",
-                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0 ? number_format(($thongKe['LoaiSanPham'][4]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2) : 0); ?>,
+                    data: <?php echo e($thongKe['SoLuongChiTietHoaDon'] != 0? number_format(($thongKe['LoaiSanPham'][4]['LuotMua'] / $thongKe['SoLuongChiTietHoaDon']) * 100, 2): 0); ?>,
                     color: "#FEE074"
                 },
-            ]
+            ];
 
             function drawPieChart(placeholder, data, position) {
                 $.plot(placeholder, data, {
@@ -572,34 +640,35 @@
                 else $(this).closest('li').removeClass('selected');
             });
 
-            //bieu do`
-        var lineOptions = {
-            chart: {
-                type: "line",
-            },
-            series: [{
-                name: "Số tiền kiếm được",
-                data: [
-                    <?php $__currentLoopData = $thongKe['DoanhThu']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php echo e($item['DoanhThu'] . ','); ?>
-
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                ],
-            }, ],
-            xaxis: {
-                categories: [
-                    <?php $__currentLoopData = $thongKe['DoanhThu']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php echo e($item['Year'] . ','); ?>
-
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                ],
-            },
-        };
-        var line = new ApexCharts(document.querySelector("#lineDoanhThu"), lineOptions);
-        line.render();
-        //bieu do` end
         });
+        //bieu do`
+    var lineOptions = {
+        chart: {
+            type: "line",
+        },
+        series: [{
+            name: "Số tiền kiếm được",
+            data: [
+                <?php $__currentLoopData = $thongKe['DoanhThu']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php echo e($item['DoanhThu'] . ','); ?>
+
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            ],
+        }, ],
+        xaxis: {
+            categories: [
+                <?php $__currentLoopData = $thongKe['DoanhThu']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php echo e($item['Year'] . ','); ?>
+
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            ],
+        },
+    };
+    var line = new ApexCharts(document.querySelector("#lineDoanhThu"), lineOptions);
+    line.render();
+    //bieu do` end
     </script>
+    <?php echo $__env->make("SanPham.script.SanPham-show-script", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\tranphuocvinh\laravel\Do-An-Laravel\resources\views/Home.blade.php ENDPATH**/ ?>

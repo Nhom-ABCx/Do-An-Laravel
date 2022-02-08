@@ -7,42 +7,6 @@
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
     
-
-    <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
-    <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
-    <style>
-        .spinner-preview {
-            width: 100px;
-            height: 100px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .dropdown-preview {
-            margin: 0 5px;
-            display: inline-block;
-        }
-
-        .dropdown-preview>.dropdown-menu {
-            display: block;
-            position: static;
-            margin-bottom: 5px;
-        }
-
-        /* hien thi hinh anh khi select */
-        .hinhAnh {
-            display: none;
-        }
-
-        select option:first-child {
-            display: none;
-        }
-
-        /* .hinhAnh img {
-                                                            max-width: 150px;
-                                                        } */
-
-    </style>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('body'); ?>
@@ -71,168 +35,176 @@
         <div class="page-content">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="widget-box">
-                        <div class="widget-header">
-                            <h3 class="header smaller lighter blue">Chi tiết hóa đơn nhập</h3>
-                        </div>
-                        <div class="widget-body">
-                            <div class="widget-main">
-                                <a href="#modal-form" role="button" data-toggle="modal" class="btn btn-success">
-                                    <i class="icon-plus"></i>
-                                    Chọn sản phẩm thêm vào
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#ChiTiet">
+                                    <i class="green icon-home bigger-150"></i>
+                                    Thông tin đơn hàng
                                 </a>
+                            </li>
+
+                            <li>
+                                <a data-toggle="tab" href="#DanhSachSanPham">
+                                    <i class="pink icon-gittip bigger-150"></i>
+                                    Danh sách sản phẩm
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="ChiTiet" class="tab-pane in active">
+                                <form class="form-horizontal" role="form" action="<?php echo e(route('HoaDonNhap.CapNhatTrangThai', $hoaDonNhap)); ?>" method="post" enctype="multipart/form-data">
+                                    <?php echo csrf_field(); ?>
+                                    <?php echo method_field('PATCH'); ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-adn red"></i> Mã đơn hàng </label>
+                                        <label class="col-sm-3"> <b><?php echo e($hoaDonNhap->id); ?></b> </label>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-user blue"></i> Người lập </label>
+                                        <label class="col-sm-3"> <b><?php echo e($hoaDonNhap->NhanVien->HoTen ?? $hoaDonNhap->NhanVien->Username); ?></b> </label>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-user blue"></i> Nhà cung cấp </label>
+                                        <label class="col-sm-3"> <b><?php echo e($hoaDonNhap->NhaCungCap); ?></b> </label>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-mobile-phone green"></i> Số điện thoại </label>
+                                        <label class="col-sm-3"> <b><?php echo e($hoaDonNhap->Phone); ?></b> </label>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-calendar purple"></i> Ngày đặt </label>
+                                        <label class="col-sm-3"> <b><?php echo e($hoaDonNhap->created_at); ?></b> </label>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-exclamation-sign"></i> Trạng thái </label>
+                                        <label class="col-sm-3">
+                                            <?php if($hoaDonNhap->TrangThai): ?>
+                                                <span class="label label-success arrowed-in arrowed-in-right"> Đã thành công</span>
+                                            <?php else: ?>
+                                                <span class="label arrowed"> Chưa thành công</span>
+                                            <?php endif; ?>
+                                        </label>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-bar-chart"></i> Tổng số lượng </label>
+                                        <label class="col-sm-3"> <b id="TongSoLuong"><?php echo e($hoaDonNhap->TongSoLuong); ?></b> </label>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2" for="form-field-1"><i class="icon-money red"></i> Tổng thanh toán </label>
+                                        <label class="col-sm-3"> <b id="TongTien"><?php echo e(number_format($hoaDonNhap->TongTien)); ?> VNĐ</b> </label>
+                                    </div>
+
+                                    <?php if(!$hoaDonNhap->TrangThai): ?>
+                                        <div class="space-4"></div>
+
+                                        <div class="clearfix form-actions">
+                                            <div class="col-md-9">
+                                                <form action="<?php echo e(route('HoaDon.destroy', $hoaDonNhap)); ?>" method="post">
+                                                    <?php echo csrf_field(); ?>
+                                                    <?php echo method_field('DELETE'); ?>
+                                                    <button type="submit" class="btn btn-danger">Hủy   <i class="icon-trash bigger-130"></i></button>
+                                                </form>
+
+                                                <button class="btn btn-success" type="submit">
+                                                    Xác nhận hóa đơn
+                                                    <i class="icon-ok bigger-110"></i>
+                                                </button>
+
+                                                
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                    <!-- PAGE CONTENT ENDS -->
+                                </form>
+                            </div>
+
+                            <div id="DanhSachSanPham" class="tab-pane">
+                                <?php if($hoaDonNhap->TrangThai): ?>
+                                <?php else: ?>
+                                    <a href="#modal-form" role="button" data-toggle="modal" data-backdrop="static" data-keyboard="false" class="btn btn-success">
+                                        <i class="icon-plus"></i>
+                                        Chọn sản phẩm thêm vào
+                                    </a>
+
+                                    <div class="space"></div>
+                                <?php endif; ?>
+
+                                <div class="table-responsive">
+                                    <table id="ChiTietHoaDonNhap" class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="center"><i class="icon-adn"></i>Id</th>
+                                                <th><i class="icon-align-left"></i>Tên sản phẩm</th>
+                                                <th><i class="icon-picture"></i>Hình ảnh</th>
+                                                <th><i class="icon-bar-chart"></i>Số lượng</th>
+                                                <th><i class="icon-money"></i>Giá nhập</th>
+                                                <th><i class="icon-bar-chart"></i>Thành tiền</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="hr hr-24"></div>
-
-                    <div class="table-header">
-                        Bảng chi tiết hóa đơn nhập
-                    </div>
-
-                    <div class="table-responsive">
-                        <table id="sample-table-2" class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="center"><i class="icon-adn"></i>Id</th>
-                                    <th><i class="icon-align-left"></i>Tên sản phẩm</th>
-                                    <th><i class="icon-picture"></i>Hình ảnh</th>
-                                    <th><i class="icon-bar-chart"></i>Số lượng</th>
-                                    <th><i class="icon-money"></i>Giá nhập</th>
-                                    <th><i class="icon-bar-chart"></i>Thành tiền</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <?php $__currentLoopData = $dsChiTietHD; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php
-                                        App\Http\Controllers\SanPhamController::fixImage($item->SanPham);
-                                    ?>
-                                    <tr>
-                                        <td class="center"><?php echo e($item->SanPham->id); ?></td>
-                                        <td><?php echo e($item->SanPham->TenSanPham); ?></td>
-                                        <td>
-                                            <img src='<?php echo e($item->SanPham->HinhAnh); ?>' alt="<?php echo e($item->SanPham->HinhAnh); ?>" width='100' height='100'>
-                                        </td>
-                                        <td><?php echo e($item->SoLuong); ?></td>
-                                        <td><?php echo e(number_format($item->GiaNhap)); ?></td>
-                                        <td><?php echo e(number_format($item->ThanhTien)); ?></td>
-                                        <td>
-                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="<?php echo e(route('SanPham.index', $item->SanPham->id)); ?>" data-rel="tooltip" title="Xem sản phẩm">
-                                                    <i class="icon-zoom-in bigger-130"></i>
-                                                </a>
-                                            </div>
-
-                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                        <i class="icon-caret-down icon-only bigger-120"></i>
-                                                    </button>
-
-                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                        <li>
-                                                            <a href="<?php echo e(route('SanPham.index', $item->SanPham->id)); ?>" class="tooltip-info" data-rel="tooltip" title="Xem sản phẩm">
-                                                                <span class="blue">
-                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                </div><!-- /span -->
             </div>
 
             <div id="modal-form" class="modal" tabindex="-1">
-                <div class="modal-dialog">
+                <div class="modal-dialog" style="width: 90%;">
                     <div class="modal-content">
-                        <form action="<?php echo e(route('HoaDonNhap.update', $hoaDonNhap)); ?>" method="post">
+                        <form action="<?php echo e(route('HoaDonNhap.ThemSanPham', $hoaDonNhap)); ?>" method="post" id="submitForm">
                             <?php echo csrf_field(); ?>
-                            <?php echo method_field("PUT"); ?>
+                            
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="blue bigger">Nhập sản phẩm</h4>
+                                <h4 class="blue bigger">Chọn sản phẩm</h4>
                             </div>
 
                             <div class="modal-body overflow-visible">
                                 <div class="row">
-                                    <div class="col-xs-12 col-sm-5">
-                                        <div class="space"></div>
-
-                                        <?php $__currentLoopData = $dsSanPham; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <div class="imageSelector show-image output">
-                                                <div id="<?php echo e($item->id); ?>" class="hinhAnh">
-                                                    <img src="<?php echo e($item->HinhAnh); ?>" style="width: 100%" />
-                                                </div>
-                                            </div>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </div>
-
-                                    <div class="col-xs-12 col-sm-7">
-                                        <div class="form-group">
-                                            <label>Sản phẩm</label>
-
-                                            <div>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="icon-sort-by-attributes"></i>
-                                                    </span>
-
-                                                    <select class="width-90 chosen-select" id='imageSelector' name="SanPhamId">
-                                                        <option value=''></option>
-                                                        <?php $__currentLoopData = $dsSanPham; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                            <option value="<?php echo e($item->id); ?>" <?php echo e($item->id == old('SanPhamId') ? 'selected' : ''); ?>><?php echo e($item->TenSanPham); ?></option>
-                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                    </select>
-                                                </div>
-                                                <?php if($errors->has('SanPhamId')): ?>
-                                                    <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('SanPhamId')); ?></i>
-                                                <?php endif; ?>
-                                            </div>
-                                        </div>
-
-                                        <div class="space-4"></div>
-
-                                        <div class="form-group">
-                                            <label for="form-field-first">Số lượng</label>
-
-                                            <div>
-                                                
-                                                <input type="text" class="input-mini" id="spinner3" value="<?php echo e(old('SoLuong')); ?>" name="SoLuong" />
-                                            </div>
-                                            <?php if($errors->has('SoLuong')): ?>
-                                                <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('SoLuong')); ?></i>
-                                            <?php endif; ?>
-                                        </div>
-
-                                        <div class="space-4"></div>
-
-                                        <div class="form-group">
-                                            <label for="form-field-first">Giá nhập</label>
-
-                                            <div>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="icon-credit-card"></i>
-                                                    </span>
-
-                                                    
-                                                    <input type="text" class="input-mini" id="spinner1" value="<?php echo e(old('GiaNhap')); ?>" name="GiaNhap" />
-                                                </div>
-                                            </div>
-                                            <?php if($errors->has('GiaNhap')): ?>
-                                                <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('GiaNhap')); ?></i>
-                                            <?php endif; ?>
-                                        </div>
+                                    <div class="table-responsive">
+                                        <table id="ChonSanPham" class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="center"><i class="icon-adn"></i>Id</th>
+                                                    <th><i class="icon-align-left"></i>Tên sản phẩm</th>
+                                                    <th><i class="icon-bar-chart"></i>Số lượng tồn</th>
+                                                    <th><i class="icon-picture"></i>Hình ảnh</th>
+                                                    <th><i class="icon-apple"></i>Hãng sãn xuất</th>
+                                                    <th><i class="icon-android"></i>Loại sản phẩm</th>
+                                                    <th class="center">
+                                                        <label>
+                                                            <input type="checkbox" class="ace" />
+                                                            <span class="lbl"></span>
+                                                        </label>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -240,12 +212,12 @@
                             <div class="modal-footer">
                                 <button class="btn btn-sm" data-dismiss="modal">
                                     <i class="icon-remove"></i>
-                                    Cancel
+                                    Hủy
                                 </button>
 
                                 <button type="submit" class="btn btn-sm btn-primary">
                                     <i class="icon-ok"></i>
-                                    Save
+                                    OK
                                 </button>
                             </div>
                         </form>
@@ -253,6 +225,8 @@
                 </div>
 
             </div><!-- /.page-content -->
+
+            <div id="showModal"></div>
         </div><!-- /.main-content -->
 
     <?php $__env->stopSection(); ?>
@@ -276,135 +250,9 @@
         
         <!-- inline scripts related to this page -->
         
-        <script type="text/javascript">
-            jQuery(function($) {
-                var oTable1 = $('#sample-table-2').dataTable({
-                    "aoColumns": [
-                        null, null,
-                        {
-                            "bSortable": false
-                        },
-                        null, null, null,
-                        {
-                            "bSortable": false
-                        },
-                    ]
-                });
-
-                $('table th input:checkbox').on('click', function() {
-                    var that = this;
-                    $(this).closest('table').find('tr > td:first-child input:checkbox')
-                        .each(function() {
-                            this.checked = that.checked;
-                            $(this).closest('tr').toggleClass('selected');
-                        });
-
-                });
-
-
-                $('[data-rel="tooltip"]').tooltip({
-                    placement: tooltip_placement
-                });
-
-                function tooltip_placement(context, source) {
-                    var $source = $(source);
-                    var $parent = $source.closest('table')
-                    var off1 = $parent.offset();
-                    var w1 = $parent.width();
-
-                    var off2 = $source.offset();
-                    var w2 = $source.width();
-
-                    if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
-                    return 'left';
-                }
-            })
-            $('[data-rel=tooltip]').tooltip({
-                container: 'body'
-            });
-            $(".chosen-select").chosen();
-            $('#chosen-multiple-style').on('click', function(e) {
-                var target = $(e.target).find('input[type=radio]');
-                var which = parseInt(target.val());
-                if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
-                else $('#form-field-select-4').removeClass('tag-input-style');
-            });
-
-            /////////modal combobox fix
-            //chosen plugin inside a modal will have a zero width because the select element is originally hidden
-            //and its width cannot be determined.
-            //so we set the width after modal is show
-            $('#modal-form').on('shown.bs.modal', function() {
-                $(this).find('.chosen-container').each(function() {
-                    $(this).find('a:first-child').css('width', '210px');
-                    $(this).find('.chosen-drop').css('width', '210px');
-                    $(this).find('.chosen-search input').css('width', '200px');
-                });
-            })
-
-            _valueSL = <?php echo e(old('SoLuong') ?? 0); ?>;
-            _valueGN = <?php echo e(old('GiaNhap') ?? 0); ?>;
-            $('#spinner1').ace_spinner({
-                value: _valueGN,
-                min: 0,
-                max: 1000000000,
-                step: 10000,
-                touch_spinner: true,
-                icon_up: 'icon-caret-up',
-                icon_down: 'icon-caret-down'
-            });
-            $('#spinner3').ace_spinner({
-                value: _valueSL,
-                min: 0,
-                max: 10000,
-                step: 5,
-                on_sides: true,
-                icon_up: 'icon-plus smaller-75',
-                icon_down: 'icon-minus smaller-75',
-                btn_up_class: 'btn-success',
-                btn_down_class: 'btn-danger'
-            });
-
-            // hien thi hinh anh khi select
-            $('#imageSelector').change(function() {
-                var select = $(this);
-                $('.' + select.attr("id") + ' .hinhAnh').hide();
-                $('#' + select.val()).show();
-            });
-        </script>
+        <?php echo $__env->make("HoaDon.script.HoaDonNhap-show-script", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         
-
-        
-        <!-- page specific plugin scripts -->
-        <!--[if lte IE 8]>
-                                                                                                                                                                          <script src="assets/js/excanvas.min.js"></script>
-                                                                                                                                                                          <![endif]-->
-
-        <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-        <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
-        <script src="/storage/assets/js/bootbox.min.js"></script>
-        <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
-        <script src="/storage/assets/js/jquery.gritter.min.js"></script>
-        <script src="/storage/assets/js/spin.min.js"></script>
-
-        <script type="text/javascript">
-            jQuery(function($) {
-                <?php if($errors->any()): ?>
-                    $(document).ready(function(){
-                    $("#modal-form").modal("show");
-                    });
-
-                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        $.gritter.add({
-                        title: 'Có lỗi xảy ra',
-                        text: '<?php echo e($error); ?>',
-                        class_name: 'gritter-error'
-                        });
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                <?php endif; ?>
-            });
-        </script>
-        
+        <?php echo $__env->make("SanPham.script.SanPham-show-script", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/HoaDon/HoaDonNhap-show.blade.php ENDPATH**/ ?>

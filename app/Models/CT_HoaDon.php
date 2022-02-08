@@ -30,6 +30,6 @@ class CT_HoaDon extends Model
     }
     public function SanPham()
     {
-        return $this->belongsTo(SanPham::class, 'SanPhamId');
+        return $this->belongsTo(SanPham::class, 'SanPhamId')->withTrashed();
     }
 }

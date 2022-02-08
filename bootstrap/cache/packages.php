@@ -10,6 +10,13 @@
       'PDF' => 'Barryvdh\\DomPDF\\Facade',
     ),
   ),
+  'bensampo/laravel-enum' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'BenSampo\\Enum\\EnumServiceProvider',
+    ),
+  ),
   'facade/ignition' => 
   array (
     'providers' => 

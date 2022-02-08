@@ -63,11 +63,12 @@ class HoaDonNhapController extends Controller
     public function store(Request $request)
     {
         //xác thực đầu vào, xem các luật tại https://laravel.com/docs/8.x/validation#available-validation-rules
-        $request->validate(['NhaCungCap' => ['required', 'max:255'],]);
+        $request->validate(['NhaCungCap' => ['required', 'max:255'], 'Phone' => ['required', 'numeric'],]);
 
         HoaDonNhap::create([
             'NhanVienId' => Auth::user()->id,
             'NhaCungCap' => $request->input('NhaCungCap'),
+            'Phone' => $request->input('Phone'),
         ]);
 
         return Redirect::route('HoaDonNhap.index');
@@ -81,12 +82,15 @@ class HoaDonNhapController extends Controller
      */
     public function show(HoaDonNhap $hoaDonNhap)
     {
-        $dsChiTietHD = CT_HoaDonNhap::where("HoaDonNhapId", $hoaDonNhap->id)->get();
         $dsSanPham = SanPham::all();
-        foreach ($dsSanPham as $sp)
+        foreach ($dsSanPham as $sp) {
             SanPhamController::fixImage($sp);
+            //sua lai luon de xai cho javascript
+            $sp["HangSanXuatId"] = $sp->HangSanXuat->Ten;
+            $sp["LoaiSanPhamId"] = $sp->LoaiSanPham->TenLoai;
+        }
         //gọi fixImage cho từng sp
-        return view('HoaDon.HoaDonNhap-show', ["hoaDonNhap" => $hoaDonNhap, "dsChiTietHD" => $dsChiTietHD, "dsSanPham" => $dsSanPham]);
+        return view('HoaDon.HoaDonNhap-show', ["hoaDonNhap" => $hoaDonNhap, "dsSanPham" => $dsSanPham]);
     }
 
     /**
@@ -95,6 +99,7 @@ class HoaDonNhapController extends Controller
      * @param  \App\Models\HoaDonNhap  $hoaDonNhap
      * @return \Illuminate\Http\Response
      */
+    //cap nhat lai trang thai cua hoa don nhap
     public function edit(Request $request, HoaDonNhap $hoaDonNhap)
     {
         //trang thai phai nam` trong 2 so', tranh truong` hop thay doi request tai giao dien
@@ -129,19 +134,23 @@ class HoaDonNhapController extends Controller
      * @param  \App\Models\HoaDonNhap  $hoaDonNhap
      * @return \Illuminate\Http\Response
      */
+    //them san pham vao trong chi tiet hoa don nhap
     public function update(Request $request, HoaDonNhap $hoaDonNhap)
     {
         //xác thực đầu vào, xem các luật tại https://laravel.com/docs/8.x/validation#available-validation-rules
-        $request->validate([
-            'SanPhamId' => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
-            'SoLuong' => ['required', 'numeric', 'integer', 'min:0', Rule::notIn([0])],
-            'GiaNhap' => ['required', 'numeric', 'integer', 'min:0', Rule::notIn([0])],
+        //kiem tra du lieu
+        $validate = Validator::make($request->all(), [
+            'pk' => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
+            'value' => ['required', 'numeric', 'min:0', Rule::notIn([0])],
         ]);
-
-        $ctHoaDonNhap = CT_HoaDonNhap::where("SanPhamId", $request["SanPhamId"])->where("HoaDonNhapId", $hoaDonNhap->id)->first();
+        // //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+        //neu ton` tai roi` thi update ngc lai thi` bao' loi~
+        $ctHoaDonNhap = CT_HoaDonNhap::where("SanPhamId", $request["pk"])->where("HoaDonNhapId", $hoaDonNhap->id)->first();
         if (!empty($ctHoaDonNhap)) {
-            $soLuong = $ctHoaDonNhap->SoLuong + $request->input('SoLuong');
-            $giaNhap = $ctHoaDonNhap->GiaNhap + $request->input('GiaNhap');
+            $soLuong = ($request['name'] == "SoLuong") ? $request['value'] : $ctHoaDonNhap->SoLuong;
+            $giaNhap = ($request['name'] == "GiaNhap") ? $request['value'] : $ctHoaDonNhap->GiaNhap;
             $ctHoaDonNhap->fill([
                 'SoLuong' => $soLuong,
                 'GiaNhap' => $giaNhap,
@@ -149,21 +158,14 @@ class HoaDonNhapController extends Controller
             ]);
             $ctHoaDonNhap->save();
         } else {
-            $thanhTien = $request->input('SoLuong') * $request->input('GiaNhap');
-            $ctHoaDonNhap = CT_HoaDonNhap::create([
-                'HoaDonNhapId' => $hoaDonNhap->id,
-                'SanPhamId' => $request->input('SanPhamId'),
-                'SoLuong' => $request->input('SoLuong'),
-                'GiaNhap' => $request->input('GiaNhap'),
-                'ThanhTien' => $thanhTien,
-            ]);
+            return response()->json(["error" => "Không tìm thấy dữ liệu"], 404);
         }
 
         $hoaDonNhap->TongSoLuong = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('SoLuong');
         $hoaDonNhap->TongTien = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('ThanhTien');
         $hoaDonNhap->save();
 
-        return Redirect::route('HoaDonNhap.show', $hoaDonNhap);
+        return response()->json($ctHoaDonNhap, 200);
     }
 
     /**
@@ -206,5 +208,77 @@ class HoaDonNhapController extends Controller
         $hoaDon = HoaDonNhap::onlyTrashed()->find($id);
         $hoaDon->restore();
         return Redirect::route('HoaDonNhap.DaHuy');
+    }
+    public function ThemSanPham(Request $request, HoaDonNhap $hoaDonNhap)
+    {
+        //kiem tra du lieu
+        $validate = Validator::make($request->all(), [
+            'SanPhamId.*' => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
+        ]);
+        // //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+
+        //xem co' duoc tao ra hay ko de xu ly ben phan giao dien
+        $dsChiTietHD = [];
+        $i = 0;
+        foreach ($request["SanPhamId"] as $item) {
+            $ctHoaDonNhap = CT_HoaDonNhap::firstOrCreate([
+                'HoaDonNhapId' => $hoaDonNhap->id,
+                'SanPhamId' => $item,
+            ]);
+            $dsChiTietHD = Arr::add($dsChiTietHD, $i, $ctHoaDonNhap);
+            $i++;
+        }
+        return response()->json($dsChiTietHD, 200);
+    }
+    public function XoaSanPham($id)
+    {
+        $ctHoaDonNhap = CT_HoaDonNhap::where("SanPhamId",$id)->first();
+        if (!empty($ctHoaDonNhap)) {
+            $ctHoaDonNhap->forceDelete();
+            //tinh' lai TongSL voi TongTien
+            $hoaDonNhap=$ctHoaDonNhap->HoaDonNhap;
+            $hoaDonNhap->TongSoLuong = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('SoLuong');
+            $hoaDonNhap->TongTien = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('ThanhTien');
+            $hoaDonNhap->save();
+            return response()->json([], 200);
+        }
+        return response()->json(["Error" => "Không tìm thấy"], 404);
+    }
+    public function CapNhatTrangThai(HoaDonNhap $hoaDonNhap)
+    {
+        if ($hoaDonNhap->TrangThai == 1)
+            //if nay` de tranh' tinh` trang gui request ao?, voi thu~ nghiem luon withErrors
+            return Redirect::back()->withErrors(['TrangThai' => 'Trạng thái đã thành công thì không thể cập nhật tiếp']);
+        else {
+            $hoaDonNhap->TrangThai = $hoaDonNhap->TrangThai + 1;
+            $hoaDonNhap->save();
+
+            //neu trang thai' thanh`cong thi cap nhat lai gia' ban' va so luong ton` cua san pham tuong ung'
+            if ($hoaDonNhap->TrangThai) {
+                $dsChiTietHD = $hoaDonNhap->CT_HoaDonNhap;
+                if (count($dsChiTietHD)) {
+                    foreach ($dsChiTietHD as $item) {
+                        $sanPham = $item->SanPham;
+                        $sanPham->fill([
+                            "GiaNhap" => $item->GiaNhap,
+                            "SoLuongTon" => $sanPham->SoLuongTon + $item->SoLuong,
+                        ]);
+                        $sanPham->save();
+                    }
+                }
+            }
+        }
+        return Redirect::route('HoaDonNhap.index');
+    }
+    //api
+    public function API_HoaDonNhap_ChiTiet(HoaDonNhap $hoaDonNhap)
+    {
+        $dsCT_HoaDonNhap = $hoaDonNhap->CT_HoaDonNhap;
+        foreach ($dsCT_HoaDonNhap as $ctHoaDonNhap) {
+            SanPhamController::fixImage($ctHoaDonNhap->SanPham);
+        }
+        return response()->json($dsCT_HoaDonNhap, 200);
     }
 }

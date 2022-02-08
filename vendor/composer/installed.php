@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '8817c0150f3e5bf8eab4c0c5b7a6635c530deb29',
+        'reference' => '30e78b2519f097017aa65f41f1942dbabca88e7f',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -26,6 +26,15 @@
             'install_path' => __DIR__ . '/../barryvdh/laravel-dompdf',
             'aliases' => array(),
             'reference' => '5b99e1f94157d74e450f4c97e8444fcaffa2144b',
+            'dev_requirement' => false,
+        ),
+        'bensampo/laravel-enum' => array(
+            'pretty_version' => 'v4.2.0',
+            'version' => '4.2.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../bensampo/laravel-enum',
+            'aliases' => array(),
+            'reference' => 'ab1e261cd3214cf43521101858c50504bcd8e431',
             'dev_requirement' => false,
         ),
         'brick/math' => array(
@@ -229,6 +238,15 @@
             'reference' => '8c3d0a3f6af734494ad8f6fbbee0ba92422859f3',
             'dev_requirement' => true,
         ),
+        'hanneskod/classtools' => array(
+            'pretty_version' => '1.2.1',
+            'version' => '1.2.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../hanneskod/classtools',
+            'aliases' => array(),
+            'reference' => 'd365ddac0e602027c0471ea292f4ba2afcb49394',
+            'dev_requirement' => false,
+        ),
         'illuminate/auth' => array(
             'dev_requirement' => false,
             'replaced' => array(
@@ -421,6 +439,15 @@
                 0 => '*',
             ),
         ),
+        'laminas/laminas-code' => array(
+            'pretty_version' => '4.5.1',
+            'version' => '4.5.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laminas/laminas-code',
+            'aliases' => array(),
+            'reference' => '6fd96d4d913571a2cd056a27b123fa28cb90ac4e',
+            'dev_requirement' => false,
+        ),
         'laravel/framework' => array(
             'pretty_version' => 'v8.78.1',
             'version' => '8.78.1.0',
@@ -436,7 +463,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '8817c0150f3e5bf8eab4c0c5b7a6635c530deb29',
+            'reference' => '30e78b2519f097017aa65f41f1942dbabca88e7f',
             'dev_requirement' => false,
         ),
         'laravel/passport' => array(

@@ -5,8 +5,11 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Conversation;
+use App\Models\KhachHang;
 use App\Models\Message;
+use App\Models\NhanVien;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,7 +32,8 @@ class AppServiceProvider extends ServiceProvider
     {
         //truyen du lieu sang layout
         view()->composer('layouts.Layout', function ($view) {
-            $dsCacCuocTroChuyen = Conversation::where("conversations.NhanVienId", Auth::user()->id)->limit(5)->get();
+            $dsCacCuocTroChuyen = Conversation::where("NhanVienId", Auth::user()->id)
+            ->orderBy("KhachHangId")->limit(5)->get();
 
             foreach ($dsCacCuocTroChuyen as $item) {
                 $mess = Message::where("ConversationId", $item->id)->orderByDesc('created_at')->first();

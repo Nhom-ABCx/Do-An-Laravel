@@ -1,28 +1,7 @@
 <?php $__env->startSection('title', 'Chi tiết hóa đơn'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
-    <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
-    <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
-    <style>
-        .spinner-preview {
-            width: 100px;
-            height: 100px;
-            text-align: center;
-            margin-top: 60px;
-        }
 
-        .dropdown-preview {
-            margin: 0 5px;
-            display: inline-block;
-        }
-
-        .dropdown-preview>.dropdown-menu {
-            display: block;
-            position: static;
-            margin-bottom: 5px;
-        }
-
-    </style>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('body'); ?>
@@ -179,23 +158,22 @@
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-exclamation-sign"></i> Trạng thái </label>
                                         <label class="col-sm-3">
                                             <?php switch($hoaDon->TrangThai):
-                                                case (0): ?>
-                                                    <span class="label label-danger arrowed">0 Đang chờ xác nhận</span>
+                                                case (App\Enums\TrangThaiHD::DangXacNhan): ?>
+                                                    <span class="label label-danger arrowed"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan)); ?></span>
                                                 <?php break; ?>
-                                                <?php case (1): ?>
-                                                    <span class="label arrowed">1 Đang xử lý</span>
+                                                <?php case (App\Enums\TrangThaiHD::DangXuLy): ?>
+                                                    <span class="label arrowed"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy)); ?></span>
                                                 <?php break; ?>
-                                                <?php case (2): ?>
-                                                    <span class="label label-info arrowed-right arrowed-in">2 Đã xử lý</span>
+                                                <?php case (App\Enums\TrangThaiHD::DaXuLy): ?>
+                                                    <span class="label label-info arrowed-right arrowed-in"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy)); ?></span>
                                                 <?php break; ?>
-                                                <?php case (3): ?>
-                                                    <span class="label label-warning arrowed arrowed-right">3 Đang giao</span>
+                                                <?php case (App\Enums\TrangThaiHD::DangGiao): ?>
+                                                    <span class="label label-warning arrowed arrowed-right"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao)); ?></span>
                                                 <?php break; ?>
-                                                <?php case (4): ?>
-                                                    <span class="label label-success arrowed-in arrowed-in-right">4 Đã giao</span>
+                                                <?php case (App\Enums\TrangThaiHD::DaGiao): ?>
+                                                    <span class="label label-success arrowed-in arrowed-in-right"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao)); ?></span>
                                                 <?php break; ?>
                                                 <?php default: ?>
-
                                             <?php endswitch; ?>
                                         </label>
                                     </div>
@@ -214,17 +192,23 @@
                                         <label class="col-sm-3"> <b><?php echo e(number_format($hoaDon->TongTien)); ?> VNĐ</b> </label>
                                     </div>
 
-                                    <?php if($hoaDon->TrangThai != 4): ?>
+                                    <?php if($hoaDon->TrangThai != App\Enums\TrangThaiHD::DaGiao): ?>
                                         <div class="space-4"></div>
 
                                         <div class="clearfix form-actions">
                                             <div class="col-md-9">
+                                                <form action="<?php echo e(route('HoaDon.destroy', $hoaDon)); ?>" method="post">
+                                                    <?php echo csrf_field(); ?>
+                                                    <?php echo method_field('DELETE'); ?>
+                                                    <button type="submit" class="btn btn-danger">Hủy   <i class="icon-trash bigger-130"></i></button>
+                                                </form>
+
                                                 <button class="btn btn-success" type="submit">
                                                     Xác nhận chuyển tiếp trạng thái   
                                                     <i class="icon-ok bigger-110"></i>
                                                 </button>
 
-                                                <a href="<?php echo e(route('HoaDon.PDF', $hoaDon)); ?>" class="btn btn-danger">
+                                                <a href="<?php echo e(route('HoaDon.PDF', $hoaDon)); ?>" class="btn btn-info">
                                                     Xuất file PDF   
                                                     <i class="icon-file-text bigger-110"></i>
                                                 </a>
@@ -268,11 +252,37 @@
                                                     </td>
                                                     <td><?php echo e($item->SoLuong); ?></td>
                                                     <td><?php echo e(number_format($item->SanPham->GiaBan)); ?></td>
-                                                    <td><?php echo e(count($item->SanPham->CTChuongTrinhKM) ? number_format($item->SanPham->CTChuongTrinhKM->first()->GiamGia) : 0); ?></td>
+                                                    <td><?php echo e(count($item->SanPham->CTChuongTrinhKM)? number_format($item->SanPham->CTChuongTrinhKM->first()->GiamGia): 0); ?></td>
                                                     <td><?php echo e(number_format($item->GiaBan)); ?></td>
                                                     <td><?php echo e(number_format($item->GiaGiam)); ?></td>
                                                     <td><?php echo e(number_format($item->ThanhTien)); ?></td>
-                                                    <td></td>
+                                                    <td>
+                                                        <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                            <a class="blue" href="javascript:void(0)" onclick="showSanPham(<?php echo e($item->SanPham->id); ?>)" role="button" data-toggle="modal"
+                                                                data-rel="tooltip" title="Xem chi tiết">
+                                                                <i class="icon-zoom-in bigger-130"></i>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                            <div class="inline position-relative">
+                                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                                    <i class="icon-caret-down icon-only bigger-120"></i>
+                                                                </button>
+
+                                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                                    <li>
+                                                                        <a href="javascript:void(0)" onclick="showSanPham(<?php echo e($item->SanPham->id); ?>)" role="button" data-toggle="modal"
+                                                                            class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
+                                                                            <span class="blue">
+                                                                                <i class="icon-zoom-in bigger-120"></i>
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
@@ -334,6 +344,7 @@
                 </div><!-- /span -->
             </div>
 
+            <div id="showModal"></div>
         </div><!-- /.page-content -->
     </div><!-- /.main-content -->
 
@@ -409,34 +420,7 @@
         });
     </script>
     
-
-    
-    <!-- page specific plugin scripts -->
-    <!--[if lte IE 8]>
-                                                                                                          <script src="assets/js/excanvas.min.js"></script>
-                                                                                                          <![endif]-->
-
-    <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
-    <script src="/storage/assets/js/bootbox.min.js"></script>
-    <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
-    <script src="/storage/assets/js/jquery.gritter.min.js"></script>
-    <script src="/storage/assets/js/spin.min.js"></script>
-
-    <script type="text/javascript">
-        jQuery(function($) {
-            <?php if($errors->any()): ?>
-                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    $.gritter.add({
-                    title: 'Có lỗi xảy ra',
-                    text: '<?php echo e($error); ?>',
-                    class_name: 'gritter-error'
-                    });
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            <?php endif; ?>
-        });
-    </script>
-    
+    <?php echo $__env->make("SanPham.script.SanPham-show-script", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/HoaDon/HoaDon-show.blade.php ENDPATH**/ ?>

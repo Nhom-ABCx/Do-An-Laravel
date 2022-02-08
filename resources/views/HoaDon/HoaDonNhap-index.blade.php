@@ -10,31 +10,6 @@
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
     {{-- datetime picker end --}}
-
-    {{-- thông báo --}}
-    <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
-    <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
-    <style>
-        .spinner-preview {
-            width: 100px;
-            height: 100px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .dropdown-preview {
-            margin: 0 5px;
-            display: inline-block;
-        }
-
-        .dropdown-preview>.dropdown-menu {
-            display: block;
-            position: static;
-            margin-bottom: 5px;
-        }
-
-    </style>
-    {{-- thông báo end --}}
 @endsection
 
 @section('body')
@@ -141,6 +116,7 @@
                                     <th class="center"><i class="icon-adn"></i>Id</th>
                                     <th><i class="icon-user"></i>Người lập</th>
                                     <th><i class="icon-cogs"></i>Nhà cung cấp</th>
+                                    <th><i class="icon-phone"></i>Phone</th>
                                     <th><i class="icon-bar-chart"></i>Tổng số lượng</th>
                                     <th><i class="icon-money"></i>Tổng tiền</th>
                                     <th><i class="icon-exclamation-sign"></i>Trạng thái</th>
@@ -163,6 +139,7 @@
                                         <td class="center">{{ $item->id }}</td>
                                         <td>{{ $item->NhanVien->HoTen ?? $item->NhanVien->Username }}</td>
                                         <td>{{ $item->NhaCungCap }}</td>
+                                        <td>{{ $item->Phone }}</td>
                                         <td>{{ $item->TongSoLuong ?? 0 }}</td>
                                         <td>{{ number_format($item->TongTien) }}</td>
                                         <td>
@@ -290,10 +267,16 @@
                             <form action="{{ route('HoaDonNhap.store') }}" method="post">
                                 @csrf
                                 <div class="row">
-                                    <label for="form-field-username">Nhà cung cấp nào ?</label>
-                                    <input class="form-control" type="text" id="form-field-username" placeholder="Tên nhà cung cấp" value="{{ old('NhaCungCap') }}" name="NhaCungCap" />
+                                    <label>Nhà cung cấp nào ?</label>
+                                    <input class="form-control" type="text" placeholder="Tên nhà cung cấp" value="{{ old('NhaCungCap') }}" name="NhaCungCap" />
                                     @if ($errors->has('NhaCungCap'))
                                         <i class="icon-remove bigger-110 red"> {{ $errors->first('NhaCungCap') }}</i>
+                                    @endif
+
+                                    <label>Điện thoại liên lạc</label>
+                                    <input class="form-control" type="number" placeholder="Điện thoại" value="{{ old('Phone') }}" name="Phone" />
+                                    @if ($errors->has('Phone'))
+                                        <i class="icon-remove bigger-110 red"> {{ $errors->first('Phone') }}</i>
                                     @endif
                                 </div>
 
@@ -401,27 +384,13 @@
         {{-- datatable script End --}}
 
         {{-- thông báo error --}}
-        <!-- page specific plugin scripts -->
-        <!--[if lte IE 8]>
-                                                                                                                      <script src="assets/js/excanvas.min.js"></script>
-                                                                                                                      <![endif]-->
-
-        <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-        <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
-        <script src="/storage/assets/js/bootbox.min.js"></script>
-        <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
-        <script src="/storage/assets/js/jquery.gritter.min.js"></script>
-        <script src="/storage/assets/js/spin.min.js"></script>
-
         <script type="text/javascript">
             jQuery(function($) {
                 @if ($errors->any())
                     $('#modal-form').modal('show');
                     @foreach ($errors->all() as $error)
-                        $.gritter.add({
-                        title: 'Có lỗi xảy ra',
-                        text: '{{ $error }}',
-                        class_name: 'gritter-error'
+                    toastr.error('{{ $error }}', 'Có lỗi xảy ra', {
+                        timeOut: 3000
                         });
                     @endforeach
                 @endif

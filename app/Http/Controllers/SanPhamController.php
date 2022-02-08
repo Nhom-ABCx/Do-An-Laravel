@@ -103,9 +103,11 @@ class SanPhamController extends Controller
      * @param  \App\Models\SanPham  $sanPham
      * @return \Illuminate\Http\Response
      */
-    public function show(SanPham $sanPham)
+    public function show($sanPham)
     {
-        dd($sanPham);
+        $sanPham = SanPham::withTrashed()->find($sanPham);
+        $this->fixImage($sanPham);
+        return view("SanPham.SanPham-show-modal", ["sanPham" => $sanPham]);
     }
 
     /**
@@ -349,9 +351,10 @@ class SanPhamController extends Controller
         foreach ($chiTietCtkm as $item) {
             $sp = SanPham::where('id', $item->SanPhamId)->where('SoLuongTon', '>', 0) //so luonhg ton >0
                 ->first(); //sap xep theo luot mua giam dan`
-            $data = Arr::add($dsSanPham, "$i", $sp);
-            $dsSanPham = $data;
-            $i++;
+            if (!empty($sp)) {
+                $dsSanPham = Arr::add($dsSanPham, "$i", $sp);
+                $i++;
+            }
         }
         //dd($dsSanPham);
         YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);

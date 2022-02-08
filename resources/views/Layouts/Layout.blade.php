@@ -7,6 +7,7 @@
 
     <meta name="description" content="Static &amp; Dynamic Tables" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- basic styles -->
     <link href="/storage/assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -20,6 +21,10 @@
     <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.full.min.css" />
     <link rel="stylesheet" href="/storage/assets/css/datepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/ui.jqgrid.css" />
+    {{-- cai nay la thong báo https://github.com/CodeSeven/toastr --}}
+    <link rel="stylesheet" href="/storage/assets/css/toastr.min.css" />
+    {{-- inline editTable  https://github.com/vitalets/x-editable --}}
+    <link rel="stylesheet" href="/storage/assets/css/bootstrap-editable.css" />
     {{-- icon link ngoài của vinh --}}
     {{-- nên lấy icon có sẵn từ đây https://fontawesome.com/v3.2/icons/ --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -306,7 +311,7 @@
                                             <li>
                                                 <a
                                                     href="{{ route('Message.index') }}?KhachHangId={{ $conversation[$i]->KhachHangId }}">
-                                                    <img src="/storage/assets/images/avatar/User/{{ $conversation[$i]->KhachHangId }}/{{ $conversation[$i]->KhachHang->HinhAnh }}"
+                                                    <img src="{{ $conversation[$i]->KhachHang->HinhAnh }}"
                                                         class="msg-photo" alt="Alex's Avatar" />
                                                     <span class="msg-body">
                                                         <span class="msg-title">
@@ -770,24 +775,11 @@
     @section('script')
         {{-- phan nay la Script --}}
         <!-- basic scripts -->
-
         <!--[if !IE]> -->
 
         <script type="text/javascript">
             window.jQuery || document.write("<script src='/storage/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
         </script>
-
-        <!-- <![endif]-->
-
-        <!--[if IE]>
-                                                                            <script type="text/javascript">
-                                                                                window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                                                                            </script>
-                                                                            <![endif]-->
-        <script type="text/javascript">
-            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-        </script>
-
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
@@ -806,10 +798,14 @@
 
         <script src="/storage/assets/js/ace-elements.min.js"></script>
         <script src="/storage/assets/js/ace.min.js"></script>
+
+        {{-- https://www.webslesson.info/2020/10/how-to-make-editable-datatable-in-php-using-x-editable-plugin.html --}}
+        {{-- https://viblo.asia/p/cach-su-dung-thu-vien-jquery-x-editable-zb7vDVEOMjKd --}}
+        <script src="/storage/assets/js/bootstrap-editable.js"></script>
+        <script src="/storage/assets/js/vendor/toastr.min.js"></script>
     @show
 
     @yield('scriptThisPage')
 </body>
 
 </html>
-<script src="/storage/assets/js/jquery.dataTables.min.js"></script>

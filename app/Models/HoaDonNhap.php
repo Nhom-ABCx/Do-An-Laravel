@@ -15,6 +15,7 @@ class HoaDonNhap extends Model
     protected $fillable = [
         'NhanVienId', //nhập bởi ai
         'NhaCungCap', // ai là người cung cấp (do ko có bảng nhà cung cấp nên ghi chuỗi)
+        'Phone',
         'TongSoLuong',
         'TongTien',
         'TrangThai',

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\TrangThaiHD;
 
 class CreateDatabase extends Migration
 {
@@ -148,7 +149,9 @@ class CreateDatabase extends Migration
             $table->tinyInteger('PhuongThucThanhToan');
             $table->integer("TongSoLuong");
             $table->double('TongTien');
-            $table->tinyInteger('TrangThai');
+            //https://viblo.asia/p/tim-hieu-va-su-dung-enum-trong-laravel-vyDZOYVk5wj
+            $table->enum('TrangThai', TrangThaiHD::getValues())->default(TrangThaiHD::DangXacNhan);
+            //$table->tinyInteger('TrangThai')->default(0);
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('DiaChiId')->references('id')->on('dia_chis');
@@ -224,6 +227,7 @@ class CreateDatabase extends Migration
             $table->id();
             $table->foreignId('NhanVienId'); //nhập bởi ai
             $table->string('NhaCungCap'); // ai là người cung cấp (do ko có bảng nhà cung cấp nên ghi chuỗi)
+            $table->string('Phone'); // thông tin liên lạc
             $table->integer('TongSoLuong')->nullable();
             $table->double('TongTien')->nullable();
             $table->boolean('TrangThai')->default(false);
@@ -235,14 +239,16 @@ class CreateDatabase extends Migration
             $table->id();
             $table->foreignId('HoaDonNhapId'); //được nhập từ hóa đơn nào
             $table->foreignId('SanPhamId'); //nhập sản phẩm nào
-            $table->integer('SoLuong');
-            $table->double('GiaNhap'); //giá nhập vào bao nhiêu
-            $table->double('ThanhTien');
+            $table->integer('SoLuong')->default(0);
+            $table->double('GiaNhap')->default(0); //giá nhập vào bao nhiêu
+            $table->double('ThanhTien')->default(0);
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('HoaDonNhapId')->references('id')->on('hoa_don_nhaps');
             $table->foreign('SanPhamId')->references('id')->on('san_phams');
         });
+        //social login
+        //id,ten,mota,displayname,imageurl,...
     }
 
     /**

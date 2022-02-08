@@ -27,10 +27,10 @@
                                     <ul class="ks-items">
                                         @forelse ($dsCacCuocTroChuyen as $conversation)
                                             @if (!empty($conversation->KhachHang))
-                                                <li class="ks-item @if ($conversation->id == $request['KhachHangId']) ks-active @endif">
+                                                <li class="ks-item @if ($conversation->KhachHang->id == $request['KhachHangId']) ks-active @endif">
                                                     <a href="{{ route('Message.index') }}?KhachHangId={{ $conversation->KhachHangId }}">
                                                         <span class="ks-avatar">
-                                                            <img src="/storage/assets/images/avatar/User/{{ $conversation->KhachHangId }}/{{ $conversation->KhachHang->HinhAnh }}" width="36"
+                                                            <img src="{{ $conversation->KhachHang->HinhAnh }}" width="36"
                                                                 height="36">
                                                         </span>
                                                         <div class="ks-body">
@@ -192,7 +192,7 @@
                                             @else
                                                 <li class="ks-item ks-self">
                                                     <span class="ks-avatar ks-offline">
-                                                        <img src="/storage/assets/images/avatar/User/{{ $item->KhachHang->id }}/{{ $item->KhachHang->HinhAnh }}" width="36" height="36"
+                                                        <img src="{{ $item->KhachHang->HinhAnh }}" width="36" height="36"
                                                             class="rounded-circle">
                                                     </span>
                                                     <div class="ks-body">
@@ -354,7 +354,7 @@
                         <div class="ks-body">
                             <div class="ks-item ks-user">
                                 <span class="ks-avatar ks-online">
-                                    <img src="/storage/assets/images/avatar/User/{{ $khachHang->id }}/{{ $khachHang->HinhAnh }}" width="36" height="36" class="rounded-circle">
+                                    <img src="{{ $khachHang->HinhAnh }}" width="36" height="36" class="rounded-circle">
                                 </span>
                                 <span class="ks-name">
                                     {{ $khachHang->HoTen }}
