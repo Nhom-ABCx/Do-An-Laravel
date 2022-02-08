@@ -97,3 +97,4 @@ Route::put('GioHang/update', [GioHangController::class, "API_Update_SanPham_GioH
 Route::delete('GioHang/delete', [GioHangController::class, "API_Delete_SanPham_GioHang"]);
 Route::delete('GioHang/delete', [GioHangController::class, "API_Delete_SanPham_GioHang"]);
 Route::get('GioHang/{khachHang}', [GioHangController::class, "API_Get_GioHang"]);
+Route::post('GioHang/addList', [GioHangController::class, "api_Insert_ListSanPham_GioHang"]);
