@@ -150,12 +150,16 @@
                                     <th><i class="icon-money"></i>Tổng tiền</th>
                                     <th><i class="icon-exclamation-sign"></i>Trạng thái</th>
                                     <th>
-                                        <i class="icon-time bigger-110 hidden-480"></i>
+                                        <i class="icon-calendar bigger-110 hidden-480"></i>
                                         Ngày đặt
                                     </th>
                                     <th>
-                                        <i class="icon-time bigger-110 hidden-480"></i>
+                                        <i class="icon-calendar bigger-110 hidden-480"></i>
                                         Chỉnh sửa lần cuối
+                                    </th>
+                                    <th>
+                                        <i class="icon-time bigger-110 hidden-480"></i>
+                                        Đặt hàng vào lúc
                                     </th>
                                     <th></th>
                                 </tr>
@@ -212,6 +216,7 @@
                                         </td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
+                                        <td><?php echo e($item->created_at->diffForHumans()); ?></td>
                                         <?php if(request()->is('HoaDonn/DaHuy')): ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
@@ -360,9 +365,16 @@
     <script type="text/javascript">
         jQuery(function($) {
             var oTable1 = $('#sample-table-2').dataTable({
-                "aoColumns": [null, null, {
+                order: [
+                    [6, "desc"] //mac dinh sap xep o cot created_at
+                ],
+                aoColumns: [null, null, {
                         searchable: false
-                    }, {
+                    },
+                    {
+                        searchable: false
+                    },
+                    {
                         searchable: false
                     },
                     {
@@ -373,8 +385,10 @@
                     },
                     {
                         searchable: false
-                    }, {
-                        searchable: false
+                    },
+                    {
+                        searchable: false,
+                        bSortable: false
                     },
                     {
                         bSortable: false

@@ -134,25 +134,32 @@ class HoaDonController extends Controller
      */
     public function destroy(HoaDon $hoaDon)
     {
-        $dsChiTietHD = $hoaDon->CT_HoaDon;
-        //neu co bat ki` san pham nao duoc mua thi` hoa don do' chi xoa' tam
-        if (count($dsChiTietHD)) {
-            //hoan` lai so KHO
-            foreach ($dsChiTietHD as $item) {
-                $sp = $item->SanPham;
-                $sp->fill([
-                    'SoLuongTon' => $sp->SoLuongTon + $item->SoLuong,
-                    "LuotMua" => $sp->LuotMua - 1,
-                ]);
-                $sp->save();
-            }
+        $hoaDon = HoaDon::where("id", $hoaDon->id)
+            ->whereNotIn("TrangThai", [TrangThaiHD::DangGiao, TrangThaiHD::DaGiao])
+            ->first();
 
-            $hoaDon->delete();
-            return Redirect::route("HoaDon.index");
+        if (!empty($hoaDon)) {
+            $dsChiTietHD = $hoaDon->CT_HoaDon;
+            //neu co bat ki` san pham nao duoc mua thi` hoa don do' chi xoa' tam
+            if (count($dsChiTietHD)) {
+                //hoan` lai so KHO
+                foreach ($dsChiTietHD as $item) {
+                    $sp = $item->SanPham;
+                    $sp->fill([
+                        'SoLuongTon' => $sp->SoLuongTon + $item->SoLuong,
+                        "LuotMua" => $sp->LuotMua - 1,
+                    ]);
+                    $sp->save();
+                }
+
+                $hoaDon->delete();
+                return Redirect::route("HoaDon.index");
+            }
+            //nguoc lai xoa' luon cai hoa' don do'
+            $hoaDon->forceDelete();
+            return Redirect::route('HoaDon.index');
         }
-        //nguoc lai xoa' luon cai hoa' don do'
-        $hoaDon->forceDelete();
-        return Redirect::route('HoaDon.index');
+        return Redirect::back()->withErrors(['TrangThai' => 'Trạng thái nãy không thể hủy']);
     }
     public function HoaDonDaGiao(Request $request)
     {
@@ -305,41 +312,21 @@ class HoaDonController extends Controller
         return response()->json(["Sucssess" => True], 200);
     }
 
-    #them san pham vao chi tiet hoa don khi tra ve
-    public static function API_Them_SanPham_To_CT_Hoa_Don($listChiTietHoaDon)
-    {
-        foreach ($listChiTietHoaDon as $item) {
-            $sanPham = $item->SanPham;
-            if (!empty($sanPham))
-                Arr::add($item, "SanPham", $sanPham);
-            else
-                Arr::add($item, 'SanPham', null);
-        }
-    }
-
     #tra ve chi tiet hao don theo giai doan
-    public function API_TraVe_CT_HoaDon_Theo_Tab(Request $request)
+    public function API_GET_HoaDon_KhachHang_Theo_TrangThai(Request $request, KhachHang $khachHang)
     {
-        // $dsChiTietHD=DB::table("ct_hoa_dons")
-        // ->join("hoa_dons","hoa_dons.id","=","ct_hoa_dons.HoaDonId")
-        // ->join("dia_chis","dia_chis.id","=","hoa_dons.DiaChiId")
-        // ->where("dia_chis.KhachHangId",$request["KhachHangId"])
-        // ->where("hoa_dons.TrangThai",$request["TrangThai"])
-        // ->whereNull("hoa_dons.deleted_at")
-        // ->whereNull("ct_hoa_dons.deleted_at")
-        // ->get("ct_hoa_dons.*");
-        //y nhu nhau
         //https://stackoverflow.com/questions/38172857/how-to-select-specific-columns-in-laravel-eloquent
-        $dsChiTietHD = CT_HoaDon::join("hoa_dons", "hoa_dons.id", "=", "ct_hoa_dons.HoaDonId")
-            ->join("dia_chis", "dia_chis.id", "=", "hoa_dons.DiaChiId")
-            ->where("dia_chis.KhachHangId", $request["KhachHangId"])
+        $dsChiTietHD = HoaDon::join("dia_chis", "dia_chis.id", "hoa_dons.DiaChiId")
+            ->where("dia_chis.KhachHangId", $khachHang->id)
             ->where("hoa_dons.TrangThai", $request["TrangThai"])
-            ->whereNull("hoa_dons.deleted_at")
-            ->whereNull("ct_hoa_dons.deleted_at")
-            ->get("ct_hoa_dons.*");
-
-        $this->API_Them_SanPham_To_CT_Hoa_Don($dsChiTietHD);
-        return response()->json($dsChiTietHD, 200);
+            ->with("CT_HoaDon") //load theo khoa' ngoai cua CTHoaDon, no tu them vao`
+            ->with("CT_HoaDon.SanPham")
+            ->get("hoa_dons.*");
+        //kt neu du lieu ko rong~ thi tra ve`
+        if ($dsChiTietHD->isNotEmpty())
+            return response()->json($dsChiTietHD, 200);
+        //nguoc lai tra ve mang? rong~
+        return response()->json([], 404);
     }
     #update danh gia san pham
     public function API_Danh_Gia_SanPham(Request $request)
@@ -359,5 +346,86 @@ class HoaDonController extends Controller
         }
         //dd($data->HoaDonId);
         return response()->json(["Sucsess" => false], 405);
+    }
+    public function API_GET_HoaDon_KhachHang_DaHuy(KhachHang $khachHang)
+    {
+        $dsChiTietHD = HoaDon::onlyTrashed()
+            ->join("dia_chis", "dia_chis.id", "hoa_dons.DiaChiId")
+            ->where("dia_chis.KhachHangId", $khachHang->id)
+            ->with("CT_HoaDon") //load theo khoa' ngoai cua CTHoaDon, no tu them vao`
+            ->with("CT_HoaDon.SanPham")
+            ->get("hoa_dons.*");
+
+        //kt neu du lieu ko rong~ thi tra ve`
+        if ($dsChiTietHD->isNotEmpty())
+            return response()->json($dsChiTietHD, 200);
+        //nguoc lai tra ve mang? rong~
+        return response()->json([], 404);
+    }
+    public function API_Delete_HoaDon(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'HoaDonId' => ['required', 'numeric', 'integer', 'exists:hoa_dons,id'],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+
+        $hoaDon = HoaDon::where("id", $request["HoaDonId"])
+            ->whereNotIn("TrangThai", [TrangThaiHD::DangGiao, TrangThaiHD::DaGiao])
+            ->first();
+
+        //kt neu du lieu ko rong~ thi tra ve`
+        if (!empty($hoaDon)) {
+
+            $dsChiTietHD = $hoaDon->CT_HoaDon;
+            //neu co bat ki` san pham nao duoc mua thi` hoa don do' chi xoa' tam
+            if (count($dsChiTietHD)) {
+                //hoan` lai so KHO
+                foreach ($dsChiTietHD as $item) {
+                    $sp = $item->SanPham;
+                    $sp->fill([
+                        'SoLuongTon' => $sp->SoLuongTon + $item->SoLuong,
+                        "LuotMua" => $sp->LuotMua - 1,
+                    ]);
+                    $sp->save();
+                }
+
+                $data = $hoaDon->delete();
+                return response()->json($data, 200);
+            }
+            //nguoc lai xoa' luon cai hoa' don do'
+            $data = $hoaDon->forceDelete();
+            return response()->json($data, 200);
+        }
+        return response()->json($hoaDon, 404);
+    }
+    public function API_Restore_HoaDon(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'HoaDonId' => ['required', 'numeric', 'integer'],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+
+        $hoaDon = HoaDon::onlyTrashed()->find($request["HoaDonId"]);
+
+        //kt neu du lieu ko rong~ thi tra ve`
+        if (!empty($hoaDon)) {
+            //khi bam khoi phuc thi` lai tru` so luong ton` cua san pham
+            foreach ($hoaDon->CT_HoaDon as $item) {
+                $sp = $item->SanPham;
+                $sp->fill([
+                    'SoLuongTon' => $sp->SoLuongTon - $item->SoLuong,
+                    "LuotMua" => $sp->LuotMua + 1,
+                ]);
+                $sp->save();
+            }
+
+            $data = $hoaDon->restore();
+            return response()->json($data, 200);
+        }
+        return response()->json($hoaDon, 404);
     }
 }

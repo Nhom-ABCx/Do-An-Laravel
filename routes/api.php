@@ -81,7 +81,11 @@ Route::get('binh-luan', [BinhLuanController::class, "API_Check_Auth_ProductToPay
 #add binh luan
 Route::post('binh-luan/add', [BinhLuanController::class, "API_Add_BinhLuan_SanPham"]);
 #Hoa don theo tap
-Route::get('hoa-don', [HoaDonController::class, "API_TraVe_CT_HoaDon_Theo_Tab"]);
+Route::get('HoaDon/KhachHang/{khachHang}', [HoaDonController::class, "API_GET_HoaDon_KhachHang_Theo_TrangThai"]);
+Route::get('HoaDon/KhachHang/{khachHang}/DaHuy', [HoaDonController::class, "API_GET_HoaDon_KhachHang_DaHuy"]);
+Route::delete('HoaDon/delete', [HoaDonController::class, "API_Delete_HoaDon"]);
+Route::post('HoaDon/restore', [HoaDonController::class, "API_Restore_HoaDon"]);
+
 #danh gia cho san pham
 Route::post('danh-gia-san-pham', [HoaDonController::class, "API_Danh_Gia_SanPham"]);
 //lay' het tin nhan ve tu` Admin, truyen` len KhachHangId
@@ -90,5 +94,6 @@ Route::post('Message/add', [MessageController::class, "API_Them_Message_Admin"])
 //gio hang
 Route::post('GioHang/add', [GioHangController::class, "API_Insert_SanPham_GioHang"]);
 Route::put('GioHang/update', [GioHangController::class, "API_Update_SanPham_GioHang"]);
+Route::delete('GioHang/delete', [GioHangController::class, "API_Delete_SanPham_GioHang"]);
 Route::delete('GioHang/delete', [GioHangController::class, "API_Delete_SanPham_GioHang"]);
 Route::get('GioHang/{khachHang}', [GioHangController::class, "API_Get_GioHang"]);
