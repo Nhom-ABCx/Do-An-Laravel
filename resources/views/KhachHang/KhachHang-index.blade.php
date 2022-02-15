@@ -138,7 +138,7 @@
                                         </td>
                                         <td>{{ $item->DiaChi }}</td>
                                         <td>
-                                            <img src='/storage/assets/images/avatar/User/{{ $item->id }}/{{ $item->HinhAnh }}'
+                                            <img src='{{ $item->HinhAnh }}'
                                                 alt="{{ $item->HinhAnh }}" width='50' height='50'>
 
                                         </td>

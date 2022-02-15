@@ -152,7 +152,7 @@ class BinhLuanController extends Controller
         //lay ra het tat ca hoa don co' trang thai' la 2, thuoc khach' hang nao
         $hoaDon = HoaDon::join("dia_chis", "hoa_dons.DiaChiId", "=", "dia_chis.id")
             ->where("dia_chis.KhachHangId", $request["KhachHangId"])
-            ->where("TrangThai", 4)
+            ->where("TrangThai", 5)
             ->get("hoa_dons.*");
 
         // $hoaDon = HoaDon::leftJoin('dia_chis', 'dia_chis.id', '=', 'hoa_dons.DiaChiId')->where('dia_chis.KhachHangId', 1)

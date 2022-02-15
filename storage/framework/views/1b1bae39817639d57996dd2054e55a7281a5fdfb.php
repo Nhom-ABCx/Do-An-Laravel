@@ -1,6 +1,3 @@
-
-
-
 <?php $__env->startSection('title', 'QL khách hàng'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
@@ -135,7 +132,7 @@
                                         </td>
                                         <td><?php echo e($item->DiaChi); ?></td>
                                         <td>
-                                            <img src='/storage/assets/images/avatar/User/<?php echo e($item->id); ?>/<?php echo e($item->HinhAnh); ?>'
+                                            <img src='<?php echo e($item->HinhAnh); ?>'
                                                 alt="<?php echo e($item->HinhAnh); ?>" width='50' height='50'>
 
                                         </td>

@@ -236,18 +236,17 @@ class KhachHangController extends Controller
 
         //kiem tra upload hinh anh
         if ($request->hasFile('HinhAnh')) {
-            $khachHang->HinhAnh = $request->file('HinhAnh')->store('assets/images/avatar/User/' . $khachHang->id, 'public');
-            //cat chuoi ra, chi luu cai ten thoi
-            $catChuoi = explode("/", $khachHang->HinhAnh);
-            $khachHang->HinhAnh = $catChuoi[5];
+            $khachHang->HinhAnh = "/storage/" . $request->file('HinhAnh')->store('assets/images/avatar/User/' . $khachHang->id, 'public');
             $khachHang->save();
         } else
             return response()->json(["NoImage" => "No image request"], 400);
 
-        $data = $khachHang;
         //neu du lieu ko co rong~ thi tra ve voi status la 200
-        if (!empty($data))
-            return response()->json($data, 200);
+        if (!empty($khachHang)) {
+            $khachHang->HinhAnh = $this->fixImage($khachHang->HinhAnh);
+            return response()->json($khachHang, 200);
+        }
+        return response()->json([], 400);
     }
 
     public function API_Update_KhachHang_MatKhau(Request $request, KhachHang $khachHang)
