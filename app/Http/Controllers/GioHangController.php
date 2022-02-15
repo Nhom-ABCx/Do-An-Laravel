@@ -199,4 +199,40 @@ class GioHangController extends Controller
         }
         return response()->json($gioHang, 404);
     }
+    public function API_Insert_ListSanPham_GioHang(Request $request)
+    {
+        //kiem tra du lieu
+        $validate = Validator::make($request->all(), [
+            'KhachHangId' => ['required', 'numeric', 'integer', 'exists:khach_hangs,id'],
+            "Data.*.SanPhamId" => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
+            "Data.*.SoLuong" => ['required', 'numeric', 'integer', 'min:1'],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+
+        //$arrayRaw = json_decode($request->getContent(), true); //chuyen json thanh array de truy van
+
+        $dsGioHang = collect();
+        foreach ($request["Data"] as $item) {
+            //neu' so luong trong gio hang` lon' hon so luong ton` trong kho thi`ko them vao duoc
+            $sanPham = SanPham::find($item["SanPhamId"]);
+            if ($item["SoLuong"] > $sanPham->SoLuongTon)
+                return response()->json(["SoLuong" => "Maximum quantity in stock has been reached"], 400);
+
+            $gioHang = GioHang::firstOrCreate([
+                'KhachHangId'       => $request['KhachHangId'],
+                'SanPhamId'       => $item["SanPhamId"],
+            ], ['SoLuong'       => $item["SoLuong"],]);
+
+            //neu da co san~ trong database thi` cong don` so luong len
+            if (!$gioHang->wasRecentlyCreated) {
+                $gioHang->SoLuong += $item["SoLuong"];
+                $gioHang->save();
+            }
+            //them vao ds
+            $dsGioHang[] = $gioHang;
+        }
+        return response()->json($dsGioHang, 200);
+    }
 }
