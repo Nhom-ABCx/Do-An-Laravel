@@ -21,6 +21,7 @@ use App\Models\GioHang;
 use App\Models\YeuThich;
 use App\Models\Message;
 use App\Models\Conversation;
+use App\Models\LichSuVanChuyen;
 
 class DatabaseSeeder extends Seeder
 {
@@ -39,6 +40,5 @@ class DatabaseSeeder extends Seeder
         // ]);        // $sql = file_get_contents(database_path() . '/Do_An_Laravel_Insert_values.sql');
         // DB::statement($sql);
         //https://laravel.stonelab.ch/sql-seeder-converter/
-
     }
 }
