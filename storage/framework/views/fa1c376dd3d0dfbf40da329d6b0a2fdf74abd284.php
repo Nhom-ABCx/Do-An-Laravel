@@ -7,6 +7,7 @@
 
     <meta name="description" content="Static &amp; Dynamic Tables" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
     <!-- basic styles -->
     <link href="/storage/assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -20,6 +21,10 @@
     <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.full.min.css" />
     <link rel="stylesheet" href="/storage/assets/css/datepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/ui.jqgrid.css" />
+    
+    <link rel="stylesheet" href="/storage/assets/css/toastr.min.css" />
+    
+    <link rel="stylesheet" href="/storage/assets/css/bootstrap-editable.css" />
     
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -100,7 +105,7 @@
                                             <li>
                                                 <a
                                                     href="<?php echo e(route('Message.index')); ?>?KhachHangId=<?php echo e($conversation[$i]->KhachHangId); ?>">
-                                                    <img src="/storage/assets/images/avatar/User/<?php echo e($conversation[$i]->KhachHangId); ?>/<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>"
+                                                    <img src="<?php echo e($conversation[$i]->KhachHang->HinhAnh); ?>"
                                                         class="msg-photo" alt="Alex's Avatar" />
                                                     <span class="msg-body">
                                                         <span class="msg-title">
@@ -239,18 +244,18 @@
                     <li class="<?php echo e(request()->is('/') ? 'active' : ''); ?>">
                         <a href="/">
                             <i class="icon-dashboard"></i>
-                            <span class="menu-text"> Bảng điều khiển </span>
+                            <span class="menu-text"> Trang chủ </span>
                         </a>
                     </li>
 
                     <li class="<?php echo e(request()->is('HoaDon') ? 'active' : ''); ?>">
                         <a href="<?php echo e(route('HoaDon.index')); ?>">
                             <i class="icon-text-width"></i>
-                            <span class="menu-text"> Quản lý hóa đơn </span>
+                            <span class="menu-text"> Hóa đơn bán </span>
                         </a>
                     </li>
 
-                    <li class="<?php echo e(request()->is('SanPham') || request()->is('SanPham') ? 'active open' : ''); ?>">
+                    <li class="<?php echo e(request()->is('SanPham') || request()->is('LoaiSanPham') ? 'active open' : ''); ?>">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-desktop"></i>
                             <span class="menu-text"> Quản lý sản phẩm </span>
@@ -274,8 +279,8 @@
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="#">
+                    <li class="<?php echo e(request()->is('HoaDonNhap') ? 'active' : ''); ?>">
+                        <a href="<?php echo e(route('HoaDonNhap.index')); ?>">
                             <i class="icon-list"></i>
                             <span class="menu-text"> Hóa đơn nhập </span>
                         </a>
@@ -565,24 +570,11 @@
     <?php $__env->startSection('script'); ?>
         
         <!-- basic scripts -->
-
         <!--[if !IE]> -->
 
         <script type="text/javascript">
             window.jQuery || document.write("<script src='/storage/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
         </script>
-
-        <!-- <![endif]-->
-
-        <!--[if IE]>
-                                                                            <script type="text/javascript">
-                                                                                window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-                                                                            </script>
-                                                                            <![endif]-->
-        <script type="text/javascript">
-            window.jQuery || document.write("<script src='/storage/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
-        </script>
-
 
         <script type="text/javascript">
             if ("ontouchend" in document) document.write("<script src='/storage/assets/js/jquery.mobile.custom.min.js'>" + "<" +
@@ -601,11 +593,15 @@
 
         <script src="/storage/assets/js/ace-elements.min.js"></script>
         <script src="/storage/assets/js/ace.min.js"></script>
+
+        
+        
+        <script src="/storage/assets/js/bootstrap-editable.js"></script>
+        <script src="/storage/assets/js/vendor/toastr.min.js"></script>
     <?php echo $__env->yieldSection(); ?>
 
     <?php echo $__env->yieldContent('scriptThisPage'); ?>
 </body>
 
 </html>
-<script src="/storage/assets/js/jquery.dataTables.min.js"></script>
 <?php /**PATH D:\tranphuocvinh\laravel\Do-An-Laravel\resources\views/layouts/Layout.blade.php ENDPATH**/ ?>

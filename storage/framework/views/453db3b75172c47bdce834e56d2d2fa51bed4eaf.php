@@ -61,7 +61,7 @@
         #project span {
             color: #5D6975;
             text-align: right;
-            width: 52px;
+            width: 70px;
             margin-right: 10px;
             display: inline-block;
             font-size: 0.8em;
@@ -74,7 +74,7 @@
 
         #project div,
         #company div {
-            white-space: nowrap;
+            /* white-space: nowrap; */
         }
 
         table {
@@ -158,7 +158,7 @@
             <div>(602) 519-0450</div>
             <div><a href="mailto:ShuhaShop@example.com">ShuhaShop@example.com</a></div>
         </div>
-        <div id="project">
+        <div id="project" style="width: 50%;">
             <div><span>Mã đơn hàng</span> <?php echo e($hoaDon->id); ?></div>
             <div><span>Khách</span> <?php echo e($hoaDon->DiaChi->KhachHang->HoTen ?? $hoaDon->DiaChi->KhachHang->Username); ?></div>
             <div><span>Địa chỉ giao</span>
@@ -195,7 +195,7 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                     <td colspan="4" class="grand total">Tổng tiền (<?php echo e($hoaDon->TongSoLuong); ?> SP)</td>
-                    <td class="grand total"><?php echo e($hoaDon->TongTien); ?></td>
+                    <td class="grand total"><?php echo e(number_format($hoaDon->TongTien)); ?></td>
                 </tr>
             </tbody>
         </table>

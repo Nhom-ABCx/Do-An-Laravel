@@ -10,29 +10,6 @@
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
     
-
-    <link rel="stylesheet" href="/storage/assets/css/jquery-ui-1.10.3.custom.min.css" />
-    <link rel="stylesheet" href="/storage/assets/css/jquery.gritter.css" />
-    <style>
-        .spinner-preview {
-            width: 100px;
-            height: 100px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .dropdown-preview {
-            margin: 0 5px;
-            display: inline-block;
-        }
-
-        .dropdown-preview>.dropdown-menu {
-            display: block;
-            position: static;
-            margin-bottom: 5px;
-        }
-
-    </style>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('body'); ?>
@@ -77,8 +54,7 @@
                         <div class="widget-body">
                             <div class="widget-main">
                                 <form class="form-inline"
-                                    action="<?php echo e(request()->is('HoaDonn/DaGiao') ? route('HoaDon.DaGiao') : (request()->is('HoaDonn/DaHuy') ? route('HoaDon.DaHuy') : route('HoaDon.index'))); ?>"
-                                    method="get">
+                                    action="<?php echo e(request()->is('HoaDonn/DaGiao')? route('HoaDon.DaGiao'): (request()->is('HoaDonn/DaHuy')? route('HoaDon.DaHuy'): route('HoaDon.index'))); ?>" method="get">
                                     <?php if(request()->is('HoaDonn/DaGiao')): ?>
                                         <a href="<?php echo e(route('HoaDon.DaHuy')); ?>" class="btn btn-inverse">
                                             <i class="icon-trash"></i>
@@ -127,19 +103,19 @@
                                         <label for=""> Trạng thái: </label>
                                         <select class="width-10 chosen-select" id="form-field-select-4" name="TrangThai">
                                             <option value="">All</option>
-                                            <option value="0" <?php if('0' == $request['TrangThai']): ?> selected <?php endif; ?>>
+                                            <option value="<?php echo e(App\Enums\TrangThaiHD::DangXacNhan); ?>" <?php if('1' == $request['TrangThai']): ?> selected <?php endif; ?>>
                                                 Đang chờ xác nhận
                                             </option>
-                                            <option value="1" <?php if('1' == $request['TrangThai']): ?> selected <?php endif; ?>>
+                                            <option value="<?php echo e(App\Enums\TrangThaiHD::DangXuLy); ?>" <?php if('2' == $request['TrangThai']): ?> selected <?php endif; ?>>
                                                 Đang xử lý
                                             </option>
-                                            <option value="2" <?php if('2' == $request['TrangThai']): ?> selected <?php endif; ?>>
+                                            <option value="<?php echo e(App\Enums\TrangThaiHD::DaXuLy); ?>" <?php if('3' == $request['TrangThai']): ?> selected <?php endif; ?>>
                                                 Đã xử lý
                                             </option>
-                                            <option value="3" <?php if('3' == $request['TrangThai']): ?> selected <?php endif; ?>>
+                                            <option value="<?php echo e(App\Enums\TrangThaiHD::DangGiao); ?>" <?php if('4' == $request['TrangThai']): ?> selected <?php endif; ?>>
                                                 Đang giao
                                             </option>
-                                            <option value="4" <?php if('4' == $request['TrangThai']): ?> selected <?php endif; ?>>
+                                            <option value="<?php echo e(App\Enums\TrangThaiHD::DaGiao); ?>" <?php if('5' == $request['TrangThai']): ?> selected <?php endif; ?>>
                                                 Đã giao
                                             </option>
                                         </select>
@@ -174,12 +150,16 @@
                                     <th><i class="icon-money"></i>Tổng tiền</th>
                                     <th><i class="icon-exclamation-sign"></i>Trạng thái</th>
                                     <th>
-                                        <i class="icon-time bigger-110 hidden-480"></i>
+                                        <i class="icon-calendar bigger-110 hidden-480"></i>
                                         Ngày đặt
                                     </th>
                                     <th>
-                                        <i class="icon-time bigger-110 hidden-480"></i>
+                                        <i class="icon-calendar bigger-110 hidden-480"></i>
                                         Chỉnh sửa lần cuối
+                                    </th>
+                                    <th>
+                                        <i class="icon-time bigger-110 hidden-480"></i>
+                                        Đặt hàng vào lúc
                                     </th>
                                     <th></th>
                                 </tr>
@@ -216,27 +196,27 @@
                                         <td><?php echo e(number_format($item->TongTien)); ?></td>
                                         <td>
                                             <?php switch($item->TrangThai):
-                                                case (0): ?>
-                                                    <span class="label label-danger arrowed">0 Đang chờ xác nhận</span>
+                                                case (App\Enums\TrangThaiHD::DangXacNhan): ?>
+                                                    <span class="label label-danger arrowed"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan)); ?></span>
                                                 <?php break; ?>
-                                                <?php case (1): ?>
-                                                    <span class="label arrowed">1 Đang xử lý</span>
+                                                <?php case (App\Enums\TrangThaiHD::DangXuLy): ?>
+                                                    <span class="label arrowed"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy)); ?></span>
                                                 <?php break; ?>
-                                                <?php case (2): ?>
-                                                    <span class="label label-info arrowed-right arrowed-in">2 Đã xử lý</span>
+                                                <?php case (App\Enums\TrangThaiHD::DaXuLy): ?>
+                                                    <span class="label label-info arrowed-right arrowed-in"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy)); ?></span>
                                                 <?php break; ?>
-                                                <?php case (3): ?>
-                                                    <span class="label label-warning arrowed arrowed-right">3 Đang giao</span>
+                                                <?php case (App\Enums\TrangThaiHD::DangGiao): ?>
+                                                    <span class="label label-warning arrowed arrowed-right"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao)); ?></span>
                                                 <?php break; ?>
-                                                <?php case (4): ?>
-                                                    <span class="label label-success arrowed-in arrowed-in-right">4 Đã giao</span>
+                                                <?php case (App\Enums\TrangThaiHD::DaGiao): ?>
+                                                    <span class="label label-success arrowed-in arrowed-in-right"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao)); ?></span>
                                                 <?php break; ?>
                                                 <?php default: ?>
-
                                             <?php endswitch; ?>
                                         </td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
+                                        <td><?php echo e($item->created_at->diffForHumans()); ?></td>
                                         <?php if(request()->is('HoaDonn/DaHuy')): ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
@@ -271,16 +251,21 @@
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
                                                     
-                                                    <?php if($item->TrangThai != 4): ?>
+                                                    <?php if($item->TrangThai != App\Enums\TrangThaiHD::DaGiao): ?>
                                                         <span class="dropdown-hover dropup dropdown-pink">
                                                             <i class="icon-cog green bigger-200" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
                                                             <ul class="dropdown-menu pull-right">
                                                                 <li>
-                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=0" tabindex="-1">0 Đang chờ xác nhận</a>
-                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=1" tabindex="-1">1 Đang xử lý</a>
-                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=2" tabindex="-1">2 Đã xử lý</a>
-                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=3" tabindex="-1">3 Đang giao</a>
-                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=4" tabindex="-1">4 Đã giao</a>
+                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DangXacNhan); ?>"
+                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan)); ?></a>
+                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DangXuLy); ?>"
+                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy)); ?></a>
+                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DaXuLy); ?>"
+                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy)); ?></a>
+                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DangGiao); ?>"
+                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao)); ?></a>
+                                                                    <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DaGiao); ?>"
+                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao)); ?></a>
                                                                 </li>
                                                             </ul>
                                                         </span>
@@ -304,28 +289,43 @@
                                                         </button>
 
                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <?php if($item->TrangThai != App\Enums\TrangThaiHD::DaGiao): ?>
+                                                                <li>
+                                                                    <span class="dropdown-hover dropup dropdown-pink">
+                                                                        <i class="icon-cog green bigger-150" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
+                                                                        <ul class="dropdown-menu pull-right">
+                                                                            <li>
+                                                                                <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DangXacNhan); ?>"
+                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan)); ?></a>
+                                                                                <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DangXuLy); ?>"
+                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy)); ?></a>
+                                                                                <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DaXuLy); ?>"
+                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy)); ?></a>
+                                                                                <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DangGiao); ?>"
+                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao)); ?></a>
+                                                                                <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DaGiao); ?>"
+                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao)); ?></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </span>
+                                                                </li>
+
+                                                                <li>
+                                                                    <form action="<?php echo e(route('HoaDon.destroy', $item)); ?>" method="post">
+                                                                        <?php echo csrf_field(); ?>
+                                                                        <?php echo method_field('DELETE'); ?>
+                                                                        <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Hủy"><i
+                                                                                class="icon-trash bigger-120"></i></button>
+                                                                    </form>
+                                                                </li>
+                                                            <?php endif; ?>
+
                                                             <li>
                                                                 <a href="<?php echo e(route('HoaDon.show', $item)); ?>" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
                                                                     </span>
                                                                 </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="<?php echo e(route('HoaDon.edit', $item)); ?>" class="tooltip-success" data-rel="tooltip" title="Chỉnh sửa">
-                                                                    <span class="green">
-                                                                        <i class="icon-edit bigger-120"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <form action="<?php echo e(route('HoaDon.destroy', $item)); ?>" method="post">
-                                                                    <?php echo csrf_field(); ?>
-                                                                    <?php echo method_field('DELETE'); ?>
-                                                                    <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-120"></i></button>
-                                                                </form>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -347,7 +347,6 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scriptThisPage'); ?>
-    <script src="/storage/assets/js/chosen.jquery.min.js"></script>
     
     <script src="/storage/assets/js/chosen.jquery.min.js"></script>
     <script src="/storage/assets/js/date-time/moment.min.js"></script>
@@ -366,11 +365,33 @@
     <script type="text/javascript">
         jQuery(function($) {
             var oTable1 = $('#sample-table-2').dataTable({
-                "aoColumns": [
-                    null, null, null, null,
-                    null, null, null, null,
+                order: [
+                    [6, "desc"] //mac dinh sap xep o cot created_at
+                ],
+                aoColumns: [null, null, {
+                        searchable: false
+                    },
                     {
-                        "bSortable": false
+                        searchable: false
+                    },
+                    {
+                        searchable: false
+                    },
+                    {
+                        searchable: false
+                    },
+                    {
+                        searchable: false
+                    },
+                    {
+                        searchable: false
+                    },
+                    {
+                        searchable: false,
+                        bSortable: false
+                    },
+                    {
+                        bSortable: false
                     }
                 ]
             });
@@ -402,7 +423,8 @@
                 if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
                 return 'left';
             }
-        })
+        });
+
         $('[data-rel=tooltip]').tooltip({
             container: 'body'
         });
@@ -417,26 +439,12 @@
     
 
     
-    <!-- page specific plugin scripts -->
-    <!--[if lte IE 8]>
-                                      <script src="assets/js/excanvas.min.js"></script>
-                                      <![endif]-->
-
-    <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
-    <script src="/storage/assets/js/bootbox.min.js"></script>
-    <script src="/storage/assets/js/jquery.easy-pie-chart.min.js"></script>
-    <script src="/storage/assets/js/jquery.gritter.min.js"></script>
-    <script src="/storage/assets/js/spin.min.js"></script>
-
     <script type="text/javascript">
         jQuery(function($) {
             <?php if($errors->any()): ?>
                 <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    $.gritter.add({
-                    title: 'Có lỗi xảy ra',
-                    text: '<?php echo e($error); ?>',
-                    class_name: 'gritter-error'
+                    toastr.error('<?php echo e($error); ?>', 'Có lỗi xảy ra', {
+                    timeOut: 3000
                     });
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <?php endif; ?>

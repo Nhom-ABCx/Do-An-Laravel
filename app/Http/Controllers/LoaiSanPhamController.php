@@ -111,6 +111,7 @@ class LoaiSanPhamController extends Controller
             $loaiSanPham->save();
             return Redirect::route("LoaiSanPham.index");
         }
+        //xoa vinh~ vien~ khi loa san pham ko co san pham
         $loaiSanPham->forceDelete();
         return Redirect::route("LoaiSanPham.index");
     }

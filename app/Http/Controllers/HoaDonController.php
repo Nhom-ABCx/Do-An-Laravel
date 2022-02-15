@@ -328,6 +328,7 @@ class HoaDonController extends Controller
         //nguoc lai tra ve mang? rong~
         return response()->json([], 404);
     }
+
     #update danh gia san pham
     public function API_Danh_Gia_SanPham(Request $request)
     {
@@ -427,5 +428,18 @@ class HoaDonController extends Controller
             return response()->json($data, 200);
         }
         return response()->json($hoaDon, 404);
+    }
+    public function API_San_Pham_Can_Danh_Gia(Request $request)
+    {
+        $dsCtHoaDonCanDanhGia = CT_HoaDon::join('hoa_dons', 'hoa_dons.id', 'HoaDonId')
+            ->join("dia_chis", "dia_chis.id", "hoa_dons.DiaChiId")
+            ->join('san_phams', 'san_phams.id', 'SanPhamId')
+            ->where('dia_chis.KhachHangId', $request['KhachHangId'])
+            ->where('hoa_dons.TrangThai', 5)
+            ->where('Star', 0)
+            ->with("SanPham") //load theo khoa' ngoai cua CTHoaDon, no tu them vao`
+            // ->with("CT_HoaDon.SanPham")
+            ->get("ct_hoa_dons.*");
+        return response()->json($dsCtHoaDonCanDanhGia, 200);
     }
 }
