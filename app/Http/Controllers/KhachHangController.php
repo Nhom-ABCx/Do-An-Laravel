@@ -161,8 +161,8 @@ class KhachHangController extends Controller
     {
         //kiem tra du lieu
         $validate = Validator::make($request->all(), [
-            'Username' => ['required', 'unique:khach_hangs'],
-            'Email' => ['required', 'unique:khach_hangs,Email'],
+            'Username' => ['required', 'unique:khach_hangs,Username'],
+            'Email' => ['required', 'unique:khach_hangs,Email', "regex:/(.+)@(.+)\.(.+)/i"],
             'MatKhau' => ['required'],
         ]);
         //neu du lieu no' sai thi`tra? ve` loi~
