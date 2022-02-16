@@ -436,10 +436,16 @@ class HoaDonController extends Controller
             ->join('san_phams', 'san_phams.id', 'SanPhamId')
             ->where('dia_chis.KhachHangId', $request['KhachHangId'])
             ->where('hoa_dons.TrangThai', 5)
-            ->where('Star', 0)
+            ->where(function ($query) {
+                $query->where('Star', 0)
+                    ->orWhereNull('Star');
+            })
             ->with("SanPham") //load theo khoa' ngoai cua CTHoaDon, no tu them vao`
             // ->with("CT_HoaDon.SanPham")
             ->get("ct_hoa_dons.*");
+
+
+
         return response()->json($dsCtHoaDonCanDanhGia, 200);
     }
 }

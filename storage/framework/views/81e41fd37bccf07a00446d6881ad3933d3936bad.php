@@ -56,9 +56,7 @@
 
                         <div class="tab-content">
                             <div id="ChiTiet" class="tab-pane in active">
-                                <form class="form-horizontal" role="form" action="<?php echo e(route('HoaDon.update', $hoaDon)); ?>" method="post" enctype="multipart/form-data">
-                                    <?php echo csrf_field(); ?>
-                                    <?php echo method_field('PUT'); ?>
+                                <div class="form-horizontal">
                                     <div class="form-group">
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-adn red"></i> Mã đơn hàng </label>
                                         <label class="col-sm-3"> <b><?php echo e($hoaDon->id); ?></b> </label>
@@ -103,9 +101,19 @@
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-location-arrow purple"></i> Địa chỉ giao </label>
                                         <label class="col-sm-3"> <b><?php echo e($hoaDon->DiaChi->DiaChiChiTiet); ?>
 
-                                                <?php if(!empty($hoaDon->DiaChi->PhuongXa)): ?>, <?php echo e($hoaDon->DiaChi->PhuongXa); ?>  <?php endif; ?>
-                                                <?php if(!empty($hoaDon->DiaChi->QuanHuyen)): ?>, <?php echo e($hoaDon->DiaChi->QuanHuyen); ?>  <?php endif; ?>
-                                                <?php if(!empty($hoaDon->DiaChi->TinhThanhPho)): ?>, <?php echo e($hoaDon->DiaChi->TinhThanhPho); ?>  <?php endif; ?></b>
+                                                <?php if(!empty($hoaDon->DiaChi->PhuongXa)): ?>
+                                                    , <?php echo e($hoaDon->DiaChi->PhuongXa); ?>
+
+                                                <?php endif; ?>
+                                                <?php if(!empty($hoaDon->DiaChi->QuanHuyen)): ?>
+                                                    , <?php echo e($hoaDon->DiaChi->QuanHuyen); ?>
+
+                                                <?php endif; ?>
+                                                <?php if(!empty($hoaDon->DiaChi->TinhThanhPho)): ?>
+                                                    , <?php echo e($hoaDon->DiaChi->TinhThanhPho); ?>
+
+                                                <?php endif; ?>
+                                            </b>
                                         </label>
                                     </div>
 
@@ -139,7 +147,6 @@
                                                         ZaloPay
                                                     <?php break; ?>
                                                     <?php default: ?>
-
                                                 <?php endswitch; ?>
                                             </b>
                                         </label>
@@ -197,16 +204,20 @@
 
                                         <div class="clearfix form-actions">
                                             <div class="col-md-9">
-                                                <form action="<?php echo e(route('HoaDon.destroy', $hoaDon)); ?>" method="post">
+                                                <form action="<?php echo e(route('HoaDon.destroy', $hoaDon)); ?>" method="post" style="display: inline">
                                                     <?php echo csrf_field(); ?>
                                                     <?php echo method_field('DELETE'); ?>
                                                     <button type="submit" class="btn btn-danger">Hủy   <i class="icon-trash bigger-130"></i></button>
                                                 </form>
 
-                                                <button class="btn btn-success" type="submit">
-                                                    Xác nhận chuyển tiếp trạng thái   
-                                                    <i class="icon-ok bigger-110"></i>
-                                                </button>
+                                                <form action="<?php echo e(route('HoaDon.update', $hoaDon)); ?>" method="post" style="display: inline">
+                                                    <?php echo csrf_field(); ?>
+                                                    <?php echo method_field('PUT'); ?>
+                                                    <button class="btn btn-success" type="submit">
+                                                        Xác nhận chuyển tiếp trạng thái   
+                                                        <i class="icon-ok bigger-110"></i>
+                                                    </button>
+                                                </form>
 
                                                 <a href="<?php echo e(route('HoaDon.PDF', $hoaDon)); ?>" class="btn btn-info">
                                                     Xuất file PDF   
@@ -216,7 +227,7 @@
                                         </div>
                                     <?php endif; ?>
                                     <!-- PAGE CONTENT ENDS -->
-                                </form>
+                                </div>
                             </div>
 
                             <div id="DanhSachSanPham" class="tab-pane">

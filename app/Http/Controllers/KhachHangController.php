@@ -302,7 +302,10 @@ class KhachHangController extends Controller
         ]);
 
         //neu du lieu ko co rong~ thi tra ve voi status la 200
-        if (!empty($khachHang))
+        if (!empty($khachHang)) {
+            $khachHang->HinhAnh = $this->fixImage($khachHang->HinhAnh);
             return response()->json($khachHang, 200);
+        }
+        return response()->json(["Error" => "Item Not found"], 404);
     }
 }

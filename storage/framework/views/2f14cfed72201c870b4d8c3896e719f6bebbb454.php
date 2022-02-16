@@ -164,7 +164,6 @@
 
                             <tbody>
                                 <?php $__currentLoopData = $hoaDon; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
                                     <tr>
                                         <td class="center"><?php echo e($item->id); ?></td>
                                         <td><?php echo e($item->DiaChi->KhachHang->HoTen ?? $item->DiaChi->KhachHang->Username); ?></td>
@@ -186,7 +185,6 @@
                                                     ZaloPay
                                                 <?php break; ?>
                                                 <?php default: ?>
-
                                             <?php endswitch; ?>
                                         </td>
                                         <td><?php echo e($item->TongSoLuong); ?></td>
@@ -272,7 +270,6 @@
                                                             <?php echo method_field('DELETE'); ?>
                                                             <button type="submit" class="btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-130"></i></button>
                                                         </form>
-
                                                     <?php endif; ?>
                                                     <a class="blue" href="<?php echo e(route('HoaDon.show', $item)); ?>" data-rel="tooltip" title="Xem chi tiết">
                                                         <i class="icon-zoom-in bigger-130"></i>
@@ -330,7 +327,6 @@
                                             </td>
                                         <?php endif; ?>
                                     </tr>
-
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                         </table>

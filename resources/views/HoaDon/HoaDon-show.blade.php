@@ -66,9 +66,7 @@
 
                         <div class="tab-content">
                             <div id="ChiTiet" class="tab-pane in active">
-                                <form class="form-horizontal" role="form" action="{{ route('HoaDon.update', $hoaDon) }}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
+                                <div class="form-horizontal">
                                     <div class="form-group">
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-adn red"></i> Mã đơn hàng </label>
                                         <label class="col-sm-3"> <b>{{ $hoaDon->id }}</b> </label>
@@ -112,9 +110,16 @@
                                     <div class="form-group">
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-location-arrow purple"></i> Địa chỉ giao </label>
                                         <label class="col-sm-3"> <b>{{ $hoaDon->DiaChi->DiaChiChiTiet }}
-                                                @if (!empty($hoaDon->DiaChi->PhuongXa)), {{ $hoaDon->DiaChi->PhuongXa }}  @endif
-                                                @if (!empty($hoaDon->DiaChi->QuanHuyen)), {{ $hoaDon->DiaChi->QuanHuyen }}  @endif
-                                                @if (!empty($hoaDon->DiaChi->TinhThanhPho)), {{ $hoaDon->DiaChi->TinhThanhPho }}  @endif</b>
+                                                @if (!empty($hoaDon->DiaChi->PhuongXa))
+                                                    , {{ $hoaDon->DiaChi->PhuongXa }}
+                                                @endif
+                                                @if (!empty($hoaDon->DiaChi->QuanHuyen))
+                                                    , {{ $hoaDon->DiaChi->QuanHuyen }}
+                                                @endif
+                                                @if (!empty($hoaDon->DiaChi->TinhThanhPho))
+                                                    , {{ $hoaDon->DiaChi->TinhThanhPho }}
+                                                @endif
+                                            </b>
                                         </label>
                                     </div>
 
@@ -148,7 +153,6 @@
                                                         ZaloPay
                                                     @break
                                                     @default
-
                                                 @endswitch
                                             </b>
                                         </label>
@@ -206,16 +210,20 @@
 
                                         <div class="clearfix form-actions">
                                             <div class="col-md-9">
-                                                <form action="{{ route('HoaDon.destroy', $hoaDon) }}" method="post">
+                                                <form action="{{ route('HoaDon.destroy', $hoaDon) }}" method="post" style="display: inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">Hủy   <i class="icon-trash bigger-130"></i></button>
                                                 </form>
 
-                                                <button class="btn btn-success" type="submit">
-                                                    Xác nhận chuyển tiếp trạng thái   
-                                                    <i class="icon-ok bigger-110"></i>
-                                                </button>
+                                                <form action="{{ route('HoaDon.update', $hoaDon) }}" method="post" style="display: inline">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button class="btn btn-success" type="submit">
+                                                        Xác nhận chuyển tiếp trạng thái   
+                                                        <i class="icon-ok bigger-110"></i>
+                                                    </button>
+                                                </form>
 
                                                 <a href="{{ route('HoaDon.PDF', $hoaDon) }}" class="btn btn-info">
                                                     Xuất file PDF   
@@ -225,7 +233,7 @@
                                         </div>
                                     @endif
                                     <!-- PAGE CONTENT ENDS -->
-                                </form>
+                                </div>
                             </div>
 
                             <div id="DanhSachSanPham" class="tab-pane">

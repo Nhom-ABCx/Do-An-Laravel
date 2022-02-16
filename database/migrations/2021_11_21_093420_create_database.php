@@ -165,7 +165,7 @@ class CreateDatabase extends Migration
             $table->double('GiaBan');
             $table->double('GiaGiam')->nullable();
             $table->double('ThanhTien');
-            $table->tinyInteger('Star')->nullable();
+            $table->tinyInteger('Star')->default(0);
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('HoaDonId')->references('id')->on('hoa_dons');

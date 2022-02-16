@@ -64,7 +64,7 @@
 
                         <div class="tab-content">
                             <div id="ChiTiet" class="tab-pane in active">
-                                <form class="form-horizontal" role="form" action="{{ route('HoaDonNhap.CapNhatTrangThai', $hoaDonNhap) }}" method="post" enctype="multipart/form-data">
+                                <div class="form-horizontal">
                                     @csrf
                                     @method('PATCH')
                                     <div class="form-group">
@@ -132,16 +132,21 @@
 
                                         <div class="clearfix form-actions">
                                             <div class="col-md-9">
-                                                <form action="{{ route('HoaDon.destroy', $hoaDonNhap) }}" method="post">
+                                                <form action="{{ route('HoaDonNhap.destroy', $hoaDonNhap) }}" method="post" style="display: inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">Hủy   <i class="icon-trash bigger-130"></i></button>
                                                 </form>
 
-                                                <button class="btn btn-success" type="submit">
-                                                    Xác nhận hóa đơn
-                                                    <i class="icon-ok bigger-110"></i>
-                                                </button>
+                                                <form class="form-horizontal" role="form" action="{{ route('HoaDonNhap.CapNhatTrangThai', $hoaDonNhap) }}" method="post" enctype="multipart/form-data"
+                                                    style="display: inline">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button class="btn btn-success" type="submit">
+                                                        Xác nhận hóa đơn
+                                                        <i class="icon-ok bigger-110"></i>
+                                                    </button>
+                                                </form>
 
                                                 {{-- <a href="#" class="btn btn-info">
                                                     Xuất file PDF
@@ -151,7 +156,7 @@
                                         </div>
                                     @endif
                                     <!-- PAGE CONTENT ENDS -->
-                                </form>
+                                </div>
                             </div>
 
                             <div id="DanhSachSanPham" class="tab-pane">

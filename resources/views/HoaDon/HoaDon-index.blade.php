@@ -175,7 +175,6 @@
 
                             <tbody>
                                 @foreach ($hoaDon as $item)
-
                                     <tr>
                                         <td class="center">{{ $item->id }}</td>
                                         <td>{{ $item->DiaChi->KhachHang->HoTen ?? $item->DiaChi->KhachHang->Username }}</td>
@@ -197,7 +196,6 @@
                                                     ZaloPay
                                                 @break
                                                 @default
-
                                             @endswitch
                                         </td>
                                         <td>{{ $item->TongSoLuong }}</td>
@@ -283,7 +281,6 @@
                                                             @method('DELETE')
                                                             <button type="submit" class="btn-link red" data-rel="tooltip" title="Hủy"><i class="icon-trash bigger-130"></i></button>
                                                         </form>
-
                                                     @endif
                                                     <a class="blue" href="{{ route('HoaDon.show', $item) }}" data-rel="tooltip" title="Xem chi tiết">
                                                         <i class="icon-zoom-in bigger-130"></i>
@@ -341,7 +338,6 @@
                                             </td>
                                         @endif
                                     </tr>
-
                                 @endforeach
                             </tbody>
                         </table>
