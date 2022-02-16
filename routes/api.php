@@ -2,17 +2,17 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SanPhamController;
-use App\Http\Controllers\KhachHangController;
-use App\Http\Controllers\SendEmailController;
-use App\Http\Controllers\HoaDonController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BinhLuanController;
-use App\Http\Controllers\YeuThichController;
-use App\Http\Controllers\DiaChiController;
-use App\Http\Controllers\MessageController;
-use App\Http\Controllers\HoaDonNhapController;
-use App\Http\Controllers\GioHangController;
+
+use App\Http\Controllers\Admin\SanPhamController;
+use App\Http\Controllers\Admin\KhachHangController;
+use App\Http\Controllers\Admin\SendEmailController;
+use App\Http\Controllers\Admin\HoaDonController;
+use App\Http\Controllers\Admin\BinhLuanController;
+use App\Http\Controllers\Admin\YeuThichController;
+use App\Http\Controllers\Admin\DiaChiController;
+use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\HoaDonNhapController;
+use App\Http\Controllers\Admin\GioHangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,7 +87,7 @@ Route::delete('HoaDon/delete', [HoaDonController::class, "API_Delete_HoaDon"]);
 Route::post('HoaDon/restore', [HoaDonController::class, "API_Restore_HoaDon"]);
 
 #ds san pham can danh gia
-Route::get('san-pham-can-danh-gia',[HoaDonController::class, "API_San_Pham_Can_Danh_Gia"]);
+Route::get('san-pham-can-danh-gia', [HoaDonController::class, "API_San_Pham_Can_Danh_Gia"]);
 # add danh gia cho san pham
 Route::post('danh-gia-san-pham', [HoaDonController::class, "API_Danh_Gia_SanPham"]);
 //lay' het tin nhan ve tu` Admin, truyen` len KhachHangId

@@ -31,9 +31,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //truyen du lieu sang layout
-        view()->composer('layouts.Layout', function ($view) {
+        view()->composer('Admin.layouts.Layout', function ($view) {
             $dsCacCuocTroChuyen = Conversation::where("NhanVienId", Auth::user()->id)
-            ->orderBy("KhachHangId")->limit(5)->get();
+                ->orderBy("KhachHangId")->limit(5)->get();
 
             foreach ($dsCacCuocTroChuyen as $item) {
                 $mess = Message::where("ConversationId", $item->id)->orderByDesc('created_at')->first();

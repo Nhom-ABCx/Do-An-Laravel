@@ -1,28 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 //controller
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BinhLuanController;
-use App\Http\Controllers\HoaDonController;
-use App\Http\Controllers\HoaDonNhapController;
-use App\Http\Controllers\CTHoaDonNhapController;
-use App\Http\Controllers\SanPhamController;
-use App\Http\Controllers\ChuongTrinhKhuyenMaiController;
-use App\Http\Controllers\CTChuongTrinhKMController;
-use App\Http\Controllers\HangSanXuatController;
-use App\Http\Controllers\DonViVanChuyenController;
-use App\Http\Controllers\NguoiVanChuyenController;
-use App\Http\Controllers\SendEmailController;
-use App\Http\Controllers\KhachHangController;
-use App\Http\Controllers\LoaiSanPhamController;
-use App\Models\BinhLuan;
-use App\Http\Controllers\MessageController;
-use App\Models\ChuongTrinhKhuyenMai;
-use App\Models\DonViVanChuyen;
-use App\Models\KhachHang;
-use App\Models\SanPham;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\BinhLuanController;
+use App\Http\Controllers\Admin\HoaDonController;
+use App\Http\Controllers\Admin\HoaDonNhapController;
+use App\Http\Controllers\Admin\SanPhamController;
+use App\Http\Controllers\Admin\ChuongTrinhKhuyenMaiController;
+use App\Http\Controllers\Admin\CTChuongTrinhKMController;
+use App\Http\Controllers\Admin\HangSanXuatController;
+use App\Http\Controllers\Admin\DonViVanChuyenController;
+use App\Http\Controllers\Admin\NguoiVanChuyenController;
+use App\Http\Controllers\Admin\KhachHangController;
+use App\Http\Controllers\Admin\LoaiSanPhamController;
+use App\Http\Controllers\Admin\MessageController;
 
 //composer dump-autoload
 //composer update
