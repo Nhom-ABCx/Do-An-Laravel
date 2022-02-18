@@ -42,11 +42,9 @@
                             <h3 class="header smaller lighter blue">Bình luận </h3>
 
 
-                            <form class="form-inline"
-                                action="{{ request()->is('BinhLuann/DaXoa') ? route('BinhLuan.DaXoa') : route('BinhLuan.index') }}"
-                                method="get">
+                            <form class="form-inline" action="{{ request()->is('Admin/BinhLuann/DaXoa') ? route('BinhLuan.DaXoa') : route('BinhLuan.index') }}" method="get">
 
-                                @if (request()->is('BinhLuann/DaXoa'))
+                                @if (request()->is('Admin/BinhLuann/DaXoa'))
                                     <a class="btn btn-success" href="{{ route('BinhLuan.index') }}"> Black</a>
                                 @else
                                     <a href="{{ route('BinhLuan.DaXoa') }}" class="btn btn-inverse">
@@ -92,28 +90,24 @@
                             <tbody>
 
                                 @foreach ($bLuan as $item)
-
                                     <tr>
                                         <td class="center">{{ $item->id }}</td>
                                         <td>{{ $item->NoiDung }}</td>
                                         <td>{{ $item->KhachHang->Username }}</td>
                                         <td>{{ $item->SanPham->TenSanPham }}
-                                            <img src='/storage/assets/images/product-image/{{ $item->SanPham->HinhAnh }}'
-                                                alt="{{ $item->SanPham->HinhAnh }}" width='50' height='50'>
+                                            <img src='/storage/assets/images/product-image/{{ $item->SanPham->HinhAnh }}' alt="{{ $item->SanPham->HinhAnh }}" width='50' height='50'>
                                         </td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td>{{ $item->deleted_at }}</td>
 
-                                        @if (request()->is('BinhLuann/DaXoa'))
+                                        @if (request()->is('Admin/BinhLuann/DaXoa'))
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <form action="{{ route('BinhLuan.KhoiPhuc', $item->id) }}"
-                                                        method="post">
+                                                    <form action="{{ route('BinhLuan.KhoiPhuc', $item->id) }}" method="post">
                                                         @csrf
                                                         {{-- @method("PUT") --}}
-                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i
-                                                                class="icon-undo bigger-130"></i></button>
+                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i class="icon-undo bigger-130"></i></button>
                                                     </form>
                                                 </div>
                                             </td>
@@ -124,12 +118,9 @@
                                                 <form action="{{ route('BinhLuan.destroy', $item) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn-link red"><i
-                                                            class="icon-trash bigger-130"></i></button>
+                                                    <button type="submit" class="btn-link red"><i class="icon-trash bigger-130"></i></button>
                                                 </form>
                                             </td>
-
-
                                         @endif
 
 

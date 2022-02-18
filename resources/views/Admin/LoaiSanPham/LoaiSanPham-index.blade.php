@@ -22,7 +22,7 @@
                     <i class="icon-home home-icon"></i>
                     <a href="{{ url('/') }}">Home</a>
                 </li>
-                @if (request()->is('LoaiSanPhamm/DaXoa'))
+                @if (request()->is('Admin/LoaiSanPhamm/DaXoa'))
                     <li>
                         Loại sản phẩm đã xoá
                     </li>
@@ -47,7 +47,7 @@
                 <div class="col-xs-12">
                     <div class="widget-box">
                         <div class="widget-header">
-                            @if (request()->is('LoaiSanPhamm/DaXoa'))
+                            @if (request()->is('Admin/LoaiSanPhamm/DaXoa'))
                                 <h3 class="header smaller lighter blue">Quản lý loại sản phẩm đã xoá</h3>
                             @else
                                 <h3 class="header smaller lighter blue">Quản lý loại sản phẩm</h3>
@@ -56,10 +56,10 @@
                         <div class="widget-body">
                             <div class="widget-main">
                                 <form class="form-inline"
-                                    action="{{ request()->is('LoaiSanPhamm/DaXoa') ? route('LoaiSanPham.DaXoa') : route('LoaiSanPham.index') }}"
+                                    action="{{ request()->is('Admin/LoaiSanPhamm/DaXoa') ? route('LoaiSanPham.DaXoa') : route('LoaiSanPham.index') }}"
                                     method="get">
 
-                                    @if (request()->is('LoaiSanPhamm/DaXoa'))
+                                    @if (request()->is('Admin/LoaiSanPhamm/DaXoa'))
                                         <a href="{{ route('LoaiSanPham.index') }}" class="btn btn-inverse">Back</a>
                                     @else
                                         <a href="{{ route('LoaiSanPham.create') }}" class="btn btn-success">
@@ -125,7 +125,7 @@
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td>{{ $item->deleted_at }}</td>
-                                        @if (request()->is('LoaiSanPhamm/DaXoa'))
+                                        @if (request()->is('Admin/LoaiSanPhamm/DaXoa'))
                                             <td>
 
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">

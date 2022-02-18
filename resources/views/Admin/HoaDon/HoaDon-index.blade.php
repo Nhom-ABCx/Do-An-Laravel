@@ -26,12 +26,12 @@
                     <i class="icon-home home-icon"></i>
                     <a href="{{ url('/') }}">Home</a>
                 </li>
-                @if (request()->is('HoaDonn/DaGiao'))
+                @if (request()->is('Admin/HoaDonn/DaGiao'))
                     <li>
                         <a href="{{ route('HoaDon.index') }}">Quản lý hóa đơn</a>
                     </li>
                     <li class="active">Đã giao</li>
-                @elseif (request()->is('HoaDonn/DaHuy'))
+                @elseif (request()->is('Admin/HoaDonn/DaHuy'))
                     <li>
                         <a href="{{ route('HoaDon.index') }}">Quản lý hóa đơn</a>
                     </li>
@@ -61,13 +61,13 @@
                         <div class="widget-body">
                             <div class="widget-main">
                                 <form class="form-inline"
-                                    action="{{ request()->is('HoaDonn/DaGiao')? route('HoaDon.DaGiao'): (request()->is('HoaDonn/DaHuy')? route('HoaDon.DaHuy'): route('HoaDon.index')) }}" method="get">
-                                    @if (request()->is('HoaDonn/DaGiao'))
+                                    action="{{ request()->is('Admin/HoaDonn/DaGiao')? route('HoaDon.DaGiao'): (request()->is('Admin/HoaDonn/DaHuy')? route('HoaDon.DaHuy'): route('HoaDon.index')) }}" method="get">
+                                    @if (request()->is('Admin/HoaDonn/DaGiao'))
                                         <a href="{{ route('HoaDon.DaHuy') }}" class="btn btn-inverse">
                                             <i class="icon-trash"></i>
                                             Hóa đơn đã hủy
                                         </a>
-                                    @elseif (request()->is('HoaDonn/DaHuy'))
+                                    @elseif (request()->is('Admin/HoaDonn/DaHuy'))
 
                                         <a href="{{ route('HoaDon.DaGiao') }}" class="btn btn-success">
                                             <i class="icon-check-sign"></i>
@@ -106,7 +106,7 @@
                                             ZaloPay
                                         </option>
                                     </select>
-                                    @if (request()->is('HoaDonn/DaGiao'))
+                                    @if (request()->is('Admin/HoaDonn/DaGiao'))
                                     @else
                                         <label for=""> Trạng thái: </label>
                                         <select class="width-10 chosen-select" id="form-field-select-4" name="TrangThai">
@@ -223,7 +223,7 @@
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td>{{ $item->created_at->diffForHumans() }}</td>
-                                        @if (request()->is('HoaDonn/DaHuy'))
+                                        @if (request()->is('Admin/HoaDonn/DaHuy'))
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                     <form action="{{ route('HoaDon.KhoiPhuc', $item->id) }}" method="post">

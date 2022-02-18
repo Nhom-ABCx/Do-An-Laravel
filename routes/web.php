@@ -47,7 +47,10 @@ Route::get('Error', [HomeController::class, 'Error'])->name('Home.Error');
 Route::get('Test', [HomeController::class, 'Test'])->name('Home.Test');
 
 //bat buoc dang nhap
-Route::middleware('auth')->group(function () {
+Route::group([
+    'middleware' => 'auth',
+    'prefix' => 'Admin',
+], function () {
     //viet route vao day de bat buoc dang nhap
     Route::get('/', [HomeController::class, "Index"])->name('Home.index');
     Route::resource('SanPham', SanPhamController::class, [

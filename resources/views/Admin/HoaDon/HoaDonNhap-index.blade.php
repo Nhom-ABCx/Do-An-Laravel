@@ -26,7 +26,7 @@
                     <i class="icon-home home-icon"></i>
                     <a href="{{ url('/') }}">Home</a>
                 </li>
-                @if (request()->is('HoaDonNhapp/DaHuy'))
+                @if (request()->is('Admin/HoaDonNhapp/DaHuy'))
                     <li>
                         <a href="{{ route('HoaDonNhap.index') }}">Quản lý hóa đơn nhập</a>
                     </li>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                @if (!request()->is('HoaDonNhapp/DaHuy'))
+                                @if (!request()->is('Admin/HoaDonNhapp/DaHuy'))
                                     <a href="#modal-form" role="button" data-toggle="modal" class="btn btn-success">
                                         <i class="icon-plus"></i>
                                         Thêm hóa đơn nhập
@@ -65,7 +65,7 @@
                                         Hóa đơn nhập đã hủy
                                     </a>
                                 @endif
-                                <form class="form-inline" action="{{ request()->is('HoaDonNhapp/DaHuy') ? route('HoaDonNhap.DaHuy') : route('HoaDonNhap.index') }}" method="get"
+                                <form class="form-inline" action="{{ request()->is('Admin/HoaDonNhapp/DaHuy') ? route('HoaDonNhap.DaHuy') : route('HoaDonNhap.index') }}" method="get"
                                     style="margin-top: 10px">
                                     {{-- <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên hoặc username khách hàng" data-placement="bottom"
                                         value="{{ $request['NameSearch'] }}" name="NameSearch" /> --}}
@@ -151,7 +151,7 @@
                                         </td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
-                                        @if (request()->is('HoaDonNhapp/DaHuy'))
+                                        @if (request()->is('Admin/HoaDonNhapp/DaHuy'))
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                     <form action="{{ route('HoaDonNhap.KhoiPhuc', $item->id) }}" method="post">

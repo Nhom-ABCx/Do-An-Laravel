@@ -97,7 +97,7 @@
                                         <td>{{ $item->Star }}</td>
                                         {{-- <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td> --}}
-                                        @if (request()->is('SanPhamm/DaXoa'))
+                                        @if (request()->is('Admin/SanPhamm/DaXoa'))
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                     <form action="{{ route('SanPham.KhoiPhuc', $item->id) }}"

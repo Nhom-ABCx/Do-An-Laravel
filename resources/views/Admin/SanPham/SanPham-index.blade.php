@@ -25,7 +25,7 @@
                     <i class="icon-home home-icon"></i>
                     <a href="{{ url('/') }}">Home</a>
                 </li>
-                @if (request()->is('SanPhamm/DaXoa'))
+                @if (request()->is('Admin/SanPhamm/DaXoa'))
                     <li>
                         <a href="{{ route('SanPham.index') }}">Quản lý sản phẩm</a>
                     </li>
@@ -54,12 +54,12 @@
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                <form class="form-inline" action="{{ request()->is('SanPhamm/DaXoa') ? route('SanPham.DaXoa') : route('SanPham.index') }}" method="get">
+                                <form class="form-inline" action="{{ request()->is('Admin/SanPhamm/DaXoa') ? route('SanPham.DaXoa') : route('SanPham.index') }}" method="get">
                                     <a href="#modal-form" role="button" data-toggle="modal" class="btn btn-success">
                                         <i class="icon-plus"></i>
                                         Thêm sản phẩm
                                     </a>
-                                    @if (request()->is('SanPhamm/DaXoa'))
+                                    @if (request()->is('Admin/SanPhamm/DaXoa'))
                                     @else
                                         <a href="{{ route('SanPham.DaXoa') }}" class="btn btn-inverse">
                                             <i class="icon-trash"></i>
@@ -145,7 +145,7 @@
                                         <td>{{ $item->LoaiSanPham->TenLoai }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
-                                        @if (request()->is('SanPhamm/DaXoa'))
+                                        @if (request()->is('Admin/SanPhamm/DaXoa'))
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                     <form action="{{ route('SanPham.KhoiPhuc', $item->id) }}" method="post">

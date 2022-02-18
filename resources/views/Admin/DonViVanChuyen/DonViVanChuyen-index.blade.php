@@ -45,14 +45,14 @@
                         <div class="widget-body">
                             <div class="widget-main">
                                 <form class="form-inline"
-                                    action="{{ request()->is('DonViVanChuyenn/DaXoa') ? route('DonViVanChuyen.DaXoa') : route('DonViVanChuyen.index') }}"
+                                    action="{{ request()->is('Admin/DonViVanChuyenn/DaXoa') ? route('DonViVanChuyen.DaXoa') : route('DonViVanChuyen.index') }}"
                                     method="get">
                                     <a href="{{ route('DonViVanChuyen.create') }}" class="btn btn-success">
                                         <i class="icon-plus"></i>
                                         Thêm đơn vị vận chuyển
                                     </a>
 
-                                    @if (request()->is('DonViVanChuyenn/DaXoa'))
+                                    @if (request()->is('Admin/DonViVanChuyenn/DaXoa'))
                                         <a class="btn btn-inverse" href="{{ route('DonViVanChuyen.index') }}">
                                             Black</a>
                                     @else
@@ -110,7 +110,7 @@
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td>{{ $item->deleted_at }}</td>
-                                        @if (request()->is('DonViVanChuyenn/DaXoa'))
+                                        @if (request()->is('Admin/DonViVanChuyenn/DaXoa'))
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                     <form action="{{ route('DonViVanChuyen.KhoiPhuc', $item->id) }}"

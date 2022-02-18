@@ -309,10 +309,8 @@
                                     @for ($i = 0; $i < count($conversation); $i++)
                                         @if (!empty($conversation[$i]->KhachHang))
                                             <li>
-                                                <a
-                                                    href="{{ route('Message.index') }}?KhachHangId={{ $conversation[$i]->KhachHangId }}">
-                                                    <img src="{{ $conversation[$i]->KhachHang->HinhAnh }}"
-                                                        class="msg-photo" alt="Alex's Avatar" />
+                                                <a href="{{ route('Message.index') }}?KhachHangId={{ $conversation[$i]->KhachHangId }}">
+                                                    <img src="{{ $conversation[$i]->KhachHang->HinhAnh }}" class="msg-photo" alt="Alex's Avatar" />
                                                     <span class="msg-body">
                                                         <span class="msg-title">
                                                             <span class="blue">
@@ -347,8 +345,7 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="@auth{{ Auth::user()->HinhAnh }}@endauth"
-                                    alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="@auth{{ Auth::user()->HinhAnh }}@endauth" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     @auth
@@ -446,21 +443,21 @@
                 </div><!-- #sidebar-shortcuts -->
 
                 <ul class="nav nav-list">
-                    <li class="{{ request()->is('/') ? 'active' : '' }}">
-                        <a href="/">
+                    <li class="{{ request()->is('Admin') ? 'active' : '' }}">
+                        <a href="{{ route('Home.index') }}">
                             <i class="icon-dashboard"></i>
                             <span class="menu-text"> Trang chủ </span>
                         </a>
                     </li>
 
-                    <li class="{{ request()->is('HoaDon') ? 'active' : '' }}">
+                    <li class="{{ request()->is('Admin/HoaDon') ? 'active' : '' }}">
                         <a href="{{ route('HoaDon.index') }}">
                             <i class="icon-text-width"></i>
                             <span class="menu-text"> Hóa đơn bán </span>
                         </a>
                     </li>
 
-                    <li class="{{ request()->is('SanPham') || request()->is('LoaiSanPham') ? 'active open' : '' }}">
+                    <li class="{{ request()->is('Admin/SanPham') || request()->is('Admin/LoaiSanPham') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-desktop"></i>
                             <span class="menu-text"> Quản lý sản phẩm </span>
@@ -468,14 +465,14 @@
                         </a>
 
                         <ul class="submenu">
-                            <li class="{{ request()->is('SanPham') ? 'active' : '' }}">
+                            <li class="{{ request()->is('Admin/SanPham') ? 'active' : '' }}">
                                 <a href="{{ route('SanPham.index') }}">
                                     <i class="icon-double-angle-right"></i>
                                     Sản phẩm
                                 </a>
                             </li>
 
-                            <li class="{{ request()->is('LoaiSanPham') ? 'active' : '' }}">
+                            <li class="{{ request()->is('Admin/LoaiSanPham') ? 'active' : '' }}">
                                 <a href="{{ route('LoaiSanPham.index') }}">
                                     <i class="icon-double-angle-right"></i>
                                     Loại sản phẩm
@@ -484,15 +481,14 @@
                         </ul>
                     </li>
 
-                    <li class="{{ request()->is('HoaDonNhap') ? 'active' : '' }}">
+                    <li class="{{ request()->is('Admin/HoaDonNhap') ? 'active' : '' }}">
                         <a href="{{ route('HoaDonNhap.index') }}">
                             <i class="icon-list"></i>
                             <span class="menu-text"> Hóa đơn nhập </span>
                         </a>
                     </li>
 
-                    <li
-                        class="{{ request()->is('San_Pham/Sao') || request()->is('San_Pham/Sao') ? 'active open' : '' }}">
+                    <li class="{{ request()->is('Admin/San_Pham/Sao') || request()->is('Admin/San_Pham/Sao') ? 'active open' : '' }}">
 
                         <a href="{{ route('SanPham.SoSao') }}">
                             <i class="icon-star"></i>
@@ -500,21 +496,20 @@
                         </a>
                     </li>
 
-                    <li
-                        class="{{ request()->is('KhuyenMai') || request()->is('CTKhuyenMai') ? 'active open' : '' }}">
+                    <li class="{{ request()->is('Admin/KhuyenMai') || request()->is('Admin/CTKhuyenMai') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Khuyến mãi </span>
                             <b class="arrow icon-angle-down"></b>
 
                             <ul class="submenu">
-                                <li class="{{ request()->is('KhuyenMai') ? 'active' : '' }}">
+                                <li class="{{ request()->is('Admin/KhuyenMai') ? 'active' : '' }}">
                                     <a href="{{ route('KhuyenMai.index') }}">
                                         <i class="icon-double-angle-right"></i>
                                         Chương Trình Khuyến Mãi
                                     </a>
                                 </li>
-                                <li class="{{ request()->is('CTKhuyenMai') ? 'active' : '' }}">
+                                <li class="{{ request()->is('Admin/CTKhuyenMai') ? 'active' : '' }}">
                                     <a href="{{ route('CTKhuyenMai.index') }}">
                                         <i class="icon-check"></i>
                                         Chi tiết CT-Khuyến mãi
@@ -523,28 +518,27 @@
                             </ul>
                         </a>
                     </li>
-                    <li class="{{ request()->is('HangSanXuat') ? 'active' : '' }}">
+                    <li class="{{ request()->is('Admin/HangSanXuat') ? 'active' : '' }}">
                         <a href="{{ route('HangSanXuat.index') }}">
                             <i class="icon-list-alt"></i>
                             <span class="menu-text"> Hãng Sản Xuất </span>
                         </a>
                     </li>
                     {{-- Van chuyen --}}
-                    <li
-                        class="{{ request()->is('DonViVanChuyen') || request()->is('NguoiVanChuyen') ? 'active open' : '' }}">
+                    <li class="{{ request()->is('Admin/DonViVanChuyen') || request()->is('Admin/NguoiVanChuyen') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-fighter-jet"></i>
                             <span class="menu-text"> Vận chuyển </span>
                             <b class="arrow icon-angle-down"></b>
 
                             <ul class="submenu">
-                                <li class="{{ request()->is('DonViVanChuyen') ? 'active' : '' }}">
+                                <li class="{{ request()->is('Admin/DonViVanChuyen') ? 'active' : '' }}">
                                     <a href="{{ route('DonViVanChuyen.index') }}">
                                         <i class="icon-double-angle-right"></i>
                                         Đơn vị vận chuyển
                                     </a>
                                 </li>
-                                <li class="{{ request()->is('NguoiVanChuyen') ? 'active' : '' }}">
+                                <li class="{{ request()->is('Admin/NguoiVanChuyen') ? 'active' : '' }}">
                                     <a href="{{ route('NguoiVanChuyen.index') }}">
                                         <i class="icon-check"></i>
                                         Người vận chuyển
@@ -554,7 +548,7 @@
                         </a>
                     </li>
                     {{-- binh luan --}}
-                    <li class="{{ request()->is('BinhLuan') ? 'active' : '' }}">
+                    <li class="{{ request()->is('Admin/BinhLuan') ? 'active' : '' }}">
                         <a href="{{ route('BinhLuan.index') }}">
                             <i class="icon-edit "></i>
                             <span class="menu-text"> Bình Luận SP</span>
@@ -562,7 +556,7 @@
                         </a>
                     </li>
                     {{-- binh luan --}}
-                    <li class="{{ request()->is('KhachHang') ? 'active' : '' }}">
+                    <li class="{{ request()->is('Admin/KhachHang') ? 'active' : '' }}">
                         <a href="{{ route('KhachHang.index') }}">
                             <i class="icon-user"></i>
                             <span class="menu-text"> Khách Hàng</span>
@@ -575,8 +569,7 @@
 
                             <span class="menu-text">
                                 Calendar
-                                <span class="badge badge-transparent tooltip-error"
-                                    title="2&nbsp;Important&nbsp;Events">
+                                <span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
                                     <i class="icon-warning-sign red bigger-130"></i>
                                 </span>
                             </span>
@@ -695,8 +688,7 @@
                 </ul><!-- /.nav-list -->
 
                 <div class="sidebar-collapse" id="sidebar-collapse">
-                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
-                        data-icon2="icon-double-angle-right"></i>
+                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
                 </div>
 
                 <script type="text/javascript">

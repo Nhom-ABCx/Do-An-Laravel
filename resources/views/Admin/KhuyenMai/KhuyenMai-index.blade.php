@@ -39,11 +39,11 @@
             <div class="page-content">
                 <div class="row">
                     <form class="form-inline"
-                        action="{{ request()->is('KhuyenMaii/DaXoa') ? route('KhuyenMai.DaXoa') : route('KhuyenMai.index') }}"
+                        action="{{ request()->is('Admin/KhuyenMaii/DaXoa') ? route('KhuyenMai.DaXoa') : route('KhuyenMai.index') }}"
                         method="get">
                         <a type="button" class="btn btn-success " href="{{ route('KhuyenMai.create') }}"><i
                                 class="fa fa-plus"></i> Thêm chương trình khuyến mãi</a>
-                        @if (request()->is('KhuyenMaii/DaXoa'))
+                        @if (request()->is('Admin/KhuyenMaii/DaXoa'))
                             <a class="btn btn-inverse" href="{{ route('KhuyenMai.index') }}"> Black</a>
                         @else
                             <a href="{{ route('KhuyenMai.DaXoa') }}" class="btn btn-inverse">
@@ -105,7 +105,7 @@
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         {{-- <td>{{ $item->deleted_at }}</td> --}}
-                                        @if (request()->is('KhuyenMaii/DaXoa'))
+                                        @if (request()->is('Admin/KhuyenMaii/DaXoa'))
                                             <td>
 
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
