@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 
 use App\Models\GioHang;
@@ -127,15 +128,21 @@ class GioHangController extends Controller
             "SanPhamId" => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
             "SoLuong" => ['required', 'numeric', 'integer', 'min:1',],
         ]);
-        //neu du lieu no' sai thi`tra? ve` loi~
+        //neu du lieu no' sai thitra? ve loi~
         if ($validate->fails())
             return response()->json($validate->errors(), 400);
 
 
 
-        //neu' so luong trong gio hang` lon' hon so luong ton` trong kho thi`ko them vao duoc
         $sanPham = SanPham::find($request["SanPhamId"]);
-        if ($request["SoLuong"] > $sanPham->SoLuongTon)
+        //lay ra gio hang hien tai cua khach hang de so sanh'
+        $gh = GioHang::where("KhachHangId", $request["KhachHangId"])->where("SanPhamId", $request["SanPhamId"])->first();
+        $sl = 0;
+        //neu gio hang ko rong thi lay so luong cua no de so sanh'
+        if (!empty($gh))
+            $sl = $gh->SoLuong;
+        //neu'soluong them vao lon' hon so luong ton  hoac so luong trong gio hang lon' hon so luong ton trong kho thiko them vao duoc
+        if (($request["SoLuong"] > $sanPham->SoLuongTon) || ($sl >= $sanPham->SoLuongTon))
             return response()->json(["SoLuong" => "Maximum quantity in stock has been reached"], 400);
 
 
@@ -145,7 +152,7 @@ class GioHangController extends Controller
             'SanPhamId'       => $request["SanPhamId"],
         ], ['SoLuong'       => $request["SoLuong"],]);
 
-        //neu da co san~ trong database thi` cong don` so luong len
+        //neu da co san~ trong database thi cong don so luong len
         if (!$gioHang->wasRecentlyCreated) {
             $gioHang->SoLuong += 1;
             $gioHang->save();
@@ -166,6 +173,8 @@ class GioHangController extends Controller
             return response()->json($validate->errors(), 400);
 
         $gioHang = GioHang::where("KhachHangId", $request["KhachHangId"])->where("SanPhamId", $request["SanPhamId"])->first();
+
+
 
         //neu co' gio~ hang` thi` cap nhat so luong
         if (!empty($gioHang)) {
