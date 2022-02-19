@@ -48,7 +48,7 @@ class CreateDatabase extends Migration
             $table->Id();
             $table->string('Ten')->unique();
             $table->string('DiaChi')->nullable();
-            $table->string('Email');
+            $table->string('Email')->unique();
             $table->string('Phone')->nullable();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
@@ -96,10 +96,11 @@ class CreateDatabase extends Migration
             $table->softDeletes(); //nay la trang thai xoa
         });
         Schema::create('ct_chuong_trinh_kms', function (Blueprint $table) {
+            $table->Id();
             $table->foreignId('ChuongTrinhKhuyenMaiId');
             $table->foreignId('SanPhamId');
             $table->double('GiamGia');
-            $table->double('SoLuong');
+            $table->integer('SoLuong');
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('ChuongTrinhKhuyenMaiId')->references('id')->on('chuong_trinh_khuyen_mais');

@@ -23,7 +23,7 @@
                     <i class="icon-home home-icon"></i>
                     <a href="<?php echo e(url('/')); ?>">Home</a>
                 </li>
-                <?php if(request()->is('HoaDonNhapp/DaHuy')): ?>
+                <?php if(request()->is('Admin/HoaDonNhapp/DaHuy')): ?>
                     <li>
                         <a href="<?php echo e(route('HoaDonNhap.index')); ?>">Quản lý hóa đơn nhập</a>
                     </li>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                <?php if(!request()->is('HoaDonNhapp/DaHuy')): ?>
+                                <?php if(!request()->is('Admin/HoaDonNhapp/DaHuy')): ?>
                                     <a href="#modal-form" role="button" data-toggle="modal" class="btn btn-success">
                                         <i class="icon-plus"></i>
                                         Thêm hóa đơn nhập
@@ -55,7 +55,7 @@
                                         Hóa đơn nhập đã hủy
                                     </a>
                                 <?php endif; ?>
-                                <form class="form-inline" action="<?php echo e(request()->is('HoaDonNhapp/DaHuy') ? route('HoaDonNhap.DaHuy') : route('HoaDonNhap.index')); ?>" method="get"
+                                <form class="form-inline" action="<?php echo e(request()->is('Admin/HoaDonNhapp/DaHuy') ? route('HoaDonNhap.DaHuy') : route('HoaDonNhap.index')); ?>" method="get"
                                     style="margin-top: 10px">
                                     
                                     <label> Tên nhân viên: </label>
@@ -141,7 +141,7 @@
                                         </td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
-                                        <?php if(request()->is('HoaDonNhapp/DaHuy')): ?>
+                                        <?php if(request()->is('Admin/HoaDonNhapp/DaHuy')): ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                     <form action="<?php echo e(route('HoaDonNhap.KhoiPhuc', $item->id)); ?>" method="post">

@@ -22,7 +22,7 @@
                     <i class="icon-home home-icon"></i>
                     <a href="<?php echo e(url('/')); ?>">Home</a>
                 </li>
-                <?php if(request()->is('SanPhamm/DaXoa')): ?>
+                <?php if(request()->is('Admin/SanPhamm/DaXoa')): ?>
                     <li>
                         <a href="<?php echo e(route('SanPham.index')); ?>">Quản lý sản phẩm</a>
                     </li>
@@ -44,12 +44,12 @@
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                <form class="form-inline" action="<?php echo e(request()->is('SanPhamm/DaXoa') ? route('SanPham.DaXoa') : route('SanPham.index')); ?>" method="get">
+                                <form class="form-inline" action="<?php echo e(request()->is('Admin/SanPhamm/DaXoa') ? route('SanPham.DaXoa') : route('SanPham.index')); ?>" method="get">
                                     <a href="#modal-form" role="button" data-toggle="modal" class="btn btn-success">
                                         <i class="icon-plus"></i>
                                         Thêm sản phẩm
                                     </a>
-                                    <?php if(request()->is('SanPhamm/DaXoa')): ?>
+                                    <?php if(request()->is('Admin/SanPhamm/DaXoa')): ?>
                                     <?php else: ?>
                                         <a href="<?php echo e(route('SanPham.DaXoa')); ?>" class="btn btn-inverse">
                                             <i class="icon-trash"></i>
@@ -137,7 +137,7 @@
                                         <td><?php echo e($item->LoaiSanPham->TenLoai); ?></td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
-                                        <?php if(request()->is('SanPhamm/DaXoa')): ?>
+                                        <?php if(request()->is('Admin/SanPhamm/DaXoa')): ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                     <form action="<?php echo e(route('SanPham.KhoiPhuc', $item->id)); ?>" method="post">
