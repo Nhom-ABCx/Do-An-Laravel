@@ -980,7 +980,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scriptThisPage'); ?>
-
+    <script src="/storage/assets/user/js/countdown.js"></script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('User.layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/User/Home.blade.php ENDPATH**/ ?>

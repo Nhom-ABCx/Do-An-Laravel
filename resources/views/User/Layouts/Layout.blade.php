@@ -49,33 +49,9 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                             <ul class="nav navbar-nav menu_nav ml-auto">
-                                <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-                                <li class="nav-item submenu dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item"><a class="nav-link" href="category.html">Shop Category</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item submenu dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item submenu dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="tracking.html">Tracking</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                                <li class="nav-item active"><a class="nav-link" href="index.html">Trang chủ</a></li>
+                                <li class="nav-item"><a class="nav-link" href="index.html">Loại sản phẩm</a></li>
+                                <li class="nav-item"><a class="nav-link" href="contact.html">Liên hệ</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
@@ -111,18 +87,16 @@
                 <div class="row">
                     <div class="col-lg-3  col-md-6 col-sm-6">
                         <div class="single-footer-widget">
-                            <h6>About Us</h6>
+                            <h6>Shop việt</h6>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                                ut labore dolore
-                                magna aliqua.
+                                Nói về bản thân của Shop...
                             </p>
                         </div>
                     </div>
                     <div class="col-lg-4  col-md-6 col-sm-6">
                         <div class="single-footer-widget">
-                            <h6>Newsletter</h6>
-                            <p>Stay update with our latest</p>
+                            <h6>Bản tin</h6>
+                            <p>Cập nhật thông tin mới nhất của chúng tôi</p>
                             <div class="" id="mc_embed_signup">
 
                                 <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get"
@@ -140,8 +114,8 @@
                                         </div>
 
                                         <!-- <div class="col-lg-4 col-md-4">
-                                                             <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
-                                                            </div>  -->
+                                                                                                             <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
+                                                                                                            </div>  -->
                                     </div>
                                     <div class="info"></div>
                                 </form>
@@ -165,8 +139,8 @@
                     </div>
                     <div class="col-lg-2 col-md-6 col-sm-6">
                         <div class="single-footer-widget">
-                            <h6>Follow Us</h6>
-                            <p>Let us be social</p>
+                            <h6>Theo dõi</h6>
+                            <p>Thông qua các kênh</p>
                             <div class="footer-social d-flex align-items-center">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
@@ -204,6 +178,8 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
         <script src="/storage/assets/user/js/gmaps.min.js"></script>
         <script src="/storage/assets/user/js/main.js"></script>
+
+        <script src="/storage/assets/js/vendor/toastr.min.js"></script>
     @show
 
     @yield('scriptThisPage')

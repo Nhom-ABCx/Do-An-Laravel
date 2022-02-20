@@ -42,7 +42,7 @@ Route::get('Test', [HomeController::class, 'Test'])->name('Home.Test');
 
 //bo route User vo trong nay` cho de~
 Route::name('User.')->group(function () {
-    Route::get('/', [UserHomeController::class, "Index"])->name('Home.index');
+    Route::get('/', [UserHomeController::class, "Index"])->name('home');
 });
 
 
