@@ -41,7 +41,7 @@ Route::get('san-pham/{id}', [SanPhamController::class, "API_SanPham_DT_ChiTiet"]
 Route::post('/search-product', [SanPhamController::class, "API_SanPham_TimKiem"]);
 
 # sản phẩm bán chạy
-Route::get('san-pham-top', [SanPhamController::class, 'API_SanPham_Top']);
+Route::get('san-pham-top', [SanPhamController::class, 'API_SanPham_Top'])->name("API.SanPham-top");
 
 Route::post('DangNhap', [KhachHangController::class, "API_DangNhap"]);
 Route::post('DangKy', [KhachHangController::class, "API_DangKy"]);
@@ -91,7 +91,7 @@ Route::get('san-pham-can-danh-gia', [HoaDonController::class, "API_San_Pham_Can_
 # add danh gia cho san pham
 Route::post('danh-gia-san-pham', [HoaDonController::class, "API_Danh_Gia_SanPham"]);
 // api san pham moi
-Route::get('san-pham-moi',[SanPhamController::class,'API_SanPham_Moi']);
+Route::get('san-pham-moi', [SanPhamController::class, 'API_SanPham_Moi'])->name("API.SanPham-moi");
 //lay' het tin nhan ve tu` Admin, truyen` len KhachHangId
 Route::post('Message', [MessageController::class, "API_GetAll_Message_Admin"]);
 Route::post('Message/add', [MessageController::class, "API_Them_Message_Admin"]);

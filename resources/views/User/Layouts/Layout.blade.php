@@ -54,9 +54,10 @@
                                 <li class="nav-item"><a class="nav-link" href="contact.html">Liên hệ</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
+                                <li class="nav-item"><a href="#" class="cart" data-rel="tooltip" title="Giỏ hàng" data-placement="top"><span class="ti-bag"></span></a>
+                                </li>
                                 <li class="nav-item">
-                                    <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+                                    <button class="search"><span class="lnr lnr-magnifier" id="search" data-rel="tooltip" title="Tìm kiếm" data-placement="top"></span></button>
                                 </li>
                             </ul>
                         </div>
@@ -114,8 +115,8 @@
                                         </div>
 
                                         <!-- <div class="col-lg-4 col-md-4">
-                                                                                                             <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
-                                                                                                            </div>  -->
+                                                                                                                                                                     <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
+                                                                                                                                                                    </div>  -->
                                     </div>
                                     <div class="info"></div>
                                 </form>
@@ -180,6 +181,9 @@
         <script src="/storage/assets/user/js/main.js"></script>
 
         <script src="/storage/assets/js/vendor/toastr.min.js"></script>
+        <script>
+            $('[data-rel="tooltip"]').tooltip({});
+        </script>
     @show
 
     @yield('scriptThisPage')

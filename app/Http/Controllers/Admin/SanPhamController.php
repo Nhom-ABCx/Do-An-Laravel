@@ -334,8 +334,8 @@ class SanPhamController extends Controller
     #top sản phẩm bán chạy
     public function API_SanPham_Top(Request $request)
     {
-        $data = SanPham::where('LuotMua', '>', 10)->where('SoLuongTon', '>', 0) //so luonhg ton >0
-            ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
+        $data = SanPham::where('SoLuongTon', '>', 0) //so luonhg ton >0
+            ->orderByDesc('LuotMua')->limit(8)->get(); //sap xep theo luot mua giam dan`
 
         YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
         $this->Them_Star_Vao_ListSanPham($data);
@@ -398,7 +398,7 @@ class SanPhamController extends Controller
     // api san pham moi
     public function API_SanPham_Moi(Request $request)
     {
-        $dsSanPham = SanPham::orderBy('created_at', 'desc')->limit(10)->get();
+        $dsSanPham = SanPham::orderBy('created_at', 'desc')->limit(8)->get();
         // dd($dsSanPham);
         YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
         $this->Them_Star_Vao_ListSanPham($dsSanPham);

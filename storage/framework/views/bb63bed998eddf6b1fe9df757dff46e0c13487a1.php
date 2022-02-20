@@ -189,45 +189,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <?php $__currentLoopData = $spBanChay; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php
-                            App\Http\Controllers\Admin\SanPhamController::fixImage($item);
-                        ?>
-                        <!-- single product -->
-                        <div class="col-lg-3 col-md-6">
-                            <div class="single-product">
-                                <img src="<?php echo e($item->HinhAnh); ?>" alt="" width="100" height="200">
-                                <div class="product-details">
-                                    <h6><?php echo e($item->TenSanPham); ?></h6>
-                                    <div class="price">
-                                        <h6><?php echo e(number_format($item->GiaBan)); ?> VNĐ</h6>
-                                        <h6 class="l-through">$210.00</h6>
-                                    </div>
-                                    <div class="prd-bottom">
-
-                                        <a href="" class="social-info">
-                                            <span class="ti-bag"></span>
-                                            <p class="hover-text">Thêm</p>
-                                        </a>
-                                        <a href="" class="social-info">
-                                            <span class="lnr lnr-heart"></span>
-                                            <p class="hover-text">Yêu thích</p>
-                                        </a>
-                                        <a href="" class="social-info">
-                                            <span class="lnr lnr-sync"></span>
-                                            <p class="hover-text">So sánh</p>
-                                        </a>
-                                        <a href="" class="social-info">
-                                            <span class="lnr lnr-move"></span>
-                                            <p class="hover-text">Xem chi tiết</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </div>
+                <div class="row spBanChay"></div>
             </div>
         </div>
         <!-- single product slide -->
@@ -241,45 +203,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <?php $__currentLoopData = $spMoiNhat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php
-                            App\Http\Controllers\Admin\SanPhamController::fixImage($item);
-                        ?>
-                        <!-- single product -->
-                        <div class="col-lg-3 col-md-6">
-                            <div class="single-product">
-                                <img src="<?php echo e($item->HinhAnh); ?>" alt="" width="100" height="200">
-                                <div class="product-details">
-                                    <h6><?php echo e($item->TenSanPham); ?></h6>
-                                    <div class="price">
-                                        <h6><?php echo e(number_format($item->GiaBan)); ?> VNĐ</h6>
-                                        <h6 class="l-through">$210.00</h6>
-                                    </div>
-                                    <div class="prd-bottom">
-
-                                        <a href="" class="social-info">
-                                            <span class="ti-bag"></span>
-                                            <p class="hover-text">Thêm</p>
-                                        </a>
-                                        <a href="" class="social-info">
-                                            <span class="lnr lnr-heart"></span>
-                                            <p class="hover-text">Yêu thích</p>
-                                        </a>
-                                        <a href="" class="social-info">
-                                            <span class="lnr lnr-sync"></span>
-                                            <p class="hover-text">So sánh</p>
-                                        </a>
-                                        <a href="" class="social-info">
-                                            <span class="lnr lnr-move"></span>
-                                            <p class="hover-text">Xem chi tiết</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </div>
+                <div class="row spMoi"></div>
             </div>
         </div>
     </section>
@@ -431,7 +355,112 @@
 
 <?php $__env->startSection('scriptThisPage'); ?>
     <script src="/storage/assets/user/js/countdown.js"></script>
+    <script>
+        $(document).ready(function() {
+            function buildSanPham(value) {
+                return `<!-- single product -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="single-product">
+                                <img src="/storage/assets/images/product-image/` + value.HinhAnh + `" alt="" width="100" height="200">
+                                <div class="product-details">
+                                    <h6>` + value.TenSanPham + `</h6>
+                                    <div class="price">
+                                        <h6>` + parseInt(value.GiaBan).toLocaleString() + ` VNĐ</h6>
+                                        <h6 class="l-through">$210.00</h6>
+                                    </div>
+                                    <div class="prd-bottom">
 
+                                        <a href="" class="social-info">
+                                            <span class="ti-bag"></span>
+                                            <p class="hover-text">Thêm</p>
+                                        </a>
+                                        <a href="" class="social-info">
+                                            <span class="lnr lnr-heart"></span>
+                                            <p class="hover-text">Yêu thích</p>
+                                        </a>
+                                        <a href="" class="social-info">
+                                            <span class="lnr lnr-sync"></span>
+                                            <p class="hover-text">So sánh</p>
+                                        </a>
+                                        <a href="" class="social-info">
+                                            <span class="lnr lnr-move"></span>
+                                            <p class="hover-text">Xem chi tiết</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+            }
+            $.ajax({
+                //gui di voi phuong thuc' cua Form
+                method: "GET",
+                //url = duong dan cua form
+                url: "<?php echo e(route('API.SanPham-top')); ?>",
+                //du lieu gui di
+                data: {},
+                //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
+                processData: false,
+                // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la rong~
+                contentType: false,
+                //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+                //dataType: 'json',
+                //truoc khi gui di thi thuc hien gi do'
+                beforeSend: function() {
+
+                },
+                success: function(response) {
+                    console.log("request ok");
+                    $.each(response, function(key, value) {
+                        var spBanChay = buildSanPham(value);
+                        $(".spBanChay").append(spBanChay);
+                    });
+                },
+                error: function(response) {
+                    console.log("request lỗi");
+                    //console.log(response.responseJSON.Username[0]);
+                    $.each(response.responseJSON, function(key, val) {
+                        toastr.error(val, 'Có lỗi xảy ra', {
+                            timeOut: 3000
+                        });
+                    });
+                },
+            });
+            $.ajax({
+                //gui di voi phuong thuc' cua Form
+                method: "GET",
+                //url = duong dan cua form
+                url: "<?php echo e(route('API.SanPham-moi')); ?>",
+                //du lieu gui di
+                data: {},
+                //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
+                processData: false,
+                // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la rong~
+                contentType: false,
+                //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+                //dataType: 'json',
+                //truoc khi gui di thi thuc hien gi do'
+                beforeSend: function() {
+
+                },
+                success: function(response) {
+                    console.log("request ok");
+                    $.each(response, function(key, value) {
+                        var spBanChay = buildSanPham(value);
+                        $(".spMoi").append(spBanChay);
+                    });
+                },
+                error: function(response) {
+                    console.log("request lỗi");
+                    //console.log(response.responseJSON.Username[0]);
+                    $.each(response.responseJSON, function(key, val) {
+                        toastr.error(val, 'Có lỗi xảy ra', {
+                            timeOut: 3000
+                        });
+                    });
+                },
+            });
+        });
+    </script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('User.layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Program Files\xampp\htdocs\Do-An-Laravel\resources\views/User/home.blade.php ENDPATH**/ ?>

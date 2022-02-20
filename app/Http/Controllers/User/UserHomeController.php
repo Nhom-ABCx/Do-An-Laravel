@@ -21,11 +21,6 @@ class UserHomeController extends Controller
 {
     public function Index(Request $request)
     {
-        $spBanChay = SanPham::where('SoLuongTon', '>', 0) //so luonhg ton >0
-            ->orderByDesc('LuotMua')->limit(8)->get(); //sap xep theo luot mua giam dan`
-        $spMoiNhat = SanPham::where('SoLuongTon', '>', 0)
-            ->orderBy('created_at', 'desc')->limit(8)->get();
-
         $khuyenMai = CTChuongTrinhKM::join("chuong_trinh_khuyen_mais", "chuong_trinh_khuyen_mais.id", "=", "ct_chuong_trinh_kms.ChuongTrinhKhuyenMaiId")
             ->whereDate("chuong_trinh_khuyen_mais.FromDate", "<=", date('Y-m-d H:i:s'))
             ->whereDate("chuong_trinh_khuyen_mais.ToDate", ">=", date('Y-m-d H:i:s'))
@@ -33,6 +28,6 @@ class UserHomeController extends Controller
             ->limit(9)
             ->get("ct_chuong_trinh_kms.*");
 
-        return view('User.home', ["spBanChay" => $spBanChay, "spMoiNhat" => $spMoiNhat, "dsKhuyenMai" => $khuyenMai]);
+        return view('User.home', ["dsKhuyenMai" => $khuyenMai]);
     }
 }
