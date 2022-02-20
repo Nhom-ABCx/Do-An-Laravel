@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\NguoiVanChuyenController;
 use App\Http\Controllers\Admin\KhachHangController;
 use App\Http\Controllers\Admin\LoaiSanPhamController;
 use App\Http\Controllers\Admin\MessageController;
+//
+use App\Http\Controllers\User\UserHomeController;
 
 //composer dump-autoload
 //composer update
@@ -31,14 +33,6 @@ use App\Http\Controllers\Admin\MessageController;
 |
 */
 
-Route::get('Login', [AuthController::class, 'index'])->name('Login.index'); //show trang login
-Route::post('Login', [AuthController::class, 'show'])->name('Login.show'); //xu ly dang nhap -> tra ve home
-Route::get('Login/create', [AuthController::class, 'create'])->name('Login.create'); //dang ky
-Route::post('Login/create', [AuthController::class, 'store'])->name('Login.store');
-Route::delete('Login', [AuthController::class, 'destroy'])->name('Login.destroy'); //dang xuat
-Route::get('Login/{social}', [AuthController::class, 'social'])->name('Login.social');
-Route::get('Login/{social}/Callback', [AuthController::class, 'social_callback'])->name('Login.social_callback');
-
 //Route::get('sendEmail', [SendEmailController::class, 'send'])->name('send');
 Route::get('KhachHang/{token}/showResetPass', [KhachHangController::class, 'showResetPassword_KhachHang'])->name('KhachHang.showReset');
 Route::put('KhachHang/{khachHang}/actionResetPass', [KhachHangController::class, 'actionResetPassword_KhachHang'])->name('KhachHang.actionReset');
@@ -46,7 +40,24 @@ Route::get('ResetPassword-Susscess', [HomeController::class, 'Susscess'])->name(
 Route::get('Error', [HomeController::class, 'Error'])->name('Home.Error');
 Route::get('Test', [HomeController::class, 'Test'])->name('Home.Test');
 
-//bat buoc dang nhap
+//bo route User vo trong nay` cho de~
+Route::name('User.')->group(function () {
+    Route::get('/', [UserHomeController::class, "Index"])->name('Home.index');
+});
+
+
+//bat buoc dang nhap phan Admin
+Route::group([
+    'prefix' => 'Admin',
+], function () {
+    Route::get('Login', [AuthController::class, 'index'])->name('Login.index'); //show trang login
+    Route::post('Login', [AuthController::class, 'show'])->name('Login.show'); //xu ly dang nhap -> tra ve home
+    Route::get('Login/create', [AuthController::class, 'create'])->name('Login.create'); //dang ky
+    Route::post('Login/create', [AuthController::class, 'store'])->name('Login.store');
+    Route::delete('Login', [AuthController::class, 'destroy'])->name('Login.destroy'); //dang xuat
+    Route::get('Login/{social}', [AuthController::class, 'social'])->name('Login.social');
+    Route::get('Login/{social}/Callback', [AuthController::class, 'social_callback'])->name('Login.social_callback');
+});
 Route::group([
     'middleware' => 'auth',
     'prefix' => 'Admin',
