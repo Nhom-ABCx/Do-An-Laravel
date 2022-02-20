@@ -90,6 +90,8 @@ Route::post('HoaDon/restore', [HoaDonController::class, "API_Restore_HoaDon"]);
 Route::get('san-pham-can-danh-gia', [HoaDonController::class, "API_San_Pham_Can_Danh_Gia"]);
 # add danh gia cho san pham
 Route::post('danh-gia-san-pham', [HoaDonController::class, "API_Danh_Gia_SanPham"]);
+// api san pham moi
+Route::get('san-pham-moi',[SanPhamController::class,'API_SanPham_Moi']);
 //lay' het tin nhan ve tu` Admin, truyen` len KhachHangId
 Route::post('Message', [MessageController::class, "API_GetAll_Message_Admin"]);
 Route::post('Message/add', [MessageController::class, "API_Them_Message_Admin"]);

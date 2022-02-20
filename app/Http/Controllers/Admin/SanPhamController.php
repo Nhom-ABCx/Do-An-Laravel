@@ -395,11 +395,16 @@ class SanPhamController extends Controller
         return response()->json($dsSanPham, 200);
     }
 
-    // #api binh luan
-    // public function API_Get_BinhLuan_SanPham(Request $request)
-    // {
-    //     $data = BinhLuan::where("SanPhamId", $request["SanPhamId"])->get();
-    //     dd($data);
-    //     return response()->json($data, 200);
-    // }
+    // api san pham moi
+    public function API_SanPham_Moi(Request $request)
+    {
+        $dsSanPham = SanPham::orderBy('created_at', 'desc')->limit(10)->get();
+        // dd($dsSanPham);
+        YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
+        $this->Them_Star_Vao_ListSanPham($dsSanPham);
+        SanPhamController::Them_GiamGia_Vao_ListsanPham($dsSanPham);
+        if (!empty($dsSanPham))
+            return response()->json($dsSanPham, 200);
+        return response()->json($dsSanPham, 400);
+    }
 }
