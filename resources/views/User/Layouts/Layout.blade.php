@@ -39,9 +39,12 @@
                 <nav class="navbar navbar-expand-lg navbar-light main_box">
                     <div class="container">
                         <!-- Brand and toggle get grouped for better mobile display -->
-                        <a class="navbar-brand logo_h" href="index.html"><img src="/storage/assets/user/img/logo.png" alt=""></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                            aria-label="Toggle navigation">
+                        <a class="navbar-brand logo_h" href="{{ route('User.home') }}"><img
+                                src="/storage/assets/user/img/logo.png" alt=""></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -49,15 +52,26 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                             <ul class="nav navbar-nav menu_nav ml-auto">
-                                <li class="nav-item active"><a class="nav-link" href="index.html">Trang chủ</a></li>
-                                <li class="nav-item"><a class="nav-link" href="index.html">Loại sản phẩm</a></li>
+                                <li class="nav-item active"><a class="nav-link"
+                                        href="{{ route('User.home') }}">Trang chủ</a></li>
+                                <li class="nav-item"><a class="nav-link" href="index.html">Loại sản phẩm</a>
+                                </li>
                                 <li class="nav-item"><a class="nav-link" href="contact.html">Liên hệ</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="nav-item"><a href="#" class="cart" data-rel="tooltip" title="Giỏ hàng" data-placement="top"><span class="ti-bag"></span></a>
+                                <li class="nav-item"><a href="{{ route('User.GioHang.index') }}"
+                                        class="cart" data-rel="tooltip" title="Giỏ hàng"
+                                        data-placement="top"><span class="ti-bag"></span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <button class="search"><span class="lnr lnr-magnifier" id="search" data-rel="tooltip" title="Tìm kiếm" data-placement="top"></span></button>
+                                    <button class="search"><span class="lnr lnr-magnifier" id="search"
+                                            data-rel="tooltip" title="Tìm kiếm" data-placement="top"></span></button>
+                                </li>
+                                <li class="nav-item {{ request()->is('User') ? 'active' : '' }}">
+
+                                    <a href="{{ route('User.KhachHang.index') }}" class="user"
+                                        data-rel="tooltip" title="Tài khoản" data-placement="top"><span
+                                            class="fa fa-user-o"></span></a>
                                 </li>
                             </ul>
                         </div>
@@ -100,23 +114,27 @@
                             <p>Cập nhật thông tin mới nhất của chúng tôi</p>
                             <div class="" id="mc_embed_signup">
 
-                                <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get"
-                                    class="form-inline">
+                                <form target="_blank" novalidate="true"
+                                    action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                    method="get" class="form-inline">
 
                                     <div class="d-flex flex-row">
 
-                                        <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required=""
-                                            type="email">
+                                        <input class="form-control" name="EMAIL" placeholder="Enter Email"
+                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
+                                            required="" type="email">
 
 
-                                        <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
+                                        <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right"
+                                                aria-hidden="true"></i></button>
                                         <div style="position: absolute; left: -5000px;">
-                                            <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+                                            <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value=""
+                                                type="text">
                                         </div>
 
                                         <!-- <div class="col-lg-4 col-md-4">
-                                                                                                                                                                     <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
-                                                                                                                                                                    </div>  -->
+                                                                                                                                                                                                             <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
+                                                                                                                                                                                                            </div>  -->
                                     </div>
                                     <div class="info"></div>
                                 </form>
@@ -156,7 +174,8 @@
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         <script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </script> All rights reserved | This template is made with <i class="fa fa-heart-o"
+                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
@@ -166,7 +185,8 @@
     @show
     @section('script')
         <script src="/storage/assets/user/js/vendor/jquery-2.2.4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+                integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous">
         </script>
         <script src="/storage/assets/user/js/vendor/bootstrap.min.js"></script>
         <script src="/storage/assets/user/js/jquery.ajaxchimp.min.js"></script>

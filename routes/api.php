@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\SanPhamController;
 use App\Http\Controllers\Admin\KhachHangController;
-use App\Http\Controllers\Admin\SendEmailController;
+use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\Admin\HoaDonController;
 use App\Http\Controllers\Admin\BinhLuanController;
 use App\Http\Controllers\Admin\YeuThichController;

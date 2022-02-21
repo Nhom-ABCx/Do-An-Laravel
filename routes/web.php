@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\LoaiSanPhamController;
 use App\Http\Controllers\Admin\MessageController;
 //
 use App\Http\Controllers\User\UserHomeController;
+use App\Http\Controllers\User\UserGioHangController;
+use App\Http\Controllers\User\UserKhachHangController;
 
 //composer dump-autoload
 //composer update
@@ -43,6 +45,16 @@ Route::get('Test', [HomeController::class, 'Test'])->name('Home.Test');
 //bo route User vo trong nay` cho de~
 Route::name('User.')->group(function () {
     Route::get('/', [UserHomeController::class, "Index"])->name('home');
+    Route::resource('GioHang', UserGioHangController::class, [
+        'parameters' => [
+            'GioHang' => 'gioHang'
+        ]
+    ]);
+    Route::resource('KhachHang', UserKhachHangController::class, [
+        'parameters' => [
+            'KhachHang' => 'khachHang'
+        ]
+    ]);
 });
 
 
