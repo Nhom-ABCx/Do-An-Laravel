@@ -443,11 +443,7 @@ class HoaDonController extends Controller
                     ->orWhereNull('Star');
             })
             ->with("SanPham") //load theo khoa' ngoai cua CTHoaDon, no tu them vao`
-            // ->with("CT_HoaDon.SanPham")
             ->get("ct_hoa_dons.*");
-
-
-
         return response()->json($dsCtHoaDonCanDanhGia, 200);
     }
 }

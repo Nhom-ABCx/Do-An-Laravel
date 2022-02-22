@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 //use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage; //thu vien luu tru~ de tao lien ket den public
 
 class KhachHangController extends Controller
 {
@@ -23,6 +24,7 @@ class KhachHangController extends Controller
     public function index()
     {
         $data = KhachHang::all();
+
         // dd($data);
         return view("Admin.KhachHang.KhachHang-index", ["khachHang" => $data]);
     }

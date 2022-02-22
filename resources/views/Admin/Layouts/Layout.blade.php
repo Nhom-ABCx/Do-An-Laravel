@@ -309,8 +309,10 @@
                                     @for ($i = 0; $i < count($conversation); $i++)
                                         @if (!empty($conversation[$i]->KhachHang))
                                             <li>
-                                                <a href="{{ route('Message.index') }}?KhachHangId={{ $conversation[$i]->KhachHangId }}">
-                                                    <img src="{{ $conversation[$i]->KhachHang->HinhAnh }}" class="msg-photo" alt="Alex's Avatar" />
+                                                <a
+                                                    href="{{ route('Message.index') }}?KhachHangId={{ $conversation[$i]->KhachHangId }}">
+                                                    <img src="{{ $conversation[$i]->KhachHang->HinhAnh }}"
+                                                        class="msg-photo" alt="Alex's Avatar" />
                                                     <span class="msg-body">
                                                         <span class="msg-title">
                                                             <span class="blue">
@@ -345,7 +347,8 @@
 
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="@auth{{ Auth::user()->HinhAnh }}@endauth" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="@auth{{ Auth::user()->HinhAnh }}@endauth"
+                                    alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
                                     @auth
@@ -457,7 +460,8 @@
                         </a>
                     </li>
 
-                    <li class="{{ request()->is('Admin/SanPham') || request()->is('Admin/LoaiSanPham') ? 'active open' : '' }}">
+                    <li
+                        class="{{ request()->is('Admin/SanPham') || request()->is('Admin/LoaiSanPham') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-desktop"></i>
                             <span class="menu-text"> Quản lý sản phẩm </span>
@@ -488,7 +492,8 @@
                         </a>
                     </li>
 
-                    <li class="{{ request()->is('Admin/San_Pham/Sao') || request()->is('Admin/San_Pham/Sao') ? 'active open' : '' }}">
+                    <li
+                        class="{{ request()->is('Admin/San_Pham/Sao') || request()->is('Admin/San_Pham/Sao') ? 'active open' : '' }}">
 
                         <a href="{{ route('SanPham.SoSao') }}">
                             <i class="icon-star"></i>
@@ -496,7 +501,8 @@
                         </a>
                     </li>
 
-                    <li class="{{ request()->is('Admin/KhuyenMai') || request()->is('Admin/CTKhuyenMai') ? 'active open' : '' }}">
+                    <li
+                        class="{{ request()->is('Admin/KhuyenMai') || request()->is('Admin/CTKhuyenMai') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-certificate"></i>
                             <span class="menu-text"> Khuyến mãi </span>
@@ -525,7 +531,8 @@
                         </a>
                     </li>
                     {{-- Van chuyen --}}
-                    <li class="{{ request()->is('Admin/DonViVanChuyen') || request()->is('Admin/NguoiVanChuyen') ? 'active open' : '' }}">
+                    <li
+                        class="{{ request()->is('Admin/DonViVanChuyen') || request()->is('Admin/NguoiVanChuyen') ? 'active open' : '' }}">
                         <a href="#" class="dropdown-toggle">
                             <i class="icon-fighter-jet"></i>
                             <span class="menu-text"> Vận chuyển </span>
@@ -563,132 +570,11 @@
 
                         </a>
                     </li>
-                    <li>
-                        <a href="calendar.html">
-                            <i class="icon-calendar"></i>
-
-                            <span class="menu-text">
-                                Calendar
-                                <span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
-                                    <i class="icon-warning-sign red bigger-130"></i>
-                                </span>
-                            </span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="gallery.html">
-                            <i class="icon-picture"></i>
-                            <span class="menu-text"> Gallery </span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="dropdown-toggle">
-                            <i class="icon-tag"></i>
-                            <span class="menu-text"> More Pages </span>
-
-                            <b class="arrow icon-angle-down"></b>
-                        </a>
-
-                        <ul class="submenu">
-                            <li>
-                                <a href="profile.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    User Profile
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="inbox.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Inbox
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="pricing.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Pricing Tables
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="invoice.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Invoice
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="timeline.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Timeline
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="login.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Login &amp; Register
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="#" class="dropdown-toggle">
-                            <i class="icon-file-alt"></i>
-
-                            <span class="menu-text">
-                                Other Pages
-                                <span class="badge badge-primary ">5</span>
-                            </span>
-
-                            <b class="arrow icon-angle-down"></b>
-                        </a>
-
-                        <ul class="submenu">
-                            <li>
-                                <a href="faq.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    FAQ
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="error-404.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Error 404
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="error-500.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Error 500
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="grid.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Grid
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="blank.html">
-                                    <i class="icon-double-angle-right"></i>
-                                    Blank Page
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                 </ul><!-- /.nav-list -->
 
                 <div class="sidebar-collapse" id="sidebar-collapse">
-                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
+                        data-icon2="icon-double-angle-right"></i>
                 </div>
 
                 <script type="text/javascript">
