@@ -260,7 +260,7 @@
                 </div>
             </div>
 
-            <div id="modal-form" class="modal" tabindex="-1">
+            <div id="modal-form" class="modal" tabindex="-1" data-keyboard="false" data-backdrop="static">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -281,6 +281,9 @@
                                         @endif
                                         <label>Excel</label>
                                         <input type="file" accept=".xlsx, .xls, .csv, .ods" name="FileExcel">
+                                        @if ($errors->has('FileExcel'))
+                                            <i class="icon-remove bigger-110 red"> {{ $errors->first('FileExcel') }}</i>
+                                        @endif
                                     </div>
 
                                     <div class="col-xs-12 col-sm-7">
@@ -414,11 +417,19 @@
         <script type="text/javascript">
             jQuery(function($) {
                 /////////
-                $('#modal-form input[type=file]').ace_file_input({
+                $('#modal-form input[name=FileExcel]').ace_file_input({
                     style: 'well',
-                    btn_choose: 'Drop files here or click to choose',
+                    btn_choose: 'Kéo thả file vào đây hoặc click để chọn',
                     btn_change: null,
                     no_icon: 'icon-cloud-upload',
+                    droppable: true,
+                    thumbnail: 'large'
+                })
+                $('#modal-form input[name=HinhAnh]').ace_file_input({
+                    style: 'well',
+                    btn_choose: 'Kéo thả hình vào đây hoặc click để chọn',
+                    btn_change: null,
+                    no_icon: 'icon-picture',
                     droppable: true,
                     thumbnail: 'large'
                 })

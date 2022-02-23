@@ -69,6 +69,11 @@ class SanPhamController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'FileExcel' => ['mimes:xlsx,xls,csv,ods'], //validate loại excel
+            ]
+        );
         if ($request->hasFile('FileExcel')) {
             $import = new SanPhamImport;
             Excel::import($import, $request->file('FileExcel'));
