@@ -151,13 +151,15 @@
                                                     <form action="{{ route('SanPham.KhoiPhuc', $item->id) }}" method="post">
                                                         @csrf
                                                         {{-- @method("PUT") --}}
-                                                        <button type="submit" class="btn-link blue" title="Khôi phục"><i class="icon-undo bigger-130"></i></button>
+                                                        <button type="submit" class="btn-link blue" data-rel="tooltip" title="Khôi phục" data-placement="bottom"><i
+                                                                class="icon-undo bigger-130"></i></button>
                                                     </form>
 
                                                     <form id="form" action="{{ route('SanPham.XoaVinhVien', $item->id) }}" method="post">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button" class="btn-link red bootbox-options" title="Xóa vĩnh viễn"><i class="icon-trash bigger-130"></i></button>
+                                                        <button type="button" class="btn-link red bootbox-options" data-rel="tooltip" title="Xóa vĩnh viễn" data-placement="bottom"><i
+                                                                class="icon-trash bigger-130"></i></button>
                                                     </form>
                                                 </div>
 
@@ -277,6 +279,8 @@
                                         @if ($errors->has('HinhAnh'))
                                             <i class="icon-remove bigger-110 red"> {{ $errors->first('HinhAnh') }}</i>
                                         @endif
+                                        <label>Excel</label>
+                                        <input type="file" accept=".xlsx, .xls, .csv, .ods" name="FileExcel">
                                     </div>
 
                                     <div class="col-xs-12 col-sm-7">
@@ -402,6 +406,10 @@
         <script src="/storage/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
         <script src="/storage/assets/js/jquery.maskedinput.min.js"></script>
         <script src="/storage/assets/js/bootstrap-tag.min.js"></script>
+        {{-- dialog --}}
+        <script src="/storage/assets/js/bootbox.min.js"></script>
+        {{-- dialog --}}
+
         <!-- inline scripts related to this page -->
         <script type="text/javascript">
             jQuery(function($) {
@@ -524,9 +532,8 @@
                         });
                     @endforeach
                 @endif
-
-                @if (!empty($request['SanPhamMoi']))
-                    toastr.success('Thêm sản phẩm {{ $request['SanPhamMoi'] }} thành công', 'Thành công', {
+                @if (Session::has('SanPhamMoi'))
+                    toastr.success("{{ Session::get('SanPhamMoi') }}", "Thành công", {
                     timeOut: 3000
                     });
                 @endif

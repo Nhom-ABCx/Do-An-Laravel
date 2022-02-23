@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use App\Imports\SanPhamImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SanPhamController extends Controller
 {
@@ -67,6 +69,11 @@ class SanPhamController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->hasFile('FileExcel')) {
+            $import = new SanPhamImport;
+            Excel::import($import, $request->file('FileExcel'));
+            return Redirect::back()->with("SanPhamMoi", 'Thêm thành công ' . $import->getRowCount() . ' sản phẩm');
+        }
         //xác thực đầu vào, xem các luật tại https://laravel.com/docs/8.x/validation#available-validation-rules
         $request->validate(
             [
@@ -96,7 +103,8 @@ class SanPhamController extends Controller
         }
 
         $sanPham->save(); //luu lại đường dẫn hình
-        return Redirect::route('SanPham.index', ["SanPhamMoi" => $sanPham->TenSanPham]);
+
+        return Redirect::back()->with("SanPhamMoi", 'Thêm sản phẩm mới ' . $sanPham->TenSanPham . ' thành công');
     }
 
     /**

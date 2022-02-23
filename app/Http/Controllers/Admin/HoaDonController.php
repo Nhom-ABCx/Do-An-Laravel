@@ -22,7 +22,8 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use BenSampo\Enum\Rules\EnumValue;
 use BenSampo\Enum\Rules\EnumKey;
-use PDF;
+use Barryvdh\DomPDF\Facade as PDF;
+//use PDF;
 
 class HoaDonController extends Controller
 {

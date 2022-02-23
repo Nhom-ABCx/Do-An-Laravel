@@ -84,6 +84,7 @@ Route::group([
     Route::get("SanPhamm/DaXoa", [SanPhamController::class, "SanPhamDaXoa"])->name("SanPham.DaXoa");
     Route::post("SanPham/KhoiPhuc/{id}", [SanPhamController::class, "KhoiPhucSanPham"])->name("SanPham.KhoiPhuc");
     Route::delete("SanPham/XoaVinhVien/{id}", [SanPhamController::class, "XoaVinhVienSanPham"])->name("SanPham.XoaVinhVien");
+
     Route::resource('KhuyenMai', ChuongTrinhKhuyenMaiController::class, [
         'parameters' => [
             'KhuyenMai' => 'chuongTrinhKhuyenMai'

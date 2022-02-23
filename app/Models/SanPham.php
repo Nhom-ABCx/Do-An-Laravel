@@ -13,7 +13,6 @@ class SanPham extends Model
 
     protected $table = 'san_phams';
     protected $fillable = [
-        'Id',
         'TenSanPham',
         'MoTa',
         'SoLuongTon',
