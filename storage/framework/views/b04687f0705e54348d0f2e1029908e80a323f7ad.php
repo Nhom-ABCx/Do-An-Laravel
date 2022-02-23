@@ -85,7 +85,7 @@
                                         data-placement="top" />
 
                                     <button type="submit" class="btn btn-purple btn-sm">
-                                        Search
+                                        Lọc
                                         <i class="icon-search icon-on-right bigger-110"></i>
                                     </button>
                                 </form>

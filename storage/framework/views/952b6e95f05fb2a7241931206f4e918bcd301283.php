@@ -46,7 +46,7 @@
                                         data-placement="top" />
 
                                     <button type="submit" class="btn btn-purple btn-sm">
-                                        Search
+                                        Lọc
                                         <i class="icon-search icon-on-right bigger-110"></i>
                                     </button>
                                 </form>
@@ -293,21 +293,24 @@
                                                                 case (App\Enums\TrangThaiHD::DangXacNhan): ?>
                                                                     <span class="label label-danger arrowed"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan)); ?></span>
                                                                 <?php break; ?>
+
                                                                 <?php case (App\Enums\TrangThaiHD::DangXuLy): ?>
                                                                     <span class="label arrowed"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy)); ?></span>
                                                                 <?php break; ?>
+
                                                                 <?php case (App\Enums\TrangThaiHD::DaXuLy): ?>
-                                                                    <span
-                                                                        class="label label-info arrowed-right arrowed-in"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy)); ?></span>
+                                                                    <span class="label label-info arrowed-right arrowed-in"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy)); ?></span>
                                                                 <?php break; ?>
+
                                                                 <?php case (App\Enums\TrangThaiHD::DangGiao): ?>
-                                                                    <span
-                                                                        class="label label-warning arrowed arrowed-right"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao)); ?></span>
+                                                                    <span class="label label-warning arrowed arrowed-right"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao)); ?></span>
                                                                 <?php break; ?>
+
                                                                 <?php case (App\Enums\TrangThaiHD::DaGiao): ?>
                                                                     <span
                                                                         class="label label-success arrowed-in arrowed-in-right"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao)); ?></span>
                                                                 <?php break; ?>
+
                                                                 <?php default: ?>
                                                             <?php endswitch; ?>
                                                         </td>
@@ -420,8 +423,8 @@
     <!-- page specific plugin scripts -->
 
     <!--[if lte IE 8]>
-                                                                                                                                                                                  <script src="/storage/assets/js/excanvas.min.js"></script>
-                                                                                                                                                                                  <![endif]-->
+                                                                                                                                                                                      <script src="/storage/assets/js/excanvas.min.js"></script>
+                                                                                                                                                                                      <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
