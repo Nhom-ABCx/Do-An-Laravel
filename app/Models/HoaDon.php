@@ -21,7 +21,7 @@ class HoaDon extends Model
     ];
     public function DiaChi()
     {
-        return $this->belongsTo(DiaChi::class, 'DiaChiId');
+        return $this->belongsTo(DiaChi::class, 'DiaChiId')->withTrashed();
     }
     public function CT_HoaDon()
     {

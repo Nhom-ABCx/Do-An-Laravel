@@ -25,7 +25,7 @@ class UserGioHangController extends Controller
      */
     public function index()
     {
-        return view("User.Cart");
+        return view("User.GioHang.Cart");
     }
 
     /**

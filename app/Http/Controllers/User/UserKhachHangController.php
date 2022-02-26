@@ -22,7 +22,7 @@ class UserKhachHangController extends Controller
      */
     public function index()
     {
-        return view("User.Profile");
+        return view("User.KhachHang.Profile");
     }
 
     /**

@@ -241,14 +241,17 @@ class HoaDonController extends Controller
         if ($validate->fails())
             return response()->json($validate->errors(), 400);
         $diaChi = DiaChi::find($request["DiaChiId"]);
+        //clone ra 1 dia chi moi' de luu lai hoa' don do' giao toi' dau
+        $newDiaChi = $diaChi->replicate();
+        $newDiaChi->save(); //luu clone vao database
+        $newDiaChi->delete(); //xoa' clone do' di cho no' ko co' hien ra
         $hoaDon = HoaDon::create([
-            'DiaChiId'         => $diaChi->id,
+            'DiaChiId'         => $newDiaChi->id,
             "PhuongThucThanhToan" => $request["PhuongThucThanhToan"],
             //'TrangThai' => 1, //vua lap, dang cho xac nhan
             'TongSoLuong' => 0,
             'TongTien' => 0,
         ]);
-
 
         //---------------------------------------------
         //lay ra cac chi tiet khuyen mai dang giam gia'
