@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'nhan_viens',
+        'passwords' => 'tai_khoans',
     ],
 
     /*
@@ -28,7 +28,7 @@ return [
     | here which uses session storage and the Eloquent user provider.
     |
     | All authentication drivers have a user provider. This defines how the
-    | nhan_viens are actually retrieved out of your database or other storage
+    | tai_khoans are actually retrieved out of your database or other storage
     | mechanisms used by this application to persist your user's data.
     |
     | Supported: "session"
@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'nhan_viens',
+            'provider' => 'tai_khoans',
         ],
 
         'api' => [
@@ -53,7 +53,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | All authentication drivers have a user provider. This defines how the
-    | nhan_viens are actually retrieved out of your database or other storage
+    | tai_khoans are actually retrieved out of your database or other storage
     | mechanisms used by this application to persist your user's data.
     |
     | If you have multiple user tables or models you may configure multiple
@@ -65,14 +65,14 @@ return [
     */
 
     'providers' => [
-        'nhan_viens' => [
+        'tai_khoans' => [
             'driver' => 'eloquent',
-            'model' => App\Models\NhanVien::class,
+            'model' => App\Models\TaiKhoan::class,
         ],
 
-        // 'nhan_viens' => [
+        // 'tai_khoans' => [
         //     'driver' => 'database',
-        //     'table' => 'nhan_viens',
+        //     'table' => 'tai_khoans',
         // ],
     ],
 
@@ -92,8 +92,8 @@ return [
     */
 
     'passwords' => [
-        'nhan_viens' => [
-            'provider' => 'nhan_viens',
+        'tai_khoans' => [
+            'provider' => 'tai_khoans',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
