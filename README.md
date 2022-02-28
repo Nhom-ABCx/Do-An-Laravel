@@ -1,65 +1,19 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+Kết quả đạt được
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![17](https://user-images.githubusercontent.com/62784077/155970047-7ad74356-d7bc-469c-a434-7232d4b37f57.png)
+![18](https://user-images.githubusercontent.com/62784077/155970054-38cfdb94-a765-4e87-a3a0-62da09ecb9c6.png)
+![19](https://user-images.githubusercontent.com/62784077/155970057-c45516fb-bdd0-41eb-9155-e2551ecc247c.png)
+![20](https://user-images.githubusercontent.com/62784077/155970062-5b85a8aa-16e2-465b-bb32-6caf7641a3c6.png)
+![21](https://user-images.githubusercontent.com/62784077/155970068-b74143a6-62fc-4002-8311-eb57862ac0b0.png)
+![22](https://user-images.githubusercontent.com/62784077/155970073-e284a2ea-ac70-4698-8c45-ccdea0c8995d.png)
+![23](https://user-images.githubusercontent.com/62784077/155970082-be17b42b-36d2-48ed-8c70-fdf65638afb7.png)
+![24](https://user-images.githubusercontent.com/62784077/155970092-861d0a63-e37e-46cf-9946-1272fe0012aa.png)
+![25](https://user-images.githubusercontent.com/62784077/155970100-8b3f67d6-ffbd-4ce8-ac29-dcc3e5361817.png)
+![26](https://user-images.githubusercontent.com/62784077/155970117-e3e92e61-8434-4d08-acf3-06f3c19359d6.png)
+![27](https://user-images.githubusercontent.com/62784077/155970123-1bf132f3-1c04-49a7-b68a-1ce4950a965c.png)
+![28](https://user-images.githubusercontent.com/62784077/155970127-48168dd7-54b6-406b-9160-98e898ed2d98.png)
+![29](https://user-images.githubusercontent.com/62784077/155970141-adb2f8bf-7e76-4650-bf3a-6ad87694d653.png)
+![30](https://user-images.githubusercontent.com/62784077/155970146-a9dc6038-16de-4e3d-864f-8fd81715798c.png)
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Còn nữa...
