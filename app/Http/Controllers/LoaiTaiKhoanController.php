@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LoaiTaiKhoan;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreLoaiTaiKhoanRequest;
-use App\Http\Requests\UpdateLoaiTaiKhoanRequest;
+use Illuminate\Http\Request;
 
 class LoaiTaiKhoanController extends Controller
 {
@@ -32,10 +31,10 @@ class LoaiTaiKhoanController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreLoaiTaiKhoanRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreLoaiTaiKhoanRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -65,11 +64,11 @@ class LoaiTaiKhoanController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateLoaiTaiKhoanRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @param  \App\Models\LoaiTaiKhoan  $loaiTaiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateLoaiTaiKhoanRequest $request, LoaiTaiKhoan $loaiTaiKhoan)
+    public function update(Request $request, LoaiTaiKhoan $loaiTaiKhoan)
     {
         //
     }

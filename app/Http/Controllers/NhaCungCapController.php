@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\NhaCungCap;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreNhaCungCapRequest;
-use App\Http\Requests\UpdateNhaCungCapRequest;
+use Illuminate\Http\Request;
 
 class NhaCungCapController extends Controller
 {
@@ -32,10 +31,10 @@ class NhaCungCapController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreNhaCungCapRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNhaCungCapRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -65,11 +64,11 @@ class NhaCungCapController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateNhaCungCapRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @param  \App\Models\NhaCungCap  $nhaCungCap
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNhaCungCapRequest $request, NhaCungCap $nhaCungCap)
+    public function update(Request $request, NhaCungCap $nhaCungCap)
     {
         //
     }

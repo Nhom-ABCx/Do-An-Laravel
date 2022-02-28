@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TaiKhoan;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreTaiKhoanRequest;
-use App\Http\Requests\UpdateTaiKhoanRequest;
+use Illuminate\Http\Request;
 
 class TaiKhoanController extends Controller
 {
@@ -32,10 +31,10 @@ class TaiKhoanController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTaiKhoanRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTaiKhoanRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -65,11 +64,11 @@ class TaiKhoanController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTaiKhoanRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @param  \App\Models\TaiKhoan  $taiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTaiKhoanRequest $request, TaiKhoan $taiKhoan)
+    public function update(Request $request, TaiKhoan $taiKhoan)
     {
         //
     }

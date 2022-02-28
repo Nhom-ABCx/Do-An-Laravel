@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MauSac;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreMauSacRequest;
-use App\Http\Requests\UpdateMauSacRequest;
+use Illuminate\Http\Request;
 
 class MauSacController extends Controller
 {
@@ -32,10 +31,10 @@ class MauSacController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreMauSacRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMauSacRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -65,11 +64,11 @@ class MauSacController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateMauSacRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @param  \App\Models\MauSac  $mauSac
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMauSacRequest $request, MauSac $mauSac)
+    public function update(Request $request, MauSac $mauSac)
     {
         //
     }

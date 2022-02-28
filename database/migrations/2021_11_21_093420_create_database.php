@@ -89,7 +89,10 @@ class CreateDatabase extends Migration
         //mau` sac'
         //Ram
         //BoNoTrong
-
+        Schema::create('ct_san_phams', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
         Schema::create('san_pham_dien_thoais', function (Blueprint $table) {
             $table->id();
             $table->foreignId('SanPhamId');
@@ -110,7 +113,7 @@ class CreateDatabase extends Migration
             $table->foreign('SanPhamId')->references('id')->on('san_phams');
             $table->foreign('MauSacId')->references('id')->on('mau_sacs');
         });
-        Schema::create('hinh_anh_dien_thoais', function (Blueprint $table) {
+        Schema::create('hinh_anhs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('SanPhamDienThoaiId');
             $table->string('HinhAnh')->nullable();
@@ -320,8 +323,8 @@ class CreateDatabase extends Migration
         Schema::dropIfExists('tai_khoans');
         Schema::dropIfExists('loai_tai_khoans');
         Schema::dropIfExists('nha_cung_caps');
-        Schema::dropIfExists('san_pham_dien_thoais');
         Schema::dropIfExists('mau_sacs');
-        Schema::dropIfExists('hinh_anh_dien_thoais');
+        Schema::dropIfExists('hinh_anhs');
+        Schema::dropIfExists('ct_san_phams');
     }
 }
