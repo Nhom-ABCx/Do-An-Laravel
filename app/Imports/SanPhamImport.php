@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class SanPhamImport implements ToModel, WithHeadingRow
 {
+    //    https://viblo.asia/p/nhap-xuat-du-lieu-trong-laravel-voi-package-maatwebsiteexcel-6J3ZgoLBZmB
     private $rows = 0; //dem so dong`
 
     public function headingRow(): int
