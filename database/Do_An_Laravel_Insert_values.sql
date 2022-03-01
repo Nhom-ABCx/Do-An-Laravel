@@ -63,60 +63,110 @@ insert into Khach_Hangs(Username,Email,Phone,MatKhau,HoTen,NgaySinh,GioiTinh,Dia
 ('whitemeercat301', 'tilde.rasmussen@example.com', '90306008', 'password123', 'Tilde_Rasmussen', '1954-11-25 03:00:34', 0, 'Egevangen, København Ø, Denmark', 'https://randomuser.me/api/portraits/women/1.jpg',(SELECT FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP('2000-1-1') - UNIX_TIMESTAMP('2015-01-01')) + UNIX_TIMESTAMP('2015-01-01')))),
 ('tinyelephant830', 'rebekka.schie@example.com', '65371361', 'password123', 'Rebekka_Schie', '1966-09-24 20:57:08', 0, 'Lachmanns vei, Skarnes, Norway', 'https://randomuser.me/api/portraits/women/9.jpg',(SELECT FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP('2000-1-1') - UNIX_TIMESTAMP('2015-01-01')) + UNIX_TIMESTAMP('2015-01-01'))));
 
-insert into Hang_San_Xuats(Ten,DiaChi,Email,Phone) values
-('Cannon','V2, Lê Thị Riêng, Hà Nam','Cannon@gmail.com','0468343337'),
-('IPhone','N3, Hoàng Sa, Tây Ninh','IPhone@gmail.com','0868562476'),
-('Xiaomi','Z7, Lê Thánh Tôn, Lào Cai','Xiaomi@gmail.com','0727834458'),
-('SaNaKy','E4, Lê Anh Xuân, Phú Yên','SaNaKy@gmail.com','0219680334'),
-('SONY','V2, Lê Thị Riêng, Hà Nam','SONY@gmail.com','0124108053'),
-('SamSung','M8, Nguyễn Cư Trinh, Lai Châu','SamSung@gmail.com','0487862068'),
-('ViVo','R1, Lê Công Kiều, Hải Phòng','ViVo@gmail.com','0912247804'),
-('Electrolux','F3, Nguyễn Cảnh Chân, Khánh Hòa','Electrolux@gmail.com','0316892771'),
-('LG','N1, Nam Quốc Cang, Nam Định','LG@gmail.com','0233681010'),
-('Toshiba','J4, Calmette, Hà Nam','Toshiba@gmail.com','0268628820'),
-('Acer','F9, Nguyễn Hữu Cầu, Cao Bằng','Acer@gmail.com','0883771752'),
-('ASUS','H6, Huỳnh Khương Ninh, Hà Tĩnh','ASUS@gmail.com','0135349672');
+insert into Hang_San_Xuats(TenHangSanXuat) values
+('Cannon' ),
+('IPhone' ),
+('Xiaomi' ),
+('SaNaKy' ),
+('SONY'   ),
+('SamSung'),
+('ViVo'   ),
+('LG'     ),
+('Toshiba'),
+('Acer'   ),
+('ASUS'   );
 
-insert into Loai_San_Phams(TenLoai,MoTa) values(N'Điện lạnh',null),
+insert into Loai_San_Phams(TenLoai,MoTa) values
 (N'Điện thoại','Smart Phone'),
+(N'Điện lạnh',null),
 (N'LapTop',null),
 (N'Máy ảnh',null),
 (N'Máy tính bảng',null),
 (N'Phụ kiện',null);
 
-insert into San_Phams(TenSanPham,MoTa,SoLuongTon,GiaNhap,GiaBan,HinhAnh,LuotMua,HangSanXuatId,LoaiSanPhamId,created_at) values
-(N'Xiaomi Redmi Note 6 Pro30','64GB',10,         1000000,2000000,'DT_1.jpg',12,2,2,'2022-12-22'),
-(N'Máy giặt Electrolux 10 Kg29','2 Năm',4,       5376969,6376969,'DL_1.jpg',3,8,1,'2022-12-22'),
-(N'Máy giặt Beko 9Kg28','2 Năm',8,               2560459,3560459,'DL_2.jpg',5,8,1,'2022-12-22'),
-(N'Samsung Inverter 1227','2 Năm',46,            9208494,10208494,'DT_2.jpg',9,6,2,'2022-12-22'),
-(N'Máy giặt Toshiba 9.5 Kg26','32Gb',10,         8996345,9996345,'DL_3.jpg',1,10,1,'2022-12-22'),
-(N'Điện thoại xiaomi-mi-a125','1 Năm FullBox',39,5139972,6139972,'DT_3.jpg',0,3,2,'2022-12-22'),
-(N'Điện thoại xiaomi-mi-a224','16Gb',5,          1367603,2367603,'DT_4.jpg',2,3,2,'2022-12-22'),
-(N'Đt xiaomi-redmi-5-plus23','32Gb',6,           8322064,9322064,'DT_5.jpg',3,3,2,'2022-12-22'),
-(N'Điện thoại xiaomi-mi-a122','1 Năm FullBox',17,5817358,6817358,'DT_6.jpg',7,3,2,'2022-12-22'),
-(N'Điện thoại xiaomi-mi-a221','16Gb',33,         2647340,3647340,'DT_7.jpg',8,3,2,'2022-12-22'),
-(N'Đt xiaomi-redmi-5-plus20','32Gb',2,           2299870,3299870,'DT_8.jpg',90,3,2,'2022-12-22'),
-(N'Điện thoại xiaomi-mi-a119','1 Năm FullBox',24,2674972,3674972,'DT_9.jpg',4,3,2,'2022-12-22'),
-(N'Điện thoại xiaomi-mi-a218','16Gb',48,         6927375,7927375,'DT_10.jpg',1,3,2,'2022-12-22'),
-(N'Đt xiaomi-redmi-5-plus17','1 Năm FullBox',19, 8344018,9344018,'DT_11.jpg',2,3,2,'2022-12-22'),
-(N'samsung-galaxy-tab-e-9616','1 Năm FullBox',25,5775860,6775860,'DT_12.jpg',3,6,2,'2022-12-22'),
-(N'samsung-galaxy-tab-e-9615','1 Năm FullBox',23,5175337,6175337,'DT_13.jpg',7,6,2,'2022-12-22'),
-(N'samsung-galaxy-tab-e-9614','1 Năm FullBox',39,3102066,4102066,'DT_14.jpg',5,6,2,'2022-12-22'),
-(N'Điện thoại vivo-y85-red13','I3',43,           7205830,8205830,'DT_15.jpg',4,7,2,'2022-12-22'),
-(N'LapTop acer-aspire-a31412','I7',28,           4421204,5421204,'LT_1.jpg',9,11,3,'2022-12-22'),
-(N'LapTop acer-aspire-a71511','I5',22,           6477731,7477731,'LT_2.jpg',10,11,3,'2022-12-22'),
-(N'LapTop asus-s510ua-i50','I3',30,              7542377,8542377,'LT_3.jpg',15,12,3,'2022-12-22'),
-(N'LapTop asus-x44lua-i39','Full box',14,        8256867,9256867,'LT_4.jpg',17,12,3,'2022-12-22'),
-(N'Máy ảnh Cannon EOS 6D8','Full box',5,         8396596,9396596,'Camera_1.jpg',12,1,4,'2022-12-22'),
-(N'Máy ảnh Canon Ixus 1857','Full box',3,        1812596,2812596,'Camera_2.jpg',2,1,4,'2022-12-22'),
-(N'Máy ảnh Canon EOS M506','Full box',19,        4217622,5217622,'Camera_3.jpg',3,1,4,'2022-12-22'),
-(N'Máy ảnh Canon Ixus 2855','Full box',37,       9344565,10344565,'Camera_1.jpg',4,1,4,'2022-12-22'),
-(N'Máy ảnh Canon Powershot4 ','Test',41,         5761988,6761988,'Camera_2.jpg',1,1,4,'2022-12-22'),
-(N'cap-lightning-2m-evalu3','Test',47,           7613987,8613987,'SP_1.jpg',5,6,6,'2022-12-22'),
-(N'cap-lightning-20cm-esaver2','Test',30,        7403373,8403373,'SP_2.jpg',1,5,6,'2022-12-22'),
-(N'cap-micro-1m-esaver1','Test',44,              8930751,9930751,'SP_3.jpg',2,5,6,'2022-12-22'),
-(N'cap-micro-usb-20cm1','Test',32,               3214440,4214440,'SP_4.jpg',3,5,6,'2022-12-22'),
-(N'tai-nghe-chup-tai-kanen1','',27,              8870860,9870860,'SP_5.jpg',7,12,6,'2022-12-22');
+insert into San_Phams(TenSanPham,LuotMua,HangSanXuatId,LoaiSanPhamId) values
+('iPhone 13 Pro Max',5,2,1);
+
+insert into thuoc_tinhs(TenThuocTinh,MoTa) values
+('ManHinh','Màn hình'),
+('HeDieuHanh','Hệ điều hành'),
+('CameraSau','Camera sau'),
+('CameraTruoc','Camera trước'),
+('Chip','Chip'),
+('Ram','Ram'),
+('BoNhoTrong','Bộ nhớ trong'),
+('Sim','Sim'),
+('Pin','Pin'),
+('MauSac','Màu sắc');
+
+insert into san_pham_thuoc_tinhs(SanPhamId,ThuocTinhId) values
+(1,1),
+(1,2),
+(1,3),
+(1,4),
+(1,5),
+(1,6),
+(1,7),
+(1,8),
+(1,9),
+(1,10);
+
+insert into thuoc_tinh_values(ThuocTinhId,Value) values
+(1,'OLED6.7"Super Retina XDR'),
+(2,'iOS 15'),
+(3,'3 camera 12 MP'),
+(4,'12 MP'),
+(5,'Apple A15 Bionic'),
+(6,'4'),
+(6,'6'),
+(6,'8'),
+(6,'16'),
+(6,'32'),
+(7,'128'),
+(7,'256'),
+(7,'512'),
+(7,'1024'),
+(8,'1 Nano SIM & 1 eSIMHỗ trợ 5G'),
+(9,'4352 mAh20 W'),
+(10,'Vàng đồng'),
+(10,'Xám'),
+(10,'Bạc'),
+(10,'Xanh dương');
+
+insert into ct_san_phams(SanPhamId,MaSanPham,GiaBan) values
+(1,'DT1',33990000),
+(1,'DT2',40000000);
+
+insert into ct_san_pham_values(SanPhamId,CTSanPhamId,ThuocTinhId,ThuocTinhValueId) values
+(1,1,1,1),
+(1,1,2,2),
+(1,1,3,3),
+(1,1,4,4),
+(1,1,5,5),
+(1,1,6,7),
+(1,1,7,11),
+(1,1,8,15),
+(1,1,9,16),
+(1,1,10,17);
+
+
+insert into ct_san_pham_values(SanPhamId,CTSanPhamId,ThuocTinhId,ThuocTinhValueId) values
+(1,2,1,1),
+(1,2,2,2),
+(1,2,3,3),
+(1,2,4,4),
+(1,2,5,5),
+(1,2,6,7),
+(1,2,7,11),
+(1,2,8,15),
+(1,2,9,16),
+(1,2,10,17);
+
+
+
+
+
+
 
 insert into Chuong_Trinh_Khuyen_Mais(TenChuongTrinh,MoTa,FromDate,ToDate,created_at) values(N'Khuyến mãi cực hot ngày 20/11',N' giảm giá đến 5000đ các loại phụ kiện','2021-11-20','2022-12-01','2021-10-19');
 

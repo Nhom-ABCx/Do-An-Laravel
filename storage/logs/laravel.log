@@ -25646,3 +25646,91 @@ Stack trace:
 [stacktrace]
 #0 {main}
 "} 
+[2022-03-01 14:43:42] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:43:43] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:44:08] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:44:13] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:44:30] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:44:37] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:44:42] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:44:49] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:45:36] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:45:42] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:46:42] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:47:15] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:47:25] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:47:42] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:48:14] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:48:38] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:48:42] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:49:42] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:50:07] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:50:42] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:51:23] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
+[2022-03-01 14:51:42] local.ERROR: Trait "Laravel\Passport\HasApiTokens" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Laravel\\Passport\\HasApiTokens\" not found at D:\\Program Files\\xampp\\htdocs\\Do-An-Laravel\\app\\Models\\KhachHang.php:10)
+[stacktrace]
+#0 {main}
+"} 
