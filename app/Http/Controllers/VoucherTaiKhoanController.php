@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CT_SanPham;
+use App\Models\Voucher_TaiKhoan;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCT_SanPhamRequest;
-use App\Http\Requests\UpdateCT_SanPhamRequest;
+use App\Http\Requests\StoreVoucher_TaiKhoanRequest;
+use App\Http\Requests\UpdateVoucher_TaiKhoanRequest;
 
-class CTSanPhamController extends Controller
+class VoucherTaiKhoanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class CTSanPhamController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCT_SanPhamRequest  $request
+     * @param  \App\Http\Requests\StoreVoucher_TaiKhoanRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCT_SanPhamRequest $request)
+    public function store(StoreVoucher_TaiKhoanRequest $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class CTSanPhamController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CT_SanPham  $cT_SanPham
+     * @param  \App\Models\Voucher_TaiKhoan  $voucher_TaiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function show(CT_SanPham $cT_SanPham)
+    public function show(Voucher_TaiKhoan $voucher_TaiKhoan)
     {
         //
     }
@@ -54,10 +54,10 @@ class CTSanPhamController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CT_SanPham  $cT_SanPham
+     * @param  \App\Models\Voucher_TaiKhoan  $voucher_TaiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function edit(CT_SanPham $cT_SanPham)
+    public function edit(Voucher_TaiKhoan $voucher_TaiKhoan)
     {
         //
     }
@@ -65,11 +65,11 @@ class CTSanPhamController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCT_SanPhamRequest  $request
-     * @param  \App\Models\CT_SanPham  $cT_SanPham
+     * @param  \App\Http\Requests\UpdateVoucher_TaiKhoanRequest  $request
+     * @param  \App\Models\Voucher_TaiKhoan  $voucher_TaiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCT_SanPhamRequest $request, CT_SanPham $cT_SanPham)
+    public function update(UpdateVoucher_TaiKhoanRequest $request, Voucher_TaiKhoan $voucher_TaiKhoan)
     {
         //
     }
@@ -77,10 +77,10 @@ class CTSanPhamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CT_SanPham  $cT_SanPham
+     * @param  \App\Models\Voucher_TaiKhoan  $voucher_TaiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CT_SanPham $cT_SanPham)
+    public function destroy(Voucher_TaiKhoan $voucher_TaiKhoan)
     {
         //
     }

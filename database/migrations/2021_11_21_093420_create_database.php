@@ -19,11 +19,29 @@ class CreateDatabase extends Migration
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
+        Schema::create('quyens', function (Blueprint $table) {
+            $table->id();
+            $table->string('Key');
+            $table->string('TenQuyen');
+            $table->integer('Parent_Id')->nullable(); //xai` de quy
+            $table->timestamps();
+            $table->softDeletes(); //nay la trang thai xoa
+        });
         Schema::create('loai_tai_khoans', function (Blueprint $table) {
             $table->id();
             $table->string('TenLoai');
             $table->string('MoTa');
             $table->timestamps();
+        });
+        Schema::create('loai_tai_khoan_quyens', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('LoaiTaiKhoanId');
+            $table->foreignId('QuyenId');
+            $table->string('MoTa');
+            $table->timestamps();
+            $table->softDeletes(); //nay la trang thai xoa
+            $table->foreign('LoaiTaiKhoanId')->references('id')->on('loai_tai_khoans');
+            $table->foreign('QuyenId')->references('id')->on('quyens');
         });
         Schema::create('tai_khoans', function (Blueprint $table) {
             $table->Id();
@@ -62,13 +80,7 @@ class CreateDatabase extends Migration
             $table->Id();
             $table->string('TenLoai')->unique();
             $table->string('MoTa')->nullable();
-            $table->timestamps();
-            $table->softDeletes(); //nay la trang thai xoa
-        });
-        Schema::create('mau_sacs', function (Blueprint $table) {
-            $table->id();
-            $table->string('TenMauSac');
-            $table->string('CodeHex');
+            $table->integer('Parent_Id')->nullable(); //xai` de quy
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
         });
@@ -85,51 +97,111 @@ class CreateDatabase extends Migration
             $table->foreign('HangSanXuatId')->references('id')->on('hang_san_xuats');
             $table->foreign('LoaiSanPhamId')->references('id')->on('loai_san_phams');
         });
-        //1-1
-        //mau` sac'
-        //Ram
-        //BoNoTrong
+        //id: 1  TenSanPham: Iphone 13 pro max
+        Schema::create('thuoc_tinhs', function (Blueprint $table) {
+            $table->id();
+            $table->string('TenThuocTinh')->unique();
+            $table->timestamps();
+            $table->softDeletes(); //nay la trang thai xoa
+        });
+        //id: 1  Ten: Ram
+        //id: 2  Ten: MauSac
+        //id: 3  Ten: Chip
+        //id: 4  Ten: ManHinh
+        //HeDieuHanh,Chip,BoNhoTrong,Sim,Pin
+        Schema::create('thuoc_tinh_values', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('ThuocTinhId');
+            $table->string('Value')->unique();
+            $table->timestamps();
+            $table->softDeletes(); //nay la trang thai xoa
+            $table->foreign('ThuocTinhId')->references('id')->on('thuoc_tinhs');
+        });
+        //id: 1  ThuocTinhId: 1  Value: 8
+        //id: 2  ThuocTinhId: 1  Value: 16
+        //id: 3  ThuocTinhId: 1  Value: 32
+        //id: 4  ThuocTinhId: 1  Value: 64
+        //id: 5  ThuocTinhId: 2  Value: White
+        //id: 6  ThuocTinhId: 2  Value: Black
+        //id: 7  ThuocTinhId: 3  Value: Yellow
+        //id: 8  ThuocTinhId: 3  Value: Snap Dragon
+        //id: 9  ThuocTinhId: 4  Value: 12hz
         Schema::create('ct_san_phams', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-        });
-        Schema::create('san_pham_dien_thoais', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('SanPhamId');
-            $table->foreignId('MauSacId');
-            $table->string('ManHinh')->nullable();
-            $table->string('HeDieuHanh')->nullable();
-            $table->string('Chip')->nullable();
-            $table->enum('Ram', [4, 8, 16, 32])->default(4);
-            $table->enum('BoNhoTrong', [32, 64, 128, 256, 512, 1024])->default(32);
-            $table->string('Sim')->nullable();
-            $table->string('Pin')->nullable();
-            $table->text('MoTa')->nullable();
-            $table->integer('SoLuongTon'); //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            $table->double('GiaNhap')->nullable();
+            $table->foreignId('ThuocTinhValueId');
+            $table->longText('MoTa')->nullable();
             $table->double('GiaBan')->nullable();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('SanPhamId')->references('id')->on('san_phams');
-            $table->foreign('MauSacId')->references('id')->on('mau_sacs');
+            $table->foreign('ThuocTinhValueId')->references('id')->on('thuoc_tinh_values');
+        });
+        //Iphone 13 pro max Ram (8-16-32)  MauSac (Black-Yellow)
+        //id: 1  SanPhamId: 1  ThuocTinhValueId: 1
+        //id: 2  SanPhamId: 1  ThuocTinhValueId: 2
+        //id: 3  SanPhamId: 1  ThuocTinhValueId: 3
+        //id: 4  SanPhamId: 1  ThuocTinhValueId: 6
+        //id: 5  SanPhamId: 1  ThuocTinhValueId: 7
+        //id: 6  SanPhamId: 1  ThuocTinhValueId: 8
+        //id: 7  SanPhamId: 1  ThuocTinhValueId: 9
+        // Schema::create('san_pham_dien_thoais', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('SanPhamId');
+        //     $table->foreignId('MauSacId');
+        //     $table->string('ManHinh')->nullable();
+        //     $table->string('HeDieuHanh')->nullable();
+        //     $table->string('Chip')->nullable();
+        //     $table->enum('Ram', [4, 8, 16, 32])->default(4);
+        //     $table->enum('BoNhoTrong', [32, 64, 128, 256, 512, 1024])->default(32);
+        //     $table->string('Sim')->nullable();
+        //     $table->string('Pin')->nullable();
+        //     $table->text('MoTa')->nullable();
+        //     $table->integer('SoLuongTon'); //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        //     $table->double('GiaNhap')->nullable();
+        //     $table->double('GiaBan')->nullable();
+        //     $table->timestamps();
+        //     $table->softDeletes(); //nay la trang thai xoa
+        //     $table->foreign('SanPhamId')->references('id')->on('san_phams');
+        //     $table->foreign('MauSacId')->references('id')->on('mau_sacs');
+        // });
+        Schema::create('khos', function (Blueprint $table) {
+            $table->id();
+            $table->string('TenKho')->unique();
+            $table->string('DiaChi');
+            $table->timestamps();
+            $table->softDeletes(); //nay la trang thai xoa
+        });
+        Schema::create('ct_khos', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('KhoId');
+            $table->foreignId('CTSanPhamId');
+            $table->integer('SoLuong');
+            $table->double('GiaNhap');
+            $table->double('TongTien');
+            $table->timestamps();
+            $table->softDeletes(); //nay la trang thai xoa
+            $table->foreign('KhoId')->references('id')->on('khos');
+            $table->foreign('CTSanPhamId')->references('id')->on('ct_san_phams');
         });
         Schema::create('hinh_anhs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('SanPhamDienThoaiId');
+            $table->foreignId('CTSanPhamId');
             $table->string('HinhAnh')->nullable();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
-            $table->foreign('SanPhamDienThoaiId')->references('id')->on('san_pham_dien_thoais');
+            $table->foreign('CTSanPhamId')->references('id')->on('ct_san_phams');
         });
         Schema::create('binh_luans', function (Blueprint $table) {
             $table->Id();
             $table->string('NoiDung');
             $table->foreignId('TaiKhoanId');
-            $table->foreignId('SanPhamId');
+            $table->foreignId('CTSanPhamId');
+            $table->integer('Parent_Id')->nullable(); //xai` de quy
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('TaiKhoanId')->references('id')->on('tai_khoans');
-            $table->foreign('SanPhamId')->references('id')->on('san_phams');
+            $table->foreign('CTSanPhamId')->references('id')->on('ct_san_phams');
         });
         Schema::create('chuong_trinh_khuyen_mais', function (Blueprint $table) {
             $table->Id();
@@ -143,13 +215,14 @@ class CreateDatabase extends Migration
         Schema::create('ct_chuong_trinh_kms', function (Blueprint $table) {
             $table->Id();
             $table->foreignId('ChuongTrinhKhuyenMaiId');
-            $table->foreignId('SanPhamId');
+            $table->foreignId('CTSanPhamId');
             $table->double('GiamGia');
             $table->integer('SoLuong');
+            $table->integer('SLDaSuDung');
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('ChuongTrinhKhuyenMaiId')->references('id')->on('chuong_trinh_khuyen_mais');
-            $table->foreign('SanPhamId')->references('id')->on('san_phams');
+            $table->foreign('CTSanPhamId')->references('id')->on('ct_san_phams');
         });
         Schema::create('don_vi_van_chuyens', function (Blueprint $table) {
             $table->Id();
@@ -205,7 +278,7 @@ class CreateDatabase extends Migration
         Schema::create('ct_hoa_dons', function (Blueprint $table) {
             $table->Id();
             $table->foreignId('HoaDonId');
-            $table->foreignId('SanPhamId');
+            $table->foreignId('CTSanPhamId');
             $table->integer('SoLuong');
             $table->double('GiaNhap');
             $table->double('GiaBan');
@@ -215,16 +288,16 @@ class CreateDatabase extends Migration
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('HoaDonId')->references('id')->on('hoa_dons');
-            $table->foreign('SanPhamId')->references('id')->on('san_phams');
+            $table->foreign('CTSanPhamId')->references('id')->on('ct_san_phams');
         });
         Schema::create('yeu_thichs', function (Blueprint $table) {
             $table->Id();
             $table->foreignId('TaiKhoanId');
-            $table->foreignId('SanPhamId');
+            $table->foreignId('CTSanPhamId');
             $table->timestamps();
             $table->foreign('TaiKhoanId')->references('id')->on('tai_khoans');
-            $table->foreign('SanPhamId')->references('id')->on('san_phams');
-            $table->unique(['TaiKhoanId', 'SanPhamId']);
+            $table->foreign('CTSanPhamId')->references('id')->on('ct_san_phams');
+            $table->unique(['TaiKhoanId', 'CTSanPhamId']);
         });
         Schema::create('lich_su_van_chuyens', function (Blueprint $table) {
             $table->Id();
@@ -240,29 +313,33 @@ class CreateDatabase extends Migration
         Schema::create('gio_hangs', function (Blueprint $table) {
             $table->Id();
             $table->foreignId('TaiKhoanId');
-            $table->foreignId('SanPhamId');
+            $table->foreignId('CTSanPhamId');
             $table->integer('SoLuong');
             $table->timestamps();
             $table->foreign('TaiKhoanId')->references('id')->on('tai_khoans');
-            $table->foreign('SanPhamId')->references('id')->on('san_phams');
-            $table->unique(['TaiKhoanId', 'SanPhamId']);
+            $table->foreign('CTSanPhamId')->references('id')->on('ct_san_phams');
+            $table->unique(['TaiKhoanId', 'CTSanPhamId']);
         });
         //cuoc tro chuyen/hoi thoai
-        Schema::create('conversations', function (Blueprint $table) {
+        Schema::create('chats', function (Blueprint $table) {
             $table->Id();
+            $table->string('TenChat');
+            $table->string('HinhAnh')->nullable();
+            $table->foreignId('TaiKhoanId');
             $table->foreignId('TaiKhoanId');
             $table->timestamps();
+            $table->foreign('TaiKhoanId')->references('id')->on('tai_khoans');
             $table->foreign('TaiKhoanId')->references('id')->on('tai_khoans');
         });
         //tin nhan'
         Schema::create('messages', function (Blueprint $table) {
             $table->Id();
+            $table->foreignId('ChatId'); //cuoc tro` chuyen nao`
+            $table->foreignId('TaiKhoanId'); //ai la` ng` gui?
             $table->text('Body');
-            $table->foreignId('TaiKhoanId')->nullable(); //1 trong 2
-            $table->foreignId('ConversationId');
             $table->timestamps();
+            $table->foreign('ChatId')->references('id')->on('chats');
             $table->foreign('TaiKhoanId')->references('id')->on('tai_khoans');
-            $table->foreign('ConversationId')->references('id')->on('conversations');
         });
         Schema::create('hoa_don_nhaps', function (Blueprint $table) {
             $table->id();
@@ -279,17 +356,67 @@ class CreateDatabase extends Migration
         Schema::create('ct_hoa_don_nhaps', function (Blueprint $table) {
             $table->id();
             $table->foreignId('HoaDonNhapId'); //được nhập từ hóa đơn nào
-            $table->foreignId('SanPhamId'); //nhập sản phẩm nào
+            $table->foreignId('CTSanPhamId'); //nhập sản phẩm nào
             $table->integer('SoLuong')->default(0);
             $table->double('GiaNhap')->default(0); //giá nhập vào bao nhiêu
             $table->double('ThanhTien')->default(0);
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('HoaDonNhapId')->references('id')->on('hoa_don_nhaps');
-            $table->foreign('SanPhamId')->references('id')->on('san_phams');
+            $table->foreign('CTSanPhamId')->references('id')->on('ct_san_phams');
         });
-        //social login
-        //id,ten,mota,displayname,imageurl,...
+        Schema::create('lich_su_tim_kiems', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('TaiKhoanId');
+            $table->string('TimKiem');
+            $table->timestamps();
+            $table->softDeletes(); //nay la trang thai xoa
+            $table->foreign('TaiKhoanId')->references('id')->on('tai_khoans');
+        });
+        Schema::create('slide_shows', function (Blueprint $table) {
+            $table->id();
+            $table->string('HinhAnh')->nullable();
+            $table->string('MoTa')->nullable();
+            $table->timestamps();
+            $table->softDeletes(); //nay la trang thai xoa
+        });
+        Schema::create('vouchers', function (Blueprint $table) {
+            $table->id();
+            $table->string('Code');
+            $table->double('GiamGia');
+            $table->dateTime('FromDate');
+            $table->dateTime('ToDate');
+            $table->integer('SoLuong');
+            $table->integer('SLDaSuDung');
+            $table->timestamps();
+            $table->softDeletes(); //nay la trang thai xoa
+        });
+        Schema::create('voucher_tai_khoans', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('TaiKhoanId');
+            $table->foreignId('VoucherId');
+            $table->timestamps();
+            $table->softDeletes(); //nay la trang thai xoa
+            $table->foreign('TaiKhoanId')->references('id')->on('tai_khoans');
+            $table->foreign('VoucherId')->references('id')->on('vouchers');
+        });
+        Schema::create('lich_su_hoat_dongs', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('TaiKhoanId');
+            $table->foreignId('QuyenId');
+            $table->timestamps();
+            $table->foreign('QuyenId')->references('id')->on('quyens');
+        });
+        Schema::create('social_logins', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('TaiKhoanId');
+            $table->enum('LoaiSocial', ['Google', 'Facebook', 'Github', 'Twitter', 'Instagram', 'Linkedln'])->default('Google');
+            $table->string('TenHienThi');
+            $table->string('HinhAnh');
+            $table->string('Token');
+            $table->timestamps();
+            $table->foreign('TaiKhoanId')->references('id')->on('tai_khoans');
+        });
     }
 
     /**
@@ -299,32 +426,41 @@ class CreateDatabase extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tai_khoans');
+        Schema::dropIfExists('password_resets');
+        Schema::dropIfExists('quyens');
+        Schema::dropIfExists('loai_tai_khoans');
+        Schema::dropIfExists('loai_tai_khoan_quyens');
         Schema::dropIfExists('tai_khoans');
         Schema::dropIfExists('hang_san_xuats');
+        Schema::dropIfExists('nha_cung_caps');
         Schema::dropIfExists('loai_san_phams');
         Schema::dropIfExists('san_phams');
+        Schema::dropIfExists('thuoc_tinhs');
+        Schema::dropIfExists('thuoc_tinh_values');
+        Schema::dropIfExists('ct_san_phams');
+        Schema::dropIfExists('khos');
+        Schema::dropIfExists('ct_khos');
+        Schema::dropIfExists('hinh_anhs');
         Schema::dropIfExists('binh_luans');
-        Schema::dropIfExists('hoa_dons');
-        Schema::dropIfExists('ct_hoa_dons');
-        Schema::dropIfExists('don_vi_van_chuyens');
-        Schema::dropIfExists('nguoi_van_chuyens');
         Schema::dropIfExists('chuong_trinh_khuyen_mais');
         Schema::dropIfExists('ct_chuongtrinh_kms');
+        Schema::dropIfExists('don_vi_van_chuyens');
+        Schema::dropIfExists('nguoi_van_chuyens');
+        Schema::dropIfExists('dia_chis');
+        Schema::dropIfExists('hoa_dons');
+        Schema::dropIfExists('ct_hoa_dons');
         Schema::dropIfExists('yeu_thichs');
-        Schema::dropIfExists('rep_binh_luans');
         Schema::dropIfExists('lich_su_van_chuyens');
         Schema::dropIfExists('gio_hangs');
-        Schema::dropIfExists('dia_chis');
-        Schema::dropIfExists('conversations');
+        Schema::dropIfExists('chats');
         Schema::dropIfExists('messages');
         Schema::dropIfExists('hoa_don_nhaps');
         Schema::dropIfExists('ct_hoa_don_nhaps');
-        Schema::dropIfExists('tai_khoans');
-        Schema::dropIfExists('loai_tai_khoans');
-        Schema::dropIfExists('nha_cung_caps');
-        Schema::dropIfExists('mau_sacs');
-        Schema::dropIfExists('hinh_anhs');
-        Schema::dropIfExists('ct_san_phams');
+        Schema::dropIfExists('lich_su_tim_kiems');
+        Schema::dropIfExists('slide_shows');
+        Schema::dropIfExists('vouchers');
+        Schema::dropIfExists('voucher_tai_khoans');
+        Schema::dropIfExists('lich_su_hoat_dongs');
+        Schema::dropIfExists('social_logins');
     }
 }

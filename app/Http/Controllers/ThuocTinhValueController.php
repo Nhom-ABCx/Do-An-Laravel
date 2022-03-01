@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CT_SanPham;
+use App\Models\ThuocTinh_Value;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCT_SanPhamRequest;
-use App\Http\Requests\UpdateCT_SanPhamRequest;
+use App\Http\Requests\StoreThuocTinh_ValueRequest;
+use App\Http\Requests\UpdateThuocTinh_ValueRequest;
 
-class CTSanPhamController extends Controller
+class ThuocTinhValueController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class CTSanPhamController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCT_SanPhamRequest  $request
+     * @param  \App\Http\Requests\StoreThuocTinh_ValueRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCT_SanPhamRequest $request)
+    public function store(StoreThuocTinh_ValueRequest $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class CTSanPhamController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CT_SanPham  $cT_SanPham
+     * @param  \App\Models\ThuocTinh_Value  $thuocTinh_Value
      * @return \Illuminate\Http\Response
      */
-    public function show(CT_SanPham $cT_SanPham)
+    public function show(ThuocTinh_Value $thuocTinh_Value)
     {
         //
     }
@@ -54,10 +54,10 @@ class CTSanPhamController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CT_SanPham  $cT_SanPham
+     * @param  \App\Models\ThuocTinh_Value  $thuocTinh_Value
      * @return \Illuminate\Http\Response
      */
-    public function edit(CT_SanPham $cT_SanPham)
+    public function edit(ThuocTinh_Value $thuocTinh_Value)
     {
         //
     }
@@ -65,11 +65,11 @@ class CTSanPhamController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCT_SanPhamRequest  $request
-     * @param  \App\Models\CT_SanPham  $cT_SanPham
+     * @param  \App\Http\Requests\UpdateThuocTinh_ValueRequest  $request
+     * @param  \App\Models\ThuocTinh_Value  $thuocTinh_Value
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCT_SanPhamRequest $request, CT_SanPham $cT_SanPham)
+    public function update(UpdateThuocTinh_ValueRequest $request, ThuocTinh_Value $thuocTinh_Value)
     {
         //
     }
@@ -77,10 +77,10 @@ class CTSanPhamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CT_SanPham  $cT_SanPham
+     * @param  \App\Models\ThuocTinh_Value  $thuocTinh_Value
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CT_SanPham $cT_SanPham)
+    public function destroy(ThuocTinh_Value $thuocTinh_Value)
     {
         //
     }

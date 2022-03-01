@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CT_SanPham;
+use App\Models\Quyen;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCT_SanPhamRequest;
-use App\Http\Requests\UpdateCT_SanPhamRequest;
+use App\Http\Requests\StoreQuyenRequest;
+use App\Http\Requests\UpdateQuyenRequest;
 
-class CTSanPhamController extends Controller
+class QuyenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class CTSanPhamController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCT_SanPhamRequest  $request
+     * @param  \App\Http\Requests\StoreQuyenRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCT_SanPhamRequest $request)
+    public function store(StoreQuyenRequest $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class CTSanPhamController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CT_SanPham  $cT_SanPham
+     * @param  \App\Models\Quyen  $quyen
      * @return \Illuminate\Http\Response
      */
-    public function show(CT_SanPham $cT_SanPham)
+    public function show(Quyen $quyen)
     {
         //
     }
@@ -54,10 +54,10 @@ class CTSanPhamController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CT_SanPham  $cT_SanPham
+     * @param  \App\Models\Quyen  $quyen
      * @return \Illuminate\Http\Response
      */
-    public function edit(CT_SanPham $cT_SanPham)
+    public function edit(Quyen $quyen)
     {
         //
     }
@@ -65,11 +65,11 @@ class CTSanPhamController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCT_SanPhamRequest  $request
-     * @param  \App\Models\CT_SanPham  $cT_SanPham
+     * @param  \App\Http\Requests\UpdateQuyenRequest  $request
+     * @param  \App\Models\Quyen  $quyen
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCT_SanPhamRequest $request, CT_SanPham $cT_SanPham)
+    public function update(UpdateQuyenRequest $request, Quyen $quyen)
     {
         //
     }
@@ -77,10 +77,10 @@ class CTSanPhamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CT_SanPham  $cT_SanPham
+     * @param  \App\Models\Quyen  $quyen
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CT_SanPham $cT_SanPham)
+    public function destroy(Quyen $quyen)
     {
         //
     }
