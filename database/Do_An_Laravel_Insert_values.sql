@@ -168,23 +168,6 @@ where CTSanPhamId=1 and ThuocTinhId=9;  /* Pin */
 update ct_san_pham_values
 set ThuocTinhValueId=19
 where CTSanPhamId=1 and ThuocTinhId=10;  /* MauSac */
-/* MaSanPham: DTI3X1-R6-D128 */
-update ct_san_phams a,(SELECT ctspvl.CTSanPhamId,ttvl.Value
-            FROM ct_san_pham_values ctspvl,thuoc_tinh_values ttvl
-            WHERE ctspvl.ThuocTinhValueId=ttvl.id and ttvl.ThuocTinhId=6) r,
-            (SELECT ctspvl.CTSanPhamId,ttvl.Value
-            FROM ct_san_pham_values ctspvl,thuoc_tinh_values ttvl
-            WHERE ctspvl.ThuocTinhValueId=ttvl.id and ttvl.ThuocTinhId=7) d
-set a.MaSanPham=(
-    SELECT CONCAT_WS("-",CONCAT(
-        lsp.Code,LEFT(UPPER(sp.TenSanPham), 1),
-        MID(UPPER(sp.TenSanPham), LENGTH(sp.TenSanPham)/2, 1),
-        RIGHT(UPPER(sp.TenSanPham), 1),sp.id),CONCAT("R",r.Value),CONCAT("D",d.Value)
-        )
-    from san_phams sp
-    INNER JOIN Loai_San_Phams lsp ON sp.LoaiSanPhamId=lsp.id
-    )
-where a.id=1 and a.id=r.CTSanPhamId and r.CTSanPhamId=d.CTSanPhamId;  /* id Bien' the? SP (CTSanPhamId)*/
 
 
 
