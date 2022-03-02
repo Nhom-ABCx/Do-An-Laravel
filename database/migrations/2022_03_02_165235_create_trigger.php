@@ -37,31 +37,22 @@ class CreateTrigger extends Migration
                             LIMIT 1);
                     END IF;
                 END');
-        // /* MaSanPham: DTI3X1-R6-S128 */
+        // /* MaSanPham: DT-I3X-1 */
         DB::unprepared('CREATE TRIGGER tao_MaSanPham_CTSanPham AFTER UPDATE ON `ct_san_pham_values` FOR EACH ROW
                 BEGIN
                     DECLARE NEWCTSanPhamId INT;
                     SET NEWCTSanPhamId = NEW.CTSanPhamId;
 
-                    update ct_san_phams a,
-                        (SELECT ctspvl.CTSanPhamId,ttvl.Value
-                            FROM ct_san_pham_values ctspvl
-                            INNER JOIN thuoc_tinh_values ttvl ON ctspvl.ThuocTinhValueId=ttvl.id
-                            WHERE ttvl.ThuocTinhId=6) r,
-                        (SELECT ctspvl.CTSanPhamId,ttvl.Value
-                            FROM ct_san_pham_values ctspvl
-                            INNER JOIN thuoc_tinh_values ttvl ON ctspvl.ThuocTinhValueId=ttvl.id
-                            WHERE ttvl.ThuocTinhId=7) s
-                    set a.MaSanPham=(
-                        SELECT CONCAT_WS("-",CONCAT(
-                            lsp.Code,LEFT(UPPER(sp.TenSanPham), 1),
+                    update ct_san_phams a
+                    set a.MaSanPham=(SELECT CONCAT_WS("-",lsp.Code,
+                            CONCAT(LEFT(UPPER(sp.TenSanPham), 1),
                             MID(UPPER(sp.TenSanPham), LENGTH(sp.TenSanPham)/2, 1),
-                            RIGHT(UPPER(sp.TenSanPham), 1),sp.id),CONCAT("R",r.Value),CONCAT("S",s.Value)
+                            RIGHT(UPPER(sp.TenSanPham), 1)),NEW.CTSanPhamId
                             )
                         from san_phams sp
                         INNER JOIN Loai_San_Phams lsp ON sp.LoaiSanPhamId=lsp.id
                         )
-                    where a.id=NEWCTSanPhamId and a.id=r.CTSanPhamId and a.id=s.CTSanPhamId;
+                    where a.id=NEWCTSanPhamId;
                 END');
     }
 
