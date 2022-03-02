@@ -102,7 +102,13 @@ class HoaDonController extends Controller
     {
         //trang thai phai nam` trong 4 so', tranh truong` hop thay doi request tai giao dien
         $request->validate(
-            ['TrangThai' => ['required', 'numeric', 'integer', Rule::in(TrangThaiHD::getValues()),]]
+            ['TrangThai' => ['required', 'numeric', 'integer', Rule::in(TrangThaiHD::getValues()),]],
+            [
+                'required' => 'Không được để trống',
+                'numeric' => 'Phải là số',
+                'integer' => 'Chỉ được nhập số',
+                'in' => 'Trạng thái sai theo chuẩn',
+            ]
         );
 
         $hoaDon->TrangThai = $request["TrangThai"];
