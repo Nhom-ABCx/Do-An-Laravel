@@ -76,13 +76,13 @@ insert into Hang_San_Xuats(TenHangSanXuat) values
 ('Acer'   ),
 ('ASUS'   );
 
-insert into Loai_San_Phams(TenLoai,MoTa) values
-(N'Điện thoại','Smart Phone'),
-(N'Điện lạnh',null),
-(N'LapTop',null),
-(N'Máy ảnh',null),
-(N'Máy tính bảng',null),
-(N'Phụ kiện',null);
+insert into Loai_San_Phams(Code,TenLoai,MoTa) values
+('DT',N'Điện thoại','Smart Phone'),
+('DL',N'Điện lạnh',null),
+('LT',N'LapTop',null),
+('MA',N'Máy ảnh',null),
+('MTB',N'Máy tính bảng',null),
+('PK',N'Phụ kiện',null);
 
 insert into San_Phams(TenSanPham,LuotMua,HangSanXuatId,LoaiSanPhamId) values
 ('iPhone 13 Pro Max',5,2,1);
@@ -99,7 +99,7 @@ insert into thuoc_tinhs(TenThuocTinh,MoTa) values
 ('Pin','Pin'),
 ('MauSac','Màu sắc');
 
-insert into san_pham_thuoc_tinhs(SanPhamId,ThuocTinhId) values
+insert into loai_san_pham_thuoc_tinhs(LoaiSanPhamId,ThuocTinhId) values
 (1,1),
 (1,2),
 (1,3),
@@ -112,57 +112,79 @@ insert into san_pham_thuoc_tinhs(SanPhamId,ThuocTinhId) values
 (1,10);
 
 insert into thuoc_tinh_values(ThuocTinhId,Value) values
-(1,'OLED6.7"Super Retina XDR'),
-(2,'iOS 15'),
-(3,'3 camera 12 MP'),
-(4,'12 MP'),
-(5,'Apple A15 Bionic'),
-(6,'4'),
-(6,'6'),
-(6,'8'),
-(6,'16'),
-(6,'32'),
-(7,'128'),
-(7,'256'),
-(7,'512'),
-(7,'1024'),
-(8,'1 Nano SIM & 1 eSIMHỗ trợ 5G'),
-(9,'4352 mAh20 W'),
-(10,'Vàng đồng'),
-(10,'Xám'),
-(10,'Bạc'),
-(10,'Xanh dương');
+(1,'OLED6.7"Super Retina XDR'), /* ManHinh */
+(2,'iOS 15'), /* HeDieuHanh */
+(3,'3 camera 12 MP'),  /* CameraSau */
+(4,'12 MP'),  /* Cameratruoc */
+(5,'Apple A15 Bionic'),  /* Chip */
+(6,'4'),    /* Ram */
+(6,'6'),    /* Ram */
+(6,'8'),    /* Ram */
+(6,'16'),   /* Ram */
+(6,'32'),   /* Ram */
+(7,'128'),  /* BoNhoTrong */
+(7,'256'),  /* BoNhoTrong */
+(7,'512'),  /* BoNhoTrong */
+(7,'1024'), /* BoNhoTrong */
+(8,'1 Nano SIM & 1 eSIMHỗ trợ 5G'), /* Sim */
+(9,'4352 mAh20 W'), /* Pin */
+(10,'Trắng'),       /* MauSac */
+(10,'Đen'),         /* MauSac */
+(10,'Vàng đồng'),   /* MauSac */
+(10,'Xám'),         /* MauSac */
+(10,'Bạc'),         /* MauSac */
+(10,'Xanh dương');  /* MauSac */
 
 insert into ct_san_phams(SanPhamId,MaSanPham,GiaBan) values
-(1,'DT1',33990000),
-(1,'DT2',40000000);
+(1,'DT1',33990000);
 
-insert into ct_san_pham_values(SanPhamId,CTSanPhamId,ThuocTinhId,ThuocTinhValueId) values
-(1,1,1,1),
-(1,1,2,2),
-(1,1,3,3),
-(1,1,4,4),
-(1,1,5,5),
-(1,1,6,7),
-(1,1,7,11),
-(1,1,8,15),
-(1,1,9,16),
-(1,1,10,17);
-
-
-insert into ct_san_pham_values(SanPhamId,CTSanPhamId,ThuocTinhId,ThuocTinhValueId) values
-(1,2,1,1),
-(1,2,2,2),
-(1,2,3,3),
-(1,2,4,4),
-(1,2,5,5),
-(1,2,6,7),
-(1,2,7,11),
-(1,2,8,15),
-(1,2,9,16),
-(1,2,10,17);
-
-
+update ct_san_pham_values
+set ThuocTinhValueId=1
+where CTSanPhamId=1 and ThuocTinhId=1;  /* ManHinh */
+update ct_san_pham_values
+set ThuocTinhValueId=2
+where CTSanPhamId=1 and ThuocTinhId=2;  /* HeDieuHanh */
+update ct_san_pham_values
+set ThuocTinhValueId=3
+where CTSanPhamId=1 and ThuocTinhId=3;  /* CameraSau */
+update ct_san_pham_values
+set ThuocTinhValueId=4
+where CTSanPhamId=1 and ThuocTinhId=4;  /* Cameratruoc */
+update ct_san_pham_values
+set ThuocTinhValueId=5
+where CTSanPhamId=1 and ThuocTinhId=5;  /* Chip */
+update ct_san_pham_values
+set ThuocTinhValueId=7
+where CTSanPhamId=1 and ThuocTinhId=6;  /* Ram */
+update ct_san_pham_values
+set ThuocTinhValueId=11
+where CTSanPhamId=1 and ThuocTinhId=7;  /* BoNhoTrong */
+update ct_san_pham_values
+set ThuocTinhValueId=15
+where CTSanPhamId=1 and ThuocTinhId=8;  /* Sim */
+update ct_san_pham_values
+set ThuocTinhValueId=16
+where CTSanPhamId=1 and ThuocTinhId=9;  /* Pin */
+update ct_san_pham_values
+set ThuocTinhValueId=19
+where CTSanPhamId=1 and ThuocTinhId=10;  /* MauSac */
+/* MaSanPham: DTI3X1-R6-D128 */
+update ct_san_phams a,(SELECT ctspvl.CTSanPhamId,ttvl.Value
+            FROM ct_san_pham_values ctspvl,thuoc_tinh_values ttvl
+            WHERE ctspvl.ThuocTinhValueId=ttvl.id and ttvl.ThuocTinhId=6) r,
+            (SELECT ctspvl.CTSanPhamId,ttvl.Value
+            FROM ct_san_pham_values ctspvl,thuoc_tinh_values ttvl
+            WHERE ctspvl.ThuocTinhValueId=ttvl.id and ttvl.ThuocTinhId=7) d
+set a.MaSanPham=(
+    SELECT CONCAT_WS("-",CONCAT(
+        lsp.Code,LEFT(UPPER(sp.TenSanPham), 1),
+        MID(UPPER(sp.TenSanPham), LENGTH(sp.TenSanPham)/2, 1),
+        RIGHT(UPPER(sp.TenSanPham), 1),sp.id),CONCAT("R",r.Value),CONCAT("D",d.Value)
+        )
+    from san_phams sp
+    INNER JOIN Loai_San_Phams lsp ON sp.LoaiSanPhamId=lsp.id
+    )
+where a.id=1 and a.id=r.CTSanPhamId and r.CTSanPhamId=d.CTSanPhamId;  /* id Bien' the? SP (CTSanPhamId)*/
 
 
 
