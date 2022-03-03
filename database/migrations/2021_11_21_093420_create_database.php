@@ -21,9 +21,9 @@ class CreateDatabase extends Migration
         });
         Schema::create('quyens', function (Blueprint $table) {
             $table->id();
-            $table->string('Key');
+            $table->string('Code');
             $table->string('TenQuyen');
-            $table->integer('Parent_Id')->nullable(); //xai` de quy
+            $table->integer('Parent_Id')->default(0); //xai` de quy
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
         });
@@ -45,6 +45,7 @@ class CreateDatabase extends Migration
         });
         Schema::create('tai_khoans', function (Blueprint $table) {
             $table->Id();
+            $table->foreignId('LoaiTaiKhoanId');
             $table->string('Username')->unique();
             $table->string('Email')->unique();
             $table->string('Phone')->nullable();
@@ -54,7 +55,6 @@ class CreateDatabase extends Migration
             $table->boolean('GioiTinh'); //1 nam 0 nu~
             $table->string('DiaChi')->nullable();
             $table->string('HinhAnh')->nullable();
-            $table->foreignId('LoaiTaiKhoanId');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
@@ -143,14 +143,6 @@ class CreateDatabase extends Migration
             $table->foreign('ThuocTinhValueId')->references('id')->on('thuoc_tinh_values');
             $table->primary(['SanPhamId', 'CTSanPhamId', 'ThuocTinhId']);
         });
-        //Iphone 13 pro max Ram (8-16-32)  MauSac (Black-Yellow)
-        //id: 1  SanPhamId: 1  ThuocTinhValueId: 1
-        //id: 2  SanPhamId: 1  ThuocTinhValueId: 2
-        //id: 3  SanPhamId: 1  ThuocTinhValueId: 3
-        //id: 4  SanPhamId: 1  ThuocTinhValueId: 6
-        //id: 5  SanPhamId: 1  ThuocTinhValueId: 7
-        //id: 6  SanPhamId: 1  ThuocTinhValueId: 8
-        //id: 7  SanPhamId: 1  ThuocTinhValueId: 9
         Schema::create('khos', function (Blueprint $table) {
             $table->id();
             $table->string('TenKho')->unique();
