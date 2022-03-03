@@ -117,15 +117,15 @@ insert into thuoc_tinh_values(ThuocTinhId,Value) values
 (3,'3 camera 12 MP'),  /* CameraSau */
 (4,'12 MP'),  /* Cameratruoc */
 (5,'Apple A15 Bionic'),  /* Chip */
-(6,'4'),    /* Ram */
-(6,'6'),    /* Ram */
-(6,'8'),    /* Ram */
-(6,'16'),   /* Ram */
-(6,'32'),   /* Ram */
-(7,'128'),  /* BoNhoTrong */
-(7,'256'),  /* BoNhoTrong */
-(7,'512'),  /* BoNhoTrong */
-(7,'1024'), /* BoNhoTrong */
+(6,'4 GB'),    /* Ram */
+(6,'6 GB'),    /* Ram */
+(6,'8 GB'),    /* Ram */
+(6,'16 GB'),   /* Ram */
+(6,'32 GB'),   /* Ram */
+(7,'128 GB'),  /* BoNhoTrong */
+(7,'256 GB'),  /* BoNhoTrong */
+(7,'512 GB'),  /* BoNhoTrong */
+(7,'1024 GB'), /* BoNhoTrong */
 (8,'1 Nano SIM & 1 eSIMHỗ trợ 5G'), /* Sim */
 (9,'4352 mAh20 W'), /* Pin */
 (10,'Trắng'),       /* MauSac */
