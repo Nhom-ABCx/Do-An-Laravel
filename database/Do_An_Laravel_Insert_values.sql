@@ -136,156 +136,38 @@ insert into Loai_San_Phams(Code,TenLoai,MoTa) values
 ('MTB',N'Máy tính bảng',null),
 ('PK',N'Phụ kiện',null);
 
-insert into San_Phams(TenSanPham,LuotMua,HangSanXuatId,LoaiSanPhamId) values
-('iPhone 13 Pro Max',5,2,1);
 
-insert into thuoc_tinhs(TenThuocTinh,MoTa) values
-('ManHinh','Màn hình'),
-('HeDieuHanh','Hệ điều hành'),
-('CameraSau','Camera sau'),
-('CameraTruoc','Camera trước'),
-('Chip','Chip'),
-('Ram','Ram'),
-('BoNhoTrong','Bộ nhớ trong'),
-('Sim','Sim'),
-('Pin','Pin'),
-('MauSac','Màu sắc');
 
-insert into loai_san_pham_thuoc_tinhs(LoaiSanPhamId,ThuocTinhId) values
-(1,1),
-(1,2),
-(1,3),
-(1,4),
-(1,5),
-(1,6),
-(1,7),
-(1,8),
-(1,9),
-(1,10);
+insert into San_Phams(TenSanPham,LuotMua,HangSanXuatId,LoaiSanPhamId,ThuocTinh,ThuocTinhToHop) values
+('iPhone 13 Pro Max',5,2,1,'{
+"Màn hình" : "OLED6.7Super Retina XDR",
+"Hệ điều hành" : "iOS 15",
+"Camera sau" : "3 camera 12 MP",
+"Camera trước" : "12 MP",
+"Chip" : "Apple A15 Bionic",
+"Ram" : "6 GB",
+"Sim" : "1 Nano SIM & 1 eSIMHỗ trợ 5G",
+"Pin" : "4352 mAh20 W"
+}','["Bộ nhớ trong","Màu sắc"]');
 
-insert into thuoc_tinh_values(ThuocTinhId,Value) values
-(1,'OLED6.7"Super Retina XDR'), /* ManHinh */
-(2,'iOS 15'), /* HeDieuHanh */
-(3,'3 camera 12 MP'),  /* CameraSau */
-(4,'12 MP'),  /* Cameratruoc */
-(5,'Apple A15 Bionic'),  /* Chip */
-(6,'4 GB'),    /* Ram */
-(6,'6 GB'),    /* Ram */
-(6,'8 GB'),    /* Ram */
-(6,'16 GB'),   /* Ram */
-(6,'32 GB'),   /* Ram */
-(7,'128 GB'),  /* BoNhoTrong */
-(7,'256 GB'),  /* BoNhoTrong 12*/
-(7,'512 GB'),  /* BoNhoTrong 13*/
-(7,'1024 GB'), /* BoNhoTrong 14*/
-(8,'1 Nano SIM & 1 eSIMHỗ trợ 5G'), /* Sim */
-(9,'4352 mAh20 W'), /* Pin */
-(10,'Trắng'),       /* MauSac */
-(10,'Đen'),         /* MauSac */
-(10,'Vàng đồng'),   /* MauSac */
-(10,'Xám'),         /* MauSac */
-(10,'Bạc'),         /* MauSac */
-(10,'Xanh dương');  /* MauSac */
 
-insert into ct_san_phams(SanPhamId,MaSanPham,GiaBan) values
-(1,'DT1',33990000), /* 128, Vang`dong` */
-(1,'DT2',33990000), /* 128, xam' */
-(1,'DT3',33990000), /* 128, bac' */
-(1,'DT4',33990000), /* 128, xanh duong' */
-(1,'DT5',36990000), /* 256, Vang`dong` */
-(1,'DT6',36990000), /* 256, xam' */
-(1,'DT7',36990000), /* 256, bac' */
-(1,'DT8',36990000), /* 256, xanh duong' */
-(1,'DT9',43990000),  /* 512, Vang`dong` */
-(1,'DT10',43990000), /* 512, xam' */
-(1,'DT11',43990000), /* 512, bac' */
-(1,'DT12',43990000), /* 512, xanh duong' */
-(1,'DT13',46690000), /* 1024, Vang`dong` */
-(1,'DT14',46690000), /* 1024, xam' */
-(1,'DT15',46690000), /* 1024, bac' */
-(1,'DT16',46690000); /* 1024, xanh duong' */
-
-/* 128, Vang`dong` */
-update ct_san_pham_values
-set ThuocTinhValueId=1
-where CTSanPhamId=1 and ThuocTinhId=1;  /* ManHinh */
-update ct_san_pham_values
-set ThuocTinhValueId=2
-where CTSanPhamId=1 and ThuocTinhId=2;  /* HeDieuHanh */
-update ct_san_pham_values
-set ThuocTinhValueId=3
-where CTSanPhamId=1 and ThuocTinhId=3;  /* CameraSau */
-update ct_san_pham_values
-set ThuocTinhValueId=4
-where CTSanPhamId=1 and ThuocTinhId=4;  /* Cameratruoc */
-update ct_san_pham_values
-set ThuocTinhValueId=5
-where CTSanPhamId=1 and ThuocTinhId=5;  /* Chip */
-update ct_san_pham_values
-set ThuocTinhValueId=7
-where CTSanPhamId=1 and ThuocTinhId=6;  /* Ram */
-update ct_san_pham_values
-set ThuocTinhValueId=11
-where CTSanPhamId=1 and ThuocTinhId=7;  /* BoNhoTrong */
-update ct_san_pham_values
-set ThuocTinhValueId=15
-where CTSanPhamId=1 and ThuocTinhId=8;  /* Sim */
-update ct_san_pham_values
-set ThuocTinhValueId=16
-where CTSanPhamId=1 and ThuocTinhId=9;  /* Pin */
-update ct_san_pham_values
-set ThuocTinhValueId=19
-where CTSanPhamId=1 and ThuocTinhId=10;  /* MauSac */
-
-/* 128, xam' */
-CALL updateTheo_bientheCu_Ct_SanPham_value(1,2);
-CALL update_ThuocTinhValue_Ct_SanPham_value(2,10,20);
-/* 128, bac' */
-CALL updateTheo_bientheCu_Ct_SanPham_value(1,3);
-CALL update_ThuocTinhValue_Ct_SanPham_value(3,10,21);
-/* 128, xanh duong' */
-CALL updateTheo_bientheCu_Ct_SanPham_value(1,4);
-CALL update_ThuocTinhValue_Ct_SanPham_value(4,10,22);
-
-/* 256, Vang`dong` */
-CALL updateTheo_bientheCu_Ct_SanPham_value(1,5);
-CALL update_ThuocTinhValue_Ct_SanPham_value(5,7,12);
-/* 256, xam' */
-CALL updateTheo_bientheCu_Ct_SanPham_value(5,6);
-CALL update_ThuocTinhValue_Ct_SanPham_value(6,10,20);
-/* 256, bac' */
-CALL updateTheo_bientheCu_Ct_SanPham_value(5,7);
-CALL update_ThuocTinhValue_Ct_SanPham_value(7,10,21);
-/* 256, xanh duong' */
-CALL updateTheo_bientheCu_Ct_SanPham_value(5,8);
-CALL update_ThuocTinhValue_Ct_SanPham_value(8,10,22);
-
-/* 512, Vang`dong` */
-CALL updateTheo_bientheCu_Ct_SanPham_value(1,9);
-CALL update_ThuocTinhValue_Ct_SanPham_value(9,7,13);
-/* 512, xam' */
-CALL updateTheo_bientheCu_Ct_SanPham_value(9,10);
-CALL update_ThuocTinhValue_Ct_SanPham_value(10,10,20);
-/* 512, bac' */
-CALL updateTheo_bientheCu_Ct_SanPham_value(9,11);
-CALL update_ThuocTinhValue_Ct_SanPham_value(11,10,21);
-/* 512, xanh duong' */
-CALL updateTheo_bientheCu_Ct_SanPham_value(9,12);
-CALL update_ThuocTinhValue_Ct_SanPham_value(12,10,22);
-
-/* 1024, Vang`dong` */
-CALL updateTheo_bientheCu_Ct_SanPham_value(1,13);
-CALL update_ThuocTinhValue_Ct_SanPham_value(13,7,14);
-/* 1024, xam' */
-CALL updateTheo_bientheCu_Ct_SanPham_value(9,14);
-CALL update_ThuocTinhValue_Ct_SanPham_value(14,10,20);
-/* 1024, bac' */
-CALL updateTheo_bientheCu_Ct_SanPham_value(9,15);
-CALL update_ThuocTinhValue_Ct_SanPham_value(15,10,21);
-/* 1024, xanh duong' */
-CALL updateTheo_bientheCu_Ct_SanPham_value(9,16);
-CALL update_ThuocTinhValue_Ct_SanPham_value(16,10,22);
-
+insert into ct_san_phams(SanPhamId,GiaBan,ThuocTinhToHopValue) values
+(1,33990000,'["128 GB", "Vàng đồng"]'), /* 128, Vang`dong` */
+(1,33990000,'["128 GB", "Xám"]'), /* 128, xam' */
+(1,33990000,'["128 GB", "Bạc"]'), /* 128, bac' */
+(1,33990000,'["128 GB", "Xanh dương"]'), /* 128, xanh duong' */
+(1,36990000,'["256 GB", "Vàng đồng"]'), /* 256, Vang`dong` */
+(1,36990000,'["256 GB", "Xám"]'), /* 256, xam' */
+(1,36990000,'["256 GB", "Bạc"]'), /* 256, bac' */
+(1,36990000,'["256 GB", "Xanh dương"]'), /* 256, xanh duong' */
+(1,43990000,'["512 GB", "Vàng đồng"]'),  /* 512, Vang`dong` */
+(1,43990000,'["512 GB", "Xám"]'), /* 512, xam' */
+(1,43990000,'["512 GB", "Bạc"]'), /* 512, bac' */
+(1,43990000,'["512 GB", "Xanh dương"]'), /* 512, xanh duong' */
+(1,46690000,'["1024 GB", "Vàng đồng"]'), /* 1024, Vang`dong` */
+(1,46690000,'["1024 GB", "Xám"]'), /* 1024, xam' */
+(1,46690000,'["1024 GB", "Bạc"]'), /* 1024, bac' */
+(1,46690000,'["1024 GB", "Xanh dương"]'); /* 1024, xanh duong' */
 
 
 

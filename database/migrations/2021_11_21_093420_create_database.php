@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use App\Enums\TrangThaiHD;
 
 class CreateDatabase extends Migration
@@ -87,11 +88,13 @@ class CreateDatabase extends Migration
         });
         Schema::create('san_phams', function (Blueprint $table) {
             $table->Id();
-            $table->string('TenSanPham')->unique();
-            $table->longText('MoTa')->nullable();
-            $table->integer('LuotMua');
             $table->foreignId('HangSanXuatId');
             $table->foreignId('LoaiSanPhamId');
+            $table->string('TenSanPham')->unique();
+            $table->string('ThuocTinh')->unique(); //luu thanh` json {"TenThuocTinh": "GiaTri"}
+            $table->longText('MoTa')->nullable();
+            $table->integer('LuotMua');
+            $table->string("ThuocTinhToHop");  //luu thanh` json ["Size", "Color"]
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('HangSanXuatId')->references('id')->on('hang_san_xuats');
@@ -100,8 +103,8 @@ class CreateDatabase extends Migration
         Schema::create('ct_san_phams', function (Blueprint $table) {
             $table->id();
             $table->foreignId('SanPhamId');
-            $table->string('MaSanPham')->unique();
-            //$table->string('MaSanPham');
+            $table->string('MaSanPham')->unique()->default(Str::random(10));
+            $table->string('ThuocTinhToHopValue'); //luu thanh` json ["XL", "Đỏ"]
             $table->double('GiaBan')->nullable();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa

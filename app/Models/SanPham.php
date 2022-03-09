@@ -13,16 +13,21 @@ class SanPham extends Model
 
     protected $table = 'san_phams';
     protected $fillable = [
-        'TenSanPham',
-        'MoTa',
-        'SoLuongTon',
-        'GiaNhap',
-        'GiaBan',
-        'HinhAnh',
-        'LuotMua',
         'HangSanXuatId',
         'LoaiSanPhamId',
+        'TenSanPham',
+        'MoTa',
+        'LuotMua',
+        'ThuocTinhToHop',
     ];
+    public function lstThuocTinh()
+    {
+        return json_decode($this->ThuocTinh, true);
+    }
+    public function lstThuocTinhToHop()
+    {
+        return json_decode($this->ThuocTinhToHop, true);
+    }
     public function HangSanXuat()
     {
         return $this->belongsTo(HangSanXuat::class, 'HangSanXuatId')->withTrashed();
@@ -54,5 +59,9 @@ class SanPham extends Model
     public function CT_HoaDonNhap()
     {
         return $this->hasMany(CT_HoaDonNhap::class, 'SanPhamId');
+    }
+    public function CT_SanPham()
+    {
+        return $this->hasMany(CT_SanPham::class, 'SanPhamId');
     }
 }
