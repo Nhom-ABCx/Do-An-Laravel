@@ -50,7 +50,7 @@ insert into loai_tai_khoans(TenLoai,MoTa) values
 ('HR','Quản lý Nhân sự');
 
 insert loai_tai_khoan_quyens(LoaiTaiKhoanId,QuyenId,Mota)
-SELECT 1, a.id,CONCAT_WS('-','Admin',a.TenQuyen) FROM quyens a
+SELECT 1, a.id,CONCAT_WS('-','Admin',a.TenQuyen) FROM quyens a;
 
 
 insert into tai_khoans(Username,Email,Phone,MatKhau,HoTen,NgaySinh,GioiTinh,DiaChi,HinhAnh,LoaiTaiKhoanId,created_at) values

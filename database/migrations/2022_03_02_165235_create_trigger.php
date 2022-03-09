@@ -54,6 +54,10 @@ class CreateTrigger extends Migration
                         )
                     where a.id=NEWCTSanPhamId;
                 END');
+
+        DB::unprepared('DROP PROCEDURE IF EXISTS updateTheo_bientheCu_Ct_SanPham_value');
+        DB::unprepared('DROP PROCEDURE IF EXISTS update_ThuocTinhValue_Ct_SanPham_value');
+        
         DB::unprepared('CREATE PROCEDURE updateTheo_bientheCu_Ct_SanPham_value (IN bientheCu_CTSanPhamId INT,IN bientheMoi_CTSanPhamId INT)
                 BEGIN
                     UPDATE ct_san_pham_values a,(SELECT *
