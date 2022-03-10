@@ -39,18 +39,20 @@ class UserHomeController extends Controller
 
 
 
-
+        //vi du
         $sanPham = SanPham::all()->first();
         foreach ($sanPham->lstThuocTinh() as $key => $value) {
             echo $key . " - " . $value . "</br>";
         }
+
+
         echo "</br> Tổ hợp sản phẩm </br></br>";
 
         $toHop = $sanPham->lstThuocTinhToHop();
 
         foreach ($sanPham->CT_SanPham as $item) {
             for ($i = 0; $i < count($toHop); $i++) {
-                echo $toHop[$i] . " - " . $item->lstThuocTinhToHopValue()[$i] . "</br>";
+                echo " - " . $item->lstThuocTinhValue()[$i] . "</br></br>";
             }
             //echo (json_decode($sanPham->ThuocTinhToHop, true);
         }

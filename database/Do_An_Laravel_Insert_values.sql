@@ -151,7 +151,7 @@ insert into San_Phams(TenSanPham,LuotMua,HangSanXuatId,LoaiSanPhamId,ThuocTinh,T
 }','["Bộ nhớ trong","Màu sắc"]');
 
 
-insert into ct_san_phams(SanPhamId,GiaBan,ThuocTinhToHopValue) values
+insert into ct_san_phams(SanPhamId,GiaBan,ThuocTinhValue) values
 (1,33990000,'["128 GB", "Vàng đồng"]'), /* 128, Vang`dong` */
 (1,33990000,'["128 GB", "Xám"]'), /* 128, xam' */
 (1,33990000,'["128 GB", "Bạc"]'), /* 128, bac' */

@@ -15,12 +15,12 @@ class CT_SanPham extends Model
     protected $fillable = [
         'SanPhamId',
         'MaSanPham',
-        'ThuocTinhToHopValue',
+        'ThuocTinhValue',
         'GiaBan',
     ];
-    public function lstThuocTinhToHopValue()
+    public function lstThuocTinhValue()
     {
-        return json_decode($this->ThuocTinhToHopValue);
+        return json_decode($this->ThuocTinhValue);
     }
     public function SanPham()
     {

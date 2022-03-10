@@ -104,7 +104,7 @@ class CreateDatabase extends Migration
             $table->id();
             $table->foreignId('SanPhamId');
             $table->string('MaSanPham')->unique()->default(Str::random(10));
-            $table->string('ThuocTinhToHopValue'); //luu thanh` json ["XL", "Đỏ"]
+            $table->string('ThuocTinhValue'); //luu thanh` json ["XL", "Đỏ"]
             $table->double('GiaBan')->nullable();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
