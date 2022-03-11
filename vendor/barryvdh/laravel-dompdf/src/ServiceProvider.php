@@ -83,7 +83,7 @@ class ServiceProvider extends IlluminateServiceProvider
      *
      * @return array
      */
-    public function provides()
+public function provides()
     {
         return array('dompdf', 'dompdf.options', 'dompdf.wrapper');
     }

@@ -151,32 +151,56 @@ insert into San_Phams(TenSanPham,LuotMua,HangSanXuatId,LoaiSanPhamId,ThuocTinh,T
 }','["Bộ nhớ trong","Màu sắc"]');
 
 
-insert into ct_san_phams(SanPhamId,GiaBan,ThuocTinhValue) values
-(1,33990000,'["128 GB", "Vàng đồng"]'), /* 128, Vang`dong` */
-(1,33990000,'["128 GB", "Xám"]'), /* 128, xam' */
-(1,33990000,'["128 GB", "Bạc"]'), /* 128, bac' */
-(1,33990000,'["128 GB", "Xanh dương"]'), /* 128, xanh duong' */
-(1,36990000,'["256 GB", "Vàng đồng"]'), /* 256, Vang`dong` */
-(1,36990000,'["256 GB", "Xám"]'), /* 256, xam' */
-(1,36990000,'["256 GB", "Bạc"]'), /* 256, bac' */
-(1,36990000,'["256 GB", "Xanh dương"]'), /* 256, xanh duong' */
-(1,43990000,'["512 GB", "Vàng đồng"]'),  /* 512, Vang`dong` */
-(1,43990000,'["512 GB", "Xám"]'), /* 512, xam' */
-(1,43990000,'["512 GB", "Bạc"]'), /* 512, bac' */
-(1,43990000,'["512 GB", "Xanh dương"]'), /* 512, xanh duong' */
-(1,46690000,'["1024 GB", "Vàng đồng"]'), /* 1024, Vang`dong` */
-(1,46690000,'["1024 GB", "Xám"]'), /* 1024, xam' */
-(1,46690000,'["1024 GB", "Bạc"]'), /* 1024, bac' */
-(1,46690000,'["1024 GB", "Xanh dương"]'); /* 1024, xanh duong' */
+insert into ct_san_phams(SanPhamId,SoLuong,GiaNhap,GiaBan,ThuocTinhValue) values
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 32990000, 33990000, '["128 GB", "Vàng đồng"]'), /* 128, Vang`dong` */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 32990000, 33990000, '["128 GB", "Xám"]'), /* 128, xam' */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 32990000, 33990000, '["128 GB", "Bạc"]'), /* 128, bac' */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 32990000, 33990000, '["128 GB", "Xanh dương"]'), /* 128, xanh duong' */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 35990000, 36990000, '["256 GB", "Vàng đồng"]'), /* 256, Vang`dong` */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 35990000, 36990000, '["256 GB", "Xám"]'), /* 256, xam' */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 35990000, 36990000, '["256 GB", "Bạc"]'), /* 256, bac' */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 35990000, 36990000, '["256 GB", "Xanh dương"]'), /* 256, xanh duong' */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 42990000, 43990000, '["512 GB", "Vàng đồng"]'),  /* 512, Vang`dong` */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 42990000, 43990000, '["512 GB", "Xám"]'), /* 512, xam' */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 42990000, 43990000, '["512 GB", "Bạc"]'), /* 512, bac' */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 42990000, 43990000, '["512 GB", "Xanh dương"]'), /* 512, xanh duong' */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 45690000, 46690000, '["1024 GB", "Vàng đồng"]'), /* 1024, Vang`dong` */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 45690000, 46690000, '["1024 GB", "Xám"]'), /* 1024, xam' */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 45690000, 46690000, '["1024 GB", "Bạc"]'), /* 1024, bac' */
+(1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 45690000, 46690000, '["1024 GB", "Xanh dương"]'); /* 1024, xanh duong' */
 
-
+insert into hinh_anhs(CTSanPhamId,HinhAnh) values
+(1,'vangdong.jpg'),
+(2,'xam.jpg'),
+(3,'bac.jpg'),
+(4,'xanhduong.jpg'),
+(5,'vangdong.jpg'),
+(6,'xam.jpg'),
+(7,'bac.jpg'),
+(8,'xanhduong.jpg'),
+(9,'vangdong.jpg'),
+(10,'xam.jpg'),
+(11,'bac.jpg'),
+(12,'xanhduong.jpg'),
+(13,'vangdong.jpg'),
+(14,'xam.jpg'),
+(15,'bac.jpg'),
+(16,'xanhduong.jpg');
 
 insert into Chuong_Trinh_Khuyen_Mais(TenChuongTrinh,MoTa,FromDate,ToDate,created_at) values(N'Khuyến mãi cực hot ngày 20/11',N' giảm giá đến 5000đ các loại phụ kiện','2021-11-20','2022-12-01','2021-10-19');
 
-insert into CT_Chuong_Trinh_KMs(ChuongTrinhKhuyenMaiId,SanPhamId,GiamGia,created_at) select a.Id,b.Id,5000,'2021-11-21' from Chuong_Trinh_Khuyen_Mais as a,San_Phams as b where b.LoaiSanPhamId=6 and a.Id=1;
-insert into CT_Chuong_Trinh_KMs(ChuongTrinhKhuyenMaiId,SanPhamId,GiamGia,created_at) select a.Id,b.Id,10000,'2021-11-21' from Chuong_Trinh_Khuyen_Mais as a,San_Phams as b where b.LoaiSanPhamId=4 and a.Id=1;
+insert into CT_Chuong_Trinh_KMs(ChuongTrinhKhuyenMaiId,CTSanPhamId,GiamGia,SoLuong,created_at)
+SELECT a.Id,b.Id,5000,15,'2021-11-21' from Chuong_Trinh_Khuyen_Mais as a, ct_san_phams as b
+INNER JOIN san_phams as c ON b.SanPhamId=c.id
+WHERE c.LoaiSanPhamId=6 and a.Id=1;
 
-insert into Don_Vi_Van_Chuyens(TenDonViVanChuyen,Website,Email,Phone)values
+insert into CT_Chuong_Trinh_KMs(ChuongTrinhKhuyenMaiId,CTSanPhamId,GiamGia,SoLuong,created_at)
+SELECT a.Id,b.Id,10000,15,'2021-11-21' from Chuong_Trinh_Khuyen_Mais as a, ct_san_phams as b
+INNER JOIN san_phams as c ON b.SanPhamId=c.id
+WHERE c.LoaiSanPhamId=4 and a.Id=1;
+
+
+insert into Don_Vi_Van_Chuyens(TenDonViVanChuyen,Website,Email,Phone) values
 (N'Viettel Post','https://www.viettelpost.com.vn/','viettelpost@gmail.com','84462660306'),
 (N'Vietnam Post','https://www.ems.com.vn/','Vietnampost@gmail.com','84435371552'),
 (N'Giao Hàng Nhanh','https://giaohangnhanh.vn/','giaohangnhanh@gmail.com','18001201'),
@@ -194,78 +218,104 @@ insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,Dia
 ('0506781231',6,N'Trần Phi Long','1997-06-12',0,null,'thumb-4.jpg','2021-11-21'),
 ('0298123123',7,N'Dương Tấn Tài','1989-08-29',1,null,'thumb-5.jpg','2021-11-21');
 
-insert into Dia_Chis(KhachHangId,TenNguoiNhan,Phone,DiaChiChiTiet) select a.id,a.HoTen,a.Phone,a.DiaChi from khach_hangs as a;
-insert into Dia_Chis(KhachHangId,TenNguoiNhan,Phone,TinhThanhPho,QuanHuyen,PhuongXa,DiaChiChiTiet,CodeTinhThanhPho,CodeQuanHuyen,CodePhuongXa)
-values(1,'Dat ne`','091928739',N'Thành phố Hồ Chí Minh',N'Huyện Bình Chánh',N'Thị trấn Tân Túc',N'123/ds1 Duong ABCXYZ',79,785,27595);
-insert into Dia_Chis(KhachHangId,TenNguoiNhan,Phone,TinhThanhPho,QuanHuyen,PhuongXa,DiaChiChiTiet,CodeTinhThanhPho,CodeQuanHuyen,CodePhuongXa)
-values(2,'Dattt ne``','0901283123',N'Thành phố Hà Nội',N'Quận Long Biên',N'Phường Thượng Thanh',N'123/asasd Đường An Dương Vương',1,4,115);
-insert into Dia_Chis(KhachHangId,TenNguoiNhan,Phone,TinhThanhPho,QuanHuyen,PhuongXa,DiaChiChiTiet,CodeTinhThanhPho,CodeQuanHuyen,CodePhuongXa)
-values(3,'Dat ne`','091928739',N'Thành phố Hồ Chí Minh',N'Huyện Bình Chánh',N'Thị trấn Tân Túc',N'123/ds1 Duong ABCXYZ',79,785,27595);
-insert into Dia_Chis(KhachHangId,TenNguoiNhan,Phone,TinhThanhPho,QuanHuyen,PhuongXa,DiaChiChiTiet,CodeTinhThanhPho,CodeQuanHuyen,CodePhuongXa)
-values(4,'Dattt ne``','0901283123',N'Thành phố Hà Nội',N'Quận Long Biên',N'Phường Thượng Thanh',N'123/asasd Đường An Dương Vương',1,4,115);
+insert into Dia_Chis(TaiKhoanId,TenNguoiNhan,Phone,DiaChiChiTiet) select a.id,a.HoTen,a.Phone,a.DiaChi from tai_khoans as a WHERE a.LoaiTaiKhoanId=3 OR a.LoaiTaiKhoanId=4;
+insert into Dia_Chis(TaiKhoanId,TenNguoiNhan,Phone,TinhThanhPho,QuanHuyen,PhuongXa,DiaChiChiTiet,CodeTinhThanhPho,CodeQuanHuyen,CodePhuongXa) values
+(1,'Dat ne`','091928739',N'Thành phố Hồ Chí Minh',N'Huyện Bình Chánh',N'Thị trấn Tân Túc',N'123/ds1 Duong ABCXYZ',79,785,27595),
+(2,'Dattt ne``','0901283123',N'Thành phố Hà Nội',N'Quận Long Biên',N'Phường Thượng Thanh',N'123/asasd Đường An Dương Vương',1,4,115),
+(3,'Dat ne`','091928739',N'Thành phố Hồ Chí Minh',N'Huyện Bình Chánh',N'Thị trấn Tân Túc',N'123/ds1 Duong ABCXYZ',79,785,27595),
+(4,'Dattt ne``','0901283123',N'Thành phố Hà Nội',N'Quận Long Biên',N'Phường Thượng Thanh',N'123/asasd Đường An Dương Vương',1,4,115);
 
-insert into Hoa_Dons(PhuongThucThanhToan,DiaChiId,TrangThai,TongTien,created_at)
-SELECT (SELECT FLOOR((RAND() * (5-1+1))+1)),b.id,(SELECT FLOOR((RAND() * (5-1+1))+1)),0,(SELECT FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP('2015-1-1') - UNIX_TIMESTAMP('2020-01-01')) + UNIX_TIMESTAMP('2020-01-01')))
-FROM Dia_Chis as b,san_phams ORDER BY RAND() LIMIT 100;
 
-insert into CT_Hoa_Dons(HoaDonId,SanPhamId,SoLuong,GiaGiam,ThanhTien,Star)
-SELECT a.id,b.id,(SELECT FLOOR((RAND() * (5-1+1))+1)),0,0,(SELECT FLOOR((RAND() * (5-0+1))+0))
-FROM hoa_dons as a,san_phams as b ORDER BY RAND() LIMIT 500;
+insert into phuong_thuc_thanh_toans(TenPhuongThuc) values
+('Khi nhận hàng'),
+('Thẻ tín dụng'),
+('MOMO'),
+('Viettel Pay'),
+('Zalo Pay');
 
-insert into Gio_Hangs(KhachHangId,SanPhamId,SoLuong)
+insert into vouchers(Code,GiamGia,FromDate,ToDate,SoLuong)
+SELECT SUBSTR(MD5(RAND()), 1, 10) AS Code, (SELECT FLOOR((RAND() * (10-5+1))+5)*10000) AS GiamGia,
+(SELECT FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP('2021-1-1') - UNIX_TIMESTAMP('2022-01-01')) + UNIX_TIMESTAMP('2022-01-01'))) AS FromDate,
+(SELECT FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP('2022-1-2') - UNIX_TIMESTAMP('2022-05-01')) + UNIX_TIMESTAMP('2022-05-01'))) AS ToDate,
+(SELECT FLOOR((RAND() * (100-1+1))+1)) AS SoLuong
+FROM ct_san_phams as b ORDER BY RAND() LIMIT 100;
+
+insert into voucher_tai_khoans(TaiKhoanId,VoucherId)
+SELECT a.id,b.id FROM tai_khoans as a,vouchers as b WHERE a.LoaiTaiKhoanId=3 OR a.LoaiTaiKhoanId=4 ORDER BY RAND() LIMIT 500;
+
+
+
+
+
+insert into Hoa_Dons(DiaChiId,PhuongThucThanhToanId,VoucherId,TrangThai,created_at)
+SELECT a.id, b.id, c.id, (SELECT FLOOR((RAND() * (5-1+1))+1)),(SELECT FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP('2015-1-1') - UNIX_TIMESTAMP('2020-01-01')) + UNIX_TIMESTAMP('2020-01-01')))
+FROM Dia_Chis as a, phuong_thuc_thanh_toans as b, vouchers as c ORDER BY RAND() LIMIT 100;
+
+
+
+insert into CT_Hoa_Dons(HoaDonId,CTSanPhamId,SoLuong,Star)
+SELECT a.id, b.id, (SELECT FLOOR((RAND() * (5-1+1))+1)), (SELECT FLOOR((RAND() * (5-0+1))+0))
+FROM hoa_dons as a,ct_san_phams as b ORDER BY RAND() LIMIT 500
+ON DUPLICATE KEY UPDATE CT_Hoa_Dons.SoLuong=CT_Hoa_Dons.SoLuong+1;
+
+update CT_Hoa_Dons
+set GiaNhap=(select GiaNhap from ct_san_phams where Id=CTSanPhamId),
+    GiaBan=(select GiaBan from ct_san_phams where Id=CTSanPhamId);
+
+update CT_Hoa_Dons a, (select a.id,b.GiamGia from ct_san_phams as a,ct_chuong_trinh_kms as b WHERE a.id=b.CTSanPhamId) b
+set a.GiaBan=a.GiaBan-b.GiamGia
+where a.CTSanPhamId=b.id;
+
+update CT_Hoa_Dons
+set ThanhTien=(SoLuong*GiaBan);
+
+
+update hoa_dons a, (select HoaDonId,SUM(ThanhTien) as tongTien,SUM(SoLuong) as tongSoLuong from ct_hoa_dons GROUP BY HoaDonId) b
+set a.TongTien=b.tongTien,a.TongSoLuong=b.tongSoLuong
+where a.id=b.HoaDonId;
+
+
+
+
+insert into Gio_Hangs(TaiKhoanId,CTSanPhamId,SoLuong)
 SELECT a.id,b.id,(SELECT FLOOR((RAND() * (5-1+1))+1))
-FROM khach_hangs as a,san_phams as b ORDER BY RAND() LIMIT 100;
+FROM tai_khoans as a,ct_san_phams as b WHERE a.LoaiTaiKhoanId=3 OR a.LoaiTaiKhoanId=4 ORDER BY RAND() LIMIT 100;
 
-insert into Yeu_Thichs(KhachHangId,SanPhamId)
+insert into Yeu_Thichs(TaiKhoanId,CTSanPhamId)
 SELECT a.id,b.id
-FROM khach_hangs as a,san_phams as b ORDER BY RAND() LIMIT 50;
+FROM tai_khoans as a,ct_san_phams as b WHERE a.LoaiTaiKhoanId=3 OR a.LoaiTaiKhoanId=4 ORDER BY RAND() LIMIT 50;
 
-insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'Sản phẩm rất tốt triệu like',1,30);
-insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'Sản phẩm tốt',1,28);
-insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'giao hang nhanh, sản phẩm tốt',2,29);
-insert into Binh_Luans(NoiDung,KhachHangId,SanPhamId) values(N'hoàn hảo',1,32);
 
 insert into Lich_Su_Van_Chuyens(HoaDonId,NguoiVanChuyenId,TrangThai,created_at)
 SELECT a.Id,b.Id,0,(SELECT FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP() - UNIX_TIMESTAMP('2021-01-01')) + UNIX_TIMESTAMP('2021-01-01')))
 FROM (select * from hoa_dons where hoa_dons.TrangThai=4 or hoa_dons.TrangThai=5) as a,Nguoi_Van_Chuyens as b ORDER BY RAND() LIMIT 200;
 
-insert into conversations(NhanVienId,KhachHangId,created_at) select 1,a.id,current_timestamp() from khach_hangs as a;
-insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'Hello Admin',2,(select id from conversations where KhachHangId=2 and NhanVienId=1),'2021-1-1');
-insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'Mon nay` ban nhu nao`?',2,(select id from conversations where KhachHangId=2 and NhanVienId=1),'2021-1-3');
-insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'Gia bao nhieu',2,(select id from conversations where KhachHangId=2 and NhanVienId=1),'2021-1-5');
-insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'200k ban ko',2,(select id from conversations where KhachHangId=2 and NhanVienId=1),'2021-1-8');
-insert into messages(Body,KhachHangId,ConversationId,created_at) values(N'abcxyz thoi ko mua nua',2,(select id from conversations where KhachHangId=2 and NhanVienId=1),'2021-1-9');
-
-insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'Hello khach',1,(select id from conversations where KhachHangId=2 and NhanVienId=1),'2021-1-2');
-insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'Mon nay sieu re~',1,(select id from conversations where KhachHangId=2 and NhanVienId=1),'2021-1-4');
-insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'mua di mua di',1,(select id from conversations where KhachHangId=2 and NhanVienId=1),'2021-1-6');
-insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'ban voi gia sale mua di dung ngai',1,(select id from conversations where KhachHangId=2 and NhanVienId=1),'2021-1-7');
-insert into messages(Body,NhanVienId,ConversationId,created_at) values(N'khong mua t chem',1,(select id from conversations where KhachHangId=2 and NhanVienId=1),'2021-1-10');
-
-update san_phams
-set GiaNhap=(SELECT FLOOR((RAND() * (15-3+1))+3)*1000000),
-	GiaBan=GiaNhap+1000000;
-
-update san_phams
-set GiaNhap=(SELECT FLOOR((RAND() * (15-3+1))+3)*10000),
-	GiaBan=GiaNhap+10000
-where LoaiSanPhamId=6;
 
 update Lich_Su_Van_Chuyens a, (select * from hoa_dons where TrangThai=5) b
 set a.TrangThai=1
 where a.id=(select id from lich_su_van_chuyens where HoaDonId=b.id ORDER BY created_at DESC LIMIT 1);
 
-update CT_Hoa_Dons
-set GiaNhap=(select GiaNhap from San_Phams where Id=SanPhamId),
-    GiaBan=(select GiaBan from San_Phams where Id=SanPhamId);
 
-update CT_Hoa_Dons a, (select a.id,b.GiamGia from san_phams as a,ct_chuong_trinh_kms as b WHERE a.id=b.SanPhamId) b
-set a.GiaBan=a.GiaBan-b.GiamGia
-where a.SanPhamId=b.id;
+insert nha_cung_caps(TenNhaCungCap,DiaChi,Email,Phone) values
+('Ông bán ve chai', '383 Tran Phu St., Ward 8, Dist. 5,  Ho Chi Minh City', 'BanVeChai@gmail.com','09224954'),
+('Bà bán vé số', '75/22 Avenue,  Phu Tho Ward, Binh Duong','BanVeSo@gmail.com','03560283'),
+('Chị hàng xóm', '125-127 Tung Thien Vuong Street, Ward 11, District 8, 125-127 Tung Thien Vuong Street, Ward 11, District 8', 'ChiHangXom@gmail.com','091823123'),
+('Tổng thống Mỹ','91/3 Tran Binh Trong, Dist.5, Ho Chi Minh City','TongThongMy@gmail.com','012398732');
 
-update CT_Hoa_Dons
-set ThanhTien=(SoLuong*GiaBan)-GiaGiam;
+insert into hoa_don_nhaps(TaiKhoanId,NhaCungCapId)
+SELECT a.id,b.id
+FROM tai_khoans as a,nha_cung_caps as b WHERE a.LoaiTaiKhoanId=1 OR a.LoaiTaiKhoanId=5 ORDER BY RAND() LIMIT 10;
 
-update hoa_dons a, (select HoaDonId,SUM(ThanhTien) as tongTien,SUM(SoLuong) as tongSoLuong from ct_hoa_dons GROUP BY HoaDonId) b
-set a.TongTien=b.tongTien,a.TongSoLuong=b.tongSoLuong
-where a.id=b.HoaDonId;
+insert into ct_hoa_don_nhaps(HoaDonNhapId,CTSanPhamId,SoLuong,GiaNhap)
+SELECT a.id,b.id,b.SoLuong,b.GiaNhap
+FROM hoa_don_nhaps as a, ct_san_phams as b ORDER BY RAND() LIMIT 500
+ON DUPLICATE KEY UPDATE ct_hoa_don_nhaps.SoLuong=ct_hoa_don_nhaps.SoLuong+1;
+
+update ct_hoa_don_nhaps
+set ThanhTien=(SoLuong*GiaNhap);
+
+insert into slide_shows(HinhAnh,deleted_at) values
+("banner_1.png",NULL),
+("banner_2.png",NULL),
+("banner_3.png",NULL),
+("banner_4.png",NULL);
