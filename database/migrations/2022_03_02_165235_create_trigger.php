@@ -29,6 +29,29 @@ class CreateTrigger extends Migration
                         INNER JOIN hang_san_xuats hsx ON sp.HangSanXuatId=hsx.id
                         );
                 END');
+        DB::unprepared('CREATE TRIGGER ThanhTien_CTHoaDon BEFORE INSERT ON `ct_hoa_dons` FOR EACH ROW
+                BEGIN
+                    set
+                        NEW.GiaNhap=(select GiaNhap from ct_san_phams b where b.Id=NEW.CTSanPhamId),
+                        NEW.GiaBan=(select GiaBan-IFNULL((select b.GiamGia from ct_san_phams as a, ct_chuong_trinh_kms as b WHERE a.id=b.CTSanPhamId and a.id=NEW.CTSanPhamId),0) from ct_san_phams b where b.Id=NEW.CTSanPhamId),
+                        NEW.ThanhTien=(NEW.SoLuong*NEW.GiaBan);
+                END');
+
+
+        DB::unprepared('CREATE TRIGGER Them_DiaChi AFTER INSERT ON `tai_khoans` FOR EACH ROW
+        BEGIN
+            IF (NEW.LoaiTaiKhoanId=3 OR NEW.LoaiTaiKhoanId=4) THEN
+                insert into Dia_Chis(TaiKhoanId,TenNguoiNhan,Phone,DiaChiChiTiet) VALUES (NEW.id,NEW.HoTen,NEW.Phone,NEW.DiaChi);
+            END IF;
+        END');
+
+        DB::unprepared('DROP PROCEDURE IF EXISTS update_TongTien_HoaDon');
+        DB::unprepared('CREATE PROCEDURE update_TongTien_HoaDon ()
+        BEGIN
+            update hoa_dons a LEFT JOIN vouchers ON vouchers.id=a.VoucherId, (select HoaDonId,SUM(ThanhTien) as tongTien,SUM(SoLuong) as tongSoLuong from ct_hoa_dons GROUP BY HoaDonId) b
+            set a.TongTien=b.tongTien-IFNULL(GiamGia,0), a.TongSoLuong=b.tongSoLuong
+            where a.id=b.HoaDonId;
+        END');
     }
 
     /**
@@ -39,5 +62,7 @@ class CreateTrigger extends Migration
     public function down()
     {
         DB::unprepared('DROP TRIGGER tao_MaSanPham_CTSanPham');
+        DB::unprepared('DROP TRIGGER ThanhTien_CTHoaDon');
+        DB::unprepared('DROP TRIGGER Them_DiaChi');
     }
 }

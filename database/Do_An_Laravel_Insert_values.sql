@@ -218,12 +218,11 @@ insert into Nguoi_Van_Chuyens(Phone,DonViVanChuyenId,HoTen,NgaySinh,GioiTinh,Dia
 ('0506781231',6,N'Trần Phi Long','1997-06-12',0,null,'thumb-4.jpg','2021-11-21'),
 ('0298123123',7,N'Dương Tấn Tài','1989-08-29',1,null,'thumb-5.jpg','2021-11-21');
 
-insert into Dia_Chis(TaiKhoanId,TenNguoiNhan,Phone,DiaChiChiTiet) select a.id,a.HoTen,a.Phone,a.DiaChi from tai_khoans as a WHERE a.LoaiTaiKhoanId=3 OR a.LoaiTaiKhoanId=4;
 insert into Dia_Chis(TaiKhoanId,TenNguoiNhan,Phone,TinhThanhPho,QuanHuyen,PhuongXa,DiaChiChiTiet,CodeTinhThanhPho,CodeQuanHuyen,CodePhuongXa) values
-(1,'Dat ne`','091928739',N'Thành phố Hồ Chí Minh',N'Huyện Bình Chánh',N'Thị trấn Tân Túc',N'123/ds1 Duong ABCXYZ',79,785,27595),
-(2,'Dattt ne``','0901283123',N'Thành phố Hà Nội',N'Quận Long Biên',N'Phường Thượng Thanh',N'123/asasd Đường An Dương Vương',1,4,115),
-(3,'Dat ne`','091928739',N'Thành phố Hồ Chí Minh',N'Huyện Bình Chánh',N'Thị trấn Tân Túc',N'123/ds1 Duong ABCXYZ',79,785,27595),
-(4,'Dattt ne``','0901283123',N'Thành phố Hà Nội',N'Quận Long Biên',N'Phường Thượng Thanh',N'123/asasd Đường An Dương Vương',1,4,115);
+(5,'Dat ne`','091928739',N'Thành phố Hồ Chí Minh',N'Huyện Bình Chánh',N'Thị trấn Tân Túc',N'123/ds1 Duong ABCXYZ',79,785,27595),
+(6,'Dattt ne``','0901283123',N'Thành phố Hà Nội',N'Quận Long Biên',N'Phường Thượng Thanh',N'123/asasd Đường An Dương Vương',1,4,115),
+(7,'Dat ne`','091928739',N'Thành phố Hồ Chí Minh',N'Huyện Bình Chánh',N'Thị trấn Tân Túc',N'123/ds1 Duong ABCXYZ',79,785,27595),
+(8,'Dattt ne``','0901283123',N'Thành phố Hà Nội',N'Quận Long Biên',N'Phường Thượng Thanh',N'123/asasd Đường An Dương Vương',1,4,115);
 
 
 insert into phuong_thuc_thanh_toans(TenPhuongThuc) values
@@ -237,14 +236,16 @@ insert into vouchers(Code,GiamGia,FromDate,ToDate,SoLuong)
 SELECT SUBSTR(MD5(RAND()), 1, 10) AS Code, (SELECT FLOOR((RAND() * (10-5+1))+5)*10000) AS GiamGia,
 (SELECT FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP('2021-1-1') - UNIX_TIMESTAMP('2022-01-01')) + UNIX_TIMESTAMP('2022-01-01'))) AS FromDate,
 (SELECT FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP('2022-1-2') - UNIX_TIMESTAMP('2022-05-01')) + UNIX_TIMESTAMP('2022-05-01'))) AS ToDate,
-(SELECT FLOOR((RAND() * (100-1+1))+1)) AS SoLuong
+(SELECT FLOOR((RAND() * (100-50+1))+50)) AS SoLuong
 FROM ct_san_phams as b ORDER BY RAND() LIMIT 100;
 
 insert into voucher_tai_khoans(TaiKhoanId,VoucherId)
 SELECT a.id,b.id FROM tai_khoans as a,vouchers as b WHERE a.LoaiTaiKhoanId=3 OR a.LoaiTaiKhoanId=4 ORDER BY RAND() LIMIT 500;
 
 
-
+update vouchers a, (select voucherid,count(voucherid) as SLDaSuDung from voucher_tai_khoans GROUP by voucherid) b
+set a.SLDaSuDung=b.SLDaSuDung
+where a.id=b.voucherid;
 
 
 insert into Hoa_Dons(DiaChiId,PhuongThucThanhToanId,VoucherId,TrangThai,created_at)
@@ -252,28 +253,12 @@ SELECT a.id, b.id, c.id, (SELECT FLOOR((RAND() * (5-1+1))+1)),(SELECT FROM_UNIXT
 FROM Dia_Chis as a, phuong_thuc_thanh_toans as b, vouchers as c ORDER BY RAND() LIMIT 100;
 
 
-
 insert into CT_Hoa_Dons(HoaDonId,CTSanPhamId,SoLuong,Star)
 SELECT a.id, b.id, (SELECT FLOOR((RAND() * (5-1+1))+1)), (SELECT FLOOR((RAND() * (5-0+1))+0))
 FROM hoa_dons as a,ct_san_phams as b ORDER BY RAND() LIMIT 500
 ON DUPLICATE KEY UPDATE CT_Hoa_Dons.SoLuong=CT_Hoa_Dons.SoLuong+1;
 
-update CT_Hoa_Dons
-set GiaNhap=(select GiaNhap from ct_san_phams where Id=CTSanPhamId),
-    GiaBan=(select GiaBan from ct_san_phams where Id=CTSanPhamId);
-
-update CT_Hoa_Dons a, (select a.id,b.GiamGia from ct_san_phams as a,ct_chuong_trinh_kms as b WHERE a.id=b.CTSanPhamId) b
-set a.GiaBan=a.GiaBan-b.GiamGia
-where a.CTSanPhamId=b.id;
-
-update CT_Hoa_Dons
-set ThanhTien=(SoLuong*GiaBan);
-
-
-update hoa_dons a, (select HoaDonId,SUM(ThanhTien) as tongTien,SUM(SoLuong) as tongSoLuong from ct_hoa_dons GROUP BY HoaDonId) b
-set a.TongTien=b.tongTien,a.TongSoLuong=b.tongSoLuong
-where a.id=b.HoaDonId;
-
+CALL update_TongTien_HoaDon();
 
 
 

@@ -222,7 +222,7 @@ class CreateDatabase extends Migration
             $table->Id();
             $table->foreignId('DiaChiId');
             $table->foreignId('PhuongThucThanhToanId');
-            $table->foreignId('VoucherId');
+            $table->foreignId('VoucherId')->nullable();
             $table->integer("TongSoLuong")->default(0);
             $table->double('TongTien')->default(0);
             //https://viblo.asia/p/tim-hieu-va-su-dung-enum-trong-laravel-vyDZOYVk5wj
