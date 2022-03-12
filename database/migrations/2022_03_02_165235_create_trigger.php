@@ -29,7 +29,7 @@ class CreateTrigger extends Migration
                         INNER JOIN hang_san_xuats hsx ON sp.HangSanXuatId=hsx.id
                         );
                 END');
-        DB::unprepared('CREATE TRIGGER ThanhTien_CTHoaDon BEFORE INSERT ON `ct_hoa_dons` FOR EACH ROW
+        DB::unprepared('CREATE TRIGGER thanhTien_CTHoaDon BEFORE INSERT ON `ct_hoa_dons` FOR EACH ROW
                 BEGIN
                     set
                         NEW.GiaNhap=(select GiaNhap from ct_san_phams b where b.Id=NEW.CTSanPhamId),
@@ -38,7 +38,7 @@ class CreateTrigger extends Migration
                 END');
 
 
-        DB::unprepared('CREATE TRIGGER Them_DiaChi AFTER INSERT ON `tai_khoans` FOR EACH ROW
+        DB::unprepared('CREATE TRIGGER them_DiaChi AFTER INSERT ON `tai_khoans` FOR EACH ROW
         BEGIN
             IF (NEW.LoaiTaiKhoanId=3 OR NEW.LoaiTaiKhoanId=4) THEN
                 insert into Dia_Chis(TaiKhoanId,TenNguoiNhan,Phone,DiaChiChiTiet) VALUES (NEW.id,NEW.HoTen,NEW.Phone,NEW.DiaChi);
@@ -62,7 +62,7 @@ class CreateTrigger extends Migration
     public function down()
     {
         DB::unprepared('DROP TRIGGER tao_MaSanPham_CTSanPham');
-        DB::unprepared('DROP TRIGGER ThanhTien_CTHoaDon');
-        DB::unprepared('DROP TRIGGER Them_DiaChi');
+        DB::unprepared('DROP TRIGGER thanhTien_CTHoaDon');
+        DB::unprepared('DROP TRIGGER them_DiaChi');
     }
 }
