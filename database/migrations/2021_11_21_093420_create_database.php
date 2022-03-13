@@ -94,7 +94,7 @@ class CreateDatabase extends Migration
             $table->string('TenSanPham')->unique();
             $table->string('ThuocTinh')->unique(); //luu thanh` json {"TenThuocTinh": "GiaTri"}
             $table->longText('MoTa')->nullable();
-            $table->integer('LuotMua');
+            $table->integer('LuotMua')->default(0);
             $table->string("ThuocTinhToHop");  //luu thanh` json ["Size", "Color"]
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
@@ -106,8 +106,8 @@ class CreateDatabase extends Migration
             $table->foreignId('SanPhamId');
             $table->string('MaSanPham')->unique()->default(Str::random(10));
             $table->integer('SoLuong');
-            $table->double('GiaNhap');
-            $table->double('GiaBan')->nullable();
+            $table->double('GiaNhap')->nullable();
+            $table->double('GiaBan');
             $table->string('ThuocTinhValue'); //luu thanh` json ["XL", "Đỏ"]
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
@@ -339,7 +339,7 @@ class CreateDatabase extends Migration
             $table->string('HinhAnh');
             $table->string('MoTa')->nullable();
             $table->timestamps();
-            $table->softDeletes()->default(date("Y-m-d H:i:s")); //nay la trang thai xoa
+            $table->softDeletes()->useCurrent(); //nay la trang thai xoa
         });
         Schema::create('lich_su_hoat_dongs', function (Blueprint $table) {
             $table->id();

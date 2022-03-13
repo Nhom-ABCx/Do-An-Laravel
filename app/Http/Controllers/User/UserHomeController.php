@@ -52,8 +52,9 @@ class UserHomeController extends Controller
 
         foreach ($sanPham->CT_SanPham as $item) {
             for ($i = 0; $i < count($toHop); $i++) {
-                echo " - " . $item->lstThuocTinhValue()[$i] . "</br></br>";
+                echo " - " . $item->lstThuocTinhValue()[$i];
             }
+            echo "</br></br>";
             //echo (json_decode($sanPham->ThuocTinhToHop, true);
         }
     }

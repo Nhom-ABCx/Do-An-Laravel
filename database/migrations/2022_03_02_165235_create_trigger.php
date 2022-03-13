@@ -22,11 +22,12 @@ class CreateTrigger extends Migration
                         CONCAT(LEFT(UPPER(sp.TenSanPham), 1),
                         MID(UPPER(sp.TenSanPham), LENGTH(sp.TenSanPham)/2, 1),
                         RIGHT(UPPER(sp.TenSanPham), 1)),
-                        (SELECT COUNT(SanPhamId+1) from ct_san_phams)
+                        IFNULL((SELECT MAX(id)+1 from ct_san_phams where SanPhamId=NEW.SanPhamId),1)
                         )
                     from san_phams sp
                     INNER JOIN Loai_San_Phams lsp ON sp.LoaiSanPhamId=lsp.id
                     INNER JOIN hang_san_xuats hsx ON sp.HangSanXuatId=hsx.id
+                    WHERE sp.id=NEW.SanPhamId
                     );
             END');
         //khi insert
@@ -49,7 +50,7 @@ class CreateTrigger extends Migration
                     NEW.GiaBan=(select GiaBan-IFNULL((select b.GiamGia from ct_san_phams as a, ct_chuong_trinh_kms as b WHERE a.id=b.CTSanPhamId and a.id=NEW.CTSanPhamId),0) from ct_san_phams b where b.Id=NEW.CTSanPhamId),
                     NEW.ThanhTien=(NEW.SoLuong*NEW.GiaBan);
             END');
-        DB::unprepared('CREATE TRIGGER thanhTien_CTHoaDon_afupdate AFTER UPDATE ON `ct_hoa_dons` FOR EACH ROW
+        DB::unprepared('CREATE TRIGGER tongTien_CTHoaDon_afupdate AFTER UPDATE ON `ct_hoa_dons` FOR EACH ROW
             BEGIN
                 CALL update_TongTien_HoaDon();
             END');
@@ -57,16 +58,16 @@ class CreateTrigger extends Migration
             BEGIN
                 set NEW.ThanhTien=(NEW.SoLuong*NEW.GiaNhap);
             END');
-        DB::unprepared('CREATE TRIGGER thanhTien_CTHoaDonNhap_afupdate AFTER UPDATE ON `ct_hoa_don_nhaps` FOR EACH ROW
+        DB::unprepared('CREATE TRIGGER tongTien_CTHoaDonNhap_afupdate AFTER UPDATE ON `ct_hoa_don_nhaps` FOR EACH ROW
             BEGIN
                 CALL update_TongTien_HoaDonNhap();
             END');
         //khi delete
-        DB::unprepared('CREATE TRIGGER thanhTien_CTHoaDon_afdelete AFTER DELETE ON `ct_hoa_dons` FOR EACH ROW
+        DB::unprepared('CREATE TRIGGER tongTien_CTHoaDon_afdelete AFTER DELETE ON `ct_hoa_dons` FOR EACH ROW
             BEGIN
                 CALL update_TongTien_HoaDon();
             END');
-        DB::unprepared('CREATE TRIGGER thanhTien_CTHoaDonNhap_afdelete AFTER DELETE ON `ct_hoa_don_nhaps` FOR EACH ROW
+        DB::unprepared('CREATE TRIGGER tongTien_CTHoaDonNhap_afdelete AFTER DELETE ON `ct_hoa_don_nhaps` FOR EACH ROW
             BEGIN
                 CALL update_TongTien_HoaDonNhap();
             END');
@@ -111,11 +112,11 @@ class CreateTrigger extends Migration
         DB::unprepared('DROP TRIGGER thanhTien_CTHoaDon');
         DB::unprepared('DROP TRIGGER thanhTien_CTHoaDonNhap');
         DB::unprepared('DROP TRIGGER thanhTien_CTHoaDon_update');
-        DB::unprepared('DROP TRIGGER thanhTien_CTHoaDon_afupdate');
+        DB::unprepared('DROP TRIGGER tongTien_CTHoaDon_afupdate');
         DB::unprepared('DROP TRIGGER thanhTien_CTHoaDonNhap_update');
-        DB::unprepared('DROP TRIGGER thanhTien_CTHoaDonNhap_afupdate');
-        DB::unprepared('DROP TRIGGER thanhTien_CTHoaDon_afdelete');
-        DB::unprepared('DROP TRIGGER thanhTien_CTHoaDonNhap_afdelete');
+        DB::unprepared('DROP TRIGGER tongTien_CTHoaDonNhap_afupdate');
+        DB::unprepared('DROP TRIGGER tongTien_CTHoaDon_afdelete');
+        DB::unprepared('DROP TRIGGER tongTien_CTHoaDonNhap_afdelete');
         DB::unprepared('DROP TRIGGER them_DiaChi');
     }
 }
