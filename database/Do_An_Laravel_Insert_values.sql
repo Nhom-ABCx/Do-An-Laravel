@@ -292,12 +292,12 @@ SELECT a.id,b.id
 FROM tai_khoans as a,nha_cung_caps as b WHERE a.LoaiTaiKhoanId=1 OR a.LoaiTaiKhoanId=5 ORDER BY RAND() LIMIT 10;
 
 insert into ct_hoa_don_nhaps(HoaDonNhapId,CTSanPhamId,SoLuong,GiaNhap)
-SELECT a.id,b.id,b.SoLuong,b.GiaNhap
+SELECT a.id,b.id,(SELECT FLOOR((RAND() * (5-1+1))+1)),b.GiaNhap
 FROM hoa_don_nhaps as a, ct_san_phams as b ORDER BY RAND() LIMIT 500
 ON DUPLICATE KEY UPDATE ct_hoa_don_nhaps.SoLuong=ct_hoa_don_nhaps.SoLuong+1;
 
-update ct_hoa_don_nhaps
-set ThanhTien=(SoLuong*GiaNhap);
+CALL update_TongTien_HoaDonNhap();
+
 
 insert into slide_shows(HinhAnh,deleted_at) values
 ("banner_1.png",NULL),

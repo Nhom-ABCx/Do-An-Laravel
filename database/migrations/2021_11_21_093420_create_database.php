@@ -247,7 +247,6 @@ class CreateDatabase extends Migration
             $table->double('ThanhTien');
             $table->tinyInteger('Star');
             $table->timestamps();
-            $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('HoaDonId')->references('id')->on('hoa_dons');
             $table->foreign('CTSanPhamId')->references('id')->on('ct_san_phams');
             $table->unique(['HoaDonId', 'CTSanPhamId']);
@@ -323,7 +322,6 @@ class CreateDatabase extends Migration
             $table->double('GiaNhap')->default(0); //giá nhập vào bao nhiêu
             $table->double('ThanhTien')->default(0);
             $table->timestamps();
-            $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('HoaDonNhapId')->references('id')->on('hoa_don_nhaps');
             $table->foreign('CTSanPhamId')->references('id')->on('ct_san_phams');
             $table->unique(['HoaDonNhapId', 'CTSanPhamId']);

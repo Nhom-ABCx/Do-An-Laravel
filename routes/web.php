@@ -23,7 +23,7 @@ use App\Http\Controllers\User\UserTaiKhoanController;
 
 //composer dump-autoload
 //composer update
-
+//bo dau ; o php.ini  dong` ;extension=gd    khi bi loi~
 /*
 |--------------------------------------------------------------------------
 | Web Routes
