@@ -8,11 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes; //them vao de khai bao' thu vien s
 
 class ChuongTrinhKhuyenMai extends Model
 {
-    use HasFactory;
-    use SoftDeletes; //su dung chuc nang softdelete
-    protected $table ="chuong_trinh_khuyen_mais";
-    protected $fillable=[
-        'Id',
+    use HasFactory, SoftDeletes; //su dung chuc nang softdelete
+    protected $table = "chuong_trinh_khuyen_mais";
+    protected $fillable = [
         'TenChuongTrinh',
         'MoTa',
         'FromDate',
@@ -20,6 +18,6 @@ class ChuongTrinhKhuyenMai extends Model
     ];
     public function CTChuongTrinhKM()
     {
-        return $this->hasMany(CTChuongTrinhKM::class,'ChuongTrinhKhuyenMaiId');
+        return $this->hasMany(CTChuongTrinhKM::class, 'ChuongTrinhKhuyenMaiId');
     }
 }

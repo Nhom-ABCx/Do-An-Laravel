@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\KhachHang;
-use GrahamCampbell\ResultType\Result;
+use App\Models\TaiKhoan;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -14,7 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage; //thu vien luu tru~ de tao lien ket den public
 
-class KhachHangController extends Controller
+class TaiKhoanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,10 +22,10 @@ class KhachHangController extends Controller
      */
     public function index()
     {
-        $data = KhachHang::all();
+        $data = TaiKhoan::all();
 
         // dd($data);
-        return view("Admin.KhachHang.KhachHang-index", ["khachHang" => $data]);
+        return view("Admin.TaiKhoan.TaiKhoan-index", ["taiKhoan" => $data]);
     }
 
     /**
@@ -53,10 +52,10 @@ class KhachHangController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\KhachHang  $khachHang
+     * @param  \App\Models\TaiKhoan  $taiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function show(KhachHang $khachHang)
+    public function show(TaiKhoan $taiKhoan)
     {
         //
     }
@@ -64,10 +63,10 @@ class KhachHangController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\KhachHang  $khachHang
+     * @param  \App\Models\TaiKhoan  $taiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function edit(KhachHang $khachHang)
+    public function edit(TaiKhoan $taiKhoan)
     {
         //
     }
@@ -76,10 +75,10 @@ class KhachHangController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\KhachHang  $khachHang
+     * @param  \App\Models\TaiKhoan  $taiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, KhachHang $khachHang)
+    public function update(Request $request, TaiKhoan $taiKhoan)
     {
         //
     }
@@ -87,47 +86,47 @@ class KhachHangController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\KhachHang  $khachHang
+     * @param  \App\Models\TaiKhoan  $taiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(KhachHang $khachHang)
+    public function destroy(TaiKhoan $taiKhoan)
     {
-        // dd($khachHang);
-        $khachHang->delete();
-        return Redirect::route('KhachHang.index');
+        // dd($taiKhoan);
+        $taiKhoan->delete();
+        return Redirect::route('TaiKhoan.index');
     }
-    public function KhachHang_DS_Den(Request $request)
+    public function TaiKhoan_DS_Den(Request $request)
     {
-        $data = KhachHang::onlyTrashed()->get();
-        return view('Admin.KhachHang.KhachHang-index', ['khachHang' => $data, 'request' => $request]);
+        $data = TaiKhoan::onlyTrashed()->get();
+        return view('Admin.TaiKhoan.TaiKhoan-index', ['taiKhoan' => $data, 'request' => $request]);
     }
-    public function KhoiPhucKhachHang($id)
+    public function KhoiPhucTaiKhoan($id)
     {
         // dd($id);
-        $data = KhachHang::onlyTrashed()->find($id);
+        $data = TaiKhoan::onlyTrashed()->find($id);
         $data->restore();
-        return Redirect::route('KhachHang.dsDen');
+        return Redirect::route('TaiKhoan.dsDen');
     }
 
     //Api
 
-    public function showResetPassword_KhachHang($token)
+    public function showResetPassword_TaiKhoan($token)
     {
-        $khachHang = KhachHang::where("remember_token", $token)->first();
-        if (!empty($khachHang))
-            return view('Admin.Login.ResetPassword', ['khachHang' => $khachHang]);
+        $taiKhoan = TaiKhoan::where("remember_token", $token)->first();
+        if (!empty($taiKhoan))
+            return view('Admin.Login.ResetPassword', ['taiKhoan' => $taiKhoan]);
         return "Tai khoan cua ban co ve da duoc thay doi~";
     }
-    public function actionResetPassword_KhachHang(Request $request, KhachHang $khachHang)
+    public function actionResetPassword_TaiKhoan(Request $request, TaiKhoan $taiKhoan)
     {
         $request->validate([
             'MatKhau' => ['required'],
             'XacNhan_MatKhau' => ['required', 'same:MatKhau'],
         ]);
 
-        $khachHang->fill(['MatKhau' => $request['MatKhau']]);
-        $khachHang->remember_token = Str::random(60); //tao moi 1 token
-        $khachHang->save();
+        $taiKhoan->fill(['MatKhau' => $request['MatKhau']]);
+        $taiKhoan->remember_token = Str::random(60); //tao moi 1 token
+        $taiKhoan->save();
 
         return Redirect::route('Home.Susscess');
     }
@@ -144,8 +143,8 @@ class KhachHangController extends Controller
     //API
     public function API_DangNhap(Request $request)
     {
-        //select * from KhachHang where MatKhau=$MatKhau and (Email=$Email or Username=$Username or Phone=$Phone)
-        $data = KhachHang::where('MatKhau', $request['MatKhau'])
+        //select * from TaiKhoan where MatKhau=$MatKhau and (Email=$Email or Username=$Username or Phone=$Phone)
+        $data = TaiKhoan::where('MatKhau', $request['MatKhau'])
             ->Where(function ($query) use ($request) {
                 $query->orwhere('Email', $request['Email'])
                     ->orwhere('Username', $request['Username'])
@@ -155,7 +154,7 @@ class KhachHangController extends Controller
 
         //neu du lieu ko co rong~ thi tra ve voi status la 200
         if (!empty($data)) {
-            $data->HinhAnh = KhachHangController::fixImage($data->HinhAnh);
+            $data->HinhAnh = TaiKhoanController::fixImage($data->HinhAnh);
             return response()->json($data, 200);
         }
         //nguoc lai du lieu rong~ thi tra ve status 404
@@ -173,7 +172,7 @@ class KhachHangController extends Controller
         if ($validate->fails())
             return response()->json($validate->errors(), 400);
 
-        $khachHang = KhachHang::firstOrCreate([
+        $taiKhoan = TaiKhoan::firstOrCreate([
             'Username'       => strip_tags($request['Username']),
             'Email'       => strip_tags($request['Email']),
         ], [
@@ -186,13 +185,13 @@ class KhachHangController extends Controller
             "DiaChi" => "",
         ]);
 
-        $data = $khachHang;
+        $data = $taiKhoan;
         //neu du lieu ko co rong~ thi tra ve voi status la 200
         if (!empty($data))
             return response()->json($data, 200);
     }
 
-    public function API_Update_KhachHang(Request $request, KhachHang $khachHang)
+    public function API_Update_TaiKhoan(Request $request, TaiKhoan $taiKhoan)
     {
         //kiem tra du lieu
         $validate = Validator::make($request->all(), [
@@ -210,7 +209,7 @@ class KhachHangController extends Controller
         if ($validate->fails())
             return response()->json($validate->errors(), 400);
 
-        $khachHang->fill([
+        $taiKhoan->fill([
             'Username' => $request['Username'],
             'Email' => $request['Email'],
             'Phone' => $request['Phone'],
@@ -220,14 +219,14 @@ class KhachHangController extends Controller
             'GioiTinh' => $request['GioiTinh'],
             'DiaChi' => $request['DiaChi'],
         ]);
-        $khachHang->save();
+        $taiKhoan->save();
 
-        $data = $khachHang;
+        $data = $taiKhoan;
         if (!empty($data))
             return response()->json($data, 200);
     }
 
-    public function API_Update_KhachHang_HinhAnh(Request $request, $id)
+    public function API_Update_TaiKhoan_HinhAnh(Request $request, $id)
     {
         //kiem tra du lieu
         $validate = Validator::make($request->all(), [
@@ -236,24 +235,24 @@ class KhachHangController extends Controller
         //neu du lieu no' sai thi`tra? ve` loi~
         if ($validate->fails())
             return response()->json($validate->errors(), 400);
-        $khachHang = KhachHang::find($id);
+        $taiKhoan = TaiKhoan::find($id);
 
         //kiem tra upload hinh anh
         if ($request->hasFile('HinhAnh')) {
-            $khachHang->HinhAnh = "/storage/" . $request->file('HinhAnh')->store('assets/images/avatar/User/' . $khachHang->id, 'public');
-            $khachHang->save();
+            $taiKhoan->HinhAnh = "/storage/" . $request->file('HinhAnh')->store('assets/images/avatar/User/' . $taiKhoan->id, 'public');
+            $taiKhoan->save();
         } else
             return response()->json(["NoImage" => "No image request"], 400);
 
         //neu du lieu ko co rong~ thi tra ve voi status la 200
-        if (!empty($khachHang)) {
-            $khachHang->HinhAnh = $this->fixImage($khachHang->HinhAnh);
-            return response()->json($khachHang, 200);
+        if (!empty($taiKhoan)) {
+            $taiKhoan->HinhAnh = $this->fixImage($taiKhoan->HinhAnh);
+            return response()->json($taiKhoan, 200);
         }
         return response()->json([], 400);
     }
 
-    public function API_Update_KhachHang_MatKhau(Request $request, KhachHang $khachHang)
+    public function API_Update_TaiKhoan_MatKhau(Request $request, TaiKhoan $taiKhoan)
     {
         //kiem tra du lieu
         $validate = Validator::make($request->all(), [
@@ -264,24 +263,24 @@ class KhachHangController extends Controller
         //neu du lieu no' sai thi`tra? ve` loi~
         if ($validate->fails())
             return response()->json($validate->errors(), 400);
-        if ($khachHang->MatKhau != $request['oldMatKhau'])
+        if ($taiKhoan->MatKhau != $request['oldMatKhau'])
             return response()->json(['oldMatKhau' => "wrong password"], 400);
-        else if ($khachHang->MatKhau == $request['MatKhau'])
+        else if ($taiKhoan->MatKhau == $request['MatKhau'])
             return response()->json(['MatKhau' => "New password matches your old password"], 400);
 
-        $khachHang->fill(['MatKhau' => $request['MatKhau'],]);
-        $khachHang->save();
+        $taiKhoan->fill(['MatKhau' => $request['MatKhau'],]);
+        $taiKhoan->save();
 
-        $data = $khachHang;
+        $data = $taiKhoan;
         if (!empty($data))
             return response()->json($data, 200);
     }
 
-    public function API_Get_KhachHang(KhachHang $khachHang)
+    public function API_Get_TaiKhoan(TaiKhoan $taiKhoan)
     {
-        if (!empty($khachHang)) {
-            $khachHang->HinhAnh = KhachHangController::fixImage($khachHang->HinhAnh);
-            return response()->json($khachHang, 200);
+        if (!empty($taiKhoan)) {
+            $taiKhoan->HinhAnh = TaiKhoanController::fixImage($taiKhoan->HinhAnh);
+            return response()->json($taiKhoan, 200);
         }
         return response()->json(["Error" => "Item Not found"], 404);
     }
@@ -291,7 +290,7 @@ class KhachHangController extends Controller
         //do google nickname no' rong~ nen de? tam nhu v
         //lay tu doan dau` cho den' truoc' vi tri @
         $username = substr($request['Email'], 0, strpos($request['Email'], '@'));
-        $khachHang = KhachHang::firstOrCreate([
+        $taiKhoan = TaiKhoan::firstOrCreate([
             'Username'       => $username,
             'Email'       => $request['Email'],
         ], [
@@ -306,9 +305,9 @@ class KhachHangController extends Controller
         ]);
 
         //neu du lieu ko co rong~ thi tra ve voi status la 200
-        if (!empty($khachHang)) {
-            $khachHang->HinhAnh = $this->fixImage($khachHang->HinhAnh);
-            return response()->json($khachHang, 200);
+        if (!empty($taiKhoan)) {
+            $taiKhoan->HinhAnh = $this->fixImage($taiKhoan->HinhAnh);
+            return response()->json($taiKhoan, 200);
         }
         return response()->json(["Error" => "Item Not found"], 404);
     }

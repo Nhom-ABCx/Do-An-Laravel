@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes; //them vao de khai bao' thu vien s
 
 class SanPham extends Model
 {
-    use HasFactory;
-    use SoftDeletes; //su dung chuc nang softdelete
+    use HasFactory, SoftDeletes;
 
     protected $table = 'san_phams';
     protected $fillable = [
         'HangSanXuatId',
         'LoaiSanPhamId',
         'TenSanPham',
+        'ThuocTinh',
         'MoTa',
         'LuotMua',
         'ThuocTinhToHop',
@@ -28,6 +28,7 @@ class SanPham extends Model
     {
         return json_decode($this->ThuocTinhToHop, true);
     }
+    //relations
     public function HangSanXuat()
     {
         return $this->belongsTo(HangSanXuat::class, 'HangSanXuatId')->withTrashed();
@@ -36,32 +37,12 @@ class SanPham extends Model
     {
         return $this->belongsTo(LoaiSanPham::class, 'LoaiSanPhamId')->withTrashed();
     }
-    public function CTChuongTrinhKM()
-    {
-        return $this->hasMany(CTChuongTrinhKM::class, 'SanPhamId');
-    }
-    public function CT_HoaDon()
-    {
-        return $this->hasMany(CT_HoaDon::class, 'SanPhamId');
-    }
-    public function YeuThich()
-    {
-        return $this->hasMany(YeuThich::class, 'SanPhamId');
-    }
-    public function GioHang()
-    {
-        return $this->hasMany(GioHang::class, 'SanPhamId');
-    }
-    public function BinhLuan()
-    {
-        return $this->hasMany(BinhLuan::class, 'SanPhamId');
-    }
-    public function CT_HoaDonNhap()
-    {
-        return $this->hasMany(CT_HoaDonNhap::class, 'SanPhamId');
-    }
     public function CT_SanPham()
     {
         return $this->hasMany(CT_SanPham::class, 'SanPhamId');
+    }
+    public function CTChuongTrinhKM()
+    {
+        return $this->hasMany(CTChuongTrinhKM::class, 'CTSanPhamId');
     }
 }

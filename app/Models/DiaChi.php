@@ -8,25 +8,24 @@ use Illuminate\Database\Eloquent\SoftDeletes; //them vao de khai bao' thu vien s
 
 class DiaChi extends Model
 {
-    use HasFactory;
-    use SoftDeletes; //su dung chuc nang softdelete
+    use HasFactory, SoftDeletes; //su dung chuc nang softdelete
 
     protected $table = 'dia_chis';
     protected $fillable = [
-        'KhachHangId',
+        'TaiKhoanId',
         'TenNguoiNhan',
         'Phone',
-        'TinhThanhPho',
-        'QuanHuyen',
-        'PhuongXa',
         'DiaChiChiTiet',
-        'CodeTinhThanhPho',
-        'CodeQuanHuyen',
+        'PhuongXa',
+        'QuanHuyen',
+        'TinhThanhPho',
         'CodePhuongXa',
+        'CodeQuanHuyen',
+        'CodeTinhThanhPho',
     ];
-    public function KhachHang()
+    public function TaiKhoan()
     {
-        return $this->belongsTo(KhachHang::class, 'KhachHangId');
+        return $this->belongsTo(TaiKhoan::class, 'TaiKhoanId');
     }
     public function HoaDon()
     {

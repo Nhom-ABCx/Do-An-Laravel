@@ -40,13 +40,13 @@
             <div class="page-content">
                 <div class="row">
                     <form class="form-inline"
-                        action="{{ request()->is('Admin/KhachHangg/dsden') ? route('KhachHang.dsDen') : route('KhachHang.index') }}"
+                        action="{{ request()->is('Admin/TaiKhoang/dsden') ? route('TaiKhoan.dsDen') : route('TaiKhoan.index') }}"
                         method="get">
 
-                        @if (request()->is('Admin/KhachHangg/dsden'))
-                            <a class="btn btn-inverse" href="{{ route('KhachHang.index') }}"> Black</a>
+                        @if (request()->is('Admin/TaiKhoang/dsden'))
+                            <a class="btn btn-inverse" href="{{ route('TaiKhoan.index') }}"> Black</a>
                         @else
-                            <a href="{{ route('KhachHang.dsDen') }}" class="btn btn-inverse">
+                            <a href="{{ route('TaiKhoan.dsDen') }}" class="btn btn-inverse">
                                 <i class="icon-trash"></i>
                                 Danh sách đen
                             </a>
@@ -120,8 +120,8 @@
                             </thead>
 
                             <tbody>
-                                {{-- {{ dd($khachHang) }} --}}
-                                @foreach ($khachHang as $item)
+                                {{-- {{ dd($taiKhoan) }} --}}
+                                @foreach ($taiKhoan as $item)
                                     <tr>
                                         <td>{{ $item->Username }}</td>
                                         <td>{{ $item->Email }}</td>
@@ -146,10 +146,10 @@
                                         <td>{{ $item->updated_at }}</td>
                                         <td>{{ $item->deleted_at }}</td>
 
-                                        @if (request()->is('Admin/KhachHangg/dsden'))
+                                        @if (request()->is('Admin/TaiKhoang/dsden'))
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <form action="{{ route('KhachHang.KhoiPhuc', $item->id) }}"
+                                                    <form action="{{ route('TaiKhoan.KhoiPhuc', $item->id) }}"
                                                         method="post">
                                                         @csrf
                                                         {{-- @method("PUT") --}}
@@ -164,7 +164,7 @@
                                                     {{-- <a class="blue" href="#">
                                                         <i class="fa fa-plus"></i>
                                                     </a> --}}
-                                                    <form action="{{ route('KhachHang.destroy', $item) }}" method="post">
+                                                    <form action="{{ route('TaiKhoan.destroy', $item) }}" method="post">
                                                         {{-- {{ dd($item) }} --}}
                                                         @csrf
                                                         @method('DELETE')

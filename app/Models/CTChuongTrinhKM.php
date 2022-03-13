@@ -8,19 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes; //them vao de khai bao' thu vien s
 
 class CTChuongTrinhKM extends Model
 {
-    use HasFactory;
-    use SoftDeletes; //su dung chuc nang softdelete
+    use HasFactory, SoftDeletes; //su dung chuc nang softdelete
 
     protected $table = "ct_chuong_trinh_kms";
-
-    protected $primaryKey = null;
-    public $incrementing = false;
-
     protected $fillable = [
         'ChuongTrinhKhuyenMaiId',
-        'SanPhamId',
+        'CTSanPhamId',
         'GiamGia',
-        'SoLuong'
+        'SoLuong',
+        'SLDaSuDung',
     ];
 
     public function ChuongTrinhKhuyenMai()
@@ -29,6 +25,6 @@ class CTChuongTrinhKM extends Model
     }
     public function SanPham()
     {
-        return $this->belongsTo(SanPham::class, 'SanPhamId');
+        return $this->belongsTo(SanPham::class, 'CTSanPhamId');
     }
 }

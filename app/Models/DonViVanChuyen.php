@@ -9,19 +9,17 @@ use Illuminate\Database\Eloquent\SoftDeletes; //them vao de khai bao' thu vien s
 
 class DonViVanChuyen extends Model
 {
-    use HasFactory;
-    use SoftDeletes; //su dung chuc nang softdelete
+    use HasFactory, SoftDeletes; //su dung chuc nang softdelete
 
     protected $table = 'don_vi_van_chuyens';
     protected $fillable = [
-          'Id',
-          'TenDonViVanChuyen',
-          'Website',
-          'Email',
-          'Phone',
+        'TenDonViVanChuyen',
+        'Website',
+        'Email',
+        'Phone',
     ];
     public function NguoiVanChuyen()
     {
-        return $this->hasMany(NguoiVanChuyen::class,'DonViVanChuyenId');
+        return $this->hasMany(NguoiVanChuyen::class, 'DonViVanChuyenId');
     }
 }

@@ -13,16 +13,19 @@ class HoaDonNhap extends Model
 
     protected $table = 'hoa_don_nhaps';
     protected $fillable = [
-        'NhanVienId', //nhập bởi ai
-        'NhaCungCap', // ai là người cung cấp (do ko có bảng nhà cung cấp nên ghi chuỗi)
-        'Phone',
+        'TaiKhoanId',
+        'NhaCungCapId',
         'TongSoLuong',
         'TongTien',
         'TrangThai',
     ];
-    public function NhanVien()
+    public function TaiKhoan()
     {
-        return $this->belongsTo(NhanVien::class, 'NhanVienId');
+        return $this->belongsTo(TaiKhoan::class, 'TaiKhoanId');
+    }
+    public function NhaCungCap()
+    {
+        return $this->belongsTo(NhaCungCap::class, 'NhaCungCapId');
     }
     public function CT_HoaDonNhap()
     {

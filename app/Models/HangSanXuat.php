@@ -8,18 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes; //them vao de khai bao' thu vien s
 
 class HangSanXuat extends Model
 {
-    use HasFactory;
-    use SoftDeletes; //su dung chuc nang softdelete
-    protected $table ="hang_san_xuats";
-    protected $fillable=[
-        'Id',
-        'Ten',
-        'DiaChi',
-        'Email',
-        'Phone'
+    use HasFactory, SoftDeletes; //su dung chuc nang softdelete
+    protected $table = "hang_san_xuats";
+    protected $fillable = [
+        'TenHangSanXuat',
+        'MoTa',
     ];
     public function SanPham()
     {
-        return $this->hasMany(SanPham::class,'HangSanXuatId');
+        return $this->hasMany(SanPham::class, 'HangSanXuatId');
     }
 }

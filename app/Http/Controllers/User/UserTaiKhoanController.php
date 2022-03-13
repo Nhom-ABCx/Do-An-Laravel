@@ -1,12 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
+
 use App\Http\Controllers\Controller;
 
-use App\Models\NhanVien;
+use App\Models\TaiKhoan;
+use GrahamCampbell\ResultType\Result;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+//use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
-class NhanVienController extends Controller
+class UserTaiKhoanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +22,7 @@ class NhanVienController extends Controller
      */
     public function index()
     {
-        //
+        return view("User.TaiKhoan.Profile");
     }
 
     /**
@@ -42,10 +49,10 @@ class NhanVienController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\NhanVien  $nhanVien
+     * @param  \App\Models\TaiKhoan  $TaiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function show(NhanVien $nhanVien)
+    public function show(TaiKhoan $TaiKhoan)
     {
         //
     }
@@ -53,10 +60,10 @@ class NhanVienController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\NhanVien  $nhanVien
+     * @param  \App\Models\TaiKhoan  $TaiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function edit(NhanVien $nhanVien)
+    public function edit(TaiKhoan $TaiKhoan)
     {
         //
     }
@@ -65,10 +72,10 @@ class NhanVienController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\NhanVien  $nhanVien
+     * @param  \App\Models\TaiKhoan  $TaiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NhanVien $nhanVien)
+    public function update(Request $request, TaiKhoan $TaiKhoan)
     {
         //
     }
@@ -76,11 +83,11 @@ class NhanVienController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\NhanVien  $nhanVien
+     * @param  \App\Models\TaiKhoan  $TaiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NhanVien $nhanVien)
+    public function destroy(TaiKhoan $TaiKhoan)
     {
-        //
+
     }
 }

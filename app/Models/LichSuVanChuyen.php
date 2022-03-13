@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LichSuVanChuyen extends Model
 {
-    use HasFactory;
-    use SoftDeletes; //su dung chuc nang softdelete
+    use HasFactory, SoftDeletes; //su dung chuc nang softdelete
 
     protected $table = 'lich_su_van_chuyens';
     protected $fillable = [

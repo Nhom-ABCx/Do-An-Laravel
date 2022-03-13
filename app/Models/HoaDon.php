@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HoaDon extends Model
 {
-    use HasFactory;
-    use SoftDeletes; //su dung chuc nang softdelete
+    use HasFactory, SoftDeletes; //su dung chuc nang softdelete
 
     protected $table = 'hoa_dons';
     protected $fillable = [
         'DiaChiId',
-        "PhuongThucThanhToan",
+        "PhuongThucThanhToanId",
+        "VoucherId",
         "TongSoLuong",
         'TongTien',
         'TrangThai',
@@ -23,12 +23,20 @@ class HoaDon extends Model
     {
         return $this->belongsTo(DiaChi::class, 'DiaChiId')->withTrashed();
     }
+    public function PhuongThucThanhToan()
+    {
+        return $this->belongsTo(PhuongThucThanhToan::class, 'PhuongThucThanhToanId')->withTrashed();
+    }
+    public function Voucher()
+    {
+        return $this->belongsTo(Voucher::class, 'VoucherId')->withTrashed();
+    }
     public function CT_HoaDon()
     {
         return $this->hasMany(CT_HoaDon::class, 'HoaDonId');
     }
     public function LichSuVanChuyen()
     {
-        return $this->hasMany(LichSuVanChuyen::class, 'HoaDonId')->orderBy("created_at");
+        return $this->hasMany(LichSuVanChuyen::class, 'HoaDonId');
     }
 }

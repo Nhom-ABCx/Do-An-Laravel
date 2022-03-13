@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\NhanVien;
+use App\Models\TaiKhoan;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -55,7 +55,7 @@ class AuthController extends Controller
             'XacNhan_MatKhau' => ['required', 'same:MatKhau'],
         ]);
 
-        $user = NhanVien::create([
+        $user = TaiKhoan::create([
             'Username'       => strip_tags($request->input('Username')),
             'Email'       => strip_tags($request->input('Email')),
             'Phone'       => strip_tags($request->input('Phone')),
@@ -90,7 +90,7 @@ class AuthController extends Controller
         if ($validate->fails())
             return response()->json($validate->errors(), 400);
 
-        $select = NhanVien::where('Username', $request->input("Username"))->where('MatKhau', $request->input("MatKhau"))->first();
+        $select = TaiKhoan::where('Username', $request->input("Username"))->where('MatKhau', $request->input("MatKhau"))->first();
         if (!empty($select)) { //neu' ko rong~
             Auth::login($select);
             //$request->session()->regenerate();
@@ -151,7 +151,7 @@ class AuthController extends Controller
         //lay tu doan dau` cho den' truoc' vi tri @
         $username = substr($user->email, 0, strpos($user->email, '@'));
         //do google nickname no' rong~ nen de? tam nhu v
-        $user = NhanVien::firstOrCreate([
+        $user = TaiKhoan::firstOrCreate([
             'Username' => $user->nickname ?? $username,
             'Email' => $user->email
         ], [

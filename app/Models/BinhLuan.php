@@ -11,17 +11,18 @@ class BinhLuan extends Model
     use HasFactory;
     use SoftDeletes; //su dung chuc nang softdelete
     protected $table = "binh_luans";
-    protected $fillable=[
-        'Id',
+    protected $fillable = [
+        'TaiKhoanId',
+        'CTSanPhamId',
         'NoiDung',
-        'KhachHangId',
-        'SanPhamId',
+        'Parent_Id',
     ];
-    public function KhachHang(){
-         return $this->belongsTo(KhachHang::class, 'KhachHangId');
-    }
-    public function SanPham()
+    public function TaiKhoan()
     {
-        return $this->belongsTo(SanPham::class, 'SanPhamId');
+        return $this->belongsTo(TaiKhoan::class, 'TaiKhoanId');
+    }
+    public function CT_SanPham()
+    {
+        return $this->belongsTo(CT_SanPham::class, 'CTSanPhamId');
     }
 }

@@ -13,13 +13,13 @@ use App\Http\Controllers\Admin\CTChuongTrinhKMController;
 use App\Http\Controllers\Admin\HangSanXuatController;
 use App\Http\Controllers\Admin\DonViVanChuyenController;
 use App\Http\Controllers\Admin\NguoiVanChuyenController;
-use App\Http\Controllers\Admin\KhachHangController;
+use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\Admin\LoaiSanPhamController;
 use App\Http\Controllers\Admin\MessageController;
 //
 use App\Http\Controllers\User\UserHomeController;
 use App\Http\Controllers\User\UserGioHangController;
-use App\Http\Controllers\User\UserKhachHangController;
+use App\Http\Controllers\User\UserTaiKhoanController;
 
 //composer dump-autoload
 //composer update
@@ -36,8 +36,8 @@ use App\Http\Controllers\User\UserKhachHangController;
 */
 
 //Route::get('sendEmail', [SendEmailController::class, 'send'])->name('send');
-Route::get('KhachHang/{token}/showResetPass', [KhachHangController::class, 'showResetPassword_KhachHang'])->name('KhachHang.showReset');
-Route::put('KhachHang/{khachHang}/actionResetPass', [KhachHangController::class, 'actionResetPassword_KhachHang'])->name('KhachHang.actionReset');
+Route::get('TaiKhoan/{token}/showResetPass', [TaiKhoanController::class, 'showResetPassword_TaiKhoan'])->name('TaiKhoan.showReset');
+Route::put('TaiKhoan/{taiKhoan}/actionResetPass', [TaiKhoanController::class, 'actionResetPassword_TaiKhoan'])->name('TaiKhoan.actionReset');
 Route::get('ResetPassword-Susscess', [HomeController::class, 'Susscess'])->name('Home.Susscess');
 Route::get('Error', [HomeController::class, 'Error'])->name('Home.Error');
 Route::get('Test', [HomeController::class, 'Test'])->name('Home.Test');
@@ -50,9 +50,9 @@ Route::name('User.')->group(function () {
             'GioHang' => 'gioHang'
         ]
     ]);
-    Route::resource('KhachHang', UserKhachHangController::class, [
+    Route::resource('TaiKhoan', UserTaiKhoanController::class, [
         'parameters' => [
-            'KhachHang' => 'khachHang'
+            'TaiKhoan' => 'taiKhoan'
         ]
     ]);
 });
@@ -157,13 +157,13 @@ Route::group([
         return view("WidgetThongBao");
     });
     // khach hang
-    Route::resource('KhachHang', KhachHangController::class, [
+    Route::resource('TaiKhoan', TaiKhoanController::class, [
         'parameters' => [
-            'KhachHang' => 'khachHang'
+            'TaiKhoan' => 'taiKhoan'
         ]
     ]);
-    Route::get("KhachHangg/dsden", [KhachHangController::class, "KhachHang_DS_Den"])->name("KhachHang.dsDen");
-    Route::post("KhachHang/KhoiPhuc/{id}", [KhachHangController::class, "KhoiPhucKhachHang"])->name("KhachHang.KhoiPhuc");
+    Route::get("TaiKhoang/dsden", [TaiKhoanController::class, "TaiKhoan_DS_Den"])->name("TaiKhoan.dsDen");
+    Route::post("TaiKhoan/KhoiPhuc/{id}", [TaiKhoanController::class, "KhoiPhucTaiKhoan"])->name("TaiKhoan.KhoiPhuc");
 
     //Route số sao sản phẩm
     Route::get("SanPham/Sao", [SanPhamController::class, "SoSao"])->name('SanPham.SoSao');

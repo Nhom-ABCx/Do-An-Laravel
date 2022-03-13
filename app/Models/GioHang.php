@@ -9,19 +9,17 @@ class GioHang extends Model
 {
     use HasFactory;
     protected $table = 'gio_hangs';
-    //protected $primaryKey = null;
-    //public $incrementing = false;
     protected $fillable = [
-        'KhachHangId',
-        'SanPhamId',
+        'TaiKhoanId',
+        'CTSanPhamId',
         'SoLuong',
     ];
-    public function KhachHang()
+    public function TaiKhoan()
     {
-        return $this->belongsTo(KhachHang::class, 'KhachHangId');
+        return $this->belongsTo(TaiKhoan::class, 'TaiKhoanId');
     }
-    public function SanPham()
+    public function CT_SanPham()
     {
-        return $this->belongsTo(SanPham::class, 'SanPhamId');
+        return $this->belongsTo(CT_SanPham::class, 'CTSanPhamId');
     }
 }
