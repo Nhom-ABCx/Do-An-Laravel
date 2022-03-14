@@ -19,9 +19,9 @@ class CT_SanPham extends Model
         'GiaBan',
         'ThuocTinhValue',
     ];
-    public function lstThuocTinhValue()
+    public function decodeThuocTinhValue()
     {
-        return json_decode($this->ThuocTinhValue);
+        return collect(json_decode($this->ThuocTinhValue));
     }
     public function SanPham()
     {

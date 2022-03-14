@@ -41,22 +41,24 @@ class UserHomeController extends Controller
 
         //vi du
         $sanPham = SanPham::all()->first();
-        foreach ($sanPham->lstThuocTinh() as $key => $value) {
+        foreach ($sanPham->decodeThuocTinh() as $key => $value) {
             echo $key . " - " . $value . "</br>";
         }
 
 
         echo "</br> Tổ hợp sản phẩm </br></br>";
 
-        $toHop = $sanPham->lstThuocTinhToHop();
-
+        $toHop = $sanPham->decodeThuocTinhToHop();
 
         foreach ($sanPham->CT_SanPham as $item) {
-            for ($i = 0; $i < count($toHop); $i++) {
-                echo " - " . $item->lstThuocTinhValue()[$i];
-            }
+            $sanPham->decodeThuocTinhToHop()->each(function ($value, $key) use ($item) {
+                echo " - " . $item->decodeThuocTinhValue()[$key];
+            });
             echo "</br></br>";
-            //echo (json_decode($sanPham->ThuocTinhToHop, true);
         }
+        dump($sanPham->lstThuocTinh());
+
+        $color = collect(["grey", "success", "warning", "danger", "info", "purple", "inverse", "pink", "yellow"]);
+        echo $color->random();
     }
 }

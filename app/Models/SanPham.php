@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes; //them vao de khai bao' thu vien soft delete
+use Illuminate\Support\Arr;
 
 class SanPham extends Model
 {
@@ -22,11 +23,23 @@ class SanPham extends Model
     ];
     public function lstThuocTinh()
     {
-        return json_decode($this->ThuocTinh, true);
+        $lstThuocTinh = collect([]);
+        $this->decodeThuocTinhToHop()->each(function ($item, $key) use ($lstThuocTinh) {
+            $array = collect([]);
+            foreach ($this->CT_SanPham as $ct) {
+                $array[] = $ct->decodeThuocTinhValue()[$key];
+            }
+            $lstThuocTinh = Arr::add($lstThuocTinh, $key, $array->unique()->values()->all());
+        });
+        return $lstThuocTinh;
     }
-    public function lstThuocTinhToHop()
+    public function decodeThuocTinh()
     {
-        return json_decode($this->ThuocTinhToHop, true);
+        return collect(json_decode($this->ThuocTinh, true));
+    }
+    public function decodeThuocTinhToHop()
+    {
+        return collect(json_decode($this->ThuocTinhToHop, true));
     }
     public function tongSoLuongTon()
     {

@@ -207,7 +207,7 @@
                                         <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Thuộc tính </label>
 
                                         <div id="accordion" class="accordion-style1 panel-group col-sm-10">
-                                            <?php $__currentLoopData = $sanPham->lstThuocTinhToHop(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $thuocTinh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php $__currentLoopData = $sanPham->decodeThuocTinhToHop(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $thuocTinh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
@@ -216,9 +216,14 @@
                                                                 &nbsp; <i class=" icon-asterisk smaller-75 green"></i> <?php echo e($thuocTinh); ?>
 
                                                                 <label style="width: 20px"></label>
-                                                                <span class="badge">
-                                                                    1111
-                                                                </span>
+
+                                                                <?php $__currentLoopData = $sanPham->lstThuocTinh()[$loop->index]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                    <span
+                                                                        class="badge badge-<?php echo e(collect(['grey', 'success', 'warning', 'danger', 'info', 'purple', 'inverse', 'pink', 'yellow'])->random()); ?>">
+                                                                        <?php echo e($item); ?>
+
+                                                                    </span>
+                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                             </a>
                                                         </h4>
                                                     </div>

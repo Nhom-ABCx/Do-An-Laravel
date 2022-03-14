@@ -208,7 +208,7 @@
                                         <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Thuộc tính </label>
 
                                         <div id="accordion" class="accordion-style1 panel-group col-sm-10">
-                                            @foreach ($sanPham->lstThuocTinhToHop() as $thuocTinh)
+                                            @foreach ($sanPham->decodeThuocTinhToHop() as $thuocTinh)
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
@@ -216,9 +216,13 @@
                                                                 <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down" data-icon-show="icon-angle-right"></i>
                                                                 &nbsp; <i class=" icon-asterisk smaller-75 green"></i> {{ $thuocTinh }}
                                                                 <label style="width: 20px"></label>
-                                                                <span class="badge">
-                                                                    1111
-                                                                </span>
+
+                                                                @foreach ($sanPham->lstThuocTinh()[$loop->index] as $item)
+                                                                    <span
+                                                                        class="badge badge-{{ collect(['grey', 'success', 'warning', 'danger', 'info', 'purple', 'inverse', 'pink', 'yellow'])->random() }}">
+                                                                        {{ $item }}
+                                                                    </span>
+                                                                @endforeach
                                                             </a>
                                                         </h4>
                                                     </div>
