@@ -51,6 +51,7 @@
                     <form class="form-horizontal" role="form" action="<?php echo e(route('SanPham.update', $sanPham)); ?>" method="post" enctype="multipart/form-data">
                         <?php echo csrf_field(); ?>
                         <?php echo method_field('PUT'); ?>
+                        <div class="space-10"></div>
                         <div class="widget-box">
                             <div class="widget-header">
                                 <h3 class="header smaller lighter blue">Sản phẩm</h3>
@@ -140,6 +141,176 @@
                         <div class="space-10"></div>
                         <div class="widget-box">
                             <div class="widget-header">
+                                <h3 class="header smaller lighter blue">Thông tin chung</h3>
+
+                                <div class="widget-toolbar">
+                                    <a href="#" data-action="collapse">
+                                        <i class="icon-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Hãng sản xuất
+                                        </label>
+
+                                        <div class="col-sm-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="icon-sort-by-attributes"></i>
+                                                </span>
+
+                                                <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="HangSanXuatId">
+                                                    <option value="">&nbsp;</option>
+                                                    <?php $__currentLoopData = $lstHangSanXuat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($item->id); ?>" <?php if($item->id == $sanPham->HangSanXuatId): ?> selected <?php endif; ?>>
+                                                            <?php echo e($item->TenHangSanXuat); ?>
+
+                                                        </option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Loại sản phẩm
+                                        </label>
+
+                                        <div class="col-sm-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="icon-sort-by-attributes"></i>
+                                                </span>
+
+                                                <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="LoaiSanPhamId">
+                                                    <option value="">&nbsp;</option>
+                                                    <?php $__currentLoopData = $lstLoaiSanPham; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($item->id); ?>" <?php if($item->id == $sanPham->LoaiSanPhamId): ?> selected <?php endif; ?>>
+                                                            <?php echo e($item->TenLoai); ?>
+
+                                                        </option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Thuộc tính </label>
+
+                                        <div id="accordion" class="accordion-style1 panel-group col-sm-10">
+                                            <?php $__currentLoopData = $sanPham->lstThuocTinhToHop(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $thuocTinh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo e($loop->index); ?>">
+                                                                <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down" data-icon-show="icon-angle-right"></i>
+                                                                &nbsp; <i class=" icon-asterisk smaller-75 green"></i> <?php echo e($thuocTinh); ?>
+
+                                                                <label style="width: 20px"></label>
+                                                                <span class="badge">
+                                                                    1111
+                                                                </span>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+
+                                                    <div class="panel-collapse collapse" id="collapse<?php echo e($loop->index); ?>">
+                                                        <div class="panel-body">
+                                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+                                                            skateboard
+                                                            dolor
+                                                            brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                                                            assumenda
+                                                            shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Số lượng tồn </label>
+
+                                        <div class="col-sm-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="icon-foursquare"></i>
+                                                </span>
+
+                                                <input type="text" class="form-control center" readonly id="form-input-readonly" value="<?php echo e($sanPham->tongSoLuongTon()); ?>" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Lượt mua </label>
+
+                                        <div class="col-sm-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="icon-bar-chart"></i>
+                                                </span>
+
+                                                <input class="form-control center" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->LuotMua); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Giá Nhập </label>
+
+                                        <div class="col-sm-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="icon-credit-card"></i>
+                                                </span>
+
+                                                
+                                                <input type="text" class="input-mini" id="spinner1" value="<?php echo e($sanPham->GiaNhap); ?>" name="GiaNhap" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Giá bán </label>
+
+                                        <div class="col-sm-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="icon-money"></i>
+                                                </span>
+
+                                                
+                                                <input type="text" class="input-mini" id="spinner2" value="<?php echo e($sanPham->GiaBan); ?>" name="GiaBan" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-10"></div>
+                        <div class="widget-box">
+                            <div class="widget-header">
                                 <h3 class="header smaller lighter blue">Sản phẩm</h3>
 
                                 <div class="widget-toolbar">
@@ -155,166 +326,7 @@
                             </div>
                         </div>
 
-                        <div class="space-4"></div>
 
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Số lượng tồn </label>
-
-                            <div class="col-sm-3">
-                                
-                                <input type="text" class="input-mini" id="spinner3" value="<?php echo e($sanPham->SoLuongTon); ?>" name="SoLuongTon" />
-                            </div>
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Giá Nhập </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-credit-card"></i>
-                                    </span>
-
-                                    
-                                    <input type="text" class="input-mini" id="spinner1" value="<?php echo e($sanPham->GiaNhap); ?>" name="GiaNhap" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Giá bán </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-money"></i>
-                                    </span>
-
-                                    
-                                    <input type="text" class="input-mini" id="spinner2" value="<?php echo e($sanPham->GiaBan); ?>" name="GiaBan" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="space-4"></div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Lượt mua </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-bar-chart"></i>
-                                    </span>
-
-                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->LuotMua); ?>">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Hãng sản xuất
-                            </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-sort-by-attributes"></i>
-                                    </span>
-
-                                    <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="HangSanXuatId">
-                                        <option value="">&nbsp;</option>
-                                        <?php $__currentLoopData = $lstHangSanXuat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($item->id); ?>" <?php if($item->id == $sanPham->HangSanXuatId): ?> selected <?php endif; ?>>
-                                                <?php echo e($item->TenHangSanXuat); ?>
-
-                                            </option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Loại sản phẩm
-                            </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-sort-by-attributes"></i>
-                                    </span>
-
-                                    <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="LoaiSanPhamId">
-                                        <option value="">&nbsp;</option>
-                                        <?php $__currentLoopData = $lstLoaiSanPham; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($item->id); ?>" <?php if($item->id == $sanPham->LoaiSanPhamId): ?> selected <?php endif; ?>>
-                                                <?php echo e($item->TenLoai); ?>
-
-                                            </option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Ngày tạo </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-calendar"></i>
-                                    </span>
-
-                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->created_at); ?>">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Ngày cập nhật
-                            </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-calendar"></i>
-                                    </span>
-
-                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->updated_at); ?>">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="space-4"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Ngày xóa </label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="icon-calendar"></i>
-                                    </span>
-
-                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->deleted_at); ?>">
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="space-4"></div>
 

@@ -50,6 +50,7 @@ class UserHomeController extends Controller
 
         $toHop = $sanPham->lstThuocTinhToHop();
 
+
         foreach ($sanPham->CT_SanPham as $item) {
             for ($i = 0; $i < count($toHop); $i++) {
                 echo " - " . $item->lstThuocTinhValue()[$i];
