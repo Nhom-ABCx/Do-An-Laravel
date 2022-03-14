@@ -40,11 +40,6 @@ return [
             'driver' => 'session',
             'provider' => 'tai_khoans',
         ],
-
-        'api' => [
-            'driver' => 'passport',
-            'provider' => 'users',
-        ],
     ],
 
     /*

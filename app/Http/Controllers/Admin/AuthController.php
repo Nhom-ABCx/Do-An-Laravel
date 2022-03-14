@@ -56,10 +56,11 @@ class AuthController extends Controller
         ]);
 
         $user = TaiKhoan::create([
-            'Username'       => strip_tags($request->input('Username')),
-            'Email'       => strip_tags($request->input('Email')),
-            'Phone'       => strip_tags($request->input('Phone')),
-            'MatKhau'         => Hash::make($request->input('password')),
+            'Username'       => $request->input('Username'),
+            'Email'       => $request->input('Email'),
+            'Phone'       => $request->input('Phone'),
+            //'MatKhau'         => Hash::make($request->input('password')),
+            'MatKhau'         => $request->input('password'),
             'HoTen' => '', //cap nhat sau
             'NgaySinh' => date('Y-m-d H:i:s'),
             'GioiTinh' => 0,
@@ -90,9 +91,17 @@ class AuthController extends Controller
         if ($validate->fails())
             return response()->json($validate->errors(), 400);
 
-        $select = TaiKhoan::where('Username', $request->input("Username"))->where('MatKhau', $request->input("MatKhau"))->first();
-        if (!empty($select)) { //neu' ko rong~
-            Auth::login($select);
+
+
+        $taiKhoan = TaiKhoan::where('MatKhau', $request['MatKhau'])
+            ->Where(function ($query) use ($request) {
+                $query->orwhere('Email', $request['Email'])
+                    ->orwhere('Username', $request['Username'])
+                    ->orwhere('Phone', $request['Phone']);
+            })
+            ->first();
+        if (!empty($taiKhoan)) { //neu' ko rong~
+            Auth::login($taiKhoan);
             //$request->session()->regenerate();
             //return redirect()->intended('/');
             return route('Home.index');
@@ -122,13 +131,6 @@ class AuthController extends Controller
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function logout(Request $request)
     {
         Auth::logout();

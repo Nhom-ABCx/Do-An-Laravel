@@ -1,16 +1,13 @@
-{{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
-@extends('Admin.layouts.Layout')
+<?php $__env->startSection('title', 'Edit-Sản Phẩm'); ?>
 
-@section('title', 'Edit-Sản Phẩm')
-
-@section('headThisPage')
+<?php $__env->startSection('headThisPage'); ?>
     <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
     <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('body')
+<?php $__env->startSection('body'); ?>
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
@@ -22,15 +19,15 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home home-icon"></i>
-                    <a href="{{ url('/') }}">Home</a>
+                    <a href="<?php echo e(url('/')); ?>">Home</a>
                 </li>
 
                 <li>
-                    <a href="{{ route('SanPham.index') }}">Quản lý sản phẩm</a>
+                    <a href="<?php echo e(route('SanPham.index')); ?>">Quản lý sản phẩm</a>
                 </li>
 
                 <li>
-                    <a href="{{ route('SanPham.show', ['sanPham' => $sanPham]) }}">{{ $sanPham->id }}</a>
+                    <a href="<?php echo e(route('SanPham.show', ['sanPham' => $sanPham])); ?>"><?php echo e($sanPham->id); ?></a>
                 </li>
 
                 <li class="active">Chỉnh sửa</li>
@@ -50,10 +47,10 @@
             <div class="row">
                 <div class="col-xs-12">
                     <!-- PAGE CONTENT BEGINS -->
-                    {{-- web để search Icon trong template https://fontawesome.com/v3.2/icons/ --}}
-                    <form class="form-horizontal" role="form" action="{{ route('SanPham.update', $sanPham) }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
+                    
+                    <form class="form-horizontal" role="form" action="<?php echo e(route('SanPham.update', $sanPham)); ?>" method="post" enctype="multipart/form-data">
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('PUT'); ?>
                         <div class="widget-box">
                             <div class="widget-header">
                                 <h3 class="header smaller lighter blue">Sản phẩm</h3>
@@ -74,7 +71,7 @@
                                                 <span class="input-group-addon">
                                                     <i class="icon-coffee"></i>
                                                 </span>
-                                                <textarea id="form-field-11" class="autosize-transition form-control" placeholder="Nhập tên sản phẩm" name="TenSanPham">{{ $sanPham->TenSanPham }}</textarea>
+                                                <textarea id="form-field-11" class="autosize-transition form-control" placeholder="Nhập tên sản phẩm" name="TenSanPham"><?php echo e($sanPham->TenSanPham); ?></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -129,9 +126,9 @@
                             <div class="widget-body">
                                 <div class="widget-main">
                                     <div class="form-group">
-                                        @foreach ($sanPham->HinhAnh as $item)
-                                            <img style="width:150px;max-height:150px;object-fit:contain;float: left;" src="{{ $item->fixImage() }}" alt="">
-                                        @endforeach
+                                        <?php $__currentLoopData = $sanPham->HinhAnh; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <img style="width:150px;max-height:150px;object-fit:contain;float: left;" src="<?php echo e($item->fixImage()); ?>" alt="">
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                         <div class="col-sm-2">
                                             <input multiple type="file" accept="image/*" id="id-input-file-3" name="HinhAnh">
@@ -164,8 +161,8 @@
                             <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Số lượng tồn </label>
 
                             <div class="col-sm-3">
-                                {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner3" --}}
-                                <input type="text" class="input-mini" id="spinner3" value="{{ $sanPham->SoLuongTon }}" name="SoLuongTon" />
+                                
+                                <input type="text" class="input-mini" id="spinner3" value="<?php echo e($sanPham->SoLuongTon); ?>" name="SoLuongTon" />
                             </div>
                         </div>
 
@@ -180,8 +177,8 @@
                                         <i class="icon-credit-card"></i>
                                     </span>
 
-                                    {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner1" --}}
-                                    <input type="text" class="input-mini" id="spinner1" value="{{ $sanPham->GiaNhap }}" name="GiaNhap" />
+                                    
+                                    <input type="text" class="input-mini" id="spinner1" value="<?php echo e($sanPham->GiaNhap); ?>" name="GiaNhap" />
                                 </div>
                             </div>
                         </div>
@@ -197,8 +194,8 @@
                                         <i class="icon-money"></i>
                                     </span>
 
-                                    {{-- số hiển thị của cái này thì chỉnh ở dưới javascript "spinner2" --}}
-                                    <input type="text" class="input-mini" id="spinner2" value="{{ $sanPham->GiaBan }}" name="GiaBan" />
+                                    
+                                    <input type="text" class="input-mini" id="spinner2" value="<?php echo e($sanPham->GiaBan); ?>" name="GiaBan" />
                                 </div>
                             </div>
                         </div>
@@ -215,7 +212,7 @@
                                         <i class="icon-bar-chart"></i>
                                     </span>
 
-                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="{{ $sanPham->LuotMua }}">
+                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->LuotMua); ?>">
                                 </div>
                             </div>
                         </div>
@@ -234,11 +231,12 @@
 
                                     <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="HangSanXuatId">
                                         <option value="">&nbsp;</option>
-                                        @foreach ($lstHangSanXuat as $item)
-                                            <option value="{{ $item->id }}" @if ($item->id == $sanPham->HangSanXuatId) selected @endif>
-                                                {{ $item->TenHangSanXuat }}
+                                        <?php $__currentLoopData = $lstHangSanXuat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($item->id); ?>" <?php if($item->id == $sanPham->HangSanXuatId): ?> selected <?php endif; ?>>
+                                                <?php echo e($item->TenHangSanXuat); ?>
+
                                             </option>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                 </div>
                             </div>
@@ -258,11 +256,12 @@
 
                                     <select class="width-90 chosen-select" id="form-field-select-3" data-placeholder="" name="LoaiSanPhamId">
                                         <option value="">&nbsp;</option>
-                                        @foreach ($lstLoaiSanPham as $item)
-                                            <option value="{{ $item->id }}" @if ($item->id == $sanPham->LoaiSanPhamId) selected @endif>
-                                                {{ $item->TenLoai }}
+                                        <?php $__currentLoopData = $lstLoaiSanPham; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($item->id); ?>" <?php if($item->id == $sanPham->LoaiSanPhamId): ?> selected <?php endif; ?>>
+                                                <?php echo e($item->TenLoai); ?>
+
                                             </option>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                 </div>
                             </div>
@@ -279,7 +278,7 @@
                                         <i class="icon-calendar"></i>
                                     </span>
 
-                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="{{ $sanPham->created_at }}">
+                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->created_at); ?>">
                                 </div>
                             </div>
                         </div>
@@ -296,7 +295,7 @@
                                         <i class="icon-calendar"></i>
                                     </span>
 
-                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="{{ $sanPham->updated_at }}">
+                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->updated_at); ?>">
                                 </div>
                             </div>
                         </div>
@@ -312,7 +311,7 @@
                                         <i class="icon-calendar"></i>
                                     </span>
 
-                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="{{ $sanPham->deleted_at }}">
+                                    <input class="form-control" readonly type="text" id="form-input-readonly" value="<?php echo e($sanPham->deleted_at); ?>">
                                 </div>
                             </div>
                         </div>
@@ -339,9 +338,9 @@
             </div><!-- /.row -->
         </div><!-- /.page-content -->
     </div><!-- /.main-content -->
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scriptThisPage')
+<?php $__env->startSection('scriptThisPage'); ?>
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
     <script src="/storage/assets/js/chosen.jquery.min.js"></script>
@@ -357,7 +356,7 @@
     <script src="/storage/assets/js/jquery.maskedinput.min.js"></script>
     <script src="/storage/assets/js/bootstrap-tag.min.js"></script>
 
-    @include('Admin.SanPham.script.SanPham-edit-script')
+    <?php echo $__env->make('Admin.SanPham.script.SanPham-edit-script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- inline scripts related to this page -->
 
     <script type="text/javascript">
@@ -493,7 +492,7 @@
                 thumbnail: 'large'
             })
 
-            _valueSL = {{ $sanPham->tongSoLuongTon() }};
+            _valueSL = <?php echo e($sanPham->tongSoLuongTon()); ?>;
             _valueGN = 10000;
             _valueGB = 10000;
             $('#spinner0').ace_spinner({
@@ -611,4 +610,6 @@
 
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('Admin.layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\DDDD\WEB\Laravel\Do-An-Laravel\resources\views/Admin/SanPham/SanPham-edit.blade.php ENDPATH**/ ?>

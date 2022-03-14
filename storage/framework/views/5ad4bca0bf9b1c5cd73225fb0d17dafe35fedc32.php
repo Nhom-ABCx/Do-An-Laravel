@@ -1,16 +1,13 @@
-{{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
-@extends('Admin.layouts.Layout')
+<?php $__env->startSection('title', 'QL Sản phẩm'); ?>
 
-@section('title', 'QL Sản phẩm')
-
-@section('headThisPage')
+<?php $__env->startSection('headThisPage'); ?>
     <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
     <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('body')
+<?php $__env->startSection('body'); ?>
 
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
@@ -23,26 +20,19 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home home-icon"></i>
-                    <a href="{{ url('/') }}">Home</a>
+                    <a href="<?php echo e(url('/')); ?>">Home</a>
                 </li>
-                @if (request()->is('Admin/SanPhamm/DaXoa'))
+                <?php if(request()->is('Admin/SanPhamm/DaXoa')): ?>
                     <li>
-                        <a href="{{ route('SanPham.index') }}">Quản lý sản phẩm</a>
+                        <a href="<?php echo e(route('SanPham.index')); ?>">Quản lý sản phẩm</a>
                     </li>
                     <li class="active">Đã xóa</li>
-                @else
+                <?php else: ?>
                     <li class="active">Quản lý sản phẩm</li>
-                @endif
+                <?php endif; ?>
             </ul><!-- .breadcrumb -->
 
-            {{-- <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-                        <i class="icon-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- #nav-search --> --}}
+            
         </div>
 
         <div class="page-content">
@@ -54,39 +44,41 @@
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                <form class="form-inline" action="{{ request()->is('Admin/SanPhamm/DaXoa') ? route('SanPham.DaXoa') : route('SanPham.index') }}" method="get">
+                                <form class="form-inline" action="<?php echo e(request()->is('Admin/SanPhamm/DaXoa') ? route('SanPham.DaXoa') : route('SanPham.index')); ?>" method="get">
                                     <a href="#" role="button" class="btn btn-success">
                                         <i class="icon-plus"></i>
                                         Thêm sản phẩm
                                     </a>
-                                    @if (request()->is('Admin/SanPhamm/DaXoa'))
-                                    @else
-                                        <a href="{{ route('SanPham.DaXoa') }}" class="btn btn-inverse">
+                                    <?php if(request()->is('Admin/SanPhamm/DaXoa')): ?>
+                                    <?php else: ?>
+                                        <a href="<?php echo e(route('SanPham.DaXoa')); ?>" class="btn btn-inverse">
                                             <i class="icon-trash"></i>
                                             Sản phẩm đã xóa
                                         </a>
-                                    @endif
+                                    <?php endif; ?>
 
 
-                                    <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="{{ $request['TenSanPham'] }}"
+                                    <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="<?php echo e($request['TenSanPham']); ?>"
                                         name="TenSanPham" />
                                     <label for=""> Hãng sãn xuất: </label>
                                     <select class="width-10 chosen-select" id="form-field-select-4" name="HangSanXuatId">
                                         <option value="">All</option>
-                                        @foreach ($lstHangSanXuat as $item)
-                                            <option value="{{ $item->id }}" @if ($item->id == $request['HangSanXuatId']) selected @endif>
-                                                {{ $item->TenHangSanXuat }}
+                                        <?php $__currentLoopData = $lstHangSanXuat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($item->id); ?>" <?php if($item->id == $request['HangSanXuatId']): ?> selected <?php endif; ?>>
+                                                <?php echo e($item->TenHangSanXuat); ?>
+
                                             </option>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                     <label for=""> Loại sản phẩm: </label>
                                     <select class="width-10 chosen-select" id="form-field-select-4" name="LoaiSanPhamId">
                                         <option value="">All</option>
-                                        @foreach ($lstLoaiSanPham as $item)
-                                            <option value="{{ $item->id }}" @if ($item->id == $request['LoaiSanPhamId']) selected @endif>
-                                                {{ $item->TenLoai }}
+                                        <?php $__currentLoopData = $lstLoaiSanPham; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($item->id); ?>" <?php if($item->id == $request['LoaiSanPhamId']): ?> selected <?php endif; ?>>
+                                                <?php echo e($item->TenLoai); ?>
+
                                             </option>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
 
                                     <button type="submit" class="btn btn-purple btn-sm">
@@ -127,37 +119,37 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($sanPham as $item)
+                                <?php $__currentLoopData = $sanPham; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td class="center">{{ $item->id }}</td>
+                                        <td class="center"><?php echo e($item->id); ?></td>
                                         <td>
-                                            <img src='{{ $item->HinhAnhh }}' alt="{{ $item->HinhAnhh }}" width='100' height='100'>
+                                            <img src='<?php echo e($item->HinhAnhh); ?>' alt="<?php echo e($item->HinhAnhh); ?>" width='100' height='100'>
                                         </td>
-                                        <td>{{ $item->TenSanPham }}</td>
+                                        <td><?php echo e($item->TenSanPham); ?></td>
                                         <td>
-                                            @foreach ($item->lstThuocTinhToHop() as $thuocTinh)
-                                                <p><i class=" icon-asterisk smaller-75 green"></i> {{ $thuocTinh }}</p>
-                                            @endforeach
+                                            <?php $__currentLoopData = $item->lstThuocTinhToHop(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $thuocTinh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <p><i class=" icon-asterisk smaller-75 green"></i> <?php echo e($thuocTinh); ?></p>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </td>
-                                        <td>{{ $item->tongSoLuongTon() }}</td>
-                                        <td>{{ $item->LuotMua }}</td>
-                                        <td>{{ $item->HangSanXuat->TenHangSanXuat }}</td>
-                                        <td>{{ $item->LoaiSanPham->TenLoai }}</td>
-                                        <td>{{ $item->created_at }}</td>
-                                        <td>{{ $item->updated_at }}</td>
-                                        @if (request()->is('Admin/SanPhamm/DaXoa'))
+                                        <td><?php echo e($item->tongSoLuongTon()); ?></td>
+                                        <td><?php echo e($item->LuotMua); ?></td>
+                                        <td><?php echo e($item->HangSanXuat->TenHangSanXuat); ?></td>
+                                        <td><?php echo e($item->LoaiSanPham->TenLoai); ?></td>
+                                        <td><?php echo e($item->created_at); ?></td>
+                                        <td><?php echo e($item->updated_at); ?></td>
+                                        <?php if(request()->is('Admin/SanPhamm/DaXoa')): ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <form action="{{ route('SanPham.KhoiPhuc', $item->id) }}" method="post">
-                                                        @csrf
-                                                        {{-- @method("PUT") --}}
+                                                    <form action="<?php echo e(route('SanPham.KhoiPhuc', $item->id)); ?>" method="post">
+                                                        <?php echo csrf_field(); ?>
+                                                        
                                                         <button type="submit" class="btn-link blue" data-rel="tooltip" title="Khôi phục" data-placement="bottom"><i
                                                                 class="icon-undo bigger-130"></i></button>
                                                     </form>
 
-                                                    <form id="form" action="{{ route('SanPham.XoaVinhVien', $item->id) }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
+                                                    <form id="form" action="<?php echo e(route('SanPham.XoaVinhVien', $item->id)); ?>" method="post">
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('DELETE'); ?>
                                                         <button type="button" class="btn-link red bootbox-options" data-rel="tooltip" title="Xóa vĩnh viễn" data-placement="bottom"><i
                                                                 class="icon-trash bigger-130"></i></button>
                                                     </form>
@@ -171,18 +163,18 @@
 
                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <form action="{{ route('SanPham.KhoiPhuc', $item->id) }}" method="post">
-                                                                    @csrf
-                                                                    {{-- @method("PUT") --}}
+                                                                <form action="<?php echo e(route('SanPham.KhoiPhuc', $item->id)); ?>" method="post">
+                                                                    <?php echo csrf_field(); ?>
+                                                                    
                                                                     <button type="submit" class="tooltip-error btn-link blue" data-rel="tooltip" title="Khôi phục"><i
                                                                             class="icon-undo bigger-120"></i></button>
                                                                 </form>
                                                             </li>
 
                                                             <li>
-                                                                <form id="form" action="{{ route('SanPham.XoaVinhVien', $item->id) }}" method="post">
-                                                                    @csrf
-                                                                    @method('DELETE')
+                                                                <form id="form" action="<?php echo e(route('SanPham.XoaVinhVien', $item->id)); ?>" method="post">
+                                                                    <?php echo csrf_field(); ?>
+                                                                    <?php echo method_field('DELETE'); ?>
                                                                     <button type="button" class="tooltip-error btn-link red bootbox-options" data-rel="tooltip" title="Xóa vĩnh viễn"><i
                                                                             class="icon-trash bigger-130"></i></button>
                                                                 </form>
@@ -191,28 +183,26 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        @else
+                                        <?php else: ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <a href="javascript:void(0)" onclick="showSanPham({{ $item->id }})" role="button" data-toggle="modal" class="tooltip-info" data-rel="tooltip"
+                                                    <a href="javascript:void(0)" onclick="showSanPham(<?php echo e($item->id); ?>)" role="button" data-toggle="modal" class="tooltip-info" data-rel="tooltip"
                                                         title="Xem chi tiết">
                                                         <span class="blue">
                                                             <i class="icon-zoom-in bigger-120"></i>
                                                         </span>
                                                     </a>
 
-                                                    <a class="green" href="{{ route('SanPham.edit', $item) }}" data-rel="tooltip" title="Chỉnh sửa" data-placement="top">
+                                                    <a class="green" href="<?php echo e(route('SanPham.edit', $item)); ?>" data-rel="tooltip" title="Chỉnh sửa" data-placement="top">
                                                         <i class="icon-pencil bigger-130"></i>
                                                     </a>
 
-                                                    <form action="{{ route('SanPham.destroy', $item) }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
+                                                    <form action="<?php echo e(route('SanPham.destroy', $item)); ?>" method="post">
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('DELETE'); ?>
                                                         <button type="submit" class="btn-link red" data-rel="tooltip" title="Xóa"><i class="icon-trash bigger-130"></i></button>
                                                     </form>
-                                                    {{-- <a class="red" href="{{ route('SanPham.destroy', $item) }}" data-method="delete">
-                                                    <i class="icon-trash bigger-130"></i>
-                                                </a> --}}
+                                                    
                                                 </div>
 
                                                 <div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -223,7 +213,7 @@
 
                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                             <li>
-                                                                <a href="javascript:void(0)" onclick="showSanPham({{ $item->id }})" role="button" data-toggle="modal" class="tooltip-info"
+                                                                <a href="javascript:void(0)" onclick="showSanPham(<?php echo e($item->id); ?>)" role="button" data-toggle="modal" class="tooltip-info"
                                                                     data-rel="tooltip" title="Xem chi tiết">
                                                                     <span class="blue">
                                                                         <i class="icon-zoom-in bigger-120"></i>
@@ -232,7 +222,7 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="{{ route('SanPham.edit', $item) }}" class="tooltip-success" data-rel="tooltip" title="Chỉnh sửa">
+                                                                <a href="<?php echo e(route('SanPham.edit', $item)); ?>" class="tooltip-success" data-rel="tooltip" title="Chỉnh sửa">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -240,9 +230,9 @@
                                                             </li>
 
                                                             <li>
-                                                                <form action="{{ route('SanPham.destroy', $item) }}" method="post">
-                                                                    @csrf
-                                                                    @method('DELETE')
+                                                                <form action="<?php echo e(route('SanPham.destroy', $item)); ?>" method="post">
+                                                                    <?php echo csrf_field(); ?>
+                                                                    <?php echo method_field('DELETE'); ?>
                                                                     <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Xóa"><i class="icon-trash bigger-120"></i></button>
                                                                 </form>
                                                             </li>
@@ -250,9 +240,9 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        @endif
+                                        <?php endif; ?>
                                     </tr>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                         </table>
                     </div>
@@ -263,9 +253,9 @@
             <div id="showModal"></div>
         </div><!-- /.main-content -->
 
-    @endsection
+    <?php $__env->stopSection(); ?>
 
-    @section('scriptThisPage')
+    <?php $__env->startSection('scriptThisPage'); ?>
         <script src="/storage/assets/js/chosen.jquery.min.js"></script>
         <script src="/storage/assets/js/fuelux/fuelux.spinner.min.js"></script>
         <script src="/storage/assets/js/date-time/bootstrap-datepicker.min.js"></script>
@@ -278,12 +268,12 @@
         <script src="/storage/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
         <script src="/storage/assets/js/jquery.maskedinput.min.js"></script>
         <script src="/storage/assets/js/bootstrap-tag.min.js"></script>
-        {{-- dialog --}}
+        
         <script src="/storage/assets/js/bootbox.min.js"></script>
-        {{-- dialog --}}
+        
 
         <!-- inline scripts related to this page -->
-        {{-- datatable script --}}
+        
         <script type="text/javascript">
             jQuery(function($) {
                 var oTable1 = $('#sample-table-2').dataTable({
@@ -342,9 +332,9 @@
                 else $('#form-field-select-4').removeClass('tag-input-style');
             });
         </script>
-        {{-- datatable script End --}}
+        
 
-        {{-- show arler dialog --}}
+        
         <script type="text/javascript">
             jQuery(function($) {
                 $(".bootbox-options").on(ace.click_event, function() {
@@ -367,7 +357,9 @@
                 });
             });
         </script>
-        {{-- show arler dialog end --}}
+        
 
-        @include('Admin.SanPham.script.SanPham-show-script')
-    @endsection
+        <?php echo $__env->make('Admin.SanPham.script.SanPham-show-script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('Admin.layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\DDDD\WEB\Laravel\Do-An-Laravel\resources\views/Admin/SanPham/SanPham-index.blade.php ENDPATH**/ ?>

@@ -28,6 +28,10 @@ class SanPham extends Model
     {
         return json_decode($this->ThuocTinhToHop, true);
     }
+    public function tongSoLuongTon()
+    {
+        return CT_SanPham::where('SanPhamId', $this->id)->sum('SoLuongTon');
+    }
     //relations
     public function HangSanXuat()
     {
@@ -36,6 +40,10 @@ class SanPham extends Model
     public function LoaiSanPham()
     {
         return $this->belongsTo(LoaiSanPham::class, 'LoaiSanPhamId')->withTrashed();
+    }
+    public function HinhAnh()
+    {
+        return $this->hasMany(HinhAnh::class, 'SanPhamId');
     }
     public function CT_SanPham()
     {

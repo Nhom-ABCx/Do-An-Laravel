@@ -149,6 +149,7 @@ class SanPhamController extends Controller
      */
     public function update(Request $request, SanPham $sanPham)
     {
+        dd($request->all());
         //Hình ảnh phải lưu trong public và phải có bước tạo link thì người dùng mới thấy dc
         //store() tự đặt hình bằng chuỗi random, nên tạo thư mục theo mã/tên sp để dễ quản lý
         if ($request->hasFile('HinhAnh')) {
@@ -219,13 +220,14 @@ class SanPhamController extends Controller
     {
         //chạy lệnh sau: php artisan storage:link     de tu tao 1 lien ket den' folder public
         // nếu trong đường dẫn "storage/app/public" + "assets/images/product-image/..." tồn tại hình ảnh
-
-        if (Storage::disk('public')->exists("assets/images/product-image/" . $sanPham->id . "/" . $sanPham->HinhAnh)) {
-            $sanPham->HinhAnh = Storage::url("assets/images/product-image/" . $sanPham->id . "/" . $sanPham->HinhAnh);
-        } elseif (Storage::disk('public')->exists("assets/images/product-image/" . $sanPham->HinhAnh))
-            $sanPham->HinhAnh = Storage::url("assets/images/product-image/" . $sanPham->HinhAnh);
-        else
-            $sanPham->HinhAnh = Storage::url("assets/images/404/Img_error.png");
+        foreach ($sanPham->HinhAnh as $item) {
+            if (Storage::disk('public')->exists("assets/images/product-image/" . $sanPham->id . "/" . $item->HinhAnh)) {
+                $sanPham->HinhAnhh = Storage::url("assets/images/product-image/" . $sanPham->id . "/" . $item->HinhAnh);
+                break;
+            } else {
+                $sanPham->HinhAnhh = Storage::url("assets/images/404/Img_error.png");
+            }
+        }
     }
     //lay so  sao cua san pham
     public function SoSao()

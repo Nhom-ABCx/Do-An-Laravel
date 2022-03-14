@@ -105,7 +105,7 @@ class CreateDatabase extends Migration
             $table->id();
             $table->foreignId('SanPhamId');
             $table->string('MaSanPham')->unique()->default(Str::random(10));
-            $table->integer('SoLuong');
+            $table->integer('SoLuongTon');
             $table->double('GiaNhap')->nullable();
             $table->double('GiaBan');
             $table->string('ThuocTinhValue'); //luu thanh` json ["XL", "Đỏ"]
@@ -115,11 +115,12 @@ class CreateDatabase extends Migration
         });
         Schema::create('hinh_anhs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('CTSanPhamId');
-            $table->string('HinhAnh')->nullable();
+            $table->foreignId('SanPhamId');
+            $table->string('HinhAnh');
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
-            $table->foreign('CTSanPhamId')->references('id')->on('ct_san_phams');
+            $table->foreign('SanPhamId')->references('id')->on('san_phams');
+            $table->unique(['SanPhamId', 'HinhAnh']);
         });
         Schema::create('binh_luans', function (Blueprint $table) {
             $table->Id();

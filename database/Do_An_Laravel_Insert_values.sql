@@ -151,7 +151,7 @@ insert into San_Phams(TenSanPham,LuotMua,HangSanXuatId,LoaiSanPhamId,ThuocTinh,T
 }','["Bộ nhớ trong","Màu sắc"]');
 
 
-insert into ct_san_phams(SanPhamId,SoLuong,GiaNhap,GiaBan,ThuocTinhValue) values
+insert into ct_san_phams(SanPhamId,SoLuongTon,GiaNhap,GiaBan,ThuocTinhValue) values
 (1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 32990000, 33990000, '["128 GB", "Vàng đồng"]'), /* 128, Vang`dong` */
 (1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 32990000, 33990000, '["128 GB", "Xám"]'), /* 128, xam' */
 (1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 32990000, 33990000, '["128 GB", "Bạc"]'), /* 128, bac' */
@@ -169,23 +169,11 @@ insert into ct_san_phams(SanPhamId,SoLuong,GiaNhap,GiaBan,ThuocTinhValue) values
 (1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 45690000, 46690000, '["1024 GB", "Bạc"]'), /* 1024, bac' */
 (1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 45690000, 46690000, '["1024 GB", "Xanh dương"]'); /* 1024, xanh duong' */
 
-insert into hinh_anhs(CTSanPhamId,HinhAnh) values
+insert into hinh_anhs(SanPhamId,HinhAnh) values
 (1,'vangdong.jpg'),
-(2,'xam.jpg'),
-(3,'bac.jpg'),
-(4,'xanhduong.jpg'),
-(5,'vangdong.jpg'),
-(6,'xam.jpg'),
-(7,'bac.jpg'),
-(8,'xanhduong.jpg'),
-(9,'vangdong.jpg'),
-(10,'xam.jpg'),
-(11,'bac.jpg'),
-(12,'xanhduong.jpg'),
-(13,'vangdong.jpg'),
-(14,'xam.jpg'),
-(15,'bac.jpg'),
-(16,'xanhduong.jpg');
+(1,'xam.jpg'),
+(1,'bac.jpg'),
+(1,'xanhduong.jpg');
 
 insert into Chuong_Trinh_Khuyen_Mais(TenChuongTrinh,MoTa,FromDate,ToDate,created_at) values(N'Khuyến mãi cực hot ngày 20/11',N' giảm giá đến 5000đ các loại phụ kiện','2021-11-20','2022-12-01','2021-10-19');
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 
 use App\Enums\TrangThaiHD;
@@ -143,6 +144,7 @@ class HomeController extends Controller
     }
     public function Test()
     {
+        return view('Admin.WidgetTest');
         // //mang? ban đầu
         // $arr = [
         //     "Status" => 200,

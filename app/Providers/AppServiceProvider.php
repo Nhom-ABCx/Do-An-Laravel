@@ -32,19 +32,19 @@ class AppServiceProvider extends ServiceProvider
     {
         //truyen du lieu sang layout
         view()->composer('Admin.layouts.Layout', function ($view) {
-            $dsCacCuocTroChuyen = Conversation::where("NhanVienId", Auth::user()->id)
-                ->orderBy("KhachHangId")->limit(5)->get();
+            // $dsCacCuocTroChuyen = Conversation::where("NhanVienId", Auth::user()->id)
+            //     ->orderBy("KhachHangId")->limit(5)->get();
 
-            foreach ($dsCacCuocTroChuyen as $item) {
-                $mess = Message::where("ConversationId", $item->id)->orderByDesc('created_at')->first();
+            // foreach ($dsCacCuocTroChuyen as $item) {
+            //     $mess = Message::where("ConversationId", $item->id)->orderByDesc('created_at')->first();
 
-                if (!empty($mess))
-                    Arr::add($item, "mess", $mess);
-                else
-                    Arr::add($item, 'mess', null);
-            }
+            //     if (!empty($mess))
+            //         Arr::add($item, "mess", $mess);
+            //     else
+            //         Arr::add($item, 'mess', null);
+            // }
 
-            $view->with("conversation", $dsCacCuocTroChuyen);
+            // $view->with("conversation", $dsCacCuocTroChuyen);
         });
     }
 }
