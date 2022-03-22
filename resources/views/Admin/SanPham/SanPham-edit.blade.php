@@ -195,7 +195,7 @@
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Thuộc tính </label>
+                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Thuộc tính</label>
 
                                         <div id="accordion" class="accordion-style1 panel-group col-sm-10">
                                             @foreach ($sanPham->decodeThuocTinhToHop() as $thuocTinh)
@@ -207,12 +207,14 @@
                                                                 &nbsp; <i class=" icon-asterisk smaller-75 green"></i> {{ $thuocTinh }}
                                                                 <label style="width: 20px"></label>
 
-                                                                @foreach ($sanPham->lstThuocTinh()[$loop->index] as $item)
-                                                                    <span
-                                                                        class="badge badge-{{ collect(['grey', 'success', 'warning', 'danger', 'info', 'purple', 'inverse', 'pink', 'yellow'])->random() }}">
-                                                                        {{ $item }}
-                                                                    </span>
-                                                                @endforeach
+                                                                <span id="lstThuocTinh">
+                                                                    @foreach ($sanPham->lstThuocTinh()[$loop->index] as $item)
+                                                                        <span
+                                                                            class="badge badge-{{ collect(['grey', 'success', 'warning', 'danger', 'info', 'purple', 'inverse', 'pink', 'yellow'])->random() }}">
+                                                                            {{ $item }}
+                                                                        </span>
+                                                                    @endforeach
+                                                                </span>
                                                             </a>
                                                         </h4>
                                                     </div>
@@ -225,7 +227,7 @@
 
                                                                 <div>
                                                                     <div class="input-group">
-                                                                        <input type="text" class="autosize-transition form-control" placeholder="Tên thuộc tính vd: Size/Color" name="ThuocTinh[]"
+                                                                        <input type="text" class="autosize-transition form-control" placeholder="vd: Size/Color" name="ThuocTinh[]"
                                                                             value="{{ $sanPham->decodeThuocTinhToHop()[$loop->index] }}" style="font-weight: bold;" />
 
 
@@ -244,12 +246,13 @@
                                                                 <div id="form-thuoctinh-tohop-{{ $loop->index }}">
                                                                     @foreach ($sanPham->lstThuocTinh()[$loop->index] as $item)
                                                                         <div class="input-group" style="margin-bottom: 5px">
-                                                                            <input type="text" class="autosize-transition form-control" placeholder="Thêm giá trị khác"
-                                                                                name="ThuocTinhToHop-{{ $loop->parent->index }}[]" value="{{ $item }}" style="font-weight: bold;" />
+                                                                            <input type="text" class="autosize-transition form-control" placeholder="vd: Red/Green/Blue"
+                                                                                name="ThuocTinhToHop[{{ $loop->parent->index }}][]" value="{{ $item }}" style="font-weight: bold;"
+                                                                                onchange="inputThuocTinhToHopChange({{ $loop->parent->index }})" />
 
                                                                             <a href="javascript:void(0)" id="xoa-thuoctinh-tohop-{{ $loop->parent->index }}-{{ $loop->index }}"
-                                                                                onclick="$('#xoa-thuoctinh-tohop-{{ $loop->parent->index }}-{{ $loop->index }}').parent().remove();"
-                                                                                class="input-group-addon red" style="background-color:transparent">
+                                                                                onclick="xoaTheInput({{ $loop->parent->index }},{{ $loop->index }})" class="input-group-addon red"
+                                                                                style="background-color:transparent">
                                                                                 <i class="icon-trash"></i>
                                                                             </a>
                                                                         </div>
@@ -265,15 +268,15 @@
                                                                     </a>
                                                                 </div>
                                                             </div>
-
-                                                            <button type="button" class="btn btn-sm btn-success" style="float: right">
-                                                                Lưu thay đổi
-                                                                <i class="icon-arrow-right icon-on-right bigger-110"></i>
-                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             @endforeach
+
+                                            <button onclick="themThuocTinhKhac(this)" type="button" class="btn btn-sm btn-success">
+                                                <i class="icon-plus icon-on-right bigger-110"></i>
+                                                Thêm thuộc tính khác
+                                            </button>
                                         </div>
                                     </div>
 
@@ -667,69 +670,95 @@
             })
             */
 
-
-        });
-
-        function themTheInput(index) {
-            var countDiv = $("#form-thuoctinh-tohop-" + index + " div.input-group").length;
-
-            $('#form-thuoctinh-tohop-' + index).append(`
-                    <div class="input-group" style="margin-bottom: 5px">
-                        <input type="text" class="autosize-transition form-control" placeholder="" name="ThuocTinhToHop-` + index + `[]"
-                             value="` + $('#txtThemThuocTinh-' + index).val() + `" style="font-weight: bold;" />
-
-                        <a href="javascript:void(0)" id="xoa-thuoctinh-tohop-` + index + `-` + countDiv + `"
-                            onclick="$('#xoa-thuoctinh-tohop-` + index + `-` + countDiv + `').parent().remove();" class="input-group-addon red" style="background-color:transparent">
-                            <i class="icon-trash"></i>
-                        </a>
-                    </div>`);
-
-            $('#txtThemThuocTinh-' + index).val('');
-        }
+            //ajax
 
 
+            $('#submitForm').on('submit', function(e) {
+                //ngan chan form gui di
+                e.preventDefault();
+                let form = this;
 
+                //truoc khi gui di thi` set value textarea, ko dat trong ham`beforeSend cua ajax dc, ko biet tai sao
+                let a = $(form).find('#editor1').html();
+                // console.log(a);
+                let b = $(form).find('textarea[name="MoTa"]').text(a);
 
-        //ajax
-        $('#submitForm').on('submit', function(e) {
-            //ngan chan form gui di
-            e.preventDefault();
-            let form = this;
-
-            //truoc khi gui di thi` set value textarea, ko dat trong ham`beforeSend cua ajax dc, ko biet tai sao
-            let a = $(form).find('#editor1').html();
-            // console.log(a);
-            let b = $(form).find('textarea[name="MoTa"]').text(a);
-
-            $.ajax({
-                //gui di voi phuong thuc' cua Form
-                method: $(form).attr('method'),
-                //url = duong dan cua form
-                url: $(form).attr('action'),
-                //du lieu gui di
-                data: new FormData(form),
-                //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
-                processData: false,
-                // Kiểu nội dung của dữ liệu được gửi lên server. minh gui len la FormData nen de false
-                contentType: false,
-                //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
-                //dataType: 'json',
-                //truoc khi gui di thi thuc hien gi do', o day chinh loi~ = rong~
-                beforeSend: function() {},
-                success: function(response) {
-                    window.location.href = response;
-                },
-                error: function(response) {
-                    // console.log("request lỗi");
-                    // //console.log(response.responseJSON.Username[0]);
-                    // $.each(response.responseJSON, function(key, val) {
-                    //     $(form).find('span.' + key + '-error').html('<i class="icon-remove bigger-110 red">' + val[0] + '</i>');
-                    //     toastr.error(val[0], 'Có lỗi xảy ra', {
-                    //         timeOut: 3000
-                    //     });
-                    // });
-                },
+                $.ajax({
+                    //gui di voi phuong thuc' cua Form
+                    method: $(form).attr('method'),
+                    //url = duong dan cua form
+                    url: $(form).attr('action'),
+                    //du lieu gui di
+                    data: new FormData(form),
+                    //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
+                    processData: false,
+                    // Kiểu nội dung của dữ liệu được gửi lên server. minh gui len la FormData nen de false
+                    contentType: false,
+                    //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+                    //dataType: 'json',
+                    //truoc khi gui di thi thuc hien gi do', o day chinh loi~ = rong~
+                    beforeSend: function() {},
+                    success: function(response) {
+                        window.location.href = response;
+                    },
+                    error: function(response) {
+                        // console.log("request lỗi");
+                        // //console.log(response.responseJSON.Username[0]);
+                        // $.each(response.responseJSON, function(key, val) {
+                        //     $(form).find('span.' + key + '-error').html('<i class="icon-remove bigger-110 red">' + val[0] + '</i>');
+                        //     toastr.error(val[0], 'Có lỗi xảy ra', {
+                        //         timeOut: 3000
+                        //     });
+                        // });
+                    },
+                });
             });
         });
+
+        function inputThuocTinhToHopChange(index) {
+            let tag = $('a[href="#collapse' + index + '"] span#lstThuocTinh');
+            let html = '';
+            $('input[name^="ThuocTinhToHop[' + index + ']"]').each(function() {
+                //ngua ngua ve~ mau`
+            var colors = ['grey', 'success', 'warning', 'danger', 'info', 'purple', 'inverse', 'pink', 'yellow'];
+            var color = colors[Math.floor(Math.random() * colors.length)];
+
+            //noi chuoi~
+            html += `<span class="badge badge-` + color + `">` + $(this).val() + `</span>`;
+        });
+        tag.html(html);
+    }
+
+    function themThuocTinhKhac(selectThis) {
+        let countDiv = $("#accordion div.panel-default").length;
+        // console.log(countDiv);
+
+        // $(`<div class="space-4"></div>`).insertBefore(selectThis);
+    }
+
+    function themTheInput(parentIndex) {
+        //lay' ra so' luong input-group cua? #form
+        var countDiv = $("#form-thuoctinh-tohop-" + parentIndex + " div.input-group").length;
+
+        //them vào sau selector
+        $('#form-thuoctinh-tohop-' + parentIndex).append(
+            `<div class="input-group" style="margin-bottom: 5px"><input type="text" class="autosize-transition form-control" placeholder="" name="ThuocTinhToHop[` + parentIndex + `][]" value="` +
+            $(
+                '#txtThemThuocTinh-' + parentIndex).val() + `" style="font-weight: bold;" onchange="inputThuocTinhToHopChange(` + parentIndex +
+            `)"/><a href="javascript:void(0)" id="xoa-thuoctinh-tohop-` +
+            parentIndex + `-` + countDiv + `"onclick="xoaTheInput(` + parentIndex + `,` + countDiv +
+            `)" class="input-group-addon red" style="background-color:transparent"><i class="icon-trash"></i></a></div>`);
+
+            //reset cai the? input lai
+            $('#txtThemThuocTinh-' + parentIndex).val('');
+            //refesh
+            inputThuocTinhToHopChange(parentIndex);
+        }
+
+        function xoaTheInput(parentIndex, index) {
+            $('#xoa-thuoctinh-tohop-' + parentIndex + '-' + index).parent().remove();
+            //refesh
+            inputThuocTinhToHopChange(parentIndex);
+        }
     </script>
 @endsection
