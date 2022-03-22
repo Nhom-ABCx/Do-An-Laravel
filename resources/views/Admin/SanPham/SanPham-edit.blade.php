@@ -51,7 +51,7 @@
                 <div class="col-xs-12">
                     <!-- PAGE CONTENT BEGINS -->
                     {{-- web để search Icon trong template https://fontawesome.com/v3.2/icons/ --}}
-                    <form class="form-horizontal" role="form" action="{{ route('SanPham.update', $sanPham) }}" method="post" enctype="multipart/form-data">
+                    <form id="submitForm" class="form-horizontal" role="form" action="{{ route('SanPham.update', $sanPham) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="space-10"></div>
@@ -90,28 +90,18 @@
 
                                                 <span class="btn-toolbar inline middle no-margin">
                                                     <span data-toggle="buttons" class="btn-group no-margin">
-                                                        <label class="btn btn-sm btn-yellow">
-                                                            1
-                                                            <input type="radio" value="1" />
-                                                        </label>
-
-                                                        <label class="btn btn-sm btn-yellow">
-                                                            2
-                                                            <input type="radio" value="2" />
-                                                        </label>
-
-                                                        <label class="btn btn-sm btn-yellow active">
-                                                            3
-                                                            <input type="radio" value="3" />
-                                                        </label>
+                                                        <label class="btn btn-sm btn-yellow">1<input type="radio" value="1" /></label>
+                                                        <label class="btn btn-sm btn-yellow">2<input type="radio" value="2" /></label>
+                                                        <label class="btn btn-sm btn-yellow active">3<input type="radio" value="3" /></label>
                                                     </span>
                                                 </span>
                                             </span>
                                         </h4>
 
-                                        <div class="wysiwyg-editor" id="editor1"></div>
+                                        <div class="wysiwyg-editor" id="editor1">{{ $sanPham->MoTa }}</div>
 
                                         <div class="hr hr-double dotted"></div>
+                                        <textarea name="MoTa" style="display:none;"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +125,7 @@
                                         @endforeach
 
                                         <div class="col-sm-2">
-                                            <input multiple type="file" accept="image/*" id="id-input-file-3" name="HinhAnh">
+                                            <input multiple type="file" accept="image/*" id="id-input-file-3" name="HinhAnh[]">
                                         </div>
                                     </div>
                                 </div>
@@ -229,12 +219,57 @@
 
                                                     <div class="panel-collapse collapse" id="collapse{{ $loop->index }}">
                                                         <div class="panel-body">
-                                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
-                                                            skateboard
-                                                            dolor
-                                                            brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                                                            assumenda
-                                                            shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+
+                                                            <div class="form-group">
+                                                                <label>Tên thuộc tính</label>
+
+                                                                <div>
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="autosize-transition form-control" placeholder="Tên thuộc tính vd: Size/Color" name="ThuocTinh[]"
+                                                                            value="{{ $sanPham->decodeThuocTinhToHop()[$loop->index] }}" style="font-weight: bold;" />
+
+
+                                                                        <a href="#" class="input-group-addon red" style="background-color:transparent">
+                                                                            <i class="icon-trash"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="space-4"></div>
+
+                                                            <div class="form-group">
+                                                                <label>Giá trị thuộc tính</label>
+
+                                                                <div id="form-thuoctinh-tohop-{{ $loop->index }}">
+                                                                    @foreach ($sanPham->lstThuocTinh()[$loop->index] as $item)
+                                                                        <div class="input-group" style="margin-bottom: 5px">
+                                                                            <input type="text" class="autosize-transition form-control" placeholder="Thêm giá trị khác"
+                                                                                name="ThuocTinhToHop-{{ $loop->parent->index }}[]" value="{{ $item }}" style="font-weight: bold;" />
+
+                                                                            <a href="javascript:void(0)" id="xoa-thuoctinh-tohop-{{ $loop->parent->index }}-{{ $loop->index }}"
+                                                                                onclick="$('#xoa-thuoctinh-tohop-{{ $loop->parent->index }}-{{ $loop->index }}').parent().remove();"
+                                                                                class="input-group-addon red" style="background-color:transparent">
+                                                                                <i class="icon-trash"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    @endforeach
+                                                                </div>
+                                                                <div class="input-group" style="margin-bottom: 5px">
+                                                                    <input id="txtThemThuocTinh-{{ $loop->index }}" type="text" class="autosize-transition form-control"
+                                                                        placeholder="Thêm giá trị khác ?" value="" />
+
+                                                                    <a href="javascript:void(0)" onclick="themTheInput({{ $loop->index }})" role="button" class="input-group-addon green"
+                                                                        data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính">
+                                                                        <i class="icon-plus"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+
+                                                            <button type="button" class="btn btn-sm btn-success" style="float: right">
+                                                                Lưu thay đổi
+                                                                <i class="icon-arrow-right icon-on-right bigger-110"></i>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -335,16 +370,17 @@
                         <div class="space-4"></div>
 
                         <div class="clearfix form-actions">
-                            <div class="col-md-9">
-                                <button class="btn btn-info" type="submit">
-                                    <i class="icon-ok bigger-110"></i>
-                                    Submit
-                                </button>
-
-                                &nbsp; &nbsp; &nbsp;
+                            <div style="float: right">
                                 <button class="btn" type="reset">
                                     <i class="icon-undo bigger-110"></i>
                                     Reset
+                                </button>
+
+                                &nbsp; &nbsp; &nbsp;
+
+                                <button class="btn btn-info" type="submit">
+                                    <i class="icon-ok bigger-110"></i>
+                                    Submit
                                 </button>
                             </div>
                         </div>
@@ -371,12 +407,19 @@
     <script src="/storage/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
     <script src="/storage/assets/js/jquery.maskedinput.min.js"></script>
     <script src="/storage/assets/js/bootstrap-tag.min.js"></script>
-
+    {{-- cai phần mô tả descipsion --}}
     @include('Admin.SanPham.script.SanPham-edit-script')
     <!-- inline scripts related to this page -->
 
     <script type="text/javascript">
         jQuery(function($) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
 
             $(".chosen-select").chosen();
             $('#chosen-multiple-style').on('click', function(e) {
@@ -624,6 +667,69 @@
             })
             */
 
+
+        });
+
+        function themTheInput(index) {
+            var countDiv = $("#form-thuoctinh-tohop-" + index + " div.input-group").length;
+
+            $('#form-thuoctinh-tohop-' + index).append(`
+                    <div class="input-group" style="margin-bottom: 5px">
+                        <input type="text" class="autosize-transition form-control" placeholder="" name="ThuocTinhToHop-` + index + `[]"
+                             value="` + $('#txtThemThuocTinh-' + index).val() + `" style="font-weight: bold;" />
+
+                        <a href="javascript:void(0)" id="xoa-thuoctinh-tohop-` + index + `-` + countDiv + `"
+                            onclick="$('#xoa-thuoctinh-tohop-` + index + `-` + countDiv + `').parent().remove();" class="input-group-addon red" style="background-color:transparent">
+                            <i class="icon-trash"></i>
+                        </a>
+                    </div>`);
+
+            $('#txtThemThuocTinh-' + index).val('');
+        }
+
+
+
+
+        //ajax
+        $('#submitForm').on('submit', function(e) {
+            //ngan chan form gui di
+            e.preventDefault();
+            let form = this;
+
+            //truoc khi gui di thi` set value textarea, ko dat trong ham`beforeSend cua ajax dc, ko biet tai sao
+            let a = $(form).find('#editor1').html();
+            // console.log(a);
+            let b = $(form).find('textarea[name="MoTa"]').text(a);
+
+            $.ajax({
+                //gui di voi phuong thuc' cua Form
+                method: $(form).attr('method'),
+                //url = duong dan cua form
+                url: $(form).attr('action'),
+                //du lieu gui di
+                data: new FormData(form),
+                //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
+                processData: false,
+                // Kiểu nội dung của dữ liệu được gửi lên server. minh gui len la FormData nen de false
+                contentType: false,
+                //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+                //dataType: 'json',
+                //truoc khi gui di thi thuc hien gi do', o day chinh loi~ = rong~
+                beforeSend: function() {},
+                success: function(response) {
+                    window.location.href = response;
+                },
+                error: function(response) {
+                    // console.log("request lỗi");
+                    // //console.log(response.responseJSON.Username[0]);
+                    // $.each(response.responseJSON, function(key, val) {
+                    //     $(form).find('span.' + key + '-error').html('<i class="icon-remove bigger-110 red">' + val[0] + '</i>');
+                    //     toastr.error(val[0], 'Có lỗi xảy ra', {
+                    //         timeOut: 3000
+                    //     });
+                    // });
+                },
+            });
         });
     </script>
 @endsection

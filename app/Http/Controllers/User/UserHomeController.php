@@ -31,6 +31,8 @@ class UserHomeController extends Controller
 
         // return view('User.home', ["dsKhuyenMai" => $khuyenMai]);
 
+        // $a = '<b>aaaaaaaaaaaasdasdasdasdasd</b><div><b>asadasd</b></div><div><b>asd</b></div><div><b>a</b></div><div><b>sd</b></div><div><b>as</b></div><div><b>daaaaaaaaaa</b><img src="asdasdasdasdasdasd"></div>';
+        // echo strip_tags($a);
 
 
 
@@ -48,7 +50,6 @@ class UserHomeController extends Controller
 
         echo "</br> Tổ hợp sản phẩm </br></br>";
 
-        $toHop = $sanPham->decodeThuocTinhToHop();
 
         foreach ($sanPham->CT_SanPham as $item) {
             $sanPham->decodeThuocTinhToHop()->each(function ($value, $key) use ($item) {
