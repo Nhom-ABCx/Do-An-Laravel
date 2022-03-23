@@ -144,8 +144,133 @@
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Hãng sản xuất
-                                        </label>
+                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Thuộc tính chung</label>
+
+                                        <div id="form-thuoctinh" class="col-sm-10">
+                                            <?php $__currentLoopData = $sanPham->decodeThuocTinh(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <div class="div-thuoctinh">
+                                                    <span class="input-icon">
+                                                        <input type="text" class="input-xlarge" value="<?php echo e($key); ?>" name="ThuocTinhChung[0][]">
+                                                        <i class="icon-apple blue"></i>
+                                                    </span>
+
+                                                    <span class="input-icon input-icon-right">
+                                                        <input type="text" class="input-xxlarge" value="<?php echo e($value); ?>" name="ThuocTinhChung[1][]">
+                                                        <i class="icon-android green"></i>
+                                                    </span>
+
+                                                    <a href="javascript:void(0)" id="xoa-thuoctinh-<?php echo e($loop->index); ?>" onclick="xoaTheInputThuocTinh(<?php echo e($loop->index); ?>)" class="btn btn-white">
+                                                        <i class="icon-trash red"></i>
+                                                    </a>
+                                                </div>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <div id="div-themthuoctinh">
+                                                <input type="text" class="input-xlarge" placeholder="Tên" id="txtThuocTinh-Key">
+
+                                                <input type="text" class="input-xxlarge" placeholder="Giá trị" id="txtThuocTinh-Value">
+
+                                                <a href="javascript:void(0)" onclick="themTheInputThuocTinh()" class="btn btn-white" data-rel="tooltip" data-placement="top" title="Thêm mới 1 thuộc tính">
+                                                    <i class="icon-plus green"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Biến thể</label>
+
+                                        <div id="accordion" class="accordion-style1 panel-group col-sm-10">
+                                            <?php $__currentLoopData = $sanPham->decodeThuocTinhToHop(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $thuocTinh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo e($loop->index); ?>">
+                                                                <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down" data-icon-show="icon-angle-right"></i>
+                                                                &nbsp; <i class=" icon-asterisk smaller-75 green"></i>
+                                                                <label id="tenthuoctinh-<?php echo e($loop->index); ?>"> <?php echo e($thuocTinh); ?> </label>
+                                                                <label style="width: 20px"></label>
+
+                                                                <span id="lstThuocTinh">
+                                                                    <?php $__currentLoopData = $sanPham->lstThuocTinh()[$loop->index]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                        <span
+                                                                            class="badge badge-<?php echo e(collect(['grey', 'success', 'warning', 'danger', 'info', 'purple', 'inverse', 'pink', 'yellow'])->random()); ?>">
+                                                                            <?php echo e($item); ?>
+
+                                                                        </span>
+                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                                </span>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+
+                                                    <div class="panel-collapse collapse" id="collapse<?php echo e($loop->index); ?>">
+                                                        <div class="panel-body">
+
+                                                            <div class="form-group">
+                                                                <label>Tên thuộc tính</label>
+
+                                                                <div>
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="autosize-transition form-control" placeholder="vd: Size/Color" name="ThuocTinh[]"
+                                                                            value="<?php echo e($sanPham->decodeThuocTinhToHop()[$loop->index]); ?>" style="font-weight: bold;"
+                                                                            id="txtTenThuocTinh-<?php echo e($loop->index); ?>" onchange="inputTenThuocTinhToHopChange(<?php echo e($loop->index); ?>)" />
+
+
+                                                                        <a href="#" class="input-group-addon red" style="background-color:transparent">
+                                                                            <i class="icon-trash"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="space-4"></div>
+
+                                                            <div class="form-group">
+                                                                <label>Giá trị thuộc tính</label>
+
+                                                                <div id="form-thuoctinh-tohop-<?php echo e($loop->index); ?>">
+                                                                    <?php $__currentLoopData = $sanPham->lstThuocTinh()[$loop->index]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                        <div class="input-group" style="margin-bottom: 5px">
+                                                                            <input type="text" class="autosize-transition form-control" placeholder="vd: Red/Green/Blue"
+                                                                                name="ThuocTinhToHop[<?php echo e($loop->parent->index); ?>][]" value="<?php echo e($item); ?>" style="font-weight: bold;"
+                                                                                onchange="inputThuocTinhToHopChange(<?php echo e($loop->parent->index); ?>)" />
+
+                                                                            <a href="javascript:void(0)" id="xoa-thuoctinh-tohop-<?php echo e($loop->parent->index); ?>-<?php echo e($loop->index); ?>"
+                                                                                onclick="xoaTheInputBienThe(<?php echo e($loop->parent->index); ?>,<?php echo e($loop->index); ?>)" class="input-group-addon red"
+                                                                                style="background-color:transparent">
+                                                                                <i class="icon-trash"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                                </div>
+                                                                <div class="input-group" style="margin-bottom: 5px">
+                                                                    <input id="txtThemThuocTinh-<?php echo e($loop->index); ?>" type="text" class="autosize-transition form-control"
+                                                                        placeholder="Thêm giá trị khác ?" value="" />
+
+                                                                    <a href="javascript:void(0)" onclick="themTheInputBienThe(<?php echo e($loop->index); ?>)" role="button" class="input-group-addon green"
+                                                                        data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính">
+                                                                        <i class="icon-plus"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                            <button onclick="themThuocTinhKhac(this)" type="button" class="btn btn-sm btn-success">
+                                                <i class="icon-plus icon-on-right bigger-110"></i>
+                                                Thêm thuộc tính khác
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Hãng sản xuất</label>
 
                                         <div class="col-sm-3">
                                             <div class="input-group">
@@ -188,96 +313,6 @@
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="space-4"></div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Thuộc tính</label>
-
-                                        <div id="accordion" class="accordion-style1 panel-group col-sm-10">
-                                            <?php $__currentLoopData = $sanPham->decodeThuocTinhToHop(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $thuocTinh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
-                                                        <h4 class="panel-title">
-                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo e($loop->index); ?>">
-                                                                <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down" data-icon-show="icon-angle-right"></i>
-                                                                &nbsp; <i class=" icon-asterisk smaller-75 green"></i> <?php echo e($thuocTinh); ?>
-
-                                                                <label style="width: 20px"></label>
-
-                                                                <span id="lstThuocTinh">
-                                                                    <?php $__currentLoopData = $sanPham->lstThuocTinh()[$loop->index]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                        <span
-                                                                            class="badge badge-<?php echo e(collect(['grey', 'success', 'warning', 'danger', 'info', 'purple', 'inverse', 'pink', 'yellow'])->random()); ?>">
-                                                                            <?php echo e($item); ?>
-
-                                                                        </span>
-                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                                </span>
-                                                            </a>
-                                                        </h4>
-                                                    </div>
-
-                                                    <div class="panel-collapse collapse" id="collapse<?php echo e($loop->index); ?>">
-                                                        <div class="panel-body">
-
-                                                            <div class="form-group">
-                                                                <label>Tên thuộc tính</label>
-
-                                                                <div>
-                                                                    <div class="input-group">
-                                                                        <input type="text" class="autosize-transition form-control" placeholder="vd: Size/Color" name="ThuocTinh[]"
-                                                                            value="<?php echo e($sanPham->decodeThuocTinhToHop()[$loop->index]); ?>" style="font-weight: bold;" />
-
-
-                                                                        <a href="#" class="input-group-addon red" style="background-color:transparent">
-                                                                            <i class="icon-trash"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="space-4"></div>
-
-                                                            <div class="form-group">
-                                                                <label>Giá trị thuộc tính</label>
-
-                                                                <div id="form-thuoctinh-tohop-<?php echo e($loop->index); ?>">
-                                                                    <?php $__currentLoopData = $sanPham->lstThuocTinh()[$loop->index]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                        <div class="input-group" style="margin-bottom: 5px">
-                                                                            <input type="text" class="autosize-transition form-control" placeholder="vd: Red/Green/Blue"
-                                                                                name="ThuocTinhToHop[<?php echo e($loop->parent->index); ?>][]" value="<?php echo e($item); ?>" style="font-weight: bold;"
-                                                                                onchange="inputThuocTinhToHopChange(<?php echo e($loop->parent->index); ?>)" />
-
-                                                                            <a href="javascript:void(0)" id="xoa-thuoctinh-tohop-<?php echo e($loop->parent->index); ?>-<?php echo e($loop->index); ?>"
-                                                                                onclick="xoaTheInput(<?php echo e($loop->parent->index); ?>,<?php echo e($loop->index); ?>)" class="input-group-addon red"
-                                                                                style="background-color:transparent">
-                                                                                <i class="icon-trash"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                                </div>
-                                                                <div class="input-group" style="margin-bottom: 5px">
-                                                                    <input id="txtThemThuocTinh-<?php echo e($loop->index); ?>" type="text" class="autosize-transition form-control"
-                                                                        placeholder="Thêm giá trị khác ?" value="" />
-
-                                                                    <a href="javascript:void(0)" onclick="themTheInput(<?php echo e($loop->index); ?>)" role="button" class="input-group-addon green"
-                                                                        data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính">
-                                                                        <i class="icon-plus"></i>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                                            <button onclick="themThuocTinhKhac(this)" type="button" class="btn btn-sm btn-success">
-                                                <i class="icon-plus icon-on-right bigger-110"></i>
-                                                Thêm thuộc tính khác
-                                            </button>
                                         </div>
                                     </div>
 
@@ -716,6 +751,11 @@
             });
         });
 
+        function inputTenThuocTinhToHopChange(index) {
+            let txtTenThuocTinh = $('#txtTenThuocTinh-' + index).val();
+            $('#tenthuoctinh-' + index).html(txtTenThuocTinh);
+        }
+
         function inputThuocTinhToHopChange(index) {
             let tag = $('a[href="#collapse' + index + '"] span#lstThuocTinh');
             let html = '';
@@ -732,31 +772,67 @@
 
     function themThuocTinhKhac(selectThis) {
         let countDiv = $("#accordion div.panel-default").length;
-        // console.log(countDiv);
 
-        // $(`<div class="space-4"></div>`).insertBefore(selectThis);
+        $(`<div class="panel panel-default"> <div class="panel-heading"> <h4 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse` +
+            countDiv +
+            `"> <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down" data-icon-show="icon-angle-right"></i> &nbsp; <i class=" icon-asterisk smaller-75 green"></i> <label id="tenthuoctinh-` +
+            countDiv + `"> Thuộc tính mới </label> <label style="width: 20px"></label> <span id="lstThuocTinh"></span> </a> </h4> </div> <div class="panel-collapse collapse" id="collapse` +
+            countDiv +
+            `"> <div class="panel-body"> <div class="form-group"> <label>Tên thuộc tính</label> <div> <div class="input-group"> <input type="text" class="autosize-transition form-control" placeholder="vd: Size/Color" name="ThuocTinh[]" style="font-weight: bold;" id="txtTenThuocTinh-` +
+            countDiv + `" onchange="inputTenThuocTinhToHopChange(` +
+            countDiv +
+            `)"/> <a href="#" class="input-group-addon red" style="background-color:transparent"> <i class="icon-trash"></i> </a> </div> </div> </div> <div class="space-4"></div> <div class="form-group"> <label>Giá trị thuộc tính</label> <div id="form-thuoctinh-tohop-` +
+            countDiv +
+            `"> <div class="input-group" style="margin-bottom: 5px"> <input type="text" class="autosize-transition form-control" placeholder="vd: Red/Green/Blue" name="ThuocTinhToHop[` +
+            countDiv + `][]" style="font-weight: bold;" onchange="inputThuocTinhToHopChange(` + countDiv + `)" /> <a href="javascript:void(0)" id="xoa-thuoctinh-tohop-` + countDiv +
+            `-0" onclick="xoaTheInputBienThe(` + countDiv +
+            `,0)" class="input-group-addon red" style="background-color:transparent"> <i class="icon-trash"></i> </a> </div> </div> <div class="input-group" style="margin-bottom: 5px"> <input id="txtThemThuocTinh-` +
+            countDiv + `" type="text" class="autosize-transition form-control" placeholder="Thêm giá trị khác ?" value="" /> <a href="javascript:void(0)" onclick="themTheInputBienThe(` +
+            countDiv +
+            `)" role="button" class="input-group-addon green" data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính"> <i class="icon-plus"></i> </a> </div> </div> </div> </div></div>`
+        ).insertBefore(selectThis);
     }
 
-    function themTheInput(parentIndex) {
+    function themTheInputThuocTinh() {
         //lay' ra so' luong input-group cua? #form
-        var countDiv = $("#form-thuoctinh-tohop-" + parentIndex + " div.input-group").length;
+        let countDiv = $("#form-thuoctinh div.div-thuoctinh").length;
+        let inputKey = $('#txtThuocTinh-Key');
+        let inputValue = $('#txtThuocTinh-Value');
+
+        //them vào trước selector
+        $(`<div class="div-thuoctinh"><span class="input-icon"><input type="text" class="input-xlarge" value="` + inputKey.val() +
+            `" name="ThuocTinhChung[0][]"><i class="icon-apple blue"></i></span><span class="input-icon input-icon-right"><input type="text" class="input-xxlarge" value="` + inputValue.val() +
+            `" name="ThuocTinhChung[1][]"><i class="icon-android green"></i></span><a href="javascript:void(0)" id="xoa-thuoctinh-` + countDiv + `" onclick="xoaTheInputThuocTinh(` + countDiv +
+            `)" class="btn btn-white"><i class="icon-trash red"></i></a></div>`).insertBefore("#div-themthuoctinh");
+
+        inputKey.val('');
+        inputValue.val('');
+    }
+
+    function themTheInputBienThe(parentIndex) {
+        //lay' ra so' luong input-group cua? #form
+        let countDiv = $("#form-thuoctinh-tohop-" + parentIndex + " div.input-group").length;
+        let txtThemThuocTinh = $('#txtThemThuocTinh-' + parentIndex);
 
         //them vào sau selector
         $('#form-thuoctinh-tohop-' + parentIndex).append(
             `<div class="input-group" style="margin-bottom: 5px"><input type="text" class="autosize-transition form-control" placeholder="" name="ThuocTinhToHop[` + parentIndex + `][]" value="` +
-            $(
-                '#txtThemThuocTinh-' + parentIndex).val() + `" style="font-weight: bold;" onchange="inputThuocTinhToHopChange(` + parentIndex +
+            txtThemThuocTinh.val() + `" style="font-weight: bold;" onchange="inputThuocTinhToHopChange(` + parentIndex +
             `)"/><a href="javascript:void(0)" id="xoa-thuoctinh-tohop-` +
-            parentIndex + `-` + countDiv + `"onclick="xoaTheInput(` + parentIndex + `,` + countDiv +
+            parentIndex + `-` + countDiv + `"onclick="xoaTheInputBienThe(` + parentIndex + `,` + countDiv +
             `)" class="input-group-addon red" style="background-color:transparent"><i class="icon-trash"></i></a></div>`);
 
             //reset cai the? input lai
-            $('#txtThemThuocTinh-' + parentIndex).val('');
+            txtThemThuocTinh.val('');
             //refesh
             inputThuocTinhToHopChange(parentIndex);
         }
 
-        function xoaTheInput(parentIndex, index) {
+        function xoaTheInputThuocTinh(index) {
+            $('#xoa-thuoctinh-' + index).parent().remove();
+        }
+
+        function xoaTheInputBienThe(parentIndex, index) {
             $('#xoa-thuoctinh-tohop-' + parentIndex + '-' + index).parent().remove();
             //refesh
             inputThuocTinhToHopChange(parentIndex);

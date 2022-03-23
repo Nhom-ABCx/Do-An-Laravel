@@ -36,11 +36,6 @@ class UserHomeController extends Controller
 
 
 
-
-
-
-
-
         //vi du
         $sanPham = SanPham::all()->first();
         foreach ($sanPham->decodeThuocTinh() as $key => $value) {
