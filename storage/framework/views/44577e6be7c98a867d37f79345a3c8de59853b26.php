@@ -8,6 +8,14 @@
 <!-- inline scripts related to this page -->
 
 <script type="text/javascript">
+    //
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    //phan` doan mo ta?
     jQuery(function($) {
 
         function showErrorAlert(reason, detail) {
@@ -202,5 +210,476 @@
 
 
     });
+
+    //phần của trang...
+    jQuery(function($) {
+        $(".chosen-select").chosen();
+        $('#chosen-multiple-style').on('click', function(e) {
+            var target = $(e.target).find('input[type=radio]');
+            var which = parseInt(target.val());
+            if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
+            else $('#form-field-select-4').removeClass('tag-input-style');
+        });
+
+
+        $('[data-rel=tooltip]').tooltip({
+            container: 'body'
+        });
+        $('[data-rel=popover]').popover({
+            container: 'body'
+        });
+
+        $('textarea[class*=autosize]').autosize({
+            append: "\n"
+        });
+        $('textarea.limited').inputlimiter({
+            remText: '%n character%s remaining...',
+            limitText: 'max allowed : %n.'
+        });
+
+        $.mask.definitions['~'] = '[+-]';
+        $('.input-mask-date').mask('99/99/9999');
+        $('.input-mask-phone').mask('(999) 999-9999');
+        $('.input-mask-eyescript').mask('~9.99 ~9.99 999');
+        $(".input-mask-product").mask("a*-999-a999", {
+            placeholder: " ",
+            completed: function() {
+                alert("You typed the following: " + this.val());
+            }
+        });
+
+
+
+        $("#input-size-slider").css('width', '200px').slider({
+            value: 1,
+            range: "min",
+            min: 1,
+            max: 8,
+            step: 1,
+            slide: function(event, ui) {
+                var sizing = ['', 'input-sm', 'input-lg', 'input-mini', 'input-small',
+                    'input-medium', 'input-large', 'input-xlarge', 'input-xxlarge'
+                ];
+                var val = parseInt(ui.value);
+                $('#form-field-4').attr('class', sizing[val]).val('.' + sizing[val]);
+            }
+        });
+
+        $("#input-span-slider").slider({
+            value: 1,
+            range: "min",
+            min: 1,
+            max: 12,
+            step: 1,
+            slide: function(event, ui) {
+                var val = parseInt(ui.value);
+                $('#form-field-5').attr('class', 'col-xs-' + val).val('.col-xs-' + val);
+            }
+        });
+
+
+        $("#slider-range").css('height', '200px').slider({
+            orientation: "vertical",
+            range: true,
+            min: 0,
+            max: 100,
+            values: [17, 67],
+            slide: function(event, ui) {
+                var val = ui.values[$(ui.handle).index() - 1] + "";
+
+                if (!ui.handle.firstChild) {
+                    $(ui.handle).append(
+                        "<div class='tooltip right in' style='display:none;left:16px;top:-6px;'><div class='tooltip-arrow'></div><div class='tooltip-inner'></div></div>"
+                    );
+                }
+                $(ui.handle.firstChild).show().children().eq(1).text(val);
+            }
+        }).find('a').on('blur', function() {
+            $(this.firstChild).hide();
+        });
+
+        $("#slider-range-max").slider({
+            range: "max",
+            min: 1,
+            max: 10,
+            value: 2
+        });
+
+        $("#eq > span").css({
+            width: '90%',
+            'float': 'left',
+            margin: '15px'
+        }).each(function() {
+            // read initial values from markup and remove that
+            var value = parseInt($(this).text(), 10);
+            $(this).empty().slider({
+                value: value,
+                range: "min",
+                animate: true
+
+            });
+        });
+
+
+        $('#id-input-file-1 , #id-input-file-2').ace_file_input({
+            no_file: 'No File ...',
+            btn_choose: 'Choose',
+            btn_change: 'Change',
+            droppable: false,
+            onchange: null,
+            thumbnail: false //| true | large
+            //whitelist:'gif|png|jpg|jpeg'
+            //blacklist:'exe|php'
+            //onchange:''
+            //
+        });
+
+        $('#id-input-file-3').ace_file_input({
+            style: 'well',
+            btn_choose: 'Kéo thả hình vào đây hoặc click để chọn',
+            btn_change: null,
+            no_icon: 'icon-picture',
+            droppable: true,
+            thumbnail: 'large'
+        })
+
+        _valueGN = 10000;
+        _valueGB = 10000;
+        $('#spinner1').ace_spinner({
+            value: _valueGN,
+            min: 0,
+            max: 1000000000,
+            step: 10000,
+            touch_spinner: true,
+            icon_up: 'icon-caret-up',
+            icon_down: 'icon-caret-down'
+        });
+        $('#spinner2').ace_spinner({
+            value: _valueGB,
+            min: 0,
+            max: 1000000000,
+            step: 10000,
+            touch_spinner: true,
+            icon_up: 'icon-caret-up',
+            icon_down: 'icon-caret-down'
+        });
+        $('#spinner3').ace_spinner({
+            value: _valueSL,
+            min: 0,
+            max: 10000,
+            step: 5,
+            on_sides: true,
+            icon_up: 'icon-plus smaller-75',
+            icon_down: 'icon-minus smaller-75',
+            btn_up_class: 'btn-success',
+            btn_down_class: 'btn-danger'
+        });
+
+
+
+        $('.date-picker').datepicker({
+            autoclose: true
+        }).next().on(ace.click_event, function() {
+            $(this).prev().focus();
+        });
+        $('input[name=date-range-picker]').daterangepicker().prev().on(ace.click_event, function() {
+            $(this).next().focus();
+        });
+
+        $('#timepicker1').timepicker({
+            minuteStep: 1,
+            showSeconds: true,
+            showMeridian: false
+        }).next().on(ace.click_event, function() {
+            $(this).prev().focus();
+        });
+
+        $('#colorpicker1').colorpicker();
+        $('#simple-colorpicker-1').ace_colorpicker();
+
+
+        $(".knob").knob();
+
+
+        //we could just set the data-provide="tag" of the element inside HTML, but IE8 fails!
+        var tag_input = $('#form-field-tags');
+        if (!(/msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase()))) {
+            tag_input.tag({
+                placeholder: tag_input.attr('placeholder'),
+                //enable typeahead by specifying the source array
+                source: ace.variable_US_STATES, //defined in ace.js >> ace.enable_search_ahead
+            });
+        } else {
+            //display a textarea for old IE, because it doesn't support this plugin or another one I tried!
+            tag_input.after('<textarea id="' + tag_input.attr('id') + '" name="' + tag_input.attr('name') +
+                '" rows="3">' + tag_input.val() + '</textarea>').remove();
+            //$('#form-field-tags').autosize({append: "\n"});
+        }
+
+        /////////
+        $('#modal-form input[type=file]').ace_file_input({
+            style: 'well',
+            btn_choose: 'Drop files here or click to choose',
+            btn_change: null,
+            no_icon: 'icon-cloud-upload',
+            droppable: true,
+            thumbnail: 'large'
+        })
+
+        //chosen plugin inside a modal will have a zero width because the select element is originally hidden
+        //and its width cannot be determined.
+        //so we set the width after modal is show
+        $('#modal-form').on('shown.bs.modal', function() {
+            $(this).find('.chosen-container').each(function() {
+                $(this).find('a:first-child').css('width', '210px');
+                $(this).find('.chosen-drop').css('width', '210px');
+                $(this).find('.chosen-search input').css('width', '200px');
+            });
+        })
+        /**
+        //or you can activate the chosen plugin after modal is shown
+        //this way select element becomes visible with dimensions and chosen works as expected
+        $('#modal-form').on('shown', function () {
+            $(this).find('.modal-chosen').chosen();
+        })
+        */
+    });
+
+
+
+
+
+
+
+    // var arrayInput = $('input[name^=ThuocTinhToHop]').map(function() {
+    //     return $(this).val();
+    // });
+    var arrayInput = $('input[name^=ThuocTinhToHop]');
+    console.error(arrayInput);
+
+
+
+
+
+
+
+
+
+
+
+
+    // $('#BienTheSanPham').dataTable({
+    //         autoWidth: false, //ko co cai nay` la` no' thu nho? lai max xau'
+    //         ajax: {
+    //             url: "<?php echo e(route('SanPham.CrossJoin')); ?>",
+    //             method: 'POST',
+    //             //gui di voi cai form
+    //             data: new FormData(this),
+    //             processData: false,
+    //             contentType: false,
+    //             dataSrc: "", //lay vi tri la rong~ ko phai mac dinh "data"=>[...]
+    //         },
+    //         //do du lieu vao cot
+    //         columns: [{
+    //                 data: null,
+    //                 className: "center",
+    //                 searchable: false
+    //             },
+    //             {
+    //                 data: 'TenSanPham'
+    //             },
+    //             {
+    //                 data: 'GiaBan',
+    //                 className: "pink",
+    //                 render: DataTable.render.number(',', '.'),
+    //             },
+    //             {
+    //                 //render tool
+    //                 data: 'id',
+    //                 render: function(data, type, row, meta) {
+    //                     return `<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+    //                 <a class="blue" href="javascript:void(0)" onclick="showSanPham(` + data + `)" role="button" data-toggle="modal" data-rel="tooltip" title="Xem chi tiết">
+    //                     <i class="icon-zoom-in bigger-130"></i>
+    //                 </a>
+
+    //             </div>
+
+    //             <div class="visible-xs visible-sm hidden-md hidden-lg">
+    //                 <div class="inline position-relative">
+    //                     <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+    //                         <i class="icon-caret-down icon-only bigger-120"></i>
+    //                     </button>
+
+    //                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+    //                         <li>
+    //                             <a href="javascript:void(0)" onclick="showSanPham(` + data + `)" role="button" data-toggle="modal" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
+    //                                 <span class="blue">
+    //                                     <i class="icon-zoom-in bigger-120"></i>
+    //                                 </span>
+    //                             </a>
+    //                         </li>
+
+    //                     </ul>
+    //                 </div>
+    //             </div>`;
+    //                 },
+    //                 orderable: false,
+    //                 searchable: false
+    //             },
+    //         ],
+    //         createdRow: function(row, data, rowIndex) {
+    //             //khi tao moi 1 row, them cac thuoc tinh vao cac td
+    //             $.each($('td', row), function(colIndex) {
+    //                 if (colIndex == 2) {
+    //                     $(this).attr('class', 'GiaBan pink');
+    //                     $(this).attr('data-name', 'GiaBan');
+    //                     $(this).attr('data-pk', data.id);
+    //                 }
+    //             });
+    //         },
+    //     });
+
+
+
+
+    //ajax
+    $('#submitForm').on('submit', function(e) {
+        //ngan chan form gui di
+        e.preventDefault();
+        let form = this;
+
+        //truoc khi gui di thi` set value textarea, ko dat trong ham`beforeSend cua ajax dc, ko biet tai sao
+        let a = $(form).find('#editor1').html();
+        // console.log(a);
+        let b = $(form).find('textarea[name="MoTa"]').text(a);
+
+
+
+        $.ajax({
+            //gui di voi phuong thuc' cua Form
+            method: $(form).attr('method'),
+            //url = duong dan cua form
+            url: $(form).attr('action'),
+            //du lieu gui di
+            data: new FormData(form),
+            //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
+            processData: false,
+            // Kiểu nội dung của dữ liệu được gửi lên server. minh gui len la FormData nen de false
+            contentType: false,
+            //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+            //dataType: 'json',
+            //truoc khi gui di thi thuc hien gi do', o day chinh loi~ = rong~
+            beforeSend: function() {},
+            success: function(response) {
+                window.location.href = response;
+            },
+            error: function(response) {
+                // console.log("request lỗi");
+                // //console.log(response.responseJSON.Username[0]);
+                // $.each(response.responseJSON, function(key, val) {
+                //     $(form).find('span.' + key + '-error').html('<i class="icon-remove bigger-110 red">' + val[0] + '</i>');
+                //     toastr.error(val[0], 'Có lỗi xảy ra', {
+                //         timeOut: 3000
+                //     });
+                // });
+            },
+        });
+    });
+</script>
+
+
+
+<script type="text/javascript">
+    function inputTenThuocTinhToHopChange(index) {
+        //khi thay doi ten cua thuoc tinh to? hop thi` cap nhat lai cai the?
+        let txtTenThuocTinh = $('#txtTenThuocTinh-' + index).val();
+        $('#tenthuoctinh-' + index).html(txtTenThuocTinh);
+    }
+
+    function inputThuocTinhToHopChange(index) {
+        //khi thay doi ten cua thuoc tinh to? hop thi` cap nhat lai cai the?
+        let tag = $('a[href="#collapse' + index + '"] span#lstThuocTinh');
+        let html = '';
+        $('input[name^="ThuocTinhToHop[' + index + ']"]').each(function() {
+            //ngua ngua ve~ mau`
+            var colors = ['grey', 'success', 'warning', 'danger', 'info', 'purple', 'inverse', 'pink', 'yellow'];
+            var color = colors[Math.floor(Math.random() * colors.length)];
+
+            //noi chuoi~
+            html += `<span class="badge badge-` + color + `">` + $(this).val() + `</span>`;
+        });
+        tag.html(html);
+    }
+
+    function themThuocTinhKhac(selectThis) {
+        //cai nut' them thuoc tinh' khac'
+        //lay' ra so' luong dong` cua the div hien tai
+        let countDiv = $("#accordion div.panel-default").length;
+
+        $(`<div class="panel panel-default"> <div class="panel-heading"> <h4 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse` +
+            countDiv +
+            `"> <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down" data-icon-show="icon-angle-right"></i> &nbsp; <i class=" icon-asterisk smaller-75 green"></i> <label id="tenthuoctinh-` +
+            countDiv + `"> Thuộc tính mới </label> <label style="width: 20px"></label> <span id="lstThuocTinh"></span> </a> </h4> </div> <div class="panel-collapse in" id="collapse` +
+            countDiv +
+            `"> <div class="panel-body"> <div class="form-group"> <label>Tên thuộc tính</label> <div> <div class="input-group"> <input type="text" class="autosize-transition form-control" placeholder="vd: Size/Color" name="ThuocTinh[]" style="font-weight: bold;" id="txtTenThuocTinh-` +
+            countDiv + `" onchange="inputTenThuocTinhToHopChange(` +
+            countDiv +
+            `)"/> <a href="#" class="input-group-addon red" style="background-color:transparent"> <i class="icon-trash"></i> </a> </div> </div> </div> <div class="space-4"></div> <div class="form-group"> <label>Giá trị thuộc tính</label> <div id="form-thuoctinh-tohop-` +
+            countDiv +
+            `"> <div class="input-group" style="margin-bottom: 5px"> <input type="text" class="autosize-transition form-control" placeholder="vd: Red/Green/Blue" name="ThuocTinhToHop[` +
+            countDiv + `][]" style="font-weight: bold;" onchange="inputThuocTinhToHopChange(` + countDiv + `)" /> <a href="javascript:void(0)" id="xoa-thuoctinh-tohop-` + countDiv +
+            `-0" onclick="xoaTheInputBienThe(` + countDiv +
+            `,0)" class="input-group-addon red" style="background-color:transparent"> <i class="icon-trash"></i> </a> </div> </div> <div class="input-group" style="margin-bottom: 5px"> <input id="txtThemThuocTinh-` +
+            countDiv + `" type="text" class="autosize-transition form-control" placeholder="Thêm giá trị khác ?" value="" /> <a href="javascript:void(0)" onclick="themTheInputBienThe(` +
+            countDiv +
+            `)" role="button" class="input-group-addon green" data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính"> <i class="icon-plus"></i> </a> </div> </div> </div> </div></div>`
+        ).insertBefore(selectThis);
+        //them vao` truoc' selector bang` 1 cai' widget
+    }
+
+    function themTheInputThuocTinh() {
+        //lay' ra so' luong input-group cua? #form
+        let countDiv = $("#form-thuoctinh div.div-thuoctinh").length;
+        let inputKey = $('#txtThuocTinh-Key');
+        let inputValue = $('#txtThuocTinh-Value');
+
+        //them vào trước selector
+        $(`<div class="div-thuoctinh"><span class="input-icon"><input type="text" class="input-xlarge" value="` + inputKey.val() +
+            `" name="ThuocTinhChung[0][]"><i class="icon-apple blue"></i></span><span class="input-icon input-icon-right"><input type="text" class="input-xxlarge" value="` + inputValue.val() +
+            `" name="ThuocTinhChung[1][]"><i class="icon-android green"></i></span><a href="javascript:void(0)" id="xoa-thuoctinh-` + countDiv + `" onclick="xoaTheInputThuocTinh(` + countDiv +
+            `)" class="btn btn-white"><i class="icon-trash red"></i></a></div>`).insertBefore("#div-themthuoctinh");
+
+        inputKey.val('');
+        inputValue.val('');
+    }
+
+    function themTheInputBienThe(parentIndex) {
+        //lay' ra so' luong input-group cua? #form
+        let countDiv = $("#form-thuoctinh-tohop-" + parentIndex + " div.input-group").length;
+        let txtThemThuocTinh = $('#txtThemThuocTinh-' + parentIndex);
+
+        //them vào sau selector
+        $('#form-thuoctinh-tohop-' + parentIndex).append(
+            `<div class="input-group" style="margin-bottom: 5px"><input type="text" class="autosize-transition form-control" placeholder="" name="ThuocTinhToHop[` + parentIndex + `][]" value="` +
+            txtThemThuocTinh.val() + `" style="font-weight: bold;" onchange="inputThuocTinhToHopChange(` + parentIndex +
+            `)"/><a href="javascript:void(0)" id="xoa-thuoctinh-tohop-` +
+            parentIndex + `-` + countDiv + `"onclick="xoaTheInputBienThe(` + parentIndex + `,` + countDiv +
+            `)" class="input-group-addon red" style="background-color:transparent"><i class="icon-trash"></i></a></div>`);
+
+        //reset cai the? input lai
+        txtThemThuocTinh.val('');
+        //refesh
+        inputThuocTinhToHopChange(parentIndex);
+    }
+
+    function xoaTheInputThuocTinh(index) {
+        $('#xoa-thuoctinh-' + index).parent().remove();
+    }
+
+    function xoaTheInputBienThe(parentIndex, index) {
+        $('#xoa-thuoctinh-tohop-' + parentIndex + '-' + index).parent().remove();
+        //refesh
+        inputThuocTinhToHopChange(parentIndex);
+    }
 </script>
 <?php /**PATH E:\DDDD\WEB\Laravel\Do-An-Laravel\resources\views/Admin/SanPham/script/SanPham-edit-script.blade.php ENDPATH**/ ?>

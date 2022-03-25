@@ -285,6 +285,11 @@ class SanPhamController extends Controller
         }
     }
     //API
+    public function API_SanPham_CrossJoin(Request $request)
+    {
+        dd($request->all());
+        return response()->json([], 200);
+    }
     public function API_SanPham(Request $request)
     {
         //lay het san pham

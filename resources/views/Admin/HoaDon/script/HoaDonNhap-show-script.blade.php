@@ -12,6 +12,10 @@
             url: "{{ route('HoaDonNhap.APIChiTiet', $hoaDonNhap) }}",
             method: 'GET',
             dataSrc: "" //lay vi tri la rong~ ko phai mac dinh "data"=>[...]
+            //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+            dataType: "json",
+            // Kiểu nội dung của dữ liệu được gửi lên server.
+            contentType: "application/json; charset=utf-8"
         },
         //do du lieu vao cot
         columns: [{
