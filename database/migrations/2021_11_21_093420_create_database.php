@@ -92,10 +92,11 @@ class CreateDatabase extends Migration
             $table->foreignId('HangSanXuatId');
             $table->foreignId('LoaiSanPhamId');
             $table->string('TenSanPham')->unique();
-            $table->string('ThuocTinh')->unique(); //luu thanh` json {"TenThuocTinh": "GiaTri"}
+            $table->json('ThuocTinh')->unique(); //luu thanh` json {"TenThuocTinh": "GiaTri"}
             $table->longText('MoTa')->nullable();
             $table->integer('LuotMua')->default(0);
-            $table->string("ThuocTinhToHop");  //luu thanh` json ["Size", "Color"]
+            //https://viblo.asia/p/use-mysql-json-field-in-laravel-OeVKBqk05kW
+            $table->json("ThuocTinhToHop");  //luu thanh` json ["Size", "Color"]
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('HangSanXuatId')->references('id')->on('hang_san_xuats');
@@ -108,7 +109,7 @@ class CreateDatabase extends Migration
             $table->integer('SoLuongTon');
             $table->double('GiaNhap')->nullable();
             $table->double('GiaBan');
-            $table->string('ThuocTinhValue'); //luu thanh` json ["XL", "Đỏ"]
+            $table->json('ThuocTinhValue'); //luu thanh` json ["XL", "Đỏ"]
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('SanPhamId')->references('id')->on('san_phams');

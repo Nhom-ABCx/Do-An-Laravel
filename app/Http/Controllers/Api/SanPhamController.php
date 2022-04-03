@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 //php artisan make:controller Api/SanPhamController --api --model=SanPham
 use App\Http\Controllers\Controller;
+use App\Models\CT_SanPham;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -77,11 +78,29 @@ class SanPhamController extends Controller
         foreach ($data as $key => $item) {
             //ghi de` lai` mang? thu'[0] thanh` 1 mang? du lieu moi'
             //ep' kieu? mang? $item thanh` collect, sau do' chi lay' phan` tu? co' ten 'value'
-            $data[$key] = (collect($item)->pluck("value"));
+            $data[$key] = collect($item)->pluck("value");
         }
         //$data = [["128 GB", "256 GB", "512 GB", "1024 GB"], ["Vàng đồng", "Xám", "Bạc", "Xanh dương"]];
         //The kind of explodes all elements in the array and sets them as paramenters.(...$options)
+        $array = [];
 
-        return response()->json(Arr::crossJoin(...$data), 200);
+        foreach (Arr::crossJoin(...$data) as $items) {
+            $thuocTinhValue = json_encode($items, JSON_UNESCAPED_UNICODE);
+
+            ///https://laracasts.com/discuss/channels/testing/testing-a-model-that-has-some-json-fields
+            //dang lam` dang do?
+            $sanPham = new SanPham;
+            dd(empty($sanPham->id));
+            foreach (CT_SanPham::where("SanPhamId", 1)->get() as $sp) {
+                if ($sp->decodeThuocTinhValue() == collect($items))
+                    $sanPham = $sp;
+            }
+            dd($sanPham);
+
+            dd("1");
+            $array[] = ["BienThe" => $thuocTinhValue, "GiaBan" => 0];
+        }
+
+        return response()->json($array, 200);
     }
 }

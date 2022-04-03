@@ -466,9 +466,11 @@
             },
             //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
             processData: false,
+            dataSrc: "", //lay vi tri la rong~ ko phai mac dinh "data"=>[...]
+            //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+            dataType: "json",
             // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la json nen de la json
             contentType: "application/json; charset=utf-8",
-            dataSrc: "", //lay vi tri la rong~ ko phai mac dinh "data"=>[...]
         },
         //do du lieu vao cot
         columns: [{
@@ -480,13 +482,10 @@
                 searchable: false
             },
             {
-                data: null,
-                render: function(data, type, row, meta) {
-                    return data;
-                },
+                data: 'BienThe',
             },
             {
-                data: null,
+                data: 'GiaBan',
                 className: "pink",
                 render: DataTable.render.number(',', '.'),
             },
@@ -639,26 +638,38 @@
         //lay' ra so' luong dong` cua the div hien tai
         let countDiv = $("#accordion div.panel-default").length;
 
-        $(`<div class="panel panel-default"> <div class="panel-heading"> <h4 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse` +
-            countDiv +
-            `"> <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down" data-icon-show="icon-angle-right"></i> &nbsp; <i class=" icon-asterisk smaller-75 green"></i> <label id="tenthuoctinh-` +
-            countDiv + `"> Thuộc tính mới </label> <label style="width: 20px"></label> <span id="lstThuocTinh"></span> </a> </h4> </div> <div class="panel-collapse in" id="collapse` +
-            countDiv +
-            `"> <div class="panel-body"> <div class="form-group"> <label>Tên thuộc tính</label> <div> <div class="input-group"> <input type="text" class="autosize-transition form-control" placeholder="vd: Size/Color" name="ThuocTinh[]" style="font-weight: bold;" id="txtTenThuocTinh-` +
-            countDiv + `" onchange="inputTenThuocTinhToHopChange(` +
-            countDiv +
-            `)"/> <a href="#" class="input-group-addon red" style="background-color:transparent"> <i class="icon-trash"></i> </a> </div> </div> </div> <div class="space-4"></div> <div class="form-group"> <label>Giá trị thuộc tính</label> <div id="form-thuoctinh-tohop-` +
-            countDiv +
-            `"> <div class="input-group" style="margin-bottom: 5px"> <input type="text" class="autosize-transition form-control" placeholder="vd: Red/Green/Blue" name="ThuocTinhToHop[` +
-            countDiv + `][]" style="font-weight: bold;" onchange="inputThuocTinhToHopChange(` + countDiv + `)" /> <a href="javascript:void(0)" id="xoa-thuoctinh-tohop-` + countDiv +
-            `-0" onclick="xoaTheInputBienThe(` + countDiv +
-            `,0)" class="input-group-addon red" style="background-color:transparent"> <i class="icon-trash"></i> </a> </div> </div> <div class="input-group" style="margin-bottom: 5px"> <input id="txtThemThuocTinh-` +
-            countDiv + `" type="text" class="autosize-transition form-control" placeholder="Thêm giá trị khác ?" value="" /> <a href="javascript:void(0)" onclick="themTheInputBienThe(` +
-            countDiv +
-            `,'` + $('#txtTenThuocTinh-' + countDiv).val() +
-            `')" role="button" class="input-group-addon green" data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính"> <i class="icon-plus"></i> </a> </div> </div> </div> </div></div>`
-        ).insertBefore(selectThis);
-        //them vao` truoc' selector bang` 1 cai' widget
+        //validate
+        let divTruocDo = countDiv - 1;
+        let txtTenThuocTinh = $('#txtTenThuocTinh-' + divTruocDo).val();
+        let txtGiaTriThuocTinhDauTien = $('input[name^="ThuocTinhToHop[' + divTruocDo + ']"]').first().val();
+        if (txtTenThuocTinh == '' || txtGiaTriThuocTinhDauTien == '') {
+            toastr.error("Thuộc tính mới không được bỏ trống !", 'Có lỗi xảy ra', {
+                timeOut: 3000
+            });
+        } else {
+
+
+            $(`<div class="panel panel-default"> <div class="panel-heading"> <h4 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse` +
+                countDiv +
+                `"> <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down" data-icon-show="icon-angle-right"></i> &nbsp; <i class=" icon-asterisk smaller-75 green"></i> <label id="tenthuoctinh-` +
+                countDiv + `"> Thuộc tính mới </label> <label style="width: 20px"></label> <span id="lstThuocTinh"></span> </a> </h4> </div> <div class="panel-collapse in" id="collapse` +
+                countDiv +
+                `"> <div class="panel-body"> <div class="form-group"> <label>Tên thuộc tính</label> <div> <div class="input-group"> <input type="text" class="autosize-transition form-control" placeholder="vd: Size/Color" name="ThuocTinh[]" style="font-weight: bold;" id="txtTenThuocTinh-` +
+                countDiv + `" onchange="inputTenThuocTinhToHopChange(` +
+                countDiv +
+                `)"/> <a href="#" class="input-group-addon red" style="background-color:transparent"> <i class="icon-trash"></i> </a> </div> </div> </div> <div class="space-4"></div> <div class="form-group"> <label>Giá trị thuộc tính</label> <div id="form-thuoctinh-tohop-` +
+                countDiv +
+                `"> <div class="input-group" style="margin-bottom: 5px"> <input type="text" class="autosize-transition form-control" placeholder="vd: Red/Green/Blue" name="ThuocTinhToHop[` +
+                countDiv + `][]" style="font-weight: bold;" onchange="inputThuocTinhToHopChange(` + countDiv + `)" /> <a href="javascript:void(0)" id="xoa-thuoctinh-tohop-` + countDiv +
+                `-0" onclick="xoaTheInputBienThe(` + countDiv +
+                `,0)" class="input-group-addon red" style="background-color:transparent"> <i class="icon-trash"></i> </a> </div> </div> <div class="input-group" style="margin-bottom: 5px"> <input id="txtThemThuocTinh-` +
+                countDiv + `" type="text" class="autosize-transition form-control" placeholder="Thêm giá trị khác ?" value="" /> <a href="javascript:void(0)" onclick="themTheInputBienThe(` +
+                countDiv +
+                `,'` + $('#txtTenThuocTinh-' + countDiv).val() +
+                `')" role="button" class="input-group-addon green" data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính"> <i class="icon-plus"></i> </a> </div> </div> </div> </div></div>`
+            ).insertBefore(selectThis);
+            //them vao` truoc' selector bang` 1 cai' widget
+        }
     }
 
     function themTheInputThuocTinh() {
@@ -667,14 +678,20 @@
         let inputKey = $('#txtThuocTinh-Key');
         let inputValue = $('#txtThuocTinh-Value');
 
-        //them vào trước selector
-        $(`<div class="div-thuoctinh"><span class="input-icon"><input type="text" class="input-xlarge" value="` + inputKey.val() +
-            `" name="ThuocTinhChung[0][]"><i class="icon-apple blue"></i></span><span class="input-icon input-icon-right"><input type="text" class="input-xxlarge" value="` + inputValue.val() +
-            `" name="ThuocTinhChung[1][]"><i class="icon-android green"></i></span><a href="javascript:void(0)" id="xoa-thuoctinh-` + countDiv + `" onclick="xoaTheInputThuocTinh(` + countDiv +
-            `)" class="btn btn-white"><i class="icon-trash red"></i></a></div>`).insertBefore("#div-themthuoctinh");
+        if (inputKey.val() == '' || inputValue.val() == '') {
+            toastr.error("Không được bỏ trống !", 'Có lỗi xảy ra', {
+                timeOut: 3000
+            });
+        } else {
+            //them vào trước selector
+            $(`<div class="div-thuoctinh"><span class="input-icon"><input type="text" class="input-xlarge" value="` + inputKey.val() +
+                `" name="ThuocTinhChung[0][]"><i class="icon-apple blue"></i></span><span class="input-icon input-icon-right"><input type="text" class="input-xxlarge" value="` + inputValue.val() +
+                `" name="ThuocTinhChung[1][]"><i class="icon-android green"></i></span><a href="javascript:void(0)" id="xoa-thuoctinh-` + countDiv + `" onclick="xoaTheInputThuocTinh(` + countDiv +
+                `)" class="btn btn-white"><i class="icon-trash red"></i></a></div>`).insertBefore("#div-themthuoctinh");
 
-        inputKey.val('');
-        inputValue.val('');
+            inputKey.val('');
+            inputValue.val('');
+        }
     }
 
     function themTheInputBienThe(parentIndex, tenThuocTinh) {
@@ -682,21 +699,28 @@
         let countDiv = $("#form-thuoctinh-tohop-" + parentIndex + " div.input-group").length;
         let txtThemThuocTinh = $('#txtThemThuocTinh-' + parentIndex);
 
-        //them vào sau selector
-        $('#form-thuoctinh-tohop-' + parentIndex).append(
-            `<div class="input-group" style="margin-bottom: 5px"><input type="text" class="autosize-transition form-control" placeholder="" name="ThuocTinhToHop[` + parentIndex +
-            `][]" ThuocTinh="` + tenThuocTinh + `" value="` +
-            txtThemThuocTinh.val() + `" style="font-weight: bold;" onchange="inputThuocTinhToHopChange(` + parentIndex +
-            `)"/><a href="javascript:void(0)" id="xoa-thuoctinh-tohop-` +
-            parentIndex + `-` + countDiv + `"onclick="xoaTheInputBienThe(` + parentIndex + `,` + countDiv +
-            `)" class="input-group-addon red" style="background-color:transparent"><i class="icon-trash"></i></a></div>`);
+        if (txtThemThuocTinh.val() == '') {
+            toastr.error("Không được bỏ trống !", 'Có lỗi xảy ra', {
+                timeOut: 3000
+            });
+        } else {
 
-        //reset cai the? input lai
-        txtThemThuocTinh.val('');
-        //refesh
-        inputThuocTinhToHopChange(parentIndex);
-        //reload datatable
-        reloadDatatableBienThe();
+            //them vào sau selector
+            $('#form-thuoctinh-tohop-' + parentIndex).append(
+                `<div class="input-group" style="margin-bottom: 5px"><input type="text" class="autosize-transition form-control" placeholder="" name="ThuocTinhToHop[` + parentIndex +
+                `][]" ThuocTinh="` + tenThuocTinh + `" value="` +
+                txtThemThuocTinh.val() + `" style="font-weight: bold;" onchange="inputThuocTinhToHopChange(` + parentIndex +
+                `)"/><a href="javascript:void(0)" id="xoa-thuoctinh-tohop-` +
+                parentIndex + `-` + countDiv + `"onclick="xoaTheInputBienThe(` + parentIndex + `,` + countDiv +
+                `)" class="input-group-addon red" style="background-color:transparent"><i class="icon-trash"></i></a></div>`);
+
+            //reset cai the? input lai
+            txtThemThuocTinh.val('');
+            //refesh
+            inputThuocTinhToHopChange(parentIndex);
+            //reload datatable
+            reloadDatatableBienThe();
+        }
     }
 
     function xoaTheInputThuocTinh(index) {
