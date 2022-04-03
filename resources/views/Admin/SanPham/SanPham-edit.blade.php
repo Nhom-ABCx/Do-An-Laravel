@@ -150,7 +150,7 @@
                                         <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Thuộc tính</label>
 
                                         <div id="form-thuoctinh" class="col-sm-10">
-                                            @foreach ($sanPham->decodeThuocTinh() as $key => $value)
+                                            @foreach ($sanPham->ThuocTinh as $key => $value)
                                                 <div class="div-thuoctinh">
                                                     <span class="input-icon">
                                                         <input type="text" class="input-xlarge" value="{{ $key }}" name="ThuocTinhChung[0][]">
@@ -280,7 +280,7 @@
                                         <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Biến thể</label>
 
                                         <div id="accordion" class="accordion-style1 panel-group col-sm-10">
-                                            @foreach ($sanPham->decodeThuocTinhToHop() as $thuocTinh)
+                                            @foreach ($sanPham->ThuocTinhToHop as $thuocTinh)
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
@@ -311,8 +311,8 @@
                                                                 <div>
                                                                     <div class="input-group">
                                                                         <input type="text" class="autosize-transition form-control" placeholder="vd: Size/Color" name="ThuocTinh[]"
-                                                                            value="{{ $sanPham->decodeThuocTinhToHop()[$loop->index] }}" style="font-weight: bold;"
-                                                                            id="txtTenThuocTinh-{{ $loop->index }}" onchange="inputTenThuocTinhToHopChange({{ $loop->index }})" />
+                                                                            value="{{ $sanPham->ThuocTinhToHop[$loop->index] }}" style="font-weight: bold;" id="txtTenThuocTinh-{{ $loop->index }}"
+                                                                            onchange="inputTenThuocTinhToHopChange({{ $loop->index }})" />
 
 
                                                                         <a href="#" class="input-group-addon red" style="background-color:transparent">

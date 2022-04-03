@@ -19,10 +19,10 @@ class CT_SanPham extends Model
         'GiaBan',
         'ThuocTinhValue',
     ];
-    public function decodeThuocTinhValue()
-    {
-        return collect(json_decode($this->ThuocTinhValue));
-    }
+    protected $casts = [
+        'ThuocTinhValue' => 'array',
+    ];
+
     public function SanPham()
     {
         return $this->belongsTo(SanPham::class, 'SanPhamId');

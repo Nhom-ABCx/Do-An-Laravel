@@ -127,7 +127,7 @@
                                         </td>
                                         <td><?php echo e($item->TenSanPham); ?></td>
                                         <td>
-                                            <?php $__currentLoopData = $item->decodeThuocTinhToHop(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $thuocTinh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php $__currentLoopData = $item->ThuocTinhToHop; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $thuocTinh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <p><i class=" icon-asterisk smaller-75 green"></i> <?php echo e($thuocTinh); ?></p>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </td>

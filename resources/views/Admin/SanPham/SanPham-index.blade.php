@@ -135,7 +135,7 @@
                                         </td>
                                         <td>{{ $item->TenSanPham }}</td>
                                         <td>
-                                            @foreach ($item->decodeThuocTinhToHop() as $thuocTinh)
+                                            @foreach ($item->ThuocTinhToHop as $thuocTinh)
                                                 <p><i class=" icon-asterisk smaller-75 green"></i> {{ $thuocTinh }}</p>
                                             @endforeach
                                         </td>

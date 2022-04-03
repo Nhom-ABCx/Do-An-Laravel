@@ -147,7 +147,7 @@
                                         <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Thuộc tính</label>
 
                                         <div id="form-thuoctinh" class="col-sm-10">
-                                            <?php $__currentLoopData = $sanPham->decodeThuocTinh(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php $__currentLoopData = $sanPham->ThuocTinh; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="div-thuoctinh">
                                                     <span class="input-icon">
                                                         <input type="text" class="input-xlarge" value="<?php echo e($key); ?>" name="ThuocTinhChung[0][]">
@@ -279,7 +279,7 @@
                                         <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Biến thể</label>
 
                                         <div id="accordion" class="accordion-style1 panel-group col-sm-10">
-                                            <?php $__currentLoopData = $sanPham->decodeThuocTinhToHop(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $thuocTinh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php $__currentLoopData = $sanPham->ThuocTinhToHop; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $thuocTinh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
@@ -311,8 +311,8 @@
                                                                 <div>
                                                                     <div class="input-group">
                                                                         <input type="text" class="autosize-transition form-control" placeholder="vd: Size/Color" name="ThuocTinh[]"
-                                                                            value="<?php echo e($sanPham->decodeThuocTinhToHop()[$loop->index]); ?>" style="font-weight: bold;"
-                                                                            id="txtTenThuocTinh-<?php echo e($loop->index); ?>" onchange="inputTenThuocTinhToHopChange(<?php echo e($loop->index); ?>)" />
+                                                                            value="<?php echo e($sanPham->ThuocTinhToHop[$loop->index]); ?>" style="font-weight: bold;" id="txtTenThuocTinh-<?php echo e($loop->index); ?>"
+                                                                            onchange="inputTenThuocTinhToHopChange(<?php echo e($loop->index); ?>)" />
 
 
                                                                         <a href="#" class="input-group-addon red" style="background-color:transparent">

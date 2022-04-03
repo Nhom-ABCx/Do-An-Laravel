@@ -95,7 +95,6 @@ class CreateDatabase extends Migration
             $table->json('ThuocTinh')->unique(); //luu thanh` json {"TenThuocTinh": "GiaTri"}
             $table->longText('MoTa')->nullable();
             $table->integer('LuotMua')->default(0);
-            //https://viblo.asia/p/use-mysql-json-field-in-laravel-OeVKBqk05kW
             $table->json("ThuocTinhToHop");  //luu thanh` json ["Size", "Color"]
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa

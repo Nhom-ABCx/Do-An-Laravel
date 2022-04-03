@@ -37,8 +37,9 @@ class UserHomeController extends Controller
 
 
         //vi du
+        //https://viblo.asia/p/use-mysql-json-field-in-laravel-OeVKBqk05kW
         $sanPham = SanPham::all()->first();
-        foreach ($sanPham->decodeThuocTinh() as $key => $value) {
+        foreach ($sanPham->ThuocTinh as $key => $value) {
             echo $key . " - " . $value . "</br>";
         }
 
@@ -47,8 +48,8 @@ class UserHomeController extends Controller
 
 
         foreach ($sanPham->CT_SanPham as $item) {
-            $sanPham->decodeThuocTinhToHop()->each(function ($value, $key) use ($item) {
-                echo " - " . $item->decodeThuocTinhValue()[$key];
+            collect($sanPham->ThuocTinhToHop)->each(function ($value, $key) use ($item) {
+                echo " - " . $item->ThuocTinhValue[$key];
             });
             echo "</br></br>";
         }

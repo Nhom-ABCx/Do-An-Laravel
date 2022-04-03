@@ -21,25 +21,21 @@ class SanPham extends Model
         'LuotMua',
         'ThuocTinhToHop',
     ];
+    protected $casts = [
+        'ThuocTinh' => 'array',
+        'ThuocTinhToHop' => 'array',
+    ];
     public function lstThuocTinh()
     {
         $lstThuocTinh = collect([]);
-        $this->decodeThuocTinhToHop()->each(function ($item, $key) use ($lstThuocTinh) {
+        collect($this->ThuocTinhToHop)->each(function ($item, $key) use ($lstThuocTinh) {
             $array = collect([]);
             foreach ($this->CT_SanPham as $ct) {
-                $array[] = $ct->decodeThuocTinhValue()[$key];
+                $array[] = $ct->ThuocTinhValue[$key];
             }
             $lstThuocTinh = Arr::add($lstThuocTinh, $key, $array->unique()->values()->all());
         });
         return $lstThuocTinh;
-    }
-    public function decodeThuocTinh()
-    {
-        return collect(json_decode($this->ThuocTinh, true));
-    }
-    public function decodeThuocTinhToHop()
-    {
-        return collect(json_decode($this->ThuocTinhToHop, true));
     }
     public function tongSoLuongTon()
     {
