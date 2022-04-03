@@ -363,17 +363,6 @@
             icon_up: 'icon-caret-up',
             icon_down: 'icon-caret-down'
         });
-        $('#spinner3').ace_spinner({
-            value: _valueSL,
-            min: 0,
-            max: 10000,
-            step: 5,
-            on_sides: true,
-            icon_up: 'icon-plus smaller-75',
-            icon_down: 'icon-minus smaller-75',
-            btn_up_class: 'btn-success',
-            btn_down_class: 'btn-danger'
-        });
 
 
 
@@ -445,101 +434,113 @@
         */
     });
 
+    //khoi tao bang?
+    //lay' ra het tat' ca? input ThuocTinhToHop
+    let output = [];
+    var arrayInput = $('input[name^=ThuocTinhToHop]').map(function() {
+        //lay' ra input co' thuoctinh thuoc ve` input do'
+        let key = $(this).attr("ThuocTinh");
+        let value = $(this).val();
+        //day? vao` mang? tam
+        output.push({
+            key: key,
+            value: value
+        });
+    });
+    //nhom'-tach' ket qua? lai
+    result = output.reduce(function(r, a) {
+        r[a.key] = r[a.key] || [];
+        r[a.key].push(a);
+        return r;
+    }, Object.create(null));
+    //
+
+    $('#BienTheSanPham').dataTable({
+        autoWidth: false, //ko co cai nay` la` no' thu nho? lai max xau'
+        ajax: {
+            url: "<?php echo e(route('SanPham.CrossJoin')); ?>",
+            method: 'POST',
+            //gui di voi cai form
+            data: function(d) {
+                return JSON.stringify(result);
+            },
+            //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
+            processData: false,
+            // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la json nen de la json
+            contentType: "application/json; charset=utf-8",
+            dataSrc: "", //lay vi tri la rong~ ko phai mac dinh "data"=>[...]
+        },
+        //do du lieu vao cot
+        columns: [{
+                data: null,
+                render: function(data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                },
+                className: "center",
+                searchable: false
+            },
+            {
+                data: null,
+                render: function(data, type, row, meta) {
+                    return data;
+                },
+            },
+            {
+                data: null,
+                className: "pink",
+                render: DataTable.render.number(',', '.'),
+            },
+            {
+                //render tool
+                data: null,
+                render: function(data, type, row, meta) {
+                    return `<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                <a class="blue" href="javascript:void(0)" onclick="showSanPham(` + data + `)" role="button" data-toggle="modal" data-rel="tooltip" title="Xem chi tiết">
+                                    <i class="icon-zoom-in bigger-130"></i>
+                                </a>
+
+                            </div>
+
+                            <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                <div class="inline position-relative">
+                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon-caret-down icon-only bigger-120"></i>
+                                    </button>
+
+                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                        <li>
+                                            <a href="javascript:void(0)" onclick="showSanPham(` + data + `)" role="button" data-toggle="modal" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
+                                                <span class="blue">
+                                                    <i class="icon-zoom-in bigger-120"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>`;
+                },
+                orderable: false,
+                searchable: false
+            },
+        ],
+        createdRow: function(row, data, rowIndex) {
+            //khi tao moi 1 row, them cac thuoc tinh vao cac td
+            $.each($('td', row), function(colIndex) {
+                if (colIndex == 2) {
+                    $(this).attr('class', 'GiaBan pink');
+                    $(this).attr('data-name', 'GiaBan');
+                    $(this).attr('data-pk', data.id);
+                }
+            });
+        },
+    });
 
 
+    $('#submitForm').on('change', function(e) {
 
-
-
-
-    // var arrayInput = $('input[name^=ThuocTinhToHop]').map(function() {
-    //     return $(this).val();
-    // });
-    var arrayInput = $('input[name^=ThuocTinhToHop]');
-    console.error(arrayInput);
-
-
-
-
-
-
-
-
-
-
-
-
-    // $('#BienTheSanPham').dataTable({
-    //         autoWidth: false, //ko co cai nay` la` no' thu nho? lai max xau'
-    //         ajax: {
-    //             url: "<?php echo e(route('SanPham.CrossJoin')); ?>",
-    //             method: 'POST',
-    //             //gui di voi cai form
-    //             data: new FormData(this),
-    //             processData: false,
-    //             contentType: false,
-    //             dataSrc: "", //lay vi tri la rong~ ko phai mac dinh "data"=>[...]
-    //         },
-    //         //do du lieu vao cot
-    //         columns: [{
-    //                 data: null,
-    //                 className: "center",
-    //                 searchable: false
-    //             },
-    //             {
-    //                 data: 'TenSanPham'
-    //             },
-    //             {
-    //                 data: 'GiaBan',
-    //                 className: "pink",
-    //                 render: DataTable.render.number(',', '.'),
-    //             },
-    //             {
-    //                 //render tool
-    //                 data: 'id',
-    //                 render: function(data, type, row, meta) {
-    //                     return `<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-    //                 <a class="blue" href="javascript:void(0)" onclick="showSanPham(` + data + `)" role="button" data-toggle="modal" data-rel="tooltip" title="Xem chi tiết">
-    //                     <i class="icon-zoom-in bigger-130"></i>
-    //                 </a>
-
-    //             </div>
-
-    //             <div class="visible-xs visible-sm hidden-md hidden-lg">
-    //                 <div class="inline position-relative">
-    //                     <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-    //                         <i class="icon-caret-down icon-only bigger-120"></i>
-    //                     </button>
-
-    //                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-    //                         <li>
-    //                             <a href="javascript:void(0)" onclick="showSanPham(` + data + `)" role="button" data-toggle="modal" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
-    //                                 <span class="blue">
-    //                                     <i class="icon-zoom-in bigger-120"></i>
-    //                                 </span>
-    //                             </a>
-    //                         </li>
-
-    //                     </ul>
-    //                 </div>
-    //             </div>`;
-    //                 },
-    //                 orderable: false,
-    //                 searchable: false
-    //             },
-    //         ],
-    //         createdRow: function(row, data, rowIndex) {
-    //             //khi tao moi 1 row, them cac thuoc tinh vao cac td
-    //             $.each($('td', row), function(colIndex) {
-    //                 if (colIndex == 2) {
-    //                     $(this).attr('class', 'GiaBan pink');
-    //                     $(this).attr('data-name', 'GiaBan');
-    //                     $(this).attr('data-pk', data.id);
-    //                 }
-    //             });
-    //         },
-    //     });
-
-
+        reloadDatatableBienThe();
+    });
 
 
     //ajax
@@ -552,8 +553,6 @@
         let a = $(form).find('#editor1').html();
         // console.log(a);
         let b = $(form).find('textarea[name="MoTa"]').text(a);
-
-
 
         $.ajax({
             //gui di voi phuong thuc' cua Form
@@ -590,6 +589,30 @@
 
 
 <script type="text/javascript">
+    function reloadDatatableBienThe() {
+        //lay' ra het tat' ca? input ThuocTinhToHop
+        let output = [];
+        var arrayInput = $('input[name^=ThuocTinhToHop]').map(function() {
+            //lay' ra input co' thuoctinh thuoc ve` input do'
+            let key = $(this).attr("ThuocTinh");
+            let value = $(this).val();
+            //day? vao` mang? tam
+            output.push({
+                key: key,
+                value: value
+            });
+        });
+        //nhom'-tach' ket qua? lai
+        result = output.reduce(function(r, a) {
+            r[a.key] = r[a.key] || [];
+            r[a.key].push(a);
+            return r;
+        }, Object.create(null));
+
+        //reload lai datatable
+        $('#BienTheSanPham').DataTable().ajax.reload();
+    }
+
     function inputTenThuocTinhToHopChange(index) {
         //khi thay doi ten cua thuoc tinh to? hop thi` cap nhat lai cai the?
         let txtTenThuocTinh = $('#txtTenThuocTinh-' + index).val();
@@ -632,7 +655,8 @@
             `,0)" class="input-group-addon red" style="background-color:transparent"> <i class="icon-trash"></i> </a> </div> </div> <div class="input-group" style="margin-bottom: 5px"> <input id="txtThemThuocTinh-` +
             countDiv + `" type="text" class="autosize-transition form-control" placeholder="Thêm giá trị khác ?" value="" /> <a href="javascript:void(0)" onclick="themTheInputBienThe(` +
             countDiv +
-            `)" role="button" class="input-group-addon green" data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính"> <i class="icon-plus"></i> </a> </div> </div> </div> </div></div>`
+            `,'` + $('#txtTenThuocTinh-' + countDiv).val() +
+            `')" role="button" class="input-group-addon green" data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính"> <i class="icon-plus"></i> </a> </div> </div> </div> </div></div>`
         ).insertBefore(selectThis);
         //them vao` truoc' selector bang` 1 cai' widget
     }
@@ -653,14 +677,15 @@
         inputValue.val('');
     }
 
-    function themTheInputBienThe(parentIndex) {
+    function themTheInputBienThe(parentIndex, tenThuocTinh) {
         //lay' ra so' luong input-group cua? #form
         let countDiv = $("#form-thuoctinh-tohop-" + parentIndex + " div.input-group").length;
         let txtThemThuocTinh = $('#txtThemThuocTinh-' + parentIndex);
 
         //them vào sau selector
         $('#form-thuoctinh-tohop-' + parentIndex).append(
-            `<div class="input-group" style="margin-bottom: 5px"><input type="text" class="autosize-transition form-control" placeholder="" name="ThuocTinhToHop[` + parentIndex + `][]" value="` +
+            `<div class="input-group" style="margin-bottom: 5px"><input type="text" class="autosize-transition form-control" placeholder="" name="ThuocTinhToHop[` + parentIndex +
+            `][]" ThuocTinh="` + tenThuocTinh + `" value="` +
             txtThemThuocTinh.val() + `" style="font-weight: bold;" onchange="inputThuocTinhToHopChange(` + parentIndex +
             `)"/><a href="javascript:void(0)" id="xoa-thuoctinh-tohop-` +
             parentIndex + `-` + countDiv + `"onclick="xoaTheInputBienThe(` + parentIndex + `,` + countDiv +
@@ -670,6 +695,8 @@
         txtThemThuocTinh.val('');
         //refesh
         inputThuocTinhToHopChange(parentIndex);
+        //reload datatable
+        reloadDatatableBienThe();
     }
 
     function xoaTheInputThuocTinh(index) {
@@ -680,6 +707,8 @@
         $('#xoa-thuoctinh-tohop-' + parentIndex + '-' + index).parent().remove();
         //refesh
         inputThuocTinhToHopChange(parentIndex);
+        //reload datatable
+        reloadDatatableBienThe();
     }
 </script>
 <?php /**PATH E:\DDDD\WEB\Laravel\Do-An-Laravel\resources\views/Admin/SanPham/script/SanPham-edit-script.blade.php ENDPATH**/ ?>

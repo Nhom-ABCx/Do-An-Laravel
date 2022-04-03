@@ -331,8 +331,8 @@
                                                                     @foreach ($sanPham->lstThuocTinh()[$loop->index] as $item)
                                                                         <div class="input-group" style="margin-bottom: 5px">
                                                                             <input type="text" class="autosize-transition form-control" placeholder="vd: Red/Green/Blue"
-                                                                                name="ThuocTinhToHop[{{ $loop->parent->index }}][]" value="{{ $item }}" style="font-weight: bold;"
-                                                                                onchange="inputThuocTinhToHopChange({{ $loop->parent->index }})" />
+                                                                                name="ThuocTinhToHop[{{ $loop->parent->index }}][]" ThuocTinh="{{ $thuocTinh }}" value="{{ $item }}"
+                                                                                style="font-weight: bold;" onchange="inputThuocTinhToHopChange({{ $loop->parent->index }})" />
 
                                                                             <a href="javascript:void(0)" id="xoa-thuoctinh-tohop-{{ $loop->parent->index }}-{{ $loop->index }}"
                                                                                 onclick="xoaTheInputBienThe({{ $loop->parent->index }},{{ $loop->index }})" class="input-group-addon red"
@@ -346,8 +346,8 @@
                                                                     <input id="txtThemThuocTinh-{{ $loop->index }}" type="text" class="autosize-transition form-control"
                                                                         placeholder="Thêm giá trị khác ?" value="" />
 
-                                                                    <a href="javascript:void(0)" onclick="themTheInputBienThe({{ $loop->index }})" role="button" class="input-group-addon green"
-                                                                        data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính">
+                                                                    <a href="javascript:void(0)" onclick="themTheInputBienThe({{ $loop->index }},'{{ $thuocTinh }}')" role="button"
+                                                                        class="input-group-addon green" data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính">
                                                                         <i class="icon-plus"></i>
                                                                     </a>
                                                                 </div>

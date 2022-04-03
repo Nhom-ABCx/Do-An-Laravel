@@ -174,7 +174,4 @@ Route::group([
     ]);
     Route::get("LoaiSanPhamm/DaXoa", [LoaiSanPhamController::class, "LoaiSanPhamDaXoa"])->name("LoaiSanPham.DaXoa");
     Route::post("LoaiSanPham/KhoiPhuc/{id}", [LoaiSanPhamController::class, "KhoiPhucLoaiSanPham"])->name("LoaiSanPham.KhoiPhuc");
-    //json ajax
-    Route::get('HoaDonNhap/{hoaDonNhap}', [HoaDonNhapController::class, "API_HoaDonNhap_ChiTiet"])->name("HoaDonNhap.APIChiTiet");
-    Route::post('SanPham-CrossJoin-Input', [SanPhamController::class, "API_SanPham_CrossJoin"])->name("SanPham.CrossJoin");
 });

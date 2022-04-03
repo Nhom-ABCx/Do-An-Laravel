@@ -3,16 +3,16 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Admin\SanPhamController;
-use App\Http\Controllers\Admin\KhachHangController;
 use App\Http\Controllers\SendEmailController;
-use App\Http\Controllers\Admin\HoaDonController;
-use App\Http\Controllers\Admin\BinhLuanController;
-use App\Http\Controllers\Admin\YeuThichController;
-use App\Http\Controllers\Admin\DiaChiController;
-use App\Http\Controllers\Admin\MessageController;
-use App\Http\Controllers\Admin\HoaDonNhapController;
-use App\Http\Controllers\Admin\GioHangController;
+use App\Http\Controllers\Api\SanPhamController;
+use App\Http\Controllers\Api\KhachHangController;
+use App\Http\Controllers\Api\HoaDonController;
+use App\Http\Controllers\Api\BinhLuanController;
+use App\Http\Controllers\Api\YeuThichController;
+use App\Http\Controllers\Api\DiaChiController;
+use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Api\HoaDonNhapController;
+use App\Http\Controllers\Api\GioHangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,3 +102,6 @@ Route::delete('GioHang/delete', [GioHangController::class, "API_Delete_SanPham_G
 Route::delete('GioHang/delete', [GioHangController::class, "API_Delete_SanPham_GioHang"]);
 Route::get('GioHang/{khachHang}', [GioHangController::class, "API_Get_GioHang"]);
 Route::post('GioHang/addList', [GioHangController::class, "api_Insert_ListSanPham_GioHang"]);
+//json ajax
+Route::get('HoaDonNhap/{hoaDonNhap}', [HoaDonNhapController::class, "API_HoaDonNhap_ChiTiet"])->name("HoaDonNhap.APIChiTiet");
+Route::post('SanPham-CrossJoin-Input', [SanPhamController::class, "API_SanPham_CrossJoin"])->name("SanPham.CrossJoin");
