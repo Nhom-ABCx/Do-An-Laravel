@@ -14,7 +14,7 @@ class CT_SanPham extends Model
     protected $fillable = [
         'SanPhamId',
         'MaSanPham',
-        'SoLuong',
+        'SoLuongTon',
         'GiaNhap',
         'GiaBan',
         'ThuocTinhValue',

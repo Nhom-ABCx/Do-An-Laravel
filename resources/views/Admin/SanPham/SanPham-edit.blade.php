@@ -68,6 +68,7 @@
                             <div class="widget-body">
                                 <div class="widget-main">
                                     <div class="form-group">
+                                        <span class="error-text TenSanPham-error"></span>
                                         <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Tên sản phẩm </label>
 
                                         <div class="col-sm-10">
@@ -101,7 +102,6 @@
                                         <div class="wysiwyg-editor" id="editor1">{{ $sanPham->MoTa }}</div>
 
                                         <div class="hr hr-double dotted"></div>
-                                        <textarea name="MoTa" style="display:none;"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                                 <div class="widget-main">
                                     <div class="form-group">
                                         @foreach ($sanPham->HinhAnh as $item)
-                                            <img style="width:150px;max-height:150px;object-fit:contain;float: left;" src="{{ $item->fixImage() }}" alt="">
+                                            <img style="width:150px;max-height:150px;object-fit:contain;float: left;" src="{{ $item->HinhAnh }}" alt="">
                                         @endforeach
 
                                         <div class="col-sm-2">
@@ -182,6 +182,7 @@
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
+                                        <span class="error-text HangSanXuatId-error"></span>
                                         <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Hãng sản xuất</label>
 
                                         <div class="col-sm-3">
@@ -205,6 +206,7 @@
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
+                                        <span class="error-text LoaiSanPhamId-error"></span>
                                         <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Loại sản phẩm
                                         </label>
 
@@ -277,11 +279,12 @@
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
+                                        <span class="error-text ThuocTinh-error"></span>
                                         <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Biến thể</label>
 
                                         <div id="accordion" class="accordion-style1 panel-group col-sm-10">
                                             @foreach ($sanPham->ThuocTinhToHop as $thuocTinh)
-                                                <div class="panel panel-default">
+                                                <div class="panel panel-default" id="xoa-thuoctinh-khac-{{ $loop->index }}">
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
                                                             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $loop->index }}">
@@ -315,7 +318,8 @@
                                                                             onchange="inputTenThuocTinhToHopChange({{ $loop->index }})" />
 
 
-                                                                        <a href="#" class="input-group-addon red" style="background-color:transparent">
+                                                                        <a href="javascript:void(0)" onclick="xoaThuocTinhKhac({{ $loop->index }})" class="input-group-addon red"
+                                                                            style="background-color:transparent" title="Xóa thuộc tính">
                                                                             <i class="icon-trash"></i>
                                                                         </a>
                                                                     </div>
@@ -406,16 +410,16 @@
 
                         <div class="clearfix form-actions">
                             <div style="float: right">
-                                <button class="btn" type="reset">
+                                {{-- <button class="btn" type="reset">
                                     <i class="icon-undo bigger-110"></i>
                                     Reset
-                                </button>
+                                </button> --}}
 
                                 &nbsp; &nbsp; &nbsp;
 
                                 <button class="btn btn-info" type="submit">
                                     <i class="icon-ok bigger-110"></i>
-                                    Submit
+                                    Lưu
                                 </button>
                             </div>
                         </div>

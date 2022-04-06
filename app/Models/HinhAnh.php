@@ -16,13 +16,6 @@ class HinhAnh extends Model
         'SanPhamId',
         'HinhAnh',
     ];
-    public function fixImage()
-    {
-        if (Storage::disk('public')->exists("assets/images/product-image/" . $this->SanPhamId . "/" . $this->HinhAnh))
-            return $this->HinhAnh = Storage::url("assets/images/product-image/" . $this->SanPhamId . "/" . $this->HinhAnh);
-
-        return $this->HinhAnh = Storage::url("assets/images/404/Img_error.png");
-    }
     public function SanPham()
     {
         return $this->belongsTo(SanPham::class, 'SanPhamId');

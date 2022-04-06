@@ -104,4 +104,4 @@ Route::get('GioHang/{khachHang}', [GioHangController::class, "API_Get_GioHang"])
 Route::post('GioHang/addList', [GioHangController::class, "api_Insert_ListSanPham_GioHang"]);
 //json ajax
 Route::get('HoaDonNhap/{hoaDonNhap}', [HoaDonNhapController::class, "API_HoaDonNhap_ChiTiet"])->name("HoaDonNhap.APIChiTiet");
-Route::post('SanPham-CrossJoin-Input', [SanPhamController::class, "API_SanPham_CrossJoin"])->name("SanPham.CrossJoin");
+Route::post('SanPham-CrossJoin-Input/{sanPham}', [SanPhamController::class, "API_SanPham_CrossJoin"])->name("SanPham.CrossJoin");

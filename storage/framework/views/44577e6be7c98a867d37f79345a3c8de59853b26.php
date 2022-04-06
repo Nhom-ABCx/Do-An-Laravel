@@ -437,7 +437,7 @@
     //khoi tao bang?
     //lay' ra het tat' ca? input ThuocTinhToHop
     let output = [];
-    var arrayInput = $('input[name^=ThuocTinhToHop]').map(function() {
+    $('input[name^=ThuocTinhToHop]').map(function() {
         //lay' ra input co' thuoctinh thuoc ve` input do'
         let key = $(this).attr("ThuocTinh");
         let value = $(this).val();
@@ -447,6 +447,7 @@
             value: value
         });
     });
+
     //nhom'-tach' ket qua? lai
     result = output.reduce(function(r, a) {
         r[a.key] = r[a.key] || [];
@@ -458,7 +459,7 @@
     $('#BienTheSanPham').dataTable({
         autoWidth: false, //ko co cai nay` la` no' thu nho? lai max xau'
         ajax: {
-            url: "<?php echo e(route('SanPham.CrossJoin')); ?>",
+            url: "<?php echo e(route('SanPham.CrossJoin', $sanPham)); ?>",
             method: 'POST',
             //gui di voi cai form
             data: function(d) {
@@ -529,12 +530,68 @@
                 if (colIndex == 2) {
                     $(this).attr('class', 'GiaBan pink');
                     $(this).attr('data-name', 'GiaBan');
-                    $(this).attr('data-pk', data.id);
+                    $(this).attr('data-pk', rowIndex);
                 }
             });
         },
     });
 
+
+
+    $('#BienTheSanPham').editable({
+        title: 'Nhập giá',
+        //url: '#',
+        container: 'body',
+        selector: 'td.GiaBan',
+        type: 'text',
+        //send: 'always',
+        ajaxOptions: {
+            //gui len voi phuong thuc, mac dinh la POST
+            type: "PUT",
+            //mong muon kieu du lieu tra ve tu sever
+            dataType: 'json'
+        },
+        display: function(value) {
+            //khi nhan' vao` thi` display no' moi' chay thi` phai?
+            //do luc' dau` datatable hien thi theo numberFormat "1,000,000" nen loai bo? het dau', cho no' thanh` so'
+            let stringValue = value.replace(/[,]/g, "");
+
+            //khi nhan' thay doi? thi` format lai number
+            let giaBanFormat = new Intl.NumberFormat().format(stringValue);
+            $(this).text(giaBanFormat);
+        },
+        //name: 'SoLuong',
+        validate: function(value) {
+            if ($.trim(value) == '')
+                return 'Không được rỗng';
+            if ($.isNumeric(value) == '')
+                return 'Nhập số';
+        },
+        success: function(response, newValue) {
+
+            var table = $('#BienTheSanPham').closest('table').DataTable();
+            table.cell(this).data(newValue);
+
+            // if (response != null) {
+            //     toastr.success("Cập nhật thành công", 'Thành công', {
+            //         timeOut: 3000
+            //     });
+            // } else {
+            //     toastr.warning("Có gì đó xảy ra", 'Cảnh báo', {
+            //         timeOut: 3000
+            //     });
+            // }
+        },
+        error: function(response) {
+            // console.log("request lỗi");
+
+            // $.each(response.responseJSON, function(key, val) {
+            //     toastr.error(val[0], 'Có lỗi xảy ra', {
+            //         timeOut: 3000
+            //     });
+            // });
+        },
+    });
 
     $('#submitForm').on('change', function(e) {
 
@@ -548,10 +605,15 @@
         e.preventDefault();
         let form = this;
 
-        //truoc khi gui di thi` set value textarea, ko dat trong ham`beforeSend cua ajax dc, ko biet tai sao
-        let a = $(form).find('#editor1').html();
-        // console.log(a);
-        let b = $(form).find('textarea[name="MoTa"]').text(a);
+        let data = new FormData(form);
+        //truoc khi gui di thi` set value textarea, ko dat trong ham`beforeSend cua ajax dc
+        let moTa = $(form).find('#editor1').html();
+        data.append("MoTa", moTa);
+
+        //gui het du lieu cua datatable sang controller luon
+        let datatable = $('#BienTheSanPham').DataTable().rows().data().toArray();
+        data.append("Datatable", JSON.stringify(datatable));
+
 
         $.ajax({
             //gui di voi phuong thuc' cua Form
@@ -559,7 +621,7 @@
             //url = duong dan cua form
             url: $(form).attr('action'),
             //du lieu gui di
-            data: new FormData(form),
+            data: data,
             //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
             processData: false,
             // Kiểu nội dung của dữ liệu được gửi lên server. minh gui len la FormData nen de false
@@ -567,19 +629,25 @@
             //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
             //dataType: 'json',
             //truoc khi gui di thi thuc hien gi do', o day chinh loi~ = rong~
-            beforeSend: function() {},
+            beforeSend: function() {
+                $(form).find('span.error-text').empty();
+            },
             success: function(response) {
-                window.location.href = response;
+                //window.location.href = response;
+
+                toastr.success("Cập nhật thành công", 'Thành công', {
+                    timeOut: 3000
+                });
             },
             error: function(response) {
-                // console.log("request lỗi");
-                // //console.log(response.responseJSON.Username[0]);
-                // $.each(response.responseJSON, function(key, val) {
-                //     $(form).find('span.' + key + '-error').html('<i class="icon-remove bigger-110 red">' + val[0] + '</i>');
-                //     toastr.error(val[0], 'Có lỗi xảy ra', {
-                //         timeOut: 3000
-                //     });
-                // });
+                console.log("request lỗi");
+
+                $.each(response.responseJSON, function(key, val) {
+                    $(form).find('span.' + key + '-error').html('<i class="icon-remove bigger-110 red">' + val[0] + '</i>');
+                    toastr.error(val[0], 'Có lỗi xảy ra', {
+                        timeOut: 3000
+                    });
+                });
             },
         });
     });
@@ -591,7 +659,8 @@
     function reloadDatatableBienThe() {
         //lay' ra het tat' ca? input ThuocTinhToHop
         let output = [];
-        var arrayInput = $('input[name^=ThuocTinhToHop]').map(function() {
+
+        $('input[name^=ThuocTinhToHop]').map(function() {
             //lay' ra input co' thuoctinh thuoc ve` input do'
             let key = $(this).attr("ThuocTinh");
             let value = $(this).val();
@@ -601,12 +670,19 @@
                 value: value
             });
         });
+
+        if (output.length === 0) {
+            $('#BienTheSanPham').DataTable().clear().draw();
+            return;
+        }
+
         //nhom'-tach' ket qua? lai
         result = output.reduce(function(r, a) {
             r[a.key] = r[a.key] || [];
             r[a.key].push(a);
             return r;
         }, Object.create(null));
+
 
         //reload lai datatable
         $('#BienTheSanPham').DataTable().ajax.reload();
@@ -649,7 +725,8 @@
         } else {
 
 
-            $(`<div class="panel panel-default"> <div class="panel-heading"> <h4 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse` +
+            $(`<div class="panel panel-default" id="xoa-thuoctinh-khac-` + countDiv +
+                `"> <div class="panel-heading"> <h4 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse` +
                 countDiv +
                 `"> <i class="icon-angle-down bigger-110" data-icon-hide="icon-angle-down" data-icon-show="icon-angle-right"></i> &nbsp; <i class=" icon-asterisk smaller-75 green"></i> <label id="tenthuoctinh-` +
                 countDiv + `"> Thuộc tính mới </label> <label style="width: 20px"></label> <span id="lstThuocTinh"></span> </a> </h4> </div> <div class="panel-collapse in" id="collapse` +
@@ -657,15 +734,17 @@
                 `"> <div class="panel-body"> <div class="form-group"> <label>Tên thuộc tính</label> <div> <div class="input-group"> <input type="text" class="autosize-transition form-control" placeholder="vd: Size/Color" name="ThuocTinh[]" style="font-weight: bold;" id="txtTenThuocTinh-` +
                 countDiv + `" onchange="inputTenThuocTinhToHopChange(` +
                 countDiv +
-                `)"/> <a href="#" class="input-group-addon red" style="background-color:transparent"> <i class="icon-trash"></i> </a> </div> </div> </div> <div class="space-4"></div> <div class="form-group"> <label>Giá trị thuộc tính</label> <div id="form-thuoctinh-tohop-` +
+                `)"/> <a href="javascript:void(0)" onclick="xoaThuocTinhKhac(` + countDiv +
+                `)" class="input-group-addon red" style="background-color:transparent"> <i class="icon-trash"></i> </a> </div> </div> </div> <div class="space-4"></div> <div class="form-group"> <label>Giá trị thuộc tính</label> <div id="form-thuoctinh-tohop-` +
                 countDiv +
                 `"> <div class="input-group" style="margin-bottom: 5px"> <input type="text" class="autosize-transition form-control" placeholder="vd: Red/Green/Blue" name="ThuocTinhToHop[` +
-                countDiv + `][]" style="font-weight: bold;" onchange="inputThuocTinhToHopChange(` + countDiv + `)" /> <a href="javascript:void(0)" id="xoa-thuoctinh-tohop-` + countDiv +
+                countDiv + `][]" ThuocTinh="` + txtTenThuocTinh + `" style="font-weight: bold;" onchange="inputThuocTinhToHopChange(` + countDiv +
+                `)" /> <a href="javascript:void(0)" id="xoa-thuoctinh-tohop-` + countDiv +
                 `-0" onclick="xoaTheInputBienThe(` + countDiv +
                 `,0)" class="input-group-addon red" style="background-color:transparent"> <i class="icon-trash"></i> </a> </div> </div> <div class="input-group" style="margin-bottom: 5px"> <input id="txtThemThuocTinh-` +
                 countDiv + `" type="text" class="autosize-transition form-control" placeholder="Thêm giá trị khác ?" value="" /> <a href="javascript:void(0)" onclick="themTheInputBienThe(` +
                 countDiv +
-                `,'` + $('#txtTenThuocTinh-' + countDiv).val() +
+                `,'` + txtTenThuocTinh +
                 `')" role="button" class="input-group-addon green" data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính"> <i class="icon-plus"></i> </a> </div> </div> </div> </div></div>`
             ).insertBefore(selectThis);
             //them vao` truoc' selector bang` 1 cai' widget
@@ -731,6 +810,12 @@
         $('#xoa-thuoctinh-tohop-' + parentIndex + '-' + index).parent().remove();
         //refesh
         inputThuocTinhToHopChange(parentIndex);
+        //reload datatable
+        reloadDatatableBienThe();
+    }
+
+    function xoaThuocTinhKhac(index) {
+        $('#xoa-thuoctinh-khac-' + index).remove();
         //reload datatable
         reloadDatatableBienThe();
     }

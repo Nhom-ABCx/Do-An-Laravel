@@ -130,8 +130,10 @@
                                 @foreach ($sanPham as $item)
                                     <tr>
                                         <td class="center">{{ $item->id }}</td>
-                                        <td>
-                                            <img src='{{ $item->HinhAnhh }}' alt="{{ $item->HinhAnhh }}" width='100' height='100'>
+                                        <td style="width: 150px">
+                                            @foreach ($item->HinhAnh as $hinhAnh)
+                                                <img src='{{ $hinhAnh->HinhAnh }}' width='50' height='50'>
+                                            @endforeach
                                         </td>
                                         <td>{{ $item->TenSanPham }}</td>
                                         <td>

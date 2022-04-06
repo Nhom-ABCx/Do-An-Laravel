@@ -11,6 +11,7 @@ use App\Models\CTChuongTrinhKM;
 use App\Models\SanPham;
 use App\Models\LoaiSanPham;
 use App\Models\HangSanXuat;
+use App\Models\HinhAnh;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage; //thu vien luu tru~ de tao lien ket den public
 use Illuminate\Support\Facades\Redirect;
@@ -18,7 +19,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Imports\SanPhamImport;
+use App\Models\CT_SanPham;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SanPhamController extends Controller
@@ -149,28 +152,79 @@ class SanPhamController extends Controller
      */
     public function update(Request $request, SanPham $sanPham)
     {
-        dd($request->all());
+        //kiem tra du lieu
+        $validate = Validator::make($request->all(), [
+            'TenSanPham' => ['required', 'max:255'],
+            //'HinhAnh' => ['required', 'image', "max:102400"], //max:100 Mb
+            'HangSanXuatId' => ['required', 'numeric', 'integer', 'exists:hang_san_xuats,id'],
+            'LoaiSanPhamId' => ['required', 'numeric', 'integer', 'exists:loai_san_phams,id'],
+            'ThuocTinh' => ['array'],
+            'ThuocTinhToHop' => ['array'],
+            'Datatable' => ['json'],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+
+
+
+        //dd(json_decode($request["Datatable"], true));
         //Hình ảnh phải lưu trong public và phải có bước tạo link thì người dùng mới thấy dc
         //store() tự đặt hình bằng chuỗi random, nên tạo thư mục theo mã/tên sp để dễ quản lý
         if ($request->hasFile('HinhAnh')) {
-            $sanPham->HinhAnh = $request->file('HinhAnh')->store('assets/images/product-image/' . $sanPham->id, 'public');
-            //cat chuoi ra, chi luu cai ten thoi
-            $catChuoi = explode("/", $sanPham->HinhAnh);
-            $sanPham->HinhAnh = $catChuoi[4];
+
+            foreach ($request->file('HinhAnh') as $hinhAnh) {
+                $luuHinh = $hinhAnh->store('assets/images/product-image/' . $sanPham->id, 'public');
+
+                //cat chuoi ra, chi luu cai ten thoi
+                $catChuoi = explode("/", $luuHinh);
+                $luuHinh = $catChuoi[4];
+
+                HinhAnh::create([
+                    "SanPhamId" => $sanPham->id,
+                    "HinhAnh" => $luuHinh,
+                ]);
+            }
         }
-        $sanPham->fill([
-            'TenSanPham' => $request->input('TenSanPham'),
-            'MoTa' => $request->input('MoTa') ?? '',
-            'SoLuongTon' => $request->input('SoLuongTon'),
-            'GiaNhap' => $request->input('GiaNhap'),
-            'GiaBan' => $request->input('GiaBan') ?? 0,
-            'HangSanXuatId' => $request->input('HangSanXuatId'),
-            'LoaiSanPhamId' => $request->input('LoaiSanPhamId'),
+
+        //gop key va` value lai thanh` 1 mang? de luu vo dang json
+        $thuocTinhChung =  collect($request['ThuocTinhChung'][0])->combine($request['ThuocTinhChung'][1]);
+
+
+        $sanPham->update([
+            'TenSanPham' => $request['TenSanPham'],
+            'MoTa' => $request['MoTa'] ?? '',
+            'ThuocTinh' => $thuocTinhChung,
+            'HangSanXuatId' => $request['HangSanXuatId'],
+            'LoaiSanPhamId' => $request['LoaiSanPhamId'],
+            'ThuocTinhToHop' => $request['ThuocTinh'],
         ]);
-        //fill chi sua doi tuong trong bo nho', muon luu trong CSDL thi phai save()
-        $sanPham->save();
-        //dd($sanPham);
-        return Redirect::route('SanPham.index');
+
+        //lay het' bang? ra, so sanh' luu vai` DB
+        foreach (json_decode($request['Datatable'], true) as $item) {
+            //neu' trong DB da~ ton` tai SP do' thi` cap nhat lai gia' ban', ngc lai tao moi'
+            $ctSanPham = CT_SanPham::where("SanPhamId", $sanPham->id)->whereRaw('JSON_CONTAINS(ThuocTinhValue, ?)', [$item['BienThe']])->first();
+            if (!empty($ctSanPham)) {
+                $ctSanPham->update([
+                    'GiaBan' => $item['GiaBan'],
+                ]);
+            } else {
+                //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                echo ($item['BienThe']);
+                dd($item['BienThe']);
+                CT_SanPham::Create([
+                    'SanPhamId' => $sanPham->id,
+                    'ThuocTinhValue' => json_decode($item['BienThe'], true),
+                    //'ThuocTinhValue' => $item['BienThe'],
+                    'SoLuongTon' => 0,
+                    'GiaNhap' => 0,
+                    'GiaBan' => $item['GiaBan'],
+                ]);
+            }
+        }
+
+        return response()->json([], 200);
+        //return route('SanPham.index');
     }
 
     /**
@@ -222,10 +276,9 @@ class SanPhamController extends Controller
         // nếu trong đường dẫn "storage/app/public" + "assets/images/product-image/..." tồn tại hình ảnh
         foreach ($sanPham->HinhAnh as $item) {
             if (Storage::disk('public')->exists("assets/images/product-image/" . $sanPham->id . "/" . $item->HinhAnh)) {
-                $sanPham->HinhAnhh = Storage::url("assets/images/product-image/" . $sanPham->id . "/" . $item->HinhAnh);
-                break;
+                $item->HinhAnh = Storage::url("assets/images/product-image/" . $sanPham->id . "/" . $item->HinhAnh);
             } else {
-                $sanPham->HinhAnhh = Storage::url("assets/images/404/Img_error.png");
+                $item->HinhAnh = Storage::url("assets/images/404/Img_error.png");
             }
         }
     }

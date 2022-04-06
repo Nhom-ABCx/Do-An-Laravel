@@ -122,8 +122,10 @@
                                 <?php $__currentLoopData = $sanPham; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td class="center"><?php echo e($item->id); ?></td>
-                                        <td>
-                                            <img src='<?php echo e($item->HinhAnhh); ?>' alt="<?php echo e($item->HinhAnhh); ?>" width='100' height='100'>
+                                        <td style="width: 150px">
+                                            <?php $__currentLoopData = $item->HinhAnh; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $hinhAnh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <img src='<?php echo e($hinhAnh->HinhAnh); ?>' width='50' height='50'>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </td>
                                         <td><?php echo e($item->TenSanPham); ?></td>
                                         <td>
