@@ -350,8 +350,8 @@
                                                                     <input id="txtThemThuocTinh-{{ $loop->index }}" type="text" class="autosize-transition form-control"
                                                                         placeholder="Thêm giá trị khác ?" value="" />
 
-                                                                    <a href="javascript:void(0)" onclick="themTheInputBienThe({{ $loop->index }},'{{ $thuocTinh }}')" role="button"
-                                                                        class="input-group-addon green" data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính">
+                                                                    <a href="javascript:void(0)" onclick="themTheInputBienThe({{ $loop->index }})" role="button" class="input-group-addon green"
+                                                                        data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính">
                                                                         <i class="icon-plus"></i>
                                                                     </a>
                                                                 </div>

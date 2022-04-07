@@ -209,17 +209,11 @@ class SanPhamController extends Controller
                     'GiaBan' => $item['GiaBan'],
                 ]);
             } else {
-                //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                echo ($item['BienThe']);
-                dd($item['BienThe']);
-                CT_SanPham::Create([
-                    'SanPhamId' => $sanPham->id,
-                    'ThuocTinhValue' => json_decode($item['BienThe'], true),
-                    //'ThuocTinhValue' => $item['BienThe'],
-                    'SoLuongTon' => 0,
-                    'GiaNhap' => 0,
-                    'GiaBan' => $item['GiaBan'],
-                ]);
+                //xài DB::insert mà ko xài CT_SanPham::create([])  tai vi no' loi~ chu~ khi them vao
+                DB::insert(
+                    'insert into ct_san_phams(SanPhamId,SoLuongTon,GiaNhap,GiaBan,ThuocTinhValue) values (?, ?, ?, ?, ?)',
+                    [$sanPham->id, 0, 0, $item['GiaBan'], $item['BienThe']]
+                );
             }
         }
 

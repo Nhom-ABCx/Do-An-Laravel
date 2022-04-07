@@ -692,6 +692,10 @@
         //khi thay doi ten cua thuoc tinh to? hop thi` cap nhat lai cai the?
         let txtTenThuocTinh = $('#txtTenThuocTinh-' + index).val();
         $('#tenthuoctinh-' + index).html(txtTenThuocTinh);
+        //lay thay doi thuoctinh input ben trong
+        $('input[name^="ThuocTinhToHop[' + index + ']"]').each(function() {
+            $(this).attr("ThuocTinh", txtTenThuocTinh);
+        });
     }
 
     function inputThuocTinhToHopChange(index) {
@@ -724,6 +728,7 @@
             });
         } else {
 
+            let txtTenThuocTinh = $('#txtTenThuocTinh-' + countDiv).val();
 
             $(`<div class="panel panel-default" id="xoa-thuoctinh-khac-` + countDiv +
                 `"> <div class="panel-heading"> <h4 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse` +
@@ -744,8 +749,7 @@
                 `,0)" class="input-group-addon red" style="background-color:transparent"> <i class="icon-trash"></i> </a> </div> </div> <div class="input-group" style="margin-bottom: 5px"> <input id="txtThemThuocTinh-` +
                 countDiv + `" type="text" class="autosize-transition form-control" placeholder="Thêm giá trị khác ?" value="" /> <a href="javascript:void(0)" onclick="themTheInputBienThe(` +
                 countDiv +
-                `,'` + txtTenThuocTinh +
-                `')" role="button" class="input-group-addon green" data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính"> <i class="icon-plus"></i> </a> </div> </div> </div> </div></div>`
+                `)" role="button" class="input-group-addon green" data-rel="tooltip" data-placement="bottom" title="Thêm mới 1 thuộc tính"> <i class="icon-plus"></i> </a> </div> </div> </div> </div></div>`
             ).insertBefore(selectThis);
             //them vao` truoc' selector bang` 1 cai' widget
         }
@@ -773,7 +777,7 @@
         }
     }
 
-    function themTheInputBienThe(parentIndex, tenThuocTinh) {
+    function themTheInputBienThe(parentIndex) {
         //lay' ra so' luong input-group cua? #form
         let countDiv = $("#form-thuoctinh-tohop-" + parentIndex + " div.input-group").length;
         let txtThemThuocTinh = $('#txtThemThuocTinh-' + parentIndex);
@@ -783,6 +787,7 @@
                 timeOut: 3000
             });
         } else {
+            let tenThuocTinh = $('#txtTenThuocTinh-' + parentIndex).val();
 
             //them vào sau selector
             $('#form-thuoctinh-tohop-' + parentIndex).append(
