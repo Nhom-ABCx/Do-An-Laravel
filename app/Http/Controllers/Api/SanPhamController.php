@@ -67,35 +67,4 @@ class SanPhamController extends Controller
     {
         //
     }
-    public function API_SanPham_CrossJoin(Request $request, SanPham $sanPham)
-    {
-        //https://stackoverflow.com/questions/63631114/how-can-i-cross-join-dynamically-in-laravel
-
-        //dd($request->all());
-        //ep' kieu? mang? request thanh` dang collect va` reset lai key
-        $requestArray = collect($request->all())->values();
-
-
-        foreach ($requestArray as $item) {
-            //ghi de` lai` mang? thu'[0] thanh` 1 mang? du lieu moi'
-            //ep' kieu? mang? $item thanh` collect, sau do' chi lay' phan` tu? co' ten 'value'
-            $data[] = collect($item)->pluck("value");
-            //$thuocTinhToHop[] = collect($item)->pluck("key")->unique()->first();
-        }
-        //dd($thuocTinhToHop);
-
-        //$data = [["128 GB", "256 GB", "512 GB", "1024 GB"], ["Vàng đồng", "Xám", "Bạc", "Xanh dương"]];
-        //The kind of explodes all elements in the array and sets them as paramenters.(...$options)
-        $array = [];
-        foreach (Arr::crossJoin(...$data) as $items) {
-            $thuocTinhValue = json_encode($items, JSON_UNESCAPED_UNICODE);
-
-            //neu' trong CTSanPham no' co' to? hop thuoc tinh' do' thi` lay' ra gia' tien`
-            $giaBan = CT_SanPham::where("SanPhamId", $sanPham->id)->whereRaw('JSON_CONTAINS(ThuocTinhValue, ?)', [$thuocTinhValue])->first()->GiaBan ?? 0;
-
-            $array[] = ["BienThe" => $thuocTinhValue, "GiaBan" => $giaBan];
-        }
-
-        return response()->json($array, 200);
-    }
 }

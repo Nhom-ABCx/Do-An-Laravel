@@ -824,5 +824,45 @@
         //reload datatable
         reloadDatatableBienThe();
     }
+
+    function xoaHinhAnhSanPham(id) {
+
+        $.ajax({
+            //gui di voi phuong thuc'
+            method: "DELETE",
+            //url = duong dan cua form
+            url: "<?php echo e(route('HinhAnh.destroy', '')); ?>/" + id,
+            //du lieu gui di
+            data: {},
+            //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
+            processData: false,
+            // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la rong~
+            contentType: false,
+            //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+            //dataType: 'json',
+            beforeSend: function() {
+
+            },
+            success: function(response) {
+                console.log("request ok");
+
+                toastr.success("Xóa thành công", 'Thành công', {
+                    timeOut: 3000
+                });
+
+                //xoa' the? image vua` xoa'
+                $('li#HinhAnh-' + id).remove();
+            },
+            error: function(response) {
+                console.log("request lỗi");
+
+                $.each(response.responseJSON, function(key, val) {
+                    toastr.error(val, 'Có lỗi xảy ra', {
+                        timeOut: 3000
+                    });
+                });
+            },
+        });
+    }
 </script>
 <?php /**PATH E:\DDDD\WEB\Laravel\Do-An-Laravel\resources\views/Admin/SanPham/script/SanPham-edit-script.blade.php ENDPATH**/ ?>

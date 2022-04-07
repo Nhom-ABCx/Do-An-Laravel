@@ -5,6 +5,9 @@
     <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
+    
+    <link rel="stylesheet" href="/storage/assets/css/colorbox.css" />
+    
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('body'); ?>
@@ -116,11 +119,33 @@
                             </div>
                             <div class="widget-body">
                                 <div class="widget-main">
-                                    <div class="form-group">
-                                        <?php $__currentLoopData = $sanPham->HinhAnh; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <img style="width:150px;max-height:150px;object-fit:contain;float: left;" src="<?php echo e($item->HinhAnh); ?>" alt="">
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="row-fluid">
+                                        <ul class="ace-thumbnails">
 
+                                            <?php $__currentLoopData = $sanPham->HinhAnh; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <li id="HinhAnh-<?php echo e($item->id); ?>">
+                                                    <a href="<?php echo e($item->HinhAnh); ?>" data-rel="colorbox">
+                                                        <img style="width:150px;max-height:150px;" alt=" 150x150" src="<?php echo e($item->HinhAnh); ?>" />
+                                                        <div class="text">
+                                                            <div class="inner">...</div>
+                                                        </div>
+                                                    </a>
+
+                                                    <div class="tools tools-bottom">
+                                                        
+
+                                                        <a href="javascript:void(0)" title="Xóa ?" onclick="xoaHinhAnhSanPham(<?php echo e($item->id); ?>)">
+                                                            <i class="icon-remove red"></i>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                        </ul>
+                                    </div>
+
+
+                                    <div class="form-group">
                                         <div class="col-sm-2">
                                             <input multiple type="file" accept="image/*" id="id-input-file-3" name="HinhAnh[]">
                                         </div>
@@ -445,6 +470,48 @@
     <script src="/storage/assets/js/bootstrap-tag.min.js"></script>
     
     <?php echo $__env->make('Admin.SanPham.script.SanPham-edit-script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+
+
+    
+
+    <script src="/storage/assets/js/jquery.colorbox-min.js"></script>
+    <script type="text/javascript">
+        jQuery(function($) {
+            var colorbox_params = {
+                reposition: true,
+                scalePhotos: true,
+                scrolling: false,
+                previous: '<i class="icon-arrow-left"></i>',
+                next: '<i class="icon-arrow-right"></i>',
+                close: '&times;',
+                current: '{current} of {total}',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                onOpen: function() {
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed: function() {
+                    document.body.style.overflow = 'auto';
+                },
+                onComplete: function() {
+                    $.colorbox.resize();
+                }
+            };
+
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+            $("#cboxLoadingGraphic").append("<i class='icon-spinner orange'></i>"); //let's add a custom loading icon
+
+            /**$(window).on('resize.colorbox', function() {
+                try {
+                    //this function has been changed in recent versions of colorbox, so it won't work
+                    $.fn.colorbox.load();//to redraw the current frame
+                } catch(e){}
+            });*/
+        })
+    </script>
+
+    
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('Admin.layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\DDDD\WEB\Laravel\Do-An-Laravel\resources\views/Admin/SanPham/SanPham-edit.blade.php ENDPATH**/ ?>

@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\NguoiVanChuyenController;
 use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\Admin\LoaiSanPhamController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\HinhAnhController;
 //
 use App\Http\Controllers\User\UserHomeController;
 use App\Http\Controllers\User\UserGioHangController;
@@ -84,6 +85,7 @@ Route::group([
     Route::get("SanPhamm/DaXoa", [SanPhamController::class, "SanPhamDaXoa"])->name("SanPham.DaXoa");
     Route::post("SanPham/KhoiPhuc/{id}", [SanPhamController::class, "KhoiPhucSanPham"])->name("SanPham.KhoiPhuc");
     Route::delete("SanPham/XoaVinhVien/{id}", [SanPhamController::class, "XoaVinhVienSanPham"])->name("SanPham.XoaVinhVien");
+    Route::post('SanPham-CrossJoin-Input/{sanPham}', [SanPhamController::class, "API_SanPham_CrossJoin"])->name("SanPham.CrossJoin");
 
     Route::resource('KhuyenMai', ChuongTrinhKhuyenMaiController::class, [
         'parameters' => [
@@ -152,6 +154,8 @@ Route::group([
     Route::post("HoaDonNhap/ThemSanPham/{hoaDonNhap}", [HoaDonNhapController::class, "ThemSanPham"])->name("HoaDonNhap.ThemSanPham");
     Route::delete("HoaDonNhap/XoaSanPham/{id}", [HoaDonNhapController::class, "XoaSanPham"])->name("HoaDonNhap.XoaSanPham");
     Route::patch("HoaDonNhap/CapNhatTrangThai/{hoaDonNhap}", [HoaDonNhapController::class, "CapNhatTrangThai"])->name("HoaDonNhap.CapNhatTrangThai");
+    Route::get('HoaDonNhap/{hoaDonNhap}', [HoaDonNhapController::class, "API_HoaDonNhap_ChiTiet"])->name("HoaDonNhap.APIChiTiet");
+
 
     Route::get("WidgetThongBao", function () {
         return view("WidgetThongBao");
@@ -174,4 +178,11 @@ Route::group([
     ]);
     Route::get("LoaiSanPhamm/DaXoa", [LoaiSanPhamController::class, "LoaiSanPhamDaXoa"])->name("LoaiSanPham.DaXoa");
     Route::post("LoaiSanPham/KhoiPhuc/{id}", [LoaiSanPhamController::class, "KhoiPhucLoaiSanPham"])->name("LoaiSanPham.KhoiPhuc");
+
+    //hinh`anh?
+    Route::resource('HinhAnh', HinhAnhController::class, [
+        'parameters' => [
+            'HinhAnh' => 'hinhAnh'
+        ]
+    ]);
 });

@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="/storage/assets/css/bootstrap-timepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/daterangepicker.css" />
     <link rel="stylesheet" href="/storage/assets/css/colorpicker.css" />
+    {{-- image show --}}
+    <link rel="stylesheet" href="/storage/assets/css/colorbox.css" />
+    {{-- image show end --}}
 @endsection
 
 @section('body')
@@ -119,11 +122,43 @@
                             </div>
                             <div class="widget-body">
                                 <div class="widget-main">
-                                    <div class="form-group">
-                                        @foreach ($sanPham->HinhAnh as $item)
-                                            <img style="width:150px;max-height:150px;object-fit:contain;float: left;" src="{{ $item->HinhAnh }}" alt="">
-                                        @endforeach
+                                    <div class="row-fluid">
+                                        <ul class="ace-thumbnails">
 
+                                            @foreach ($sanPham->HinhAnh as $item)
+                                                <li id="HinhAnh-{{ $item->id }}">
+                                                    <a href="{{ $item->HinhAnh }}" data-rel="colorbox">
+                                                        <img style="width:150px;max-height:150px;" alt=" 150x150" src="{{ $item->HinhAnh }}" />
+                                                        <div class="text">
+                                                            <div class="inner">...</div>
+                                                        </div>
+                                                    </a>
+
+                                                    <div class="tools tools-bottom">
+                                                        {{-- <a href="#">
+                                                            <i class="icon-link"></i>
+                                                        </a>
+
+                                                        <a href="#">
+                                                            <i class="icon-paper-clip"></i>
+                                                        </a>
+
+                                                        <a href="#">
+                                                            <i class="icon-pencil"></i>
+                                                        </a> --}}
+
+                                                        <a href="javascript:void(0)" title="Xóa ?" onclick="xoaHinhAnhSanPham({{ $item->id }})">
+                                                            <i class="icon-remove red"></i>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+
+                                        </ul>
+                                    </div>
+
+
+                                    <div class="form-group">
                                         <div class="col-sm-2">
                                             <input multiple type="file" accept="image/*" id="id-input-file-3" name="HinhAnh[]">
                                         </div>
@@ -448,4 +483,46 @@
     <script src="/storage/assets/js/bootstrap-tag.min.js"></script>
     {{-- cai phần mô tả descipsion với mấy cái của trang web --}}
     @include('Admin.SanPham.script.SanPham-edit-script')
+
+
+
+    {{-- image show --}}
+
+    <script src="/storage/assets/js/jquery.colorbox-min.js"></script>
+    <script type="text/javascript">
+        jQuery(function($) {
+            var colorbox_params = {
+                reposition: true,
+                scalePhotos: true,
+                scrolling: false,
+                previous: '<i class="icon-arrow-left"></i>',
+                next: '<i class="icon-arrow-right"></i>',
+                close: '&times;',
+                current: '{current} of {total}',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                onOpen: function() {
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed: function() {
+                    document.body.style.overflow = 'auto';
+                },
+                onComplete: function() {
+                    $.colorbox.resize();
+                }
+            };
+
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+            $("#cboxLoadingGraphic").append("<i class='icon-spinner orange'></i>"); //let's add a custom loading icon
+
+            /**$(window).on('resize.colorbox', function() {
+                try {
+                    //this function has been changed in recent versions of colorbox, so it won't work
+                    $.fn.colorbox.load();//to redraw the current frame
+                } catch(e){}
+            });*/
+        })
+    </script>
+
+    {{-- image show end --}}
 @endsection

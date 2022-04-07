@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\HinhAnh;
 use App\Http\Controllers\Controller;
@@ -81,6 +81,7 @@ class HinhAnhController extends Controller
      */
     public function destroy(HinhAnh $hinhAnh)
     {
-        //
+        $hinhAnh->delete();
+        return response()->json([], 200);
     }
 }
