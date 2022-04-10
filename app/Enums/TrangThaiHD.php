@@ -5,10 +5,17 @@ namespace App\Enums;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static OptionOne()
- * @method static static OptionTwo()
- * @method static static OptionThree()
+ * @method static static DangXacNhan()
+ * @method static static DangXuLy()
+ * @method static static DaXuLy()
+ * @method static static DangGiao()
+ * @method static static DaGiao()
  */
+
+
+//php artisan make:enum UserRole
+//https://viblo.asia/p/tim-hieu-va-su-dung-enum-trong-laravel-vyDZOYVk5wj
+//https://github.com/BenSampo/laravel-enum/blob/v4.2.0/README.md
 final class TrangThaiHD extends Enum
 {
     // Đang chờ xác nhận 1 //lúc khách vừa đặt hàng, gọi điện cho khách để tránh tình trạng đặt bừa
@@ -17,6 +24,7 @@ final class TrangThaiHD extends Enum
     // Đang giao 4 //shipper đang trong quá trình giao hàng
     // Giao thành cỏng  5 //đã ship hàng thành công
     // deleted_at   // khách đã hủy đơn
+
     const DangXacNhan =   1;
     const DangXuLy =   2;
     const DaXuLy = 3;

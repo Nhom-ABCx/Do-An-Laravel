@@ -1,6 +1,3 @@
-
-
-
 <?php $__env->startSection('title', 'Trang chủ'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
@@ -24,7 +21,7 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home home-icon"></i>
-                    <a href="<?php echo e(url('/')); ?>">Home</a>
+                    <a href="<?php echo e(route('Home.index')); ?>">Home</a>
                 </li>
                 <li class="active">Thống kê</li>
             </ul><!-- .breadcrumb -->
@@ -63,10 +60,10 @@
                             <?php
                                 $catChuoi = explode(' - ', $request->input('NgayDat'));
                                 //neu'co' thoi gian ko rong~ va` dung' dinh dang datetime thi` tim` kiem' theo moc' thoi gian
-                                if (!empty($request->input('NgayDat')) && date_create($catChuoi[0]) != false && date_create($catChuoi[1]) != false) {
-                                    echo 'Thống kê từ ' . $catChuoi[0] . ' đến ' . $catChuoi[1];
-                                } else {
-                                    echo 'Thống kê trong tháng';
+    if (!empty($request->input('NgayDat')) && date_create($catChuoi[0]) != false && date_create($catChuoi[1]) != false) {
+        echo 'Thống kê từ ' . $catChuoi[0] . ' đến ' . $catChuoi[1];
+    } else {
+        echo 'Thống kê trong tháng';
                                 }
                                 unset($catChuoi);
                             ?>
@@ -426,8 +423,8 @@
     <!-- page specific plugin scripts -->
 
     <!--[if lte IE 8]>
-                                                                                                                                                                                      <script src="/storage/assets/js/excanvas.min.js"></script>
-                                                                                                                                                                                      <![endif]-->
+                                                                                                                                                                                          <script src="/storage/assets/js/excanvas.min.js"></script>
+                                                                                                                                                                                          <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -671,7 +668,7 @@
     line.render();
     //bieu do` end
     </script>
-    <?php echo $__env->make("Admin.SanPham.script.SanPham-show-script", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('Admin.SanPham.script.SanPham-show-script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('Admin.layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\DDDD\WEB\Laravel\Do-An-Laravel\resources\views/Admin/Home.blade.php ENDPATH**/ ?>

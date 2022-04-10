@@ -19,7 +19,7 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home home-icon"></i>
-                    <a href="{{ url('/') }}">Home</a>
+                    <a href="{{ route('Home.index') }}">Home</a>
                 </li>
                 <li class="active">Bình Luận</li>
             </ul><!-- .breadcrumb -->
@@ -111,8 +111,6 @@
                                                     </form>
                                                 </div>
                                             </td>
-
-
                                         @else
                                             <td>
                                                 <form action="{{ route('BinhLuan.destroy', $item) }}" method="post">

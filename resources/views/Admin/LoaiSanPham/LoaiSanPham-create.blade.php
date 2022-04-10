@@ -33,8 +33,7 @@
         <div class="nav-search" id="nav-search">
             <form class="form-search">
                 <span class="input-icon">
-                    <input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input"
-                        autocomplete="off" />
+                    <input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input" autocomplete="off" />
                     <i class="icon-search nav-search-icon"></i>
                 </span>
             </form>
@@ -42,8 +41,7 @@
         <div class="page-content">
             <div class="span4">
                 <div class="pull">
-                    <a type="button" class="btn btn-info " href="{{ route('LoaiSanPham.index') }}"><i
-                            class="fa fa-angle-double-left"></i> Back</a>
+                    <a type="button" class="btn btn-info " href="{{ route('LoaiSanPham.index') }}"><i class="fa fa-angle-double-left"></i> Back</a>
                 </div>
                 <form action="{{ route('LoaiSanPham.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf

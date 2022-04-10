@@ -1,13 +1,10 @@
-{{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
-@extends('Admin.layouts.Layout')
+<?php $__env->startSection('title', 'QL loại sản phẩm'); ?>
 
-@section('title', 'QL loại sản phẩm')
-
-@section('headThisPage')
+<?php $__env->startSection('headThisPage'); ?>
     <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('body')
+<?php $__env->startSection('body'); ?>
 
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
@@ -20,26 +17,19 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home home-icon"></i>
-                    <a href="{{ route('Home.index') }}">Home</a>
+                    <a href="<?php echo e(route('Home.index')); ?>">Home</a>
                 </li>
-                @if (request()->is('Admin/LoaiSanPhamm/DaXoa'))
+                <?php if(request()->is('Admin/LoaiSanPhamm/DaXoa')): ?>
                     <li>
                         Loại sản phẩm đã xoá
                     </li>
 
-                @else
+                <?php else: ?>
                     <li class="active">Quản lý loại sản phẩm</li>
-                @endif
+                <?php endif; ?>
             </ul><!-- .breadcrumb -->
 
-            {{-- <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-                        <i class="icon-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div><!-- #nav-search --> --}}
+            
         </div>
 
         <div class="page-content">
@@ -47,30 +37,30 @@
                 <div class="col-xs-12">
                     <div class="widget-box">
                         <div class="widget-header">
-                            @if (request()->is('Admin/LoaiSanPhamm/DaXoa'))
+                            <?php if(request()->is('Admin/LoaiSanPhamm/DaXoa')): ?>
                                 <h3 class="header smaller lighter blue">Quản lý loại sản phẩm đã xoá</h3>
-                            @else
+                            <?php else: ?>
                                 <h3 class="header smaller lighter blue">Quản lý loại sản phẩm</h3>
-                            @endif
+                            <?php endif; ?>
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
                                 <form class="form-inline"
-                                    action="{{ request()->is('Admin/LoaiSanPhamm/DaXoa') ? route('LoaiSanPham.DaXoa') : route('LoaiSanPham.index') }}"
+                                    action="<?php echo e(request()->is('Admin/LoaiSanPhamm/DaXoa') ? route('LoaiSanPham.DaXoa') : route('LoaiSanPham.index')); ?>"
                                     method="get">
 
-                                    @if (request()->is('Admin/LoaiSanPhamm/DaXoa'))
-                                        <a href="{{ route('LoaiSanPham.index') }}" class="btn btn-inverse">Back</a>
-                                    @else
-                                        <a href="{{ route('LoaiSanPham.create') }}" class="btn btn-success">
+                                    <?php if(request()->is('Admin/LoaiSanPhamm/DaXoa')): ?>
+                                        <a href="<?php echo e(route('LoaiSanPham.index')); ?>" class="btn btn-inverse">Back</a>
+                                    <?php else: ?>
+                                        <a href="<?php echo e(route('LoaiSanPham.create')); ?>" class="btn btn-success">
                                             <i class="icon-plus"></i>
                                             Thêm loại sản phẩm
                                         </a>
-                                        <a href="{{ route('LoaiSanPham.DaXoa') }}" class="btn btn-inverse">
+                                        <a href="<?php echo e(route('LoaiSanPham.DaXoa')); ?>" class="btn btn-inverse">
                                             <i class="icon-trash"></i>
                                             Loại sản phẩm đã xóa
                                         </a>
-                                    @endif
+                                    <?php endif; ?>
                                 </form>
                             </div>
                         </div>
@@ -81,7 +71,7 @@
                     <div class="table-header">
                         Bảng loại sản phẩm
                     </div>
-                    {{-- main --}}
+                    
                     <div class="table-responsive">
                         <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                             <thead>
@@ -117,29 +107,29 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($loaiSp as $item)
+                                <?php $__currentLoopData = $loaiSp; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td class="center">{{ $item->id }}</td>
-                                        <td>{{ $item->TenLoai }}</td>
-                                        <td>{{ $item->MoTa }}</td>
-                                        <td>{{ $item->created_at }}</td>
-                                        <td>{{ $item->updated_at }}</td>
-                                        <td>{{ $item->deleted_at }}</td>
-                                        @if (request()->is('Admin/LoaiSanPhamm/DaXoa'))
+                                        <td class="center"><?php echo e($item->id); ?></td>
+                                        <td><?php echo e($item->TenLoai); ?></td>
+                                        <td><?php echo e($item->MoTa); ?></td>
+                                        <td><?php echo e($item->created_at); ?></td>
+                                        <td><?php echo e($item->updated_at); ?></td>
+                                        <td><?php echo e($item->deleted_at); ?></td>
+                                        <?php if(request()->is('Admin/LoaiSanPhamm/DaXoa')): ?>
                                             <td>
 
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <form action="{{ route('LoaiSanPham.KhoiPhuc', $item->id) }}"
+                                                    <form action="<?php echo e(route('LoaiSanPham.KhoiPhuc', $item->id)); ?>"
                                                         method="post">
-                                                        @csrf
-                                                        {{-- @method("PUT") --}}
+                                                        <?php echo csrf_field(); ?>
+                                                        
                                                         <button type="submit" class="btn-link blue" title="Khôi phục"><i
                                                                 class="icon-undo bigger-130"></i></button>
                                                     </form>
                                                 </div>
 
                                             </td>
-                                        @else
+                                        <?php else: ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                     <a class="blue" href="#">
@@ -147,13 +137,13 @@
                                                     </a>
 
                                                     <a class="green"
-                                                        href="{{ route('LoaiSanPham.edit', $item) }}" title="Sữa">
+                                                        href="<?php echo e(route('LoaiSanPham.edit', $item)); ?>" title="Sữa">
                                                         <i class="icon-pencil bigger-130"></i>
                                                     </a>
-                                                    <form action="{{ route('LoaiSanPham.destroy', $item) }}"
+                                                    <form action="<?php echo e(route('LoaiSanPham.destroy', $item)); ?>"
                                                         method="post">
-                                                        @csrf
-                                                        @method('DELETE')
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('DELETE'); ?>
                                                         <button type="submit" class="btn-link red" title="Xoá"><i
                                                                 class="icon-trash bigger-130"></i></button>
                                                     </form>
@@ -198,10 +188,10 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        @endif
+                                        <?php endif; ?>
 
                                     </tr>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                         </table>
                     </div>
@@ -211,18 +201,18 @@
         </div><!-- /.page-content -->
     </div><!-- /.main-content -->
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scriptThisPage')
+<?php $__env->startSection('scriptThisPage'); ?>
 
     <script src="/storage/assets/js/chosen.jquery.min.js"></script>
-    {{-- dialog --}}
+    
     <script src="/storage/assets/js/bootbox.min.js"></script>
-    {{-- dialog --}}
+    
 
     <!-- inline scripts related to this page -->
 
-    {{-- datatable script --}}
+    
     <script type="text/javascript">
         jQuery(function($) {
             var oTable1 = $('#sample-table-2').dataTable({
@@ -278,9 +268,9 @@
             else $('#form-field-select-4').removeClass('tag-input-style');
         });
     </script>
-    {{-- datatable script End --}}
+    
 
-    {{-- show arler dialog --}}
+    
     <script type="text/javascript">
         jQuery(function($) {
             $(".bootbox-options").on(ace.click_event, function() {
@@ -303,5 +293,7 @@
             });
         });
     </script>
-    {{-- show arler dialog end --}}
-@endsection
+    
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('Admin.layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\DDDD\WEB\Laravel\Do-An-Laravel\resources\views/Admin/LoaiSanPham/LoaiSanPham-index.blade.php ENDPATH**/ ?>

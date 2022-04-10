@@ -432,6 +432,20 @@
             $(this).find('.modal-chosen').chosen();
         })
         */
+
+        //
+        $('table th input:checkbox').on('click', function() {
+            var that = this;
+            $(this).closest('table').find('tr > td:nth-last-child(2) input:checkbox')
+                .each(function(i) {
+                    // this.checked = that.checked;
+                    // $(this).closest('tr').toggleClass('selected');
+
+                    let selectorTd = $(this).closest('td');
+                    var table = $('#BienTheSanPham').closest('table').DataTable();
+                    table.cell(selectorTd).data(that.checked);
+                });
+        });
     });
 
     //khoi tao bang?
@@ -489,6 +503,21 @@
                 data: 'GiaBan',
                 className: "pink",
                 render: DataTable.render.number(',', '.'),
+            },
+            {
+                //render tool
+                data: 'TrangThai',
+                render: function(data, type, row, meta) {
+                    let check = "";
+                    if (data)
+                        check = "checked";
+                    return `<label class="pull-right inline">
+                                <input id="gritter-light-2" ` + check + ` type="checkbox" class="ace ace-switch ace-switch-6" value="1" onchange="thayDoiTrangThai_Datatable($(this).parent().parent(),this.checked)">
+                                <span class="lbl"></span>
+                            </label>`;
+                },
+                orderable: false,
+                searchable: false
             },
             {
                 //render tool
@@ -593,7 +622,7 @@
         },
     });
 
-    $('#submitForm').on('change', function(e) {
+    $('#accordion').on('change', function(e) {
 
         reloadDatatableBienThe();
     });
@@ -863,6 +892,13 @@
                 });
             },
         });
+    }
+
+    function thayDoiTrangThai_Datatable(selectorTd, checked) {
+        //truyen vo phan tu? cha la` the td de selector
+        console.log(selectorTd);
+        var table = $('#BienTheSanPham').closest('table').DataTable();
+        table.cell(selectorTd).data(checked);
     }
 </script>
 <?php /**PATH E:\DDDD\WEB\Laravel\Do-An-Laravel\resources\views/Admin/SanPham/script/SanPham-edit-script.blade.php ENDPATH**/ ?>

@@ -24,7 +24,7 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home home-icon"></i>
-                    <a href="{{ url('/') }}">Home</a>
+                    <a href="{{ route('Home.index') }}">Home</a>
                 </li>
                 <li class="active">Thống kê</li>
             </ul><!-- .breadcrumb -->
@@ -71,10 +71,10 @@
                             @php
                                 $catChuoi = explode(' - ', $request->input('NgayDat'));
                                 //neu'co' thoi gian ko rong~ va` dung' dinh dang datetime thi` tim` kiem' theo moc' thoi gian
-                                if (!empty($request->input('NgayDat')) && date_create($catChuoi[0]) != false && date_create($catChuoi[1]) != false) {
-                                    echo 'Thống kê từ ' . $catChuoi[0] . ' đến ' . $catChuoi[1];
-                                } else {
-                                    echo 'Thống kê trong tháng';
+    if (!empty($request->input('NgayDat')) && date_create($catChuoi[0]) != false && date_create($catChuoi[1]) != false) {
+        echo 'Thống kê từ ' . $catChuoi[0] . ' đến ' . $catChuoi[1];
+    } else {
+        echo 'Thống kê trong tháng';
                                 }
                                 unset($catChuoi);
                             @endphp
@@ -497,8 +497,8 @@
     <!-- page specific plugin scripts -->
 
     <!--[if lte IE 8]>
-                                                                                                                                                                                      <script src="/storage/assets/js/excanvas.min.js"></script>
-                                                                                                                                                                                      <![endif]-->
+                                                                                                                                                                                          <script src="/storage/assets/js/excanvas.min.js"></script>
+                                                                                                                                                                                          <![endif]-->
 
     <script src="/storage/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="/storage/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -740,5 +740,5 @@
     line.render();
     //bieu do` end
     </script>
-    @include("Admin.SanPham.script.SanPham-show-script")
+    @include('Admin.SanPham.script.SanPham-show-script')
 @endsection

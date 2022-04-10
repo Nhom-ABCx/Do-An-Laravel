@@ -1,6 +1,3 @@
-
-
-
 <?php $__env->startSection('title', 'Hóa đơn'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
@@ -24,7 +21,7 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home home-icon"></i>
-                    <a href="<?php echo e(url('/')); ?>">Home</a>
+                    <a href="<?php echo e(route('Home.index')); ?>">Home</a>
                 </li>
                 <?php if(request()->is('Admin/HoaDonn/DaGiao')): ?>
                     <li>
@@ -54,14 +51,14 @@
                         <div class="widget-body">
                             <div class="widget-main">
                                 <form class="form-inline"
-                                    action="<?php echo e(request()->is('Admin/HoaDonn/DaGiao')? route('HoaDon.DaGiao'): (request()->is('Admin/HoaDonn/DaHuy')? route('HoaDon.DaHuy'): route('HoaDon.index'))); ?>" method="get">
+                                    action="<?php echo e(request()->is('Admin/HoaDonn/DaGiao')? route('HoaDon.DaGiao'): (request()->is('Admin/HoaDonn/DaHuy')? route('HoaDon.DaHuy'): route('HoaDon.index'))); ?>"
+                                    method="get">
                                     <?php if(request()->is('Admin/HoaDonn/DaGiao')): ?>
                                         <a href="<?php echo e(route('HoaDon.DaHuy')); ?>" class="btn btn-inverse">
                                             <i class="icon-trash"></i>
                                             Hóa đơn đã hủy
                                         </a>
                                     <?php elseif(request()->is('Admin/HoaDonn/DaHuy')): ?>
-
                                         <a href="<?php echo e(route('HoaDon.DaGiao')); ?>" class="btn btn-success">
                                             <i class="icon-check-sign"></i>
                                             Hóa đơn đã giao
@@ -102,6 +99,13 @@
                                     <?php else: ?>
                                         <label for=""> Trạng thái: </label>
                                         <select class="width-10 chosen-select" id="form-field-select-4" name="TrangThai">
+
+                                            <?php $__currentLoopData = App\Enums\TrangThai::getInstances(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $trangThai): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <a href="javascript:void(0)" onclick="capnhatTrangThaiSanPham(<?php echo e($item->id); ?>,<?php echo e($trangThai->value); ?>)"
+                                                    tabindex="-1"><?php echo e($trangThai->description); ?></a>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
                                             <option value="">All</option>
                                             <option value="<?php echo e(App\Enums\TrangThaiHD::DangXacNhan); ?>" <?php if('1' == $request['TrangThai']): ?> selected <?php endif; ?>>
                                                 Đang chờ xác nhận
@@ -175,18 +179,23 @@
                                                 case (1): ?>
                                                     Thanh toán khi nhận hàng
                                                 <?php break; ?>
+
                                                 <?php case (2): ?>
                                                     Thẻ tín dụng
                                                 <?php break; ?>
+
                                                 <?php case (3): ?>
                                                     MOMO
                                                 <?php break; ?>
+
                                                 <?php case (4): ?>
                                                     ViettelPay
                                                 <?php break; ?>
+
                                                 <?php case (5): ?>
                                                     ZaloPay
                                                 <?php break; ?>
+
                                                 <?php default: ?>
                                             <?php endswitch; ?>
                                         </td>
@@ -195,20 +204,25 @@
                                         <td>
                                             <?php switch($item->TrangThai):
                                                 case (App\Enums\TrangThaiHD::DangXacNhan): ?>
-                                                    <span class="label label-danger arrowed"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan)); ?></span>
+                                                    <span class="label label-danger arrowed"><?php echo e(App\Enums\TrangThaiHD::DangXacNhan()->description); ?></span>
                                                 <?php break; ?>
+
                                                 <?php case (App\Enums\TrangThaiHD::DangXuLy): ?>
-                                                    <span class="label arrowed"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy)); ?></span>
+                                                    <span class="label arrowed"><?php echo e(App\Enums\TrangThaiHD::DangXuLy()->description); ?></span>
                                                 <?php break; ?>
+
                                                 <?php case (App\Enums\TrangThaiHD::DaXuLy): ?>
-                                                    <span class="label label-info arrowed-right arrowed-in"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy)); ?></span>
+                                                    <span class="label label-info arrowed-right arrowed-in"><?php echo e(App\Enums\TrangThaiHD::DaXuLy()->description); ?></span>
                                                 <?php break; ?>
+
                                                 <?php case (App\Enums\TrangThaiHD::DangGiao): ?>
-                                                    <span class="label label-warning arrowed arrowed-right"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao)); ?></span>
+                                                    <span class="label label-warning arrowed arrowed-right"><?php echo e(App\Enums\TrangThaiHD::DangGiao()->description); ?></span>
                                                 <?php break; ?>
+
                                                 <?php case (App\Enums\TrangThaiHD::DaGiao): ?>
-                                                    <span class="label label-success arrowed-in arrowed-in-right"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao)); ?></span>
+                                                    <span class="label label-success arrowed-in arrowed-in-right"><?php echo e(App\Enums\TrangThaiHD::DaGiao()->description); ?></span>
                                                 <?php break; ?>
+
                                                 <?php default: ?>
                                             <?php endswitch; ?>
                                         </td>
@@ -255,15 +269,15 @@
                                                             <ul class="dropdown-menu pull-right">
                                                                 <li>
                                                                     <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DangXacNhan); ?>"
-                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan)); ?></a>
+                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::DangXacNhan()->description); ?></a>
                                                                     <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DangXuLy); ?>"
-                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy)); ?></a>
+                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::DangXuLy()->description); ?></a>
                                                                     <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DaXuLy); ?>"
-                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy)); ?></a>
+                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::DaXuLy()->description); ?></a>
                                                                     <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DangGiao); ?>"
-                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao)); ?></a>
+                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::DangGiao()->description); ?></a>
                                                                     <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DaGiao); ?>"
-                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao)); ?></a>
+                                                                        tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::DaGiao()->description); ?></a>
                                                                 </li>
                                                             </ul>
                                                         </span>
@@ -293,15 +307,15 @@
                                                                         <ul class="dropdown-menu pull-right">
                                                                             <li>
                                                                                 <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DangXacNhan); ?>"
-                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan)); ?></a>
+                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::DangXacNhan()->description); ?></a>
                                                                                 <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DangXuLy); ?>"
-                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy)); ?></a>
+                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::DangXuLy()->description); ?></a>
                                                                                 <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DaXuLy); ?>"
-                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy)); ?></a>
+                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::DaXuLy()->description); ?></a>
                                                                                 <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DangGiao); ?>"
-                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao)); ?></a>
+                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::DangGiao()->description); ?></a>
                                                                                 <a href="<?php echo e(route('HoaDon.edit', $item)); ?>?TrangThai=<?php echo e(App\Enums\TrangThaiHD::DaGiao); ?>"
-                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao)); ?></a>
+                                                                                    tabindex="-1"><?php echo e(App\Enums\TrangThaiHD::DaGiao()->description); ?></a>
                                                                             </li>
                                                                         </ul>
                                                                     </span>

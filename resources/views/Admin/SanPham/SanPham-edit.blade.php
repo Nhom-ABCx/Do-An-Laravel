@@ -25,7 +25,7 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home home-icon"></i>
-                    <a href="{{ url('/') }}">Home</a>
+                    <a href="{{ route('Home.index') }}">Home</a>
                 </li>
 
                 <li>
@@ -295,6 +295,23 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="space-4"></div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Trạng thái (Ẩn/Bán) </label>
+
+                                        <div class="col-sm-3">
+                                            <div class="input-group">
+                                                <label class="pull-right inline">
+                                                    <input id="gritter-light" @if ($sanPham->TrangThai) checked @endif type="checkbox" class="ace ace-switch ace-switch-4" name="TrangThai"
+                                                        value="1">
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -396,10 +413,10 @@
                                                 </div>
                                             @endforeach
 
-                                            <button onclick="themThuocTinhKhac(this)" type="button" class="btn btn-sm btn-success">
+                                            {{-- <button onclick="themThuocTinhKhac(this)" type="button" class="btn btn-sm btn-success">
                                                 <i class="icon-plus icon-on-right bigger-110"></i>
                                                 Thêm thuộc tính khác
-                                            </button>
+                                            </button> --}}
                                         </div>
                                     </div>
 
@@ -412,6 +429,13 @@
                                                     <th class="center"><i class="icon-adn"></i></th>
                                                     <th><i class="icon-align-left"></i>Mẫu mã</th>
                                                     <th><i class="icon-money"></i>Giá bán</th>
+                                                    <th>
+                                                        <i class="icon-check-sign"></i>Trạng thái (Ẩn/Bán)
+                                                        <label class="pull-right inline">
+                                                            <input type="checkbox" class="ace ace-switch ace-switch-6" value="1">
+                                                            <span class="lbl"></span>
+                                                        </label>
+                                                    </th>
                                                     <th></th>
                                                 </tr>
                                             </thead>

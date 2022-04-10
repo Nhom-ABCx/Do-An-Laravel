@@ -24,7 +24,7 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home home-icon"></i>
-                    <a href="{{ url('/') }}">Home</a>
+                    <a href="{{ route('Home.index') }}">Home</a>
                 </li>
                 @if (request()->is('Admin/HoaDonn/DaGiao'))
                     <li>
@@ -61,14 +61,14 @@
                         <div class="widget-body">
                             <div class="widget-main">
                                 <form class="form-inline"
-                                    action="{{ request()->is('Admin/HoaDonn/DaGiao')? route('HoaDon.DaGiao'): (request()->is('Admin/HoaDonn/DaHuy')? route('HoaDon.DaHuy'): route('HoaDon.index')) }}" method="get">
+                                    action="{{ request()->is('Admin/HoaDonn/DaGiao')? route('HoaDon.DaGiao'): (request()->is('Admin/HoaDonn/DaHuy')? route('HoaDon.DaHuy'): route('HoaDon.index')) }}"
+                                    method="get">
                                     @if (request()->is('Admin/HoaDonn/DaGiao'))
                                         <a href="{{ route('HoaDon.DaHuy') }}" class="btn btn-inverse">
                                             <i class="icon-trash"></i>
                                             Hóa đơn đã hủy
                                         </a>
                                     @elseif (request()->is('Admin/HoaDonn/DaHuy'))
-
                                         <a href="{{ route('HoaDon.DaGiao') }}" class="btn btn-success">
                                             <i class="icon-check-sign"></i>
                                             Hóa đơn đã giao
@@ -110,6 +110,13 @@
                                     @else
                                         <label for=""> Trạng thái: </label>
                                         <select class="width-10 chosen-select" id="form-field-select-4" name="TrangThai">
+
+                                            @foreach (App\Enums\TrangThai::getInstances() as $trangThai)
+                                                <a href="javascript:void(0)" onclick="capnhatTrangThaiSanPham({{ $item->id }},{{ $trangThai->value }})"
+                                                    tabindex="-1">{{ $trangThai->description }}</a>
+                                            @endforeach
+
+
                                             <option value="">All</option>
                                             <option value="{{ App\Enums\TrangThaiHD::DangXacNhan }}" @if ('1' == $request['TrangThai']) selected @endif>
                                                 Đang chờ xác nhận
@@ -183,18 +190,23 @@
                                                 @case(1)
                                                     Thanh toán khi nhận hàng
                                                 @break
+
                                                 @case(2)
                                                     Thẻ tín dụng
                                                 @break
+
                                                 @case(3)
                                                     MOMO
                                                 @break
+
                                                 @case(4)
                                                     ViettelPay
                                                 @break
+
                                                 @case(5)
                                                     ZaloPay
                                                 @break
+
                                                 @default
                                             @endswitch
                                         </td>
@@ -203,20 +215,25 @@
                                         <td>
                                             @switch($item->TrangThai)
                                                 @case(App\Enums\TrangThaiHD::DangXacNhan)
-                                                    <span class="label label-danger arrowed">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan) }}</span>
+                                                    <span class="label label-danger arrowed">{{ App\Enums\TrangThaiHD::DangXacNhan()->description }}</span>
                                                 @break
+
                                                 @case(App\Enums\TrangThaiHD::DangXuLy)
-                                                    <span class="label arrowed">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy) }}</span>
+                                                    <span class="label arrowed">{{ App\Enums\TrangThaiHD::DangXuLy()->description }}</span>
                                                 @break
+
                                                 @case(App\Enums\TrangThaiHD::DaXuLy)
-                                                    <span class="label label-info arrowed-right arrowed-in">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy) }}</span>
+                                                    <span class="label label-info arrowed-right arrowed-in">{{ App\Enums\TrangThaiHD::DaXuLy()->description }}</span>
                                                 @break
+
                                                 @case(App\Enums\TrangThaiHD::DangGiao)
-                                                    <span class="label label-warning arrowed arrowed-right">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao) }}</span>
+                                                    <span class="label label-warning arrowed arrowed-right">{{ App\Enums\TrangThaiHD::DangGiao()->description }}</span>
                                                 @break
+
                                                 @case(App\Enums\TrangThaiHD::DaGiao)
-                                                    <span class="label label-success arrowed-in arrowed-in-right">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao) }}</span>
+                                                    <span class="label label-success arrowed-in arrowed-in-right">{{ App\Enums\TrangThaiHD::DaGiao()->description }}</span>
                                                 @break
+
                                                 @default
                                             @endswitch
                                         </td>
@@ -263,15 +280,15 @@
                                                             <ul class="dropdown-menu pull-right">
                                                                 <li>
                                                                     <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DangXacNhan }}"
-                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan) }}</a>
+                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::DangXacNhan()->description }}</a>
                                                                     <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DangXuLy }}"
-                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy) }}</a>
+                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::DangXuLy()->description }}</a>
                                                                     <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DaXuLy }}"
-                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy) }}</a>
+                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::DaXuLy()->description }}</a>
                                                                     <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DangGiao }}"
-                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao) }}</a>
+                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::DangGiao()->description }}</a>
                                                                     <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DaGiao }}"
-                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao) }}</a>
+                                                                        tabindex="-1">{{ App\Enums\TrangThaiHD::DaGiao()->description }}</a>
                                                                 </li>
                                                             </ul>
                                                         </span>
@@ -301,15 +318,15 @@
                                                                         <ul class="dropdown-menu pull-right">
                                                                             <li>
                                                                                 <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DangXacNhan }}"
-                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXacNhan) }}</a>
+                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::DangXacNhan()->description }}</a>
                                                                                 <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DangXuLy }}"
-                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangXuLy) }}</a>
+                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::DangXuLy()->description }}</a>
                                                                                 <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DaXuLy }}"
-                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaXuLy) }}</a>
+                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::DaXuLy()->description }}</a>
                                                                                 <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DangGiao }}"
-                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DangGiao) }}</a>
+                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::DangGiao()->description }}</a>
                                                                                 <a href="{{ route('HoaDon.edit', $item) }}?TrangThai={{ App\Enums\TrangThaiHD::DaGiao }}"
-                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::getDescription(App\Enums\TrangThaiHD::DaGiao) }}</a>
+                                                                                    tabindex="-1">{{ App\Enums\TrangThaiHD::DaGiao()->description }}</a>
                                                                             </li>
                                                                         </ul>
                                                                     </span>

@@ -70,7 +70,7 @@
 
             <div class="navbar-container" id="navbar-container">
                 <div class="navbar-header pull-left">
-                    <a href="<?php echo e(url('/')); ?>" class="navbar-brand">
+                    <a href="<?php echo e(route('Home.index')); ?>" class="navbar-brand">
                         <small>
                             <i class="icon-leaf"></i>
                             Ace Admin

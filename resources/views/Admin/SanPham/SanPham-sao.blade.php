@@ -19,7 +19,7 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home home-icon"></i>
-                    <a href="{{ url('/') }}">Home</a>
+                    <a href="{{ route('Home.index') }}">Home</a>
                 </li>
 
                 <li>

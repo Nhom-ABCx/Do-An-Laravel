@@ -8,7 +8,6 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('body'); ?>
-
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
@@ -20,9 +19,9 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home home-icon"></i>
-                    <a href="<?php echo e(url('/')); ?>">Home</a>
+                    <a href="<?php echo e(route('Home.index')); ?>">Home</a>
                 </li>
-                <?php if(request()->is('Admin/SanPhamm/DaXoa')): ?>
+                <?php if(URL::current() == route('SanPham.DaXoa')): ?>
                     <li>
                         <a href="<?php echo e(route('SanPham.index')); ?>">Quản lý sản phẩm</a>
                     </li>
@@ -44,52 +43,17 @@
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                <form class="form-inline" action="<?php echo e(request()->is('Admin/SanPhamm/DaXoa') ? route('SanPham.DaXoa') : route('SanPham.index')); ?>" method="get">
-                                    <a href="#" role="button" class="btn btn-success">
-                                        <i class="icon-plus"></i>
-                                        Thêm sản phẩm
+                                <a href="#" role="button" class="btn btn-success">
+                                    <i class="icon-plus"></i>
+                                    Thêm sản phẩm
+                                </a>
+                                <?php if(URL::current() == route('SanPham.DaXoa')): ?>
+                                <?php else: ?>
+                                    <a href="<?php echo e(route('SanPham.DaXoa')); ?>" class="btn btn-inverse">
+                                        <i class="icon-trash"></i>
+                                        Sản phẩm đã xóa
                                     </a>
-                                    <?php if(request()->is('Admin/SanPhamm/DaXoa')): ?>
-                                    <?php else: ?>
-                                        <a href="<?php echo e(route('SanPham.DaXoa')); ?>" class="btn btn-inverse">
-                                            <i class="icon-trash"></i>
-                                            Sản phẩm đã xóa
-                                        </a>
-                                    <?php endif; ?>
-
-
-                                    <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="<?php echo e($request['TenSanPham']); ?>"
-                                        name="TenSanPham" />
-                                    <label for=""> Hãng sãn xuất: </label>
-                                    <select class="width-10 chosen-select" id="form-field-select-4" name="HangSanXuatId">
-                                        <option value="">All</option>
-                                        <?php $__currentLoopData = $lstHangSanXuat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($item->id); ?>" <?php if($item->id == $request['HangSanXuatId']): ?> selected <?php endif; ?>>
-                                                <?php echo e($item->TenHangSanXuat); ?>
-
-                                            </option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </select>
-                                    <label for=""> Loại sản phẩm: </label>
-                                    <select class="width-10 chosen-select" id="form-field-select-4" name="LoaiSanPhamId">
-                                        <option value="">All</option>
-                                        <?php $__currentLoopData = $lstLoaiSanPham; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($item->id); ?>" <?php if($item->id == $request['LoaiSanPhamId']): ?> selected <?php endif; ?>>
-                                                <?php echo e($item->TenLoai); ?>
-
-                                            </option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </select>
-
-                                    <button type="submit" class="btn btn-purple btn-sm">
-                                        Search
-                                        <i class="icon-search icon-on-right bigger-110"></i>
-                                    </button>
-                                    <button type="reset" class="btn btn-sm">
-                                        <i class="icon-refresh"></i>
-                                        Reset
-                                    </button>
-                                </form>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -98,6 +62,55 @@
 
                     <div class="table-header">
                         Bảng sản phẩm
+                        <form class="form-inline" action="<?php echo e(URL::current() == route('SanPham.DaXoa') ? route('SanPham.DaXoa') : route('SanPham.index')); ?>" method="get">
+                            <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="<?php echo e($request['TenSanPham']); ?>"
+                                name="TenSanPham" />
+
+                            <label for=""> Hãng sãn xuất: </label>
+                            <select class="width-10 chosen-select" id="form-field-select-4" name="HangSanXuatId">
+                                <option value="">Tất cả</option>
+                                <?php $__currentLoopData = $lstHangSanXuat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($item->id); ?>" <?php if($item->id == $request['HangSanXuatId']): ?> selected <?php endif; ?>>
+                                        <?php echo e($item->TenHangSanXuat); ?>
+
+                                    </option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+
+                            <label for=""> Loại sản phẩm: </label>
+                            <select class="width-10 chosen-select" id="form-field-select-4" name="LoaiSanPhamId">
+                                <option value="">Tất cả</option>
+                                <?php $__currentLoopData = $lstLoaiSanPham; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($item->id); ?>" <?php if($item->id == $request['LoaiSanPhamId']): ?> selected <?php endif; ?>>
+                                        <?php echo e($item->TenLoai); ?>
+
+                                    </option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+
+                            <?php if(URL::current() == route('SanPham.DaXoa')): ?>
+                            <?php else: ?>
+                                <label for=""> Trạng thái: </label>
+                                <select class="width-10 chosen-select" id="form-field-select-4" name="TrangThai">
+                                    <option value="">Tất cả</option>
+                                    <option value="0" <?php if('0' == $request['TrangThai']): ?> selected <?php endif; ?>>
+                                        Ẩn
+                                    </option>
+                                    <option value="1" <?php if('1' == $request['TrangThai']): ?> selected <?php endif; ?>>
+                                        Đang bán
+                                    </option>
+                                </select>
+                            <?php endif; ?>
+
+                            <button type="submit" class="btn btn-purple btn-sm">
+                                Tìm kiếm
+                                <i class="icon-search icon-on-right bigger-110"></i>
+                            </button>
+                            <button type="reset" class="btn btn-sm">
+                                <i class="icon-refresh"></i>
+                                Reset
+                            </button>
+                        </form>
                     </div>
 
                     <div class="table-responsive">
@@ -112,6 +125,7 @@
                                     <th><i class="icon-bar-chart"></i>Lượt mua</th>
                                     <th><i class="icon-apple"></i>Hãng sãn xuất</th>
                                     <th><i class="icon-android"></i>Loại sản phẩm</th>
+                                    <th><i class="icon-exclamation-sign"></i>Trạng thái</th>
                                     <th><i class="icon-time bigger-110 hidden-480"></i>Ngày thêm</th>
                                     <th><i class="icon-time bigger-110 hidden-480"></i>Ngày sửa</th>
                                     <th></th>
@@ -137,9 +151,16 @@
                                         <td><?php echo e($item->LuotMua); ?></td>
                                         <td><?php echo e($item->HangSanXuat->TenHangSanXuat); ?></td>
                                         <td><?php echo e($item->LoaiSanPham->TenLoai); ?></td>
+                                        <td>
+                                            <?php if($item->TrangThai): ?>
+                                                <span class="label label-success arrowed-in arrowed-in-right">Đang bán</span>
+                                            <?php else: ?>
+                                                <span class="label arrowed">Ẩn</span>
+                                            <?php endif; ?>
+                                        </td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
-                                        <?php if(request()->is('Admin/SanPhamm/DaXoa')): ?>
+                                        <?php if(URL::current() == route('SanPham.DaXoa')): ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                     <form action="<?php echo e(route('SanPham.KhoiPhuc', $item->id)); ?>" method="post">
@@ -188,6 +209,16 @@
                                         <?php else: ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                    <span class="dropdown-hover dropup dropdown-pink">
+                                                        <i class="icon-cog green bigger-200" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
+                                                        <ul class="dropdown-menu pull-right">
+                                                            <li>
+                                                                <a href="javascript:void(0)" onclick="capnhatTrangThaiSanPham(<?php echo e($item->id); ?>,0)" tabindex="-1">Ẩn</a>
+                                                                <a href="javascript:void(0)" onclick="capnhatTrangThaiSanPham(<?php echo e($item->id); ?>,1)" tabindex="-1">Đang bán</a>
+                                                            </li>
+                                                        </ul>
+                                                    </span>
+
                                                     <a href="javascript:void(0)" onclick="showSanPham(<?php echo e($item->id); ?>)" role="button" data-toggle="modal" class="tooltip-info" data-rel="tooltip"
                                                         title="Xem chi tiết">
                                                         <span class="blue">
@@ -214,6 +245,18 @@
                                                         </button>
 
                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                            <li>
+                                                                <span class="dropdown-hover dropup dropdown-pink">
+                                                                    <i class="icon-cog green bigger-200" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
+                                                                    <ul class="dropdown-menu pull-right">
+                                                                        <li>
+                                                                            <a href="javascript:void(0)" onclick="capnhatTrangThaiSanPham(<?php echo e($item->id); ?>,0)" tabindex="-1">Ẩn</a>
+                                                                            <a href="javascript:void(0)" onclick="capnhatTrangThaiSanPham(<?php echo e($item->id); ?>,1)" tabindex="-1">Đang bán</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </span>
+                                                            </li>
+
                                                             <li>
                                                                 <a href="javascript:void(0)" onclick="showSanPham(<?php echo e($item->id); ?>)" role="button" data-toggle="modal" class="tooltip-info"
                                                                     data-rel="tooltip" title="Xem chi tiết">
@@ -288,7 +331,7 @@
                             "bSortable": false
                         }, //mota
                         null,
-                        null, null, null, null, null,
+                        null, null, null, null, null, null,
                         {
                             "bSortable": false
                         }
@@ -362,6 +405,57 @@
         
 
         <?php echo $__env->make('Admin.SanPham.script.SanPham-show-script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+        <script type="text/javascript">
+            //
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+            function capnhatTrangThaiSanPham(sanPhamId, trangThai) {
+                console.log(trangThai);
+                var url = "<?php echo e(route('SanPham.CapNhatTrangThai', ':sanPham')); ?>";
+                url = url.replace(':sanPham', sanPhamId);
+
+                $.ajax({
+                    //gui di voi phuong thuc'
+                    method: "PUT",
+                    //url = duong dan cua form
+                    url: url,
+                    //du lieu gui di
+                    data: JSON.stringify({
+                        "TrangThai": trangThai
+                    }),
+                    //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
+                    processData: false,
+                    // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la json nen de la json
+                    contentType: "application/json; charset=utf-8",
+                    //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+                    dataType: 'json',
+                    beforeSend: function() {
+
+                    },
+                    success: function(response) {
+                        location.reload();
+                        // toastr.success("Cập nhật thành công", 'Thành công', {
+                        //     timeOut: 3000
+                        // });
+                    },
+                    error: function(response) {
+                        console.log("request lỗi");
+
+                        $.each(response.responseJSON, function(key, val) {
+                            toastr.error(val, 'Có lỗi xảy ra', {
+                                timeOut: 3000
+                            });
+                        });
+                    },
+                });
+            }
+        </script>
     <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('Admin.layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\DDDD\WEB\Laravel\Do-An-Laravel\resources\views/Admin/SanPham/SanPham-index.blade.php ENDPATH**/ ?>

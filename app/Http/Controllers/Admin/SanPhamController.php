@@ -20,6 +20,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use App\Imports\SanPhamImport;
 use App\Models\CT_SanPham;
 use Maatwebsite\Excel\Facades\Excel;
@@ -167,7 +168,6 @@ class SanPhamController extends Controller
             return response()->json($validate->errors(), 400);
 
 
-
         //dd(json_decode($request["Datatable"], true));
         //Hình ảnh phải lưu trong public và phải có bước tạo link thì người dùng mới thấy dc
         //store() tự đặt hình bằng chuỗi random, nên tạo thư mục theo mã/tên sp để dễ quản lý
@@ -194,6 +194,7 @@ class SanPhamController extends Controller
         $sanPham->update([
             'TenSanPham' => $request['TenSanPham'],
             'MoTa' => $request['MoTa'] ?? '',
+            'TrangThai' => $request['TrangThai'] ?? false,
             'ThuocTinh' => $thuocTinhChung,
             'HangSanXuatId' => $request['HangSanXuatId'],
             'LoaiSanPhamId' => $request['LoaiSanPhamId'],
@@ -207,12 +208,13 @@ class SanPhamController extends Controller
             if (!empty($ctSanPham)) {
                 $ctSanPham->update([
                     'GiaBan' => $item['GiaBan'],
+                    'TrangThai' => $item['TrangThai'],
                 ]);
             } else {
                 //xài DB::insert mà ko xài CT_SanPham::create([])  tai vi no' loi~ chu~ khi them vao
                 DB::insert(
-                    'insert into ct_san_phams(SanPhamId,SoLuongTon,GiaNhap,GiaBan,ThuocTinhValue) values (?, ?, ?, ?, ?)',
-                    [$sanPham->id, 0, 0, $item['GiaBan'], $item['BienThe']]
+                    'insert into ct_san_phams(SanPhamId,SoLuongTon,GiaNhap,GiaBan,ThuocTinhValue,TrangThai) values (?, ?, ?, ?, ?, ?)',
+                    [$sanPham->id, 0, 0, $item['GiaBan'], $item['BienThe'], $item['TrangThai']]
                 );
             }
         }
@@ -331,7 +333,7 @@ class SanPhamController extends Controller
             }
         }
     }
-    public function API_SanPham_CrossJoin(Request $request, SanPham $sanPham)
+    public function SanPhamCrossJoin(Request $request, SanPham $sanPham)
     {
         //https://stackoverflow.com/questions/63631114/how-can-i-cross-join-dynamically-in-laravel
 
@@ -355,12 +357,37 @@ class SanPhamController extends Controller
             $thuocTinhValue = json_encode($items, JSON_UNESCAPED_UNICODE);
 
             //neu' trong CTSanPham no' co' to? hop thuoc tinh' do' thi` lay' ra gia' tien`
-            $giaBan = CT_SanPham::where("SanPhamId", $sanPham->id)->whereRaw('JSON_CONTAINS(ThuocTinhValue, ?)', [$thuocTinhValue])->first()->GiaBan ?? 0;
+            $ctSanPham = CT_SanPham::where("SanPhamId", $sanPham->id)->whereRaw('JSON_CONTAINS(ThuocTinhValue, ?)', [$thuocTinhValue])->first();
+            $giaBan = $ctSanPham->GiaBan ?? 0;
 
-            $array[] = ["BienThe" => $thuocTinhValue, "GiaBan" => $giaBan];
+            $array[] = ["BienThe" => $thuocTinhValue, "GiaBan" => $giaBan, "TrangThai" => $ctSanPham->TrangThai ?? 0];
         }
 
         return response()->json($array, 200);
+    }
+    public function CapNhatTrangThaiSanPham(Request $request, SanPham $sanPham)
+    {
+        //trang thai phai nam` trong 4 so', tranh truong` hop thay doi request tai giao dien
+        //kiem tra du lieu
+        $validate = Validator::make(
+            $request->all(),
+            ['TrangThai' => ['required', 'numeric', 'integer', Rule::in(0, 1),]],
+            [
+                'required' => 'Không được để trống',
+                'numeric' => 'Phải là số',
+                'integer' => 'Phải là số nguyên',
+                'in' => 'Trạng thái sai theo chuẩn',
+            ]
+        );
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+
+
+        $sanPham->update([
+            'TrangThai' => $request["TrangThai"],
+        ]);
+        return response()->json([], 200);
     }
     //API
     public function API_SanPham(Request $request)

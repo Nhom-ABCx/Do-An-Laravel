@@ -85,7 +85,8 @@ Route::group([
     Route::get("SanPhamm/DaXoa", [SanPhamController::class, "SanPhamDaXoa"])->name("SanPham.DaXoa");
     Route::post("SanPham/KhoiPhuc/{id}", [SanPhamController::class, "KhoiPhucSanPham"])->name("SanPham.KhoiPhuc");
     Route::delete("SanPham/XoaVinhVien/{id}", [SanPhamController::class, "XoaVinhVienSanPham"])->name("SanPham.XoaVinhVien");
-    Route::post('SanPham-CrossJoin-Input/{sanPham}', [SanPhamController::class, "API_SanPham_CrossJoin"])->name("SanPham.CrossJoin");
+    Route::post('SanPham-CrossJoin-Input/{sanPham}', [SanPhamController::class, "SanPhamCrossJoin"])->name("SanPham.CrossJoin");
+    Route::put("SanPham/{sanPham}/edit/TrangThai",[SanPhamController::class,"CapNhatTrangThaiSanPham"])->name("SanPham.CapNhatTrangThai");
 
     Route::resource('KhuyenMai', ChuongTrinhKhuyenMaiController::class, [
         'parameters' => [

@@ -18,6 +18,7 @@ class CT_SanPham extends Model
         'GiaNhap',
         'GiaBan',
         'ThuocTinhValue',
+        'TrangThai',
     ];
     protected $casts = [
         'ThuocTinhValue' => 'array',

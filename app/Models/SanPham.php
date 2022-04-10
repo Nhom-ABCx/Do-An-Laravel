@@ -20,6 +20,7 @@ class SanPham extends Model
         'MoTa',
         'LuotMua',
         'ThuocTinhToHop',
+        'TrangThai',
     ];
     protected $casts = [
         'ThuocTinh' => 'array',

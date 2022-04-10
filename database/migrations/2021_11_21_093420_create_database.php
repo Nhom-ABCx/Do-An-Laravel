@@ -96,6 +96,7 @@ class CreateDatabase extends Migration
             $table->longText('MoTa')->nullable();
             $table->integer('LuotMua')->default(0);
             $table->json("ThuocTinhToHop");  //luu thanh` json ["Size", "Color"]
+            $table->boolean('TrangThai')->default(false); //1 hoat dong 0 ko hoat dong
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('HangSanXuatId')->references('id')->on('hang_san_xuats');
@@ -109,6 +110,7 @@ class CreateDatabase extends Migration
             $table->double('GiaNhap')->nullable();
             $table->double('GiaBan');
             $table->json('ThuocTinhValue'); //luu thanh` json ["XL", "Đỏ"]
+            $table->boolean('TrangThai')->default(false); //1 hoat dong 0 ko hoat dong
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('SanPhamId')->references('id')->on('san_phams');
