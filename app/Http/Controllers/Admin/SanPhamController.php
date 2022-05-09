@@ -24,6 +24,7 @@ use Illuminate\Validation\Rule;
 use App\Imports\SanPhamImport;
 use App\Models\CT_SanPham;
 use Maatwebsite\Excel\Facades\Excel;
+use phpDocumentor\Reflection\Types\Null_;
 
 class SanPhamController extends Controller
 {
@@ -62,7 +63,7 @@ class SanPhamController extends Controller
         $lstLoaiSanPham = LoaiSanPham::all();
         $lstHangSanXuat = HangSanXuat::all();
         //truyền thêm danh sách loại sản phẩm để tạo thẻ <options>
-        return view('Admin.SanPham.SanPham-create', ['lstLoaiSanPham' => $lstLoaiSanPham, 'lstHangSanXuat' => $lstHangSanXuat]);
+        return view('Admin.SanPham.SanPham-edit', ['lstLoaiSanPham' => $lstLoaiSanPham, 'lstHangSanXuat' => $lstHangSanXuat]);
     }
 
     /**
@@ -73,47 +74,89 @@ class SanPhamController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
-            [
-                'FileExcel' => ['mimes:xlsx,xls,csv,ods'], //validate loại excel
-            ]
-        );
+        $validate = Validator::make($request->all(), [
+            'FileExcel' => ['mimes:xlsx,xls,csv,ods'], //validate loại excel
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+
         if ($request->hasFile('FileExcel')) {
             $import = new SanPhamImport;
             Excel::import($import, $request->file('FileExcel'));
             return Redirect::back()->with("SanPhamMoi", 'Thêm thành công ' . $import->getRowCount() . ' sản phẩm');
         }
+
         //xác thực đầu vào, xem các luật tại https://laravel.com/docs/8.x/validation#available-validation-rules
-        $request->validate(
-            [
-                'TenSanPham' => ['required', 'unique:san_phams,TenSanPham', 'max:255'],
-                'MoTa' => ['max:255'],
-                'HinhAnh' => ['required', 'image', "max:102400"], //max:100 Mb
-                'HangSanXuatId' => ['required', 'numeric', 'integer', 'exists:loai_san_phams,id'],
-                'LoaiSanPhamId' => ['required', 'numeric', 'integer', 'exists:hang_san_xuats,id'],
-            ]
-        );
+        $validate = Validator::make($request->all(), [
+            'TenSanPham' => ['required', 'unique:san_phams,TenSanPham', 'max:255'],
+            'MoTa' => ['max:255'],
+            //'HinhAnh' => ['required', 'image', "max:102400"], //max:100 Mb
+            'HangSanXuatId' => ['required', 'numeric', 'integer', 'exists:hang_san_xuats,id'],
+            'LoaiSanPhamId' => ['required', 'numeric', 'integer', 'exists:loai_san_phams,id'],
+            'ThuocTinhChung' => ['array'],
+            'ThuocTinh' => ['array'],
+            'MoTa' => [],
+            'ThuocTinhToHop' => ['array'],
+            'Datatable' => ['json'],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+
+        //gop key va` value lai thanh` 1 mang? de luu vo dang json
+        if (!empty($request['ThuocTinhChung']))
+            $thuocTinhChung =  collect($request['ThuocTinhChung'][0])->combine($request['ThuocTinhChung'][1]);
 
         $sanPham = SanPham::create([
-            'TenSanPham' => $request->input('TenSanPham'),
-            'MoTa' => $request->input('MoTa') ?? '',
-            'SoLuongTon' => 0,
-            'HinhAnh' => '', //cap nhat sau
-            'LuotMua' => 0,
-            'HangSanXuatId' => $request->input('HangSanXuatId'),
-            'LoaiSanPhamId' => $request->input('LoaiSanPhamId'),
+            'TenSanPham' => $request['TenSanPham'],
+            'MoTa' => $request['MoTa'] ?? '',
+            'TrangThai' => $request['TrangThai'] ?? false,
+            'ThuocTinh' => $thuocTinhChung ?? [],
+            'HangSanXuatId' => $request['HangSanXuatId'],
+            'LoaiSanPhamId' => $request['LoaiSanPhamId'],
+            'ThuocTinhToHop' => $request['ThuocTinh'],
         ]);
 
+        //lay het' bang? ra, so sanh' luu vai` DB
+        foreach (json_decode($request['Datatable'], true) as $item) {
+            //neu' trong DB da~ ton` tai SP do' thi` cap nhat lai gia' ban', ngc lai tao moi'
+            $ctSanPham = CT_SanPham::where("SanPhamId", $sanPham->id)->whereRaw('JSON_CONTAINS(ThuocTinhValue, ?)', [$item['BienThe']])->first();
+            if (!empty($ctSanPham)) {
+                $ctSanPham->update([
+                    'GiaBan' => $item['GiaBan'],
+                    'TrangThai' => $item['TrangThai'],
+                ]);
+            } else {
+                //xài DB::insert mà ko xài CT_SanPham::create([])  tai vi no' loi~ chu~ khi them vao
+                DB::insert(
+                    'insert into ct_san_phams(SanPhamId,SoLuongTon,GiaNhap,GiaBan,ThuocTinhValue,TrangThai) values (?, ?, ?, ?, ?, ?)',
+                    [$sanPham->id, 0, 0, $item['GiaBan'], $item['BienThe'], $item['TrangThai']]
+                );
+            }
+        }
+        //Hình ảnh phải lưu trong public và phải có bước tạo link thì người dùng mới thấy dc
+        //store() tự đặt hình bằng chuỗi random, nên tạo thư mục theo mã/tên sp để dễ quản lý
         if ($request->hasFile('HinhAnh')) {
-            $sanPham->HinhAnh = $request->file('HinhAnh')->store('assets/images/product-image/' . $sanPham->id, 'public');
-            //cat chuoi ra, chi luu cai ten thoi
-            $catChuoi = explode("/", $sanPham->HinhAnh);
-            $sanPham->HinhAnh = $catChuoi[4];
+
+            foreach ($request->file('HinhAnh') as $hinhAnh) {
+                $luuHinh = $hinhAnh->store('assets/images/product-image/' . $sanPham->id, 'public');
+
+                //cat chuoi ra, chi luu cai ten thoi
+                $catChuoi = explode("/", $luuHinh);
+                $luuHinh = $catChuoi[4];
+
+                HinhAnh::create([
+                    "SanPhamId" => $sanPham->id,
+                    "HinhAnh" => $luuHinh,
+                ]);
+            }
         }
 
         $sanPham->save(); //luu lại đường dẫn hình
 
-        return Redirect::back()->with("SanPhamMoi", 'Thêm sản phẩm mới ' . $sanPham->TenSanPham . ' thành công');
+        //return Redirect::back()->with("SanPhamMoi", 'Thêm sản phẩm mới ' . $sanPham->TenSanPham . ' thành công');
+        return route('SanPham.index');
     }
 
     /**
@@ -159,7 +202,9 @@ class SanPhamController extends Controller
             //'HinhAnh' => ['required', 'image', "max:102400"], //max:100 Mb
             'HangSanXuatId' => ['required', 'numeric', 'integer', 'exists:hang_san_xuats,id'],
             'LoaiSanPhamId' => ['required', 'numeric', 'integer', 'exists:loai_san_phams,id'],
+            'ThuocTinhChung' => ['array'],
             'ThuocTinh' => ['array'],
+            'MoTa' => [],
             'ThuocTinhToHop' => ['array'],
             'Datatable' => ['json'],
         ]);
@@ -188,14 +233,15 @@ class SanPhamController extends Controller
         }
 
         //gop key va` value lai thanh` 1 mang? de luu vo dang json
-        $thuocTinhChung =  collect($request['ThuocTinhChung'][0])->combine($request['ThuocTinhChung'][1]);
+        if (!empty($request['ThuocTinhChung']))
+            $thuocTinhChung =  collect($request['ThuocTinhChung'][0])->combine($request['ThuocTinhChung'][1]);
 
 
         $sanPham->update([
             'TenSanPham' => $request['TenSanPham'],
             'MoTa' => $request['MoTa'] ?? '',
             'TrangThai' => $request['TrangThai'] ?? false,
-            'ThuocTinh' => $thuocTinhChung,
+            'ThuocTinh' => $thuocTinhChung ?? [],
             'HangSanXuatId' => $request['HangSanXuatId'],
             'LoaiSanPhamId' => $request['LoaiSanPhamId'],
             'ThuocTinhToHop' => $request['ThuocTinh'],
@@ -219,8 +265,8 @@ class SanPhamController extends Controller
             }
         }
 
-        return response()->json([], 200);
-        //return route('SanPham.index');
+        //return response()->json([], 200);
+        return route('SanPham.index');
     }
 
     /**
@@ -333,7 +379,7 @@ class SanPhamController extends Controller
             }
         }
     }
-    public function SanPhamCrossJoin(Request $request, SanPham $sanPham)
+    public function SanPhamCrossJoin(Request $request, SanPham $sanPham = null)
     {
         //https://stackoverflow.com/questions/63631114/how-can-i-cross-join-dynamically-in-laravel
 
@@ -353,15 +399,17 @@ class SanPhamController extends Controller
         //$data = [["128 GB", "256 GB", "512 GB", "1024 GB"], ["Vàng đồng", "Xám", "Bạc", "Xanh dương"]];
         //The kind of explodes all elements in the array and sets them as paramenters.(...$options)
         $array = [];
-        foreach (Arr::crossJoin(...$data) as $items) {
-            $thuocTinhValue = json_encode($items, JSON_UNESCAPED_UNICODE);
+        if (!empty($data))
+            foreach (Arr::crossJoin(...$data) as $items) {
+                $thuocTinhValue = json_encode($items, JSON_UNESCAPED_UNICODE);
 
-            //neu' trong CTSanPham no' co' to? hop thuoc tinh' do' thi` lay' ra gia' tien`
-            $ctSanPham = CT_SanPham::where("SanPhamId", $sanPham->id)->whereRaw('JSON_CONTAINS(ThuocTinhValue, ?)', [$thuocTinhValue])->first();
-            $giaBan = $ctSanPham->GiaBan ?? 0;
+                //neu' trong CTSanPham no' co' to? hop thuoc tinh' do' thi` lay' ra gia' tien`
+                if (!empty($sanPham))
+                    $ctSanPham = CT_SanPham::where("SanPhamId", $sanPham->id)->whereRaw('JSON_CONTAINS(ThuocTinhValue, ?)', [$thuocTinhValue])->first();
+                $giaBan = $ctSanPham->GiaBan ?? 0;
 
-            $array[] = ["BienThe" => $thuocTinhValue, "GiaBan" => $giaBan, "TrangThai" => $ctSanPham->TrangThai ?? 0];
-        }
+                $array[] = ["BienThe" => $thuocTinhValue, "GiaBan" => $giaBan, "TrangThai" => $ctSanPham->TrangThai ?? 0];
+            }
 
         return response()->json($array, 200);
     }

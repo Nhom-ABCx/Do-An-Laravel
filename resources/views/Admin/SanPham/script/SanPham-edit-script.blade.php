@@ -334,6 +334,14 @@
             //
         });
 
+        $('input[name=FileExcel]').ace_file_input({
+            style: 'well',
+            btn_choose: 'Kéo thả file vào đây hoặc click để chọn',
+            btn_change: null,
+            no_icon: 'icon-cloud-upload',
+            droppable: true,
+            thumbnail: 'large'
+        });
         $('#id-input-file-3').ace_file_input({
             style: 'well',
             btn_choose: 'Kéo thả hình vào đây hoặc click để chọn',
@@ -475,7 +483,11 @@
     $('#BienTheSanPham').dataTable({
         autoWidth: false, //ko co cai nay` la` no' thu nho? lai max xau'
         ajax: {
-            url: "{{ route('SanPham.CrossJoin', $sanPham) }}",
+            @if (URL::current() == route('SanPham.create'))
+                url: "{{ route('SanPham.CrossJoin') }}",
+            @else
+                url: "{{ route('SanPham.CrossJoin', $sanPham) }}",
+            @endif
             method: 'POST',
             //gui di voi cai form
             data: function(d) {
@@ -664,7 +676,7 @@
                 $(form).find('span.error-text').empty();
             },
             success: function(response) {
-                //window.location.href = response;
+                window.location.href = response;
 
                 toastr.success("Cập nhật thành công", 'Thành công', {
                     timeOut: 3000

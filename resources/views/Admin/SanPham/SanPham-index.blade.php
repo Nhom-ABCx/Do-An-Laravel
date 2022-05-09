@@ -53,7 +53,7 @@
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-                                <a href="#" role="button" class="btn btn-success">
+                                <a href="{{ route('SanPham.create') }}" role="button" class="btn btn-success">
                                     <i class="icon-plus"></i>
                                     Thêm sản phẩm
                                 </a>
