@@ -38,15 +38,12 @@ class SanPhamImport implements ToModel, WithHeadingRow
     {
         ++$this->rows; //so' dong`
         return new SanPham([
-            'TenSanPham' => $row['tensanpham'],
-            'MoTa' => $row['mota'],
-            'SoLuongTon' => $row['soluongton'],
-            'GiaNhap' => $row['gianhap'],
-            'GiaBan' => $row['giaban'],
-            'HinhAnh' => $row['hinhanh'],
-            'LuotMua' => $row['luotmua'],
             'HangSanXuatId' => $row['hangsanxuatid'],
             'LoaiSanPhamId' => $row['loaisanphamid'],
+            'TenSanPham' => $row['tensanpham'],
+            'ThuocTinh' => $row['thuoctinh'],
+            'MoTa' => $row['mota'],
+            'ThuocTinhToHop' => $row['ThuocTinhToHop'],
             //'birthday' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['birthday'] ?? $row['ngay_sinh'])->format('Y-m-d'),
         ]);
     }

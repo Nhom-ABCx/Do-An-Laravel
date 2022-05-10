@@ -82,9 +82,10 @@ class SanPhamController extends Controller
             return response()->json($validate->errors(), 400);
 
         if ($request->hasFile('FileExcel')) {
-            $import = new SanPhamImport;
-            Excel::import($import, $request->file('FileExcel'));
-            return Redirect::back()->with("SanPhamMoi", 'Thêm thành công ' . $import->getRowCount() . ' sản phẩm');
+            Excel::import(new SanPhamImport, $request->file('FileExcel'));
+
+            //return Redirect::back()->with("SanPhamMoi", 'Thêm thành công ' . $import->getRowCount() . ' sản phẩm');
+            return route('SanPham.index');
         }
 
         //xác thực đầu vào, xem các luật tại https://laravel.com/docs/8.x/validation#available-validation-rules
