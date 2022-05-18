@@ -149,6 +149,8 @@ insert into San_Phams(TenSanPham,LuotMua,HangSanXuatId,LoaiSanPhamId,ThuocTinh,T
 "Sim" : "1 Nano SIM & 1 eSIMHỗ trợ 5G",
 "Pin" : "4352 mAh20 W"
 }','["Bộ nhớ trong","Màu sắc"]');
+INSERT INTO `san_phams` (`id`, `HangSanXuatId`, `LoaiSanPhamId`, `TenSanPham`, `ThuocTinh`, `MoTa`, `LuotMua`, `ThuocTinhToHop`, `TrangThai`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 3, 1, 'Điện thoại Xiaomi Redmi Note 11S', '{\"M\\u00e0n h\\u00ecnh\":\"AMOLED6.43\",\"H\\u1ec7 \\u0111i\\u1ec1u h\\u00e0nh\":\"Android 11\",\"Camera sau\":\"Ch\\u00ednh 108 MP & Ph\\u1ee5 8 MP, 2 MP, 2 MP\",\"Camera tr\\u01b0\\u1edbc\":\"16 MP\",\"Chip\":\"MediaTek Helio G96 8 nh\\u00e2n\",\"SIM\":\"2 Nano SIMH\\u1ed7 tr\\u1ee3 4G\",\"Pin, S\\u1ea1c\":\"5000 mAh33 W\",\"RAM\":\"8 GB\"}', 'Redmi Note 11S 5G có ngoại hình bắt mắt với 3 màu sắc thời thượng gồm: Midnight Black, Twilight Blue và Star Blue. Viền màn hình hai bên của máy khá mỏng cùng với đó là cạnh viền bo cong theo lòng bàn tay, tạo cảm giác cầm nắm thoải mái hơn.', 0, '[\"Wifi\",\"Color\"]', 1, '2022-05-17 22:10:13', '2022-05-17 22:11:57', NULL);
 
 
 insert into ct_san_phams(SanPhamId,SoLuongTon,GiaNhap,GiaBan,ThuocTinhValue) values
@@ -168,12 +170,24 @@ insert into ct_san_phams(SanPhamId,SoLuongTon,GiaNhap,GiaBan,ThuocTinhValue) val
 (1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 45690000, 46690000, '["1024 GB", "Xám"]'), /* 1024, xam' */
 (1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 45690000, 46690000, '["1024 GB", "Bạc"]'), /* 1024, bac' */
 (1, (SELECT FLOOR((RAND() * (5-1+1))+1)), 45690000, 46690000, '["1024 GB", "Xanh dương"]'); /* 1024, xanh duong' */
+INSERT INTO `ct_san_phams` (`id`, `SanPhamId`, `MaSanPham`, `SoLuongTon`, `GiaNhap`, `GiaBan`, `ThuocTinhValue`, `TrangThai`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(17, 2, 'DT-Xiaomi-ĐRS-1', 0, 0, 0, '[\"4G\",\"Đen\"]', 1, NULL, NULL, NULL),
+(18, 2, 'DT-Xiaomi-ĐRS-18', 0, 0, 0, '[\"4G\",\"Xanh dương đậm\"]', 1, NULL, NULL, NULL),
+(19, 2, 'DT-Xiaomi-ĐRS-19', 0, 0, 0, '[\"4G\",\"Xanh dương nhạt\"]', 1, NULL, NULL, NULL),
+(20, 2, 'DT-Xiaomi-ĐRS-20', 0, 0, 0, '[\"5G\",\"Đen\"]', 1, NULL, NULL, NULL),
+(21, 2, 'DT-Xiaomi-ĐRS-21', 0, 0, 0, '[\"5G\",\"Xanh dương đậm\"]', 1, NULL, NULL, NULL),
+(22, 2, 'DT-Xiaomi-ĐRS-22', 0, 0, 0, '[\"5G\",\"Xanh dương nhạt\"]', 1, NULL, NULL, NULL);
+
 
 insert into hinh_anhs(SanPhamId,HinhAnh) values
 (1,'vangdong.jpg'),
 (1,'xam.jpg'),
 (1,'bac.jpg'),
 (1,'xanhduong.jpg');
+INSERT INTO `hinh_anhs` (`id`, `SanPhamId`, `HinhAnh`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(5, 2, '75Q0P5fYNLLIhfpWZc7MDX1uu1TsZTJMFp7VXYMS.jpg', '2022-05-17 22:10:13', '2022-05-17 22:10:13', NULL),
+(6, 2, 'aJhdnckGaXBh0AdXyiY2ZbKi4mFQQZYHsGB9tvP5.jpg', '2022-05-17 22:10:13', '2022-05-17 22:10:13', NULL),
+(7, 2, 'r3SaQtS2OZbSvjlzjeoQCFBvsiCJEGTR0f42Khcc.jpg', '2022-05-17 22:10:13', '2022-05-17 22:10:13', NULL);
 
 insert into Chuong_Trinh_Khuyen_Mais(TenChuongTrinh,MoTa,FromDate,ToDate,created_at) values(N'Khuyến mãi cực hot ngày 20/11',N' giảm giá đến 5000đ các loại phụ kiện','2021-11-20','2022-12-01','2021-10-19');
 

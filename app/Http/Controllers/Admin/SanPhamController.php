@@ -110,7 +110,7 @@ class SanPhamController extends Controller
             $thuocTinhChung =  collect($request['ThuocTinhChung'][0])->combine($request['ThuocTinhChung'][1]);
 
         $sanPham = SanPham::create([
-            'TenSanPham' => $request['TenSanPham'],
+            'TenSanPham' => trim($request['TenSanPham']),
             'MoTa' => $request['MoTa'] ?? '',
             'TrangThai' => $request['TrangThai'] ?? false,
             'ThuocTinh' => $thuocTinhChung ?? [],
@@ -239,7 +239,7 @@ class SanPhamController extends Controller
 
 
         $sanPham->update([
-            'TenSanPham' => $request['TenSanPham'],
+            'TenSanPham' => trim($request['TenSanPham']),
             'MoTa' => $request['MoTa'] ?? '',
             'TrangThai' => $request['TrangThai'] ?? false,
             'ThuocTinh' => $thuocTinhChung ?? [],

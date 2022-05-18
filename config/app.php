@@ -170,13 +170,15 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
 
+
         /*
-         * Application Service Providers...
-         */
+        * Application Service Providers...
+        */
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Weidner\Goutte\GoutteServiceProvider::class, // [1] This will register the Package in the laravel echo system
 
     ],
 
@@ -233,6 +235,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Goutte' => Weidner\Goutte\GoutteFacade::class,
+
 
     ],
 

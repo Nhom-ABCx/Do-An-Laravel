@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\HinhAnhController;
 use App\Http\Controllers\User\UserHomeController;
 use App\Http\Controllers\User\UserGioHangController;
 use App\Http\Controllers\User\UserTaiKhoanController;
+use App\Http\Controllers\CrawlData;
 
 //composer dump-autoload
 //composer update
@@ -42,6 +43,8 @@ Route::put('TaiKhoan/{taiKhoan}/actionResetPass', [TaiKhoanController::class, 'a
 Route::get('ResetPassword-Susscess', [HomeController::class, 'Susscess'])->name('Home.Susscess');
 Route::get('Error', [HomeController::class, 'Error'])->name('Home.Error');
 Route::get('Test', [HomeController::class, 'Test'])->name('Home.Test');
+//
+Route::get('CrawlData', [CrawlData::class, 'TGDD'])->name('CrawlData.TGDD');
 
 //bo route User vo trong nay` cho de~
 Route::name('User.')->group(function () {
