@@ -478,6 +478,7 @@
                                             <tr>
                                                 <th class="center"><i class="icon-adn"></i></th>
                                                 <th><i class="icon-align-left"></i>Mẫu mã</th>
+                                                <th><i class="icon-shopping-cart"></i>Số lượng tồn</th>
                                                 <th><i class="icon-money"></i>Giá bán</th>
                                                 <th>
                                                     <i class="icon-check-sign"></i>Trạng thái (Ẩn/Bán)

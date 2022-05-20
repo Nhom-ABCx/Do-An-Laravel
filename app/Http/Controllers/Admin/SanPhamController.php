@@ -254,6 +254,7 @@ class SanPhamController extends Controller
             $ctSanPham = CT_SanPham::where("SanPhamId", $sanPham->id)->whereRaw('JSON_CONTAINS(ThuocTinhValue, ?)', [$item['BienThe']])->first();
             if (!empty($ctSanPham)) {
                 $ctSanPham->update([
+                    'SoLuongTon' => $item['SoLuongTon'],
                     'GiaBan' => $item['GiaBan'],
                     'TrangThai' => $item['TrangThai'],
                 ]);
@@ -408,8 +409,14 @@ class SanPhamController extends Controller
                 if (!empty($sanPham))
                     $ctSanPham = CT_SanPham::where("SanPhamId", $sanPham->id)->whereRaw('JSON_CONTAINS(ThuocTinhValue, ?)', [$thuocTinhValue])->first();
                 $giaBan = $ctSanPham->GiaBan ?? 0;
+                $soLuongTon = $ctSanPham->SoLuongTon ?? 0;
 
-                $array[] = ["BienThe" => $thuocTinhValue, "GiaBan" => $giaBan, "TrangThai" => $ctSanPham->TrangThai ?? 0];
+                $array[] = [
+                    "BienThe" => $thuocTinhValue,
+                    "GiaBan" => $giaBan,
+                    "TrangThai" => $ctSanPham->TrangThai ?? 0,
+                    "SoLuongTon" => $soLuongTon,
+                ];
             }
 
         return response()->json($array, 200);

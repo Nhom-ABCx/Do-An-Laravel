@@ -15,14 +15,14 @@ class CreateTrigger extends Migration
     public function up()
     {
         // /* MaSanPham: DT-Iphone-I3X-1 */
-        DB::unprepared('CREATE TRIGGER tao_MaSanPham_CTSanPham_khiUpdate BEFORE INSERT ON `ct_san_phams` FOR EACH ROW
+        DB::unprepared('CREATE TRIGGER tao_MaSanPham_CTSanPham BEFORE INSERT ON `ct_san_phams` FOR EACH ROW
             BEGIN
                 set NEW.MaSanPham=(SELECT CONCAT_WS("-",lsp.Code,
                         hsx.TenHangSanXuat,
                         CONCAT(LEFT(UPPER(sp.TenSanPham), 1),
                         MID(UPPER(sp.TenSanPham), LENGTH(sp.TenSanPham)/2, 1),
                         RIGHT(UPPER(sp.TenSanPham), 1)),
-                        IFNULL((SELECT MAX(id)+1 from ct_san_phams where SanPhamId=NEW.SanPhamId),1)
+                        IFNULL((SELECT COUNT(id)+1 from ct_san_phams where SanPhamId=NEW.SanPhamId),1)
                         )
                     from san_phams sp
                     INNER JOIN Loai_San_Phams lsp ON sp.LoaiSanPhamId=lsp.id

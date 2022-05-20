@@ -514,6 +514,11 @@
                 data: 'BienThe',
             },
             {
+                data: 'SoLuongTon',
+                className: "pink",
+                render: DataTable.render.number(',', '.'),
+            },
+            {
                 data: 'GiaBan',
                 className: "pink",
                 render: DataTable.render.number(',', '.'),
@@ -571,6 +576,11 @@
             //khi tao moi 1 row, them cac thuoc tinh vao cac td
             $.each($('td', row), function(colIndex) {
                 if (colIndex == 2) {
+                    $(this).attr('class', 'SoLuongTon pink');
+                    $(this).attr('data-name', 'SoLuongTon');
+                    $(this).attr('data-pk', rowIndex);
+                }
+                if (colIndex == 3) {
                     $(this).attr('class', 'GiaBan pink');
                     $(this).attr('data-name', 'GiaBan');
                     $(this).attr('data-pk', rowIndex);
@@ -580,6 +590,60 @@
     });
 
 
+    $('#BienTheSanPham').editable({
+        title: 'Nhập giá',
+        //url: '#',
+        container: 'body',
+        selector: 'td.SoLuongTon',
+        type: 'text',
+        //send: 'always',
+        ajaxOptions: {
+            //gui len voi phuong thuc, mac dinh la POST
+            type: "PUT",
+            //mong muon kieu du lieu tra ve tu sever
+            dataType: 'json'
+        },
+        display: function(value) {
+            //khi nhan' vao` thi` display no' moi' chay thi` phai?
+            //do luc' dau` datatable hien thi theo numberFormat "1,000,000" nen loai bo? het dau', cho no' thanh` so'
+            let stringValue = value.replace(/[,]/g, "");
+
+            //khi nhan' thay doi? thi` format lai number
+            let soLuongTonFormat = new Intl.NumberFormat().format(stringValue);
+            $(this).text(soLuongTonFormat);
+        },
+        //name: 'SoLuong',
+        validate: function(value) {
+            if ($.trim(value) == '')
+                return 'Không được rỗng';
+            if ($.isNumeric(value) == '')
+                return 'Nhập số';
+        },
+        success: function(response, newValue) {
+
+            var table = $('#BienTheSanPham').closest('table').DataTable();
+            table.cell(this).data(newValue);
+
+            // if (response != null) {
+            //     toastr.success("Cập nhật thành công", 'Thành công', {
+            //         timeOut: 3000
+            //     });
+            // } else {
+            //     toastr.warning("Có gì đó xảy ra", 'Cảnh báo', {
+            //         timeOut: 3000
+            //     });
+            // }
+        },
+        error: function(response) {
+            // console.log("request lỗi");
+
+            // $.each(response.responseJSON, function(key, val) {
+            //     toastr.error(val[0], 'Có lỗi xảy ra', {
+            //         timeOut: 3000
+            //     });
+            // });
+        },
+    });
 
     $('#BienTheSanPham').editable({
         title: 'Nhập giá',
