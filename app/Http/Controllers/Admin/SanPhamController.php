@@ -254,6 +254,7 @@ class SanPhamController extends Controller
             $ctSanPham = CT_SanPham::where("SanPhamId", $sanPham->id)->whereRaw('JSON_CONTAINS(ThuocTinhValue, ?)', [$item['BienThe']])->first();
             if (!empty($ctSanPham)) {
                 $ctSanPham->update([
+                    'MaSanPham' => DB::select("select func_Tao_MaSanPham_CTSanPham_deUpdate(?,?) as Name", [$sanPham->id, $ctSanPham->id])[0]->Name,
                     'SoLuongTon' => $item['SoLuongTon'],
                     'GiaBan' => $item['GiaBan'],
                     'TrangThai' => $item['TrangThai'],

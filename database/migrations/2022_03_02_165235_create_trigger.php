@@ -14,14 +14,17 @@ class CreateTrigger extends Migration
      */
     public function up()
     {
-        // /* MaSanPham: DT-Iphone-I3X-1 */
+        // /* MaSanPham: DT-Iphone-I3X-20200520-1 */
+        //khi insert
         DB::unprepared('CREATE TRIGGER tao_MaSanPham_CTSanPham BEFORE INSERT ON `ct_san_phams` FOR EACH ROW
             BEGIN
                 set NEW.MaSanPham=(SELECT CONCAT_WS("-",lsp.Code,
                         hsx.TenHangSanXuat,
                         CONCAT(LEFT(UPPER(sp.TenSanPham), 1),
                         MID(UPPER(sp.TenSanPham), LENGTH(sp.TenSanPham)/2, 1),
-                        RIGHT(UPPER(sp.TenSanPham), 1)),
+                        RIGHT(UPPER(sp.TenSanPham), 1)
+                        ),
+                        DATE_FORMAT(sp.created_at,"%Y%m%d%H%i%s"),
                         IFNULL((SELECT COUNT(id)+1 from ct_san_phams where SanPhamId=NEW.SanPhamId),1)
                         )
                     from san_phams sp
@@ -30,6 +33,7 @@ class CreateTrigger extends Migration
                     WHERE sp.id=NEW.SanPhamId
                     );
             END');
+
         //khi insert
         DB::unprepared('CREATE TRIGGER thanhTien_CTHoaDon BEFORE INSERT ON `ct_hoa_dons` FOR EACH ROW
             BEGIN
@@ -83,7 +87,7 @@ class CreateTrigger extends Migration
 
 
 
-
+        //procedure
         DB::unprepared('DROP PROCEDURE IF EXISTS update_TongTien_HoaDon');
         DB::unprepared('CREATE PROCEDURE update_TongTien_HoaDon ()
         BEGIN
@@ -98,6 +102,25 @@ class CreateTrigger extends Migration
             update hoa_don_nhaps a, (select HoaDonNhapId,SUM(ThanhTien) as tongTien,SUM(SoLuong) as tongSoLuong from ct_hoa_don_nhaps GROUP BY HoaDonNhapId) b
             set a.TongTien=b.tongTien, a.TongSoLuong=b.tongSoLuong
             where a.id=b.HoaDonNhapId;
+        END');
+
+        DB::unprepared('DROP FUNCTION IF EXISTS func_Tao_MaSanPham_CTSanPham_deUpdate');
+        DB::unprepared('CREATE FUNCTION func_Tao_MaSanPham_CTSanPham_deUpdate (thisSanPhamId INT,thisCTSanPhamId INT)
+        RETURNS NVARCHAR(255) DETERMINISTIC
+        BEGIN
+             RETURN (SELECT CONCAT_WS("-",lsp.Code,
+                        hsx.TenHangSanXuat,
+                        CONCAT(LEFT(UPPER(sp.TenSanPham), 1),
+                        MID(UPPER(sp.TenSanPham), LENGTH(sp.TenSanPham)/2, 1),
+                        RIGHT(UPPER(sp.TenSanPham), 1)
+                        ),
+                        DATE_FORMAT(sp.created_at,"%Y%m%d%H%i%s"),
+                        (SELECT SUBSTRING_INDEX(MaSanPham, "-", -1) from ct_san_phams where SanPhamId=thisSanPhamId and id=thisCTSanPhamId)
+                        )
+                from san_phams sp
+                INNER JOIN Loai_San_Phams lsp ON sp.LoaiSanPhamId=lsp.id
+                INNER JOIN hang_san_xuats hsx ON sp.HangSanXuatId=hsx.id
+                WHERE sp.id=thisSanPhamId);
         END');
     }
 
