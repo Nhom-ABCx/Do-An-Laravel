@@ -2,14 +2,14 @@
 //https://viblo.asia/p/crawl-data-bang-laravel-va-goutte-L4x5x3ewlBM
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Admin\SanPhamController;
-use FontLib\Table\Type\name;
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 use App\Models\SanPham;
 use App\Models\CT_SanPham;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage; //thu vien luu tru~ de tao lien ket den public
+use App\Models\HinhAnh;
 use Illuminate\Http\Request;
 
 class CrawlData extends Controller
@@ -25,8 +25,15 @@ class CrawlData extends Controller
         $client = new Client();
 
         $crawler = $client->request('GET', $baseUrl . $urlAll);
-        $crawler->filter('ul.listproduct li.__cate_42')->each(
-            function (Crawler $node) use ($baseUrl, $client) {
+        $list = $crawler->filter('ul.listproduct li.__cate_42');
+        $index = 0;
+        echo "Total List: " . $list->count();
+        $list->each(
+            function (Crawler $node) use ($baseUrl, $client, &$index) {
+                $index = $index + 1;
+                dump($index);
+
+                //
                 // $name = $node->filter('h3')->text();
 
                 // $price = $node->filter('strong.price')->text();
@@ -78,6 +85,14 @@ class CrawlData extends Controller
                     }
                 );
 
+                //lay url hinh` anh?
+                $hinhAnh = $pageDetail->filter('div.box01__tab.scrolling img')->each(
+                    function (Crawler $node) {
+                        return $node->attr('data-src');
+                    }
+
+                );
+
                 $request = [
                     "TenSanPham" => $name,
                     "ThuocTinhChung" => $thuocTinhChung,
@@ -88,6 +103,7 @@ class CrawlData extends Controller
                     "ThuocTinhToHop" => $thuocTinhToHop->all(),
                     "MoTa" => "Mô tả ko crawl dc",
                     "Datatable" => "",
+                    "HinhAnh" => $hinhAnh,
                 ];
 
                 //--------
@@ -147,7 +163,34 @@ class CrawlData extends Controller
                     }
                 }
 
+                //Hình ảnh phải lưu trong public và phải có bước tạo link thì người dùng mới thấy dc
+                //store() tự đặt hình bằng chuỗi random, nên tạo thư mục theo mã/tên sp để dễ quản lý
+                if (!empty($request['HinhAnh'])) {
+
+                    foreach ($request['HinhAnh'] as $hinhAnh) {
+                        //download image from url
+                        $url = $hinhAnh;
+                        try {
+                            $contents = file_get_contents($url);
+                            $name = substr($url, strrpos($url, '/') + 1);
+                            $path = 'assets/images/product-image/' . $sanPham->id . '/' . $name;
+                            Storage::disk('public')->put($path, $contents);
+                            //code...
+                        } catch (\Throwable $th) {
+                            //throw $th;
+                        }
+
+                        HinhAnh::create([
+                            "SanPhamId" => $sanPham->id,
+                            "HinhAnh" => $name,
+                        ]);
+                    }
+                }
+
+                $sanPham->save(); //luu lại đường dẫn hình
+
                 //return Redirect::back()->with("SanPhamMoi", 'Thêm sản phẩm mới ' . $sanPham->TenSanPham . ' thành công');
+
             }
         );
         dd("sucsses");
