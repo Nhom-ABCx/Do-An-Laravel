@@ -15,7 +15,7 @@ class CreateTrigger extends Migration
     public function up()
     {
         // /* MaSanPham: DT-Iphone-I3X-20200520-1 */
-        //khi insert
+        //khi insert tao MaSanPham trong CTSanPham
         DB::unprepared('CREATE TRIGGER tao_MaSanPham_CTSanPham BEFORE INSERT ON `ct_san_phams` FOR EACH ROW
             BEGIN
                 set NEW.MaSanPham=(SELECT CONCAT_WS("-",lsp.Code,
@@ -34,7 +34,7 @@ class CreateTrigger extends Migration
                     );
             END');
 
-        //khi insert
+        //khi insert tinh ThanhTien trong CtHoaDon
         DB::unprepared('CREATE TRIGGER thanhTien_CTHoaDon BEFORE INSERT ON `ct_hoa_dons` FOR EACH ROW
             BEGIN
                 set
@@ -42,11 +42,12 @@ class CreateTrigger extends Migration
                     NEW.GiaBan=(select GiaBan-IFNULL((select b.GiamGia from ct_san_phams as a, ct_chuong_trinh_kms as b WHERE a.id=b.CTSanPhamId and a.id=NEW.CTSanPhamId),0) from ct_san_phams b where b.Id=NEW.CTSanPhamId),
                     NEW.ThanhTien=(NEW.SoLuong*NEW.GiaBan);
             END');
+        //tinh thanhtien trong cthoadonNhap
         DB::unprepared('CREATE TRIGGER thanhTien_CTHoaDonNhap BEFORE INSERT ON `ct_hoa_don_nhaps` FOR EACH ROW
             BEGIN
                 set NEW.ThanhTien=(NEW.SoLuong*NEW.GiaNhap);
             END');
-        //khi update
+        //khi update tinh thanh`tien` CTHoaDon
         DB::unprepared('CREATE TRIGGER thanhTien_CTHoaDon_update BEFORE UPDATE ON `ct_hoa_dons` FOR EACH ROW
             BEGIN
                 set
@@ -54,14 +55,17 @@ class CreateTrigger extends Migration
                     NEW.GiaBan=(select GiaBan-IFNULL((select b.GiamGia from ct_san_phams as a, ct_chuong_trinh_kms as b WHERE a.id=b.CTSanPhamId and a.id=NEW.CTSanPhamId),0) from ct_san_phams b where b.Id=NEW.CTSanPhamId),
                     NEW.ThanhTien=(NEW.SoLuong*NEW.GiaBan);
             END');
+        //tinh tong tien` CTHoaDon
         DB::unprepared('CREATE TRIGGER tongTien_CTHoaDon_afupdate AFTER UPDATE ON `ct_hoa_dons` FOR EACH ROW
             BEGIN
                 CALL update_TongTien_HoaDon();
             END');
+        //tinh thanh` tien` CTHoaDonNhap
         DB::unprepared('CREATE TRIGGER thanhTien_CTHoaDonNhap_update BEFORE UPDATE ON `ct_hoa_don_nhaps` FOR EACH ROW
             BEGIN
                 set NEW.ThanhTien=(NEW.SoLuong*NEW.GiaNhap);
             END');
+        //tinh tong tien` CTHoaDonNhap
         DB::unprepared('CREATE TRIGGER tongTien_CTHoaDonNhap_afupdate AFTER UPDATE ON `ct_hoa_don_nhaps` FOR EACH ROW
             BEGIN
                 CALL update_TongTien_HoaDonNhap();
@@ -77,7 +81,7 @@ class CreateTrigger extends Migration
             END');
 
 
-
+        //khi insert tai khoan? moi thi` mac dinh tao 1 dia chi?
         DB::unprepared('CREATE TRIGGER them_DiaChi AFTER INSERT ON `tai_khoans` FOR EACH ROW
             BEGIN
                 IF (NEW.LoaiTaiKhoanId=3 OR NEW.LoaiTaiKhoanId=4) THEN
@@ -104,6 +108,7 @@ class CreateTrigger extends Migration
             where a.id=b.HoaDonNhapId;
         END');
 
+        //tao MaSanPham trong CTSanPham de khi sua? thong tin sanPham thi` se update ma~nay`
         DB::unprepared('DROP FUNCTION IF EXISTS func_Tao_MaSanPham_CTSanPham_deUpdate');
         DB::unprepared('CREATE FUNCTION func_Tao_MaSanPham_CTSanPham_deUpdate (thisSanPhamId INT,thisCTSanPhamId INT)
         RETURNS NVARCHAR(255) DETERMINISTIC
