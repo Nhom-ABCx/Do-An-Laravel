@@ -14,6 +14,20 @@ use Illuminate\Http\Request;
 
 class CrawlData extends Controller
 {
+    public function index($type)
+    {
+        switch ($type) {
+            case 'TGDD':
+                $this->TGDD();
+                break;
+            case 'DienLanh':
+                $this->DienLanh();
+                break;
+            default:
+                # code...
+                break;
+        }
+    }
     //crawl data tu`the gioi di dong
     public function TGDD()
     {
@@ -191,6 +205,102 @@ class CrawlData extends Controller
 
                 //return Redirect::back()->with("SanPhamMoi", 'Thêm sản phẩm mới ' . $sanPham->TenSanPham . ' thành công');
 
+            }
+        );
+        dd("sucsses");
+    }
+
+    //crawl data tu` dien may xanh
+    public function DienLanh()
+    {
+        //dien may xanh moi TGDD no giong nhau
+        $baseUrl = 'https://www.dienmayxanh.com';
+        $urlAll = '/tu-dong';
+
+        $client = new Client();
+
+        $crawler = $client->request('GET', $baseUrl . $urlAll);
+        $list = $crawler->filter('ul.listproduct li.__cate_166');
+        $index = 0;
+        echo "Total List: " . $list->count();
+        $list->each(
+            function (Crawler $node) use ($baseUrl, $client, &$index) {
+                $index = $index + 1;
+                dump($index);
+
+                //
+                // $name = $node->filter('h3')->text();
+
+                // $price = $node->filter('strong.price')->text();
+                // $price = preg_replace('/\D/', '', $price);
+                // $star = $node->filter('i.icon-star')->count();
+                //
+                $href = $node->filter('a')->attr('href');
+                $pageDetail = $client->request('GET', $baseUrl . $href);
+
+                $name = $pageDetail->filter('h1')->text();
+                $price = $pageDetail->filter('div.box-price p.box-price-present')->text();
+                $price = preg_replace('/\D/', '', $price);
+                //
+                $thuocTinhChung = collect($pageDetail->filter('ul.parameter__list li')->each(
+                    //tung` phan` tu cua table Cau hinh`
+                    function (Crawler $item) {
+                        $left = $item->filter('p.lileft')->text();
+                        $right = collect($item->filter('div.liright span')->each(
+                            function (Crawler $span) {
+                                return $span->text();
+                            }
+                        ))->implode(', ');
+                        return [$left, $right];
+                    }
+                ));
+                //gop lai cho no' theo mang? chuan? cua request
+                $thuocTinhChung = [$thuocTinhChung->pluck(0)->all(), $thuocTinhChung->pluck(1)->all()];
+                //
+                $rawThuocTinh = $pageDetail->filter('div.scrolling_inner')->each(
+                    function (Crawler $node) {
+                        return $node->filter('div.box03 > a.box03__item.item')->each(
+                            function (Crawler $item) {
+                                return $item->text();
+                            }
+                        );
+                    }
+                );
+
+                $thuocTinhToHop = collect($rawThuocTinh)->map(function ($item) {
+                    return $item;
+                })->reject(function ($item) {
+                    //neu' null thi` xoa' no' di
+                    return empty($item);
+                })->values();
+
+                $thuocTinh = $thuocTinhToHop->map(
+                    function ($value, $key) {
+                        return 'ThuocTinh ' . $key;
+                    }
+                );
+
+                //lay url hinh` anh?
+                $hinhAnh = $pageDetail->filter('div.box01__tab.scrolling img')->each(
+                    function (Crawler $node) {
+                        return $node->attr('data-src');
+                    }
+
+                );
+
+                $request = [
+                    "TenSanPham" => $name,
+                    "ThuocTinhChung" => $thuocTinhChung,
+                    "HangSanXuatId" => rand(1, 11),
+                    "LoaiSanPhamId" => 2,
+                    "TrangThai" => "1",
+                    "ThuocTinh" => $thuocTinh->all(),
+                    "ThuocTinhToHop" => $thuocTinhToHop->all(),
+                    "MoTa" => "Mô tả ko crawl dc",
+                    "Datatable" => "",
+                    "HinhAnh" => $hinhAnh,
+                ];
+                dd($request);
             }
         );
         dd("sucsses");

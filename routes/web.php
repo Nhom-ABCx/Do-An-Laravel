@@ -44,7 +44,7 @@ Route::get('ResetPassword-Susscess', [HomeController::class, 'Susscess'])->name(
 Route::get('Error', [HomeController::class, 'Error'])->name('Home.Error');
 Route::get('Test', [HomeController::class, 'Test'])->name('Home.Test');
 //
-Route::get('CrawlData', [CrawlData::class, 'TGDD'])->name('CrawlData.TGDD');
+Route::get('CrawlData/{type}', [CrawlData::class, 'index'])->name('CrawlData.index');
 
 //bo route User vo trong nay` cho de~
 Route::name('User.')->group(function () {
