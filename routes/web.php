@@ -85,7 +85,7 @@ Route::group([
             'SanPham' => 'sanPham'
         ]
     ]);
-    Route::get("SanPhamm/DaXoa", [SanPhamController::class, "SanPhamDaXoa"])->name("SanPham.DaXoa");
+    Route::get("SanPhamm/DaXoa", [SanPhamController::class, "DaXoa"])->name("SanPham.DaXoa");
     Route::post("SanPham/KhoiPhuc/{id}", [SanPhamController::class, "KhoiPhucSanPham"])->name("SanPham.KhoiPhuc");
     Route::delete("SanPham/XoaVinhVien/{id}", [SanPhamController::class, "XoaVinhVienSanPham"])->name("SanPham.XoaVinhVien");
     Route::post('SanPham-CrossJoin-Input/{sanPham?}', [SanPhamController::class, "SanPhamCrossJoin"])->name("SanPham.CrossJoin");
@@ -180,7 +180,7 @@ Route::group([
             'LoaiSanPham' => 'loaiSanPham'
         ]
     ]);
-    Route::get("LoaiSanPhamm/DaXoa", [LoaiSanPhamController::class, "LoaiSanPhamDaXoa"])->name("LoaiSanPham.DaXoa");
+    Route::get("LoaiSanPhamm/DaXoa", [LoaiSanPhamController::class, "DaXoa"])->name("LoaiSanPham.DaXoa");
     Route::post("LoaiSanPham/KhoiPhuc/{id}", [LoaiSanPhamController::class, "KhoiPhucLoaiSanPham"])->name("LoaiSanPham.KhoiPhuc");
 
     //hinh`anh?

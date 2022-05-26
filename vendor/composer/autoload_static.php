@@ -665,6 +665,7 @@ class ComposerStaticInitee083f8c21d34e31d2b7d4c1495424cf
         'App\\Http\\Controllers\\Admin\\YeuThichController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/YeuThichController.php',
         'App\\Http\\Controllers\\Api\\SanPhamController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/SanPhamController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\CrawlData' => __DIR__ . '/../..' . '/app/Http/Controllers/CrawlData.php',
         'App\\Http\\Controllers\\SendEmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/SendEmailController.php',
         'App\\Http\\Controllers\\User\\UserGioHangController' => __DIR__ . '/../..' . '/app/Http/Controllers/User/UserGioHangController.php',
         'App\\Http\\Controllers\\User\\UserHomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/User/UserHomeController.php',

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 
 use App\Models\LoaiSanPham;
@@ -15,10 +16,24 @@ class LoaiSanPhamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = LoaiSanPham::all();
-        return view('Admin.LoaiSanPham.LoaiSanPham-index', ['loaiSp' => $data]);
+        $data = LoaiSanPham::from(app(LoaiSanPham::class)->getTable());
+
+        $this->filter($data, $request);
+
+        return view('Admin.LoaiSanPham.LoaiSanPham-index', ['loaiSp' => $data, 'request' => $request]);
+    }
+    /**
+     * ham` nay` co tac dung filter theo request
+     *  chu? yeu' xai` lai ho index va` daxoa
+     */
+    private function filter(&$data, Request $request)
+    {
+        if (!empty($request['Ten']))
+            $data = $data->where('TenLoaiSanPham', 'LIKE', '%' . $request['Ten'] . '%');
+
+        $data = $data->get();
     }
 
     /**
@@ -28,7 +43,7 @@ class LoaiSanPhamController extends Controller
      */
     public function create()
     {
-        return view("Admin.LoaiSanPham.LoaiSanPham-create");
+        // return view("Admin.LoaiSanPham.LoaiSanPham-create");
     }
 
     /**
@@ -39,18 +54,18 @@ class LoaiSanPhamController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'TenLoai' => ['required', 'unique:loai_san_phams,TenLoai', 'max:255'],
             'MoTa' => ['max:255'],
+            'Parent_Id' => [],
         ]);
-        $loaiSp = new LoaiSanPham();
-        $loaiSp->fill([
-            'TenLoai' => $request->input('TenLoai'),
-            'MoTa' => $request->input('MoTa') ?? '',
+        $loaiSanPham = LoaiSanPham::create([
+            'TenLoai' => $request['TenLoai'],
+            'MoTa' => $request['MoTa'] ?? '',
+            'Parent_Id' => $request['Parent_Id'],
         ]);
-        $loaiSp->save();
-        return Redirect::route('LoaiSanPham.index');
+
+        return Redirect::back()->with("themMoi", 'Thêm loại ' . $loaiSanPham->TenLoai . ' thành công');
     }
     /**
      * Display the specified resource.
@@ -116,10 +131,13 @@ class LoaiSanPhamController extends Controller
         $loaiSanPham->forceDelete();
         return Redirect::route("LoaiSanPham.index");
     }
-    public function LoaiSanPhamDaXoa(Request $request)
+    public function DaXoa(Request $request)
     {
-        $data = LoaiSanPham::onlyTrashed()->get();
-        return view("Admin.LoaiSanPham.LoaiSanPham-index", ['loaiSp' => $data]);
+        $data = LoaiSanPham::onlyTrashed();
+
+        $this->filter($data, $request);
+
+        return view("Admin.LoaiSanPham.LoaiSanPham-index", ['loaiSp' => $data, 'request' => $request]);
     }
     public function KhoiPhucLoaiSanPham($id)
     {

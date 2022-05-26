@@ -30,6 +30,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\YeuThichController' => $baseDir . '/app/Http/Controllers/Admin/YeuThichController.php',
     'App\\Http\\Controllers\\Api\\SanPhamController' => $baseDir . '/app/Http/Controllers/Api/SanPhamController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\CrawlData' => $baseDir . '/app/Http/Controllers/CrawlData.php',
     'App\\Http\\Controllers\\SendEmailController' => $baseDir . '/app/Http/Controllers/SendEmailController.php',
     'App\\Http\\Controllers\\User\\UserGioHangController' => $baseDir . '/app/Http/Controllers/User/UserGioHangController.php',
     'App\\Http\\Controllers\\User\\UserHomeController' => $baseDir . '/app/Http/Controllers/User/UserHomeController.php',

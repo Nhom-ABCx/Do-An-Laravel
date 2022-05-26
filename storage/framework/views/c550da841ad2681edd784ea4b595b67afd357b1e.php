@@ -1,14 +1,14 @@
-{{-- cai nay la duong dan den' file Layouts/Layout.blade.php --}}
-@extends('Admin.layouts.Layout')
 
-@section('title', 'Page Title')
 
-@section('headThisPage')
-    {{-- đoạn include Link chỉ dành cho trang tránh gây lỗi CSS --}}
-@endsection
 
-@section('body')
-    {{-- Trang nay la trang BODY --}}
+<?php $__env->startSection('title', 'Page Title'); ?>
+
+<?php $__env->startSection('headThisPage'); ?>
+    
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('body'); ?>
+    
     <div class="main-content">
 
         <ul class="breadcrumb">
@@ -27,7 +27,7 @@
                     <i class="icon-angle-right arrow-icon"></i>
                 </span>
             </li>
-            {{-- <li class="active">CT-Khuyến mãi</li> --}}
+            
         </ul><!-- .breadcrumb -->
 
         <div class="nav-search" id="nav-search">
@@ -41,10 +41,10 @@
         <div class="page-content">
             <div class="span4">
                 <div class="pull">
-                    <a type="button" class="btn btn-info " href="{{ route('LoaiSanPham.index') }}"><i class="fa fa-angle-double-left"></i> Back</a>
+                    <a type="button" class="btn btn-info " href="<?php echo e(route('LoaiSanPham.index')); ?>"><i class="fa fa-angle-double-left"></i> Back</a>
                 </div>
-                <form action="{{ route('LoaiSanPham.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <form action="<?php echo e(route('LoaiSanPham.store')); ?>" method="POST" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
                     <div class="widget-box">
                         <div class="widget-header">
                             <h4>Thêm loại sản phẩm</h4>
@@ -60,9 +60,9 @@
                                     <div class="row-fluid input-append">
                                         <textarea name="TenLoai" cols="50" rows="3"></textarea>
                                     </div>
-                                    @if ($errors->has('TenLoai'))
-                                        <i class="icon-remove bigger-110 red"> {{ $errors->first('TenLoai') }}</i>
-                                    @endif
+                                    <?php if($errors->has('TenLoai')): ?>
+                                        <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('TenLoai')); ?></i>
+                                    <?php endif; ?>
                                 </div>
                                 <hr />
                                 <div class="row-fluid">
@@ -73,9 +73,9 @@
                                     <div class="row-fluid input-append">
                                         <textarea name="MoTa" cols="50" rows="3"></textarea>
                                     </div>
-                                    @if ($errors->has('MoTa'))
-                                        <i class="icon-remove bigger-110 red"> {{ $errors->first('MoTa') }}</i>
-                                    @endif
+                                    <?php if($errors->has('MoTa')): ?>
+                                        <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('MoTa')); ?></i>
+                                    <?php endif; ?>
                                 </div>
                                 <hr />
                                 <button class="btn btn-primary " type="submit"><i class="fa fa-check-square-o"></i>
@@ -86,8 +86,10 @@
             </div>
         </div><!-- /.page-content -->
     </div><!-- /.main-content -->
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scriptThisPage')
-    {{-- Đoạn script chỉ xài cho trang --}}
-@endsection
+<?php $__env->startSection('scriptThisPage'); ?>
+    
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('Admin.layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\DDDD\Do-An-Laravel\resources\views/Admin/LoaiSanPham/LoaiSanPham-create.blade.php ENDPATH**/ ?>

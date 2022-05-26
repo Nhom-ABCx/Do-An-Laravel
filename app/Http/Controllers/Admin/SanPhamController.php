@@ -35,13 +35,9 @@ class SanPhamController extends Controller
      */
     public function index(Request $request)
     {
-        $data = SanPham::all();
-        if (!empty($request->input('TenSanPham')))
-            $data = $data->where('TenSanPham', 'LIKE', '%' . Str::of($request->input('TenSanPham'))->trim() . '%');
-        if (!empty($request->input('HangSanXuatId')))
-            $data = $data->where('HangSanXuatId', $request->input('HangSanXuatId'));
-        if (!empty($request->input('LoaiSanPhamId')))
-            $data = $data->where('LoaiSanPhamId', $request->input('LoaiSanPhamId'));
+        $data = SanPham::from(app(SanPham::class)->getTable());
+
+        $this->filter($data, $request);
 
         foreach ($data as $sp)
             $this->fixImage($sp);
@@ -50,6 +46,23 @@ class SanPhamController extends Controller
         $lstHangSanXuat = HangSanXuat::all();
         //tra lai resquet ve cho view de hien thi lai tim` kiem' cu?
         return view('Admin.SanPham.SanPham-index', ["sanPham" => $data, 'lstLoaiSanPham' => $lstLoaiSanPham, 'lstHangSanXuat' => $lstHangSanXuat, 'request' => $request]);
+    }
+    /**
+     * ham` nay` co tac dung filter theo request
+     *  chu? yeu' xai` lai ho index va` daxoa
+     */
+    private function filter(&$data, Request $request)
+    {
+        if (!empty($request['TenSanPham']))
+            $data = $data->where('TenSanPham', 'LIKE', '%' . $request['TenSanPham'] . '%');
+        if (!empty($request['HangSanXuatId']))
+            $data = $data->where('HangSanXuatId', $request['HangSanXuatId']);
+        if (!empty($request['LoaiSanPhamId']))
+            $data = $data->where('LoaiSanPhamId', $request['LoaiSanPhamId']);
+        if (!empty($request['TrangThai']))
+            $data = $data->where('TrangThai', $request['TrangThai']);
+
+        $data = $data->get();
     }
 
     /**
@@ -284,15 +297,11 @@ class SanPhamController extends Controller
         $sanPham->delete();
         return Redirect::route('SanPham.index');
     }
-    public function SanPhamDaXoa(Request $request)
+    public function DaXoa(Request $request)
     {
-        $data = SanPham::onlyTrashed()->get();
-        if (!empty($request->input('TenSanPham')))
-            $data = $data->where('TenSanPham', 'LIKE', '%' . Str::of($request->input('TenSanPham'))->trim() . '%');
-        if (!empty($request->input('HangSanXuatId')))
-            $data = $data->where('HangSanXuatId', $request->input('HangSanXuatId'));
-        if (!empty($request->input('LoaiSanPhamId')))
-            $data = $data->where('LoaiSanPhamId', $request->input('LoaiSanPhamId'));
+        $data = SanPham::onlyTrashed();
+
+        $this->filter($data, $request);
 
         foreach ($data as $sp)
             $this->fixImage($sp);
