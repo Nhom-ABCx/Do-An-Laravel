@@ -300,7 +300,93 @@ class CrawlData extends Controller
                     "Datatable" => "",
                     "HinhAnh" => $hinhAnh,
                 ];
-                dd($request);
+
+
+                //--------
+                //--------
+                //--------
+                //--------
+                //--------
+                //----------------------------------copy past tu` crossjoin
+
+                //$data = [["128 GB", "256 GB", "512 GB", "1024 GB"], ["Vàng đồng", "Xám", "Bạc", "Xanh dương"]];
+                $data = $thuocTinhToHop->all();
+                //The kind of explodes all elements in the array and sets them as paramenters.(...$options)
+                $array = [];
+                if (!empty($data))
+                    foreach (Arr::crossJoin(...$data) as $items) {
+                        $thuocTinhValue = json_encode($items, JSON_UNESCAPED_UNICODE);
+
+                        //neu' trong CTSanPham no' co' to? hop thuoc tinh' do' thi` lay' ra gia' tien`
+                        if (!empty($sanPham))
+                            $ctSanPham = CT_SanPham::where("SanPhamId", $sanPham->id)->whereRaw('JSON_CONTAINS(ThuocTinhValue, ?)', [$thuocTinhValue])->first();
+                        $giaBan = $ctSanPham->GiaBan ?? 0;
+
+                        $array[] = ["BienThe" => $thuocTinhValue, "GiaBan" => $giaBan, "TrangThai" => $ctSanPham->TrangThai ?? 0];
+                    }
+                $request['Datatable'] = json_encode($array);
+                //----------------------------------copy past tu` store sang
+
+                //gop key va` value lai thanh` 1 mang? de luu vo dang json
+                if (!empty($request['ThuocTinhChung']))
+                    $thuocTinhChung =  collect($request['ThuocTinhChung'][0])->combine($request['ThuocTinhChung'][1]);
+
+                $sanPham = SanPham::create([
+                    'TenSanPham' => trim($request['TenSanPham']),
+                    'MoTa' => $request['MoTa'] ?? '',
+                    'TrangThai' => $request['TrangThai'] ?? false,
+                    'ThuocTinh' => $thuocTinhChung ?? [],
+                    'HangSanXuatId' => $request['HangSanXuatId'],
+                    'LoaiSanPhamId' => $request['LoaiSanPhamId'],
+                    'ThuocTinhToHop' => $request['ThuocTinh'],
+                ]);
+
+                //lay het' bang? ra, so sanh' luu vai` DB
+                foreach (json_decode($request['Datatable'], true) as $item) {
+                    //neu' trong DB da~ ton` tai SP do' thi` cap nhat lai gia' ban', ngc lai tao moi'
+                    $ctSanPham = CT_SanPham::where("SanPhamId", $sanPham->id)->whereRaw('JSON_CONTAINS(ThuocTinhValue, ?)', [$item['BienThe']])->first();
+                    if (!empty($ctSanPham)) {
+                        $ctSanPham->update([
+                            'GiaBan' => $item['GiaBan'],
+                            'TrangThai' => $item['TrangThai'],
+                        ]);
+                    } else {
+                        //xài DB::insert mà ko xài CT_SanPham::create([])  tai vi no' loi~ chu~ khi them vao
+                        DB::insert(
+                            'insert into ct_san_phams(SanPhamId,SoLuongTon,GiaNhap,GiaBan,ThuocTinhValue,TrangThai) values (?, ?, ?, ?, ?, ?)',
+                            [$sanPham->id, 0, 0, $item['GiaBan'], $item['BienThe'], $item['TrangThai']]
+                        );
+                    }
+                }
+
+                //Hình ảnh phải lưu trong public và phải có bước tạo link thì người dùng mới thấy dc
+                //store() tự đặt hình bằng chuỗi random, nên tạo thư mục theo mã/tên sp để dễ quản lý
+                if (!empty($request['HinhAnh'])) {
+
+                    foreach ($request['HinhAnh'] as $hinhAnh) {
+                        //download image from url
+                        $url = $hinhAnh;
+                        try {
+                            $contents = file_get_contents("https:" . $url);
+                            $name = substr($url, strrpos($url, '/') + 1);
+                            $path = 'assets/images/product-image/' . $sanPham->id . '/' . $name;
+                            Storage::disk('public')->put($path, $contents);
+                            //code...
+                        } catch (\Throwable $th) {
+                            //throw $th;
+                        }
+
+                        HinhAnh::create([
+                            "SanPhamId" => $sanPham->id,
+                            "HinhAnh" => $name,
+                        ]);
+                    }
+                }
+
+                $sanPham->save(); //luu lại đường dẫn hình
+
+                //return Redirect::back()->with("SanPhamMoi", 'Thêm sản phẩm mới ' . $sanPham->TenSanPham . ' thành công');
+
             }
         );
         dd("sucsses");
