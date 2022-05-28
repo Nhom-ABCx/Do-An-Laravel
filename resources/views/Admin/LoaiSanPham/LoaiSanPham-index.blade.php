@@ -8,7 +8,6 @@
 @endsection
 
 @section('body')
-
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
@@ -113,7 +112,7 @@
                                         <td class="center">{{ $item->id }}</td>
                                         <td>{{ $item->TenLoai }}</td>
                                         <td>{{ $item->MoTa }}</td>
-                                        <td>{{ $item->Parent_Id }}</td>
+                                        <td>{{ $item->parent_Id }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td>{{ $item->deleted_at }}</td>
@@ -250,18 +249,14 @@
                                                     <i class="icon-sort-by-attributes"></i>
                                                 </span>
 
-                                                <select class="chosen-select" data-placeholder="" name="ParentId">
+                                                <select class="chosen-select" data-placeholder="" name="parent_id">
                                                     <option value="">&nbsp;</option>
-                                                    @foreach ($loaiSp as $item)
-                                                        <option value="{{ $item->id }}" @if ($item->id == old('ParentId')) selected @endif>
-                                                            {{ $item->TenLoai }}
-                                                        </option>
-                                                    @endforeach
+                                                    {{ App\Http\Controllers\Admin\LoaiSanPhamController::showSelectOption($loaiSp) }}
                                                 </select>
                                             </div>
                                         </div>
-                                        @if ($errors->has('LoaiSanPhamId'))
-                                            <i class="icon-remove bigger-110 red"> {{ $errors->first('LoaiSanPhamId') }}</i>
+                                        @if ($errors->has('parent_id'))
+                                            <i class="icon-remove bigger-110 red"> {{ $errors->first('parent_id') }}</i>
                                         @endif
                                     </div>
                                 </div>

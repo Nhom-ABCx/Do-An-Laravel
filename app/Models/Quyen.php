@@ -13,7 +13,7 @@ class Quyen extends Model
     protected $fillable = [
         'Code',
         'TenQuyen',
-        'Parent_Id',
+        'parent_id',
     ];
     public function LoaiTaiKhoan_Quyen()
     {

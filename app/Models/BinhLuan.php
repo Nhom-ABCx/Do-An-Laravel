@@ -15,7 +15,7 @@ class BinhLuan extends Model
         'TaiKhoanId',
         'CTSanPhamId',
         'NoiDung',
-        'Parent_Id',
+        'parent_id',
     ];
     public function TaiKhoan()
     {

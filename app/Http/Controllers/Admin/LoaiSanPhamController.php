@@ -33,6 +33,7 @@ class LoaiSanPhamController extends Controller
         if (!empty($request['Ten']))
             $data = $data->where('TenLoaiSanPham', 'LIKE', '%' . $request['Ten'] . '%');
 
+        //$data = $data->get()->toTree();
         $data = $data->get();
     }
 
@@ -54,16 +55,30 @@ class LoaiSanPhamController extends Controller
      */
     public function store(Request $request)
     {
+        //https://github.com/lazychaser/laravel-nestedset
         $request->validate([
             'TenLoai' => ['required', 'unique:loai_san_phams,TenLoai', 'max:255'],
             'MoTa' => ['max:255'],
-            'Parent_Id' => [],
+            'parent_id' => [],
         ]);
+        //get the first character of the name
+        //ex: if name is "Nguyen Van A" => get the first character of "NVA"
+        $listName = explode(" ", $request->TenLoai);
+        $code = "";
+        foreach ($listName as $item) {
+            $code .= substr($item, 0, 1);
+        }
+
         $loaiSanPham = LoaiSanPham::create([
+            "Code" => $code,
             'TenLoai' => $request['TenLoai'],
             'MoTa' => $request['MoTa'] ?? '',
-            'Parent_Id' => $request['Parent_Id'],
         ]);
+
+        if ($request['parent_id']) {
+            $node = LoaiSanPham::find($request['parent_id']);
+            $node->appendNode($loaiSanPham);
+        }
 
         return Redirect::back()->with("themMoi", 'Thêm loại ' . $loaiSanPham->TenLoai . ' thành công');
     }
@@ -144,5 +159,23 @@ class LoaiSanPhamController extends Controller
         $data = LoaiSanPham::onlyTrashed()->find($id);
         $data->restore();
         return Redirect::route('LoaiSanPham.DaXoa');
+    }
+    public static function showSelectOption($categories, $parent_id = null, $char = '')
+    {
+        foreach ($categories as $key => $item) {
+            // Nếu là chuyên mục con thì hiển thị
+            if ($item['parent_id'] == $parent_id) {
+
+                echo "<option value='" . $item['id'] . "'>";
+                echo $char . $item['TenLoai'];
+                echo '</option>';
+
+                // Xóa chuyên mục đã lặp
+                unset($categories[$key]);
+
+                // Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp
+                LoaiSanPhamController::showSelectOption($categories, $item['id'], $char . '--');
+            }
+        }
     }
 }

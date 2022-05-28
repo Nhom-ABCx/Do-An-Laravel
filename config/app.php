@@ -179,6 +179,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Weidner\Goutte\GoutteServiceProvider::class, // [1] This will register the Package in the laravel echo system
+        Kalnoy\Nestedset\NestedSetServiceProvider::class, // [1] This will register the Package in the laravel echo system
 
     ],
 

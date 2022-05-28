@@ -5,7 +5,6 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('body'); ?>
-
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
@@ -103,7 +102,7 @@
                                         <td class="center"><?php echo e($item->id); ?></td>
                                         <td><?php echo e($item->TenLoai); ?></td>
                                         <td><?php echo e($item->MoTa); ?></td>
-                                        <td><?php echo e($item->Parent_Id); ?></td>
+                                        <td><?php echo e($item->parent_Id); ?></td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
                                         <td><?php echo e($item->deleted_at); ?></td>
@@ -240,19 +239,15 @@
                                                     <i class="icon-sort-by-attributes"></i>
                                                 </span>
 
-                                                <select class="chosen-select" data-placeholder="" name="ParentId">
+                                                <select class="chosen-select" data-placeholder="" name="parent_id">
                                                     <option value="">&nbsp;</option>
-                                                    <?php $__currentLoopData = $loaiSp; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <option value="<?php echo e($item->id); ?>" <?php if($item->id == old('ParentId')): ?> selected <?php endif; ?>>
-                                                            <?php echo e($item->TenLoai); ?>
+                                                    <?php echo e(App\Http\Controllers\Admin\LoaiSanPhamController::showSelectOption($loaiSp)); ?>
 
-                                                        </option>
-                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </div>
                                         </div>
-                                        <?php if($errors->has('LoaiSanPhamId')): ?>
-                                            <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('LoaiSanPhamId')); ?></i>
+                                        <?php if($errors->has('parent_id')): ?>
+                                            <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('parent_id')); ?></i>
                                         <?php endif; ?>
                                     </div>
                                 </div>

@@ -8,6 +8,9 @@ use App\Enums\TrangThaiHD;
 
 class CreateDatabase extends Migration
 {
+    //composer require kalnoy/nestedset
+    //composer remove kalnoy/nestedset
+
     /**
      * Run the migrations.
      *
@@ -24,7 +27,7 @@ class CreateDatabase extends Migration
             $table->id();
             $table->string('Code');
             $table->string('TenQuyen');
-            $table->integer('Parent_Id')->default(0); //xai` de quy
+            $table->nestedSet();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
         });
@@ -83,7 +86,7 @@ class CreateDatabase extends Migration
             $table->string('Code')->unique();
             $table->string('TenLoai')->unique();
             $table->string('MoTa')->nullable();
-            $table->integer('Parent_Id')->nullable(); //xai` de quy
+            $table->nestedSet();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
         });
@@ -129,7 +132,7 @@ class CreateDatabase extends Migration
             $table->foreignId('TaiKhoanId');
             $table->foreignId('CTSanPhamId');
             $table->string('NoiDung');
-            $table->integer('Parent_Id')->nullable(); //xai` de quy
+            $table->nestedSet();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
             $table->foreign('TaiKhoanId')->references('id')->on('tai_khoans');
