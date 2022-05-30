@@ -51,7 +51,7 @@ class SanPhamController extends Controller
      * ham` nay` co tac dung filter theo request
      *  chu? yeu' xai` lai ho index va` daxoa
      */
-    private function filter(&$data, Request $request)
+    public static function filter(&$data, Request $request)
     {
         if (!empty($request['TenSanPham']))
             $data = $data->where('TenSanPham', 'LIKE', '%' . $request['TenSanPham'] . '%');
@@ -336,61 +336,9 @@ class SanPhamController extends Controller
             }
         }
     }
-    //lay so  sao cua san pham
-    public function SoSao()
-    {
-        $data = SanPham::all();
-        $this::Them_Star_Vao_ListSanPham($data);
-        foreach ($data as $value) {
-            $this->fixImage($value);
-        }
-        // dd($data);
-        return view('Admin.SanPham.SanPham-sao', ['sanPhamSao' => $data]);
-    }
-    //ham ho tro API
-    public static function Them_Star_Vao_ListSanPham($ListSanPham)
-    {
-        //tung phan tu cua ListsanPham, tinh trung binh so' Sao dua theo chi tiet hoa' don
-        //API tra ve` trung binh` so' Sao
-        foreach ($ListSanPham as $item) {
-            //lay ra danh sach' san pham duoc mua
-            $dsCtHoaDon = CT_HoaDon::where("SanPhamId", $item->id)->get();
-            //$dsCtHoaDon = $item->CT_HoaDon;   //ko biet tai sao no' co' chi tiet hoa' don vao json
-            //dd($dsCtHoaDon);
-            $Star = $dsCtHoaDon->avg('Star'); //lay ra so' sao trung binh`
-            if (!empty($Star))
-                Arr::add($item, "Star", $Star);
-            else
-                Arr::add($item, "Star", 0);
-        }
-    }
-    //them giam gia' vao` api
-    public static function Them_GiamGia_Vao_ListsanPham($ListSanPham)
-    {
-        //lay ra cac chi tiet khuyen mai dang giam gia'
-        $dsCtChuongTrinhKM = ChuongTrinhKhuyenMaiController::danhSachChiTietChuongTrinhKM();
-        //lay ra tat ca id san pham dang giam gia' luu vao trong mang?
-        $idSanPhamGiamGia = [];
-        $i = 0;
-        foreach ($dsCtChuongTrinhKM as $ctkm) {
-            $data = Arr::add($idSanPhamGiamGia, "$i", $ctkm->SanPhamId);
-            $idSanPhamGiamGia = $data;
-            $i++;
-        }
-        //tung phan tu cua danh sach San Pham
-        foreach ($ListSanPham as $item) {
-            //neu' id san pham do' ko thuoc san pham dang giam gia' thi GiamGia=0
-            if (!in_array($item->id, $idSanPhamGiamGia))
-                Arr::add($item, "GiamGia", 0);
-            //nguoc lai tim` xem san pham giam? gia' do' no' Gia'Giam? bao nhieu
-            else {
-                foreach ($dsCtChuongTrinhKM as $ctkm) {
-                    if ($item->id == $ctkm->SanPhamId)
-                        Arr::add($item, "GiamGia", $ctkm->GiamGia);
-                }
-            }
-        }
-    }
+    /**
+     * xài để trả về tổ hợp sản phẩm (sử dụng trong edit san pham)
+     */
     public function SanPhamCrossJoin(Request $request, SanPham $sanPham = null)
     {
         //https://stackoverflow.com/questions/63631114/how-can-i-cross-join-dynamically-in-laravel
@@ -454,143 +402,5 @@ class SanPhamController extends Controller
             'TrangThai' => $request["TrangThai"],
         ]);
         return response()->json([], 200);
-    }
-    //API
-    public function API_SanPham(Request $request)
-    {
-        //lay het san pham
-        $dsSanPham = SanPham::where('SoLuongTon', '>', 0) //so luonhg ton >0
-            ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
-
-
-
-        //dd($dsSanPham);
-
-        YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
-        SanPhamController::Them_Star_Vao_ListSanPham($dsSanPham);
-        SanPhamController::Them_GiamGia_Vao_ListsanPham($dsSanPham);
-
-        return response()->json($dsSanPham, 200);
-    }
-
-    public function API_SanPham_LoaiSanPham(LoaiSanPham $loaiSanPham, Request $request)
-    {
-        $data = SanPham::where('LoaiSanPhamId', $loaiSanPham->id)->where('SoLuongTon', '>', 0) //so luonhg ton >0
-            ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
-
-        YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
-        $this->Them_Star_Vao_ListSanPham($data);
-        SanPhamController::Them_GiamGia_Vao_ListsanPham($data);
-
-
-        //kt neu du lieu ko rong~ thi tra ve`
-        if (!empty($data))
-            return response()->json($data, 200);
-        //nguoc lai tra ve mang? rong~
-        return response()->json([], 404);
-    }
-    #chi tiết sản phẩm
-    public function API_SanPham_DT_ChiTiet($id)
-    {
-        $data = SanPham::find($id);
-        if ($data == null) {
-            return response()->json($data, 404);
-        }
-        return response()->json($data, 200);
-    }
-    # tìm kiếm sản phẩm
-    public function API_SanPham_TimKiem(Request $request)
-    {
-        $data = SanPham::where('TenSanPham', 'LIKE', '%' . Str::of($request['TenSanPham'])->trim() . '%')->where('SoLuongTon', '>', 0) //so luonhg ton >0
-            ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
-
-        YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
-        $this->Them_Star_Vao_ListSanPham($data);
-        SanPhamController::Them_GiamGia_Vao_ListsanPham($data);
-        # không có dữ liệu trả về
-        if ($data == null) {
-            return response()->json($data, 404);
-        }
-
-        #có dữ liệu
-        return response()->json($data, 200);
-    }
-
-
-    #top sản phẩm bán chạy
-    public function API_SanPham_Top(Request $request)
-    {
-        $data = SanPham::where('SoLuongTon', '>', 0) //so luonhg ton >0
-            ->orderByDesc('LuotMua')->limit(8)->get(); //sap xep theo luot mua giam dan`
-
-        YeuThichController::Them_isFavorite_Vao_ListSanPham($data, $request);
-        $this->Them_Star_Vao_ListSanPham($data);
-        SanPhamController::Them_GiamGia_Vao_ListsanPham($data);
-        return response()->json($data, 200);
-    }
-
-    # sản phẩm đang giảm giá
-    public function API_SanPham_GiamGia(Request $request)
-    {
-        $ctkm = ChuongTrinhKhuyenMai::where('deleted_at', null)->get();
-        $chiTietCtkm = CTChuongTrinhKM::where('ChuongTrinhKhuyenMaiId', $ctkm[0]->id)->get();
-        $dsSanPham = [];
-        $i = 0;
-        foreach ($chiTietCtkm as $item) {
-            $sp = SanPham::where('id', $item->SanPhamId)->where('SoLuongTon', '>', 0) //so luonhg ton >0
-                ->first(); //sap xep theo luot mua giam dan`
-            if (!empty($sp)) {
-                $dsSanPham = Arr::add($dsSanPham, "$i", $sp);
-                $i++;
-            }
-        }
-        //dd($dsSanPham);
-        YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
-        $this->Them_Star_Vao_ListSanPham($dsSanPham);
-        SanPhamController::Them_GiamGia_Vao_ListsanPham($dsSanPham);
-        return response()->json($dsSanPham, 200);
-    }
-
-    public function API_SanPham_GiaBan(Request $request)
-    {
-        //$data = SanPham::whereBetween('GiaBan', [$request["from"], $request["to"]])->where('LoaiSanPhamId',$request["id"])->get();
-        $data = SanPham::where('LoaiSanPhamId', $request["id"])->where('SoLuongTon', '>', 0) //so luonhg ton >0
-            ->orderByDesc('LuotMua')->get(); //sap xep theo luot mua giam dan`
-
-        $PriceFrom = $request["PriceFrom"];
-        $PriceTo = $request["PriceTo"];
-
-        if ((empty($PriceFrom) || $PriceFrom == 0) && !empty($PriceTo)) //null vs notnull
-            $data = $data->where("GiaBan", ">=", 0)->where("GiaBan", "<=", $PriceTo);
-        else if (!empty($PriceFrom && (empty($PriceTo)) || $PriceTo == 0)) //notnull vs null
-            $data = $data->where("GiaBan", ">=", $PriceFrom);
-        else if (!empty($PriceFrom) && !empty($PriceTo)) //notnull vs notnull
-            $data = $data->where("GiaBan", ">=", $PriceFrom)->where("GiaBan", "<=", $PriceTo);
-
-        $dsSanPham = [];
-        $i = 0;
-        foreach ($data as $item) {
-            $ds = Arr::add($dsSanPham, $i, $item);
-            $dsSanPham = $ds;
-            $i++;
-        }
-
-        YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
-        $this->Them_Star_Vao_ListSanPham($dsSanPham);
-        SanPhamController::Them_GiamGia_Vao_ListsanPham($dsSanPham);
-        return response()->json($dsSanPham, 200);
-    }
-
-    // api san pham moi
-    public function API_SanPham_Moi(Request $request)
-    {
-        $dsSanPham = SanPham::orderBy('created_at', 'desc')->limit(8)->get();
-        // dd($dsSanPham);
-        YeuThichController::Them_isFavorite_Vao_ListSanPham($dsSanPham, $request);
-        $this->Them_Star_Vao_ListSanPham($dsSanPham);
-        SanPhamController::Them_GiamGia_Vao_ListsanPham($dsSanPham);
-        if (!empty($dsSanPham))
-            return response()->json($dsSanPham, 200);
-        return response()->json($dsSanPham, 400);
     }
 }

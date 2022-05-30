@@ -23,8 +23,8 @@ class CTChuongTrinhKM extends Model
     {
         return $this->belongsTo(ChuongTrinhKhuyenMai::class, 'ChuongTrinhKhuyenMaiId');
     }
-    public function SanPham()
+    public function CT_SanPham()
     {
-        return $this->belongsTo(SanPham::class, 'CTSanPhamId');
+        return $this->belongsTo(CT_SanPham::class, 'CTSanPhamId');
     }
 }

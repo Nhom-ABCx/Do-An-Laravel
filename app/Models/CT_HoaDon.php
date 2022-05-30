@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CT_HoaDon extends Model
 {
-    use HasFactory, SoftDeletes; //su dung chuc nang softdelete
+    use HasFactory;
 
     protected $table = 'ct_hoa_dons';
     // protected $primaryKey = null;

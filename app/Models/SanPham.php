@@ -59,8 +59,4 @@ class SanPham extends Model
     {
         return $this->hasMany(CT_SanPham::class, 'SanPhamId');
     }
-    public function CTChuongTrinhKM()
-    {
-        return $this->hasMany(CTChuongTrinhKM::class, 'CTSanPhamId');
-    }
 }

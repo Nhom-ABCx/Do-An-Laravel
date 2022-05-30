@@ -58,7 +58,7 @@
 
                                     <a href="#modal-form" role="button" data-toggle="modal" class="btn btn-success">
                                         <i class="icon-plus"></i>
-                                        Thêm sản phẩm
+                                        Thêm loại sản phẩm
                                     </a>
 
                                     @if (URL::current() == route('LoaiSanPham.DaXoa'))

@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 
 use App\Models\ChuongTrinhKhuyenMai;
+use App\Models\CTChuongTrinhKM;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -119,25 +121,30 @@ class ChuongTrinhKhuyenMaiController extends Controller
         $chuongTrinhKhuyenMai->delete();
         return Redirect::route('KhuyenMai.index');
     }
-    public function KhuyenMaiDaXoa(Request $request){
-        $data=ChuongTrinhKhuyenMai::onlyTrashed()->get();
-        return view('Admin.KhuyenMai.KhuyenMai-index',['ctkm'=>$data,'request'=>$request]);
+    public function KhuyenMaiDaXoa(Request $request)
+    {
+        $data = ChuongTrinhKhuyenMai::onlyTrashed()->get();
+        return view('Admin.KhuyenMai.KhuyenMai-index', ['ctkm' => $data, 'request' => $request]);
     }
-    public function KhoiPhucKhuyenMai($id){
-        $data=ChuongTrinhKhuyenMai::onlyTrashed()->find($id);
+    public function KhoiPhucKhuyenMai($id)
+    {
+        $data = ChuongTrinhKhuyenMai::onlyTrashed()->find($id);
         $data->restore();
         return Redirect::route('KhuyenMai.DaXoa');
     }
-
+    /**
+     * Lấy ra hết tất cả chi tiết chương trình KM đang còn hiệu lực
+     *
+     * @return collect App\Models\CTChuongTrinhKM
+     */
     public static function danhSachChiTietChuongTrinhKM()
     {
-        return DB::table("ct_chuong_trinh_kms")
-            ->join("chuong_trinh_khuyen_mais", "chuong_trinh_khuyen_mais.id", "=", "ct_chuong_trinh_kms.ChuongTrinhKhuyenMaiId")
-            ->select("ct_chuong_trinh_kms.*")
-            ->whereDate("chuong_trinh_khuyen_mais.FromDate", "<=", date('Y-m-d H:i:s'))
-            ->whereDate("chuong_trinh_khuyen_mais.ToDate", ">=", date('Y-m-d H:i:s'))
+        $currentDate = date('Y-m-d H:i:s');
+        return CTChuongTrinhKM::join("chuong_trinh_khuyen_mais", "chuong_trinh_khuyen_mais.id", "=", "ct_chuong_trinh_kms.ChuongTrinhKhuyenMaiId")
+            ->whereDate("chuong_trinh_khuyen_mais.FromDate", "<=", $currentDate)
+            ->whereDate("chuong_trinh_khuyen_mais.ToDate", ">=", $currentDate)
             ->whereNull("chuong_trinh_khuyen_mais.deleted_at")
             ->whereNull("ct_chuong_trinh_kms.deleted_at")
-            ->get();
+            ->get("ct_chuong_trinh_kms.*");
     }
 }

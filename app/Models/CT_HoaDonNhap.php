@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes; //them vao de khai bao' thu vien s
 class CT_HoaDonNhap extends Model
 {
     use HasFactory;
-    use SoftDeletes; //su dung chuc nang softdelete
 
     protected $table = 'ct_hoa_don_nhaps';
     protected $fillable = [
