@@ -10,13 +10,25 @@ use App\Http\Controllers\Controller;
 use App\Models\CT_HoaDon;
 use App\Models\CT_SanPham;
 use App\Models\SanPham;
+use App\Models\SlideShow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ApiSanPhamController extends Controller
 {
+    /**
+     * Custom hinh` anh? tra? ve` (tra? ve` luon duong` dan~)
+     */
+    public function getBanner()
+    {
+        $data = SlideShow::all();
+        foreach ($data as $hinhAnh)
+            $hinhAnh->HinhAnh = Storage::url("assets/images/banner/{$hinhAnh->HinhAnh}");
+        return response()->json($data);
+    }
     /**
      * search hoặc lấy hết data (nếu null thì lấy hết)
      *
@@ -29,8 +41,8 @@ class ApiSanPhamController extends Controller
         //lay het san pham
         $data = SanPham::from(app(SanPham::class)->getTable())
             ->with("CT_SanPham") //load them chi tiet
-            ->with("HinhAnh") //load them hinh anh
-            ->whereRelation("CT_SanPham", "SoLuongTon", ">", 0); //so luong ton` phai >0
+            ->whereRelation("CT_SanPham", "SoLuongTon", ">", 0) //so luong ton` phai >0
+            ->where("TrangThai", "!=", 0);
 
         //filter OrderBy, fromPrice, toPrice
         $this->filter($data, $request);
@@ -40,6 +52,8 @@ class ApiSanPhamController extends Controller
         $this->Them_Star_Vao_ListSanPham($data);
         $this->Them_GiamGia_Vao_ListsanPham($data);
         //isFavorite
+        //customImage
+        $this->fixImage($data);
 
 
         return response()->json($data, 200);
@@ -52,8 +66,8 @@ class ApiSanPhamController extends Controller
             $data = $data->orderByDesc($request['OrderBy']); //sap xep giam? dan`
 
         //filter fromPrice, toPrice
-        $fromPrice = $request["fromPrice"];
-        $toPrice = $request["toPrice"];
+        $fromPrice = $request["fromPrice"] ?? 0;
+        $toPrice = $request["toPrice"] ?? 0;
 
 
         if ((empty($fromPrice) || $fromPrice == 0) && !empty($toPrice)) //null vs notnull
@@ -109,6 +123,16 @@ class ApiSanPhamController extends Controller
                     }
                 }
             }
+        }
+    }
+    /**
+     * Custom hinh` anh? tra? ve` (tra? ve` luon duong` dan~)
+     */
+    public function fixImage($ListSanPham)
+    {
+        foreach ($ListSanPham as $item) {
+            foreach ($item->HinhAnh as $hinhAnh)
+                $hinhAnh->HinhAnh = Storage::url("assets/images/product-image/{$hinhAnh->SanPhamId}/{$hinhAnh->HinhAnh}");
         }
     }
 }

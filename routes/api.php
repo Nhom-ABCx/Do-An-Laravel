@@ -32,3 +32,4 @@ Route::group([
 ], function () {
     Route::get('san-pham', [ApiSanPhamController::class, "search"]);
 });
+Route::get('banner', [ApiSanPhamController::class, "getBanner"]);
