@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\Api\ApiSanPhamController;
+use App\Http\Controllers\Api\ApiSlideShowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,4 @@ Route::group([
 ], function () {
     Route::get('san-pham', [ApiSanPhamController::class, "search"]);
 });
-Route::get('banner', [ApiSanPhamController::class, "getBanner"]);
+Route::get('banner', [ApiSlideShowController::class, "getBanner"]);

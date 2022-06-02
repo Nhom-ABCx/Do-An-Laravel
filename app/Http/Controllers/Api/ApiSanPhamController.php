@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-//php artisan make:controller Api/SanPhamController --api --model=SanPham
+//php artisan make:controller Api/ApiSanPhamController --api --model=SanPham
 
 use App\Http\Controllers\Admin\ChuongTrinhKhuyenMaiController;
 use App\Http\Controllers\Admin\SanPhamController;
@@ -19,16 +19,6 @@ use Illuminate\Support\Str;
 
 class ApiSanPhamController extends Controller
 {
-    /**
-     * Custom hinh` anh? tra? ve` (tra? ve` luon duong` dan~)
-     */
-    public function getBanner()
-    {
-        $data = SlideShow::all();
-        foreach ($data as $hinhAnh)
-            $hinhAnh->HinhAnh = Storage::url("assets/images/banner/{$hinhAnh->HinhAnh}");
-        return response()->json($data);
-    }
     /**
      * search hoặc lấy hết data (nếu null thì lấy hết)
      *
