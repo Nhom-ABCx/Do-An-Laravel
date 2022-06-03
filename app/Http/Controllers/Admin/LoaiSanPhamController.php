@@ -28,7 +28,7 @@ class LoaiSanPhamController extends Controller
      * ham` nay` co tac dung filter theo request
      *  chu? yeu' xai` lai ho index va` daxoa
      */
-    private function filter(&$data, Request $request)
+    public static function filter(&$data, Request $request)
     {
         if (!empty($request['Ten']))
             $data = $data->where('TenLoaiSanPham', 'LIKE', '%' . $request['Ten'] . '%');

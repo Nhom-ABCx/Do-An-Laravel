@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApiLoaiSanPhamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,5 +33,6 @@ Route::group([
     'prefix' => 'search',
 ], function () {
     Route::get('san-pham', [ApiSanPhamController::class, "search"]);
+    Route::get('loai-san-pham', [ApiLoaiSanPhamController::class, "search"]);
 });
 Route::get('banner', [ApiSlideShowController::class, "getBanner"]);
