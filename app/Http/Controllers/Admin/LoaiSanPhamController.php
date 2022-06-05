@@ -61,16 +61,11 @@ class LoaiSanPhamController extends Controller
             'MoTa' => ['max:255'],
             'parent_id' => [],
         ]);
-        //get the first character of the name
-        //ex: if name is "Nguyen Van A" => get the first character of "NVA"
-        $listName = explode(" ", $request->TenLoai);
-        $code = "";
-        foreach ($listName as $item) {
-            $code .= substr($item, 0, 1);
-        }
+
+
 
         $loaiSanPham = LoaiSanPham::create([
-            "Code" => $code,
+            "Code" => $this->getCodeLoaiSanPham($request),   //viet thanh chu~ INH HOA
             'TenLoai' => $request['TenLoai'],
             'MoTa' => $request['MoTa'] ?? '',
         ]);
@@ -113,20 +108,22 @@ class LoaiSanPhamController extends Controller
      */
     public function update(Request $request, LoaiSanPham $loaiSanPham)
     {
-        // $request->validate(
-        //     [
-        //         "TenLoai" => $request["TenLoai"],
-        //         "MoTa" => $request["MoTa"]
-        //     ]
-        // );
-        $loaiSanPham->fill(
-            [
-                "TenLoai" => $request->input("TenLoai"),
-                "MoTa" => $request->input("MoTa")
-            ]
-        );
+        //https://github.com/lazychaser/laravel-nestedset
+
+
+        $loaiSanPham->fill([
+            "Code" => $this->getCodeLoaiSanPham($request),   //viet thanh chu~ INH HOA
+            'TenLoai' => $request['TenLoai'],
+            'MoTa' => $request['MoTa'] ?? '',
+        ]);
         $loaiSanPham->save();
-        return Redirect::route('LoaiSanPham.index');
+
+        if ($request['parent_id']) {
+            $node = LoaiSanPham::find($request['parent_id']);
+            $node->appendNode($loaiSanPham);
+        }
+
+        return Redirect::back()->with("themMoi", 'Update loại ' . $loaiSanPham->TenLoai . ' thành công');
     }
 
     /**
@@ -177,5 +174,35 @@ class LoaiSanPhamController extends Controller
                 LoaiSanPhamController::showSelectOption($categories, $item['id'], $char . '--');
             }
         }
+    }
+
+    /**
+     * Tính toán tên loại sản phẩm và lấy về Code của nó
+     * get the first character of the name
+     * ex: if name is "Nguyen Van A" => get the first character of "NVA"
+     */
+    private function getCodeLoaiSanPham(Request $request): string
+    {
+        $code = "";
+        $listName = explode(" ", trim($request->TenLoai));
+        foreach ($listName as $item) {
+            $code .= substr($item, 0, 1);
+        }
+        //neu' no' chi? co' 1 chu~ "Nguyen" =>NYN
+        if (strlen($code) == 1) {
+            $tenLoai = str_replace(" ", "", trim($request->TenLoai));
+            $left = substr($tenLoai, 0, 1);
+            $mid = substr($tenLoai, strlen($tenLoai) / 2, 1);
+            $right = substr($tenLoai, -1, 1);
+            $code = $left . $mid . $right;
+        }
+        //neu' co' parent_id  thi` se~ thanh`  CHA-CON
+        if (!empty($request['parent_id'])) {
+            $loaiCode = LoaiSanPham::find($request['parent_id'])->Code;
+            if (!empty($loaiCode)) {
+                $code = $loaiCode . "-" . $code;
+            }
+        }
+        return strtoupper($code);
     }
 }
