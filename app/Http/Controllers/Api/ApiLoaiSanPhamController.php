@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+//php artisan make:controller Api/ApiLoaiSanPhamController --api --model=LoaiSanPham
+
 use App\Http\Controllers\Admin\LoaiSanPhamController;
 use App\Http\Controllers\Controller;
 use App\Models\LoaiSanPham;

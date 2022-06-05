@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiLoaiSanPhamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,3 +37,15 @@ Route::group([
     Route::get('loai-san-pham', [ApiLoaiSanPhamController::class, "search"]);
 });
 Route::get('banner', [ApiSlideShowController::class, "getBanner"]);
+
+
+Route::post('/login', [ApiAuthController::class, "login"]);
+
+//bat buoc phai co token
+Route::group([
+    'middleware' => 'auth:sanctum',
+    'prefix' => 'TaiKhoan',
+], function () {
+    Route::post('/logout', [ApiAuthController::class, "logout"]);
+    Route::get('/my-profile', [ApiAuthController::class, "MyProfile"]);
+});
