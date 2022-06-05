@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class ApiLoaiSanPhamController extends Controller
 {
+    //https://github.com/lazychaser/laravel-nestedset
     /**
      * search hoặc lấy hết data (nếu null thì lấy hết)
      *
@@ -20,6 +21,21 @@ class ApiLoaiSanPhamController extends Controller
     {
         //lay het san pham
         $data = LoaiSanPham::from(app(LoaiSanPham::class)->getTable());
+
+        //lay ra to? tien
+        // $result = LoaiSanPham::ancestorsOf(9);
+        //to? tien va` ban than
+        //$result = LoaiSanPham::ancestorsAndSelf(9);
+        //con chau'
+        //$result = LoaiSanPham::descendantsOf(9);
+        //con chau' va` ban? than
+        //$result = LoaiSanPham::descendantsAndSelf(9);
+        //$result = LoaiSanPham::defaultOrder()->ancestorsOf(9);
+        //lay' ra theo do sau cua? loai
+        //$result = LoaiSanPham::withDepth()->having('depth', '=', 1)->get();
+
+
+        //$depth = $result->depth;
 
         LoaiSanPhamController::filter($data, $request);
 
