@@ -41,6 +41,7 @@ class ApiSanPhamController extends Controller
 
         $this->Them_Star_Vao_ListSanPham($data);
         $this->Them_GiamGia_Vao_ListsanPham($data);
+        $this->Them_lstThuocTinh_Vao_ListsanPham($data);
         //isFavorite
         //customImage
         $this->fixImage($data);
@@ -113,6 +114,15 @@ class ApiSanPhamController extends Controller
                     }
                 }
             }
+        }
+    }
+    /**
+     * them lstThuocTinh vao` trong mang? SanPham
+     */
+    public static function Them_lstThuocTinh_Vao_ListsanPham($ListSanPham)
+    {
+        foreach ($ListSanPham as $item) {
+            $item["lstThuocTinhValue"] = $item->lstThuocTinh();
         }
     }
     /**
