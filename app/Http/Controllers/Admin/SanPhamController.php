@@ -126,7 +126,7 @@ class SanPhamController extends Controller
             'TenSanPham' => trim($request['TenSanPham']),
             'MoTa' => $request['MoTa'] ?? '',
             'TrangThai' => $request['TrangThai'] ?? false,
-            'ThuocTinh' => $thuocTinhChung ?? [],
+            'ThuocTinh' => $thuocTinhChung ?? json_decode("{}"),
             'HangSanXuatId' => $request['HangSanXuatId'],
             'LoaiSanPhamId' => $request['LoaiSanPhamId'],
             'ThuocTinhToHop' => $request['ThuocTinh'],

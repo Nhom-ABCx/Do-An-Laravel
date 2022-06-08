@@ -95,7 +95,7 @@ class CreateDatabase extends Migration
             $table->foreignId('HangSanXuatId');
             $table->foreignId('LoaiSanPhamId');
             $table->string('TenSanPham')->unique();
-            $table->json('ThuocTinh')->unique(); //luu thanh` json {"TenThuocTinh": "GiaTri"}
+            $table->json('ThuocTinh'); //luu thanh` json {"TenThuocTinh": "GiaTri"}
             $table->longText('MoTa')->nullable();
             $table->integer('LuotMua')->default(0);
             $table->json("ThuocTinhToHop");  //luu thanh` json ["Size", "Color"]
