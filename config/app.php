@@ -239,6 +239,7 @@ return [
         'Goutte' => Weidner\Goutte\GoutteFacade::class,
 
 
+
     ],
 
 ];

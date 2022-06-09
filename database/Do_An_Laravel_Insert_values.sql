@@ -506,11 +506,6 @@ from Chuong_Trinh_Khuyen_Mais as a, ct_san_phams as b
 INNER JOIN san_phams as c ON b.SanPhamId=c.id
 WHERE c.LoaiSanPhamId=1 and a.Id=1;
 
-insert into CT_Chuong_Trinh_KMs(ChuongTrinhKhuyenMaiId,CTSanPhamId,GiamGia,SoLuong,created_at)
-SELECT a.Id,b.Id,10000,15,'2021-11-21' from Chuong_Trinh_Khuyen_Mais as a, ct_san_phams as b
-INNER JOIN san_phams as c ON b.SanPhamId=c.id
-WHERE c.LoaiSanPhamId=4 and a.Id=1;
-
 
 insert into Don_Vi_Van_Chuyens(TenDonViVanChuyen,Website,Email,Phone) values
 (N'Viettel Post','https://www.viettelpost.com.vn/','viettelpost@gmail.com','84462660306'),

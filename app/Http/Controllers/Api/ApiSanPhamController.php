@@ -7,8 +7,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Admin\ChuongTrinhKhuyenMaiController;
 use App\Http\Controllers\Admin\SanPhamController;
 use App\Http\Controllers\Controller;
+use App\Models\ChuongTrinhKhuyenMai;
 use App\Models\CT_HoaDon;
 use App\Models\CT_SanPham;
+use App\Models\CTChuongTrinhKM;
 use App\Models\SanPham;
 use App\Models\SlideShow;
 use Illuminate\Http\Request;
@@ -16,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Collection;
 
 class ApiSanPhamController extends Controller
 {
@@ -28,11 +31,25 @@ class ApiSanPhamController extends Controller
      */
     public function search(Request $request)
     {
-        //lay het san pham
-        $data = SanPham::from(app(SanPham::class)->getTable())
-            ->with("CT_SanPham") //load them chi tiet
-            ->whereRelation("CT_SanPham", "SoLuongTon", ">", 0) //so luong ton` phai >0
-            ->where("TrangThai", "!=", 0);
+        $data = new Collection([]);
+        //neu' co' request lay' ra khuyen mai~
+        if ($request['isKhuyenMai']) {
+            //lay' ra ds ct Chuong trinh` khuyen mai dang co'
+            $dsCtChuongTrinhKM = ChuongTrinhKhuyenMaiController::danhSachChiTietChuongTrinhKM();
+
+            //lay' ra tat' ca? SanPham co' trong khuyen mai
+            foreach ($dsCtChuongTrinhKM as $ctkm) {
+                $data[] = $ctkm->CT_SanPham->SanPham;
+            }
+            //tranh' lap lai san pham khi lay' ra -> xap' xep' lai mang? -> chuyen> no' thanh` queryBuilder
+            $data = $data->unique('id')->values()->toQuery();
+        } else {
+            //lay het san pham
+            $data = SanPham::from(app(SanPham::class)->getTable())
+                ->with("CT_SanPham") //load them chi tiet
+                ->whereRelation("CT_SanPham", "SoLuongTon", ">", 0) //so luong ton` phai >0
+                ->where("TrangThai", "!=", 0);
+        }
 
         //filter OrderBy, fromPrice, toPrice
         $this->filter($data, $request);
