@@ -19,6 +19,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ApiSanPhamController extends Controller
 {
@@ -27,10 +29,26 @@ class ApiSanPhamController extends Controller
      *
      * @return json
      * @property-read TenSanPham | OrderBy string
-     * @property-read HangSanXuatId | LoaiSanPhamId | TrangThai | fromPrice | toPrice int
+     * @property-read HangSanXuatId | LoaiSanPhamId | fromPrice | toPrice int
+     * @property-read TrangThai | isKhuyenMai boolean
      */
     public function search(Request $request)
     {
+        $validate = Validator::make($request->all(), [
+            'TenSanPham' => ['nullable', 'string'],
+            'OrderBy' => ['nullable', 'string'],
+            'HangSanXuatId' => ['nullable', 'numeric', 'integer', 'exists:hang_san_xuats,id'],
+            'LoaiSanPhamId' => ['nullable', 'numeric', 'integer', 'exists:loai_san_phams,id'],
+            "TrangThai" => ['nullable', 'boolean'],
+            'fromPrice' => ['nullable', 'numeric'],
+            'toPrice' => ['nullable', 'numeric'],
+            "isKhuyenMai" => ['nullable', 'boolean'],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+        //
+
         $data = new Collection([]);
         //neu' co' request lay' ra khuyen mai~
         if ($request['isKhuyenMai']) {
@@ -47,8 +65,7 @@ class ApiSanPhamController extends Controller
             //lay het san pham
             $data = SanPham::from(app(SanPham::class)->getTable())
                 ->with("CT_SanPham") //load them chi tiet
-                ->whereRelation("CT_SanPham", "SoLuongTon", ">", 0) //so luong ton` phai >0
-                ->where("TrangThai", "!=", 0);
+                ->whereRelation("CT_SanPham", "SoLuongTon", ">", 0); //so luong ton` phai >0
         }
 
         //filter OrderBy, fromPrice, toPrice

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApiAuthController;
+use App\Http\Controllers\Api\ApiHoaDonController;
 use App\Http\Controllers\Api\ApiLoaiSanPhamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -48,4 +49,5 @@ Route::group([
 ], function () {
     Route::post('/logout', [ApiAuthController::class, "logout"]);
     Route::get('/my-profile', [ApiAuthController::class, "MyProfile"]);
+    Route::get('/search/hoa-don', [ApiHoaDonController::class, "search"]);
 });

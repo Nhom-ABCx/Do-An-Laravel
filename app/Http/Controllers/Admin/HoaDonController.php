@@ -324,23 +324,6 @@ class HoaDonController extends Controller
         return response()->json(["Sucssess" => True], 200);
     }
 
-    #tra ve chi tiet hao don theo giai doan
-    public function API_GET_HoaDon_KhachHang_Theo_TrangThai(Request $request, KhachHang $khachHang)
-    {
-        //https://stackoverflow.com/questions/38172857/how-to-select-specific-columns-in-laravel-eloquent
-        $dsChiTietHD = HoaDon::join("dia_chis", "dia_chis.id", "hoa_dons.DiaChiId")
-            ->where("dia_chis.KhachHangId", $khachHang->id)
-            ->where("hoa_dons.TrangThai", $request["TrangThai"])
-            ->with("CT_HoaDon") //load theo khoa' ngoai cua CTHoaDon, no tu them vao`
-            ->with("CT_HoaDon.SanPham")
-            ->get("hoa_dons.*");
-        //kt neu du lieu ko rong~ thi tra ve`
-        if ($dsChiTietHD->isNotEmpty())
-            return response()->json($dsChiTietHD, 200);
-        //nguoc lai tra ve mang? rong~
-        return response()->json([], 404);
-    }
-
     #update danh gia san pham
     public function API_Danh_Gia_SanPham(Request $request)
     {

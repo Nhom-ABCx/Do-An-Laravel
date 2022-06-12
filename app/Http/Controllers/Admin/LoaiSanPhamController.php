@@ -31,7 +31,7 @@ class LoaiSanPhamController extends Controller
     public static function filter(&$data, Request $request)
     {
         if (!empty($request['Ten']))
-            $data = $data->where('TenLoaiSanPham', 'LIKE', '%' . $request['Ten'] . '%');
+            $data = $data->where('TenLoai', 'LIKE', '%' . $request['Ten'] . '%');
 
         //$data = $data->get()->toTree();
         $data = $data->get();

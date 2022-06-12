@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\LoaiSanPhamController;
 use App\Http\Controllers\Controller;
 use App\Models\LoaiSanPham;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ApiLoaiSanPhamController extends Controller
 {
@@ -16,11 +17,17 @@ class ApiLoaiSanPhamController extends Controller
      * search hoặc lấy hết data (nếu null thì lấy hết)
      *
      * @return json
-     * @property-read string
+     * @property-read Ten string
      * @property-read int
      */
     public function search(Request $request)
     {
+        $validate = Validator::make($request->all(), ['Ten' => ['nullable', 'string']]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+        //
+
         //lay het san pham
         $data = LoaiSanPham::from(app(LoaiSanPham::class)->getTable());
 
