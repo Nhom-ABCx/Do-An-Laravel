@@ -251,7 +251,7 @@ class CreateDatabase extends Migration
             $table->double('GiaNhap');
             $table->double('GiaBan');
             $table->double('ThanhTien');
-            $table->tinyInteger('Star');
+            $table->tinyInteger('Star')->default(0);
             $table->timestamps();
             $table->foreign('HoaDonId')->references('id')->on('hoa_dons');
             $table->foreign('CTSanPhamId')->references('id')->on('ct_san_phams');

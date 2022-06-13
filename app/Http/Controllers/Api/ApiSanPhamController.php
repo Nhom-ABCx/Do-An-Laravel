@@ -81,7 +81,11 @@ class ApiSanPhamController extends Controller
         $this->fixImage($data);
 
 
-        return response()->json($data, 200);
+        //kt neu du lieu ko rong~ thi tra ve`
+        if ($data->isNotEmpty())
+            return response()->json($data, 200);
+        //nguoc lai tra ve mang? rong~
+        return response()->json([], 404);
     }
     //ham ho tro API
     public function filter(&$data, Request $request)
@@ -117,9 +121,8 @@ class ApiSanPhamController extends Controller
                 unset($ctSanPham->CT_HoaDon); //xoa' cai' ct_hoa don` di de no ko tra? ve` theo
             }
             $star = $arrayStar->reject(function ($item) {
-                return $item == 0;
-            }) //neu' no' =0 thi` xoa' no' di, ko tinh' trung binh` danh' gia' =0
-                ->avg(); //tinh trung binh`
+                return $item == 0; //neu' no' =0 thi` xoa' no' di, ko tinh' trung binh` danh' gia' =0
+            })->avg(); //tinh trung binh`
 
             //them Star , tuong tu nhu Array::add()
             $item["Star"] = $star ?? 0;

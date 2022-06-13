@@ -49,5 +49,6 @@ Route::group([
 ], function () {
     Route::post('/logout', [ApiAuthController::class, "logout"]);
     Route::get('/my-profile', [ApiAuthController::class, "MyProfile"]);
-    Route::get('/search/hoa-don', [ApiHoaDonController::class, "search"]);
+    Route::get('/hoa-don/search', [ApiHoaDonController::class, "search"]);
+    Route::post('/hoa-don/lap-hoa-don', [ApiHoaDonController::class, "lapHoaDon"]);
 });
