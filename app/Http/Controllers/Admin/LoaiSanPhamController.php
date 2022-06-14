@@ -22,6 +22,7 @@ class LoaiSanPhamController extends Controller
 
         $this->filter($data, $request);
 
+
         $string = file_get_contents(storage_path() . "/app/public/assets/google-icon-data.json");
         $arrayJsonIcon = json_decode($string, true);
 
@@ -62,6 +63,7 @@ class LoaiSanPhamController extends Controller
         $request->validate([
             'TenLoai' => ['required', 'unique:loai_san_phams,TenLoai', 'max:255'],
             'MoTa' => ['max:255'],
+            'Icon' => ['json'],
             'parent_id' => [],
         ]);
 

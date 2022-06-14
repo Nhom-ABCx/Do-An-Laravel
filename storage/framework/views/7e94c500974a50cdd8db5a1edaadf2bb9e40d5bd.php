@@ -104,7 +104,7 @@
                                         <td class="center"><?php echo e($item->id); ?></td>
                                         <td><?php echo e($item->TenLoai); ?></td>
                                         <td><?php echo e($item->MoTa); ?></td>
-                                        <td><i class="material-icons md-36">home</i></td>
+                                        <td><?php echo $item->Icon['icon'] ?? ''; ?></td>
                                         <td><?php echo e($item->parent_Id); ?></td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
@@ -270,6 +270,31 @@
                                         </div>
                                         <?php if($errors->has('parent_id')): ?>
                                             <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('parent_id')); ?></i>
+                                        <?php endif; ?>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Loại sản phẩm cha ?</label>
+
+                                        <div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon pink">
+                                                    <i class="icon-sort-by-attributes"></i>
+                                                </span>
+
+                                                <select class="chosen-select" data-placeholder="" name="Icon">
+                                                    <option value="">&nbsp;</option>
+                                                    <?php $__currentLoopData = $icons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $icon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option class='material-icons md-36' value="<?php echo e(json_encode($icon)); ?>" <?php if(json_encode($icon) == $request['Icon']): ?> selected <?php endif; ?>>
+                                                            <?php echo $icon['icon']; ?>
+
+                                                        </option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <?php if($errors->has('Icon')): ?>
+                                            <i class="icon-remove bigger-110 red"> <?php echo e($errors->first('Icon')); ?></i>
                                         <?php endif; ?>
                                     </div>
                                 </div>

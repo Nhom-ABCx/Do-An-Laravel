@@ -114,7 +114,7 @@
                                         <td class="center">{{ $item->id }}</td>
                                         <td>{{ $item->TenLoai }}</td>
                                         <td>{{ $item->MoTa }}</td>
-                                        <td><i class="material-icons md-36">home</i></td>
+                                        <td>{!! $item->Icon['icon'] ?? '' !!}</td>
                                         <td>{{ $item->parent_Id }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
@@ -278,6 +278,30 @@
                                         </div>
                                         @if ($errors->has('parent_id'))
                                             <i class="icon-remove bigger-110 red"> {{ $errors->first('parent_id') }}</i>
+                                        @endif
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Icon ?</label>
+
+                                        <div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon pink">
+                                                    <i class="icon-sort-by-attributes"></i>
+                                                </span>
+
+                                                <select class="chosen-select" data-placeholder="" name="Icon">
+                                                    <option value="">&nbsp;</option>
+                                                    @foreach ($icons as $icon)
+                                                        <option class='material-icons md-36' value="{{ json_encode($icon) }}">
+                                                            {!! $icon['icon'] !!}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @if ($errors->has('Icon'))
+                                            <i class="icon-remove bigger-110 red"> {{ $errors->first('Icon') }}</i>
                                         @endif
                                     </div>
                                 </div>

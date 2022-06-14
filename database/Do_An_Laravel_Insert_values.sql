@@ -130,13 +130,13 @@ insert into Hang_San_Xuats(TenHangSanXuat) values
 ('Oppo'   ),
 ('Realme' );
 
-insert into Loai_San_Phams(Code,TenLoai,MoTa) values
-('DT',N'Điện thoại','Smart Phone'),
-('DL',N'Điện lạnh',null),
-('LT',N'LapTop',null),
-('MA',N'Máy ảnh',null),
-('MTB',N'Máy tính bảng',null),
-('PK',N'Phụ kiện',null);
+insert into Loai_San_Phams(Code,TenLoai,MoTa,Icon) values
+('DT',N'Điện thoại','Smart Phone','{"icon": "<i class=\'material-icons md-36\'>zoom_out_map</i>","data": "zoom_out_map"}'),
+('DL',N'Điện lạnh',null,'{"icon": "<i class=\'material-icons md-36\'>zoom_out_map</i>","data": "zoom_out_map"}'),
+('LT',N'LapTop',null,'{"icon": "<i class=\'material-icons md-36\'>zoom_out_map</i>","data": "zoom_out_map"}'),
+('MA',N'Máy ảnh',null,'{"icon": "<i class=\'material-icons md-36\'>zoom_out_map</i>","data": "zoom_out_map"}'),
+('MTB',N'Máy tính bảng',null,'{"icon": "<i class=\'material-icons md-36\'>zoom_out_map</i>","data": "zoom_out_map"}'),
+('PK',N'Phụ kiện',null,'{"icon": "<i class=\'material-icons md-36\'>zoom_out_map</i>","data": "zoom_out_map"}');
 INSERT INTO loai_san_phams (Code, TenLoai, MoTa, _lft, _rgt, parent_id) VALUES
 ('CHG', 'Clothing', '', 13, 34, NULL),
 ('CHG-MEN', 'Men', '', 14, 21, 7),

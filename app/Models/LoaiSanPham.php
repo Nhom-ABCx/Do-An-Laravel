@@ -20,6 +20,9 @@ class LoaiSanPham extends Model
         'Icon',
         'parent_id',
     ];
+    protected $casts = [
+        'Icon' => 'array',
+    ];
     public function SanPham()
     {
         return $this->hasMany(SanPham::class, 'LoaiSanPhamId');

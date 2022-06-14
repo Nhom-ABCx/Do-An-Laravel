@@ -86,7 +86,7 @@ class CreateDatabase extends Migration
             $table->string('Code')->unique();
             $table->string('TenLoai')->unique();
             $table->string('MoTa')->nullable();
-            $table->string('Icon')->nullable();
+            $table->json('Icon')->nullable();
             $table->nestedSet();
             $table->timestamps();
             $table->softDeletes(); //nay la trang thai xoa
