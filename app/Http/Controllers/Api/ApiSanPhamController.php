@@ -81,11 +81,8 @@ class ApiSanPhamController extends Controller
         $this->fixImage($data);
 
 
-        //kt neu du lieu ko rong~ thi tra ve`
-        if ($data->isNotEmpty())
-            return response()->json($data, 200);
-        //nguoc lai tra ve mang? rong~
-        return response()->json([], 404);
+
+        return response()->json($data, 200);
     }
     //ham ho tro API
     public function filter(&$data, Request $request)

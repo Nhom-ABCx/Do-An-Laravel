@@ -5,6 +5,7 @@
 
 @section('headThisPage')
     <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 @endsection
 
 @section('body')
@@ -98,6 +99,7 @@
                                     <th><i class="fa fa-key "></i>##</th>
                                     <th><i class="fa fa-align-left"></i>Tên loại</th>
                                     <th><i class="fa fa-file-text-o"></i>Mô tả</th>
+                                    <th><i class="icon-cogs"></i>Icon</th>
                                     <th><i class="fa fa-pencil"></i>parent</th>
                                     <th><i class="fa fa-pencil"></i>Ngày tạo</th>
                                     <th><i class="fa fa-check-square-o"></i>Ngày cập nhật</th>
@@ -112,6 +114,7 @@
                                         <td class="center">{{ $item->id }}</td>
                                         <td>{{ $item->TenLoai }}</td>
                                         <td>{{ $item->MoTa }}</td>
+                                        <td><i class="material-icons md-36">home</i></td>
                                         <td>{{ $item->parent_Id }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
@@ -186,6 +189,24 @@
                             </tbody>
                         </table>
                     </div>
+
+
+                    <div class="hr hr-24"></div>
+
+                    <div class="widget-box">
+                        <div class="widget-header">
+                            <h3 class="header smaller lighter blue">All Icons</h3>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                @foreach ($icons as $icon)
+                                    {!! $icon['icon'] !!}
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 
@@ -301,6 +322,9 @@
                     {
                         "bSortable": false
                     }, //mota
+                    {
+                        "bSortable": false
+                    }, //icon
                     null, null, null, null,
                     {
                         "bSortable": false

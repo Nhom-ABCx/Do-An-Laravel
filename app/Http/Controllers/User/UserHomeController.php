@@ -35,7 +35,10 @@ class UserHomeController extends Controller
         // echo strip_tags($a);
 
 
-
+        //read icon data file
+        // $string = file_get_contents(storage_path() . "/app/public/assets/google-icon-data.json");
+        // $json_a = json_decode($string, true);
+        // dd("stop");
         //vi du
         //https://viblo.asia/p/use-mysql-json-field-in-laravel-OeVKBqk05kW
         $sanPham = SanPham::all()->first();

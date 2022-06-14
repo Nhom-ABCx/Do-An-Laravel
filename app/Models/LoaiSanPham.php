@@ -17,6 +17,7 @@ class LoaiSanPham extends Model
         'Code',
         'TenLoai',
         'MoTa',
+        'Icon',
         'parent_id',
     ];
     public function SanPham()

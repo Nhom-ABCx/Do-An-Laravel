@@ -37,10 +37,10 @@ class ApiAuthController extends Controller
             })
             ->first();
 
-        //neu du lieu rong~ thi tra ve status 404
+        //neu du lieu rong~ thi tra ve status 400
 
         if (empty($data))
-            return response()->json(null, 404);
+            return response()->json(["message" => "Username or password is wrong"], 400);
 
         //ko co rong~ thi tra ve voi status la 200
         $tokenResult = $data->createToken('Login')->plainTextToken;

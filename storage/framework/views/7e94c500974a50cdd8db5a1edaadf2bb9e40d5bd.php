@@ -2,6 +2,7 @@
 
 <?php $__env->startSection('headThisPage'); ?>
     <link rel="stylesheet" href="/storage/assets/css/chosen.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('body'); ?>
@@ -88,6 +89,7 @@
                                     <th><i class="fa fa-key "></i>##</th>
                                     <th><i class="fa fa-align-left"></i>Tên loại</th>
                                     <th><i class="fa fa-file-text-o"></i>Mô tả</th>
+                                    <th><i class="icon-cogs"></i>Icon</th>
                                     <th><i class="fa fa-pencil"></i>parent</th>
                                     <th><i class="fa fa-pencil"></i>Ngày tạo</th>
                                     <th><i class="fa fa-check-square-o"></i>Ngày cập nhật</th>
@@ -102,6 +104,7 @@
                                         <td class="center"><?php echo e($item->id); ?></td>
                                         <td><?php echo e($item->TenLoai); ?></td>
                                         <td><?php echo e($item->MoTa); ?></td>
+                                        <td><i class="material-icons md-36">home</i></td>
                                         <td><?php echo e($item->parent_Id); ?></td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
@@ -176,6 +179,25 @@
                             </tbody>
                         </table>
                     </div>
+
+
+                    <div class="hr hr-24"></div>
+
+                    <div class="widget-box">
+                        <div class="widget-header">
+                            <h3 class="header smaller lighter blue">All Icons</h3>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <?php $__currentLoopData = $icons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $icon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php echo $icon['icon']; ?>
+
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 
@@ -292,6 +314,9 @@
                     {
                         "bSortable": false
                     }, //mota
+                    {
+                        "bSortable": false
+                    }, //icon
                     null, null, null, null,
                     {
                         "bSortable": false

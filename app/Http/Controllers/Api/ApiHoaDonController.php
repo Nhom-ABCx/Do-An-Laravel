@@ -54,11 +54,8 @@ class ApiHoaDonController extends Controller
             $data = $data->where("hoa_dons.TrangThai", $request["TrangThai"]);
         //
         $data = $data->get("hoa_dons.*");
-        //kt neu du lieu ko rong~ thi tra ve`
-        if ($data->isNotEmpty())
-            return response()->json($data, 200);
-        //nguoc lai tra ve mang? rong~
-        return response()->json([], 404);
+        //
+        return response()->json($data, 200);
     }
     public function lapHoaDon(Request $request)
     {
