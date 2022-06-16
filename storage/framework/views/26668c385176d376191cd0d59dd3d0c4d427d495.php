@@ -219,8 +219,8 @@
                                                         </ul>
                                                     </span>
 
-                                                    <a href="javascript:void(0)" onclick="showSanPham(<?php echo e($item->id); ?>)" role="button" data-toggle="modal" class="tooltip-info" data-rel="tooltip"
-                                                        title="Xem chi tiết">
+                                                    <a href="javascript:void(0)" onclick="showSanPham(<?php echo e($item->id); ?>)" role="button" data-toggle="modal" class="tooltip-info"
+                                                        data-rel="tooltip" title="Xem chi tiết">
                                                         <span class="blue">
                                                             <i class="icon-zoom-in bigger-120"></i>
                                                         </span>
@@ -278,7 +278,8 @@
                                                                 <form action="<?php echo e(route('SanPham.destroy', $item)); ?>" method="post">
                                                                     <?php echo csrf_field(); ?>
                                                                     <?php echo method_field('DELETE'); ?>
-                                                                    <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Xóa"><i class="icon-trash bigger-120"></i></button>
+                                                                    <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Xóa"><i
+                                                                            class="icon-trash bigger-120"></i></button>
                                                                 </form>
                                                             </li>
                                                         </ul>
@@ -322,8 +323,9 @@
         <script type="text/javascript">
             jQuery(function($) {
                 var oTable1 = $('#sample-table-2').dataTable({
-                    "aoColumns": [
-                        null, {
+                    "aoColumns": [{
+                            "type": "num"
+                        }, {
                             "bSortable": false
                         }, //hinh anh
                         null,

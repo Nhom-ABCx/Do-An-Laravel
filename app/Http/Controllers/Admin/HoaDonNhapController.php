@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 
 use App\Models\HoaDonNhap;
 use App\Models\CT_HoaDonNhap;
 use Illuminate\Support\Facades\Auth;
-use App\Models\NhanVien;
 use App\Models\SanPham;
+use App\Models\TaiKhoan;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -26,22 +27,35 @@ class HoaDonNhapController extends Controller
      */
     public function index(Request $request)
     {
-        $data = HoaDonNhap::all();
+        $data = HoaDonNhap::from(app(HoaDonNhap::class)->getTable());
+
+        $this->filter($data, $request);
+
+        $dsTaiKhoan = TaiKhoan::where('LoaiTaiKhoanId', 5)->get();
+
+        //tra lai resquet ve cho view de hien thi lai tim` kiem' cu?
+        return view('Admin.HoaDon.HoaDonNhap-index', ["hoaDon" => $data, 'dsTaiKhoan' => $dsTaiKhoan, 'request' => $request]);
+    }
+    /**
+     * ham` nay` co tac dung filter theo request
+     *  chu? yeu' xai` lai ho index va` daxoa
+     */
+    public static function filter(&$data, Request $request)
+    {
         $catChuoi = explode(" - ", $request->input("NgayDat"));
         //neu' ko rong~ va` dung' dinh dang datetime thi` tim` kiem'
         if ((!empty($request->input("NgayDat"))) && date_create($catChuoi[0]) != false && date_create($catChuoi[1]) != false) {
             $data = HoaDonNhap::whereDate("created_at", ">=", date_format(date_create($catChuoi[0]), 'Y-m-d'))
-                ->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'))->get();
+                ->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'));
         }
         //unset de no' huy? bien' do~ ton' dung luong
         unset($catChuoi);
         if (!empty($request->input('TrangThai')))
             $data = $data->where('TrangThai', $request->input('TrangThai'));
-        if (!empty($request->input('NhanVienId')))
-            $data = $data->where('NhanVienId', $request->input('NhanVienId'));
-        $dsNhanVien = NhanVien::all();
-        //tra lai resquet ve cho view de hien thi lai tim` kiem' cu?
-        return view('Admin.HoaDon.HoaDonNhap-index', ["hoaDon" => $data, 'dsNhanVien' => $dsNhanVien, 'request' => $request]);
+        if (!empty($request->input('TaiKhoanId')))
+            $data = $data->where('TaiKhoanId', $request->input('TaiKhoanId'));
+
+        $data = $data->get();
     }
 
     /**
@@ -66,7 +80,7 @@ class HoaDonNhapController extends Controller
         $request->validate(['NhaCungCap' => ['required', 'max:255'], 'Phone' => ['required', 'numeric'],]);
 
         HoaDonNhap::create([
-            'NhanVienId' => Auth::user()->id,
+            'TaiKhoanId' => Auth::user()->id,
             'NhaCungCap' => $request->input('NhaCungCap'),
             'Phone' => $request->input('Phone'),
         ]);
@@ -197,11 +211,11 @@ class HoaDonNhapController extends Controller
         }
         if (!empty($request->input('TrangThai')))
             $data = $data->where('TrangThai', $request->input('TrangThai'));
-        if (!empty($request->input('NhanVienId')))
-            $data = $data->where('NhanVienId', $request->input('NhanVienId'));
-        $dsNhanVien = NhanVien::all();
+        if (!empty($request->input('TaiKhoanId')))
+            $data = $data->where('TaiKhoanId', $request->input('TaiKhoanId'));
+        $dsTaiKhoan = TaiKhoan::all();
         //tra lai resquet ve cho view de hien thi lai tim` kiem' cu?
-        return view('Admin.HoaDon.HoaDonNhap-index', ["hoaDon" => $data, 'dsNhanVien' => $dsNhanVien, 'request' => $request]);
+        return view('Admin.HoaDon.HoaDonNhap-index', ["hoaDon" => $data, 'dsTaiKhoan' => $dsTaiKhoan, 'request' => $request]);
     }
     public function KhoiPhucHoaDonNhap($id)
     {
@@ -234,11 +248,11 @@ class HoaDonNhapController extends Controller
     }
     public function XoaSanPham($id)
     {
-        $ctHoaDonNhap = CT_HoaDonNhap::where("SanPhamId",$id)->first();
+        $ctHoaDonNhap = CT_HoaDonNhap::where("SanPhamId", $id)->first();
         if (!empty($ctHoaDonNhap)) {
             $ctHoaDonNhap->forceDelete();
             //tinh' lai TongSL voi TongTien
-            $hoaDonNhap=$ctHoaDonNhap->HoaDonNhap;
+            $hoaDonNhap = $ctHoaDonNhap->HoaDonNhap;
             $hoaDonNhap->TongSoLuong = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('SoLuong');
             $hoaDonNhap->TongTien = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('ThanhTien');
             $hoaDonNhap->save();

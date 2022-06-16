@@ -605,9 +605,9 @@ insert nha_cung_caps(TenNhaCungCap,DiaChi,Email,Phone) values
 ('Chị hàng xóm', '125-127 Tung Thien Vuong Street, Ward 11, District 8, 125-127 Tung Thien Vuong Street, Ward 11, District 8', 'ChiHangXom@gmail.com','091823123'),
 ('Tổng thống Mỹ','91/3 Tran Binh Trong, Dist.5, Ho Chi Minh City','TongThongMy@gmail.com','012398732');
 
-insert into hoa_don_nhaps(TaiKhoanId,NhaCungCapId)
-SELECT a.id,b.id
-FROM tai_khoans as a,nha_cung_caps as b WHERE a.LoaiTaiKhoanId=1 OR a.LoaiTaiKhoanId=5 ORDER BY RAND() LIMIT 10;
+insert into hoa_don_nhaps(TaiKhoanId,NhaCungCapId,created_at)
+SELECT a.id,b.id,(SELECT FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP('2021-10-1') - UNIX_TIMESTAMP('2022-10-01')) + UNIX_TIMESTAMP('2022-10-01')))
+FROM tai_khoans as a,nha_cung_caps as b WHERE a.LoaiTaiKhoanId=5 ORDER BY RAND() LIMIT 10;
 
 insert into ct_hoa_don_nhaps(HoaDonNhapId,CTSanPhamId,SoLuong,GiaNhap)
 SELECT a.id,b.id,(SELECT FLOOR((RAND() * (5-1+1))+1)),b.GiaNhap

@@ -221,8 +221,9 @@
     <script type="text/javascript">
         jQuery(function($) {
             var oTable1 = $('#sample-table-2').dataTable({
-                "aoColumns": [
-                    null, null,
+                "aoColumns": [{
+                        "type": "num"
+                    }, null,
                     {
                         "bSortable": false
                     }, //mota

@@ -70,10 +70,10 @@
                                     {{-- <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên hoặc username khách hàng" data-placement="bottom"
                                         value="{{ $request['NameSearch'] }}" name="NameSearch" /> --}}
                                     <label> Tên nhân viên: </label>
-                                    <select class="width-10 chosen-select" id="form-field-select-4" name="NhanVienId">
+                                    <select class="width-10 chosen-select" id="form-field-select-4" name="TaiKhoanId">
                                         <option value="">All</option>
-                                        @foreach ($dsNhanVien as $item)
-                                            <option value="{{ $item->id }}" @if ($item->id == $request['NhanVienId']) selected @endif>
+                                        @foreach ($dsTaiKhoan as $item)
+                                            <option value="{{ $item->id }}" @if ($item->id == $request['TaiKhoanId']) selected @endif>
                                                 {{ $item->HoTen ?? $item->Username }}
                                             </option>
                                         @endforeach
@@ -134,11 +134,10 @@
 
                             <tbody>
                                 @foreach ($hoaDon as $item)
-
                                     <tr>
                                         <td class="center">{{ $item->id }}</td>
-                                        <td>{{ $item->NhanVien->HoTen ?? $item->NhanVien->Username }}</td>
-                                        <td>{{ $item->NhaCungCap }}</td>
+                                        <td>{{ $item->TaiKhoan->HoTen ?? $item->TaiKhoan->Username }}</td>
+                                        <td>{{ $item->NhaCungCap->TenNhaCungCap }}</td>
                                         <td>{{ $item->Phone }}</td>
                                         <td>{{ $item->TongSoLuong ?? 0 }}</td>
                                         <td>{{ number_format($item->TongTien) }}</td>
@@ -247,7 +246,6 @@
                                             </td>
                                         @endif
                                     </tr>
-
                                 @endforeach
                             </tbody>
                         </table>
@@ -321,12 +319,14 @@
         <script type="text/javascript">
             jQuery(function($) {
                 var oTable1 = $('#sample-table-2').dataTable({
-                    "aoColumns": [
-                        null, null, null, null,
+                    "aoColumns": [{
+                            "type": "num"
+                        }, null, null, null,
                         null, null, null, null,
                         {
                             "bSortable": false
-                        }
+                        },
+                        null
                     ]
                 });
 
@@ -389,8 +389,8 @@
                 @if ($errors->any())
                     $('#modal-form').modal('show');
                     @foreach ($errors->all() as $error)
-                    toastr.error('{{ $error }}', 'Có lỗi xảy ra', {
-                        timeOut: 3000
+                        toastr.error('{{ $error }}', 'Có lỗi xảy ra', {
+                            timeOut: 3000
                         });
                     @endforeach
                 @endif

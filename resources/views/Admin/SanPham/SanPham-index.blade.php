@@ -227,8 +227,8 @@
                                                         </ul>
                                                     </span>
 
-                                                    <a href="javascript:void(0)" onclick="showSanPham({{ $item->id }})" role="button" data-toggle="modal" class="tooltip-info" data-rel="tooltip"
-                                                        title="Xem chi tiết">
+                                                    <a href="javascript:void(0)" onclick="showSanPham({{ $item->id }})" role="button" data-toggle="modal" class="tooltip-info"
+                                                        data-rel="tooltip" title="Xem chi tiết">
                                                         <span class="blue">
                                                             <i class="icon-zoom-in bigger-120"></i>
                                                         </span>
@@ -288,7 +288,8 @@
                                                                 <form action="{{ route('SanPham.destroy', $item) }}" method="post">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Xóa"><i class="icon-trash bigger-120"></i></button>
+                                                                    <button type="submit" class="tooltip-error btn-link red" data-rel="tooltip" title="Xóa"><i
+                                                                            class="icon-trash bigger-120"></i></button>
                                                                 </form>
                                                             </li>
                                                         </ul>
@@ -332,8 +333,9 @@
         <script type="text/javascript">
             jQuery(function($) {
                 var oTable1 = $('#sample-table-2').dataTable({
-                    "aoColumns": [
-                        null, {
+                    "aoColumns": [{
+                            "type": "num"
+                        }, {
                             "bSortable": false
                         }, //hinh anh
                         null,
