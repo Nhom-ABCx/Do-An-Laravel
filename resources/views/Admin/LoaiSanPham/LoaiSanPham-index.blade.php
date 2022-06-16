@@ -79,7 +79,8 @@
                     <div class="table-header">
                         Bảng loại sản phẩm
                         <form class="form-inline" action="{{ URL::current() == route('LoaiSanPham.DaXoa') ? route('LoaiSanPham.DaXoa') : route('LoaiSanPham.index') }}" method="get">
-                            <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="{{ $request['Ten'] }}" name="Ten" />
+                            <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="{{ $request['Ten'] }}"
+                                name="Ten" />
 
                             <button type="submit" class="btn btn-purple btn-sm">
                                 Tìm kiếm
@@ -114,7 +115,7 @@
                                         <td class="center">{{ $item->id }}</td>
                                         <td>{{ $item->TenLoai }}</td>
                                         <td>{{ $item->MoTa }}</td>
-                                        <td>{!! $item->Icon['icon'] ?? '' !!}</td>
+                                        <td>{!! $item->Icon['iconHtml'] ?? '' !!}</td>
                                         <td>{{ $item->parent_Id }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
@@ -200,7 +201,9 @@
                         <div class="widget-body">
                             <div class="widget-main">
                                 @foreach ($icons as $icon)
-                                    {!! $icon['icon'] !!}
+                                    <span data-rel="tooltip" data-placement="top" title="{{ $icon['iconName'] }}">
+                                        {!! $icon['iconHtml'] !!}
+                                    </span>
                                 @endforeach
                             </div>
                         </div>
@@ -294,7 +297,7 @@
                                                     <option value="">&nbsp;</option>
                                                     @foreach ($icons as $icon)
                                                         <option class='material-icons md-36' value="{{ json_encode($icon) }}">
-                                                            {!! $icon['icon'] !!}
+                                                            {!! $icon['iconHtml'] !!}
                                                         </option>
                                                     @endforeach
                                                 </select>

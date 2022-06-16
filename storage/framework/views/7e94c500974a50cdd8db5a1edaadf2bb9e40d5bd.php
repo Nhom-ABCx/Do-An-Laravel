@@ -69,7 +69,8 @@
                     <div class="table-header">
                         Bảng loại sản phẩm
                         <form class="form-inline" action="<?php echo e(URL::current() == route('LoaiSanPham.DaXoa') ? route('LoaiSanPham.DaXoa') : route('LoaiSanPham.index')); ?>" method="get">
-                            <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="<?php echo e($request['Ten']); ?>" name="Ten" />
+                            <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên" data-placement="bottom" value="<?php echo e($request['Ten']); ?>"
+                                name="Ten" />
 
                             <button type="submit" class="btn btn-purple btn-sm">
                                 Tìm kiếm
@@ -104,7 +105,7 @@
                                         <td class="center"><?php echo e($item->id); ?></td>
                                         <td><?php echo e($item->TenLoai); ?></td>
                                         <td><?php echo e($item->MoTa); ?></td>
-                                        <td><?php echo $item->Icon['icon'] ?? ''; ?></td>
+                                        <td><?php echo $item->Icon['iconHtml'] ?? ''; ?></td>
                                         <td><?php echo e($item->parent_Id); ?></td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
@@ -190,8 +191,10 @@
                         <div class="widget-body">
                             <div class="widget-main">
                                 <?php $__currentLoopData = $icons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $icon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php echo $icon['icon']; ?>
+                                    <span data-rel="tooltip" data-placement="top" title="<?php echo e($icon['iconName']); ?>">
+                                        <?php echo $icon['iconHtml']; ?>
 
+                                    </span>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                         </div>
@@ -274,7 +277,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Loại sản phẩm cha ?</label>
+                                        <label>Icon ?</label>
 
                                         <div>
                                             <div class="input-group">
@@ -285,8 +288,8 @@
                                                 <select class="chosen-select" data-placeholder="" name="Icon">
                                                     <option value="">&nbsp;</option>
                                                     <?php $__currentLoopData = $icons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $icon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <option class='material-icons md-36' value="<?php echo e(json_encode($icon)); ?>" <?php if(json_encode($icon) == $request['Icon']): ?> selected <?php endif; ?>>
-                                                            <?php echo $icon['icon']; ?>
+                                                        <option class='material-icons md-36' value="<?php echo e(json_encode($icon)); ?>">
+                                                            <?php echo $icon['iconHtml']; ?>
 
                                                         </option>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

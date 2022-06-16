@@ -131,12 +131,12 @@ insert into Hang_San_Xuats(TenHangSanXuat) values
 ('Realme' );
 
 insert into Loai_San_Phams(Code,TenLoai,MoTa,Icon) values
-('DT',N'Điện thoại','Smart Phone','{"icon": "<i class=\'material-icons md-36\'>zoom_out_map</i>","data": "zoom_out_map"}'),
-('DL',N'Điện lạnh',null,'{"icon": "<i class=\'material-icons md-36\'>zoom_out_map</i>","data": "zoom_out_map"}'),
-('LT',N'LapTop',null,'{"icon": "<i class=\'material-icons md-36\'>zoom_out_map</i>","data": "zoom_out_map"}'),
-('MA',N'Máy ảnh',null,'{"icon": "<i class=\'material-icons md-36\'>zoom_out_map</i>","data": "zoom_out_map"}'),
-('MTB',N'Máy tính bảng',null,'{"icon": "<i class=\'material-icons md-36\'>zoom_out_map</i>","data": "zoom_out_map"}'),
-('PK',N'Phụ kiện',null,'{"icon": "<i class=\'material-icons md-36\'>zoom_out_map</i>","data": "zoom_out_map"}');
+('DT',N'Điện thoại','Smart Phone','{"iconHtml":"<i class=\'material-icons md-36\'>phone_iphone</i>","iconName":"phone_iphone","iconCode":"0xe4aa"}'),
+('DL',N'Điện lạnh',null,'{"iconHtml":"<i class=\'material-icons md-36\'>mode_fan_off</i>","iconName":"mode_fan_off","iconCode":"0xf07ae"}'),
+('LT',N'LapTop',null,'{"iconHtml":"<i class=\'material-icons md-36\'>laptop_windows</i>","iconName":"laptop_windows","iconCode":"0xe36a"}'),
+('MA',N'Máy ảnh',null,'{"iconHtml":"<i class=\'material-icons md-36\'>photo_camera</i>","iconName":"photo_camera","iconCode":"0xe4b6"}'),
+('MTB',N'Máy tính bảng',null,'{"iconHtml":"<i class=\'material-icons md-36\'>developer_board</i>","iconName":"developer_board","iconCode":"0xe1c5"}'),
+('PK',N'Phụ kiện',null,'{"iconHtml":"<i class=\'material-icons md-36\'>device_hub</i>","iconName":"device_hub","iconCode":"0xe1c8"}');
 INSERT INTO loai_san_phams (Code, TenLoai, MoTa, _lft, _rgt, parent_id) VALUES
 ('CHG', 'Clothing', '', 13, 34, NULL),
 ('CHG-MEN', 'Men', '', 14, 21, 7),

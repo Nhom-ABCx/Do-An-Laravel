@@ -63,7 +63,7 @@ class LoaiSanPhamController extends Controller
         $request->validate([
             'TenLoai' => ['required', 'unique:loai_san_phams,TenLoai', 'max:255'],
             'MoTa' => ['max:255'],
-            'Icon' => ['json'],
+            'Icon' => ['nullable', 'json'],
             'parent_id' => [],
         ]);
 
@@ -73,6 +73,7 @@ class LoaiSanPhamController extends Controller
             "Code" => $this->getCodeLoaiSanPham($request),   //viet thanh chu~ INH HOA
             'TenLoai' => $request['TenLoai'],
             'MoTa' => $request['MoTa'] ?? '',
+            'Icon' => json_decode($request['Icon'], true) ?? null,
         ]);
 
         if ($request['parent_id']) {
