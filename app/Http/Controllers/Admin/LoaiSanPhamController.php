@@ -23,10 +23,13 @@ class LoaiSanPhamController extends Controller
         $this->filter($data, $request);
 
 
-        $string = file_get_contents(storage_path() . "/app/public/assets/google-icon-data.json");
-        $arrayJsonIcon = json_decode($string, true);
 
-        return view('Admin.LoaiSanPham.LoaiSanPham-index', ['loaiSp' => $data, 'request' => $request, 'icons' => $arrayJsonIcon]);
+
+        return view('Admin.LoaiSanPham.LoaiSanPham-index', [
+            'loaiSp' => $data,
+            'request' => $request,
+            'icons' => $this->listIcons(),
+        ]);
     }
     /**
      * ham` nay` co tac dung filter theo request
@@ -89,9 +92,26 @@ class LoaiSanPhamController extends Controller
      * @param  \App\Models\LoaiSanPham  $loaiSanPham
      * @return \Illuminate\Http\Response
      */
-    public function show(LoaiSanPham $loaiSanPham)
+    public function show($loaiSanPham, Request $request)
     {
-        //
+        if ($loaiSanPham == "Store")
+            return view("Admin.LoaiSanPham.LoaiSanPham-show-model", [
+                "titleModel" => "Thêm loại sản phẩm",
+                "lstLoaiSanPham" => LoaiSanPham::all(),
+                "icons" => $this->listIcons(),
+                "routeUrl" => route('LoaiSanPham.store'),
+                "method" => "POST", //PATCH
+                "loaiSanPham" => null,
+            ]);
+        if ($loaiSanPham == "Edit")
+            return view("Admin.LoaiSanPham.LoaiSanPham-show-model", [
+                "titleModel" => "Sửa loại sản phẩm",
+                "lstLoaiSanPham" => LoaiSanPham::all(),
+                "icons" => $this->listIcons(),
+                "routeUrl" => route('LoaiSanPham.update', $request['LoaiSanPhamId']),
+                "method" => "PUT", //PATCH
+                "loaiSanPham" => LoaiSanPham::find($request['LoaiSanPhamId']),
+            ]);
     }
 
     /**
@@ -102,7 +122,7 @@ class LoaiSanPhamController extends Controller
      */
     public function edit(LoaiSanPham $loaiSanPham)
     {
-        return view('Admin.LoaiSanPham.LoaiSanPham-edit', ['loaiSanPham' => $loaiSanPham]);
+        // return view('Admin.LoaiSanPham.LoaiSanPham-edit', [ 'loaiSanPham' => $loaiSanPham]);
     }
 
     /**
@@ -115,12 +135,19 @@ class LoaiSanPhamController extends Controller
     public function update(Request $request, LoaiSanPham $loaiSanPham)
     {
         //https://github.com/lazychaser/laravel-nestedset
-
+        $request->validate([
+            // 'TenLoai' => ['required', 'unique:loai_san_phams,TenLoai', 'max:255'],
+            'TenLoai' => ['required', 'max:255'],
+            'MoTa' => ['max:255'],
+            'Icon' => ['nullable', 'json'],
+            'parent_id' => [],
+        ]);
 
         $loaiSanPham->fill([
             "Code" => $this->getCodeLoaiSanPham($request),   //viet thanh chu~ INH HOA
             'TenLoai' => $request['TenLoai'],
             'MoTa' => $request['MoTa'] ?? '',
+            'Icon' => json_decode($request['Icon'], true) ?? null,
         ]);
         $loaiSanPham->save();
 
@@ -213,5 +240,10 @@ class LoaiSanPhamController extends Controller
             }
         }
         return strtoupper($code);
+    }
+    private function listIcons()
+    {
+        $string = file_get_contents(storage_path() . "/app/public/assets/google-icon-data.json");
+        return json_decode($string, true);
     }
 }
