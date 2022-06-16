@@ -281,11 +281,17 @@
 
                                         <div>
                                             <div class="input-group">
-                                                <span class="input-group-addon pink">
+                                                <span id="loaiSanPhamIconSpan" class="input-group-addon green">
                                                     <i class="icon-sort-by-attributes"></i>
                                                 </span>
 
-                                                <select class="chosen-select" data-placeholder="" name="Icon">
+                                                <select class="chosen-select" data-placeholder="" name="Icon" id="loaiSanPhamIcon"
+                                                    onchange='javascript:{
+                                                    var selectedJson = $("#loaiSanPhamIcon").val();
+                                                    var json=JSON.parse(selectedJson);
+                                                    $("#loaiSanPhamIconSpan").html(json.iconHtml);
+                                                    }'>
+                                                    
                                                     <option value="">&nbsp;</option>
                                                     <?php $__currentLoopData = $icons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $icon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <option class='material-icons md-36' value="<?php echo e(json_encode($icon)); ?>">

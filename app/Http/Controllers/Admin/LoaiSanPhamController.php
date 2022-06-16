@@ -155,7 +155,10 @@ class LoaiSanPhamController extends Controller
 
         $this->filter($data, $request);
 
-        return view("Admin.LoaiSanPham.LoaiSanPham-index", ['loaiSp' => $data, 'request' => $request]);
+        $string = file_get_contents(storage_path() . "/app/public/assets/google-icon-data.json");
+        $arrayJsonIcon = json_decode($string, true);
+
+        return view("Admin.LoaiSanPham.LoaiSanPham-index", ['loaiSp' => $data, 'request' => $request, 'icons' => $arrayJsonIcon]);
     }
     public function KhoiPhucLoaiSanPham($id)
     {

@@ -289,11 +289,17 @@
 
                                         <div>
                                             <div class="input-group">
-                                                <span class="input-group-addon pink">
+                                                <span id="loaiSanPhamIconSpan" class="input-group-addon green">
                                                     <i class="icon-sort-by-attributes"></i>
                                                 </span>
 
-                                                <select class="chosen-select" data-placeholder="" name="Icon">
+                                                <select class="chosen-select" data-placeholder="" name="Icon" id="loaiSanPhamIcon"
+                                                    onchange='javascript:{
+                                                    var selectedJson = $("#loaiSanPhamIcon").val();
+                                                    var json=JSON.parse(selectedJson);
+                                                    $("#loaiSanPhamIconSpan").html(json.iconHtml);
+                                                    }'>
+                                                    {{-- vai` dong` query nen viet chung luon cho le --}}
                                                     <option value="">&nbsp;</option>
                                                     @foreach ($icons as $icon)
                                                         <option class='material-icons md-36' value="{{ json_encode($icon) }}">
