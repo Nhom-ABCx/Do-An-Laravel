@@ -179,11 +179,11 @@ class SanPhamController extends Controller
      * @param  \App\Models\SanPham  $sanPham
      * @return \Illuminate\Http\Response
      */
-    public function show($sanPham)
+    public function show(SanPham $sanPham)
     {
-        $sanPham = SanPham::withTrashed()->find($sanPham);
         $this->fixImage($sanPham);
-        return view("Admin.SanPham.SanPham-show-modal", ["sanPham" => $sanPham]);
+        // return response()->json($sanPham->load('CT_SanPham'));
+        return view("Admin.SanPham.SanPham-show-modal", ["sanPham" => $sanPham->load('CT_SanPham')]);
     }
 
     /**

@@ -270,5 +270,5 @@
         {{-- datatable script --}}
         @include('Admin.HoaDon.script.HoaDonNhap-show-script')
         {{-- datatable script End --}}
-        {{-- @include('Admin.SanPham.script.SanPham-show-script') --}}
+        @include('Admin.SanPham.script.SanPham-show-script')
     @endsection

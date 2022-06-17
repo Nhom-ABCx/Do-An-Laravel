@@ -75,7 +75,12 @@
                                 <div>
                                     <div class="input-group">
                                         <span id="loaiSanPhamIconSpan" class="input-group-addon green">
-                                            <i class="icon-sort-by-attributes"></i>
+                                            <?php if(empty($loaiSanPham->Icon)): ?>
+                                                <i class="icon-sort-by-attributes"></i>
+                                            <?php else: ?>
+                                                <?php echo $loaiSanPham->Icon['iconHtml']; ?>
+
+                                            <?php endif; ?>
                                         </span>
 
                                         <select class="chosen-select" data-placeholder="" name="Icon" id="loaiSanPhamIcon"
@@ -87,7 +92,7 @@
                                             
                                             <option value="">&nbsp;</option>
                                             <?php $__currentLoopData = $icons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $icon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <option class='material-icons md-36' value="<?php echo e(json_encode($icon)); ?>" <?php if($loaiSanPham->Icon ?? '' == $icon): ?> selected <?php endif; ?>>
+                                                <option class='material-icons md-36' value="<?php echo e(json_encode($icon)); ?>" <?php if(($loaiSanPham->Icon ?? []) == $icon): ?> selected <?php endif; ?>>
                                                     <?php echo $icon['iconHtml']; ?>
 
                                                 </option>

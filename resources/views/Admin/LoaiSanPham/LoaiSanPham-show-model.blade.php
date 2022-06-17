@@ -73,7 +73,11 @@
                                 <div>
                                     <div class="input-group">
                                         <span id="loaiSanPhamIconSpan" class="input-group-addon green">
-                                            <i class="icon-sort-by-attributes"></i>
+                                            @if (empty($loaiSanPham->Icon))
+                                                <i class="icon-sort-by-attributes"></i>
+                                            @else
+                                                {!! $loaiSanPham->Icon['iconHtml'] !!}
+                                            @endif
                                         </span>
 
                                         <select class="chosen-select" data-placeholder="" name="Icon" id="loaiSanPhamIcon"
@@ -85,7 +89,7 @@
                                             {{-- vai` dong` query nen viet chung luon cho le --}}
                                             <option value="">&nbsp;</option>
                                             @foreach ($icons as $icon)
-                                                <option class='material-icons md-36' value="{{ json_encode($icon) }}" @if ($loaiSanPham->Icon ?? '' == $icon) selected @endif>
+                                                <option class='material-icons md-36' value="{{ json_encode($icon) }}" @if (($loaiSanPham->Icon ?? []) == $icon) selected @endif>
                                                     {!! $icon['iconHtml'] !!}
                                                 </option>
                                             @endforeach

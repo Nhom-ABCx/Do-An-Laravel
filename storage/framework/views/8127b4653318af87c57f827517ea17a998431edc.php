@@ -61,15 +61,15 @@
             },
             {
                 //render tool
-                data: 'c_t__san_pham.id',
+                data: 'c_t__san_pham',
                 render: function(data, type, row, meta) {
                     return `<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                    <a class="blue" href="javascript:void(0)" onclick="showSanPham(` + data + `)" role="button" data-toggle="modal" data-rel="tooltip" title="Xem chi tiết">
+                    <a class="blue" href="javascript:void(0)" onclick="showSanPham(` + data.SanPhamId + `)" role="button" data-toggle="modal" data-rel="tooltip" title="Xem chi tiết">
                         <i class="icon-zoom-in bigger-130"></i>
                     </a>
                     <?php if($hoaDonNhap->TrangThai): ?>
                     <?php else: ?>
-                        <a class="red" href="javascript:void(0)" onclick="xoaSanPham(` + data + `)" data-rel="tooltip" title="Xóa" data-id="` + data + `" id="xoaSanPham">
+                        <a class="red" href="javascript:void(0)" onclick="xoaSanPham(` + data.id + `)" data-rel="tooltip" title="Xóa" data-id="` + data.id + `" id="xoaSanPham">
                             <i class="icon-trash bigger-130"></i>
                         </a>
                     <?php endif; ?>
@@ -83,7 +83,7 @@
 
                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                             <li>
-                                <a href="javascript:void(0)" onclick="showSanPham(` + data + `)" role="button" data-toggle="modal" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
+                                <a href="javascript:void(0)" onclick="showSanPham(` + data.SanPhamId + `)" role="button" data-toggle="modal" class="tooltip-info" data-rel="tooltip" title="Xem chi tiết">
                                     <span class="blue">
                                         <i class="icon-zoom-in bigger-120"></i>
                                     </span>
@@ -92,7 +92,7 @@
                             <?php if($hoaDonNhap->TrangThai): ?>
                             <?php else: ?>
                                 <li>
-                                    <a href="javascript:void(0)" onclick="xoaSanPham(` + data + `)" class="tooltip-error" data-rel="tooltip" title="Xóa" data-id="` + data + `" id="xoaSanPham">
+                                    <a href="javascript:void(0)" onclick="xoaSanPham(` + data.id + `)" class="tooltip-error" data-rel="tooltip" title="Xóa" data-id="` + data.id + `" id="xoaSanPham">
                                         <span class="red">
                                             <i class="icon-trash bigger-120"></i>
                                         </span>
