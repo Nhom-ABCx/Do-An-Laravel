@@ -173,7 +173,7 @@
 
         $('#ChiTietHoaDonNhap').editable({
             title: 'Nhập số lượng',
-            url: '{{ route('HoaDonNhap.update', $hoaDonNhap) }}',
+            url: "{{ route('HoaDonNhap.update', $hoaDonNhap) }}",
             container: 'body',
             selector: 'td.SoLuong',
             type: 'text',
@@ -222,7 +222,7 @@
 
         $('#ChiTietHoaDonNhap').editable({
             title: 'Nhập giá',
-            url: '{{ route('HoaDonNhap.update', $hoaDonNhap) }}',
+            url: "{{ route('HoaDonNhap.update', $hoaDonNhap) }}",
             container: 'body',
             selector: 'td.GiaNhap',
             type: 'text',

@@ -97,14 +97,14 @@
                         <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th><i class="fa fa-key "></i>##</th>
-                                    <th><i class="fa fa-align-left"></i>Tên loại</th>
-                                    <th><i class="fa fa-file-text-o"></i>Mô tả</th>
-                                    <th><i class="icon-cogs"></i>Icon</th>
-                                    <th><i class="fa fa-pencil"></i>parent</th>
-                                    <th><i class="fa fa-pencil"></i>Ngày tạo</th>
-                                    <th><i class="fa fa-check-square-o"></i>Ngày cập nhật</th>
-                                    <th><i class="fa fa-trash"></i>Ngày xoá</th>
+                                    <th><i class="fa fa-key "></i> ##</th>
+                                    <th><i class="fa fa-align-left"></i> Tên loại</th>
+                                    <th><i class="fa fa-file-text-o"></i> Mô tả</th>
+                                    <th><i class="icon-cogs"></i> Icon</th>
+                                    <th><i class="fa fa-pencil"></i> parent</th>
+                                    <th><i class="fa fa-pencil"></i> Ngày tạo</th>
+                                    <th><i class="fa fa-check-square-o"></i> Ngày cập nhật</th>
+                                    <th><i class="fa fa-trash"></i> Ngày xoá</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -115,8 +115,8 @@
                                         <td class="center">{{ $item->id }}</td>
                                         <td>{{ $item->TenLoai }}</td>
                                         <td>{{ $item->MoTa }}</td>
-                                        <td>{!! $item->Icon['iconHtml'] ?? '' !!}</td>
-                                        <td>{{ $item->parent_Id }}</td>
+                                        <td style="width: 10px" class="center">{!! $item->Icon['iconHtml'] ?? '' !!}</td>
+                                        <td>{{ $item->parent_id }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td>{{ $item->deleted_at }}</td>

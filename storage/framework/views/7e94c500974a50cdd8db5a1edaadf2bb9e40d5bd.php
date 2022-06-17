@@ -87,14 +87,14 @@
                         <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th><i class="fa fa-key "></i>##</th>
-                                    <th><i class="fa fa-align-left"></i>Tên loại</th>
-                                    <th><i class="fa fa-file-text-o"></i>Mô tả</th>
-                                    <th><i class="icon-cogs"></i>Icon</th>
-                                    <th><i class="fa fa-pencil"></i>parent</th>
-                                    <th><i class="fa fa-pencil"></i>Ngày tạo</th>
-                                    <th><i class="fa fa-check-square-o"></i>Ngày cập nhật</th>
-                                    <th><i class="fa fa-trash"></i>Ngày xoá</th>
+                                    <th><i class="fa fa-key "></i> ##</th>
+                                    <th><i class="fa fa-align-left"></i> Tên loại</th>
+                                    <th><i class="fa fa-file-text-o"></i> Mô tả</th>
+                                    <th><i class="icon-cogs"></i> Icon</th>
+                                    <th><i class="fa fa-pencil"></i> parent</th>
+                                    <th><i class="fa fa-pencil"></i> Ngày tạo</th>
+                                    <th><i class="fa fa-check-square-o"></i> Ngày cập nhật</th>
+                                    <th><i class="fa fa-trash"></i> Ngày xoá</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -105,8 +105,8 @@
                                         <td class="center"><?php echo e($item->id); ?></td>
                                         <td><?php echo e($item->TenLoai); ?></td>
                                         <td><?php echo e($item->MoTa); ?></td>
-                                        <td><?php echo $item->Icon['iconHtml'] ?? ''; ?></td>
-                                        <td><?php echo e($item->parent_Id); ?></td>
+                                        <td style="width: 10px" class="center"><?php echo $item->Icon['iconHtml'] ?? ''; ?></td>
+                                        <td><?php echo e($item->parent_id); ?></td>
                                         <td><?php echo e($item->created_at); ?></td>
                                         <td><?php echo e($item->updated_at); ?></td>
                                         <td><?php echo e($item->deleted_at); ?></td>

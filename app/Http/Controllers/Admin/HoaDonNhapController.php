@@ -154,30 +154,26 @@ class HoaDonNhapController extends Controller
         //xác thực đầu vào, xem các luật tại https://laravel.com/docs/8.x/validation#available-validation-rules
         //kiem tra du lieu
         $validate = Validator::make($request->all(), [
-            'pk' => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
-            'value' => ['required', 'numeric', 'min:0', Rule::notIn([0])],
+            'pk' => ['required', 'numeric', 'integer', 'exists:ct_san_phams,id'],
+            'value' => ['required', 'numeric', 'min:1'],
         ]);
         // //neu du lieu no' sai thi`tra? ve` loi~
         if ($validate->fails())
             return response()->json($validate->errors(), 400);
         //neu ton` tai roi` thi update ngc lai thi` bao' loi~
-        $ctHoaDonNhap = CT_HoaDonNhap::where("SanPhamId", $request["pk"])->where("HoaDonNhapId", $hoaDonNhap->id)->first();
+        $ctHoaDonNhap = CT_HoaDonNhap::where("CTSanPhamId", $request["pk"])->where("HoaDonNhapId", $hoaDonNhap->id)->first();
         if (!empty($ctHoaDonNhap)) {
             $soLuong = ($request['name'] == "SoLuong") ? $request['value'] : $ctHoaDonNhap->SoLuong;
             $giaNhap = ($request['name'] == "GiaNhap") ? $request['value'] : $ctHoaDonNhap->GiaNhap;
-            $ctHoaDonNhap->fill([
+            $ctHoaDonNhap->update([
                 'SoLuong' => $soLuong,
                 'GiaNhap' => $giaNhap,
-                'ThanhTien' => $soLuong * $giaNhap,
+                //thanh` tien` hoa don nhap trigger tu tinh'
+                //'ThanhTien' => $soLuong * $giaNhap,
             ]);
-            $ctHoaDonNhap->save();
         } else {
             return response()->json(["error" => "Không tìm thấy dữ liệu"], 404);
         }
-
-        $hoaDonNhap->TongSoLuong = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('SoLuong');
-        $hoaDonNhap->TongTien = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('ThanhTien');
-        $hoaDonNhap->save();
 
         return response()->json($ctHoaDonNhap, 200);
     }
