@@ -123,22 +123,25 @@ class HoaDonNhapController extends Controller
 
         $hoaDonNhap->update(['TrangThai' => $request['TrangThai']]);
 
+        $this->updateSoLuong_GiaBanCuaHD($hoaDonNhap);
 
+        return Redirect::route('HoaDonNhap.index');
+    }
+    private function updateSoLuong_GiaBanCuaHD(HoaDonNhap $hoaDonNhap)
+    {
         //neu trang thai' thanh`cong thi cap nhat lai gia' ban' va so luong ton` cua san pham tuong ung'
         if ($hoaDonNhap->TrangThai) {
             $dsChiTietHD = $hoaDonNhap->CT_HoaDonNhap;
             if (count($dsChiTietHD)) {
                 foreach ($dsChiTietHD as $item) {
                     $ctSanPham = $item->CT_SanPham;
-                    $ctSanPham->fill([
+                    $ctSanPham->update([
                         "GiaNhap" => $item->GiaNhap,
                         "SoLuongTon" => $ctSanPham->SoLuongTon + $item->SoLuong,
                     ]);
-                    $ctSanPham->save();
                 }
             }
         }
-        return Redirect::route('HoaDonNhap.index');
     }
 
     /**
@@ -244,17 +247,13 @@ class HoaDonNhapController extends Controller
     }
     public function XoaSanPham($id)
     {
-        $ctHoaDonNhap = CT_HoaDonNhap::where("SanPhamId", $id)->first();
+        $ctHoaDonNhap = CT_HoaDonNhap::where("CTSanPhamId", $id)->first();
         if (!empty($ctHoaDonNhap)) {
             $ctHoaDonNhap->forceDelete();
             //tinh' lai TongSL voi TongTien
-            $hoaDonNhap = $ctHoaDonNhap->HoaDonNhap;
-            $hoaDonNhap->TongSoLuong = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('SoLuong');
-            $hoaDonNhap->TongTien = CT_HoaDonNhap::where('HoaDonNhapId', $hoaDonNhap->id)->sum('ThanhTien');
-            $hoaDonNhap->save();
             return response()->json([], 200);
         }
-        return response()->json(["Error" => "Không tìm thấy"], 404);
+        return response()->json(["error" => "Không tìm thấy"], 404);
     }
     public function CapNhatTrangThai(HoaDonNhap $hoaDonNhap)
     {
@@ -265,20 +264,7 @@ class HoaDonNhapController extends Controller
             $hoaDonNhap->TrangThai = $hoaDonNhap->TrangThai + 1;
             $hoaDonNhap->save();
 
-            //neu trang thai' thanh`cong thi cap nhat lai gia' ban' va so luong ton` cua san pham tuong ung'
-            if ($hoaDonNhap->TrangThai) {
-                $dsChiTietHD = $hoaDonNhap->CT_HoaDonNhap;
-                if (count($dsChiTietHD)) {
-                    foreach ($dsChiTietHD as $item) {
-                        $sanPham = $item->SanPham;
-                        $sanPham->fill([
-                            "GiaNhap" => $item->GiaNhap,
-                            "SoLuongTon" => $sanPham->SoLuongTon + $item->SoLuong,
-                        ]);
-                        $sanPham->save();
-                    }
-                }
-            }
+            $this->updateSoLuong_GiaBanCuaHD($hoaDonNhap);
         }
         return Redirect::route('HoaDonNhap.index');
     }
