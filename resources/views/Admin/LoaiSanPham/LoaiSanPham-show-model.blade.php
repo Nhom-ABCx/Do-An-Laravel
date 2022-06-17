@@ -58,7 +58,7 @@
 
                                         <select class="chosen-select" data-placeholder="" name="parent_id">
                                             <option value="">&nbsp;</option>
-                                            {{ App\Http\Controllers\Admin\LoaiSanPhamController::showSelectOption($lstLoaiSanPham) }}
+                                            {{ App\Http\Controllers\Admin\LoaiSanPhamController::showSelectOption($lstLoaiSanPham, $loaiSanPham->parent_id ?? null) }}
                                         </select>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
                                             {{-- vai` dong` query nen viet chung luon cho le --}}
                                             <option value="">&nbsp;</option>
                                             @foreach ($icons as $icon)
-                                                <option class='material-icons md-36' value="{{ json_encode($icon) }}">
+                                                <option class='material-icons md-36' value="{{ json_encode($icon) }}" @if ($loaiSanPham->Icon ?? '' == $icon) selected @endif>
                                                     {!! $icon['iconHtml'] !!}
                                                 </option>
                                             @endforeach

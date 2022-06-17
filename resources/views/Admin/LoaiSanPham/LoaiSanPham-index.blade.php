@@ -190,7 +190,7 @@
                         <div class="widget-body">
                             <div class="widget-main">
                                 @foreach ($icons as $icon)
-                                    <span data-rel="tooltip" data-placement="top" title="{{ $icon['iconName'] }}">
+                                    <span class="tooltip-success" data-rel="tooltip" data-placement="top" title="{{ $icon['iconName'] }}">
                                         {!! $icon['iconHtml'] !!}
                                     </span>
                                 @endforeach
@@ -249,9 +249,7 @@
             });
 
 
-            $('[data-rel="tooltip"]').tooltip({
-                placement: tooltip_placement
-            });
+            $('[data-rel="tooltip"]').tooltip();
 
             function tooltip_placement(context, source) {
                 var $source = $(source);
@@ -266,9 +264,6 @@
                 return 'left';
             }
         })
-        $('[data-rel=tooltip]').tooltip({
-            container: 'body'
-        });
     </script>
     {{-- datatable script End --}}
 

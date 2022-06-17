@@ -59,7 +59,7 @@
 
                                         <select class="chosen-select" data-placeholder="" name="parent_id">
                                             <option value="">&nbsp;</option>
-                                            <?php echo e(App\Http\Controllers\Admin\LoaiSanPhamController::showSelectOption($lstLoaiSanPham)); ?>
+                                            <?php echo e(App\Http\Controllers\Admin\LoaiSanPhamController::showSelectOption($lstLoaiSanPham, $loaiSanPham->parent_id ?? null)); ?>
 
                                         </select>
                                     </div>
@@ -87,7 +87,7 @@
                                             
                                             <option value="">&nbsp;</option>
                                             <?php $__currentLoopData = $icons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $icon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <option class='material-icons md-36' value="<?php echo e(json_encode($icon)); ?>">
+                                                <option class='material-icons md-36' value="<?php echo e(json_encode($icon)); ?>" <?php if($loaiSanPham->Icon ?? '' == $icon): ?> selected <?php endif; ?>>
                                                     <?php echo $icon['iconHtml']; ?>
 
                                                 </option>

@@ -180,7 +180,7 @@
                         <div class="widget-body">
                             <div class="widget-main">
                                 <?php $__currentLoopData = $icons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $icon): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <span data-rel="tooltip" data-placement="top" title="<?php echo e($icon['iconName']); ?>">
+                                    <span class="tooltip-success" data-rel="tooltip" data-placement="top" title="<?php echo e($icon['iconName']); ?>">
                                         <?php echo $icon['iconHtml']; ?>
 
                                     </span>
@@ -240,9 +240,7 @@
             });
 
 
-            $('[data-rel="tooltip"]').tooltip({
-                placement: tooltip_placement
-            });
+            $('[data-rel="tooltip"]').tooltip();
 
             function tooltip_placement(context, source) {
                 var $source = $(source);
@@ -257,9 +255,6 @@
                 return 'left';
             }
         })
-        $('[data-rel=tooltip]').tooltip({
-            container: 'body'
-        });
     </script>
     
 

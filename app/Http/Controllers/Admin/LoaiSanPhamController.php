@@ -144,7 +144,7 @@ class LoaiSanPhamController extends Controller
         ]);
 
         $loaiSanPham->fill([
-            "Code" => $this->getCodeLoaiSanPham($request),   //viet thanh chu~ INH HOA
+            // "Code" => $this->getCodeLoaiSanPham($request),   //viet thanh chu~ INH HOA
             'TenLoai' => $request['TenLoai'],
             'MoTa' => $request['MoTa'] ?? '',
             'Icon' => json_decode($request['Icon'], true) ?? null,
@@ -193,13 +193,16 @@ class LoaiSanPhamController extends Controller
         $data->restore();
         return Redirect::route('LoaiSanPham.DaXoa');
     }
-    public static function showSelectOption($categories, $parent_id = null, $char = '')
+    public static function showSelectOption($categories, $selectedParentId, $parent_id = null, $char = '')
     {
         foreach ($categories as $key => $item) {
             // Nếu là chuyên mục con thì hiển thị
             if ($item['parent_id'] == $parent_id) {
 
-                echo "<option value='" . $item['id'] . "'>";
+                if ($item['id'] == $selectedParentId)
+                    echo "<option value='" . $item['id'] . "' selected >";
+                else
+                    echo "<option value='" . $item['id'] . "'>";
                 echo $char . $item['TenLoai'];
                 echo '</option>';
 
@@ -207,7 +210,7 @@ class LoaiSanPhamController extends Controller
                 unset($categories[$key]);
 
                 // Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp
-                LoaiSanPhamController::showSelectOption($categories, $item['id'], $char . '--');
+                LoaiSanPhamController::showSelectOption($categories, $selectedParentId, $item['id'], $char . '--');
             }
         }
     }
