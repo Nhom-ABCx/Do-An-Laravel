@@ -55,40 +55,6 @@
                                         Hóa đơn nhập đã hủy
                                     </a>
                                 <?php endif; ?>
-                                <form class="form-inline" action="<?php echo e(request()->is('Admin/HoaDonNhapp/DaHuy') ? route('HoaDonNhap.DaHuy') : route('HoaDonNhap.index')); ?>" method="get"
-                                    style="margin-top: 10px">
-                                    
-                                    <label> Tên nhân viên: </label>
-                                    <select class="width-10 chosen-select" id="form-field-select-4" name="TaiKhoanId">
-                                        <option value="">All</option>
-                                        <?php $__currentLoopData = $dsTaiKhoan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($item->id); ?>" <?php if($item->id == $request['TaiKhoanId']): ?> selected <?php endif; ?>>
-                                                <?php echo e($item->HoTen ?? $item->Username); ?>
-
-                                            </option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </select>
-
-                                    <label> Trạng thái: </label>
-                                    <select class="width-10 chosen-select" id="form-field-select-4" name="TrangThai">
-                                        <option value="">All</option>
-                                        <option value="0" <?php if('0' == $request['TrangThai']): ?> selected <?php endif; ?>>
-                                            Chưa thành công
-                                        </option>
-                                        <option value="1" <?php if('1' == $request['TrangThai']): ?> selected <?php endif; ?>>
-                                            Đã thành công
-                                        </option>
-                                    </select>
-
-                                    <label for=""> Lọc theo ngày: </label>
-                                    <input class="width-20" type="text" name="NgayDat" id="id-NgayDat-1" value="<?php echo e($request['NgayDat']); ?>" data-rel="tooltip" title="Tháng-Ngày-Năm"
-                                        data-placement="top" />
-
-                                    <button type="submit" class="btn btn-purple btn-sm">
-                                        Lọc
-                                        <i class="icon-search icon-on-right bigger-110"></i>
-                                    </button>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -97,6 +63,38 @@
 
                     <div class="table-header">
                         Bảng Hóa đơn nhập
+                        <form class="form-inline" action="<?php echo e(request()->is('Admin/HoaDonNhapp/DaHuy') ? route('HoaDonNhap.DaHuy') : route('HoaDonNhap.index')); ?>" method="get" style="margin-top: 10px">
+                            
+                            <label> Tên nhân viên: </label>
+                            <select class="width-10 chosen-select" id="form-field-select-4" name="TaiKhoanId">
+                                <option value="">All</option>
+                                <?php $__currentLoopData = $dsTaiKhoan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($item->id); ?>" <?php if($item->id == $request['TaiKhoanId']): ?> selected <?php endif; ?>>
+                                        <?php echo e($item->HoTen ?? $item->Username); ?>
+
+                                    </option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+
+                            <label> Trạng thái: </label>
+                            <select class="width-10 chosen-select" id="form-field-select-4" name="TrangThai">
+                                <option value="">All</option>
+                                <option value="0" <?php if('0' == $request['TrangThai']): ?> selected <?php endif; ?>>
+                                    Chưa thành công
+                                </option>
+                                <option value="1" <?php if('1' == $request['TrangThai']): ?> selected <?php endif; ?>>
+                                    Đã thành công
+                                </option>
+                            </select>
+
+                            <label for=""> Lọc theo ngày: </label>
+                            <input class="width-20" type="text" name="NgayDat" id="id-NgayDat-1" value="<?php echo e($request['NgayDat']); ?>" data-rel="tooltip" title="Tháng-Ngày-Năm" data-placement="top" />
+
+                            <button type="submit" class="btn btn-purple btn-sm">
+                                Lọc
+                                <i class="icon-search icon-on-right bigger-110"></i>
+                            </button>
+                        </form>
                     </div>
 
                     <div class="table-responsive">
@@ -128,7 +126,7 @@
                                         <td class="center"><?php echo e($item->id); ?></td>
                                         <td><?php echo e($item->TaiKhoan->HoTen ?? $item->TaiKhoan->Username); ?></td>
                                         <td><?php echo e($item->NhaCungCap->TenNhaCungCap); ?></td>
-                                        <td><?php echo e($item->Phone); ?></td>
+                                        <td><?php echo e($item->NhaCungCap->Phone); ?></td>
                                         <td><?php echo e($item->TongSoLuong ?? 0); ?></td>
                                         <td><?php echo e(number_format($item->TongTien)); ?></td>
                                         <td>
@@ -172,15 +170,17 @@
                                         <?php else: ?>
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <span class="dropdown-hover dropup dropdown-pink">
-                                                        <i class="icon-cog green bigger-200" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
-                                                        <ul class="dropdown-menu pull-right">
-                                                            <li>
-                                                                <a href="<?php echo e(route('HoaDonNhap.edit', $item)); ?>?TrangThai=0" tabindex="-1"> Chưa thành công</a>
-                                                                <a href="<?php echo e(route('HoaDonNhap.edit', $item)); ?>?TrangThai=1" tabindex="-1"> Đã thành công</a>
-                                                            </li>
-                                                        </ul>
-                                                    </span>
+                                                    <?php if(!$item->TrangThai): ?>
+                                                        <span class="dropdown-hover dropup dropdown-pink">
+                                                            <i class="icon-cog green bigger-200" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
+                                                            <ul class="dropdown-menu pull-right">
+                                                                <li>
+                                                                    <a href="<?php echo e(route('HoaDonNhap.edit', $item)); ?>?TrangThai=0" tabindex="-1"> Chưa thành công</a>
+                                                                    <a href="<?php echo e(route('HoaDonNhap.edit', $item)); ?>?TrangThai=1" tabindex="-1"> Đã thành công</a>
+                                                                </li>
+                                                            </ul>
+                                                        </span>
+                                                    <?php endif; ?>
 
                                                     <?php if(!$item->TrangThai): ?>
                                                         <form action="<?php echo e(route('HoaDonNhap.destroy', $item)); ?>" method="post">
@@ -202,15 +202,17 @@
                                                         </button>
 
                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                            <span class="dropdown-hover dropup dropdown-pink">
-                                                                <i class="icon-cog green bigger-150" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
-                                                                <ul class="dropdown-menu pull-right">
-                                                                    <li>
-                                                                        <a href="<?php echo e(route('HoaDonNhap.edit', $item)); ?>?TrangThai=0" tabindex="-1"> Chưa thành công</a>
-                                                                        <a href="<?php echo e(route('HoaDonNhap.edit', $item)); ?>?TrangThai=1" tabindex="-1"> Đã thành công</a>
-                                                                    </li>
-                                                                </ul>
-                                                            </span>
+                                                            <?php if(!$item->TrangThai): ?>
+                                                                <span class="dropdown-hover dropup dropdown-pink">
+                                                                    <i class="icon-cog green bigger-150" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
+                                                                    <ul class="dropdown-menu pull-right">
+                                                                        <li>
+                                                                            <a href="<?php echo e(route('HoaDonNhap.edit', $item)); ?>?TrangThai=0" tabindex="-1"> Chưa thành công</a>
+                                                                            <a href="<?php echo e(route('HoaDonNhap.edit', $item)); ?>?TrangThai=1" tabindex="-1"> Đã thành công</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </span>
+                                                            <?php endif; ?>
 
                                                             <?php if(!$item->TrangThai): ?>
                                                                 <li>

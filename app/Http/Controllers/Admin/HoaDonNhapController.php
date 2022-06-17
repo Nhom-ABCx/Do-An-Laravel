@@ -121,20 +121,20 @@ class HoaDonNhapController extends Controller
             ['TrangThai' => ['required', 'numeric', 'integer', Rule::in([0, 1])]]
         );
 
-        $hoaDonNhap->TrangThai = $request["TrangThai"];
-        $hoaDonNhap->save();
+        $hoaDonNhap->update(['TrangThai' => $request['TrangThai']]);
+
 
         //neu trang thai' thanh`cong thi cap nhat lai gia' ban' va so luong ton` cua san pham tuong ung'
         if ($hoaDonNhap->TrangThai) {
             $dsChiTietHD = $hoaDonNhap->CT_HoaDonNhap;
             if (count($dsChiTietHD)) {
                 foreach ($dsChiTietHD as $item) {
-                    $sanPham = $item->SanPham;
-                    $sanPham->fill([
+                    $ctSanPham = $item->CT_SanPham;
+                    $ctSanPham->fill([
                         "GiaNhap" => $item->GiaNhap,
-                        "SoLuongTon" => $sanPham->SoLuongTon + $item->SoLuong,
+                        "SoLuongTon" => $ctSanPham->SoLuongTon + $item->SoLuong,
                     ]);
-                    $sanPham->save();
+                    $ctSanPham->save();
                 }
             }
         }
@@ -289,10 +289,10 @@ class HoaDonNhapController extends Controller
     //api
     public function API_HoaDonNhap_ChiTiet(HoaDonNhap $hoaDonNhap)
     {
-        $dsCT_HoaDonNhap = $hoaDonNhap->CT_HoaDonNhap;
-        foreach ($dsCT_HoaDonNhap as $ctHoaDonNhap) {
-            SanPhamController::fixImage($ctHoaDonNhap->SanPham);
+        $dsChiTietHD = $hoaDonNhap->CT_HoaDonNhap;
+        foreach ($dsChiTietHD as $ctHD) {
+            SanPhamController::fixImage($ctHD->CT_SanPham->SanPham);
         }
-        return response()->json($dsCT_HoaDonNhap, 200);
+        return response()->json($dsChiTietHD, 200);
     }
 }

@@ -76,21 +76,21 @@
 
                                     <div class="form-group">
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-user blue"></i> Người lập </label>
-                                        <label class="col-sm-3"> <b>{{ $hoaDonNhap->NhanVien->HoTen ?? $hoaDonNhap->NhanVien->Username }}</b> </label>
+                                        <label class="col-sm-3"> <b>{{ $hoaDonNhap->TaiKhoan->HoTen ?? $hoaDonNhap->TaiKhoan->Username }}</b> </label>
                                     </div>
 
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-user blue"></i> Nhà cung cấp </label>
-                                        <label class="col-sm-3"> <b>{{ $hoaDonNhap->NhaCungCap }}</b> </label>
+                                        <label class="col-sm-3"> <b>{{ $hoaDonNhap->NhaCungCap->TenNhaCungCap }}</b> </label>
                                     </div>
 
                                     <div class="space-4"></div>
 
                                     <div class="form-group">
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-mobile-phone green"></i> Số điện thoại </label>
-                                        <label class="col-sm-3"> <b>{{ $hoaDonNhap->Phone }}</b> </label>
+                                        <label class="col-sm-3"> <b>{{ $hoaDonNhap->NhaCungCap->TenNhaCungCap }}</b> </label>
                                     </div>
 
                                     <div class="space-4"></div>
@@ -138,8 +138,8 @@
                                                     <button type="submit" class="btn btn-danger">Hủy   <i class="icon-trash bigger-130"></i></button>
                                                 </form>
 
-                                                <form class="form-horizontal" role="form" action="{{ route('HoaDonNhap.CapNhatTrangThai', $hoaDonNhap) }}" method="post" enctype="multipart/form-data"
-                                                    style="display: inline">
+                                                <form class="form-horizontal" role="form" action="{{ route('HoaDonNhap.CapNhatTrangThai', $hoaDonNhap) }}" method="post"
+                                                    enctype="multipart/form-data" style="display: inline">
                                                     @csrf
                                                     @method('PATCH')
                                                     <button class="btn btn-success" type="submit">
@@ -160,8 +160,7 @@
                             </div>
 
                             <div id="DanhSachSanPham" class="tab-pane">
-                                @if ($hoaDonNhap->TrangThai)
-                                @else
+                                @if (!$hoaDonNhap->TrangThai)
                                     <a href="#modal-form" role="button" data-toggle="modal" data-backdrop="static" data-keyboard="false" class="btn btn-success">
                                         <i class="icon-plus"></i>
                                         Chọn sản phẩm thêm vào
@@ -268,7 +267,7 @@
         {{-- end datetime picker --}}
         <!-- inline scripts related to this page -->
         {{-- datatable script --}}
-        @include("Admin.HoaDon.script.HoaDonNhap-show-script")
+        @include('Admin.HoaDon.script.HoaDonNhap-show-script')
         {{-- datatable script End --}}
-        @include("Admin.SanPham.script.SanPham-show-script")
+        @include('Admin.SanPham.script.SanPham-show-script')
     @endsection

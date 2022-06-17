@@ -65,40 +65,6 @@
                                         Hóa đơn nhập đã hủy
                                     </a>
                                 @endif
-                                <form class="form-inline" action="{{ request()->is('Admin/HoaDonNhapp/DaHuy') ? route('HoaDonNhap.DaHuy') : route('HoaDonNhap.index') }}" method="get"
-                                    style="margin-top: 10px">
-                                    {{-- <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên hoặc username khách hàng" data-placement="bottom"
-                                        value="{{ $request['NameSearch'] }}" name="NameSearch" /> --}}
-                                    <label> Tên nhân viên: </label>
-                                    <select class="width-10 chosen-select" id="form-field-select-4" name="TaiKhoanId">
-                                        <option value="">All</option>
-                                        @foreach ($dsTaiKhoan as $item)
-                                            <option value="{{ $item->id }}" @if ($item->id == $request['TaiKhoanId']) selected @endif>
-                                                {{ $item->HoTen ?? $item->Username }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-
-                                    <label> Trạng thái: </label>
-                                    <select class="width-10 chosen-select" id="form-field-select-4" name="TrangThai">
-                                        <option value="">All</option>
-                                        <option value="0" @if ('0' == $request['TrangThai']) selected @endif>
-                                            Chưa thành công
-                                        </option>
-                                        <option value="1" @if ('1' == $request['TrangThai']) selected @endif>
-                                            Đã thành công
-                                        </option>
-                                    </select>
-
-                                    <label for=""> Lọc theo ngày: </label>
-                                    <input class="width-20" type="text" name="NgayDat" id="id-NgayDat-1" value="{{ $request['NgayDat'] }}" data-rel="tooltip" title="Tháng-Ngày-Năm"
-                                        data-placement="top" />
-
-                                    <button type="submit" class="btn btn-purple btn-sm">
-                                        Lọc
-                                        <i class="icon-search icon-on-right bigger-110"></i>
-                                    </button>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -107,6 +73,38 @@
 
                     <div class="table-header">
                         Bảng Hóa đơn nhập
+                        <form class="form-inline" action="{{ request()->is('Admin/HoaDonNhapp/DaHuy') ? route('HoaDonNhap.DaHuy') : route('HoaDonNhap.index') }}" method="get" style="margin-top: 10px">
+                            {{-- <input data-rel="tooltip" type="text" id="form-field-6" placeholder="Nhập tên" title="Tìm kiếm theo tên hoặc username khách hàng" data-placement="bottom"
+                                value="{{ $request['NameSearch'] }}" name="NameSearch" /> --}}
+                            <label> Tên nhân viên: </label>
+                            <select class="width-10 chosen-select" id="form-field-select-4" name="TaiKhoanId">
+                                <option value="">All</option>
+                                @foreach ($dsTaiKhoan as $item)
+                                    <option value="{{ $item->id }}" @if ($item->id == $request['TaiKhoanId']) selected @endif>
+                                        {{ $item->HoTen ?? $item->Username }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            <label> Trạng thái: </label>
+                            <select class="width-10 chosen-select" id="form-field-select-4" name="TrangThai">
+                                <option value="">All</option>
+                                <option value="0" @if ('0' == $request['TrangThai']) selected @endif>
+                                    Chưa thành công
+                                </option>
+                                <option value="1" @if ('1' == $request['TrangThai']) selected @endif>
+                                    Đã thành công
+                                </option>
+                            </select>
+
+                            <label for=""> Lọc theo ngày: </label>
+                            <input class="width-20" type="text" name="NgayDat" id="id-NgayDat-1" value="{{ $request['NgayDat'] }}" data-rel="tooltip" title="Tháng-Ngày-Năm" data-placement="top" />
+
+                            <button type="submit" class="btn btn-purple btn-sm">
+                                Lọc
+                                <i class="icon-search icon-on-right bigger-110"></i>
+                            </button>
+                        </form>
                     </div>
 
                     <div class="table-responsive">
@@ -138,7 +136,7 @@
                                         <td class="center">{{ $item->id }}</td>
                                         <td>{{ $item->TaiKhoan->HoTen ?? $item->TaiKhoan->Username }}</td>
                                         <td>{{ $item->NhaCungCap->TenNhaCungCap }}</td>
-                                        <td>{{ $item->Phone }}</td>
+                                        <td>{{ $item->NhaCungCap->Phone }}</td>
                                         <td>{{ $item->TongSoLuong ?? 0 }}</td>
                                         <td>{{ number_format($item->TongTien) }}</td>
                                         <td>
@@ -182,15 +180,17 @@
                                         @else
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                    <span class="dropdown-hover dropup dropdown-pink">
-                                                        <i class="icon-cog green bigger-200" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
-                                                        <ul class="dropdown-menu pull-right">
-                                                            <li>
-                                                                <a href="{{ route('HoaDonNhap.edit', $item) }}?TrangThai=0" tabindex="-1"> Chưa thành công</a>
-                                                                <a href="{{ route('HoaDonNhap.edit', $item) }}?TrangThai=1" tabindex="-1"> Đã thành công</a>
-                                                            </li>
-                                                        </ul>
-                                                    </span>
+                                                    @if (!$item->TrangThai)
+                                                        <span class="dropdown-hover dropup dropdown-pink">
+                                                            <i class="icon-cog green bigger-200" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
+                                                            <ul class="dropdown-menu pull-right">
+                                                                <li>
+                                                                    <a href="{{ route('HoaDonNhap.edit', $item) }}?TrangThai=0" tabindex="-1"> Chưa thành công</a>
+                                                                    <a href="{{ route('HoaDonNhap.edit', $item) }}?TrangThai=1" tabindex="-1"> Đã thành công</a>
+                                                                </li>
+                                                            </ul>
+                                                        </span>
+                                                    @endif
 
                                                     @if (!$item->TrangThai)
                                                         <form action="{{ route('HoaDonNhap.destroy', $item) }}" method="post">
@@ -212,15 +212,17 @@
                                                         </button>
 
                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                            <span class="dropdown-hover dropup dropdown-pink">
-                                                                <i class="icon-cog green bigger-150" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
-                                                                <ul class="dropdown-menu pull-right">
-                                                                    <li>
-                                                                        <a href="{{ route('HoaDonNhap.edit', $item) }}?TrangThai=0" tabindex="-1"> Chưa thành công</a>
-                                                                        <a href="{{ route('HoaDonNhap.edit', $item) }}?TrangThai=1" tabindex="-1"> Đã thành công</a>
-                                                                    </li>
-                                                                </ul>
-                                                            </span>
+                                                            @if (!$item->TrangThai)
+                                                                <span class="dropdown-hover dropup dropdown-pink">
+                                                                    <i class="icon-cog green bigger-150" data-rel="tooltip" title="Chỉnh sửa trạng thái" data-placement="bottom"></i>
+                                                                    <ul class="dropdown-menu pull-right">
+                                                                        <li>
+                                                                            <a href="{{ route('HoaDonNhap.edit', $item) }}?TrangThai=0" tabindex="-1"> Chưa thành công</a>
+                                                                            <a href="{{ route('HoaDonNhap.edit', $item) }}?TrangThai=1" tabindex="-1"> Đã thành công</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </span>
+                                                            @endif
 
                                                             @if (!$item->TrangThai)
                                                                 <li>
