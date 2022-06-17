@@ -175,7 +175,8 @@
                                             <tr>
                                                 <th class="center"><i class="icon-adn"></i>Id</th>
                                                 <th><i class="icon-align-left"></i>Tên sản phẩm</th>
-                                                <th><i class="icon-picture"></i>Hình ảnh</th>
+                                                <th><i class="icon-cog"></i>Tổ hợp</th>
+                                                <th style="width: 150px"><i class="icon-picture"></i>Hình ảnh</th>
                                                 <th><i class="icon-bar-chart"></i>Số lượng</th>
                                                 <th><i class="icon-money"></i>Giá nhập</th>
                                                 <th><i class="icon-bar-chart"></i>Thành tiền</th>
@@ -269,5 +270,5 @@
         {{-- datatable script --}}
         @include('Admin.HoaDon.script.HoaDonNhap-show-script')
         {{-- datatable script End --}}
-        @include('Admin.SanPham.script.SanPham-show-script')
+        {{-- @include('Admin.SanPham.script.SanPham-show-script') --}}
     @endsection

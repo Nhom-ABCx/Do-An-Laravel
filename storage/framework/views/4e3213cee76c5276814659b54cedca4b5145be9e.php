@@ -162,7 +162,8 @@
                                             <tr>
                                                 <th class="center"><i class="icon-adn"></i>Id</th>
                                                 <th><i class="icon-align-left"></i>Tên sản phẩm</th>
-                                                <th><i class="icon-picture"></i>Hình ảnh</th>
+                                                <th><i class="icon-cog"></i>Tổ hợp</th>
+                                                <th style="width: 150px"><i class="icon-picture"></i>Hình ảnh</th>
                                                 <th><i class="icon-bar-chart"></i>Số lượng</th>
                                                 <th><i class="icon-money"></i>Giá nhập</th>
                                                 <th><i class="icon-bar-chart"></i>Thành tiền</th>
@@ -256,7 +257,7 @@
         
         <?php echo $__env->make('Admin.HoaDon.script.HoaDonNhap-show-script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         
-        <?php echo $__env->make('Admin.SanPham.script.SanPham-show-script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        
     <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('Admin.layouts.Layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\DDDD\Do-An-Laravel\resources\views/Admin/HoaDon/HoaDonNhap-show.blade.php ENDPATH**/ ?>
