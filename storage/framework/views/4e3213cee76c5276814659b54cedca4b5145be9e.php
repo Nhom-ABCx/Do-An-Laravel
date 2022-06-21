@@ -80,7 +80,7 @@
 
                                     <div class="form-group">
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-mobile-phone green"></i> Số điện thoại </label>
-                                        <label class="col-sm-3"> <b><?php echo e($hoaDonNhap->NhaCungCap->TenNhaCungCap); ?></b> </label>
+                                        <label class="col-sm-3"> <b><?php echo e($hoaDonNhap->NhaCungCap->Phone); ?></b> </label>
                                     </div>
 
                                     <div class="space-4"></div>
@@ -181,51 +181,64 @@
             <div id="modal-form" class="modal" tabindex="-1">
                 <div class="modal-dialog" style="width: 90%;">
                     <div class="modal-content">
-                        <form action="<?php echo e(route('HoaDonNhap.ThemSanPham', $hoaDonNhap)); ?>" method="post" id="submitForm">
-                            <?php echo csrf_field(); ?>
-                            
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="blue bigger">Chọn sản phẩm</h4>
-                            </div>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="blue bigger">Chọn sản phẩm</h4>
+                        </div>
 
-                            <div class="modal-body overflow-visible">
-                                <div class="row">
-                                    <div class="table-responsive">
-                                        <table id="ChonSanPham" class="table table-striped table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th class="center"><i class="icon-adn"></i>Id</th>
-                                                    <th><i class="icon-align-left"></i>Tên sản phẩm</th>
-                                                    <th><i class="icon-bar-chart"></i>Số lượng tồn</th>
-                                                    <th style="width: 175px"><i class="icon-picture"></i>Hình ảnh</th>
-                                                    <th><i class="icon-apple"></i>Hãng sãn xuất</th>
-                                                    <th><i class="icon-android"></i>Loại sản phẩm</th>
-                                                    <th class="center">
-                                                        <label>
-                                                            <input type="checkbox" class="ace" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </th>
+                        <div class="modal-body overflow-visible">
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table id="ChonSanPham" class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="center"><i class="icon-adn"></i>Id</th>
+                                                <th style="width: 175px"><i class="icon-picture"></i>Hình ảnh</th>
+                                                <th><i class="icon-align-left"></i>Tên sản phẩm</th>
+                                                <th><i class="icon-file-text-alt"></i>Thuộc tính</th>
+                                                <th><i class="icon-bar-chart"></i>Số lượng tồn</th>
+                                                <th><i class="icon-apple"></i>Hãng sãn xuất</th>
+                                                <th><i class="icon-android"></i>Loại sản phẩm</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <?php $__currentLoopData = $dsSanPham; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <tr onclick="showChonChiTietSanPham(<?php echo e($item->id); ?>,<?php echo e($hoaDonNhap->id); ?>)" data-toggle="modal" data-backdrop="static">
+                                                    <td class="center"><?php echo e($item->id); ?></td>
+                                                    <td style="width: 150px">
+                                                        <?php $__currentLoopData = $item->HinhAnh; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $hinhAnh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <img src='<?php echo e($hinhAnh->HinhAnh); ?>' width='50' height='50'>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    </td>
+                                                    <td><?php echo e($item->TenSanPham); ?></td>
+                                                    <td>
+                                                        <?php $__currentLoopData = $item->ThuocTinhToHop; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $thuocTinh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <p><i class=" icon-asterisk smaller-75 green"></i> <?php echo e($thuocTinh); ?></p>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    </td>
+                                                    <td><?php echo e($item->tongSoLuongTon()); ?></td>
+                                                    <td><?php echo e($item->HangSanXuatId); ?></td>
+                                                    <td><?php echo e($item->LoaiSanPhamId); ?></td>
                                                 </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="modal-footer">
-                                <button class="btn btn-sm" data-dismiss="modal">
-                                    <i class="icon-remove"></i>
-                                    Hủy
-                                </button>
+                        <div class="modal-footer">
+                            <button class="btn btn-sm" data-dismiss="modal">
+                                <i class="icon-remove"></i>
+                                Hủy
+                            </button>
 
-                                <button type="submit" class="btn btn-sm btn-primary">
-                                    <i class="icon-ok"></i>
-                                    OK
-                                </button>
-                            </div>
-                        </form>
+                            <button type="submit" class="btn btn-sm btn-primary">
+                                <i class="icon-ok"></i>
+                                OK
+                            </button>
+                        </div>
                     </div>
                 </div>
 

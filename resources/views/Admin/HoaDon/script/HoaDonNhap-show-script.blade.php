@@ -113,7 +113,6 @@
         createdRow: function(row, data, rowIndex) {
             //khi tao moi 1 row, them cac thuoc tinh vao cac td
             $.each($('td', row), function(colIndex) {
-                console.log(colIndex);
                 if (colIndex == 4) {
                     $(this).attr('class', 'SoLuong pink');
                     $(this).attr('data-name', 'SoLuong');
@@ -318,117 +317,125 @@
             $(this).find('.chosen-search input').css('width', '200px');
         });
 
-        $('#ChonSanPham').DataTable({
-            //tap ra ngoai` la se huy cai bang?, de tranh' thong bao'
-            destroy: true,
-            //viet tat', lay het sanPham, chuyen thanh mang? json dua vo trong javascript
-            data: @json($dsSanPham),
-            //do du lieu vao cot
-            columns: [{
-                    data: 'id',
-                    className: "center",
-                    searchable: false
-                },
-                {
-                    data: 'TenSanPham'
-                },
-                {
-                    data: 'LuotMua',
-                    searchable: false
-                },
-                {
-                    //render cot hinh anh?
-                    data: 'hinh_anh',
-                    render: function(data, type, row, meta) {
-                    var image = '';
-                    data.forEach(function(value, key) {
-                        image += '<img src="' + value.HinhAnh + '" width="50px" height="50px">';
-                    });
-                    return image;
-                    },
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'HangSanXuatId',
-                },
-                {
-                    data: 'LoaiSanPhamId',
-                },
-                {
-                    //render cot checkbox
-                    data: "id",
-                    className: "center",
-                    render: function(data, type, row, meta) {
-                        return '<label><input type="checkbox" class="ace" value="' + data + '"/><span class="lbl"></span></label>';
-                    },
-                    // defaultContent: `<label>
-                    //     <input type="checkbox" class="ace" value=""/>
-                    //     <span class="lbl"></span>
-                    //     </label>`,
-                    orderable: false,
-                    searchable: false
-                },
-            ],
-        });
-
-
-        $('#submitForm').on('submit', function(e) {
-            //ngan chan form gui di
-            e.preventDefault();
-            let form = this;
-
-            //lay het tat ca san pham da check
-            var dsSPCheck = [];
-            $('tbody input[type=checkbox]:checked').each(function(i) {
-                dsSPCheck[i] = $(this).val();
-            });
-
-            $.ajax({
-                //gui di voi phuong thuc' cua Form
-                method: $(form).attr('method'),
-                //url = duong dan cua form
-                url: $(form).attr('action'),
-                //du lieu gui di
-                data: JSON.stringify({
-                    "SanPhamId": dsSPCheck
-                }),
-                //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
-                processData: false,
-                // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la json nen de la json
-                contentType: "application/json; charset=utf-8",
-                //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
-                //dataType: 'json',
-                //truoc khi gui di thi thuc hien gi do', o day chinh loi~ = rong~
-                beforeSend: function() {
-                    //$(form).find('span.error-text').empty();
-                },
-                success: function(response) {
-                    if (response.length != 0) {
-                        console.log("request ok");
-                        $('#modal-form').modal('hide');
-                        toastr.success("Thêm sản phẩm " + dsSPCheck, 'Thành công', {
-                            timeOut: 3000
-                        });
-                        //reload lại table
-                        $('#ChiTietHoaDonNhap').DataTable().ajax.reload()
-                    } else {
-                        toastr.warning("Không có sản phẩm nào được thêm", 'Cảnh báo', {
-                            timeOut: 3000
-                        });
-                    }
-                },
-                error: function(response) {
-                    console.log("request lỗi");
-                    //console.log(response.responseJSON.Username[0]);
-                    $.each(response.responseJSON, function(key, val) {
-                        toastr.error(val[0], 'Có lỗi xảy ra', {
-                            timeOut: 3000
-                        });
-                    });
-                },
-            });
-        });
-
+        // stack modal
+        const zIndex = 1030 + (10 * $('.modal:visible').not(this).length);
+        $(this).css('z-index', zIndex);
+        setTimeout(() => $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex -1).addClass('modal-stack'));
+        // end stack modal
     });
+
+    $(document).on('hidden.bs.modal', '.modal',() => $('.modal:visible').length && $(document.body).addClass('modal-open'));
+
+    // https://legacy.datatables.net/usage/columns
+    $('#ChonSanPham').dataTable({
+        "aoColumns": [{
+                "type": "num",
+                "bSearchable": false
+            },{
+                "bSortable": false,
+                "bSearchable": false
+            }, null, {
+                "bSortable": false,
+                "bSearchable": false
+            },null, null, null
+        ]
+    });
+
+
+    $('#submitForm').on('submit', function(e) {
+        //ngan chan form gui di
+        e.preventDefault();
+        let form = this;
+
+        //lay het tat ca san pham da check
+        var dsSPCheck = [];
+        $('tbody input[type=checkbox]:checked').each(function(i) {
+            dsSPCheck[i] = $(this).val();
+        });
+
+        $.ajax({
+            //gui di voi phuong thuc' cua Form
+            method: $(form).attr('method'),
+            //url = duong dan cua form
+            url: $(form).attr('action'),
+            //du lieu gui di
+            data: JSON.stringify({
+                "SanPhamId": dsSPCheck
+            }),
+            //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
+            processData: false,
+            // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la json nen de la json
+            contentType: "application/json; charset=utf-8",
+            //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+            //dataType: 'json',
+            //truoc khi gui di thi thuc hien gi do', o day chinh loi~ = rong~
+            beforeSend: function() {
+                //$(form).find('span.error-text').empty();
+            },
+            success: function(response) {
+                if (response.length != 0) {
+                    console.log("request ok");
+                    $('#modal-form').modal('hide');
+                    toastr.success("Thêm sản phẩm " + dsSPCheck, 'Thành công', {
+                        timeOut: 3000
+                    });
+                    //reload lại table
+                    $('#ChiTietHoaDonNhap').DataTable().ajax.reload()
+                } else {
+                    toastr.warning("Không có sản phẩm nào được thêm", 'Cảnh báo', {
+                        timeOut: 3000
+                    });
+                }
+            },
+            error: function(response) {
+                console.log("request lỗi");
+                //console.log(response.responseJSON.Username[0]);
+                $.each(response.responseJSON, function(key, val) {
+                    toastr.error(val[0], 'Có lỗi xảy ra', {
+                        timeOut: 3000
+                    });
+                });
+            },
+        });
+    });
+
+    function showChonChiTietSanPham(sanPhamId,hoaDonNhapId) {
+        $.ajax({
+            //gui di voi phuong thuc' cua Form
+            method: "POST",
+            //url = duong dan cua form
+            url: "{{ route('HoaDonNhap.showModal') }}",
+            //du lieu gui di
+            data: JSON.stringify({
+                "SanPhamId": sanPhamId,
+                "HoaDonNhapId":hoaDonNhapId
+            }),
+            //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
+            processData: false,
+            // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la rong~
+            contentType: false,
+            // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la json nen de la json
+            contentType: "application/json; charset=utf-8",
+            //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+            //dataType: 'json',
+            //truoc khi gui di thi thuc hien gi do', o day chinh modal an? het'
+            beforeSend: function() {
+                $('#showLoaiSanPham').modal('hide');
+            },
+            success: function(response) {
+                console.log("request ok");
+                $('#showModal').html(response);
+                $('#ChonChiTietSanPham').modal('show');
+            },
+            error: function(response) {
+                console.log("request lỗi");
+                //console.log(response.responseJSON.Username[0]);
+                $.each(response.responseJSON, function(key, val) {
+                    toastr.error(val, 'Có lỗi xảy ra', {
+                        timeOut: 3000
+                    });
+                });
+            },
+        });
+    }
 </script>

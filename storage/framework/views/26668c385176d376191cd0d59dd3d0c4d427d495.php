@@ -1,6 +1,3 @@
-
-
-
 <?php $__env->startSection('title', 'QL Sản phẩm'); ?>
 
 <?php $__env->startSection('headThisPage'); ?>
@@ -325,6 +322,7 @@
         
         <script type="text/javascript">
             jQuery(function($) {
+                // https://legacy.datatables.net/usage/columns
                 var oTable1 = $('#sample-table-2').dataTable({
                     "aoColumns": [{
                             "type": "num"

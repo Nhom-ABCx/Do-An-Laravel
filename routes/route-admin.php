@@ -115,6 +115,7 @@ Route::group([
     Route::delete("HoaDonNhap/XoaSanPham/{id}", [HoaDonNhapController::class, "XoaSanPham"])->name("HoaDonNhap.XoaSanPham");
     Route::patch("HoaDonNhap/CapNhatTrangThai/{hoaDonNhap}", [HoaDonNhapController::class, "CapNhatTrangThai"])->name("HoaDonNhap.CapNhatTrangThai");
     Route::get('HoaDonNhap/detail/{hoaDonNhap}', [HoaDonNhapController::class, "API_HoaDonNhap_ChiTiet"])->name("HoaDonNhap.APIChiTiet");
+    Route::post('HoaDonNhap/showModal', [HoaDonNhapController::class, "showModal_ChonChiTietSP"])->name("HoaDonNhap.showModal");
 
 
     Route::get("WidgetThongBao", function () {

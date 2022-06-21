@@ -90,7 +90,7 @@
 
                                     <div class="form-group">
                                         <label class="col-sm-2" for="form-field-1"><i class="icon-mobile-phone green"></i> Số điện thoại </label>
-                                        <label class="col-sm-3"> <b>{{ $hoaDonNhap->NhaCungCap->TenNhaCungCap }}</b> </label>
+                                        <label class="col-sm-3"> <b>{{ $hoaDonNhap->NhaCungCap->Phone }}</b> </label>
                                     </div>
 
                                     <div class="space-4"></div>
@@ -194,51 +194,64 @@
             <div id="modal-form" class="modal" tabindex="-1">
                 <div class="modal-dialog" style="width: 90%;">
                     <div class="modal-content">
-                        <form action="{{ route('HoaDonNhap.ThemSanPham', $hoaDonNhap) }}" method="post" id="submitForm">
-                            @csrf
-                            {{-- @method("PUT") --}}
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="blue bigger">Chọn sản phẩm</h4>
-                            </div>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="blue bigger">Chọn sản phẩm</h4>
+                        </div>
 
-                            <div class="modal-body overflow-visible">
-                                <div class="row">
-                                    <div class="table-responsive">
-                                        <table id="ChonSanPham" class="table table-striped table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th class="center"><i class="icon-adn"></i>Id</th>
-                                                    <th><i class="icon-align-left"></i>Tên sản phẩm</th>
-                                                    <th><i class="icon-bar-chart"></i>Số lượng tồn</th>
-                                                    <th style="width: 175px"><i class="icon-picture"></i>Hình ảnh</th>
-                                                    <th><i class="icon-apple"></i>Hãng sãn xuất</th>
-                                                    <th><i class="icon-android"></i>Loại sản phẩm</th>
-                                                    <th class="center">
-                                                        <label>
-                                                            <input type="checkbox" class="ace" />
-                                                            <span class="lbl"></span>
-                                                        </label>
-                                                    </th>
+                        <div class="modal-body overflow-visible">
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table id="ChonSanPham" class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="center"><i class="icon-adn"></i>Id</th>
+                                                <th style="width: 175px"><i class="icon-picture"></i>Hình ảnh</th>
+                                                <th><i class="icon-align-left"></i>Tên sản phẩm</th>
+                                                <th><i class="icon-file-text-alt"></i>Thuộc tính</th>
+                                                <th><i class="icon-bar-chart"></i>Số lượng tồn</th>
+                                                <th><i class="icon-apple"></i>Hãng sãn xuất</th>
+                                                <th><i class="icon-android"></i>Loại sản phẩm</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach ($dsSanPham as $item)
+                                                <tr onclick="showChonChiTietSanPham({{ $item->id }},{{ $hoaDonNhap->id }})" data-toggle="modal" data-backdrop="static">
+                                                    <td class="center">{{ $item->id }}</td>
+                                                    <td style="width: 150px">
+                                                        @foreach ($item->HinhAnh as $hinhAnh)
+                                                            <img src='{{ $hinhAnh->HinhAnh }}' width='50' height='50'>
+                                                        @endforeach
+                                                    </td>
+                                                    <td>{{ $item->TenSanPham }}</td>
+                                                    <td>
+                                                        @foreach ($item->ThuocTinhToHop as $thuocTinh)
+                                                            <p><i class=" icon-asterisk smaller-75 green"></i> {{ $thuocTinh }}</p>
+                                                        @endforeach
+                                                    </td>
+                                                    <td>{{ $item->tongSoLuongTon() }}</td>
+                                                    <td>{{ $item->HangSanXuatId }}</td>
+                                                    <td>{{ $item->LoaiSanPhamId }}</td>
                                                 </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="modal-footer">
-                                <button class="btn btn-sm" data-dismiss="modal">
-                                    <i class="icon-remove"></i>
-                                    Hủy
-                                </button>
+                        <div class="modal-footer">
+                            <button class="btn btn-sm" data-dismiss="modal">
+                                <i class="icon-remove"></i>
+                                Hủy
+                            </button>
 
-                                <button type="submit" class="btn btn-sm btn-primary">
-                                    <i class="icon-ok"></i>
-                                    OK
-                                </button>
-                            </div>
-                        </form>
+                            <button type="submit" class="btn btn-sm btn-primary">
+                                <i class="icon-ok"></i>
+                                OK
+                            </button>
+                        </div>
                     </div>
                 </div>
 

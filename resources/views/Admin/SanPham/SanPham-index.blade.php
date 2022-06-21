@@ -332,6 +332,7 @@
         {{-- datatable script --}}
         <script type="text/javascript">
             jQuery(function($) {
+                // https://legacy.datatables.net/usage/columns
                 var oTable1 = $('#sample-table-2').dataTable({
                     "aoColumns": [{
                             "type": "num"

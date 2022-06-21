@@ -269,6 +269,22 @@ class HoaDonNhapController extends Controller
         }
         return Redirect::route('HoaDonNhap.index');
     }
+    public function showModal_ChonChiTietSP(Request $request)
+    {
+        //kiem tra du lieu
+        $validate = Validator::make($request->all(), [
+            'SanPhamId' => ['required', 'numeric', 'integer', 'exists:san_phams,id'],
+            "HoaDonNhapId" => ['required', 'numeric', 'integer', 'exists:hoa_don_nhaps,id'],
+        ]);
+        //neu du lieu no' sai thi`tra? ve` loi~
+        if ($validate->fails())
+            return response()->json($validate->errors(), 400);
+
+        $ctSanPham = SanPham::find($request["SanPhamId"])->CT_SanPham;
+        $hoaDonNhap = HoaDonNhap::find($request["HoaDonNhapId"]);
+
+        return view("Admin.HoaDon.HoaDonNhap-show-modal", ["ctSanPham" => $ctSanPham, "hoaDonNhap" => $hoaDonNhap]);
+    }
     //api
     public function API_HoaDonNhap_ChiTiet(HoaDonNhap $hoaDonNhap)
     {
