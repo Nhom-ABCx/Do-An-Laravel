@@ -239,18 +239,17 @@ class HoaDonNhapController extends Controller
         foreach ($request["SanPhamId"] as $item) {
             $ctHoaDonNhap = CT_HoaDonNhap::firstOrCreate([
                 'HoaDonNhapId' => $hoaDonNhap->id,
-                'SanPhamId' => $item,
+                'CTSanPhamId' => $item,
             ]);
             $dsChiTietHD = Arr::add($dsChiTietHD, $i, $ctHoaDonNhap);
             $i++;
         }
         return response()->json($dsChiTietHD, 200);
     }
-    public function XoaSanPham($id)
+    public function XoaSanPham(HoaDonNhap $hoaDonNhap, Request $request)
     {
-        $ctHoaDonNhap = CT_HoaDonNhap::where("CTSanPhamId", $id)->first();
-        if (!empty($ctHoaDonNhap)) {
-            $ctHoaDonNhap->forceDelete();
+        if (!empty($hoaDonNhap)) {
+            $hoaDonNhap->CT_HoaDonNhap->where("CTSanPhamId", $request["CTSanPhamId"])->first()->forceDelete();
             //tinh' lai TongSL voi TongTien
             return response()->json([], 200);
         }

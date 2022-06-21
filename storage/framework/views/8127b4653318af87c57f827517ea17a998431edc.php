@@ -133,13 +133,15 @@
                 //gui di voi phuong thuc' cua Form
                 method: "DELETE",
                 //url = duong dan cua form
-                url: "<?php echo e(route('HoaDonNhap.XoaSanPham', '')); ?>/" + id,
+                url: "<?php echo e(route('HoaDonNhap.XoaSanPham', $hoaDonNhap)); ?>",
                 //du lieu gui di
-                data: {},
+                data: JSON.stringify({
+                "CTSanPhamId": id
+                }),
                 //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
                 processData: false,
-                // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la rong~
-                contentType: false,
+                // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la json nen de la json
+                contentType: "application/json; charset=utf-8",
                 //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
                 //dataType: 'json',
                 //truoc khi gui di thi thuc hien gi do', o day chinh loi~ = rong~
@@ -148,14 +150,15 @@
                 },
                 success: function(response) {
                     console.log("request ok");
-                    toastr.success("Xóa thành công", 'Thành công', {
-                        timeOut: 3000
-                    });
                     //reload lại table
                     $('#ChiTietHoaDonNhap').DataTable().ajax.reload();
                     //cap nhat lai TongSoLuong va TongSoLuong, chua xu ly dc
                     $("#TongSoLuong").html('<a href="<?php echo e(url()->current()); ?>"> Đã thay đổi </a>');
                     $("#TongTien").html('<a href="<?php echo e(url()->current()); ?>"> Đã thay đổi </a>');
+
+                    toastr.success("Xóa thành công", 'Thành công', {
+                        timeOut: 3000
+                    });
                 },
                 error: function(response) {
                     console.log("request lỗi");
@@ -268,15 +271,6 @@
         });
     <?php endif; ?>
 
-    $('table th input:checkbox').on('click', function() {
-        var that = this;
-        $(this).closest('table').find('tr > td:last-child input:checkbox')
-            .each(function(i) {
-                this.checked = that.checked;
-                $(this).closest('tr').toggleClass('selected');
-            });
-    });
-
     $('[data-rel="tooltip"]').tooltip({
         placement: tooltip_placement
     });
@@ -341,65 +335,7 @@
         ]
     });
 
-
-    $('#submitForm').on('submit', function(e) {
-        //ngan chan form gui di
-        e.preventDefault();
-        let form = this;
-
-        //lay het tat ca san pham da check
-        var dsSPCheck = [];
-        $('tbody input[type=checkbox]:checked').each(function(i) {
-            dsSPCheck[i] = $(this).val();
-        });
-
-        $.ajax({
-            //gui di voi phuong thuc' cua Form
-            method: $(form).attr('method'),
-            //url = duong dan cua form
-            url: $(form).attr('action'),
-            //du lieu gui di
-            data: JSON.stringify({
-                "SanPhamId": dsSPCheck
-            }),
-            //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
-            processData: false,
-            // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la json nen de la json
-            contentType: "application/json; charset=utf-8",
-            //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
-            //dataType: 'json',
-            //truoc khi gui di thi thuc hien gi do', o day chinh loi~ = rong~
-            beforeSend: function() {
-                //$(form).find('span.error-text').empty();
-            },
-            success: function(response) {
-                if (response.length != 0) {
-                    console.log("request ok");
-                    $('#modal-form').modal('hide');
-                    toastr.success("Thêm sản phẩm " + dsSPCheck, 'Thành công', {
-                        timeOut: 3000
-                    });
-                    //reload lại table
-                    $('#ChiTietHoaDonNhap').DataTable().ajax.reload()
-                } else {
-                    toastr.warning("Không có sản phẩm nào được thêm", 'Cảnh báo', {
-                        timeOut: 3000
-                    });
-                }
-            },
-            error: function(response) {
-                console.log("request lỗi");
-                //console.log(response.responseJSON.Username[0]);
-                $.each(response.responseJSON, function(key, val) {
-                    toastr.error(val[0], 'Có lỗi xảy ra', {
-                        timeOut: 3000
-                    });
-                });
-            },
-        });
-    });
-
-    function showChonChiTietSanPham(sanPhamId,hoaDonNhapId) {
+    function showChonChiTietSanPham(sanPhamId) {
         $.ajax({
             //gui di voi phuong thuc' cua Form
             method: "POST",
@@ -408,7 +344,8 @@
             //du lieu gui di
             data: JSON.stringify({
                 "SanPhamId": sanPhamId,
-                "HoaDonNhapId":hoaDonNhapId
+                "HoaDonNhapId":<?php echo e($hoaDonNhap->id); ?>
+
             }),
             //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
             processData: false,

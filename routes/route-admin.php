@@ -112,7 +112,7 @@ Route::group([
     Route::get("HoaDonNhapp/DaHuy", [HoaDonNhapController::class, "HoaDonNhapDaHuy"])->name("HoaDonNhap.DaHuy");
     Route::post("HoaDonNhap/KhoiPhuc/{id}", [HoaDonNhapController::class, "KhoiPhucHoaDonNhap"])->name("HoaDonNhap.KhoiPhuc");
     Route::post("HoaDonNhap/ThemSanPham/{hoaDonNhap}", [HoaDonNhapController::class, "ThemSanPham"])->name("HoaDonNhap.ThemSanPham");
-    Route::delete("HoaDonNhap/XoaSanPham/{id}", [HoaDonNhapController::class, "XoaSanPham"])->name("HoaDonNhap.XoaSanPham");
+    Route::delete("HoaDonNhap/{hoaDonNhap}/XoaSanPham", [HoaDonNhapController::class, "XoaSanPham"])->name("HoaDonNhap.XoaSanPham");
     Route::patch("HoaDonNhap/CapNhatTrangThai/{hoaDonNhap}", [HoaDonNhapController::class, "CapNhatTrangThai"])->name("HoaDonNhap.CapNhatTrangThai");
     Route::get('HoaDonNhap/detail/{hoaDonNhap}', [HoaDonNhapController::class, "API_HoaDonNhap_ChiTiet"])->name("HoaDonNhap.APIChiTiet");
     Route::post('HoaDonNhap/showModal', [HoaDonNhapController::class, "showModal_ChonChiTietSP"])->name("HoaDonNhap.showModal");

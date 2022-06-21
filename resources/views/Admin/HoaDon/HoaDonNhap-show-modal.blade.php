@@ -12,23 +12,35 @@
                 <div class="modal-body overflow-visible">
                     <div class="row">
                         <div class="table-responsive">
-                            <table id="aaa" class="table table-striped table-bordered table-hover">
+                            <table id="tableChiTietSanPham" class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th class="center"><i class="icon-adn"></i>Id</th>
-                                        <th><i class="icon-align-left"></i>Tên sản phẩm</th>
+                                        <th><i class="icon-align-left"></i>Mã sản phẩm</th>
                                         <th><i class="icon-bar-chart"></i>Số lượng tồn</th>
-                                        <th style="width: 175px"><i class="icon-picture"></i>Hình ảnh</th>
-                                        <th><i class="icon-apple"></i>Hãng sãn xuất</th>
-                                        <th><i class="icon-android"></i>Loại sản phẩm</th>
+                                        <th><i class="icon-file-text-alt"></i>Thuộc tính</th>
+                                        <th><i class="icon-money"></i>Giá nhập</th>
+                                        <th><i class="icon-money"></i>Giá bán</th>
                                         <th class="center">
-                                            <label>
-                                                <input type="checkbox" class="ace" />
-                                                <span class="lbl"></span>
-                                            </label>
+                                            <input type="checkbox" class="ace" />
+                                            <span class="lbl"></span>
                                         </th>
                                     </tr>
                                 </thead>
+
+                                <tbody>
+                                    @foreach ($ctSanPham as $item)
+                                        <tr>
+                                            <td class="center">{{ $item->id }}</td>
+                                            <td>{{ $item->MaSanPham }}</td>
+                                            <td>{{ $item->SoLuongTon }}</td>
+                                            <td>{{ collect($item->ThuocTinhValue)->join(', ') }}</td>
+                                            <td>{{ $item->GiaNhap }}</td>
+                                            <td>{{ $item->GiaBan }}</td>
+                                            <td class="center"><input type="checkbox" class="ace" value="{{ $item->id }}" /><span class="lbl"></span></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -50,3 +62,83 @@
     </div>
 
 </div><!-- /.page-content -->
+<script type="text/javascript">
+    $('#tableChiTietSanPham').dataTable({
+        "aoColumns": [{
+            "type": "num"
+        }, {
+            "bSortable": false
+        }, null, null, null, null, {
+            "bSortable": false
+        }]
+    });
+
+
+    $('table th input:checkbox').on('click', function() {
+        var that = this;
+        $(this).closest('table').find('tr > td:last-child input:checkbox')
+            .each(function(i) {
+                this.checked = that.checked;
+                $(this).closest('tr').toggleClass('selected');
+            });
+    });
+
+
+    $('#submitForm').on('submit', function(e) {
+        //ngan chan form gui di
+        e.preventDefault();
+        let form = this;
+
+        //lay het tat ca san pham da check
+        var dsSPCheck = [];
+        $('tbody input[type=checkbox]:checked').each(function(i) {
+            dsSPCheck[i] = $(this).val();
+        });
+
+        $.ajax({
+            //gui di voi phuong thuc' cua Form
+            method: $(form).attr('method'),
+            //url = duong dan cua form
+            url: $(form).attr('action'),
+            //du lieu gui di
+            data: JSON.stringify({
+                "SanPhamId": dsSPCheck
+            }),
+            //Set giá trị này là false nếu không muốn dữ liệu được truyền vào thiết lập data sẽ được xử lý và biến thành một query kiểu chuỗi.
+            processData: false,
+            // Kiểu nội dung của dữ liệu được gửi lên server.minh gui len la json nen de la json
+            contentType: "application/json; charset=utf-8",
+            //Kiểu của dữ liệu mong muốn được trả về từ server (duoi dang json).
+            //dataType: 'json',
+            //truoc khi gui di thi thuc hien gi do', o day chinh loi~ = rong~
+            beforeSend: function() {
+                //$(form).find('span.error-text').empty();
+            },
+            success: function(response) {
+                if (response.length != 0) {
+                    console.log("request ok");
+                    $('#modal-form').modal('hide');
+                    $('#ChonChiTietSanPham').modal('hide');
+                    toastr.success("Thêm sản phẩm " + dsSPCheck, 'Thành công', {
+                        timeOut: 3000
+                    });
+                    //reload lại table
+                    $('#ChiTietHoaDonNhap').DataTable().ajax.reload()
+                } else {
+                    toastr.warning("Không có sản phẩm nào được thêm", 'Cảnh báo', {
+                        timeOut: 3000
+                    });
+                }
+            },
+            error: function(response) {
+                console.log("request lỗi");
+                //console.log(response.responseJSON.Username[0]);
+                $.each(response.responseJSON, function(key, val) {
+                    toastr.error(val[0], 'Có lỗi xảy ra', {
+                        timeOut: 3000
+                    });
+                });
+            },
+        });
+    });
+</script>

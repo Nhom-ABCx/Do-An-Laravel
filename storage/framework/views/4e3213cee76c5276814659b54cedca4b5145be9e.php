@@ -204,7 +204,7 @@
 
                                         <tbody>
                                             <?php $__currentLoopData = $dsSanPham; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <tr onclick="showChonChiTietSanPham(<?php echo e($item->id); ?>,<?php echo e($hoaDonNhap->id); ?>)" data-toggle="modal" data-backdrop="static">
+                                                <tr onclick="showChonChiTietSanPham(<?php echo e($item->id); ?>)" data-toggle="modal" data-backdrop="static">
                                                     <td class="center"><?php echo e($item->id); ?></td>
                                                     <td style="width: 150px">
                                                         <?php $__currentLoopData = $item->HinhAnh; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $hinhAnh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -228,17 +228,7 @@
                             </div>
                         </div>
 
-                        <div class="modal-footer">
-                            <button class="btn btn-sm" data-dismiss="modal">
-                                <i class="icon-remove"></i>
-                                Hủy
-                            </button>
-
-                            <button type="submit" class="btn btn-sm btn-primary">
-                                <i class="icon-ok"></i>
-                                OK
-                            </button>
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -268,7 +258,7 @@
         
         <!-- inline scripts related to this page -->
         
-        <?php echo $__env->make('Admin.HoaDon.script.HoaDonNhap-show-script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php echo $__env->make('Admin.HoaDon.script.HoaDonNhap-show-script', ['hoaDonNhap' => $hoaDonNhap], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         
         <?php echo $__env->make('Admin.SanPham.script.SanPham-show-script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php $__env->stopSection(); ?>

@@ -417,6 +417,7 @@
             },
             {
                 data: 'DiaChi',
+                orderable: false,
                 searchable: false
             },
             {

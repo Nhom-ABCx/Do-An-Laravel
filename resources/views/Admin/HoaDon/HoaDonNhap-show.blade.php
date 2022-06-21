@@ -217,7 +217,7 @@
 
                                         <tbody>
                                             @foreach ($dsSanPham as $item)
-                                                <tr onclick="showChonChiTietSanPham({{ $item->id }},{{ $hoaDonNhap->id }})" data-toggle="modal" data-backdrop="static">
+                                                <tr onclick="showChonChiTietSanPham({{ $item->id }})" data-toggle="modal" data-backdrop="static">
                                                     <td class="center">{{ $item->id }}</td>
                                                     <td style="width: 150px">
                                                         @foreach ($item->HinhAnh as $hinhAnh)
@@ -241,7 +241,7 @@
                             </div>
                         </div>
 
-                        <div class="modal-footer">
+                        {{-- <div class="modal-footer">
                             <button class="btn btn-sm" data-dismiss="modal">
                                 <i class="icon-remove"></i>
                                 Hủy
@@ -251,7 +251,7 @@
                                 <i class="icon-ok"></i>
                                 OK
                             </button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -281,7 +281,7 @@
         {{-- end datetime picker --}}
         <!-- inline scripts related to this page -->
         {{-- datatable script --}}
-        @include('Admin.HoaDon.script.HoaDonNhap-show-script')
+        @include('Admin.HoaDon.script.HoaDonNhap-show-script', ['hoaDonNhap' => $hoaDonNhap])
         {{-- datatable script End --}}
         @include('Admin.SanPham.script.SanPham-show-script')
     @endsection
