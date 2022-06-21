@@ -333,14 +333,18 @@
                     data: 'TenSanPham'
                 },
                 {
-                    data: 'SoLuongTon',
+                    data: 'LuotMua',
                     searchable: false
                 },
                 {
                     //render cot hinh anh?
-                    data: 'HinhAnh',
+                    data: 'hinh_anh',
                     render: function(data, type, row, meta) {
-                        return '<img src="' + data + '" height="100" width="100"/>';
+                    var image = '';
+                    data.forEach(function(value, key) {
+                        image += '<img src="' + value.HinhAnh + '" width="50px" height="50px">';
+                    });
+                    return image;
                     },
                     orderable: false,
                     searchable: false

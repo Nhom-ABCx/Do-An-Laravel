@@ -256,28 +256,31 @@
             </div>
 
             <div id="modal-form" class="modal" tabindex="-1">
-                <div class="modal-dialog">
+                <div class="modal-dialog" style="width: 90%;">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="blue bigger">Thêm mới hóa đơn nhập</h4>
-                        </div>
+                        <form action="{{ route('HoaDonNhap.store') }}" method="post">
+                            @csrf
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="blue bigger">Thêm mới hóa đơn nhập</h4>
+                            </div>
 
-                        <div class="modal-body overflow-visible">
-                            <form action="{{ route('HoaDonNhap.store') }}" method="post">
-                                @csrf
+                            <div class="modal-body overflow-visible">
                                 <div class="row">
-                                    <label>Nhà cung cấp nào ?</label>
-                                    <input class="form-control" type="text" placeholder="Tên nhà cung cấp" value="{{ old('NhaCungCap') }}" name="NhaCungCap" />
-                                    @if ($errors->has('NhaCungCap'))
-                                        <i class="icon-remove bigger-110 red"> {{ $errors->first('NhaCungCap') }}</i>
-                                    @endif
-
-                                    <label>Điện thoại liên lạc</label>
-                                    <input class="form-control" type="number" placeholder="Điện thoại" value="{{ old('Phone') }}" name="Phone" />
-                                    @if ($errors->has('Phone'))
-                                        <i class="icon-remove bigger-110 red"> {{ $errors->first('Phone') }}</i>
-                                    @endif
+                                    <div class="table-responsive">
+                                        <table id="ChonNhaSanXuat" class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="center"><i class="icon-adn"></i>Id</th>
+                                                    <th><i class="icon-align-left"></i>Tên nhà cung cấp</th>
+                                                    <th><i class="icon-building"></i>Địa chỉ</th>
+                                                    <th><i class="icon-location-arrow"></i>Mail</th>
+                                                    <th><i class="icon-phone"></i>Phone</th>
+                                                    <th class="center"></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
                                 </div>
 
                                 <div class="modal-footer">
@@ -291,112 +294,163 @@
                                         Lưu
                                     </button>
                                 </div>
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
+            </div>
 
-            </div><!-- /.page-content -->
-        </div><!-- /.main-content -->
+        </div><!-- /.page-content -->
+    </div><!-- /.main-content -->
 
-    @endsection
+@endsection
 
-    @section('scriptThisPage')
-        <script src="/storage/assets/js/chosen.jquery.min.js"></script>
-        {{-- datetime picker` --}}
-        <script src="/storage/assets/js/chosen.jquery.min.js"></script>
-        <script src="/storage/assets/js/date-time/moment.min.js"></script>
-        <script src="/storage/assets/js/date-time/daterangepicker.min.js"></script>
-        <script src="/storage/assets/js/jquery.autosize.min.js"></script>
-        <script src="/storage/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
-        <script src="/storage/assets/js/jquery.maskedinput.min.js"></script>
-        <script type="text/javascript">
-            $('input[name=NgayDat]').daterangepicker().prev().on(ace.click_event, function() {
-                $(this).next().focus();
-            });
-        </script>
-        {{-- end datetime picker --}}
-        <!-- inline scripts related to this page -->
-        {{-- datatable script --}}
-        <script type="text/javascript">
-            jQuery(function($) {
-                var oTable1 = $('#sample-table-2').dataTable({
-                    "aoColumns": [{
-                            "type": "num"
-                        }, null, null, null,
-                        null, null, null, null,
-                        {
-                            "bSortable": false
-                        },
-                        null
-                    ]
-                });
-
-                $('table th input:checkbox').on('click', function() {
-                    var that = this;
-                    $(this).closest('table').find('tr > td:first-child input:checkbox')
-                        .each(function() {
-                            this.checked = that.checked;
-                            $(this).closest('tr').toggleClass('selected');
-                        });
-
-                });
-
-
-                $('[data-rel="tooltip"]').tooltip({
-                    placement: tooltip_placement
-                });
-
-                function tooltip_placement(context, source) {
-                    var $source = $(source);
-                    var $parent = $source.closest('table')
-                    var off1 = $parent.offset();
-                    var w1 = $parent.width();
-
-                    var off2 = $source.offset();
-                    var w2 = $source.width();
-
-                    if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
-                    return 'left';
-                }
-            })
-            $('[data-rel=tooltip]').tooltip({
-                container: 'body'
-            });
-            $(".chosen-select").chosen();
-            $('#chosen-multiple-style').on('click', function(e) {
-                var target = $(e.target).find('input[type=radio]');
-                var which = parseInt(target.val());
-                if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
-                else $('#form-field-select-4').removeClass('tag-input-style');
+@section('scriptThisPage')
+    <script src="/storage/assets/js/chosen.jquery.min.js"></script>
+    {{-- datetime picker` --}}
+    <script src="/storage/assets/js/chosen.jquery.min.js"></script>
+    <script src="/storage/assets/js/date-time/moment.min.js"></script>
+    <script src="/storage/assets/js/date-time/daterangepicker.min.js"></script>
+    <script src="/storage/assets/js/jquery.autosize.min.js"></script>
+    <script src="/storage/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+    <script src="/storage/assets/js/jquery.maskedinput.min.js"></script>
+    <script type="text/javascript">
+        $('input[name=NgayDat]').daterangepicker().prev().on(ace.click_event, function() {
+            $(this).next().focus();
+        });
+    </script>
+    {{-- end datetime picker --}}
+    <!-- inline scripts related to this page -->
+    {{-- datatable script --}}
+    <script type="text/javascript">
+        jQuery(function($) {
+            var oTable1 = $('#sample-table-2').dataTable({
+                "aoColumns": [{
+                        "type": "num"
+                    }, null, null, null,
+                    null, null, null, null,
+                    {
+                        "bSortable": false
+                    },
+                    null
+                ]
             });
 
-            /////////modal combobox fix
-            //chosen plugin inside a modal will have a zero width because the select element is originally hidden
-            //and its width cannot be determined.
-            //so we set the width after modal is show
-            $('#modal-form').on('shown.bs.modal', function() {
-                $(this).find('.chosen-container').each(function() {
-                    $(this).find('a:first-child').css('width', '210px');
-                    $(this).find('.chosen-drop').css('width', '210px');
-                    $(this).find('.chosen-search input').css('width', '200px');
-                });
-            })
-        </script>
-        {{-- datatable script End --}}
+            $('table th input:checkbox').on('click', function() {
+                var that = this;
+                $(this).closest('table').find('tr > td:first-child input:checkbox')
+                    .each(function() {
+                        this.checked = that.checked;
+                        $(this).closest('tr').toggleClass('selected');
+                    });
 
-        {{-- thông báo error --}}
-        <script type="text/javascript">
-            jQuery(function($) {
-                @if ($errors->any())
-                    $('#modal-form').modal('show');
-                    @foreach ($errors->all() as $error)
-                        toastr.error('{{ $error }}', 'Có lỗi xảy ra', {
-                            timeOut: 3000
-                        });
-                    @endforeach
-                @endif
             });
-        </script>
-        {{-- thông báo error end --}}
-    @endsection
+
+
+            $('[data-rel="tooltip"]').tooltip({
+                placement: tooltip_placement
+            });
+
+            function tooltip_placement(context, source) {
+                var $source = $(source);
+                var $parent = $source.closest('table')
+                var off1 = $parent.offset();
+                var w1 = $parent.width();
+
+                var off2 = $source.offset();
+                var w2 = $source.width();
+
+                if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
+                return 'left';
+            }
+        })
+        $('[data-rel=tooltip]').tooltip({
+            container: 'body'
+        });
+        $(".chosen-select").chosen();
+        $('#chosen-multiple-style').on('click', function(e) {
+            var target = $(e.target).find('input[type=radio]');
+            var which = parseInt(target.val());
+            if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
+            else $('#form-field-select-4').removeClass('tag-input-style');
+        });
+
+        /////////modal combobox fix
+        //chosen plugin inside a modal will have a zero width because the select element is originally hidden
+        //and its width cannot be determined.
+        //so we set the width after modal is show
+        $('#modal-form').on('shown.bs.modal', function() {
+            $(this).find('.chosen-container').each(function() {
+                $(this).find('a:first-child').css('width', '210px');
+                $(this).find('.chosen-drop').css('width', '210px');
+                $(this).find('.chosen-search input').css('width', '200px');
+            });
+        })
+    </script>
+    {{-- datatable script End --}}
+
+    {{-- thông báo error --}}
+    <script type="text/javascript">
+        jQuery(function($) {
+            @if ($errors->any())
+                $('#modal-form').modal('show');
+                @foreach ($errors->all() as $error)
+                    toastr.error('{{ $error }}', 'Có lỗi xảy ra', {
+                        timeOut: 3000
+                    });
+                @endforeach
+            @endif
+            @if (Session::has('themMoi'))
+                toastr.success("{{ Session::get('themMoi') }}", "Thành công", {
+                    timeOut: 3000
+                });
+            @endif
+        });
+    </script>
+    {{-- thông báo error end --}}
+
+
+    <script type="text/javascript">
+        $('#ChonNhaSanXuat').DataTable({
+            autoWidth: false, //ko co cai nay` la` no' thu nho? lai max xau'
+            //tap ra ngoai` la se huy cai bang?, de tranh' thong bao'
+        destroy: true,
+        //viet tat', lay het sanPham, chuyen thanh mang? json dua vo trong javascript
+        data: @json($dsNhaCungCap),
+        //do du lieu vao cot
+        columns: [{
+                data: 'id',
+                className: "center",
+                searchable: false
+            },
+            {
+                data: 'TenNhaCungCap'
+            },
+            {
+                data: 'DiaChi',
+                searchable: false
+            },
+            {
+                data: 'Email',
+                searchable: false
+            },
+            {
+                data: 'Phone',
+            },
+            {
+                //render cot checkbox
+                data: "id",
+                className: "center",
+                render: function(data, type, row, meta) {
+                    return '<input type="radio" value="' + data + '" name="NhaCungCapId" />';
+                },
+                // defaultContent: `<label>
+                    //     <input type="checkbox" class="ace" value=""/>
+                    //     <span class="lbl"></span>
+                    //     </label>`,
+                    orderable: false,
+                    searchable: false
+                },
+            ],
+        });
+    </script>
+@endsection

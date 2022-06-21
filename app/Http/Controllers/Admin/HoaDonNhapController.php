@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\HoaDonNhap;
 use App\Models\CT_HoaDonNhap;
+use App\Models\NhaCungCap;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SanPham;
 use App\Models\TaiKhoan;
@@ -32,9 +33,10 @@ class HoaDonNhapController extends Controller
         $this->filter($data, $request);
 
         $dsTaiKhoan = TaiKhoan::where('LoaiTaiKhoanId', 5)->get();
+        $dsNhaCungCap = NhaCungCap::all();
 
         //tra lai resquet ve cho view de hien thi lai tim` kiem' cu?
-        return view('Admin.HoaDon.HoaDonNhap-index', ["hoaDon" => $data, 'dsTaiKhoan' => $dsTaiKhoan, 'request' => $request]);
+        return view('Admin.HoaDon.HoaDonNhap-index', ["hoaDon" => $data, 'dsTaiKhoan' => $dsTaiKhoan, 'request' => $request, 'dsNhaCungCap' => $dsNhaCungCap]);
     }
     /**
      * ham` nay` co tac dung filter theo request
@@ -50,8 +52,8 @@ class HoaDonNhapController extends Controller
         }
         //unset de no' huy? bien' do~ ton' dung luong
         unset($catChuoi);
-        if (!empty($request->input('TrangThai')))
-            $data = $data->where('TrangThai', $request->input('TrangThai'));
+        if ($request->filled('TrangThai'))
+            $data = $data->where('TrangThai', $request['TrangThai']);
         if (!empty($request->input('TaiKhoanId')))
             $data = $data->where('TaiKhoanId', $request->input('TaiKhoanId'));
 
@@ -77,15 +79,14 @@ class HoaDonNhapController extends Controller
     public function store(Request $request)
     {
         //xác thực đầu vào, xem các luật tại https://laravel.com/docs/8.x/validation#available-validation-rules
-        $request->validate(['NhaCungCap' => ['required', 'max:255'], 'Phone' => ['required', 'numeric'],]);
+        $request->validate(['NhaCungCapId' => ['required', 'numeric', 'integer', 'exists:nha_cung_caps,id']]);
 
         HoaDonNhap::create([
             'TaiKhoanId' => Auth::user()->id,
-            'NhaCungCap' => $request->input('NhaCungCap'),
-            'Phone' => $request->input('Phone'),
+            'NhaCungCapId' => $request['NhaCungCapId'],
         ]);
 
-        return Redirect::route('HoaDonNhap.index');
+        return Redirect::back()->with("themMoi", 'Thêm hoá đơn thành công');
     }
 
     /**
@@ -100,7 +101,7 @@ class HoaDonNhapController extends Controller
         foreach ($dsSanPham as $sp) {
             SanPhamController::fixImage($sp);
             //sua lai luon de xai cho javascript
-            $sp["HangSanXuatId"] = $sp->HangSanXuat->Ten;
+            $sp["HangSanXuatId"] = $sp->HangSanXuat->TenHangSanXuat;
             $sp["LoaiSanPhamId"] = $sp->LoaiSanPham->TenLoai;
         }
         //gọi fixImage cho từng sp

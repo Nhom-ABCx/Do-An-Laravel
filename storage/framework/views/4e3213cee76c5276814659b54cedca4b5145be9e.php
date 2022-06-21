@@ -198,7 +198,7 @@
                                                     <th class="center"><i class="icon-adn"></i>Id</th>
                                                     <th><i class="icon-align-left"></i>Tên sản phẩm</th>
                                                     <th><i class="icon-bar-chart"></i>Số lượng tồn</th>
-                                                    <th><i class="icon-picture"></i>Hình ảnh</th>
+                                                    <th style="width: 175px"><i class="icon-picture"></i>Hình ảnh</th>
                                                     <th><i class="icon-apple"></i>Hãng sãn xuất</th>
                                                     <th><i class="icon-android"></i>Loại sản phẩm</th>
                                                     <th class="center">
