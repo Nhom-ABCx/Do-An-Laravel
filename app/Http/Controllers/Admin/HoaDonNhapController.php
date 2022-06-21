@@ -202,20 +202,15 @@ class HoaDonNhapController extends Controller
     public function HoaDonNhapDaHuy(Request $request)
     {
         //y chang index khac' cai' select deleted_at
-        $data = HoaDonNhap::onlyTrashed()->get();
-        if (!empty($request->input("NgayDat"))) {
-            $catChuoi = explode(" - ", $request->input("NgayDat"));
+        $data = HoaDonNhap::onlyTrashed();
 
-            $data = HoaDonNhap::whereDate("created_at", ">=", date_format(date_create($catChuoi[0]), 'Y-m-d'))
-                ->whereDate("created_at", "<=", date_format(date_create($catChuoi[1]), 'Y-m-d'))->get();
-        }
-        if (!empty($request->input('TrangThai')))
-            $data = $data->where('TrangThai', $request->input('TrangThai'));
-        if (!empty($request->input('TaiKhoanId')))
-            $data = $data->where('TaiKhoanId', $request->input('TaiKhoanId'));
-        $dsTaiKhoan = TaiKhoan::all();
+        $this->filter($data, $request);
+
+        $dsTaiKhoan = TaiKhoan::where('LoaiTaiKhoanId', 5)->get();
+        $dsNhaCungCap = NhaCungCap::all();
+
         //tra lai resquet ve cho view de hien thi lai tim` kiem' cu?
-        return view('Admin.HoaDon.HoaDonNhap-index', ["hoaDon" => $data, 'dsTaiKhoan' => $dsTaiKhoan, 'request' => $request]);
+        return view('Admin.HoaDon.HoaDonNhap-index', ["hoaDon" => $data, 'dsTaiKhoan' => $dsTaiKhoan, 'request' => $request, 'dsNhaCungCap' => $dsNhaCungCap]);
     }
     public function KhoiPhucHoaDonNhap($id)
     {
